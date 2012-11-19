@@ -1,6 +1,6 @@
 <?
 
-// Liest aus der Userinfo die Handynummern, formatiert diese und schreibt sie zurück
+// Liest aus der Userinfo die Handynummern, formatiert diese und schreibt sie zurÃ¼ck
 
 include("functions.php");
 include("smstools.php");

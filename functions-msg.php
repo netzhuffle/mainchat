@@ -15,8 +15,8 @@ if ($communityfeatures) {
 function chat_msg($o_id,$u_id,$u_name,$u_farbe,$admin,$r_id,$text,$typ) {
 
 // Schreibt Text in Raum r_id
-// User, u_id, Farbe, Raum und Typ der Nachricht werden übergeben
-// Vor Schreiben wird der Text geparsed und die Aktionen ausgeführt
+// User, u_id, Farbe, Raum und Typ der Nachricht werden Ã¼bergeben
+// Vor Schreiben wird der Text geparsed und die Aktionen ausgefÃ¼hrt
 // Art:           N: Normal
 //	          S: Systemnachricht
 //                P: Privatnachticht
@@ -31,9 +31,9 @@ global $communityfeatures,$o_punkte,$beichtstuhl,$raum_einstellungen,$ist_moderi
 global $punkte_ab_user,$punktefeatures,$whotext,$knebelzeit,$nickwechsel,$raumanlegenpunkte;
 global $einstellungen_aendern, $single_room_verhalten, $eingabe_light_farbe, $eingabe_light_hilfe, $grep;
 
-// Text $text parsen, Befehle ausführen, Texte im Chat ausgeben
+// Text $text parsen, Befehle ausfÃ¼hren, Texte im Chat ausgeben
 
-// Voreinstellung für Nachrichtenfilter
+// Voreinstellung fÃ¼r Nachrichtenfilter
 $privat=FALSE;
 
 // N als Voreinstellung setzen
@@ -46,7 +46,7 @@ $u_farbe OR $u_farbe=$user_farbe;
 $text=preg_replace("/[\\\\".chr(1)."-".chr(31)."]/","",$text);
 $text=str_replace(chr(173), "", $text);
 
-// autoknebel - ist text unerwünscht? Falls ja, User automatisch knebeln
+// autoknebel - ist text unerwÃ¼nscht? Falls ja, User automatisch knebeln
 $text=auto_knebel($text);
 
 // Eingabe parsen
@@ -59,7 +59,7 @@ switch(strtolower($chatzeile[0])) {
 
 case "/besitze":
 case "/besitzeraum":
-	// Übernimmt Besitzrechte eines Raums
+	// Ãœbernimmt Besitzrechte eines Raums
 	if (!$admin):
 		system_msg("",0,$u_id,$system_farbe,"<B>He $u_name!</B> ".str_replace("%chatzeile%",$chatzeile[0],$t['chat_msg1']));
 	else:
@@ -90,7 +90,7 @@ case "/besitzeraum":
 			$rr_id=mysql_result($result,0,"r_id");
 			$rr_name=mysql_result($result,0,"r_name");
 
-			// Raum ändern
+			// Raum Ã¤ndern
 			$f['r_besitzer']=$u_id;
 			schreibe_db("raum",$f,$r_id,"r_id");
 			system_msg("",0,$u_id,$system_farbe,str_replace("%rr_name%",$rr_name,str_replace("%uu_name%",$uu_name,str_replace("%u_name%",$u_name,$t['chat_msg2']))));
@@ -183,7 +183,7 @@ case "/int":
 			// die Nachricht wurde weitergeleitet.
 			$txt=html_parse($privat,htmlspecialchars($chatzeile[1]." ".$chatzeile[2]." ".$chatzeile[3]));
 			if (!($admin || $u_level=="A")) {
-				// Admins wissen, daß das an alle Admins geht. daher nicht nötig.
+				// Admins wissen, daÃŸ das an alle Admins geht. daher nicht nÃ¶tig.
 				system_msg("",0,$u_id,$system_farbe,$t['chat_msg47']);
 				$txt="<b>".$txt."</b>";
 			}
@@ -221,7 +221,7 @@ case "/int":
 
 case "/dupes":
 	// sucht nach doppelten IPs 
-	// ausgabe geändert - werner 25.01.02
+	// ausgabe geÃ¤ndert - werner 25.01.02
 	if ($admin) {
 		$query="SELECT o_ip,o_user,o_raum,o_browser,r_name,o_name ".
 			"FROM online left join raum on o_raum=r_id ".
@@ -374,7 +374,7 @@ case "/edithistorie":
 
 			$nick=nick_ergaenze($chatzeile[1],"online",1);
 
-			// Falls keinen Empfänger gefunden, in Usertabelle nachsehen
+			// Falls keinen EmpfÃ¤nger gefunden, in Usertabelle nachsehen
 			if ($nick['u_nick']=="") {
 				$query="SELECT u_nick,u_id from user ".
 					"WHERE u_nick='".coreCheckName($chatzeile[1],$check_name)."'";
@@ -402,7 +402,7 @@ if ($nick['u_nick'] != "")
 
 if (is_array($uu_profil_historie))
 					{
-					system_msg("",0,$u_id,$system_farbe,"Das Profil von <b>$nick[u_nick]</b> wurde zuletzt geändert von: ");
+					system_msg("",0,$u_id,$system_farbe,"Das Profil von <b>$nick[u_nick]</b> wurde zuletzt geÃ¤ndert von: ");
 					while(list($datum,$nick)=each($uu_profil_historie)):
 					$zeile= $nick."&nbsp;(".str_replace(" ","&nbsp;",date("d.m.y H:i",$datum)).")".$f4;
 					system_msg("",0,$u_id,$system_farbe,$zeile);
@@ -422,8 +422,8 @@ case "/knebel":
 case "/gag":
 case "/gaga":
 		//   /gag - zeige alle geknebelten user
-		//   /gag user - sperre user für 5 min
-		//   /gag user x  - sperre user für x min 
+		//   /gag user - sperre user fÃ¼r 5 min
+		//   /gag user x  - sperre user fÃ¼r x min 
 		//   /gag user 0  - freigabe...
 
 		if ( !$admin AND $u_level!="A" ) {
@@ -443,7 +443,7 @@ case "/gaga":
 			// knebel setzen, default=5 min...
 			if (!$knebelzeit) $knebelzeit = 5;
 
-			// knebelzeit übergeben? dann setzen, absolut, vorzeichen ignorieren
+			// knebelzeit Ã¼bergeben? dann setzen, absolut, vorzeichen ignorieren
 			if (isset($chatzeile[2]) && $chatzeile[2] != "") $knebelzeit = abs(intval($chatzeile[2]));
 			
 			// maximal 1440 Minuten
@@ -453,7 +453,7 @@ case "/gaga":
 			$nick = nick_ergaenze($chatzeile[1],"raum",1);
 			if ( !$nick['u_nick'] ) $nick = nick_ergaenze($chatzeile[1],"online",0);
 			
-			// Admins dürfen,
+			// Admins dÃ¼rfen,
 			if ( $nick['u_nick'] )
 			switch ( $nick['u_level'] ) {
 				 case "C" :
@@ -509,7 +509,7 @@ case "/gaga":
 
 case "/einlad":
 case "/invite":
-	// Einladen in Räume... darf nur Admin oder Raumbesitzer
+	// Einladen in RÃ¤ume... darf nur Admin oder Raumbesitzer
 	// Besitzer des aktuellen Raums ermitteln
 	$query="SELECT r_besitzer,r_name from raum WHERE r_id=$r_id ";
 	$result=mysql_query($query,$conn);
@@ -523,7 +523,7 @@ case "/invite":
 	}
 	if ($admin || $r_besitzer==$u_id) {
 		if ($chatzeile[1]!="") {
-			// user eintragen oder löschen
+			// user eintragen oder lÃ¶schen
 
 			// schaue zuerst, ob online ein User ist, der genauso heisst wie angegeben
 			$nick=nick_ergaenze($chatzeile[1],"online",1);
@@ -539,7 +539,7 @@ case "/invite":
 			if ($nick['u_nick']=="") $nick=nick_ergaenze($chatzeile[1],"online",1);
 			if ($nick['u_nick']=="") $nick=nick_ergaenze($chatzeile[1],"chat",0);
 			if ($nick['u_nick']!="") {
-				// nick gefunden. jetzt eintragen oder löschen...
+				// nick gefunden. jetzt eintragen oder lÃ¶schen...
 				$query="SELECT inv_user FROM invite WHERE inv_raum=$r_id AND inv_user=$nick[u_id]";
 				$result=mysql_query($query,$conn);
 				if ($result>0) {
@@ -561,7 +561,7 @@ case "/invite":
 						system_msg($u_nick,$u_id,$nick['u_id'],$system_farbe,$msg);
 						$msg=$t['invite3'];
 					}
-					// altes result löschen.
+					// altes result lÃ¶schen.
 					mysql_free_result($result);
 
 					$msg=str_replace("%admin%",$u_nick,$msg);	
@@ -622,7 +622,7 @@ case "/suche":
 	$suchtext=addslashes(preg_replace("/[*%$!?.,;\\:]/i","",$chatzeile[1]));
 	if (strlen($suchtext)>2):
 
-		// Sprüche in Array lesen
+		// SprÃ¼che in Array lesen
 		$spruchliste=file("conf/$datei_spruchliste");
 
 		// Treffer ausgeben
@@ -682,9 +682,9 @@ case "/ignoriere":
 	if (!$beichtstuhl && strlen($chatzeile[1])>0 && $u_level!="G"){
 		// Username angegeben -> ignorieren oder aufheben
 
-		// versuchen, den namen zu ergänzen.
+		// versuchen, den namen zu ergÃ¤nzen.
 		// wenn geschafft, dann ist User auch online. Somit kann er ignoriert werden.
-		// sonst evtl. DB Probs weil der expire evtl. user löscht, die hier gerade 
+		// sonst evtl. DB Probs weil der expire evtl. user lÃ¶scht, die hier gerade 
 		// eingetragen werden.
 		$nick=nick_ergaenze($chatzeile[1],"online",0);
 		if ($nick['u_nick']!=""){
@@ -714,10 +714,10 @@ case "/ignoriere":
 	}
 
 
-	// Prüfung sollte nach dem Einfügen sein, denn sonst können 17 User drauf sein
-        // Prüfung, ob bereits mehr als 16 user ignoriert werden
-        // Alle ignorierten user > 16 werden gelöscht
-        // Wenn mehr als 16 gebraucht werden, grössere Änderung in Tabelle online Feld o_ignore
+	// PrÃ¼fung sollte nach dem EinfÃ¼gen sein, denn sonst kÃ¶nnen 17 User drauf sein
+        // PrÃ¼fung, ob bereits mehr als 16 user ignoriert werden
+        // Alle ignorierten user > 16 werden gelÃ¶scht
+        // Wenn mehr als 16 gebraucht werden, grÃ¶ssere Ã„nderung in Tabelle online Feld o_ignore
         // Denn da passt nur ein Array mit 255 chars rein.
         $query="SELECT u_nick,u_id from user,iignore ".
                 "WHERE i_user_aktiv=$u_id AND u_id=i_user_passiv order by i_id";
@@ -814,7 +814,7 @@ case "/join":
 		$f['r_name']=htmlspecialchars($chatzeile[1]);
                  
                 if (!isset($chatzeile[2])) $chatzeile[2] = "";
-		// Admin oder Raumbesitzer darf das Betreten geschlossener Räume erzwingen (Prüfung in raum_gehe)
+		// Admin oder Raumbesitzer darf das Betreten geschlossener RÃ¤ume erzwingen (PrÃ¼fung in raum_gehe)
 		if ($beichtstuhl || $chatzeile[2]=="immer" || $chatzeile[2]=="force" || $chatzeile[2]=="!") {
 			$raum_geschlossen=TRUE;
 		} else {
@@ -844,7 +844,7 @@ case "/join":
 			$f['r_besitzer']=$u_id;
 			$raumanlegen=true;
 			
-			// ab hier neu: wir prüfen ob community an ist, der User kein Admin und $raumanlegenpunkte gesetzt
+			// ab hier neu: wir prÃ¼fen ob community an ist, der User kein Admin und $raumanlegenpunkte gesetzt
 
 			if ($communityfeatures && !$admin && $raumanlegenpunkte)
                 	{
@@ -877,7 +877,7 @@ case "/join":
 		}
         	mysql_free_result($result);
 	} else {
-		// Liste alle Räume auf
+		// Liste alle RÃ¤ume auf
 		if ($admin)
 		$query="SELECT r_name from raum order by r_name";
 		else
@@ -907,7 +907,7 @@ case "/list":
 		// User listen 
 		if ($chatzeile[1]=="*") { 
 
-			// * zeigt alle Räume
+			// * zeigt alle RÃ¤ume
 			$chatzeile[0]="/people";
 
 		} elseif ($chatzeile[1]!="") {
@@ -935,7 +935,7 @@ case "/list":
 		};
 
 case "/people":
-       // Liste alle Räume mit Usern auf
+       // Liste alle RÃ¤ume mit Usern auf
 	$query="SELECT r_id from raum ";
 	if (!$admin) $query.=" WHERE (r_status1='O' OR r_status1='m' OR r_id=$o_raum) ";	
 	$query.=" ORDER BY r_name";
@@ -972,7 +972,7 @@ case "/me":
 
 case "/away":
 case "/weg":
-	// Away-Text setzen oder löschen
+	// Away-Text setzen oder lÃ¶schen
 	// Smilies parsen
 	$privat=FALSE;
 
@@ -1005,7 +1005,7 @@ case "/weg":
 	break;
 
 case "/schubs":
-		// Nur für Admins und Tempadmins, schubst User in einen andere Raum
+		// Nur fÃ¼r Admins und Tempadmins, schubst User in einen andere Raum
 		if ($admin || $u_level=="A") {
 			$user=nick_ergaenze($chatzeile[1],"raum",1);
 			if ($user['u_nick']=="") $user=nick_ergaenze($chatzeile[1],"online",1);
@@ -1053,7 +1053,7 @@ case "/kick":
 	mysql_free_result($result);
 
 
-	// Nur für Admins und Tempadmins, wirft User aus dem aktuellen Raum oder hebt Sperre auf
+	// Nur fÃ¼r Admins und Tempadmins, wirft User aus dem aktuellen Raum oder hebt Sperre auf
 	if (strlen($chatzeile[1])>0)
 	{
 		// User kicken....
@@ -1076,7 +1076,7 @@ case "/kick":
 				$s_user_name=mysql_result($result,0,"o_name");
 				$s_user_level=mysql_result($result,0,"o_level");
 
-				// Auf admin prüfen
+				// Auf admin prÃ¼fen
 				if ($s_user_level=="S" ||  $s_user_level=="C" || $s_user_level=="M" || $s_user_level=="A" ):
 					system_msg("",0,$u_id,$system_farbe,str_replace("%u_name%",$u_name,str_replace("%s_user_name%",$s_user_name,$t['chat_msg13'])));
 				else:
@@ -1111,7 +1111,7 @@ case "/kick":
 	}
 	else if ($r_besitzer==$u_id || $admin || $u_level=="A")
 	{
-		// Liste der für diesen Raum gesperrten User ausgeben
+		// Liste der fÃ¼r diesen Raum gesperrten User ausgeben
 
 		$query="SELECT u_nick FROM sperre,user ".
 			"WHERE s_user=u_id ".
@@ -1152,7 +1152,7 @@ case "/kick":
 case "/name":
 case "/nick":
 
-	// Prüft und ändert Nicknamen
+	// PrÃ¼ft und Ã¤ndert Nicknamen
 	if (!$einstellungen_aendern) :
 		system_msg("",0,$u_id,$system_farbe,"<B>He $u_name!</B> ".str_replace("%chatzeile%",$chatzeile[0],$t['chat_msg1']));
 	elseif((strlen($chatzeile[1])>0) && (coreCheckName($chatzeile[1],$check_name)!=$u_name)):
@@ -1175,7 +1175,7 @@ case "/nick":
 		// Sonderzeichen filtern
 		$chatzeile[1]=coreCheckName($chatzeile[1],$check_name);
 		
-		// Länge prüfen
+		// LÃ¤nge prÃ¼fen
 		if (strlen($chatzeile[1])<4 || strlen($chatzeile[1])>20  || $differenz < $nickwechsel):
 		if ($differenz<$nickwechsel) 
 					 system_msg("",$u_id,$u_id,$system_farbe,str_replace("%nickwechsel%",$nickwechsel,$t['chat_msg107']));
@@ -1210,7 +1210,7 @@ case "/nick":
 					system_msg("",$u_id,$u_id,$system_farbe,str_replace("%u_nick%",$f['u_nick'],$t['chat_msg19']));
 				}
 			else:  
-				// Nick in Datenbank ändern
+				// Nick in Datenbank Ã¤ndern
 				schreibe_db("user",$f,$u_id,"u_id");
 
 				// Bei Moderation private Nachricht, sonst Nachricht an alle
@@ -1254,7 +1254,7 @@ case "/farbe":
 	{
 		system_msg("",0,$u_id,$system_farbe,str_replace("%chatzeile%",$chatzeile[0],$t['chat_spruch5']));
 	}
-	// Zeigt oder ändert Farbe
+	// Zeigt oder Ã¤ndert Farbe
 	else if (strlen($chatzeile[1])==6)
 	{
 		if (preg_match("/[a-f0-9]{6}/i", $chatzeile[1])) 
@@ -1366,7 +1366,7 @@ case "/farbealle":
 	else 
 	{
 
-	// Zeigt oder ändert Farbe 2 (Farbe für alle anderen User)
+	// Zeigt oder Ã¤ndert Farbe 2 (Farbe fÃ¼r alle anderen User)
 	if ($chatzeile[1]=="off") $chatzeile[1]="-";
 	if ($chatzeile[1]=="aus") $chatzeile[1]="-";
 	if (strlen($chatzeile[1])==6 || $chatzeile[1]=="-"):
@@ -1392,7 +1392,7 @@ case "/farbenoise";
     else 
     {
 
-    // Zeigt oder ändert Farbe 3 (Farbe für noises)
+    // Zeigt oder Ã¤ndert Farbe 3 (Farbe fÃ¼r noises)
     if ($chatzeile[1]=="off") $chatzeile[1]="-";
     if ($chatzeile[1]=="aus") $chatzeile[1]="-";
     if (strlen($chatzeile[1])==6 || $chatzeile[1]=="-"):
@@ -1418,7 +1418,7 @@ case "/farbepriv":
     else 
     {
 
-    // Zeigt oder ändert Farbe 4 (Farbe für privat) 
+    // Zeigt oder Ã¤ndert Farbe 4 (Farbe fÃ¼r privat) 
     if ($chatzeile[1]=="off") $chatzeile[1]="-";
     if ($chatzeile[1]=="aus") $chatzeile[1]="-";
     if (strlen($chatzeile[1])==6 || $chatzeile[1]=="-"):
@@ -1443,7 +1443,7 @@ case "/farbebg":
     } 
     else 
     {
-    // Zeigt oder ändert Farbe 5 (Farbe für Background) 
+    // Zeigt oder Ã¤ndert Farbe 5 (Farbe fÃ¼r Background) 
     if ($chatzeile[1]=="off") $chatzeile[1]="-";
     if ($chatzeile[1]=="aus") $chatzeile[1]="-";
     if (strlen($chatzeile[1])==6 || $chatzeile[1]=="-"):
@@ -1469,7 +1469,7 @@ case "/farbesys":
     } 
     else 
     {
-    // Zeigt oder ändert Farbe 6 (Farbe für Systemmeldungen) 
+    // Zeigt oder Ã¤ndert Farbe 6 (Farbe fÃ¼r Systemmeldungen) 
     if ($chatzeile[1]=="off") $chatzeile[1]="-";
     if ($chatzeile[1]=="aus") $chatzeile[1]="-";
     if (strlen($chatzeile[1])==6 || $chatzeile[1]=="-"):
@@ -1509,8 +1509,8 @@ case "/?":
     break;
 
 case "/clearedit":
-	// löschen der Eingabezeile erzwingen oder alten Text stehen lassen
-	// alter Text wird dann zum überschreiben markiert.
+	// lÃ¶schen der Eingabezeile erzwingen oder alten Text stehen lassen
+	// alter Text wird dann zum Ã¼berschreiben markiert.
 	if ($u_clearedit==0) {
         $f['u_clearedit']="1";
         system_msg("",0,$u_id,$system_farbe,$t['chat_msg30']);
@@ -1523,7 +1523,7 @@ case "/clearedit":
 
 case "/dice":
 case "/wuerfel":
-	// Würfeln
+	// WÃ¼rfeln
 	if ($u_level=="G") {
 		system_msg("",0,$u_id,$system_farbe,$t['chat_msg55']);
 	} else {
@@ -1544,14 +1544,14 @@ case "/wuerfel":
 			if ($w[1]==0) $w[1]=6;
 			$t['chat_msg34']=str_replace("%user%",$u_name,$t['chat_msg34']);
 			if ($w[0]==1) $tmp="einem "; else $tmp=htmlspecialchars("$w[0] ");
-			if (preg_match("!w!",$chatzeile[1])) $tmp=$tmp."kleinen "; else $tmp=$tmp."großen ";
+			if (preg_match("!w!",$chatzeile[1])) $tmp=$tmp."kleinen "; else $tmp=$tmp."groÃŸen ";
 			if ($w[0]==1) 
 			{
-				$tmp=$tmp.htmlspecialchars(" $w[1]-seitigen Würfel");
+				$tmp=$tmp.htmlspecialchars(" $w[1]-seitigen WÃ¼rfel");
 			}
 			else
 			{
-				$tmp=$tmp.htmlspecialchars(" $w[1]-seitigen Würfeln");
+				$tmp=$tmp.htmlspecialchars(" $w[1]-seitigen WÃ¼rfeln");
 			}
 			$t['chat_msg34']=str_replace("%wuerfel%",$tmp,$t['chat_msg34']);
 
@@ -1590,21 +1590,21 @@ case "/whois":
 
         		if ((strcasecmp($chatzeile[1],"gast")==0) && ($admin)) 
 			{
-				// suche "/whois gast" zeigt alle Gäste und den  User gastwenn vorhanden
+				// suche "/whois gast" zeigt alle GÃ¤ste und den  User gastwenn vorhanden
 	                       	$query="SELECT *,date_format(u_login,'%d.%m.%y %H:%i') as login ".
         	                       	"FROM user WHERE (u_nick LIKE '$chatzeile[1]') or (u_level = 'G') ".
                 	               	"ORDER BY u_nick,u_name limit $max_user_liste";
 			}
 			else if (($admin) || ($u_level == "A"))
 			{
-				// suche für Admins und Tempadmins zeigt alle User
+				// suche fÃ¼r Admins und Tempadmins zeigt alle User
 				$query="SELECT *,date_format(u_login,'%d.%m.%y %H:%i') as login ".
 					"FROM user WHERE u_nick $sucheper '$chatzeile[1]' ".
 					"ORDER BY u_nick,u_name limit $max_user_liste";
 			}
 			else
 			{			
-				// suche für User zeigt die gesperrten nicht an
+				// suche fÃ¼r User zeigt die gesperrten nicht an
 				$query="SELECT *,date_format(u_login,'%d.%m.%y %H:%i') as login ".
 					"FROM user WHERE u_nick $sucheper '$chatzeile[1]' ".
 					"and u_level in ('A','C','G','M','S','U') ".
@@ -1697,11 +1697,11 @@ case "/whois":
 	}
 	break;
 
-case "/msg":    // Sollte hier in den Aliasen etwas dazu kommen, muß der Autoknebel angepasst werden, damit Admins die privaten
-case "/talk":	// Nachrichten nicht lesen können, wenn der Autoknebel zuschlägt
+case "/msg":    // Sollte hier in den Aliasen etwas dazu kommen, muss der Autoknebel angepasst werden, damit Admins die privaten
+case "/talk":	// Nachrichten nicht lesen kÃ¶nnen, wenn der Autoknebel zuschlÃ¤gt
 case "/tell":
 case "/t":
-case "/msgpriv": // Extra behandlung für Private Nachrichten im Userfenster, für den fall, daß der User sich ausloggt, keine Nickergänzung
+case "/msgpriv": // Extra behandlung fÃ¼r Private Nachrichten im Userfenster, fÃ¼r den fall, daÃŸ der User sich ausloggt, keine NickergÃ¤nzung
 
 	// Private Nachricht 
 	if (!($o_knebel>0) && $u_level!="G" && (!$beichtstuhl || $admin)) {
@@ -1710,14 +1710,14 @@ case "/msgpriv": // Extra behandlung für Private Nachrichten im Userfenster, für
 		$privat=TRUE;
 		$text=html_parse($privat,htmlspecialchars($chatzeile[2]." ".$chatzeile[3]));
 
-		// Empfänger im Chat suchen
-		// /talk muß z.B. mit "/talk kleiner" auch dann an kleiner gehen 
+		// EmpfÃ¤nger im Chat suchen
+		// /talk muss z.B. mit "/talk kleiner" auch dann an kleiner gehen 
 		// wenn kleiner in anderem Raum ist und im eigenen Raum ein kleinerpfuscher anwesend ist.
 		if ($nick['u_nick']=="") 
 		{
-			if ($chatzeile[0] == "/msgpriv") // Keine Nickergänzung bei diesem Nachrichtentyp
+			if ($chatzeile[0] == "/msgpriv") // Keine NickergÃ¤nzung bei diesem Nachrichtentyp
 			{
-       				// Prüfen ob User noch Online              		
+       				// PrÃ¼fen ob User noch Online              		
 				$query="SELECT o_id, o_name, o_user, o_userdata, o_userdata2, o_userdata3, o_userdata4 FROM online WHERE o_name = '$chatzeile[1]' ";
               	
 			        $result=mysql_query($query,$conn);
@@ -1747,12 +1747,12 @@ case "/msgpriv": // Extra behandlung für Private Nachrichten im Userfenster, für
 			}
 		}
 
-		// Falls Empfänger gefunden, Nachricht versenden
+		// Falls EmpfÃ¤nger gefunden, Nachricht versenden
 		if ($nick['u_nick'] != "") {
 
 			// nick gefunden und Eindeutig.
 			if ($text!=" "){
-				// Wir prüfen, ob der User ignoriert wird, wenn ja => Fehlermeldung
+				// Wir prÃ¼fen, ob der User ignoriert wird, wenn ja => Fehlermeldung
 
 				$query="SELECT i_user_aktiv, i_user_passiv FROM iignore ".
 				       "WHERE (i_user_aktiv='$u_id' AND i_user_passiv = '$nick[u_id]') OR ".
@@ -1834,7 +1834,7 @@ case "/toall":
 		$text=html_parse($privat,$t['chat_msg100'].htmlspecialchars($chatzeile[1]." ".$chatzeile[2]." ".$chatzeile[3]));
 
 		if ($text){
-			// Schleife über alle User, die online sind
+			// Schleife Ã¼ber alle User, die online sind
 			$query="SELECT o_user FROM online";
 			$result=mysql_query($query,$conn);
 			if ($result && mysql_num_rows($result)>0) {
@@ -1858,10 +1858,10 @@ case "/toall":
 
 case "/loescheraum":
 
-	// Raum löschen
+	// Raum lÃ¶schen
 	if ( $chatzeile[1] ) {
 
-		// Rechte prüfen 
+		// Rechte prÃ¼fen 
 		$query="SELECT r_id,r_name,r_besitzer FROM raum ".
 			"WHERE r_name like '$chatzeile[1]' ";
 		$result=mysql_query($query,$conn);
@@ -1882,12 +1882,12 @@ case "/loescheraum":
 					exit;
 				};
 
-				// Löschen falls nicht Lobby
+				// LÃ¶schen falls nicht Lobby
 				if ($row->r_id==$lobby_id) {
 					system_msg("",0,$u_id,$system_farbe,str_replace("%r_name%",$row->r_name,$t['chat_msg63']));
 				} else {
 
-					// Raum darf gelöscht werden, Raum schließen
+					// Raum darf gelÃ¶scht werden, Raum schlieÃŸen
 					$f['r_status1']="G";
 					schreibe_db("raum",$f,$row->r_id,"r_id");
 
@@ -1908,7 +1908,7 @@ case "/loescheraum":
         				$result2=mysql_query($query, $conn);
 					@mysql_free_result($result2);
 
-        				// Gesperrte Räume löschen
+        				// Gesperrte RÃ¤ume lÃ¶schen
         				$query="DELETE FROM sperre WHERE s_raum=$row->r_id";
         				$result2=mysql_query($query, $conn);
 					@mysql_free_result($result2);
@@ -1933,8 +1933,8 @@ case "/loescheraum":
 case "/uebergeberaum":
 case "/schenke":
 
-	// aktuellen Raum Übergeben
-	// Rechte prüfen 
+	// aktuellen Raum Ãœbergeben
+	// Rechte prÃ¼fen 
 	$query="SELECT r_id,r_name,r_besitzer FROM raum ".
 		"WHERE r_id=$o_raum ";
 	$result=mysql_query($query,$conn);
@@ -1943,15 +1943,15 @@ case "/schenke":
 		$row=mysql_fetch_object($result);
 		if ($admin || $row->r_besitzer==$u_id) {
 
-			// Empfänger im aktuellen Raum suchen
+			// EmpfÃ¤nger im aktuellen Raum suchen
 			$nick=nick_ergaenze($chatzeile[1],"raum",1);
 
-			// Empfänger im Chat suchen
+			// EmpfÃ¤nger im Chat suchen
 			if ($nick['u_nick']=="") $nick=nick_ergaenze($chatzeile[1],"online",0);
 
-			// Falls Empfänger gefunden und Empfänger ist nicht sich selbst, Nachricht versenden
+			// Falls EmpfÃ¤nger gefunden und EmpfÃ¤nger ist nicht sich selbst, Nachricht versenden
 			if (($nick['u_nick']!="") && ($nick['u_id']) && $nick['u_nick']!=$u_name && $nick['u_level']!="G" && $r_id) {
-				// Raum übergeben
+				// Raum Ã¼bergeben
 				$text = $t['chat_msg60'];
 				$text = str_replace("%user%",$nick['u_nick'],$text);
 				$text = str_replace("%r_name%",$row->r_name,$text);
@@ -1977,8 +1977,8 @@ case "/schenke":
 
 case "/aendereraum":
 
-	// aktuellen Raum auf den Status G/O/m ändern
-	// Rechte prüfen 
+	// aktuellen Raum auf den Status G/O/m Ã¤ndern
+	// Rechte prÃ¼fen 
 	$query="SELECT r_id,r_name,r_besitzer,r_status1 FROM raum ".
 		"WHERE r_id=$o_raum ";
 	$result=mysql_query($query,$conn);
@@ -2015,10 +2015,10 @@ case "/aendereraum":
 			};
 
 			if ($f['r_status1']==$row->r_status1) {
-				// Raum nicht verändert
+				// Raum nicht verÃ¤ndert
 				system_msg("",$u_id,$u_id,$system_farbe,str_replace("%status%",$raumstatus1[$f['r_status1']],str_replace("%r_name%",$row->r_name,$t['chat_msg75'])));
 			} elseif ($f['r_status1'] && $r_id) {
-				// Raum ändern
+				// Raum Ã¤ndern
 				system_msg("",$u_id,$u_id,$system_farbe,str_replace("%status%",$raumstatus1[$f['r_status1']],str_replace("%r_name%",$row->r_name,$t['chat_msg73'])));
 				schreibe_db("raum",$f,$r_id,"r_id");
 			} else {
@@ -2039,7 +2039,7 @@ case "/aendereraum":
 	break;
 
 case "/lob":
-		// Nur für Admins, lobt User mit Punkten
+		// Nur fÃ¼r Admins, lobt User mit Punkten
 		if ($admin) {
 			if ($communityfeatures) {
 				$user=nick_ergaenze($chatzeile[1],"raum",1);
@@ -2052,7 +2052,7 @@ case "/lob":
 
 				//system_msg("", 0, $u_id, $system_farbe, "DEBUG: $user[u_level] ");
 
-				// Nur Superuser dürfen Gästen Punkte geben
+				// Nur Superuser dÃ¼rfen GÃ¤sten Punkte geben
 				if ($user['u_level'] == 'G' && $u_level!='S')
 				{
 					system_msg("",0,$u_id,$system_farbe,$t['punkte22']);
@@ -2083,7 +2083,7 @@ case "/lob":
 				if ($user['u_nick']!="") {
 
 					if ($im_raum) {
-						// eine öffentliche Nachricht an alle schreiben
+						// eine Ã¶ffentliche Nachricht an alle schreiben
 						punkte($anzahl,$user['o_id'],$user['u_id'],"",TRUE);
 						$txt=str_replace("%user1%",$u_nick,$t['punkte5']);
 						$txt=str_replace("%user2%",$user['u_nick'],$txt);
@@ -2109,7 +2109,7 @@ case "/lob":
 case "/tadel":
 case "/bestraf":
 case "/peitsch":
-		// Nur für Admins, zieht User Punkte ab
+		// Nur fÃ¼r Admins, zieht User Punkte ab
 		if ($admin) {
 			if ($communityfeatures) {
 				$user=nick_ergaenze($chatzeile[1],"raum",1);
@@ -2152,7 +2152,7 @@ case "/peitsch":
 						$txt=$t['punkte20'];
 					}
 
-					// eine öffentliche Nachricht an alle schreiben
+					// eine Ã¶ffentliche Nachricht an alle schreiben
 					punkte($anzahl*(-1),$user['o_id'],$user['u_id'],"",TRUE);
 
 					$txt=str_replace("%user%",$u_nick,$txt);
@@ -2162,7 +2162,7 @@ case "/peitsch":
 				} elseif ($user['u_nick']!="") {
 
 					if ($im_raum) {
-						// eine öffentliche Nachricht an alle schreiben
+						// eine Ã¶ffentliche Nachricht an alle schreiben
 						punkte($anzahl*(-1),$user['o_id'],$user['u_id'],"",TRUE);
 						$txt=str_replace("%user1%",$u_nick,$t['punkte6']);
 						$txt=str_replace("%user2%",$user['u_nick'],$txt);
@@ -2193,10 +2193,10 @@ case "/m":
 
 	if ($communityfeatures && !($o_knebel>0) && $u_level!="G" && strlen($text)>1) {
 
-		// Empfänger im Chat suchen
+		// EmpfÃ¤nger im Chat suchen
 		$nick=nick_ergaenze($chatzeile[1],"online",1);
 
-		// Falls keinen Empfänger gefunden, in Usertabelle nachsehen
+		// Falls keinen EmpfÃ¤nger gefunden, in Usertabelle nachsehen
 		if ($nick['u_nick']=="") {
 			$query="SELECT u_nick,u_id from user ".
 				"WHERE u_nick='".coreCheckName($chatzeile[1],$check_name)."'";
@@ -2230,7 +2230,7 @@ case "/m":
 			system_msg("",0,$u_id,$system_farbe,str_replace("%nachricht%",$text,$t['chat_msg77']));
 		} else {
 			// Nachricht konnte nicht verschickt werden, als Kopie ausgeben
-			// ignoriere User dürfen kein Mail schicken
+			// ignoriere User dÃ¼rfen kein Mail schicken
 			if ($ignore==true)
 			{
 			 system_msg("",0,$u_id,$system_farbe,str_replace("%user%",$nick['u_nick'],$t['chat_msg103'])); 
@@ -2266,7 +2266,7 @@ case "/m":
 case "/freunde":
 case "/freund":
 case "/buddy":
-	// Fügt Freund der Freundesliste hinzu oder löscht einen Eintrag
+	// FÃ¼gt Freund der Freundesliste hinzu oder lÃ¶scht einen Eintrag
 
 	if ($u_level!="G" && $communityfeatures) {
 
@@ -2278,7 +2278,7 @@ case "/buddy":
 			// Nach nicknamen suchen		
 			$nick=nick_ergaenze($chatzeile[1],"online",1);
 
-			// Falls keinen Empfänger gefunden, in Usertabelle nachsehen
+			// Falls keinen EmpfÃ¤nger gefunden, in Usertabelle nachsehen
 			if ($nick['u_nick']=="") {
 				$query="SELECT u_nick,u_id,u_level from user ".
 					"WHERE u_nick='".coreCheckName($chatzeile[1],$check_name)."'";
@@ -2303,7 +2303,7 @@ case "/buddy":
 			}
 
 			
-			// Falls nick gefunden, prüfen ob er bereits in Tabelle steht
+			// Falls nick gefunden, prÃ¼fen ob er bereits in Tabelle steht
 			if ($nick['u_nick']!="" && $nick['u_id']) {
 				$query="SELECT f_id from freunde WHERE ".
 					"(f_userid=$nick[u_id] AND f_freundid=$u_id ) ".
@@ -2330,7 +2330,7 @@ case "/buddy":
 					
 					if ($freunddazu == 1)
 					{
-						// User ist noch kein Freund -> hinzufügen
+						// User ist noch kein Freund -> hinzufÃ¼gen
 						unset($f);
 						$f['u_id']=$nick['u_id'];
 						$f['u_nick']=$nick['u_nick'];
@@ -2398,7 +2398,7 @@ case "/buddy":
 					if ($row2->o_id=="" || $row2->o_id=="NULL") $row2->online="";
 					$txt=user($row2->u_id,$row2,$o_js,TRUE,"&nbsp;",$row2->online,$row2->login,FALSE);
 				} else {
-					// User nicht gefunden, Freund löschen
+					// User nicht gefunden, Freund lÃ¶schen
 					$txt="NOBODY";
 					$query="DELETE from freunde WHERE f_id=$row->f_id";
 					$result2=mysql_query($query,$conn);
@@ -2440,7 +2440,7 @@ case "/time":
 
 case "/blacklist":
 case "/blackliste":
-	// Fügt Eintrag der Blacklist hinzu oder löscht einen Eintrag
+	// FÃ¼gt Eintrag der Blacklist hinzu oder lÃ¶scht einen Eintrag
 
 	if ($admin && $communityfeatures) {
 
@@ -2452,7 +2452,7 @@ case "/blackliste":
 			// Nach nicknamen suchen		
 			$nick=nick_ergaenze($chatzeile[1],"online",1);
 
-			// Falls keinen Empfänger gefunden, in Usertabelle nachsehen
+			// Falls keinen EmpfÃ¤nger gefunden, in Usertabelle nachsehen
 			if ($nick['u_nick']=="") {
 
 		$chatzeile[1]=coreCheckName($chatzeile[1],$check_name);
@@ -2466,7 +2466,7 @@ case "/blackliste":
 
 			};
 
-			// Falls nick gefunden, prüfen ob er bereits in Tabelle steht
+			// Falls nick gefunden, prÃ¼fen ob er bereits in Tabelle steht
 			if ($nick['u_nick']!="" && $nick['u_id']) {
 				$query="SELECT f_id from blacklist WHERE ".
 					"f_blacklistid=$nick[u_id] ";
@@ -2487,7 +2487,7 @@ case "/blackliste":
 
 				} else {
 
-					// User ist noch kein Eintrag -> hinzufügen
+					// User ist noch kein Eintrag -> hinzufÃ¼gen
 					$f['f_userid']=$u_id;
 					$f['f_blacklistid']=$nick['u_id'];
 					if (strlen($text)>1) $f['f_text']=$text;
@@ -2519,12 +2519,12 @@ case "/sms":    # martin 26.02.2002
 
 		$text=html_parse($privat,htmlspecialchars($chatzeile[2]." ".$chatzeile[3]));
 
-		// Empfänger im Chat suchen
-		// /talk muß z.B. mit "/talk kleiner" auch dann an kleiner gehen 
+		// EmpfÃ¤nger im Chat suchen
+		// /talk muss z.B. mit "/talk kleiner" auch dann an kleiner gehen 
 		// wenn kleiner in anderem Raum ist und im eigenen Raum ein kleinerpfuscher anwesend ist.
 		if ($nick['u_nick']=="") $nick=nick_ergaenze($chatzeile[1],"online",1);
 
-		 // Falls keinen Empfänger gefunden, in Usertabelle nachsehen
+		 // Falls keinen EmpfÃ¤nger gefunden, in Usertabelle nachsehen
                 if ($nick['u_nick']=="") {
 
 		$chatzeile[1]=coreCheckName($chatzeile[1],$check_name);
@@ -2537,7 +2537,7 @@ case "/sms":    # martin 26.02.2002
                         @mysql_free_result($result);
                 };
 
-		// Falls Empfänger gefunden, Nachricht versenden
+		// Falls EmpfÃ¤nger gefunden, Nachricht versenden
 		if ($nick['u_nick'] != "") {
 
 			// nick gefunden und Eindeutig.
@@ -2578,7 +2578,7 @@ default:
 		// Art des Spruchs
 		// 0: Ohne Argumente
 		// 1: Username wurde angegeben
-		// 2: Username und Zusatztext wurden übergeben
+		// 2: Username und Zusatztext wurden Ã¼bergeben
 
 		// Wenn in $chatzeile[1] oder anderen auser 0 ein " vorkommt,
 		// dann leerzeichen durch + ersetzen und neu splitten
@@ -2608,7 +2608,7 @@ default:
 		} 
 
 
-		// Befehl bestimmen und ungültige Zeichen filtern
+		// Befehl bestimmen und ungÃ¼ltige Zeichen filtern
 		$spruchname = addslashes(strtr(substr($chatzeile[0],1),"*%$!?.,;:\\",""));
 		$username   = $chatzeile[1];
 		$zusatztext = $chatzeile[2]." ".$chatzeile[3];
@@ -2626,7 +2626,7 @@ default:
 		$zusatztext = trim(str_replace("\"", "", $zusatztext));
 
 		// Spruch suchen
-		// Sprüche in Array lesen
+		// SprÃ¼che in Array lesen
 		$sp_list = file("conf/$datei_spruchliste");
                 $sp_such = "^".$spruchname."\t".$spruchart."\t";
                 for(@reset($sp_list); (list(,$sp_text)=each($sp_list)) AND (!preg_match("/".$sp_such."/",$sp_text)); );
@@ -2692,20 +2692,20 @@ default:
 			// Normaler Text im Chat ausgeben
 			// Text filtern und in DB schreiben
 
-			// Nicknamen ergänzen, gesucht wird nach aktiven usern im selben Raum
+			// Nicknamen ergÃ¤nzen, gesucht wird nach aktiven usern im selben Raum
 			$temp=substr($chatzeile[0],-1);
 			
 			// Ansprechen mit "Nick:" "@nick" oder "Nick," bzw "Nick."
-			// Problem: "Nick," und "Nick." macht Probleme bei allen Wörten, die am Anfang mit , oder "..." 
+			// Problem: "Nick," und "Nick." macht Probleme bei allen WÃ¶rten, die am Anfang mit , oder "..." 
 			// getrennt geschrieben werden
 			// z.b. so, ich gehe jetzt wird zu "[zu Sonnenschein] ich gehe zu" wenn User Sonnenschein im Raum ist
 			// if ($temp==":" || $temp=="@" || $temp==",") {
 			// Daher auskommentiert und nur "Nick:" "@nick" und testweise "Nick." akzeptiert
-			// da obriges seltener für den . passiert, und der . öffters aus versehen statt dem : erwischt wird
+			// da obriges seltener fÃ¼r den . passiert, und der . Ã¶ffters aus versehen statt dem : erwischt wird
 			if ($temp==":" || $temp=="@") {
 				$nick=nick_ergaenze($chatzeile[0],"raum",0);
 				if ($nick['u_nick'] <> "") {
-					// Falls User gefunden wurde Nicknamen einfügen und filtern
+					// Falls User gefunden wurde Nicknamen einfÃ¼gen und filtern
 					$f['c_text']="[".$t['chat_spruch6']."&nbsp;$nick[u_nick]] ".html_parse($privat,htmlspecialchars($chatzeile[1]." ".$chatzeile[2]." ".$chatzeile[3]));
 					if ($nick['u_away']!="") system_msg("",0,$u_id,$system_farbe,"<b>$chat:</b> $nick[u_nick] $t[away1] $nick[u_away]");
 				} else {
@@ -2716,7 +2716,7 @@ default:
 			} elseif (isset($chatzeile[1]) && substr($chatzeile[1],0,1)=="@") {
 				$nick=nick_ergaenze($chatzeile[1],"raum",0);
 				if ($nick['u_nick'] <> "") {
-					// Falls User gefunden wurde Nicknamen einfügen und filtern
+					// Falls User gefunden wurde Nicknamen einfÃ¼gen und filtern
 					$f['c_text']="[".$t['chat_spruch6']."&nbsp;$nick[u_nick]] ".html_parse($privat,htmlspecialchars($chatzeile[0]." ".$chatzeile[2]." ".$chatzeile[3]));
 					if ($nick['u_away']!="") system_msg("",0,$u_id,$system_farbe,"<b>$chat:</b> $nick[u_nick] $t[away1] $nick[u_away]");
 				} else {
@@ -2730,7 +2730,7 @@ default:
 			}
 
 
-			// Attribute ergänzen und Nachricht schreiben
+			// Attribute ergÃ¤nzen und Nachricht schreiben
 			$f['c_von_user']=$u_name;
 			$f['c_von_user_id']=$u_id;
 			$f['c_raum']=$r_id;
@@ -2749,8 +2749,8 @@ default:
 				$result=mysql_query($query,$conn);  
 
 				// Punkte berechnen und User gutschreiben
-				// Punkte=Anzahl der Wörter mit mindestens 4 Buchstaben
-				// Punkte werden nur in permanenten, offen Räumen gutgeschrieben!
+				// Punkte=Anzahl der WÃ¶rter mit mindestens 4 Buchstaben
+				// Punkte werden nur in permanenten, offen RÃ¤umen gutgeschrieben!
 				if ($communityfeatures && $u_level!="G" && 
 				    ($raum_einstellungen['r_status1']=="O" || $raum_einstellungen['r_status1']=="m") &&
 				    $raum_einstellungen['r_status2']=="P") {
@@ -2762,7 +2762,7 @@ default:
 					if ($punktefeatures && $result && mysql_result($result,0,0)>=$punkte_ab_user) 
 // DEBUG				if ($punktefeatures && $result && mysql_result($result,0,0)>=1) 
 					{
-						// löscht die * und _ aus dem Eingabetext, damit es für z.b. *_*_ keine Punkte mehr gibt
+						// lÃ¶scht die * und _ aus dem Eingabetext, damit es fÃ¼r z.b. *_*_ keine Punkte mehr gibt
 						$punktetext = $f['c_text'];
 						$punktetext = str_replace('<i>', '', $punktetext);
 						$punktetext = str_replace('<b>', '', $punktetext);
@@ -2827,7 +2827,7 @@ default:
 
 
 function sperre($r_id,$u_id,$u_name,$s_user,$s_user_name,$admin) {
-// Sperrt User s_user für Raum r_id oder hebt Sperre auf
+// Sperrt User s_user fÃ¼r Raum r_id oder hebt Sperre auf
 // Wirft User ggf aus dem Raum r_id
 
 global $lobby;
@@ -2891,7 +2891,7 @@ if ($r_id!=$lobby_id):
 		endif;
 
 	else:
-		// Sperre löschen
+		// Sperre lÃ¶schen
 		$s_id=mysql_result($result,0,"s_id");
 		$query2="DELETE FROM sperre WHERE s_id=$s_id ";
 		$result2=mysql_query($query2,$conn);
@@ -2921,7 +2921,7 @@ else:
 			// User rauswerfen
 			$o_id=mysql_result($result2,0,"o_id");
 			global_msg($u_id,$r_id,"'$u_name' $t[sperre2] '$s_user_name' $t[sperre7]");
-			// 2 sek vor dem ausloggen warten, damit der Störer die Meldung auch noch lesen kann !!!
+			// 2 sek vor dem ausloggen warten, damit der StÃ¶rer die Meldung auch noch lesen kann !!!
 			sleep(2);
 			verlasse_chat($s_user,$s_user_name,$r_id);
 			sleep(2);
@@ -2938,8 +2938,8 @@ endif;
 
 
 function ignore($o_id,$i_user_aktiv,$i_user_name_aktiv,$i_user_passiv,$i_user_name_passiv) {
-// Unterdrückt Mitteilungen von i_user_passiv an i_user_aktiv
-// Schaltet bei neuem Aufruf wieder zurück
+// UnterdrÃ¼ckt Mitteilungen von i_user_passiv an i_user_aktiv
+// Schaltet bei neuem Aufruf wieder zurÃ¼ck
 
 global $dbase,$chat,$conn,$t;
 
@@ -2981,7 +2981,7 @@ if ($result && mysql_num_rows($result)==0):
 
 elseif ($result && mysql_num_rows($result)>0):
 
-	// Ignore löschen
+	// Ignore lÃ¶schen
 	$i_id=mysql_result($result,0,"i_id");
 	$query2="DELETE FROM iignore WHERE i_id=$i_id ";
 	$result2=mysql_query($query2,$conn);
@@ -2998,7 +2998,7 @@ endif;
 
 
 // Kopie in Onlinedatenbank aktualisieren
-// Query muss mit dem Code in login() übereinstimmen
+// Query muss mit dem Code in login() Ã¼bereinstimmen
 $query="SELECT i_user_passiv FROM iignore WHERE i_user_aktiv=$i_user_aktiv";
 $result=mysql_query($query,$conn);
 
@@ -3027,7 +3027,7 @@ endif;
 
 function nick_ergaenze($part,$scope="raum",$noerror=0) {
 	//
-	// gibt ein assoziativ_array $nick[u_nick], $nick[u_id] zurück, falls ein Nick ergänzt werden konnt.
+	// gibt ein assoziativ_array $nick[u_nick], $nick[u_id] zurÃ¼ck, falls ein Nick ergÃ¤nzt werden konnt.
 	// falls kein Nick gefunden wurde oder mehrere Nicks gefunden wurde, werd bereits hier die Fehlerausgaben 
 	// erzeugt
 	//
@@ -3045,12 +3045,12 @@ function nick_ergaenze($part,$scope="raum",$noerror=0) {
 	// Letztes Zeichen nach Nick merken
 	$letzes_zeichen=substr($part,-1);
 
-	// ":" und "," am Ende kürzen.
+	// ":" und "," am Ende kÃ¼rzen.
 	if (preg_match("![:,]$!",$part)) $part=substr($part,0,strlen($part)-1);
 	if (substr($part,0,1)=="@") $part=substr($part,1,strlen($part)-1);
 
 	
-    	// sonderfall für Gäste -> falls nur Ziffern -> Gast ergänzen
+    	// sonderfall fÃ¼r GÃ¤ste -> falls nur Ziffern -> Gast ergÃ¤nzen
     	if (preg_match("!\d$!",$part)) $ziff=".*"; else $ziff="";
 
 
@@ -3123,9 +3123,9 @@ function nick_ergaenze($part,$scope="raum",$noerror=0) {
 			};
 		}
         } else {
-		// nicht ergänzen, ist nicht eindeutig. 
+		// nicht ergÃ¤nzen, ist nicht eindeutig. 
             	$answer=str_replace("%nickkurz%",$part,$answer);
-		// Info aufbereiten, wer alles hätte angesprochen werden können
+		// Info aufbereiten, wer alles hÃ¤tte angesprochen werden kÃ¶nnen
             	for ($i=0; $i<$rows; $i++) {
                 	$answer = $answer . @mysql_result($result,$i,"o_name");
                 	if ($i<$rows) $answer = $answer . " ";
@@ -3135,7 +3135,7 @@ function nick_ergaenze($part,$scope="raum",$noerror=0) {
         }
 
     } elseif ($letzes_zeichen!=",") {
-	// Fehler ausgeben, falls erstes Wort nicht mit einem "," endet ("fido, Du..." wird ergänzt, aber "Hallo, ich..." erzeugt keinen Fehler
+	// Fehler ausgeben, falls erstes Wort nicht mit einem "," endet ("fido, Du..." wird ergÃ¤nzt, aber "Hallo, ich..." erzeugt keinen Fehler
 	// : nicht gefunden.
 	if (!$noerror) system_msg("",0,$u_id,$u_farbe,str_replace("%chatzeile%",$part,$fehler));
     }
@@ -3166,7 +3166,7 @@ function auto_knebel($text) {
 	global $erweitertefeatures;
 	
 
-	// Prüfen ob private Nachricht
+	// PrÃ¼fen ob private Nachricht
 	$chatzeile=preg_split("/ /",$text,2);
 	$chatzeile[0] = strtolower($chatzeile[0]);
 	if (($chatzeile[0] == '/msg') or 
@@ -3187,7 +3187,7 @@ function auto_knebel($text) {
 	if (!$knebelzeit) $knebelzeit = 5;
 
 
-	// für temp-admins gibts nun auch keinen autoknebel mehr
+	// fÃ¼r temp-admins gibts nun auch keinen autoknebel mehr
 	$query="SELECT o_level FROM online WHERE o_user = '$u_id'";
 	$result=mysql_query($query);
 	$a=mysql_fetch_array($result);
@@ -3206,7 +3206,7 @@ function auto_knebel($text) {
 			 $ak=array_merge($ak,$ak2);
 			}
 		for ($i=0; $i<count($ak); $i++) {
-			// Text in Kleinschrift gegen verbotene Text prüfen
+			// Text in Kleinschrift gegen verbotene Text prÃ¼fen
 			$testtext=strtolower($text);
 			#$testtext=strip_tags($testtext);
 			$testtext=str_replace("*","",$testtext);
@@ -3225,7 +3225,7 @@ function auto_knebel($text) {
 
 				// system_msg("",0,$u_id,$system_farbe,"DEBUG: $row[o_knebel] ... $row[knebelneu] ");				
 
-				// Nur wenn neue Zeit größer als alte, dann erneut knebeln
+				// Nur wenn neue Zeit grÃ¶ÃŸer als alte, dann erneut knebeln
 				if ($row[o_knebel] <= $row[knebelneu])
 				{
 					$query="update online set o_knebel=FROM_UNIXTIME(UNIX_TIMESTAMP(NOW())+$knebelzeit*60) ".

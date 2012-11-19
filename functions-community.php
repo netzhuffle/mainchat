@@ -1,14 +1,14 @@
 <?php
 // fidion mainChat
 // (C) fidion GmbH
-// // Funktionen nur für die Community
+// // Funktionen nur fÃ¼r die Community
 // $Id: functions-community.php,v 1.15 2012/10/17 06:16:53 student Exp $
 
 require_once("functions.php-func-sms.php");
 
 function suche_vaterposting($poid)
         {
-        // Diese Funktion sucht das Vaterposting des übergebenen Postings
+        // Diese Funktion sucht das Vaterposting des Ã¼bergebenen Postings
         $query="SELECT po_vater_id FROM posting WHERE po_id = '$poid'";
         $result=mysql_query($query);
         list($vp) =mysql_fetch_array($result);
@@ -34,13 +34,13 @@ function mail_neu($u_id,$u_nick,$id,$nachricht="OLM") {
 	// Fenstername
         $fenster=str_replace("+","",$u_nick);
         $fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 
 	$query="SELECT mail.*,date_format(m_zeit,'%d.%m.%y um %H:%i') as zeit,u_nick ".
@@ -115,7 +115,7 @@ function mail_neu($u_id,$u_nick,$id,$nachricht="OLM") {
 
 
 function profil_neu($u_id,$u_nick,$id) {
-// Hat der User sein Profil ausgefüllt?
+// Hat der User sein Profil ausgefÃ¼llt?
 // Falls nein, wird einer Erinnerung ausgegeben
 // $u_id ist die ID des des Users
 
@@ -123,13 +123,13 @@ function profil_neu($u_id,$u_nick,$id) {
 
 	$fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 	$query="SELECT ui_id FROM userinfo WHERE ui_userid=$u_id";
 	$result=mysql_query($query, $conn);
@@ -174,7 +174,7 @@ function autoselect($name,$voreinstellung,$tabelle,$feld) {
 function punkte($anzahl,$o_id,$u_id=0,$text="",$sofort=FALSE) {
 // Addiert/Subtrahiert $anzahl Punkte auf das Punktekonto des Users $o_id/$u_id
 // Dieser User muss online sein, die punkte werden in der Tabelle online addiert
-// Falls $text Zeichen enthält, wird der Text mit einem Standardtext ausgegeben
+// Falls $text Zeichen enthÃ¤lt, wird der Text mit einem Standardtext ausgegeben
 
 global $t,$o_punkte,$dbase,$communityfeatures,$conn,$punkte_gruppe;
 
@@ -204,7 +204,7 @@ if (strlen($text)>0) {
 	if ($u_id!=0) system_msg("",0,$u_id,$system_farbe,$text);
 }
 
-// Optional Punkte sofort in Userdaten übertragen
+// Optional Punkte sofort in Userdaten Ã¼bertragen
 if ($sofort && $o_id) {
 
                 
@@ -218,7 +218,7 @@ if ($sofort && $o_id) {
 		$row=mysql_fetch_object($result);   
 		$u_id=$row->o_user;
 
-		// es können maximal die punkte abgezogen werden, die man auch hat
+		// es kÃ¶nnen maximal die punkte abgezogen werden, die man auch hat
                 $result2=mysql_query("select u_punkte_gesamt, u_punkte_jahr, u_punkte_monat FROM user WHERE u_id=$u_id",$conn);
                 if ($result2 && mysql_num_rows($result2)==1) 
                 {
@@ -269,7 +269,7 @@ if ($sofort && $o_id) {
 function punkte_offline($anzahl,$u_id) {
 // Addiert/Subtrahiert $anzahl Punkte auf das Punktekonto des Users $u_id
 // Die Punkte werden direkt in die user-tabelle geschrieben
-// Optional wird Info-Text als Ergebnis zurückgeliefert
+// Optional wird Info-Text als Ergebnis zurÃ¼ckgeliefert
 
 global $t,$dbase,$communityfeatures,$conn,$punkte_gruppe;
 
@@ -282,7 +282,7 @@ $result=mysql_query($query,$conn);
 // Aktuelle Punkte auf Punkte in Usertabelle addieren
 if ($u_id && ($anzahl>0 || $anzahl<0)) {
 
-        // es können maximal die punkte abgezogen werden, die man auch hat
+        // es kÃ¶nnen maximal die punkte abgezogen werden, die man auch hat
         $result2=mysql_query("select u_punkte_gesamt, u_punkte_jahr, u_punkte_monat FROM user WHERE u_id=$u_id",$conn);
         if ($result2 && mysql_num_rows($result2)==1) 
         {
@@ -346,22 +346,22 @@ return($text);
 
 function aktion($typ,$an_u_id,$u_nick,$id="",$suche_was="",$inhalt="") {
 
-	// Programmierbare Aktionen für User $an_u_id von User $u_nick
+	// Programmierbare Aktionen fÃ¼r User $an_u_id von User $u_nick
 	// Verschickt eine Nachricht (Aktion) zum Login, Raumwechsel, Sofort oder alle 5 Minuten aus (a_wann)
 	// Die Aktion ist Mail (Chatintern), E-Mail an die Adresse des Users oder eine Online-Message (a_wie)
 	// Die betroffene Chat-Funktion (zb. Freund-Login/Logout, Mailempfang) wird als Text definiert (a_was)
 	// Pro Funktion kann ein Infotext hinterlegt werden (a_text)
 	// typ = "Sofort/Offline", "Sofort/Online", "Login", "Alle 5 Minuten"
-	// Die Session-ID $id kann optional übergeben werden
-	// Mit der Angabe von $suche_was kann die Suche auf ein a_was eingeschränkt werden
-	// Für "Sofort/Offline" und "Sofort/Online" muss der Inhalt in $inhalt übergeben werden
+	// Die Session-ID $id kann optional Ã¼bergeben werden
+	// Mit der Angabe von $suche_was kann die Suche auf ein a_was eingeschrÃ¤nkt werden
+	// FÃ¼r "Sofort/Offline" und "Sofort/Online" muss der Inhalt in $inhalt Ã¼bergeben werden
 	global $u_id,$t,$dbase,$communityfeatures,$conn;
 
 
 	if ($communityfeatures) {
 
-		// Einstellungen aus DB in Array a_was merken und dabei SETs auflösen
-		// Mögliche a_wann: Sofort/Offline, Sofort/Online, Login, Alle 5 Minuten
+		// Einstellungen aus DB in Array a_was merken und dabei SETs auflÃ¶sen
+		// MÃ¶gliche a_wann: Sofort/Offline, Sofort/Online, Login, Alle 5 Minuten
 		$query="SELECT a_was,a_wie from aktion ".
 			"WHERE a_user=$an_u_id ".
 			"AND a_wann='$typ' ";
@@ -394,7 +394,7 @@ function aktion($typ,$an_u_id,$u_nick,$id="",$suche_was="",$inhalt="") {
 
 			case "Alle 5 Minuten":
 
-				// Aktionen ausführen
+				// Aktionen ausfÃ¼hren
 				//system_msg("",0,$u_id,$system_farbe, "DEBUG 5min $an_u_id,$u_nick,$id");
 				if (isset($a_was["Freunde"]["OLM"]))		freunde_online($an_u_id,$u_nick,$id,"OLM");
 				if (isset($a_was["Freunde"]["Chat-Mail"]))	freunde_online($an_u_id,$u_nick,$id,"Chat-Mail");
@@ -411,7 +411,7 @@ function aktion($typ,$an_u_id,$u_nick,$id="",$suche_was="",$inhalt="") {
 			        if (isset($a_was["Antwort auf eigenes Posting"]["SMS"]))   	postings_neu($an_u_id,$u_nick,$id,"SMS");
 
 
-				// Merken, wann zuletzt die Aktionen ausgeführt wurden
+				// Merken, wann zuletzt die Aktionen ausgefÃ¼hrt wurden
 				$query="UPDATE online SET o_aktion=".time()." where o_user=$an_u_id"; 
 				$result=mysql_query($query, $conn);
 
@@ -422,7 +422,7 @@ function aktion($typ,$an_u_id,$u_nick,$id="",$suche_was="",$inhalt="") {
 			case "Login":
 			default:
 
-				// Aktionen ausführen
+				// Aktionen ausfÃ¼hren
 				// system_msg("",0,$u_id,$system_farbe, "DEBUG Login $an_u_id,$u_nick,$id");
 				if (isset($a_was["Freunde"]["OLM"]))		freunde_online($an_u_id,$u_nick,$id,"OLM");
 				if (isset($a_was["Freunde"]["Chat-Mail"]))	freunde_online($an_u_id,$u_nick,$id,"Chat-Mail");
@@ -451,8 +451,8 @@ function aktion($typ,$an_u_id,$u_nick,$id="",$suche_was="",$inhalt="") {
 function aktion_sende($a_was,$a_wie,$inhalt,$an_u_id,$von_u_id,$u_nick,$id="") {
 
 	// Versendet eine Nachricht an User $an_u_id von $von_u_id/$u_nick
-	// Der Inhalt der Nachricht wird in $inhalt übergeben
-	// Die Session-ID $id kann optional übergeben werden
+	// Der Inhalt der Nachricht wird in $inhalt Ã¼bergeben
+	// Die Session-ID $id kann optional Ã¼bergeben werden
 	// Die Aktion ist Mail (Chatintern), E-Mail an die Adresse des Users oder eine Online-Message (a_wie)
 	// Die betroffene Chat-Funktion (zb. Freund-Login/Logout, Mailempfang) wird als Text definiert (a_was)
 
@@ -531,7 +531,7 @@ function aktion_sende($a_was,$a_wie,$inhalt,$an_u_id,$von_u_id,$u_nick,$id="") {
 						break;
 
 					case "Neue Mail":
-						// Eine neue Chat-Mail kann keine Chat-Mail auslösen
+						// Eine neue Chat-Mail kann keine Chat-Mail auslÃ¶sen
 						break;
 					case "Antwort auf eigenes Posting":
 						$betreff=str_replace("%po_titel%", $inhalt['po_titel'], $t['betreff_new_posting']);
@@ -703,7 +703,7 @@ if ($mailversand_ok==true)
 	if ($betreff) {
 		$f['m_betreff']=$betreff;
 	} else {
-		// Betreff aus Text übernehmen und kürzen
+		// Betreff aus Text Ã¼bernehmen und kÃ¼rzen
 		$f['m_betreff']=$text;
 		if (strlen($f['m_betreff'])>5){
 			$f['m_betreff']=substr($f['m_betreff'],0,30);
@@ -714,7 +714,7 @@ if ($mailversand_ok==true)
 
 	$f['m_id']=schreibe_db("mail",$f,"","m_id");
 
-	// Nachricht über neue E-Mail sofort erzeugen
+	// Nachricht Ã¼ber neue E-Mail sofort erzeugen
 	if (ist_online($an)) {
 		aktion("Sofort/Online",$an,$u_nick,"","Neue Mail",$f);
 	} else {
@@ -738,7 +738,7 @@ function email_versende ($von_user_id,$an_user_id,$text,$betreff,$an_u_email=FAL
 
 	global $chat,$dbase,$conn,$t,$http_host;
 
-	// Umwandlung der Entities rückgängig machen, Slashes und Tags entfernen
+	// Umwandlung der Entities rÃ¼ckgÃ¤ngig machen, Slashes und Tags entfernen
 	$trans = get_html_translation_table (HTML_ENTITIES);
 	$trans = array_flip ($trans);
 	$text=str_replace("<ID>","",$text);
@@ -754,13 +754,13 @@ function email_versende ($von_user_id,$an_user_id,$text,$betreff,$an_u_email=FAL
 	}
 	@mysql_free_result($result);
 
-	// Empfänger ermitteln und E-Mail versenden, Footer steht in $t[mail4]
+	// EmpfÃ¤nger ermitteln und E-Mail versenden, Footer steht in $t[mail4]
 	$query="SELECT u_adminemail,u_email,u_name,u_nick from user WHERE u_id=$an_user_id ";
 	$result=mysql_query($query, $conn);
 	if ($result && mysql_num_rows($result)==1) {
 		$row=mysql_fetch_object($result);
 
-		// Empfänger
+		// EmpfÃ¤nger
 		if ($an_u_email && $row->u_email) {
 			$adresse=$row->u_email;
 		} else {
@@ -935,7 +935,7 @@ function freunde_online($u_id,$u_nick,$id,$nachricht="OLM") {
 
 };
 
-//prüft ob neue Antworten auf eigene Postings 
+//prÃ¼ft ob neue Antworten auf eigene Postings 
 //vorhanden sind und benachrichtigt entsprechend
 function postings_neu($an_u_id,$u_nick,$id,$nachricht) {
 
@@ -973,7 +973,7 @@ function postings_neu($an_u_id,$u_nick,$id,$nachricht) {
 //		and b.po_u_id = u_id 
 //		and a.po_u_id <> b.po_u_id";
 
-// Vereinfachter Query ohne Left join, ist nun viel viel schneller. Fehlende Felder werden über zwei weitere Queries gesucht.
+// Vereinfachter Query ohne Left join, ist nun viel viel schneller. Fehlende Felder werden Ã¼ber zwei weitere Queries gesucht.
 	$sql = "
 		select a.po_id as po_id_own, a.po_th_id as po_th_id,
 		a.po_titel as po_titel_own,
@@ -1099,7 +1099,7 @@ function erzeuge_baum($threadorder, $po_id, $thread) {
         }
 
         $arr_baum = array();
-        //vom Posting ausgehend zurück zur Wurzel
+        //vom Posting ausgehend zurÃ¼ck zur Wurzel
         array_unshift($arr_baum, $po_id);
 
         $vater = $arr_postings[$po_id]['vater'];
@@ -1148,13 +1148,13 @@ function erzeuge_fuss($text) {
 function word_wrap($org_message, $cols="85", $returns="AUTO", $spacer="", $joiner=' ')
  {
  /*
-  Verbesserte Word-wrap funktion, die auch Zeile zusammenfügt (wenn nötig)
+  Verbesserte Word-wrap funktion, die auch Zeile zusammenfÃ¼gt (wenn nÃ¶tig)
    $org_message = Originaltext
    $cols = Anzahl Zeichen pro Zeile
    $cut  = Trennzeichen
    $returns = hier kann angegeben werden, welches Zeichen als Umbruch verwendet werden soll
-   $spacer = zusätzliches Zeichen was beim Treenzeichen noch angehängt werden soll
-   $joiner = Zeichen welches zum zusammenfügen von Zeilen verwendet werden soll
+   $spacer = zusÃ¤tzliches Zeichen was beim Treenzeichen noch angehÃ¤ngt werden soll
+   $joiner = Zeichen welches zum zusammenfÃ¼gen von Zeilen verwendet werden soll
  */
 
  if ($returns == 'AUTO') {
@@ -1241,7 +1241,7 @@ function erzeuge_umbruch($text, $breite) {
 
 if (strstr($text, "&gt;&nbsp;"))
 	{
-	// Alte Version für Quotes beibehalten
+	// Alte Version fÃ¼r Quotes beibehalten
         //text in feld einlesen mit \n als trennzeichen
         $arr_text = explode("\n", $text);
 
@@ -1258,7 +1258,7 @@ if (strstr($text, "&gt;&nbsp;"))
 	}
 	else
 	{
-	// neue version, verhaut die umbrüche nicht mehr
+	// neue version, verhaut die umbrÃ¼che nicht mehr
 	$text= word_wrap($text, $breite, $returns="AUTO", $spacer="", $joiner=' ');
 	return($text);
 	}
@@ -1267,7 +1267,7 @@ if (strstr($text, "&gt;&nbsp;"))
 
 
 function erzeuge_quoting($text, $autor, $date) {
-	//fügt > vor die zeilen und fügt zu beginn xxx schrieb am xxx an
+	//fÃ¼gt > vor die zeilen und fÃ¼gt zu beginn xxx schrieb am xxx an
 
         global $t;
 

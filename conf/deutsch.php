@@ -4,25 +4,25 @@
 setlocale (LC_TIME, "de_DE");
 
 // Kurzer Hilfstext
-$hilfstext=array(1=>	"<B>/user RAUM -</B> listet alle User im Raum (*=alle Räume)",
-			"<B>/raum RAUM -</B> wechselt in RAUM (legt ggf. RAUM neu an), ohne Angabe von RAUM werden alle Räume gelistet",
-			"<B>/zeige NAME-</B> Gibt die Benutzerinformationen für NAME aus (%=Joker)",
-			"<B>/msg NAME TEXT -</B> TEXT an User NAME flüstern",
+$hilfstext=array(1=>	"<B>/user RAUM -</B> listet alle User im Raum (*=alle RÃ¤ume)",
+			"<B>/raum RAUM -</B> wechselt in RAUM (legt ggf. RAUM neu an), ohne Angabe von RAUM werden alle RÃ¤ume gelistet",
+			"<B>/zeige NAME-</B> Gibt die Benutzerinformationen fÃ¼r NAME aus (%=Joker)",
+			"<B>/msg NAME TEXT -</B> TEXT an User NAME flÃ¼stern",
 			"<B>/me TEXT -</B> Spruch im Raum",
-			"<B>/weg TEXT-</B> setzt oder löscht einen ich-bin-nicht-da Text",
+			"<B>/weg TEXT-</B> setzt oder lÃ¶scht einen ich-bin-nicht-da Text",
 			"<B>/nick NAME -</B> Setzt Nickname auf NAME",
  			"<B>/ignore NAME -</B> Ignoriert User NAME, ohne Angabe von NAME werden alle ignorierten User gezeigt",
 			"<B>/kick NAME -</B> Sperrt User NAME aus dem aktuellen Raum aus (oder Freigabe)",
 			"<B>/farbe RRGGBB -</B> Setzt neue Farbe auf RRGGBB, ohne Angabe von RRGGBB wird die aktuelle Farbe angezeigt",
 			"<B>/op TEXT -</B> ruft einem Admin um Hilfe",
-			"<B>/einlad NAME -</B> Läd User in eigene Raum ein oder zeigt die Einladungen",
+			"<B>/einlad NAME -</B> LÃ¤d User in eigene Raum ein oder zeigt die Einladungen",
 			"<B>/quit TEXT -</B> beendet chat mit den Worten TEXT",
-			"<B>/suche NAME -</B> Sucht alle Sprüche die das Wort NAME enthalten",
+			"<B>/suche NAME -</B> Sucht alle SprÃ¼che die das Wort NAME enthalten",
 			"<B>=spruch (NAME ZUSATZ optional) -</B> gibt vordefinierten Spruch aus",
 			"<B>*TEXT* -</B> Text ist kursiv",
 			"<B>_TEXT_ -</B> Text ist fett",
 			"<B>USER direkt ansprechen -</B> USER: oder @USER ergibt [USER:]",
-			"<B>Für die ausführliche Hilfe mit allen Befehlen klicken Sie bitte auf [HILFE] unter der Eingabezeile.</B>");
+			"<B>FÃ¼r die ausfÃ¼hrliche Hilfe mit allen Befehlen klicken Sie bitte auf [HILFE] unter der Eingabezeile.</B>");
 
 
 // Texte Userlevel 
@@ -44,14 +44,14 @@ $leveltext['U']=		"";
 $leveltext['M']=		"Moderator";
 $leveltext['B']=		"Besitzer";
 
-// Texte Status Räume
-// achtung: groß-kleinschreibung ist wichtig.
+// Texte Status RÃ¤ume
+// achtung: groÃŸ-kleinschreibung ist wichtig.
 $raumstatus1['O']=	"offen";
 $raumstatus1['G']=	"geschlossen";
 $raumstatus1['L']=	"Teergrube";
 $raumstatus1['m']=	"moderiert";
 $raumstatus1['M']=	"Moderiert+geschl.";
-$raumstatus2['T']=	"temporär";
+$raumstatus2['T']=	"temporÃ¤r";
 $raumstatus2['P']=	"permanent";
 
 // Text o_who - wo in der Community befindet sich der User
@@ -59,22 +59,22 @@ $whotext[0]="CHAT";
 $whotext[1]="LOGIN";
 $whotext[2]="FORUM";
 
-// Texte möglicher Namen für Gäste
+// Texte mÃ¶glicher Namen fÃ¼r GÃ¤ste
 $gast_name=array(1=>	"Urzel","Murzel","Hurzel","Kurzel","Wurzel","Purzel");
 
 
 $hilfe_spruchtext=	"<B>Format:</B> '=SPRUCH USER ZUSATZTEXT'<BR><BR>".
-			"Je nach Typ muß USER (=Name eines Users im Chat) oder ".
+			"Je nach Typ muss USER (=Name eines Users im Chat) oder ".
 			"ZUSATZTEXT (=freier Text) eingegeben werden:".
 			"<UL><LI><B>Typ 0:</B> kein USER oder ZUSATZTEXT".
 			"<LI><B>Typ 1:</B> nur USER oder stattdessen ZUSATZTEXT (je nach Sinn)".
-			"<BR>Wenn ein USER angegeben wird, genügt <b>bob</b> um das per Nickergänzung auf <b>bobby</b> zu erweitern.".
-			"Wird die Nickergänzung nicht gewünscht, oder ist im ZUSATZTEXT ein Leerzeichen enthalten, muß der Text in \" gesetzt werden.".
+			"<BR>Wenn ein USER angegeben wird, genÃ¼gt <b>bob</b> um das per NickergÃ¤nzung auf <b>bobby</b> zu erweitern.".
+			"Wird die NickergÃ¤nzung nicht gewÃ¼nscht, oder ist im ZUSATZTEXT ein Leerzeichen enthalten, muss der Text in \" gesetzt werden.".
 			"<LI><B>Typ 2:</B> USER und ZUSATZTEXT".
 			"<BR>Hier kann auch USER und ZUSATZTEXT Leerzeichen enthalten, wenn der Text in \" gesetzt wird, oder alternativ das Leerzeichen durch ein + ersetzt wird.".
-			"</UL>In den Sprüchen wird immer <B>´0</B> durch den eigenen Nicknamen ersetzt. ".
-			"Zum weiteren Verständnis probieren Sie einfach die Sprüche aus.<BR><BR>".
-			"Um bestimmte Sprüche auszuwählen ist es am einfachsten, im Chat ".
-			"mit dem /such Befehl und einem Stichwort nach dem gewünschten Spruch ".
+			"</UL>In den SprÃ¼chen wird immer <B>`0</B> durch den eigenen Nicknamen ersetzt. ".
+			"Zum weiteren VerstÃ¤ndnis probieren Sie einfach die SprÃ¼che aus.<BR><BR>".
+			"Um bestimmte SprÃ¼che auszuwÃ¤hlen ist es am einfachsten, im Chat ".
+			"mit dem /such Befehl und einem Stichwort nach dem gewÃ¼nschten Spruch ".
 			"zu suchen.<BR>";
 ?>

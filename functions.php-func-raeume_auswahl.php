@@ -4,18 +4,18 @@
 
 
 function raeume_auswahl($raum,$offen,$alle,$nur_chat=TRUE) {
-// Gibt Liste aller Räume aus, wenn $offen=0
-// Gibt Liste aller offenen (O,T) Räume aus, wenn $offen=1
+// Gibt Liste aller RÃ¤ume aus, wenn $offen=0
+// Gibt Liste aller offenen (O,T) RÃ¤ume aus, wenn $offen=1
 // $raum ist Voreinstellung
-// "L" sind geLOCKte Räume, werden auch nicht mit angezeigt.
-// $nur_chat=TRUE -> Nur Räume zeigen
-// $nur_chat=FALSE -> Räume + Community-Bereiche (whotext) zeigen
+// "L" sind geLOCKte RÃ¤ume, werden auch nicht mit angezeigt.
+// $nur_chat=TRUE -> Nur RÃ¤ume zeigen
+// $nur_chat=FALSE -> RÃ¤ume + Community-Bereiche (whotext) zeigen
 
 global $dbase,$u_id,$conn,$o_raum,$timeout,$whotext,$forumfeatures,$communityfeatures;
 
 
 
-// alle=TRUE, falls alle Räume (auch leere) gezeigt werden sollen
+// alle=TRUE, falls alle RÃ¤ume (auch leere) gezeigt werden sollen
 if ($alle) {
 	$subquery1="WHERE ((UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout OR o_id IS NULL)";
 } else {
@@ -24,7 +24,7 @@ if ($alle) {
 
 
 
-// Liste der Räume mit der Anzahl der User aufstellen
+// Liste der RÃ¤ume mit der Anzahl der User aufstellen
 $query="SELECT r_id,count(o_id) as anzahl FROM raum ".
 	"LEFT JOIN online ON r_id=o_raum ".
 	"$subquery1 ".
@@ -37,7 +37,7 @@ while ($row=mysql_fetch_object($result))
 @mysql_free_result($result);
 
 
-// Optional Formularzusatz für Community-Module  ergänzen
+// Optional Formularzusatz fÃ¼r Community-Module  ergÃ¤nzen
 $zusatz_select="";
 if ($forumfeatures && $communityfeatures && !$nur_chat) {
 	$query="SELECT o_who,count(o_who) as anzahl FROM online ".
@@ -55,10 +55,10 @@ if ($forumfeatures && $communityfeatures && !$nur_chat) {
 	}
 }
 
-// offen=FALSE, falls nur offene Räume gezeigt werden sollen
+// offen=FALSE, falls nur offene RÃ¤ume gezeigt werden sollen
 if (! $offen) {
 
-	// Liste der Räume aufstellen und die Anzahl der User ergänzen
+	// Liste der RÃ¤ume aufstellen und die Anzahl der User ergÃ¤nzen
 	$query="SELECT r_id FROM raum LEFT JOIN invite ON inv_raum=r_id ".
 		"WHERE inv_user='$u_id' ";
 
@@ -87,7 +87,7 @@ if (! $offen) {
 };
 
 
-// offen=TRUE alle Räume anzeigen
+// offen=TRUE alle RÃ¤ume anzeigen
 if ($offen) {
 	$query="SELECT r_status1,r_name,r_id FROM raum ORDER BY r_name";
 } elseif (is_array($rows)) {
@@ -101,7 +101,7 @@ $result=mysql_query($query, $conn);
 echo $zusatz_select;
 while ($row=mysql_fetch_object($result)):
 	if ($row->r_status1!="O"):
-		// L->t und G->g übersetzen
+		// L->t und G->g Ã¼bersetzen
 		if ($row->r_status1=="L"):
 			$status="/t";
 		elseif ($row->r_status1=="G"):
@@ -118,7 +118,7 @@ while ($row=mysql_fetch_object($result)):
 		$anzahl=0;
 	endif;
 
-	// Alle Räume oder nur die Räume mit Usern zeigen
+	// Alle RÃ¤ume oder nur die RÃ¤ume mit Usern zeigen
 	if (($anzahl>0) OR $alle):
 		if ($row->r_id==$raum):
 			echo "<OPTION SELECTED VALUE=\"$row->r_id\">$row->r_name (".$anzahl.$status.")\n";

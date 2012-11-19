@@ -4,9 +4,9 @@
 
 function raum_gehe($o_id,$u_id,$u_name,$raum_alt,$raum_neu,$geschlossen) {
 // user $u_id/$u_name geht von $raum_alt in Raum $raum_neu
-// falls $geschlossen=TRUE -> auch geschlossene Räume betreten
+// falls $geschlossen=TRUE -> auch geschlossene RÃ¤ume betreten
 // Nachricht in Raum $r_id wird erzeugt
-// ID des neuen Raums wird zurückgeliefert
+// ID des neuen Raums wird zurÃ¼ckgeliefert
  
 global $dbase,$conn,$chat,$admin,$u_level,$u_punkte_gesamt,$farbe_chat_background2,$t,$beichtstuhl,$lobby,$timeout;
 global $http_host,$id, $erweitertefeatures, $forumfeatures, $communityfeatures;
@@ -48,7 +48,7 @@ if ($result && mysql_num_rows($result)==1):
 	$neu=mysql_fetch_object($result);
 	mysql_free_result($result);
 
-	// Online Punkte Holen, damit der User zum Raumwechsel nicht ein/ausloggen muß
+	// Online Punkte Holen, damit der User zum Raumwechsel nicht ein/ausloggen muss
 	$o_punkte = 0;
 	if ($erweitertefeatures == 1)
 	{
@@ -67,7 +67,7 @@ if ($result && mysql_num_rows($result)==1):
 
 	}
 
-	// wenn hier nach Erweitertefeatures oder Punkte geprüft werden würde, was sinn machen würde,
+	// wenn hier nach Erweitertefeatures oder Punkte geprÃ¼ft werden wÃ¼rde, was sinn machen wÃ¼rde,
 	// kommen User aus Kostenlosen chats, die mit der MainChat Community verbunden sind, trotzdem in den Raum, 
 	// trotz zu wenigen Punkten
 	if (($neu->r_name != $lobby) && ($neu->r_min_punkte > ($u_punkte_gesamt+$o_punkte)) && !$admin && $u_level!="A") 
@@ -80,8 +80,8 @@ if ($result && mysql_num_rows($result)==1):
 	}
 
 	$raumwechsel=false;
-	// Prüfen ob Raum geschlossen oder Admin
-	// Prüfen, ob Raumwechsel erlaubt...
+	// PrÃ¼fen ob Raum geschlossen oder Admin
+	// PrÃ¼fen, ob Raumwechsel erlaubt...
 
 	// Raumwechsel erlaubt wenn Raum nicht geschlossen und user nicht gesperrt.
 	if ($neu->r_status1=="G" || $neu->r_status1=="M" || $zuwenigpunkte == 1) {
@@ -102,17 +102,17 @@ if ($result && mysql_num_rows($result)==1):
 	}
 
 
-	// raumwechsel nicht erlaubt, wenn alter Raum teergrube (ausser für Admins + Tempadmins)
+	// raumwechsel nicht erlaubt, wenn alter Raum teergrube (ausser fÃ¼r Admins + Tempadmins)
 	if ($alt->r_status1=="L" && $u_level!="A" && !$admin) $raumwechsel=false;
 
-	// für admin raumwechsel erlaubt.
+	// fÃ¼r admin raumwechsel erlaubt.
 	if ($admin && $geschlossen) $raumwechsel=true;	
 
 	// Falls Beichtstuhl-Modus und $geschlossen!=TRUE, Anzahl der User im Raum
 	// ermitteln. Der Raum darf betreten werden, wenn:
 	// 1) genau ein Admin im Raum ist und
 	// 2) kein User im Raum ist oder
-	// 3) Raum temporär ist oder
+	// 3) Raum temporÃ¤r ist oder
 	// 4) der Raum Lobby ist oder
 	// 5) der User ein Admin ist
 	if ($raumwechsel && $beichtstuhl && !$admin) {
@@ -170,7 +170,7 @@ if ($result && mysql_num_rows($result)==1):
 		if ($raum_austrittsnachricht_anzeige_deaktivieren == "1") unset($txt);
 
 		if (!isset($txt)) $txt = "";
-		// Trenner zwischen den Räumen, Austrittstext
+		// Trenner zwischen den RÃ¤umen, Austrittstext
 		system_msg("",0,$u_id,""," ");
 		system_msg("",0,$u_id,"",$txt."<BR><TABLE WIDTH=100% BGCOLOR=\"$farbe_chat_background2\" BORDER=0 CELLPADDING=0 CELLSPACING=0><TR><TD>".
 				"<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR></TD></TR></TABLE>\n");
@@ -179,10 +179,10 @@ if ($result && mysql_num_rows($result)==1):
 		nachricht_betrete ($u_id,$raum_neu,$u_name,$neu->r_name);
 
 
-		// Wenn der Neue Raum eine Teergrube ist, dann Eingabzeile aktualisieren, daß der [FORUM] Link verschwindet
+		// Wenn der Neue Raum eine Teergrube ist, dann Eingabzeile aktualisieren, daÃŸ der [FORUM] Link verschwindet
 		// Es sei denn man ist Admin, dann braucht es nicht aktualisiert werden, denn der Link wird nicht ausgeblendet
 		// bzw. wenn alter Raum Teergrube war, dann auch aktualisieren
-		// $u_id über Online Tabelle, da der User auch geschubst werden kann, deswegen dessen o_vhost und o_hash 
+		// $u_id Ã¼ber Online Tabelle, da der User auch geschubst werden kann, deswegen dessen o_vhost und o_hash 
 
 		if (($forumfeatures) && ($communityfeatures) && (!$beichtstuhl) && (($neu->r_status1 == "L") || ($alt->r_status1 == "L")) && ($u_level!="A") && (!$admin))
 		{

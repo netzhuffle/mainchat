@@ -79,7 +79,7 @@ function bearbeite_moderationstexte($o_raum) {
 		print "<font><small>";
 		$a=0;
 		reset ($action);
-		// erst mal die Datensätze reservieren...
+		// erst mal die DatensÃ¤tze reservieren...
 		while ($a<count($action)) {
 			$key=key($action);
 			// nur markieren, was noch frei ist.
@@ -93,7 +93,7 @@ function bearbeite_moderationstexte($o_raum) {
 		reset ($action);
 		while ($a<count($action)) {
 			$key=key($action);
-			// nur auswählen, was bereits von diesem Moderator reserviert ist
+			// nur auswÃ¤hlen, was bereits von diesem Moderator reserviert ist
 			$query="SELECT * FROM moderation WHERE c_id=$key AND c_typ='N' AND c_moderator=$u_id";
 			$result=mysql_query($query, $conn);
 			if ($result>0) {
@@ -105,8 +105,8 @@ function bearbeite_moderationstexte($o_raum) {
 						case "clear":
 						case "thru":
 							// print "$t[mod6] $f[c_text]<br>";
-							// vorbereiten für umspeichern... geht leider nicht 1:1, 
-							// weil fetch_array mehr zurückliefert als in $f[] sein darf...
+							// vorbereiten fÃ¼r umspeichern... geht leider nicht 1:1, 
+							// weil fetch_array mehr zurÃ¼ckliefert als in $f[] sein darf...
 							$c['c_von_user']=$f['c_von_user'];
 							$c['c_an_user']=$f['c_an_user'];
 							$c['c_typ']=$f['c_typ'];
@@ -118,7 +118,7 @@ function bearbeite_moderationstexte($o_raum) {
 							if ($action[$key]=="ok") {
 								// eigene ID vermerken
 								$c['c_moderator']=$u_id;
-								// Zeit löschen, damit markierte oben erscheint...
+								// Zeit lÃ¶schen, damit markierte oben erscheint...
 								unset($c['c_zeit']);
 							} else {
 								// freigeben -> id=0 schreiben
@@ -153,7 +153,7 @@ function bearbeite_moderationstexte($o_raum) {
 							system_msg("",0,$f['c_von_user_id'],$system_farbe,"&gt;&gt;&gt; ".$f['c_text']);
 							break;
 					}
-					// jetzt noch aus moderierter Tabelle löschen.
+					// jetzt noch aus moderierter Tabelle lÃ¶schen.
 					mysql_free_result($result);
 					$query="DELETE FROM moderation WHERE c_id=$key AND c_moderator=$u_id";
 					$result2=mysql_query($query, $conn);

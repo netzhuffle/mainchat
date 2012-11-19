@@ -2,9 +2,9 @@
 // $Id: functions.php-func-verlasse_chat.php,v 1.11 2012/10/17 06:16:53 student Exp $
 
 function verlasse_chat($u_id,$u_name,$raum) {
-// user $u_id/$u_name verl‰sst $raum
+// user $u_id/$u_name verl√§sst $raum
 // Nachricht in Raum $raum wird erzeugt
-// Liefert ID des geschriebenen Datensatzes zur¸ck
+// Liefert ID des geschriebenen Datensatzes zur√ºck
  
 global $dbase,$chat,$system_farbe,$t,$lustigefeatures;
 global $eintritt_individuell, $eintritt_useranzeige;
@@ -24,9 +24,9 @@ if ($raum && $u_id)
         	{
 			$text=stripslashes($row->u_austritt);
 			if ($eintritt_useranzeige == "1")
-	                	$text="<b>&lt;&lt;&lt;</b> ".htmlspecialchars($text)." (<b>$u_name</b> - verl‰sst Chat) ";
+	                	$text="<b>&lt;&lt;&lt;</b> ".htmlspecialchars($text)." (<b>$u_name</b> - verl√§sst Chat) ";
 			else
-	                	$text="<b>&lt;&lt;&lt;</b> ".htmlspecialchars($text)." <!-- (<b>$u_name</b> - verl‰sst Chat) -->";
+	                	$text="<b>&lt;&lt;&lt;</b> ".htmlspecialchars($text)." <!-- (<b>$u_name</b> - verl√§sst Chat) -->";
         	}
         	mysql_free_result($result);
 

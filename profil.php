@@ -12,13 +12,13 @@ id_lese($id);
 
 $fenster=str_replace("+","",$u_nick);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 // Kopf ausgeben
 ?>
@@ -60,7 +60,7 @@ echo $body_tag;
 aktualisiere_online($u_id,$o_raum);
 
 
-// Browser prüfen
+// Browser prÃ¼fen
 if (ist_netscape()) {
         $eingabe_breite=30;
 } else {
@@ -73,17 +73,17 @@ if ($u_id && $communityfeatures) {
 	// Fenstername
         $fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 
-	// Prüfung, ob für diesen user bereits ein profil vorliegt -> in $f lesen und merken
-	// Falls Array aus Formular übergeben wird, nur ui_id überschreiben
+	// PrÃ¼fung, ob fÃ¼r diesen user bereits ein profil vorliegt -> in $f lesen und merken
+	// Falls Array aus Formular Ã¼bergeben wird, nur ui_id Ã¼berschreiben
 	$query="SELECT * FROM userinfo WHERE ui_userid=$u_id";
 	$result=mysql_query($query, $conn);
 	if ($result && mysql_num_rows($result)!=0) {
@@ -101,9 +101,9 @@ if ($u_id && $communityfeatures) {
 
 
 
-	// Menü als erstes ausgeben
-	$box = $ft0."Menü Profile".$ft1;
-	$text = "<A HREF=\"edit.php?http_host=$http_host&id=$id\">Usereinstellungen ändern</A>\n";
+	// MenÃ¼ als erstes ausgeben
+	$box = $ft0."MenÃ¼ Profile".$ft1;
+	$text = "<A HREF=\"edit.php?http_host=$http_host&id=$id\">Usereinstellungen Ã¤ndern</A>\n";
 	$text.= "| <A HREF=\"home.php?http_host=$http_host&id=$id&aktion=aendern\">Homepage bearbeiten</A>\n";
 	if ($u_level=="S") {
 		$text.="| <A HREF=\"profil.php?http_host=$http_host&id=$id&aktion=zeigealle\">Alle Profile ausgeben</A>\n";
@@ -117,7 +117,7 @@ if ($u_id && $communityfeatures) {
 	echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
 
 
-	// Profil prüfen und ggf. neu eintragen
+	// Profil prÃ¼fen und ggf. neu eintragen
 	if ($los=="EINTRAGEN" && $f['ui_userid']) {
 
 		// Schreibrechte?
@@ -125,39 +125,39 @@ if ($u_id && $communityfeatures) {
 
 			$fehler="";
 
-			// Prüfungen
+			// PrÃ¼fungen
 			if($f['ui_plz']!="" && !preg_match("/^[0-9]{4,5}$/i",$f['ui_plz']))
-				$fehler.="Die Postleitzahl ist ungültig (z.B.: 97074)<br>\n";
+				$fehler.="Die Postleitzahl ist ungÃ¼ltig (z.B.: 97074)<br>\n";
 	
 			if($f['ui_geburt']!="" && !preg_match("/^[0-9]{2}[.][0-9]{2}[.][0-9]{4}$/i",$f['ui_geburt']))
-				$fehler.="Das Geburtsdatum ist ungültig (z.B.: 24.01.1969)<br>\n";
+				$fehler.="Das Geburtsdatum ist ungÃ¼ltig (z.B.: 24.01.1969)<br>\n";
 
 			if($f['ui_tel']!="" && !preg_match("/^([0-9]{0,4})[\/-]{0,1}([0-9]{3,5})[\/-]([0-9]{3,})$/i",$f['ui_tel']))
-				$fehler.="Die Telefonnummer ist ungültig (z.B.: 0049-931-123456 oder 0931/123456)<br>\n";
+				$fehler.="Die Telefonnummer ist ungÃ¼ltig (z.B.: 0049-931-123456 oder 0931/123456)<br>\n";
 
 			if($f['ui_fax']!="" && !preg_match("/^([0-9]{0,4})[\/-]{0,1}([0-9]{3,5})[\/-]([0-9]{3,})$/i",$f['ui_fax']))
-				$fehler.="Die Faxnummer ist ungültig (z.B.: 0049-931-123456 oder 0931/123456)<br>\n";
+				$fehler.="Die Faxnummer ist ungÃ¼ltig (z.B.: 0049-931-123456 oder 0931/123456)<br>\n";
 
 			if($f['ui_handy']!="" && !preg_match("/^01([0-9]{9,11})$/i",$f['ui_handy']))
-				$fehler.="Die Handynummer ist ungültig (z.B.: 0170123456)<br>\n";
+				$fehler.="Die Handynummer ist ungÃ¼ltig (z.B.: 0170123456)<br>\n";
 
                 	if (strlen($f['ui_strasse'])>100) {
-                        	$fehler.="Die Straße ist länger als 100 Zeichen!<BR>\n";
+                        	$fehler.="Die StraÃŸe ist lÃ¤nger als 100 Zeichen!<BR>\n";
                 	}
                 	if (strlen($f['ui_ort'])>100) {
-                        	$fehler.="Der Ort ist länger als 100 Zeichen!<BR>\n";
+                        	$fehler.="Der Ort ist lÃ¤nger als 100 Zeichen!<BR>\n";
                 	}
                 	if (strlen($f['ui_land'])>100) {
-                        	$fehler.="Das Land ist länger als 100 Zeichen!<BR>\n";
+                        	$fehler.="Das Land ist lÃ¤nger als 100 Zeichen!<BR>\n";
                 	}
                 	if (strlen($f['ui_hobby'])>255) {
-                        	$fehler.="Die Hobbies sind länger als 255 Zeichen!<BR>\n";
+                        	$fehler.="Die Hobbies sind lÃ¤nger als 255 Zeichen!<BR>\n";
                 	}
                 	if (strlen($f['ui_beruf'])>100) {
-                        	$fehler.="Der Beruf ist länger als 100 Zeichen!<BR>\n";
+                        	$fehler.="Der Beruf ist lÃ¤nger als 100 Zeichen!<BR>\n";
                 	}
                 	if (strlen($f['ui_icq'])>100) {
-                        	$fehler.="Die ICQ-Nummer ist länger als 100 Zeichen!<BR>\n";
+                        	$fehler.="Die ICQ-Nummer ist lÃ¤nger als 100 Zeichen!<BR>\n";
                 	}
 
 			if ($fehler!="") {
@@ -168,7 +168,7 @@ if ($u_id && $communityfeatures) {
 				// Punkte gutschreiben?
 				if (!$profil_gefunden && strlen($f['ui_ort'])>2 && 
 					strlen($f['ui_plz'])>3 && strlen($f['ui_strasse'])>4) {
-					punkte(500,$o_id,$u_id,"Sie haben Ihr Profil ausgefüllt. Dafür möchten wir uns bedanken:");
+					punkte(500,$o_id,$u_id,"Sie haben Ihr Profil ausgefÃ¼llt. DafÃ¼r mÃ¶chten wir uns bedanken:");
 				}
 
 				// HTML-Zeichen ersetzen
@@ -190,7 +190,7 @@ if ($u_id && $communityfeatures) {
 		} else {
 
 			// Kein Recht die Daten zu schreiben!
-			echo "<P><B>Fehler:</B> Sie haben keine Berechtigung, das Profil von '$nick' zu verändern!</P>";
+			echo "<P><B>Fehler:</B> Sie haben keine Berechtigung, das Profil von '$nick' zu verÃ¤ndern!</P>";
 
 		}
 
@@ -202,7 +202,7 @@ if ($u_id && $communityfeatures) {
 	case "neu":
 	case "aendern":
 
-		// Neues Profil einrichten oder bestehendes Ändern
+		// Neues Profil einrichten oder bestehendes Ã„ndern
 		if ($profil_gefunden) {
 			echo "<P><B>Bestehendes Profil bearbeiten:</B></P>\n";
 		} else {
@@ -211,12 +211,12 @@ if ($u_id && $communityfeatures) {
 
 		// Textkopf
 		if ($los!="EINTRAGEN") {
-		echo "<P>Hallo $u_nick, bitte füllen Sie so viele Felder wie möglich mit ehrlichen ".
-			"Angaben aus. Falls Sie die eine oder andere Information über sich ".
-			"nicht angeben wollen, lassen Sie das Feld leer oder wählen 'Keine Angabe'. ".
-			"Ihr Profil ist in Ihrer Homepage öffentlich abrufbar, falls Sie ".
+		echo "<P>Hallo $u_nick, bitte fÃ¼llen Sie so viele Felder wie mÃ¶glich mit ehrlichen ".
+			"Angaben aus. Falls Sie die eine oder andere Information Ã¼ber sich ".
+			"nicht angeben wollen, lassen Sie das Feld leer oder wÃ¤hlen 'Keine Angabe'. ".
+			"Ihr Profil ist in Ihrer Homepage Ã¶ffentlich abrufbar, falls Sie ".
 			"es in den Homepage-Einstellungen freigeben.</P>\n".
-			"<P><B>Vielen Dank, dass Sie Ihr Profil ausfüllen!</B></P>\n";
+			"<P><B>Vielen Dank, dass Sie Ihr Profil ausfÃ¼llen!</B></P>\n";
 		}
 
 		// Editor ausgeben
@@ -233,7 +233,7 @@ if ($u_id && $communityfeatures) {
 			echo "<P><B>Fehler:</B> Sie haben keine Berechtigung, die Profile zu lesen!</P>";
 		} else {
 			echo "<P><B>Alle Profile:</B></P><TABLE border=\"1\">\n".
-				"<TR><TH>Nick</TH><TH>Username</TH><TH>Straße</TH><TH>PLZ Ort</TH><TH>Land</TH><TH>Admin-EMail</TH><TH>E-Mail</TH><TH>URL</TH><TH>Geburt</TH><TH>Geschlecht</TH><TH>Fam. Stand</TH><TH>Typ</TH><TH>Beruf</TH><TH>Hobby</TH><TH>Tel</TH><TH>Fax</TH><TH>Handy</TH><TH>ICQ</TH></TR>";
+				"<TR><TH>Nick</TH><TH>Username</TH><TH>StraÃŸe</TH><TH>PLZ Ort</TH><TH>Land</TH><TH>Admin-EMail</TH><TH>E-Mail</TH><TH>URL</TH><TH>Geburt</TH><TH>Geschlecht</TH><TH>Fam. Stand</TH><TH>Typ</TH><TH>Beruf</TH><TH>Hobby</TH><TH>Tel</TH><TH>Fax</TH><TH>Handy</TH><TH>ICQ</TH></TR>";
 
 			$query="SELECT * FROM user,userinfo WHERE ui_userid=u_id order by u_nick,u_name";
 			$result=mysql_query($query, $conn);
@@ -267,7 +267,7 @@ if ($u_id && $communityfeatures) {
 
 	default:
 
-		echo "<P><B>Fehler:</B> Aufruf mit ungültigen Parametern!</P>\n";
+		echo "<P><B>Fehler:</B> Aufruf mit ungÃ¼ltigen Parametern!</P>\n";
 
 	}
 

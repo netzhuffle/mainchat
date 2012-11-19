@@ -74,7 +74,7 @@ if (strlen($u_id)>0) {
 				zeige_moderations_antworten($o_raum,$answer);
 				break;
 			case "answerdel":
-				// antwort löschem
+				// antwort lÃ¶schem
 				if ($answer!="") {
 					$answer=AddSlashes($answer);
 					$query="DELETE FROM moderation WHERE c_id=$answer";

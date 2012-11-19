@@ -1,9 +1,9 @@
 <?php
 
-//funktionen für Forum einbinden
+//funktionen fÃ¼r Forum einbinden
 include ("functions.php-func-forum_web.php");
 include ("functions.php-func-forum_lib.php");
-//sonstige benötigte Funktionen für Forum
+//sonstige benÃ¶tigte Funktionen fÃ¼r Forum
 include ("functions.php-func-verlasse_chat.php");
 include ("functions.php-func-nachricht.php");
 include ("functions.php-index.php");

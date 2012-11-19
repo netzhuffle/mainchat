@@ -3,13 +3,13 @@
 INSTALLATION
 ************
 
-Nach dem auspacken des Archivs muﬂ mit mysqladmin eine neue Datenbank angelegt
+Nach dem auspacken des Archivs muss mit mysqladmin eine neue Datenbank angelegt
 und initialisiert werden. Die Definitionen der Datenbank befinden sich im Ver-
 zeichnis 'doc' unter 'community-statistic.mysql':
 
   $ mysqladmin create statistiken
 	$ mysql statistiken <community-statistic.mysql
 	
-In diesem Beispiel ist der Name der Datenbank 'statistiken'. Dieser Name muﬂ
+In diesem Beispiel ist der Name der Datenbank 'statistiken'. Dieser Name muss
 in der Konfiguration (zu finden unter 'statistiken/etc/config.php') ange-
-paﬂt werden.
+pa√üt werden.

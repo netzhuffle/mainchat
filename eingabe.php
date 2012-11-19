@@ -1,7 +1,7 @@
 <?php
 
 // fidon GmbH mainChat
-// eingabe.php muß mit id=$hash_id aufgerufen werden
+// eingabe.php muss mit id=$hash_id aufgerufen werden
 
 // $Id: eingabe.php,v 1.12 2012/10/17 06:16:53 student Exp $
 
@@ -30,19 +30,19 @@ if ( $u_id ) {
 	}
 
 
-	// Default für Farbe setzen, falls undefiniert
+	// Default fÃ¼r Farbe setzen, falls undefiniert
 	if (!isset($u_farbe)) $u_farbe=$user_farbe;
 
 	// Fenstername
 	$fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 // Kopf ausgeben
 ?>
@@ -102,7 +102,7 @@ function window_reload(file,win_name) {
 	echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0><TR>".
 		"<TD>&nbsp;</TD><TD COLSPAN=".(count($farbe_chat_user)+3).">";
 
-	// Typ Eingabefeld für Chateingabe setzen
+	// Typ Eingabefeld fÃ¼r Chateingabe setzen
 	if ($u_level=="M") {
 		$text2_typ="<TEXTAREA ROWS=\"4\" NAME=\"text2\" COLS=\"".$chat_eingabe_breite."\"></TEXTAREA>";
 	} else {
@@ -112,7 +112,7 @@ function window_reload(file,win_name) {
 	// Unterscheidung Normal oder sicherer Modus
 	if ($backup_chat || $u_backup) {
 
-		// Beim Netscape Eingabezeile schmäler setzen
+		// Beim Netscape Eingabezeile schmÃ¤ler setzen
 		if (ist_netscape()) {
 			$chat_eingabe_breite=floor($chat_eingabe_breite/2)-7;
 			$mindestbreite=18;
@@ -121,7 +121,7 @@ function window_reload(file,win_name) {
 			$mindestbreite=44;
 		};
 
-		// Bei zu schmaler Eingabenzeilen diese für rundes Layout auf Mindesbreite setzen
+		// Bei zu schmaler Eingabenzeilen diese fÃ¼r rundes Layout auf Mindesbreite setzen
 		if ($chat_eingabe_breite < $mindestbreite) $chat_eingabe_breite=$mindestbreite;
 
 
@@ -140,7 +140,7 @@ function window_reload(file,win_name) {
 			echo "</TD></TR>\n";
 	} else {
 
-		// Beim Netscape Eingabezeile schmäler setzen
+		// Beim Netscape Eingabezeile schmÃ¤ler setzen
 		if (ist_netscape()) {
 			$chat_eingabe_breite=floor($chat_eingabe_breite/2);
 			$mindestbreite=25;
@@ -148,7 +148,7 @@ function window_reload(file,win_name) {
 			$mindestbreite=55;
 		};
 
-		// Bei zu schmaler Eingabenzeilen diese für rundes Layout auf Mindesbreite setzen
+		// Bei zu schmaler Eingabenzeilen diese fÃ¼r rundes Layout auf Mindesbreite setzen
 		if ($chat_eingabe_breite < $mindestbreite) $chat_eingabe_breite=$mindestbreite;
 
 
@@ -200,7 +200,7 @@ function window_reload(file,win_name) {
          	
 	if ($forumfeatures && $communityfeatures)
 	{
-		// Raumstatus lesen, für Temporär, damit FORUM nicht angezeigt wird
+		// Raumstatus lesen, fÃ¼r TemporÃ¤r, damit FORUM nicht angezeigt wird
 
 		$query="SELECT r_status1 from raum WHERE r_id=$o_raum ";
 		$result=mysql_query($query, $conn);

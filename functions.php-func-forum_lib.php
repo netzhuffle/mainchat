@@ -2,7 +2,7 @@
 
 function pruefe_leserechte($th_id)
 {
-	// Prüft anhand der th_id, ob der User im Forum lesen darf
+	// PrÃ¼ft anhand der th_id, ob der User im Forum lesen darf
 	global $u_level;
 
 	$query="SELECT th_fo_id FROM thema WHERE th_id = '$th_id'";
@@ -27,7 +27,7 @@ function pruefe_leserechte($th_id)
 
 function hole_themen_id_anhand_posting_id($po_id)
 {
-        // Prüft anhand der po_id ob gesperrt ist
+        // PrÃ¼ft anhand der po_id ob gesperrt ist
 	$query="SELECT po_th_id FROM posting WHERE po_id = '$po_id'";
 	$result=mysql_query($query);
 	$fo=mysql_fetch_array($result);
@@ -37,7 +37,7 @@ function hole_themen_id_anhand_posting_id($po_id)
 
 function pruefe_schreibrechte($th_id)
 {
-	// Prüft anhand der th_id, ob der User ins Forum schreiben darf
+	// PrÃ¼ft anhand der th_id, ob der User ins Forum schreiben darf
 	global $u_level;
 
 	$query="SELECT th_fo_id FROM thema WHERE th_id = '$th_id'";
@@ -60,7 +60,7 @@ function ist_thread_gesperrt($thread)
 {
 	global $forum_thread_sperren;
 
-	// Prüft anhand der thread auf den man antworten will, gesperrt ist
+	// PrÃ¼ft anhand der thread auf den man antworten will, gesperrt ist
 	$query="SELECT po_threadts, po_ts, po_threadgesperrt FROM posting WHERE po_id = '$thread'";
 	$result=mysql_query($query);
 	$fo=mysql_fetch_array($result);
@@ -74,13 +74,13 @@ function ist_thread_gesperrt($thread)
 	{
 		$abwann = mktime(0, 0, 0, date('m')-$forum_thread_sperren,date('d') + 1,date('Y'));
 
-		// Alte Beiträge vor 4.12.2006 (ab hier erst protokoll des po_threadts)
+		// Alte BeitrÃ¤ge vor 4.12.2006 (ab hier erst protokoll des po_threadts)
 		if ($fo['po_threadts'] == 0)
 		{
 			if ($fo['po_ts'] <= $abwann)
 				$threadgesperrt = true;
 		}
-		// Alle Beiträge nach/mit 4.12.2006
+		// Alle BeitrÃ¤ge nach/mit 4.12.2006
 		else
 		{
 			if ($fo['po_threadts'] <= $abwann)
@@ -93,7 +93,7 @@ function ist_thread_gesperrt($thread)
 
 function ist_posting_gesperrt($po_id)
 {
-	// Prüft anhand der po_id ob gesperrt ist
+	// PrÃ¼ft anhand der po_id ob gesperrt ist
 	$query="SELECT po_gesperrt FROM posting WHERE po_id = '$po_id'";
 	$result=mysql_query($query);
 	$fo=mysql_fetch_array($result);
@@ -212,7 +212,7 @@ function thread_alles_gelesen($th_id,$thread_id,$u_id)
 		if (!$u_gelesene[$th_id]) 
                 	$u_gelesene[$th_id][0] = array();
 
-		// alle Postings sind im Vater in der Threadorder, dieses array, an die gelesenen anhängen
+		// alle Postings sind im Vater in der Threadorder, dieses array, an die gelesenen anhÃ¤ngen
 		$a=mysql_fetch_array($result);
 		$b=explode(",", $a['po_threadorder']);
 
@@ -224,7 +224,7 @@ function thread_alles_gelesen($th_id,$thread_id,$u_id)
                 //wenn schon gelesen, dann wieder raus
 		$u_gelesene[$th_id] = array_unique($u_gelesene[$th_id]);
 
-		// und zurückschreiben
+		// und zurÃ¼ckschreiben
 		$gelesene = serialize($u_gelesene);
  		$sql = "update user set u_gelesene_postings = '$gelesene' where u_id = $u_id";
 	        mysql_query($sql, $conn);
@@ -381,7 +381,7 @@ function anzahl_ungelesene3(&$arr_postings, $th_id) {
 
 }
 
-//Prüft Usereingaben auf Vollständigkeit
+//PrÃ¼ft Usereingaben auf VollstÃ¤ndigkeit
 // mode --> forum, thema, posting 
 function check_input($mode) {
 
@@ -428,7 +428,7 @@ function schreibe_forum() {
         $f['fo_admin'] = $fo_gast+$fo_user+1;
 	#print "fo_gast: $fo_gast<BR>";
 	#print "fo_user: $fo_user<BR>";
-	#print "DEBUG: setze fo_admin auf: $f[fo_admin]<BR>Dies ist binär: ".decbin($f[fo_admin]);
+	#print "DEBUG: setze fo_admin auf: $f[fo_admin]<BR>Dies ist binÃ¤r: ".decbin($f[fo_admin]);
 
         //groesste Order holen
         $sql = "select max(fo_order) as maxorder from forum";
@@ -463,7 +463,7 @@ function aendere_forum() {
         $f['fo_admin'] = $fo_gast+$fo_user+1;
 	#print "fo_gast: $fo_gast<BR>";
 	#print "fo_user: $fo_user<BR>";
-	#print "DEBUG: setze fo_admin auf: $f[fo_admin]<BR>Dies ist binär: ".decbin($f[fo_admin]);
+	#print "DEBUG: setze fo_admin auf: $f[fo_admin]<BR>Dies ist binÃ¤r: ".decbin($f[fo_admin]);
 	schreibe_db("forum",$f,$fo_id,"fo_id");
 
 }
@@ -475,7 +475,7 @@ function forum_up($fo_id, $fo_order) {
 
         if (!$fo_id) return;
 
-        //forum über aktuellem Forum holen
+        //forum Ã¼ber aktuellem Forum holen
         $sql = "select fo_id, fo_order as prev_order
                 from forum
                 where fo_order < $fo_order
@@ -512,7 +512,7 @@ function forum_down($fo_id, $fo_order) {
 
         if (!$fo_id) return;
 
-        //forum über aktuellem Forum holen
+        //forum Ã¼ber aktuellem Forum holen
         $sql = "select fo_id, fo_order as next_order
                 from forum
                 where fo_order > $fo_order
@@ -571,7 +571,7 @@ function loesche_forum($fo_id) {
 	$sql = "delete from forum where fo_id=$fo_id";
 	mysql_query($sql, $conn);
 
-	echo "<b>Forum $fo_name komplett gelöscht!</b><br>";
+	echo "<b>Forum $fo_name komplett gelÃ¶scht!</b><br>";
 
 }
 
@@ -631,7 +631,7 @@ function thema_up($th_id, $th_order, $fo_id) {
 
         if (!$th_id || !$fo_id) return;
 
-        //thema über aktuellem Thema holen
+        //thema Ã¼ber aktuellem Thema holen
         $sql = "select th_id, th_order as prev_order
                 from thema
                 where th_fo_id = $fo_id
@@ -713,7 +713,7 @@ function loesche_thema($th_id) {
         $sql = "delete from thema where th_id=$th_id";
         mysql_query($sql, $conn);
 
-        echo "<b>Thema $th_name komplett gelöscht!</b><br>";
+        echo "<b>Thema $th_name komplett gelÃ¶scht!</b><br>";
 
 }
 
@@ -984,7 +984,7 @@ function loesche_posting() {
 		}
 		else
 		{
-			// beim löschen eines Postings wird hier die letzte änderung aller postings gesucht, damit 
+			// beim lÃ¶schen eines Postings wird hier die letzte Ã¤nderung aller postings gesucht, damit 
 			// der thread_ts wieder stimmt
 			$new_ts = '0000000000';
 	                $new_threadorder = implode(",",$arr_new_threadorder);
@@ -1098,7 +1098,7 @@ function loesche_posting() {
 
 }
 
-//holt zum Löschen alle Postings unterhalb des vaters
+//holt zum LÃ¶schen alle Postings unterhalb des vaters
 function hole_alle_unter($vater_id) {
 
         global $conn, $arr_delete;
@@ -1136,14 +1136,14 @@ function bereinige_u_gelesene_postings($u_id) {
 
 		$lastclean = mysql_result($query,0,"u_lastclean");
 		$gelesene = mysql_result($query,0,"u_gelesene_postings");
-		if ($lastclean == "0") {			//keine Bereinignng nötig
+		if ($lastclean == "0") {			//keine Bereinignng nÃ¶tig
 			
 			$lastclean = time();
 			$sql = "update user set u_lastclean = $lastclean where u_id = $u_id";
 			mysql_query($sql, $conn);
 
 	
-		} else if ($lastclean < (time()-2592000)) { 	//Bereinigung nötig
+		} else if ($lastclean < (time()-2592000)) { 	//Bereinigung nÃ¶tig
 			$lastclean = time();
 		        $arr_gelesene = unserialize($gelesene);
 
@@ -1181,7 +1181,7 @@ function bereinige_u_gelesene_postings($u_id) {
 
 }
 
-//bereinigt wenn ein SU das Forum betritt die Anzahl der beiträge und Replays mim Thema
+//bereinigt wenn ein SU das Forum betritt die Anzahl der beitrÃ¤ge und Replays mim Thema
 function bereinige_anz_in_thema() 
 {
 	global $conn;
@@ -1227,7 +1227,7 @@ function verschiebe_posting_ausfuehren()
 		exit();
 
 
-	// Ändert die alle Postings eine Threads
+	// Ã„ndert die alle Postings eine Threads
 	$sql = "SELECT po_threadorder FROM posting WHERE po_id = $thread_verschiebe AND po_th_id = $verschiebe_von";
 	$query = mysql_query($sql, $conn);
 	if ($query && mysql_num_rows($query)==1) 

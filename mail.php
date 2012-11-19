@@ -13,13 +13,13 @@ id_lese($id);
 
 $fenster=str_replace("+","",$u_nick);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 // Kopf ausgeben
 ?>
@@ -68,7 +68,7 @@ echo $body_tag;
 aktualisiere_online($u_id,$o_raum);
 
 
-// Browser prüfen
+// Browser prÃ¼fen
 if (ist_netscape()) {
         $eingabe_breite=40;
 	$eingabe_breite1=49;
@@ -82,15 +82,15 @@ if (ist_netscape()) {
 
 if ($u_id && $communityfeatures && $u_level!="G") {
 
-	// Löscht alle Mails, die älter als $mailloescheauspapierkorb Tage sind
+	// LÃ¶scht alle Mails, die Ã¤lter als $mailloescheauspapierkorb Tage sind
 	if ($mailloescheauspapierkorb < 1) $mailloescheauspapierkorb = 14;
 	$query2="DELETE FROM mail WHERE m_an_uid = $u_id AND m_status = 'geloescht' AND m_geloescht_ts < '".date("YmdHis", mktime(0, 0, 0, date("m")  , date("d")-$mailloescheauspapierkorb, date("Y")))."'";
 	$result2=mysql_query($query2,$conn);
 
 //	echo "DEBGUG: $query2";
 	
-	// Menü als erstes ausgeben
-	$box = $ft0."Menü Mail".$ft1;
+	// MenÃ¼ als erstes ausgeben
+	$box = $ft0."MenÃ¼ Mail".$ft1;
 	$text = "<A HREF=\"mail.php?http_host=$http_host&id=$id&aktion=\">Mailbox neu laden</A>\n|\n".
 		"<A HREF=\"mail.php?http_host=$http_host&id=$id&aktion=neu\">Neue Mail schreiben</A>\n|\n".
 		"<A HREF=\"mail.php?http_host=$http_host&id=$id&aktion=papierkorb\">Papierkorb zeigen</A>\n|\n".
@@ -106,13 +106,13 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 	switch($aktion) {
 
 	case "neu":
-		// Formular für neue E-Mail ausgeben
+		// Formular fÃ¼r neue E-Mail ausgeben
 		if (!isset($neue_email)) $neue_email = "";
 		formular_neue_email($neue_email);
 		break;
 
 	case "neu2":
-		// Mail versenden, 2. Schritt: Nick Prüfen
+		// Mail versenden, 2. Schritt: Nick PrÃ¼fen
 		$neue_email['an_nick']=str_replace(" ","+",$neue_email['an_nick']);
          	$neue_email['an_nick']=coreCheckName($neue_email['an_nick'],$check_name);
 
@@ -163,10 +163,10 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 		break;
 
 	case "neu3":
-		// Mail versenden, 3. Schritt: Inhalt Prüfen
+		// Mail versenden, 3. Schritt: Inhalt PrÃ¼fen
 		$ok=TRUE;
 
-		// Betreff prüfen
+		// Betreff prÃ¼fen
 		$neue_email['m_betreff']=htmlspecialchars($neue_email['m_betreff']);
 		if (strlen($neue_email['m_betreff'])<1) {
 			echo "<B>Fehler:</B> Bitte geben Sie einen Betreff zum Versenden ein!<BR>\n";
@@ -177,7 +177,7 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 			$ok=FALSE;
 		}
 
-		// Text prüfen
+		// Text prÃ¼fen
 		$neue_email['m_text']=chat_parse(htmlspecialchars($neue_email['m_text']));
 		if (strlen($neue_email['m_text'])<4) {
 			echo "<B>Fehler:</B> Bitte geben Sie einen Text zum Versenden ein!<BR>\n";
@@ -188,7 +188,7 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 			$ok=FALSE;
 		}
 
-		// User-ID Prüfen
+		// User-ID PrÃ¼fen
 		$neue_email['m_an_uid']=AddSlashes($neue_email['m_an_uid']);
 		$query="SELECT u_nick FROM user WHERE u_id = $neue_email[m_an_uid]";
 		$result=mysql_query($query,$conn);
@@ -222,31 +222,31 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 
 				if (160-strlen($text)-strlen($absender) < 0) { $smszulang=true;}
 
-				$text=substr($text,0,160-strlen($absender)); // Text um Absender kürzen
-				$text=preg_replace("/[\\\\".chr(1)."-".chr(31)."]/","",$text);  // Ungültige Zeichen filtern
+				$text=substr($text,0,160-strlen($absender)); // Text um Absender kÃ¼rzen
+				$text=preg_replace("/[\\\\".chr(1)."-".chr(31)."]/","",$text);  // UngÃ¼ltige Zeichen filtern
 				$complete=$absender.str_replace("-- ","\n",$text);
 
-				// Prüfen ob genug Punkte
-				if ($u_punkte_gesamt < $sms[punkte]) { $fehler = "Um SMS verschicken zu dürfen brauchst Du mehr als $sms[punkte] Punkte";}
+				// PrÃ¼fen ob genug Punkte
+				if ($u_punkte_gesamt < $sms[punkte]) { $fehler = "Um SMS verschicken zu dÃ¼rfen brauchst Du mehr als $sms[punkte] Punkte";}
 
-				// Prüfen ob noch genug SMS-Guthaben da
+				// PrÃ¼fen ob noch genug SMS-Guthaben da
 				$guthaben = hole_smsguthaben($u_id);
 
 				if (! isset($fehler)) { if ($guthaben <= 0) { $fehler = "Du hast kein SMS-Guthaben mehr!";} }
 
-				// Prüfen ob Empfänger SMS möchte
+				// PrÃ¼fen ob EmpfÃ¤nger SMS mÃ¶chte
 				$neue_email['m_an_uid']=AddSlashes($neue_email['m_an_uid']);
 				$query="SELECT u_sms_ok FROM user WHERE u_id = '$neue_email[m_an_uid]'";
 				$result=mysql_query($query);
 				$a=mysql_fetch_array($result);
 				mysql_free_result($result);
 				$sms_ok=$a[u_sms_ok];
-				if (! isset($fehler)) { if ($sms_ok == "N") { $fehler = "Dieser User möchte keine SMS empfangen";} }
+				if (! isset($fehler)) { if ($sms_ok == "N") { $fehler = "Dieser User mÃ¶chte keine SMS empfangen";} }
 
-				// Prüfen auf gültige Handynummer des Empfängers 
+				// PrÃ¼fen auf gÃ¼ltige Handynummer des EmpfÃ¤ngers 
 
 				$handynr=hole_handynummer($neue_email['m_an_uid']);
-				if (! isset($fehler)) { if (! pruefe_handynummer($handynr)) { $fehler = "Dieser User hat leider keine gültige Handynummer eingetragen.";} }
+				if (! isset($fehler)) { if (! pruefe_handynummer($handynr)) { $fehler = "Dieser User hat leider keine gÃ¼ltige Handynummer eingetragen.";} }
 
 				if ( isset($fehler) ) 
 					 {
@@ -258,7 +258,7 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 					echo "<p>SMS wurde erfolgreich versendet!<BR>";
 					$guthaben = hole_smsguthaben($u_id);
 					echo "Restguthaben: $guthaben SMS";
-					if ($smszulang) { print "<p><b>Fehler! Die eingegebene SMS war zu lang. Sie wurde auf 160 Zeichen gekürzt!</p></b>";}
+					if ($smszulang) { print "<p><b>Fehler! Die eingegebene SMS war zu lang. Sie wurde auf 160 Zeichen gekÃ¼rzt!</p></b>";}
 					
 					}
 
@@ -295,13 +295,13 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 		formular_neue_email($neue_email);
 
 		if (isset($loesche_email) && is_array($loesche_email)) {
-			// Mehrere Mails auf gelöscht setzen
+			// Mehrere Mails auf gelÃ¶scht setzen
 			foreach($loesche_email as $m_id){
 				loesche_mail($m_id,$u_id);
 			}
 
 		} else {
-			// Eine Mail auf gelöscht setzen
+			// Eine Mail auf gelÃ¶scht setzen
 			if (isset($loesche_email))
 				loesche_mail($loesche_email,$u_id);
 		}
@@ -324,7 +324,7 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 		}
 		@mysql_free_result($result);
 
-		// Nick prüfen
+		// Nick prÃ¼fen
 		$query="SELECT u_id,u_nick FROM user WHERE u_id=".$row->m_von_uid;
 		$result=mysql_query($query,$conn);
 		if ($result && mysql_num_rows($result)==1) {
@@ -374,7 +374,7 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 			$row=mysql_fetch_object($result);
 		}
 
-		// Nick prüfen
+		// Nick prÃ¼fen
 		if ($row->u_nick && $row->u_nick!="NULL") {
 
 			$row2=mysql_fetch_object($result);
@@ -411,7 +411,7 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 		break;
 
 	case "papierkorbleeren":
-		// Mails mit Status geloescht löschen
+		// Mails mit Status geloescht lÃ¶schen
 		echo "<BR>";
 		$query="DELETE FROM mail WHERE m_an_uid=$u_id AND m_status='geloescht'";
 		$result=mysql_query($query,$conn);
@@ -438,7 +438,7 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 		// Formular zum Weiterleitej einer Mail ausgeben
 		echo "<font face=\"Arial\">Schliesse nun Ihre Mailbox!</font>";
 		$betreff="MAILBOX IST ZU";
-		$nachricht="Bitte löschen Sie einfach diese E-Mail, wenn Sie wieder Mails empfangen möchten!";
+		$nachricht="Bitte lÃ¶schen Sie einfach diese E-Mail, wenn Sie wieder Mails empfangen mÃ¶chten!";
 		$result=mail_sende($u_id,$u_id,$nachricht,$betreff);
 		if (!isset($neue_email)) $neue_email[] = "";
 		if (!isset($m_id)) $m_id = "";
@@ -453,7 +453,7 @@ if ($u_id && $communityfeatures && $u_level!="G") {
 	}
 
 } elseif ($u_level=="G") {
-	echo "<P><B>Fehler:</B> Als Gast steht Ihnen die Mail-Funktion nicht zur Verfügung.</P>";
+	echo "<P><B>Fehler:</B> Als Gast steht Ihnen die Mail-Funktion nicht zur VerfÃ¼gung.</P>";
 } else {
 	echo "<P><B>Fehler:</B> Beim Aufruf dieser Seite ist ein Fehler aufgetreten.</P>";
 }

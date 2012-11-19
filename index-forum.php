@@ -7,7 +7,7 @@ id_lese($id);
 
 #print "u_id: $u_id<BR>o_raum: $o_raum<BR>u_level $u_level<BR>";
 
-// raumwechsel nicht erlaubt, wenn alter Raum teergrube (ausser für Admins + Tempadmins)
+// raumwechsel nicht erlaubt, wenn alter Raum teergrube (ausser fÃ¼r Admins + Tempadmins)
 
 // Info zu altem Raum lesen
 $query="SELECT r_name,r_status1,r_austritt from raum ".
@@ -24,13 +24,13 @@ if ($alt->r_status1=="L" && $u_level!="A" && !$admin) $darf_forum=false; else $d
 #if ($darf_forum) print "Dieser User darf ins Forum";  else print "Dieser User darf nicht ins Forum";
 
 # if (!$darf_forum) Header("Location: index.php?http_host=$http_host&id=$id&aktion=relogin");
-# noch nicht ganz Perfekt hier müsste der User wieder zurück in den Chat kommen.
+# noch nicht ganz Perfekt hier mÃ¼sste der User wieder zurÃ¼ck in den Chat kommen.
 
 if (!$darf_forum) 
 {
 //    Header("Location: index.php?http_host=$http_host&id=$id&aktion=relogin&neuer_raum=$o_raum");
-    // Da manche User immernoch übers Forum gehen, weil sie den link fürs Forum kopieren
-    // erstmal ein Logout, bis ich ne Möglichkeit gefunden habe, das schöner zu machen
+    // Da manche User immernoch Ã¼bers Forum gehen, weil sie den link fÃ¼rs Forum kopieren
+    // erstmal ein Logout, bis ich ne MÃ¶glichkeit gefunden habe, das schÃ¶ner zu machen
     Header("Location: index.php");
     exit();
 }
@@ -58,7 +58,7 @@ $body_tag=$body_tag."TEXT=\"$farbe_text\" ".
           "ALINK=\"$farbe_vlink\">\n";  
 
 
-// Frame-Einstellungen für Browser definieren
+// Frame-Einstellungen fÃ¼r Browser definieren
 $user_agent=strtolower($HTTP_USER_AGENT);
 if (preg_match("/linux/",$user_agent)):
 	$frame_type="linux";
@@ -77,7 +77,7 @@ if (isset($frame_online) && strlen($frame_online)==0) {
 	$frame_online="frame_online.php";
 };                
 
-// Falls user eigene Einstellungen für das Frameset hat -> überschreiben
+// Falls user eigene Einstellungen fÃ¼r das Frameset hat -> Ã¼berschreiben
 $sql = "select u_frames from user where u_id = $u_id";
 $query = mysql_query($sql, $conn);
 $u_frames = mysql_result($query,0,"u_frames");

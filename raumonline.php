@@ -1,10 +1,10 @@
 <?php
 
-	// Die öffentlichen Räume als Liste für ein Loginformular ausgeben
+	// Die Ã¶ffentlichen RÃ¤ume als Liste fÃ¼r ein Loginformular ausgeben
 
 	require ("functions.php");
 
-        // Falls eintrittsraum nicht gesetzt ist, mit Lobby überschreiben
+        // Falls eintrittsraum nicht gesetzt ist, mit Lobby Ã¼berschreiben
         if (strlen($eintrittsraum)==0){
                 $eintrittsraum=$lobby; 
         };

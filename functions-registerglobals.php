@@ -24,7 +24,7 @@ if (ini_get('register_globals') == 0)
             $$varname = $value;
         }
 
-        // für home.php argc & argv
+        // fÃ¼r home.php argc & argv
         foreach($_SERVER as $varname => $value)
         {
             global $$varname;

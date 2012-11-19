@@ -15,9 +15,9 @@ function zeige_freunde($aktion,$zeilen) {
 			       "UNION ".
 			       "SELECT f_id,f_text,f_userid,f_freundid,f_zeit,date_format(f_zeit,'%d.%m.%y %H:%i') as zeit FROM freunde WHERE f_freundid=$u_id AND f_status = 'bestaetigt' ".
 			       "ORDER BY f_zeit desc "; 
-			$button="LÖSCHEN";
+			$button="LÃ·SCHEN";
 			$titel1="hat";
-			$titel2="bestätigte(n) Freunde";
+			$titel2="bestÃ¤tigte(n) Freunde";
 		break;
 
 		case "bestaetigen":
@@ -27,10 +27,10 @@ function zeige_freunde($aktion,$zeilen) {
 				"WHERE ( ".
 				" f_freundid=$u_id) AND (f_status='beworben') ".
 				"order by f_zeit desc";
-			$button="LÖSCHEN";
-			$button2="BESTÄTIGEN";
+			$button="LÃ·SCHEN";
+			$button2="BESTÃ„TIGEN";
 			$titel1="hat";
-			$titel2="noch zu bestätigende Freunde";
+			$titel2="noch zu bestÃ¤tigende Freunde";
 		break;
 	};
 
@@ -87,7 +87,7 @@ function zeige_freunde($aktion,$zeilen) {
 
 				} else {
 
-					// User nicht gefunden, Freund löschen
+					// User nicht gefunden, Freund lÃ¶schen
 					$freund_nick="NOBODY";
 					$query="DELETE from freunde WHERE f_id=$row->f_id";
 					$result2=mysql_query($query,$conn);
@@ -126,7 +126,7 @@ function zeige_freunde($aktion,$zeilen) {
 				"<TD>".$auf.$txt.$zu."</TD>".
 				"<TD>".$auf.$infotext.$zu."</TD>".
 				"<TD ALIGN=\"CENTER\">".$auf.$row->zeit.$zu."</TD>".
-				"<TD ALIGN=\"CENTER\">".$auf."<A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=editinfotext&editeintrag=$row->f_id\">[ÄNDERN]</A>".$zu."</TD>".
+				"<TD ALIGN=\"CENTER\">".$auf."<A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=editinfotext&editeintrag=$row->f_id\">[Ã„NDERN]</A>".$zu."</TD>".
 				"</TR>\n";
 
 				if (($i%2)>0){
@@ -138,7 +138,7 @@ function zeige_freunde($aktion,$zeilen) {
 			};
 
 			echo "<TR BGCOLOR=\"$bgcolor\"><TD COLSPAN=2><INPUT TYPE=\"checkbox\" onClick=\"toggle(this.checked)\">".
-                               $f1." Alle Auswählen".$f2."</TD>\n";
+                               $f1." Alle AuswÃ¤hlen".$f2."</TD>\n";
 			echo	"<TD ALIGN=\"right\" COLSPAN=2>".$f1;
 			if ($aktion == "bestaetigen")
 			echo "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"$button2\">";
@@ -155,14 +155,14 @@ function zeige_freunde($aktion,$zeilen) {
 
 
 function loesche_freund($f_freundid,$f_userid) {
-	// Löscht Freund aus der Tabelle mit f_userid und f_freundid
+	// LÃ¶scht Freund aus der Tabelle mit f_userid und f_freundid
 	// $f_userid User-ID 
 	// $f_freundid User-ID
 
 	global $id,$http_host,$conn,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$dbase,$conn,$u_nick,$u_id;
 
 	if (!$f_userid || !$f_freundid) {
-		echo "Fehler beim Löschen des Freundes '$f_nick': $f_userid,$f_freundid!<BR>";
+		echo "Fehler beim LÃ¶schen des Freundes '$f_nick': $f_userid,$f_freundid!<BR>";
 		return(0);
 	}
 	$f_freundid=addslashes($f_freundid);
@@ -186,7 +186,7 @@ function loesche_freund($f_freundid,$f_userid) {
 
 function formular_neuer_freund($neuer_freund) {
 
-	// Gibt Formular für Nicknamen zum Hinzufügen als Freund aus
+	// Gibt Formular fÃ¼r Nicknamen zum HinzufÃ¼gen als Freund aus
 
 	global $id,$http_host,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$conn,$dbase;
 	global $farbe_text,$farbe_tabelle_kopf2,$farbe_tabelle_zeile1,$farbe_tabelle_zeile2;
@@ -216,14 +216,14 @@ function formular_neuer_freund($neuer_freund) {
 
 function formular_editieren($f_id, $f_text) {
 
-	// Gibt Formular für Nicknamen zum Hinzufügen als Freund aus
+	// Gibt Formular fÃ¼r Nicknamen zum HinzufÃ¼gen als Freund aus
 
 	global $id,$http_host,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$conn,$dbase;
 	global $farbe_text,$farbe_tabelle_kopf2,$farbe_tabelle_zeile1,$farbe_tabelle_zeile2;
 
 	if (!$eingabe_breite) $eingabe_breite=30;
 
-	$titel="Freundestext ändern:";
+	$titel="Freundestext Ã¤ndern:";
 
 	echo "<FORM NAME=\"freund_neu\" ACTION=\"$PHP_SELF\" METHOD=POST>\n".
 		"<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n".
@@ -236,14 +236,14 @@ function formular_editieren($f_id, $f_text) {
 		"<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD align=\"right\"><B>Infotext:</B></TD><TD>".$f1.
 		"<INPUT TYPE=\"TEXT\" NAME=\"f_text\" VALUE=\"".htmlentities(stripslashes($f_text))."\" SIZE=$eingabe_breite>".
 		"&nbsp;".
-		"<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"ÄNDERN\">".
+		"<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"Ã„NDERN\">".
 		$f2."</TD></TR>\n".
 		"</TABLE></FORM>\n";
 
 };
 
 function neuer_freund($f_userid,$freund) {
-	// Trägt neuen Freund in der Datenbank ein
+	// TrÃ¤gt neuen Freund in der Datenbank ein
 
 	global $id,$http_host,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$conn,$dbase,$chat,$system_farbe;
 
@@ -251,7 +251,7 @@ function neuer_freund($f_userid,$freund) {
 		echo "Fehler beim Anlegen des Freundes: $f_userid,$freund[u_id]!<BR>";
 	} else {
 
-		// Prüfen ob Freund bereits in Tabelle steht
+		// PrÃ¼fen ob Freund bereits in Tabelle steht
 		$freund['u_id']=AddSlashes($freund['u_id']);
 		$f_userid=AddSlashes($f_userid);
 
@@ -268,10 +268,10 @@ function neuer_freund($f_userid,$freund) {
 		} elseif($freund['u_id']==$f_userid) {
 
 			// Eigener Freund ist verboten
-			$back= "<P><B>Fehler:</B> Sie können sich nicht selbst als Freund eintragen!</P>\n";
+			$back= "<P><B>Fehler:</B> Sie kÃ¶nnen sich nicht selbst als Freund eintragen!</P>\n";
 		} else {
 
-			// User ist noch kein Freund -> hinzufügen
+			// User ist noch kein Freund -> hinzufÃ¼gen
 			$f['f_userid']=$f_userid;
 			$f['f_freundid']=$freund['u_id'];
 			$f['f_text']=$freund['f_text'];
@@ -279,26 +279,26 @@ function neuer_freund($f_userid,$freund) {
 			schreibe_db("freunde",$f,0,"f_id");
 
 			$betreff="Neue Freundesbewerbung";
-			$text="Hallo $freund[u_nick]!\nIch möchte gerne Ihr Freund im $chat werden!\n".
+			$text="Hallo $freund[u_nick]!\nIch mÃ¶chte gerne Ihr Freund im $chat werden!\n".
 			      "wenn Sie das auch wollen und im $chat eingeloggt sind, so klicken Sie bitte ".
 			      "<a href=\"freunde.php?http_host=$http_host&id=<ID>&aktion=bestaetigen\">hier</a>.\n".
-			      "Sollten Sie diese E-Mail als Weiterleitung bekommen, so müssen Sie sich erst in den Chat einloggen.\n\n";
+			      "Sollten Sie diese E-Mail als Weiterleitung bekommen, so mÃ¼ssen Sie sich erst in den Chat einloggen.\n\n";
 
 			$fenster=str_replace("+","",$freund['u_nick']);
 			$fenster=str_replace("-","",$fenster);
-			$fenster=str_replace("ä","",$fenster);
-			$fenster=str_replace("ö","",$fenster);
-			$fenster=str_replace("ü","",$fenster);
-			$fenster=str_replace("Ä","",$fenster);
-			$fenster=str_replace("Ö","",$fenster);
-			$fenster=str_replace("Ü","",$fenster);
-			$fenster=str_replace("ß","",$fenster);
+			$fenster=str_replace("Ã¤","",$fenster);
+			$fenster=str_replace("Ã¶","",$fenster);
+			$fenster=str_replace("Ã¼","",$fenster);
+			$fenster=str_replace("Ã„","",$fenster);
+			$fenster=str_replace("Ã·","",$fenster);
+			$fenster=str_replace("Ãœ","",$fenster);
+			$fenster=str_replace("ÃŸ","",$fenster);
 	
 					
 			mail_sende($f_userid,$freund['u_id'],$text,$betreff);
 			if (ist_online($freund['u_id']))
 				{
-				$msg="Hallo $freund[u_nick], jemand möchte Ihr Freund werden. ".
+				$msg="Hallo $freund[u_nick], jemand mÃ¶chte Ihr Freund werden. ".
 				     "<a href=\"freunde.php?http_host=$http_host&aktion=bestaetigen&id=<ID>\" target=\"640_$fenster\" ".
 				 "onclick=\"window.open('freunde.php?http_host=$http_host&aktion=bestaetigen&id=<ID>','640_$fenster','resizable=yes,scrollbars=yes,width=780,height=580'); return(false);\">".
 				"gleich zustimmen?</a>";
@@ -315,7 +315,7 @@ function neuer_freund($f_userid,$freund) {
 }
 
 function edit_freund($f_id,$f_text) {
-	// Ändert den Infotext beim Freund
+	// Ã„ndert den Infotext beim Freund
 
 	global $id,$http_host,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$conn,$dbase,$chat,$system_farbe;
 
@@ -326,7 +326,7 @@ function edit_freund($f_id,$f_text) {
 	$f['f_text']=$f_text;
 	schreibe_db("freunde",$f,$f_id,"f_id");
 
-	$back= "<B>Hinweis:</B> Der Freundestext wurde geändert.";
+	$back= "<B>Hinweis:</B> Der Freundestext wurde geÃ¤ndert.";
 
 	return($back);
 }
@@ -339,7 +339,7 @@ $query="SELECT u_nick FROM user where u_id='$f_userid'";
         $result=mysql_query($query, $conn);
         if ($result && mysql_num_rows($result)!=0) {
                 $f_nick=mysql_result($result,0,0);
-		$back= "<P><B>Hinweis: </B>Die Freundschaft mit '$f_nick' wurde bestätigt!</P>";
+		$back= "<P><B>Hinweis: </B>Die Freundschaft mit '$f_nick' wurde bestÃ¤tigt!</P>";
 		}
 return($back);
 }

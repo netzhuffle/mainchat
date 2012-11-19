@@ -1,6 +1,6 @@
 <?php
 
-	$STAT_TXT["0050"] = "<B>Übersicht</B>";
+	$STAT_TXT["0050"] = "<B>Ãœbersicht</B>";
 	$STAT_TXT["0051"] = "[ ";
 	$STAT_TXT["0052"] = " ]";
 	$STAT_TXT["0053"] = "Anzeigen";
@@ -18,7 +18,7 @@
 	$STAT_TXT["0080"] = "Sonstige";
 
 	$STAT_TXT["0100"] = "Durchschnitt:";
-	$STAT_TXT["0101"] = "Höchste Anzahl:";
+	$STAT_TXT["0101"] = "HÃ¶chste Anzahl:";
 	$STAT_TXT["0102"] = "Benutzer";
 	$STAT_TXT["0103"] = "Uhrzeit";
 	$STAT_TXT["0104"] = "Alle virtuellen Hosts";
@@ -29,7 +29,7 @@
 
 	$STAT_MONTH_TXT["01"] = "Januar";
 	$STAT_MONTH_TXT["02"] = "Februar";
-	$STAT_MONTH_TXT["03"] = "März";
+	$STAT_MONTH_TXT["03"] = "MÃ¤rz";
 	$STAT_MONTH_TXT["04"] = "April";
 	$STAT_MONTH_TXT["05"] = "Mai";
 	$STAT_MONTH_TXT["06"] = "Juni";

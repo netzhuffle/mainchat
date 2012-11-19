@@ -23,10 +23,10 @@ if (isset($schau_raum) && !is_numeric($schau_raum))
 }
            
 if ((isset($schau_raum)) && $schau_raum<0) {
-	// Community-Bereich gewählt
+	// Community-Bereich gewÃ¤hlt
 	$raum_subquery="AND o_who=".($schau_raum*(-1));
 } elseif ((isset($schau_raum)) && $schau_raum>0) {
-	// Raum gewählt
+	// Raum gewÃ¤hlt
 	$raum_subquery="AND r_id=$schau_raum";
 } elseif (!isset($schau_raum) && $o_who!=0) {
 	// Voreinstellung auf den aktuellen Community-Bereich
@@ -59,13 +59,13 @@ if ($aktion!="zeigalle" || $u_level!="S") {
 	// Target Sonderzeichen raus...
 	$fenster = str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 	echo "<SCRIPT LANGUAGE=\"JavaScript\">\n".
 		"  var http_host='$http_host';\n".
@@ -141,7 +141,7 @@ aktualisiere_online($u_id,$o_raum);
 
 
 if ($aktion!="chatuserliste" && $aktion!="statistik") {
-	// Menü als erstes ausgeben, falls nicht Spezialfall im Chatwindow oder statistikfenster.
+	// MenÃ¼ als erstes ausgeben, falls nicht Spezialfall im Chatwindow oder statistikfenster.
 	$box = $ft0.$t['sonst2'].$ft1;
 	$text = "<LI><A HREF=\"user.php?http_host=$http_host&id=$id&schau_raum=$schau_raum\">$t[menue1]</A>\n";
 	if ($u_level != "G")
@@ -215,7 +215,7 @@ if ($admin AND isset($trace) ) {
 	$box = $ft0.$t['sonst3']." ".$trace.$ft1;
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf><TR><TD>".
 	     "<A HREF=\"#\" onClick=\"window.close();\">".
-	     "<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n".
+	     "<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n".
 	     "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n".
 	     "</TD></TR></TABLE>\n<PRE>".$f1;
 	system("$traceroute $trace",$ergebnis);
@@ -309,7 +309,7 @@ break;
 
 case "userloeschen":
 
-	// User Löschen
+	// User LÃ¶schen
 	if ($u_level=="S") {
 
 		$box = $ft0.$t['sonst51'].$ft1;
@@ -326,7 +326,7 @@ break;
 
 case "userloeschen2":
 
-	// User Löschen
+	// User LÃ¶schen
 	if ($u_level=="S") {
 
 
@@ -417,7 +417,7 @@ break;
 
 case "suche":
 
-	// Suchmaske für Ergebnis oder Suchmaske für erste Suche ausgeben
+	// Suchmaske fÃ¼r Ergebnis oder Suchmaske fÃ¼r erste Suche ausgeben
 	if (strlen($suchtext)>3 OR (isset($suchtext_eingabe) && $suchtext_eingabe=="Go!")) {
 
 
@@ -483,7 +483,7 @@ case "suche":
 		// wenn einer nur nach % sucht, kanns auch weggelassen werden
 		if ($suchtext == "%") unset($suchtext);
 
-		// Variablen säubern
+		// Variablen sÃ¤ubern
 		unset($query);
 		unset($where);
 		unset($subquery);
@@ -532,7 +532,7 @@ case "suche":
 		// Subquerys, wenn parameter gesetzt, teils anhand des Levels		
 		if ($admin)
 		{
-                        // Optional level ergänzen
+                        // Optional level ergÃ¤nzen
                         if ($f['level'] && $subquery) $subquery .= "AND u_level = '$f[level]' ";
                         else if ($f['level']) $subquery = " u_level = '$f[level]' ";
 
@@ -615,7 +615,7 @@ case "suche":
 					$larr[$i]['u_id']=$row['u_id'];
 					$larr[$i]['u_away']=$row['u_away'];
 					if ($communityfeatures) {
-						// Wenn der User nicht möchte, daß sein Würfel angezeigt wird, ist hier die einfachste Möglichkeit
+						// Wenn der User nicht mÃ¶chte, daÃŸ sein WÃ¼rfel angezeigt wird, ist hier die einfachste MÃ¶glichkeit
 						if ($row['u_punkte_anzeigen'] != "N")
 						{
 							$larr[$i]['gruppe']=hexdec($row['u_punkte_gruppe']);
@@ -735,7 +735,7 @@ case "adminliste":
 			$larr[$i][u_id]=$row[u_id];
 			$larr[$i][u_away]=$row[u_away];
 			if ($communityfeatures) {
-				// Wenn der User nicht möchte, daß sein Würfel angezeigt wird, ist hier die einfachste Möglichkeit
+				// Wenn der User nicht mÃ¶chte, daÃŸ sein WÃ¼rfel angezeigt wird, ist hier die einfachste MÃ¶glichkeit
 				if ($row[u_punkte_anzeigen] != "N")
 				{
 					$larr[$i][gruppe]=hexdec($row[u_punkte_gruppe]);
@@ -849,7 +849,7 @@ default;
 				};
 
 			};
-			// Spezialbehandlung für Admins
+			// Spezialbehandlung fÃ¼r Admins
 			if ( !$admin ) { 
 				$larr[$i]['o_ip'] = "";
 			};
@@ -884,12 +884,12 @@ default;
 
 		echo "<P>".str_replace("%whotext%",$whotext[($schau_raum*(-1))],$t['sonst43'])."</P>\n";
 
-	} else {  // array ist gefüllt -> Daten ausgeben
+	} else {  // array ist gefÃ¼llt -> Daten ausgeben
 
 		if ( $aktion!="chatuserliste" ) {
 			echo "<TABLE CELLPADDING=\"2\" CELLSPACING=\"0\" BORDER=\"0\" WIDTH=\"100%\" BGCOLOR=\"$farbe_tabelle_kopf\">\n".
 			     "<TR><TD><A HREF=\"#\" onClick=\"window.close();\">".
-			     "<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" WIDTH=\"15\" HEIGHT=\"13\" ALIGN=\"RIGHT\" BORDER=\"0\"></A>".
+			     "<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" WIDTH=\"15\" HEIGHT=\"13\" ALIGN=\"RIGHT\" BORDER=\"0\"></A>".
 			     "<FONT SIZE=\"-1\" COLOR=\"$farbe_text\"><B>$box</B></FONT>".
 			     "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=1 HEIGHT=13><BR>\n".
 			     "<TABLE CELLPADDING=\"5\" CELLSPACING=\"0\" BORDER=\"0\" WIDTH=\"100%\" BGCOLOR=\"$farbe_tabelle_koerper\">".
@@ -939,7 +939,7 @@ default;
 		echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 		echo "<TR><TD>";
 		echo "<A HREF=\"/\" onClick=\"window.close(); return(false);\">".
-			"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+			"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 			"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 		echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 		echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=1 HEIGHT=13><BR>\n";
@@ -963,7 +963,7 @@ default;
 			"</FORM>\n";
 
 if ($aktion!="chatuserliste") {
-		// Fuß der Tabelle
+		// FuÃŸ der Tabelle
 		echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
 }
 	}
@@ -981,7 +981,7 @@ endif;
 
 
 
-// Fuß
+// FuÃŸ
 if ($aktion!="zeigalle" || $u_level!="S") {
 	if ($aktion!="chatuserliste" && $o_js) {
 		echo $f1."<P ALIGN=CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</P>".$f2."\n";

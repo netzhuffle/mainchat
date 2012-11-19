@@ -1,7 +1,7 @@
 <?php
 
 function edit_home($u_id,$u_nick,$home,$einstellungen,$farben,$bilder,$aktion) {
-	// Editor für die eigene Homepage im Chat
+	// Editor fÃ¼r die eigene Homepage im Chat
 	// u_id = User-Id
 	// home = Array des Userprofiles mit Einstellungen
 	// einstellungen = Array der Einstellungen
@@ -48,7 +48,7 @@ function home_profil($u_id,$u_nick,$home,$farben,$aktion) {
 	global $dbase,$http_host,$id,$f1,$f2,$f3,$f4,$vor_einstellungen;
 
 	$url="profil.php?http_host=$http_host&id=$id&aktion=aendern";
-	$link=$f3."<B>[<A HREF=\"$url\">ÄNDERN</A>]</B>".$f4;
+	$link=$f3."<B>[<A HREF=\"$url\">Ã„NDERN</A>]</B>".$f4;
 	$text="";
 
 
@@ -57,7 +57,7 @@ function home_profil($u_id,$u_nick,$home,$farben,$aktion) {
 
 		// Profil vorhanden
 
-		// Voreinstellungen fürs Profil
+		// Voreinstellungen fÃ¼rs Profil
 		if (!$home['ui_einstellungen']) {
 			$ui_einstellungen=$vor_einstellungen;
 		} else {
@@ -65,8 +65,8 @@ function home_profil($u_id,$u_nick,$home,$farben,$aktion) {
 		};
 
 		// Profil ausgeben
-		if ($ui_einstellungen["Straße"] && $home['ui_strasse']) 
-			$text.="<TR><TD valign=\"TOP\" align=\"right\" WIDTH=20%>".$f1."Straße:".$f2."</TD><TD colspan=3 WIDTH=80%>".
+		if ($ui_einstellungen["StraÃŸe"] && $home['ui_strasse']) 
+			$text.="<TR><TD valign=\"TOP\" align=\"right\" WIDTH=20%>".$f1."StraÃŸe:".$f2."</TD><TD colspan=3 WIDTH=80%>".
 				htmlspecialchars(stripslashes($home['ui_strasse']))."</TD></TR>\n";
 
 		if (($ui_einstellungen["Ort"] || $ui_einstellungen["PLZ"]) && ($home['ui_plz'] || $home['ui_ort'])) {
@@ -130,7 +130,7 @@ function home_profil($u_id,$u_nick,$home,$farben,$aktion) {
 
 	}
 
-	// Farbwähler und Profil-Link ausgeben
+	// FarbwÃ¤hler und Profil-Link ausgeben
 	if ($aktion=="aendern") {
 		$text.="<TR><TD colspan=4 align=\"right\">".
 			$link."<BR>\n".
@@ -155,19 +155,19 @@ function home_profil($u_id,$u_nick,$home,$farben,$aktion) {
 
 
 function home_info($u_id,$u_nick,$farben,$aktion) {
-	// Zeigt die öffentlichen Userdaten an
+	// Zeigt die Ã¶ffentlichen Userdaten an
 	global $dbase,$conn,$http_host,$id,$f1,$f2,$f3,$f4,$userdata,$t,$level,$id;
 
 	// Fenstername
         $fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 
 	// Userdaten lesen
@@ -187,7 +187,7 @@ function home_info($u_id,$u_nick,$farben,$aktion) {
 		// Link auf Usereditor ausgeben
 		if ($aktion=="aendern") {
 			$url="edit.php?http_host=$http_host&id=$id";
-			$userdaten_bearbeiten=$f3."<B>[<A HREF=\"$url\" TARGET=\"$fenster\" onclick=\"window.open('$url','$fenster','resizable=yes,scrollbars=yes,width=300,height=580'); return(false);\">ÄNDERN</A>]</B>".$f4;
+			$userdaten_bearbeiten=$f3."<B>[<A HREF=\"$url\" TARGET=\"$fenster\" onclick=\"window.open('$url','$fenster','resizable=yes,scrollbars=yes,width=300,height=580'); return(false);\">Ã„NDERN</A>]</B>".$f4;
 		} else {
 			$userdaten_bearbeiten="&nbsp;";
 		};
@@ -232,7 +232,7 @@ function home_info($u_id,$u_nick,$farben,$aktion) {
 				$f2."</B></TD></TR>\n";
 		};
 
-		// Farbwähler & Link auf Editor ausgeben
+		// FarbwÃ¤hler & Link auf Editor ausgeben
 		if ($aktion=="aendern") {
 			if (!isset($home)) $home = "";
 			$text.="<TR><TD colspan=4 align=\"right\">".
@@ -268,7 +268,7 @@ function unhtmlentities($string)
 }
                             
 function home_text($u_id,$u_nick,$home,$feld,$farben,$aktion) {
-	// Gibt TEXT-AREA Feld für $feld aus
+	// Gibt TEXT-AREA Feld fÃ¼r $feld aus
 
 	global $eingabe_breite2,$f1,$f2;
 	
@@ -280,7 +280,7 @@ function home_text($u_id,$u_nick,$home,$feld,$farben,$aktion) {
 	$text=preg_replace("|target\s*=\s*.\"\s*\_blank\s*.\"|i", '####----TAR----####', $text);
 
 	// Problem: wenn zeichen z.b. b&#97;ckground codiert sind
-	// dann würde dadurch ein sicherheitsloch entstehen
+	// dann wÃ¼rde dadurch ein sicherheitsloch entstehen
 	$text = unhtmlentities($text);
 	
 //	$stopwordarray=array("background","java","script","activex","embed","target","javascript");
@@ -289,21 +289,21 @@ function home_text($u_id,$u_nick,$home,$feld,$farben,$aktion) {
 
 	foreach ($stopwordarray as $stopword)
 	{
-		// str_replace ist case sensitive, gefährlichen, wenn JavaScript geschrieben wird, oder Target, oder ActiveX
+		// str_replace ist case sensitive, gefÃ¤hrlichen, wenn JavaScript geschrieben wird, oder Target, oder ActiveX
 		while (preg_match($stopword, $text))
 			$text=preg_replace($stopword,"",$text);
 	}
 
 	$text=str_replace("####----TAR----####", "target=\"_blank\"", $text);
 
-	// Wir löschen die On-Handler aus der Homepage (einfache Version)
+	// Wir lÃ¶schen die On-Handler aus der Homepage (einfache Version)
 	// on gefolgt von 3-12 Buchstaben wird durch off ersetzt
 
 	$text=preg_replace ('|\son([a-z]{3,12})\s*=|i',' off\\1=',$text);
 /*
- auskommentiert weil code nicht mehr notwenig ist, da sessionid nicht mehr beim Aufruf der Homepage benötigt wird
- falls er wieder benötigt wird, muss er komplett neu programmiert werden, weil er so nicht fehlerfrei  funktioniert
- z.B. werden Tags ohne Anführungszeichen nicht berücksichtigt
+ auskommentiert weil code nicht mehr notwenig ist, da sessionid nicht mehr beim Aufruf der Homepage benÃ¶tigt wird
+ falls er wieder benÃ¶tigt wird, muss er komplett neu programmiert werden, weil er so nicht fehlerfrei  funktioniert
+ z.B. werden Tags ohne AnfÃ¼hrungszeichen nicht berÃ¼cksichtigt
 
 	$text = preg_replace("|href\s*=\s*\"([^\"]+)\"|ie","home_url_parse(\"href\",\"\\1\")",$text);
 	$text = preg_replace("|action\s*=\s*\"([^\"]+)\"|ie","home_url_parse(\"action\",\"\\1\")",$text);
@@ -312,7 +312,7 @@ function home_text($u_id,$u_nick,$home,$feld,$farben,$aktion) {
 */
 
 	if ($aktion=="aendern") {
-		$text="<TR><TD COLSPAN=4 VALIGN=\"TOP\">$f1<B>Ihr Text über sich selbst:</B>$f2<BR><TEXTAREA COLS=".($eingabe_breite2)." ROWS=20 NAME=\"home[$feld]\">".
+		$text="<TR><TD COLSPAN=4 VALIGN=\"TOP\">$f1<B>Ihr Text Ã¼ber sich selbst:</B>$f2<BR><TEXTAREA COLS=".($eingabe_breite2)." ROWS=20 NAME=\"home[$feld]\">".
 			stripslashes($home[$feld])."</TEXTAREA></TD></TR>".
 			"<TR><TD VALIGN=\"TOP\" ALIGN=\"RIGHT\">".
 			home_farbe($u_id,$u_nick,$home,$feld,$farben[$feld])."</TD></TR>";
@@ -353,16 +353,16 @@ function home_bild($u_id,$u_nick,$home,$feld,$farben,$aktion,$bilder,$beschreibu
 
 		if ($aktion=="aendern") {
 			$text.="<TD VALIGN=\"BOTTOM\" ALIGN=\"RIGHT\">".
-				$f3."<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=aendern&loesche=$feld\">LÖSCHEN</A>]</B>".$f4."<BR>".
+				$f3."<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=aendern&loesche=$feld\">LÃ·SCHEN</A>]</B>".$f4."<BR>".
 				home_farbe($u_id,$u_nick,$home,$feld,$farben[$feld])."</TD>\n";
 		} elseif ($aktion=="aendern_ohne_farbe") {
 			$text.="<TD VALIGN=\"BOTTOM\" ALIGN=\"RIGHT\">".
-				$f3."<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=aendern&loesche=$feld\">LÖSCHEN</A>]</B>".$f4."</TD>\n";
+				$f3."<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=aendern&loesche=$feld\">LÃ·SCHEN</A>]</B>".$f4."</TD>\n";
 		};
 
 	} elseif ($aktion=="aendern" || $aktion=="aendern_ohne_farbe") {
 
-		$text="<TD ALIGN=\"CENTER\" VALIGN=\"TOP\"><B>Kein Bild hochgeladen - Achtung: Nur Bilder im JPG und GIF Format hochladen! Kein BMP Format! Die Bilder dürfen nicht grösser als 30 Kb sein!</B><BR>".
+		$text="<TD ALIGN=\"CENTER\" VALIGN=\"TOP\"><B>Kein Bild hochgeladen - Achtung: Nur Bilder im JPG und GIF Format hochladen! Kein BMP Format! Die Bilder dÃ¼rfen nicht grÃ¶sser als 30 Kb sein!</B><BR>".
 			"<INPUT TYPE=\"FILE\" NAME=\"$feld\" SIZE=\"".($eingabe_breite/8)."\"></TD>";
 		$text.="<TD VALIGN=\"TOP\" ALIGN=\"RIGHT\">&nbsp;<BR>".
 			"<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"GO\"><BR></TD>\n";
@@ -401,13 +401,13 @@ function home_aktionen($u_id,$u_nick,$home,$farben,$aktion) {
 
 	$fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 
 	$text="<TD VALIGN=\"TOP\">".$f1;
@@ -416,12 +416,12 @@ function home_aktionen($u_id,$u_nick,$home,$farben,$aktion) {
 		$text.="<A HREF=\"$url\" TARGET=\"640_$fenster\" onClick=\"neuesFenster2('$url'); return(false)\">".
 			"<B>Schreibe mir doch eine Mail!</B>&nbsp;$chat_grafik[mail]</A><BR><BR>";
 	} else {
-		#$text.="Ihr könnt mir eine Mail schicken, wenn Ihr euch vorher im ".
+		#$text.="Ihr kÃ¶nnt mir eine Mail schicken, wenn Ihr euch vorher im ".
 		#	"<A HREF=\"index.html\">$chat anmeldet</A>.<BR><BR>\n";
 	};
 
 	if ($userdata['u_url']) {
-		$text.="Mehr&nbsp;über&nbsp;mich: <B><A HREF=\"redirect.php?url=".
+		$text.="Mehr&nbsp;Ã¼ber&nbsp;mich: <B><A HREF=\"redirect.php?url=".
 			urlencode(stripslashes($userdata['u_url'])).
 			"\" TARGET=\"_new\">".stripslashes($userdata['u_url'])."</B></A><BR>\n";
 	}
@@ -449,7 +449,7 @@ function home_aktionen($u_id,$u_nick,$home,$farben,$aktion) {
 
 
 function home_hintergrund($u_id,$u_nick,$farben,$home,$bilder) {
-	// Einstellungen für den Hintergrund
+	// Einstellungen fÃ¼r den Hintergrund
 	global $f1,$f2,$f3,$f4;
 
 	$aktion="aendern_ohne_farbe";
@@ -486,10 +486,10 @@ function home_hintergrund($u_id,$u_nick,$farben,$home,$bilder) {
 
 
 function home_einstellungen($u_id,$u_nick,$home,$einstellungen) {
-	// Einstellungen für Homepage:
-	// Homepage öffentlich ja/nein
-	// Profileinstellungen öffentlich ja/nein
-	// Addresse öffentlich ja/nein
+	// Einstellungen fÃ¼r Homepage:
+	// Homepage Ã¶ffentlich ja/nein
+	// Profileinstellungen Ã¶ffentlich ja/nein
+	// Addresse Ã¶ffentlich ja/nein
 
 	global $f1,$f2,$vor_einstellungen;
 
@@ -502,14 +502,14 @@ function home_einstellungen($u_id,$u_nick,$home,$einstellungen) {
 	$text="<TR><TD align=\"RIGHT\">".$f1."Homepage freigeben: ".$f2."</TD>".
 		"<TD><INPUT TYPE=\"CHECKBOX\" NAME=\"einstellungen[u_chathomepage]\" $checked></TD></TR>\n";
 
-	// Voreinstellungen fürs Profil
+	// Voreinstellungen fÃ¼rs Profil
 	if (!$home['ui_einstellungen']) {
 		$ui_einstellungen=$vor_einstellungen;
 	} else {
 		$ui_einstellungen=unserialize($home['ui_einstellungen']);
 	};
 		
-	// Einstellungen fürs Profil ausgeben
+	// Einstellungen fÃ¼rs Profil ausgeben
 	foreach ($vor_einstellungen as $key => $val) {
 		if ($ui_einstellungen[$key]) {
 			$checked="CHECKED";
@@ -526,7 +526,7 @@ function home_einstellungen($u_id,$u_nick,$home,$einstellungen) {
 
 
 function home_farbe($u_id,$u_nick,$home,$feld,$farbe="#FFFFFF",$mit_grafik=TRUE) {
-	// gibt Link auf Farbwähler aus
+	// gibt Link auf FarbwÃ¤hler aus
 
 	global $f3,$f4,$http_host,$id;
 
@@ -538,10 +538,10 @@ function home_farbe($u_id,$u_nick,$home,$feld,$farbe="#FFFFFF",$mit_grafik=TRUE)
 
 
 function bild_holen($u_id,$name,$ui_bild,$groesse) {
-	// Prüft hochgeladenes Bild und speichert es in die Datenbank
-	// u_id = ID des Users, dem das Bild gehört
+	// PrÃ¼ft hochgeladenes Bild und speichert es in die Datenbank
+	// u_id = ID des Users, dem das Bild gehÃ¶rt
 	// 
-	// Binäre Bildinformation -> home[ui_bild]
+	// BinÃ¤re Bildinformation -> home[ui_bild]
 	// WIDTH                  -> home[ui_bild_width] 
 	// HEIGHT                 -> home[ui_bild_height]
 	// MIME-TYPE              -> home[ui_bild_mime]
@@ -590,14 +590,14 @@ function bild_holen($u_id,$name,$ui_bild,$groesse) {
 				}
 				schreibe_db("bild",$f,$b_id,"b_id");
 			} else {
-				echo "<P><B>Fehler: </B> Es wurde kein gültiges Bildformat (PNG, JPEG, GIF, Flash) hochgeladen!</P>\n";
+				echo "<P><B>Fehler: </B> Es wurde kein gÃ¼ltiges Bildformat (PNG, JPEG, GIF, Flash) hochgeladen!</P>\n";
 			};
 
-			// Bild löschen
+			// Bild lÃ¶schen
 			unlink($ui_bild);
 
 
-			// Cache löschen
+			// Cache lÃ¶schen
 			$cache="home_bild";
 			$cachepfad=$cache."/".$http_host."/".substr($u_id,0,2)."/".$u_id."/".$name;
 			if (file_exists($cachepfad)) {
@@ -606,12 +606,12 @@ function bild_holen($u_id,$name,$ui_bild,$groesse) {
 			};
 
 		} else {
-			echo "<P><B>Fehler: </B> Es wurde kein gültiges Bildformat (PNG, JPEG, GIF, Flash) hochgeladen!</P>\n";
+			echo "<P><B>Fehler: </B> Es wurde kein gÃ¼ltiges Bildformat (PNG, JPEG, GIF, Flash) hochgeladen!</P>\n";
 			unlink($ui_bild);
 		};
 
 	} elseif ($groesse>=($max_groesse*1024)) {
-		echo "<P><B>Fehler: </B> Das Bild muß kleiner als $max_groesse KB sein!</P>\n";
+		echo "<P><B>Fehler: </B> Das Bild muss kleiner als $max_groesse KB sein!</P>\n";
 	}
 
 	// echo "DEBUG $name $ui_bild<BR>";
@@ -736,7 +736,7 @@ function zeige_home($u_id,$force=FALSE,$defaultfarben="") {
 
 			// IVW-Pixel ausgeben
 			if ($ivw){
-				// In IVW Pixel <IMG SRC=> einfügen (opt)
+				// In IVW Pixel <IMG SRC=> einfÃ¼gen (opt)
 				if (!strpos($ivw,"<IMG")) {
 					$ivw="<IMG SRC=\"$ivw\" ALT=\"\">\n";
 				};
@@ -752,7 +752,7 @@ function zeige_home($u_id,$force=FALSE,$defaultfarben="") {
 
 		// IVW-Pixel ausgeben
 		if ($ivw){
-			// In IVW Pixel <IMG SRC=> einfügen (opt)
+			// In IVW Pixel <IMG SRC=> einfÃ¼gen (opt)
 			if (!strpos($ivw,"<IMG")) {
 				$ivw="<IMG SRC=\"$ivw\" ALT=\"\">\n";
 			};
@@ -764,11 +764,11 @@ function zeige_home($u_id,$force=FALSE,$defaultfarben="") {
 	} else {
 
 		echo "<BODY BGCOLOR=\"#FFFFFF\">".
-			"<P><B>Fehler: Aufruf ohne gültige Parameter!</B></P>";
+			"<P><B>Fehler: Aufruf ohne gÃ¼ltige Parameter!</B></P>";
 
 		// IVW-Pixel ausgeben
 		if ($ivw){
-			// In IVW Pixel <IMG SRC=> einfügen (opt)
+			// In IVW Pixel <IMG SRC=> einfÃ¼gen (opt)
 			if (!strpos($ivw,"<IMG")) {
 				$ivw="<IMG SRC=\"$ivw\" ALT=\"\">\n";
 			};

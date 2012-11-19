@@ -11,13 +11,13 @@ id_lese($id);
 
 $fenster=str_replace("+","",$u_nick);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 // Kopf ausgeben
 ?>
@@ -56,7 +56,7 @@ if (strlen($u_id)!=0):
 aktualisiere_online($u_id,$o_raum);
 
 
-// Menü als erstes ausgeben
+// MenÃ¼ als erstes ausgeben
 $box=$ft0.$t['menue5'].$ft1;
 if (isset($raum)) $rraum="&schau_raum=$raum";
 else $rraum="";
@@ -73,7 +73,7 @@ if (isset($f['r_name'])) {
 
         if (!isset($f['r_werbung'])) $f['r_werbung'] = "";
         
-	// html unterdrücken
+	// html unterdrÃ¼cken
 	$f['r_name']=htmlspecialchars($f['r_name']);
 	$f['r_topic']=htmlspecialchars(stripslashes($f['r_topic']));
 	$f['r_eintritt']=htmlspecialchars(stripslashes($f['r_eintritt']));
@@ -88,7 +88,7 @@ if (isset($f['r_name'])) {
 	if (isset($f['r_werbung']) && strlen($f['r_werbung'])>0 && strtolower(substr($f['r_werbung'],0,7))!="http://")
 		$f['r_werbung']="http://".$f['r_werbung'];
 
-	// In Permanenten Räumen darf ein RB keine Punkte Ändern
+	// In Permanenten RÃ¤umen darf ein RB keine Punkte Ã„ndern
 	if (!$admin && $f['r_status2']=="P")
 	{
 		echo "<P>".$t['fehler14']."</P>\n";
@@ -96,7 +96,7 @@ if (isset($f['r_name'])) {
 	}
 
 
-	// Nur Admin darf Nicht-Temporäre Räume setzen
+	// Nur Admin darf Nicht-TemporÃ¤re RÃ¤ume setzen
 	if (!$admin && $f['r_status2']=="P"):
 		echo "<P>".str_replace("%r_status%",$raumstatus2[$f['r_status2']],$t['fehler10'])."</P>\n"; 
 		unset($f['r_status2']);
@@ -118,7 +118,7 @@ if (isset($f['r_name'])) {
 		unset($f['r_status1']);
 	}
 
-	// Prüfen ob Mindestpunkte zwischen 0 und 99.999.999
+	// PrÃ¼fen ob Mindestpunkte zwischen 0 und 99.999.999
 	if (isset($f['r_min_punkte']) && ($f['r_min_punkte']) && ($f['r_min_punkte'] < 0 || $f['r_min_punkte'] > 99999999))
 	{
 		echo "<P>".$t['fehler13']."</P>\n";
@@ -151,8 +151,8 @@ $result=mysql_query($query);
 $num=mysql_numrows($result);
 if ($num >= 1) { $f['r_id']="";$f['f_name']="";}
 
-// Änderungen in DB eintragen, falls gesetzt und Admin oder Besitzer
-// bei keinen Admins ist nur temporär erlaubt
+// Ã„nderungen in DB eintragen, falls gesetzt und Admin oder Besitzer
+// bei keinen Admins ist nur temporÃ¤r erlaubt
 if ($f['r_id']!="" && strlen($f['r_name'])>3 && strlen($f['r_name'])<$raum_max && $los=="$t[sonst9]" && !$neu && ($admin || $u_id==$r_besitzer)):
 	schreibe_db("raum",$f,$f['r_id'],"r_id");
 endif;
@@ -162,10 +162,10 @@ if (!isset($loesch)) $loesch = "";
 if (!isset($loesch2)) $loesch2 = "";
 
 // Raum neu eintragen und in Raum gehen
-// bei keinen Admins ist nur temporär erlaubt
+// bei keinen Admins ist nur temporÃ¤r erlaubt
 if (strlen($f['r_name'])>3 && strlen($f['r_name'])<$raum_max && $los=="$t[sonst9]" && $loesch!="$t[sonst4]" && $neu && ($u_level!="G")):
 
-	// Voreinstellungen für den Raumstatus
+	// Voreinstellungen fÃ¼r den Raumstatus
 	if (!$f['r_status1']) $f['r_status1']="O";
 	if (!$f['r_status2']) $f['r_status2']="T";
 
@@ -189,20 +189,20 @@ if (strlen($f['r_name'])>3 && strlen($f['r_name'])<$raum_max && $los=="$t[sonst9
 
 endif;
 
-// Raum löschen
+// Raum lÃ¶schen
 if ($los!="$t[sonst9]" && $loesch=="$t[sonst4]"):
 	$aktion="loesch";
 endif;
 
 
 
-// Raum löschen abgebrochen
+// Raum lÃ¶schen abgebrochen
 if ($loesch2=="$t[sonst5]"):
 	$aktion="";
 endif;
 
 
-// Fehlermeldung für Raum-anlegen
+// Fehlermeldung fÃ¼r Raum-anlegen
 if (strlen($f['r_name'])<=3 && $los=="$t[sonst9]" && $loesch!="$t[sonst4]" && $neu):
 	echo $t['fehler1'];
 endif;
@@ -214,7 +214,7 @@ $box=$ft0.$t['sonst10'].$ft1;
 $tabellenkopf ="<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 $tabellenkopf.="<TR><TD>";
 $tabellenkopf.="<A HREF=\"javascript:window.close();\">";
-$tabellenkopf.="<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ";
+$tabellenkopf.="<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ";
 $tabellenkopf.="WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 $tabellenkopf.="<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 $tabellenkopf.="<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=1 HEIGHT=13><BR>\n";
@@ -224,7 +224,7 @@ $tabellenkopf.="<TR><TD>";
 $tabellenfuss="</TD></TR></TABLE></TD></TR></TABLE>\n";
 
 
-// Browser prüfen
+// Browser prÃ¼fen
 if (ist_netscape()) {
 	$eingabe_breite=30;
 } else {
@@ -236,7 +236,7 @@ switch($aktion) {
 
 case "loesch2":
 
-	// Raum löschen
+	// Raum lÃ¶schen
 	$query="SELECT raum.*,u_id FROM raum left join user ".
 		"on r_besitzer=u_id ".
 		"WHERE r_id=$f[r_id] ";
@@ -247,7 +247,7 @@ case "loesch2":
 
 		$row=mysql_fetch_object($result);
 		
-		// Berechtigung prüfen, alle User in Lobby werfen und löschen
+		// Berechtigung prÃ¼fen, alle User in Lobby werfen und lÃ¶schen
 		if ($admin || ($row->r_besitzer==$u_id)):
 
 			// Lobby suchen
@@ -258,12 +258,12 @@ case "loesch2":
 			endif;
 			@mysql_free_result($result2);
 
-			// Raum ist nicht Lobby -> Löschen
+			// Raum ist nicht Lobby -> LÃ¶schen
 			if ($f['r_id']==$lobby_id) {
 				echo "<P>".str_replace("%r_name%",$row->r_name,$t['fehler12'])."</P>\n"; 
 			} else {
 
-				// Raum schließen
+				// Raum schlieÃŸen
 				$f['r_status1']="G";
 				schreibe_db("raum",$f,$f['r_id'],"r_id");
 
@@ -284,12 +284,12 @@ case "loesch2":
 				$result2=mysql_query($query, $conn);
 				@mysql_free_result($result2);
 
-                		// Gesperrte Räume löschen
+                		// Gesperrte RÃ¤ume lÃ¶schen
                 		$query="DELETE FROM sperre WHERE s_raum=$f[r_id]";
                 		$result2=mysql_query($query, $conn);
 				@mysql_free_result($result2);
 
-				// ausgeben: raum wurde gelöscht.
+				// ausgeben: raum wurde gelÃ¶scht.
 				echo "<P>".str_replace("%r_name%",$row->r_name,$t['fehler3'])."</P>\n"; 
 			}
 
@@ -306,7 +306,7 @@ break;
 
 case "loesch":
 
-	// Raum löschen
+	// Raum lÃ¶schen
 	$query="SELECT raum.*,u_id FROM raum left join user ".
 		"on r_besitzer=u_id ".
 		"WHERE r_id=$f[r_id] ";
@@ -320,7 +320,7 @@ case "loesch":
 		echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 		echo "<TR><TD>";
 		echo "<A HREF=\"javascript:window.close();\">".
-			"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+			"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 			"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 		echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 		echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=1 HEIGHT=13><BR>\n";
@@ -335,7 +335,7 @@ case "loesch":
 		echo "<TR><TD COLSPAN=2>".$f1."<B>$t[sonst7]</B> ".htmlspecialchars(stripslashes($row->r_eintritt)).$f2."</TD></TR>\n";
 		echo "</TR></TABLE>\n";
 
-		// Formular löschen
+		// Formular lÃ¶schen
 		echo "<P>$t[fehler7]</P>\n";
 		echo "<FORM NAME=\"$row->r_name\" ACTION=\"raum.php\" METHOD=POST>\n".
 			"<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n".
@@ -347,7 +347,7 @@ case "loesch":
 			"<INPUT TYPE=\"SUBMIT\" NAME=\"loesch2\" VALUE=\"$t[sonst5]\">".
 			"</FORM>\n";
 
-		// Fuß der Tabelle
+		// FuÃŸ der Tabelle
 		echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
 		mysql_free_result($result);
 
@@ -376,7 +376,7 @@ case "neu":
 		
 		if ($u_punkte_gesamt < $raumanlegenpunkte)
 				{
-				#echo "Um Räume anlegen zu dürfen, brauchst Du mindestens $raumanlegenpunkte Punkte";
+				#echo "Um RÃ¤ume anlegen zu dÃ¼rfen, brauchst Du mindestens $raumanlegenpunkte Punkte";
 				echo str_replace("%punkte%",$raumanlegenpunkte,$t['sonst13']);
 				break;
 				}		
@@ -505,10 +505,10 @@ case "edit":
 			// kein eigener Fall, wird in default abgehandelt. 
 default;
 
-	// Alle Räume
+	// Alle RÃ¤ume
 	if (!isset($order)) $order="r_name";
 
-	// Anzeige aller Räume als Liste oder eines Raums im Editor
+	// Anzeige aller RÃ¤ume als Liste oder eines Raums im Editor
 	if ($aktion=="edit") {
 		$query="SELECT raum.*,u_id,u_nick ".
 			"FROM raum left join user on r_besitzer=u_id ".
@@ -530,7 +530,7 @@ default;
 			// Ausgabe in Tabelle
 			if ($admin || $rows->u_id==$u_id):
 
-				// für diesen Raum Admin
+				// fÃ¼r diesen Raum Admin
 				echo "<FORM NAME=\"$rows->r_name\" ACTION=\"raum.php\" METHOD=POST>\n";
 				echo "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n".
 					"<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n";
@@ -612,7 +612,7 @@ default;
 
 				if ($erweitertefeatures && $rows->r_name != $lobby && $rows->r_status1 != "L")
 				{
-					// Punkte zum Betreten des Raumes ändern
+					// Punkte zum Betreten des Raumes Ã¤ndern
 					echo "<TR><TD>".$f1."<B>$t[sonst14]</B>".$f2."</TD>";
 					echo "<TD>".$f1.
 						"<INPUT TYPE=\"TEXT\" NAME=\"f[r_min_punkte]\" ".
@@ -632,7 +632,7 @@ default;
 					"<TEXTAREA rows=5 cols=".($eingabe_breite)." NAME=\"f[r_austritt]\">".stripslashes($rows->r_austritt)."</TEXTAREA>".
 					$f2."</TD></TR>\n";
 
-				// Werbung für Frame
+				// Werbung fÃ¼r Frame
 				if ($admin && $erweitertefeatures):
 					echo "<TR><TD>".$f1."<B>".$t['sonst12']."</B>".$f2."</TD>".
 						"<TD>".$f1.
@@ -668,7 +668,7 @@ default;
 
 	        endwhile;
 
-		// Fuß der Tabelle
+		// FuÃŸ der Tabelle
 		echo $tabellenfuss;
 		mysql_free_result($result);
 
@@ -676,7 +676,7 @@ default;
 	} else {
 
 
-		// Liste der Räume mit der Anzahl der User aufstellen
+		// Liste der RÃ¤ume mit der Anzahl der User aufstellen
 		$query="SELECT r_id,count(o_id) as anzahl FROM raum ".
 			"LEFT JOIN online ON r_id=o_raum ".
 			"WHERE ((UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout OR o_id IS NULL) ".
@@ -691,7 +691,7 @@ default;
 		mysql_free_result($result);
 
 
-		// Liste der Räume und der Raumbesitzer lesen
+		// Liste der RÃ¤ume und der Raumbesitzer lesen
 		$query="SELECT raum.*,u_id,u_nick,u_level,u_punkte_gesamt,u_punkte_gruppe ".
 			"FROM raum left join user on r_besitzer=u_id ".
 			"GROUP BY r_name ORDER BY $order";
@@ -828,7 +828,7 @@ default;
 };
 
 
-// Fuß
+// FuÃŸ
 if ($o_js):
 	echo $f1."<P ALIGN=CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</P>".$f2."\n";
 endif;

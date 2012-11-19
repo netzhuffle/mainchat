@@ -16,7 +16,7 @@ function werbung($werbung_flaeche,$werbung_gruppe) {
 		if (file_exists("werbung/fallback.php")) include ("werbung/fallback.php");
 		$gruppen=explode(",",$werbung_gruppe);
 
-		// zun‰chst jede Gruppe aus der config versuchen...
+		// zun√§chst jede Gruppe aus der config versuchen...
 		$werbunggelesen=0;
 		$i=0;
 		while ($werbunggelesen==0 && !empty($gruppen[$i])) {

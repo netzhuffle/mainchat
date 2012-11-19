@@ -1,5 +1,5 @@
 <?php
-// function html_parse wird von user und interaktiv benötigt.
+// function html_parse wird von user und interaktiv benÃ¶tigt.
 // $Id: functions.php-func-html_parse.php,v 1.9 2012/10/17 06:16:53 student Exp $
  
 function html_parse($privat,$text,$at_sonderbehandlung=0) {
@@ -14,8 +14,8 @@ global $admin,$smilies_pfad,$smilies_datei,$sprachconfig,$o_raum,$u_id,$u_level;
 global $t,$system_farbe,$erweitertefeatures,$conn,$smilies_anzahl,$smilies_config;
 global $ist_moderiert,$smilies_aus;
 
-// Grafik-Smilies ergänzen, falls Funktion aktiv und Raum ist nicht moderiert
-// Für Gäste gesperrt
+// Grafik-Smilies ergÃ¤nzen, falls Funktion aktiv und Raum ist nicht moderiert
+// FÃ¼r GÃ¤ste gesperrt
 // $ist_moderiert ist in raum_ist_moderiert() (Caching!) gesetzt worden!
 
 if (!$ist_moderiert && $erweitertefeatures):
@@ -29,7 +29,7 @@ if (!$ist_moderiert && $erweitertefeatures):
 			system_msg("",0,$u_id,$system_farbe,$t[chat_msg55]);
 		endif;
 
-		// Prüfen, ob im aktuellen Raum smilies erlaubt sind
+		// PrÃ¼fen, ob im aktuellen Raum smilies erlaubt sind
 		if (!$privat):
 			$query="SELECT r_smilie FROM raum WHERE r_id=$o_raum ";
 			$result=mysql_query($query,$conn);
@@ -44,7 +44,7 @@ if (!$ist_moderiert && $erweitertefeatures):
 
 		if ($smilies_aus == "1") $smilie_ok=false;
 
-		// Konfiguration für smilies lesen
+		// Konfiguration fÃ¼r smilies lesen
 		if ($smilies_config):
 			@require("conf/".$smilies_config);
 		else:
@@ -106,12 +106,12 @@ $text=preg_replace('|\*(.*?)\*|','<i>\1</i>',
 
 	// erst mal testen ob www oder http oder email vorkommen
 	if (preg_match("/(http:|www\.|@)/i",$text)) {
-		// Zerlegen der Zeile in einzelne Bruchstücke. Trennzeichen siehe $split
-		// leider müssen zunächst erstmal in $text die gefundenen urls durch dummies 
+		// Zerlegen der Zeile in einzelne BruchstÃ¼cke. Trennzeichen siehe $split
+		// leider mÃ¼ssen zunÃ¤chst erstmal in $text die gefundenen urls durch dummies 
 		// ersetzt werden, damit bei der Angabge von 2 gleichen urls nicht eine bereits 
-		// ersetzte url nochmal ersetzt wird -> gibt sonst Müll bei der Ausgabe.
+		// ersetzte url nochmal ersetzt wird -> gibt sonst MÃ¼ll bei der Ausgabe.
 
-		// wird evtl. später nochmal gebraucht...
+		// wird evtl. spÃ¤ter nochmal gebraucht...
 		$split='/[ ,\[\]\(\)]/';
 		$txt=preg_split($split,$text);
 
@@ -120,7 +120,7 @@ $text=preg_replace('|\*(.*?)\*|','<i>\1</i>',
 			if ((isset($txt[$i])) && $txt[$i]!="") break;
 		}
 		$text2=$text;
-		// Schleife über alle Worte...
+		// Schleife Ã¼ber alle Worte...
 		for ($j=0; $j<=$i; $j++) {
 			// test, ob am Ende der URL noch ein Sonderzeichen steht...
 			$txt[$j]=preg_replace("!\?$!","",$txt[$j]);
@@ -129,11 +129,11 @@ $text=preg_replace('|\*(.*?)\*|','<i>\1</i>',
 		for ($j=0; $j<=$i; $j++) {
 			// erst mal nick_replace, falls Wort mit "@" beginnt.
 			if (substr($txt[$j],0,1)=="@") {
-				$nick=nick_ergaenze($txt[$j],"raum",1);		 // fehlermeldungen unterdrücken.
-				if (($admin || $u_level=="A") && $nick[u_nick]=="") $nick=nick_ergaenze($txt[$j],"online",1);		 // fehlermeldungen unterdrücken.
+				$nick=nick_ergaenze($txt[$j],"raum",1);		 // fehlermeldungen unterdrÃ¼cken.
+				if (($admin || $u_level=="A") && $nick[u_nick]=="") $nick=nick_ergaenze($txt[$j],"online",1);		 // fehlermeldungen unterdrÃ¼cken.
 				if ($nick[u_nick]!="") 
 				{
-					if ($at_sonderbehandlung == 1) // in /me sprüchen kein [zu Nick] an den anfang stellen, sondern nur nick ergänzen
+					if ($at_sonderbehandlung == 1) // in /me sprÃ¼chen kein [zu Nick] an den anfang stellen, sondern nur nick ergÃ¤nzen
 					{
 						$rep=$nick[u_nick];	
 						$text=preg_replace("!$txt[$j]!",$rep,$text);	
@@ -158,10 +158,10 @@ $text=preg_replace('|\*(.*?)\*|','<i>\1</i>',
 			// E-Mail-Adresse -> Format = *@*.*
 			// (ssilk, 20.06.03): Besser und schneller ist
 			if (preg_match('/^[\w][\w.-]*@[[:alnum:].-]+\.[[:alnum:]-]{2,}$/',$txt[$j]) ) {
-				// Aber im Prinzip müsste man sich die RFCs für Mailadressen und Domainnamen nochmal anschauen!
+				// Aber im Prinzip mÃ¼sste man sich die RFCs fÃ¼r Mailadressen und Domainnamen nochmal anschauen!
 				// Wort=Mailadresse? -> im text durch dummie ersetzen, im wort durch href.
 				$text=preg_replace("/!$txt[$j]!/","####$j####",$text);	
-				// kranke lösung für ie: neues fenster mit mailto aufpoppen, dann gleich wieder schließen...
+				// kranke lÃ¶sung fÃ¼r ie: neues fenster mit mailto aufpoppen, dann gleich wieder schlieÃŸen...
 				$rep="<a href=mailto:".$txt[$j]." onclick=\"ww=window.open('mailto:".$txt[$j]."','Chat_Klein','resizable=yes,scrollbars=yes,width=10,height=10'); ww.window.close(); return(false);\">".$txt[$j]."</a>";
 				$txt[$j]=preg_replace("/".$txt[$j]."/",$rep,$txt[$j]);	
 			}
@@ -178,7 +178,7 @@ $text=preg_replace('|\*(.*?)\*|','<i>\1</i>',
 				// Wort=URL mit www am Anfang? -> im text durch dummie ersetzen, im wort durch href.
 				$text=preg_replace("!$txt2!","####$j####",$text);
 
-				// und den ersten Fall wieder Rückwärts, der wird ja später in der schleife nochmal behandelt.
+				// und den ersten Fall wieder RÃ¼ckwÃ¤rts, der wird ja spÃ¤ter in der schleife nochmal behandelt.
 				$text=preg_replace("!-###\d*####/!","http://$txt2/",$text);
 
 				// url aufbereiten
@@ -187,13 +187,13 @@ $text=preg_replace('|\*(.*?)\*|','<i>\1</i>',
 			// http://###### in <A HREF="http://###" TARGET=_new>http://###</A>
 			if (preg_match("!^https?://!",$txt[$j])) {
 				// Wort=URL mit http:// am Anfang? -> im text durch dummie ersetzen, im wort durch href.
-				// Zusatzproblematik.... könnte ein http-get-URL sein, mit "?" am Ende oder zwischendrin... urgs.
+				// Zusatzproblematik.... kÃ¶nnte ein http-get-URL sein, mit "?" am Ende oder zwischendrin... urgs.
 
 				// sonderfall -> "?" in der URL -> dann "?" als Sonderzeichen behandeln...
 				$txt2=preg_replace("!\?!","\\?",$txt[$j]);
 				$text=preg_replace("!$txt2!","####$j####",$text);	
 
-				// und wieder Rückwärts, falls zuviel ersetzt wurde...
+				// und wieder RÃ¼ckwÃ¤rts, falls zuviel ersetzt wurde...
 				$text=preg_replace("!####\d*####/!","$txt[$j]/",$text);
 
 				// url aufbereiten
@@ -214,7 +214,7 @@ $text=preg_replace('|\*(.*?)\*|','<i>\1</i>',
 
 // endif;
 
-// gemerkte @, _ und * zurückwandeln.
+// gemerkte @, _ und * zurÃ¼ckwandeln.
 $text=str_replace("###plus###","+",$text);
 $text=str_replace("###strich###","|",$text);
 $text=str_replace("###auf###","[",$text);

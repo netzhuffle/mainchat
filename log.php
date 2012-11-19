@@ -4,7 +4,7 @@
 
 // $Id: log.php,v 1.8 2012/10/17 06:16:53 student Exp $
 
-// log.php muß mit id=$hash_id aufgerufen werden
+// log.php muss mit id=$hash_id aufgerufen werden
 
 require ("functions.php");
 
@@ -46,13 +46,13 @@ if (strlen($u_id)>0):
 	// Fenstername
         $fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 	// Kopf ausgeben
 ?>
@@ -83,11 +83,11 @@ if (strlen($u_id)>0):
 		echo $body_tag;
 
 		// Voreinstellungen
-		// Trigger für die Ausgabe der letzten 100 Nachrichten setzen
+		// Trigger fÃ¼r die Ausgabe der letzten 100 Nachrichten setzen
 		if ($back==0) $back=100;
 		if ($back > 250) $back=250;
 
-		// Admins: Trigger für die Ausgabe der letzten 1000 Nachrichten setzen
+		// Admins: Trigger fÃ¼r die Ausgabe der letzten 1000 Nachrichten setzen
 		if ($admin) $back=1000;
 
 		// Systemnachrichten nicht ausgeben als Voreinstellung

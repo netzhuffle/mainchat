@@ -45,7 +45,7 @@ echo $body_tag;
 aktualisiere_online($u_id,$o_raum);
 
 
-// Browser prüfen
+// Browser prÃ¼fen
 if (ist_netscape()) {
         $eingabe_breite=45;
 } else {
@@ -56,8 +56,8 @@ if (ist_netscape()) {
 if ($u_id && $communityfeatures) {
 
 
-	// Menü als erstes ausgeben
-	$box = $ft0."Menü Aktionen".$ft1;
+	// MenÃ¼ als erstes ausgeben
+	$box = $ft0."MenÃ¼ Aktionen".$ft1;
 	$text = "<A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=community#home\">Hilfe</A>\n";
 	show_box2 ($box,$text,"100%");
 	echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
@@ -82,28 +82,28 @@ if ($u_id && $communityfeatures) {
 	"welcher Nachricht informiert werden wollen. Ein Ereignis ist z.B. ".
 	"der Logon oder Logout eines <B>Freundes</B>, oder auch der Eingang einer ".
 	"neuen <B>Mail</B>.</P>".
-	"<P>Wann Sie die Nachricht erhalten wollen, wählen Sie aus der obersten Zeile aus. " .
-	"Möglich ist der Empfang sofort wenn Sie online sind (<B>Sofort/Online</B>) ".
+	"<P>Wann Sie die Nachricht erhalten wollen, wÃ¤hlen Sie aus der obersten Zeile aus. " .
+	"MÃ¶glich ist der Empfang sofort wenn Sie online sind (<B>Sofort/Online</B>) ".
 	"(z.B. <B>Freund</B> loggt ein/aus ".
 	"oder zu dem Moment, in dem Sie eine <B>Neue Mail</B> erhalten), bei Ihrem ".
-	"<B>Login</B> in den Chat oder regelmäßig ".
-	"<B>alle 5 Minuten</B> (regelmäßige Information über die vorliegenden ".
+	"<B>Login</B> in den Chat oder regelmÃ¤ÃŸig ".
+	"<B>alle 5 Minuten</B> (regelmÃ¤ÃŸige Information Ã¼ber die vorliegenden ".
 	"<B>Neuen Mails</B> oder die Anwesendheit Ihrer <B>Freunde</B> im Chat)</P>".
 	"<P>Die Benachrichtungen, die Sie erhalten, wenn Sie nicht im Chat sind (offline), ".
-	"wählen Sie unter <B>Sofort/Offline</B> aus.</P>".
+	"wÃ¤hlen Sie unter <B>Sofort/Offline</B> aus.</P>".
 	"<P>Die Art der Nachricht ist einstellbar, so gibt es <B>keine</B> Benachrichtigung, ".
-	"<B>Chat-Mail</B> (chat-interne Mail), eine <B>E-Mail</B> an Ihre nicht-öffentliche ".
+	"<B>Chat-Mail</B> (chat-interne Mail), eine <B>E-Mail</B> an Ihre nicht-Ã¶ffentliche ".
 	"E-Mail Adresse oder eine <B>OLM</B> (OnLineMessage, direkte Nachricht in Chat wie ".
 	"/msg).".
-	"Zusätzlich sind auch Kombinationen von <B>E-Mail und OLM</B> sowie <B>Chat-Mail ".
-	"und OLM</B> möglich, wobei Sie in diesem Fall zwei Nachrichten erhalten.</P>";
+	"ZusÃ¤tzlich sind auch Kombinationen von <B>E-Mail und OLM</B> sowie <B>Chat-Mail ".
+	"und OLM</B> mÃ¶glich, wobei Sie in diesem Fall zwei Nachrichten erhalten.</P>";
 
 	if ($smsfeatures) {
 	echo "<P><B><A href=\"hilfe.php?http_host=$http_host&id=$id&aktion=community#sms\">SMS</A></B> ".
-		"ist die Benachrichtung via <B>SMS auf Ihr Handy</B>, falls Sie für SMS freigeschaltet sind, ".
+		"ist die Benachrichtung via <B>SMS auf Ihr Handy</B>, falls Sie fÃ¼r SMS freigeschaltet sind, ".
 		"eine Handy-Nummer eingetragen haben und ein Guthaben auf Ihrem Konto besteht. Ihr ".
-		"Konto können Sie <A HREF=\"sms.php?http_host=$http_host&id=$id\">hier aufladen</A>. ".
-		"Auch SMS können Sie wie OLM mit anderen Benachrichtigungsformen kombinieren.</P>";
+		"Konto kÃ¶nnen Sie <A HREF=\"sms.php?http_host=$http_host&id=$id\">hier aufladen</A>. ".
+		"Auch SMS kÃ¶nnen Sie wie OLM mit anderen Benachrichtigungsformen kombinieren.</P>";
 	};
 }
 	

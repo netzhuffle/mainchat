@@ -2,6 +2,6 @@
 
 // Sprachdefinition deutsch profil.php
 
-$t['sonst1']=	"Fenster schließen";
+$t['sonst1']=	"Fenster schlieÃŸen";
 
 ?>

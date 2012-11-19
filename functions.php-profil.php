@@ -1,7 +1,7 @@
 <?php
 
 function profil_editor($u_id,$u_nick,$f) {
-// Editor zur Änderung oder zur Neuanlage eines Profils
+// Editor zur Ã„nderung oder zur Neuanlage eines Profils
 // $u_id=User-Id
 // $u_nick=Nickname
 // $f=Array der Profileinstellungen
@@ -36,7 +36,7 @@ if ($result && mysql_num_rows($result)==1) {
 	$userdata=mysql_fetch_array($result);
 	mysql_free_result($result);
 	$url="edit.php?http_host=$http_host&id=$id";
-	$userdaten_bearbeiten="\n[<A HREF=\"$url\" TARGET=\"$fenster\" onclick=\"window.open('$url','$fenster','resizable=yes,scrollbars=yes,width=300,height=580'); return(false);\">Einstellungen ändern</A>]";
+	$userdaten_bearbeiten="\n[<A HREF=\"$url\" TARGET=\"$fenster\" onclick=\"window.open('$url','$fenster','resizable=yes,scrollbars=yes,width=300,height=580'); return(false);\">Einstellungen Ã¤ndern</A>]";
 }
 
 
@@ -47,11 +47,11 @@ echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=5><DIV style=\"color:$far
 	"<TR BGCOLOR=\"$farbe_tabelle_zeile2\"><TD align=\"right\">Username:</TD><TD colspan=3>".htmlspecialchars(stripslashes($userdata['u_name']))."</TD></TR>\n";
 $bgcolor=$farbe_tabelle_zeile1;
 if ($userdata['u_email']) {
-	echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">E-Mail:</TD><TD colspan=3>".htmlspecialchars(stripslashes($userdata['u_email']))." (öffentlich)</TD></TR>\n";
+	echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">E-Mail:</TD><TD colspan=3>".htmlspecialchars(stripslashes($userdata['u_email']))." (Ã¶ffentlich)</TD></TR>\n";
 	if ($bgcolor==$farbe_tabelle_zeile1){ $bgcolor=$farbe_tabelle_zeile2; }else{ $bgcolor=$farbe_tabelle_zeile1; };
 }
 if ($userdata['u_adminemail']) {
-	echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">E-Mail:</TD><TD colspan=3>".htmlspecialchars(stripslashes($userdata['u_adminemail']))." (intern, für Admins)</TD></TR>\n";
+	echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">E-Mail:</TD><TD colspan=3>".htmlspecialchars(stripslashes($userdata['u_adminemail']))." (intern, fÃ¼r Admins)</TD></TR>\n";
 	if ($bgcolor==$farbe_tabelle_zeile1){ $bgcolor=$farbe_tabelle_zeile2; }else{ $bgcolor=$farbe_tabelle_zeile1; };
 }
 if ($userdata['u_url']) {
@@ -68,7 +68,7 @@ echo "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n".
 $bgcolor=$farbe_tabelle_zeile1;
 echo "<TR><TD COLSPAN=5>&nbsp;</TD></TR>\n".
 	"<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=5><DIV style=\"color:$farbe_text;\"><B>Ihr neues Profil:</B></DIV></TD></TR>\n".
-	"<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Straße:</TD><TD colspan=3>".$f1.
+	"<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">StraÃŸe:</TD><TD colspan=3>".$f1.
 	"<INPUT TYPE=\"TEXT\" NAME=\"f[ui_strasse]\" VALUE=\"".stripslashes($f['ui_strasse'])."\" SIZE=$eingabe_breite>".
 	$f2."</TD></TR>\n";
 if ($bgcolor==$farbe_tabelle_zeile1){ $bgcolor=$farbe_tabelle_zeile2; }else{ $bgcolor=$farbe_tabelle_zeile1; };

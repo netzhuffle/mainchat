@@ -23,15 +23,15 @@ if (strlen($u_id)>0){
 	// Fenstername
         $fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
-	// Ohne die Stringersetzung, würde das Fenster bei Umlauten 
+	// Ohne die Stringersetzung, wÃ¼rde das Fenster bei Umlauten 
 	// auf die Startseite springen, da id_lese ein Problem damit hat
 	$userfuerrefresh=urlencode($user_nick);
 ?>
@@ -53,7 +53,7 @@ if (strlen($u_id)>0){
         // Timestamp im Datensatz aktualisieren
 	aktualisiere_online($u_id,$o_raum,2);
 
-	// eigene Farbe für BG gesetzt? dann die nehmen.
+	// eigene Farbe fÃ¼r BG gesetzt? dann die nehmen.
 	if ($u_farbe_bg!="" && $u_farbe_bg!="-") $farbe_chat_background1=$u_farbe_bg;
 
 	if (strlen($grafik_background1)>0) {

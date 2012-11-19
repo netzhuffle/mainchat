@@ -1,7 +1,7 @@
 <?php
 
 // $Id: functions.php-user.php,v 1.17 2012/10/17 06:16:53 student Exp $
-// functions nur für user.php
+// functions nur fÃ¼r user.php
 
 require_once("functions.php-func-html_parse.php");
 require_once("functions.php-func-raeume_auswahl.php");
@@ -47,7 +47,7 @@ function user_liste($larr,$anzahl) {
                         $result = mysql_query ($query, $conn);
                         while ( $row = mysql_fetch_array ( $result, MYSQL_ASSOC ) ) {
                             $uid = $row[ui_userid];
-                            if ( $row[ui_geschlecht] == "männlich" )    $geschl[$uid] = "M";
+                            if ( $row[ui_geschlecht] == "mÃ¤nnlich" )    $geschl[$uid] = "M";
                             else if ( $row[ui_geschlecht] == "weiblich" )     $geschl[$uid] = "W";
                             else     $geschl[$uid] = "";
                         }
@@ -60,7 +60,7 @@ function user_liste($larr,$anzahl) {
 				$leveltxt[]="leveltext[\"$key\"]=\"$val\"";
 			}
 
-			// Mit Javascript ausgeben, vollständiges Menü
+			// Mit Javascript ausgeben, vollstÃ¤ndiges MenÃ¼
 			for ($k=0; isset($larr[$k]) AND is_array($larr[$k]) AND $v=$larr[$k]; $k++ ) {
 				if ( $level!="admin" ) {
 					$v['hostname']="";
@@ -98,7 +98,7 @@ function user_liste($larr,$anzahl) {
 //			     "   stdparm=''; stdparm2=''; id=''; http_host=''; u_nick=''; raum=''; nlink=''; nick=''; url='';\n".
 			     "</SCRIPT>\n";
 	echo "<SCRIPT LANGUAGE=\"JavaScript\" src=\"popup.js\"></script>\n";
-		} else {  // kein javascript verfügbar
+		} else {  // kein javascript verfÃ¼gbar
 
 			for ($k=0; is_array($larr[$k]) AND $v=$larr[$k]; $k++ ) {
 				if ( $v['u_away'] ) { 
@@ -163,7 +163,7 @@ global $chat_grafik,$whotext,$beichtstuhl,$erweitertefeatures,$msgpopup,$serverp
 			$uu_profil_historie=unserialize($row->u_profil_historie);
 			$uu_kommentar=$row->u_kommentar;
 
-			// Default für Farbe setzen, falls undefiniert
+			// Default fÃ¼r Farbe setzen, falls undefiniert
 			if (strlen($uu_farbe)==0):
 				$uu_farbe=$user_farbe;
 			endif;
@@ -192,14 +192,14 @@ global $chat_grafik,$whotext,$beichtstuhl,$erweitertefeatures,$msgpopup,$serverp
 				echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n".
 					"<FORM NAME=\"form\" METHOD=POST TARGET=\"schreibe\" ACTION=\"schreibe.php\" onSubmit=\"resetinput(); return false;\">".
 					"<TR><TD><A HREF=\"javascript:window.close();\">".
-					"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+					"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 					"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n".
 					"<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n".
 					"<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n".
 					"<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=\"$farbe_tabelle_koerper\">\n".
 					"<TR><TD>";
 
-				// Eingabeformular für private Nachricht ausgeben
+				// Eingabeformular fÃ¼r private Nachricht ausgeben
 
 				echo $f1;
 
@@ -222,7 +222,7 @@ global $chat_grafik,$whotext,$beichtstuhl,$erweitertefeatures,$msgpopup,$serverp
         				"document.forms['form'].elements['text2'].focus();\n".
 					"\n</SCRIPT>\n\n\n";
 
-				// Fuß der Tabelle
+				// FuÃŸ der Tabelle
 				echo "</TD></TR></TABLE></TD></TR></FORM></TABLE>\n".
 					"<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
 			endif;
@@ -237,7 +237,7 @@ global $chat_grafik,$whotext,$beichtstuhl,$erweitertefeatures,$msgpopup,$serverp
 
 			echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n".
 				"<TR><TD><A HREF=\"javascript:window.close();\">".
-				"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+				"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 				"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n".
 				"<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n".
 				"<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n".
@@ -321,16 +321,16 @@ global $chat_grafik,$whotext,$beichtstuhl,$erweitertefeatures,$msgpopup,$serverp
 
 			if ($communityfeatures) {
 
-			// Nickname Sonderzeichen raus für target
+			// Nickname Sonderzeichen raus fÃ¼r target
 			$fenster=str_replace("+","",$uu_nick);
 			$fenster=str_replace("-","",$fenster);
-			$fenster=str_replace("ä","",$fenster);
-			$fenster=str_replace("ö","",$fenster);
-			$fenster=str_replace("ü","",$fenster);
-			$fenster=str_replace("Ä","",$fenster);
-			$fenster=str_replace("Ö","",$fenster);
-			$fenster=str_replace("Ü","",$fenster);
-			$fenster=str_replace("ß","",$fenster);
+			$fenster=str_replace("Ã¤","",$fenster);
+			$fenster=str_replace("Ã¶","",$fenster);
+			$fenster=str_replace("Ã¼","",$fenster);
+			$fenster=str_replace("Ã„","",$fenster);
+			$fenster=str_replace("Ã·","",$fenster);
+			$fenster=str_replace("Ãœ","",$fenster);
+			$fenster=str_replace("ÃŸ","",$fenster);
 
 				$url="mail.php?aktion=neu2&neue_email[an_nick]=".URLENCODE($uu_nick)."&id=".$id;
 				echo "<TR><TD>".$f1.$t['user_zeige6'].$f2."</TD><TD>".$f3.
@@ -490,10 +490,10 @@ global $chat_grafik,$whotext,$beichtstuhl,$erweitertefeatures,$msgpopup,$serverp
 			echo "$f2</TD></TR></TABLE>\n";
 
 
-			// Fuß der Tabelle
+			// FuÃŸ der Tabelle
 			echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
 
-			// Admin-Menü 3
+			// Admin-MenÃ¼ 3
 			if ($admin):
 				$box=$ft0.$t['user_zeige12'].$ft1;
 
@@ -501,7 +501,7 @@ global $chat_grafik,$whotext,$beichtstuhl,$erweitertefeatures,$msgpopup,$serverp
 				echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 				echo "<TR><TD>";
 				echo "<A HREF=\"javascript:window.close();\">".
-					"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+					"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 					"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 				echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 				echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
@@ -517,19 +517,19 @@ global $chat_grafik,$whotext,$beichtstuhl,$erweitertefeatures,$msgpopup,$serverp
 					"<INPUT TYPE=\"HIDDEN\" NAME=\"f[u_nick]\" VALUE=\"$uu_nick\">\n".
 					"<INPUT TYPE=\"HIDDEN\" NAME=\"zeige_loesch\" VALUE=\"1\">\n".
 					"<INPUT TYPE=\"HIDDEN\" NAME=\"aktion\" VALUE=\"edit\">\n".
-					$f1."<INPUT TYPE=\"SUBMIT\" NAME=\"ein\" VALUE=\"Ändern!\">".
-					"<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Löschen!\"><BR>";
+					$f1."<INPUT TYPE=\"SUBMIT\" NAME=\"ein\" VALUE=\"Ã„ndern!\">".
+					"<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"LÃ¶schen!\"><BR>";
 		
 				$query="SELECT u_chathomepage FROM user WHERE u_id = '$uu_id'";
 				$result=mysql_query($query);
 				$g=@mysql_fetch_array($result);
 				
-				if ($g['u_chathomepage'] == "J") echo "<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Homepage löschen!\">".$f2;
+				if ($g['u_chathomepage'] == "J") echo "<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Homepage lÃ¶schen!\">".$f2;
 				if ((($u_level == "C" || $u_level == "A") && ($uu_level == "U" || $uu_level=="M" || $uu_level=="Z" ) ) || ($u_level == "S")) echo "<BR><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"$t[chat_msg110]\">";
 				echo "</FORM>\n";
 			endif;
 
-			// Fuß der Tabelle
+			// FuÃŸ der Tabelle
 			echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
 
 			// ggf Profil ausgeben, wenn ein externes Profil eingebunden werden soll (Nickname: $uu_nick)

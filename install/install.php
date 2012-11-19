@@ -41,15 +41,15 @@ switch ($aktion)
                 	if ($chat['user']=="")
        	               		echo "<tr style=\"color:red; font-weigth:bold;\"><td>Bitte tragen Sie den Datenbankuser ein!</td></tr>\n";
                		if ($chat['pass']!=$chat['pass2'])
-                       		echo "<tr style=\"color:red; font-weigth:bold;\"><td>Das Passwort stimmt nicht überein!</td></tr>\n";
+                       		echo "<tr style=\"color:red; font-weigth:bold;\"><td>Das Passwort stimmt nicht Ã¼berein!</td></tr>\n";
                 	if ($chat['webmaster']=="")
        	                	echo "<tr style=\"color:red; font-weigth:bold;\"><td>Bitte tragen Sie einen Webmaster ein!</td></tr>\n";
 			if ((!preg_match ($regexemail,$chat['webmaster']))&&($chat['webmaster']!=""))
-				echo "<tr style=\"color:red; font-weigth:bold;\"><td>Ungültige Email-Adresse Webmaster!</td></tr>\n";
+				echo "<tr style=\"color:red; font-weigth:bold;\"><td>UngÃ¼ltige Email-Adresse Webmaster!</td></tr>\n";
                 	if ($chat['hackmail']=="")
-       	                	echo "<tr style=\"color:red; font-weigth:bold;\"><td>Bitte tragen Sie eine zutändige Person bei Hackversuchen ein!</td></tr>\n";
+       	                	echo "<tr style=\"color:red; font-weigth:bold;\"><td>Bitte tragen Sie eine zutÃ¤ndige Person bei Hackversuchen ein!</td></tr>\n";
 			if ((!preg_match ($regexemail,$chat['hackmail']))&&($chat['hackmail']!=""))
-                       	        echo "<tr style=\"color:red; font-weigth:bold;\"><td>Ungültige Email-Adresse Hackmail!</td></tr>\n";
+                       	        echo "<tr style=\"color:red; font-weigth:bold;\"><td>UngÃ¼ltige Email-Adresse Hackmail!</td></tr>\n";
                 	if ($chat['chatname']=="")
        	                	echo "<tr style=\"color:red; font-weigth:bold;\"><td>Bitte tragen Sie den Chatnamen ein!</td></tr>\n";
 			echo "<tr><td colspan=\"2\"><br><br></td></tr></table>\n";
@@ -62,7 +62,7 @@ switch ($aktion)
 		        {
 	             		echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" border=\"0\" align=\"center\">\n".
 			             "<tr bgcolor=\"#007ABE\"><td colspan=\"2\" style=\"font-size:15px; text-align:center;color:White;\"><B>FEHLER</b></td></tr>\n".
-        		             "<tr style=\"color:red;font-weigth:bold;\"><td>Die Konfigurationsdatei konnte nicht angelegt werden. Überprüfen Sie die Schreibrechte im Verzeichnis conf!</td></tr>\n".
+        		             "<tr style=\"color:red;font-weigth:bold;\"><td>Die Konfigurationsdatei konnte nicht angelegt werden. ÃœberprÃ¼fen Sie die Schreibrechte im Verzeichnis conf!</td></tr>\n".
 				     "<tr><td colspan=\"2\"><br><br></td></tr></table>\n";
                 		step_1();
 		        }

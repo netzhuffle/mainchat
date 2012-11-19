@@ -12,7 +12,7 @@ id_lese($id);
 function show_pfad_posting2($th_id) {
 
         global $conn, $f1, $f2, $f3, $f4, $id, $http_host, $thread;
-        //Infos über Forum und Thema holen
+        //Infos Ã¼ber Forum und Thema holen
         $sql = "select fo_id, fo_name, th_name
                 from forum, thema
                 where th_id = $th_id
@@ -534,8 +534,8 @@ aktualisiere_online($u_id,$o_raum);
 
 if (strlen($u_id)>0):
 
-	// Menü als erstes ausgeben
-	$box=$ft0."$chat Menü".$ft1;
+	// MenÃ¼ als erstes ausgeben
+	$box=$ft0."$chat MenÃ¼".$ft1;
 	$text="<A HREF=\"forum-suche.php?http_host=$http_host&id=$id\">$t[menue1]</A>\n";
 
 	show_box2 ($box,$text,"100%");
@@ -560,7 +560,7 @@ else:
 endif;
 
 
-// Fuß
+// FuÃŸ
 if ($o_js):
 	echo $f1."<P ALIGN=CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</P>".$f2."\n";
 endif;

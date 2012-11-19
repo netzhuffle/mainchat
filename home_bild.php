@@ -4,8 +4,8 @@
 // $Id: home_bild.php,v 1.7 2012/10/17 06:16:53 student Exp $
 
 // Liefert ein Bild inkl. Header zur direkten Darstellung im Browser
-// Übergabeparameter:	http_host -> Virtueller Host des Chats
-//			u_id -> User, zu dem das Bild gehört
+// Ãœbergabeparameter:	http_host -> Virtueller Host des Chats
+//			u_id -> User, zu dem das Bild gehÃ¶rt
 //			feld -> Feldname in der DB
 
 require_once("functions-registerglobals.php");
@@ -61,7 +61,7 @@ if ($check_np_referer == "1")
                 exit;
                 }
 
-// Überprüfen, ob ein gecached Bild vorhanden ist
+// ÃœberprÃ¼fen, ob ein gecached Bild vorhanden ist
 $cachepfad=$cache."/".$http_host."/".substr($u_id,0,2)."/".$u_id."/".$feld;
 #print "$cachepfad <br />\n\n";
 
@@ -74,11 +74,11 @@ for($c=0; $c++<50 AND !$conn; )
          usleep(200000);
 }
 if ( !$conn) {
- echo "Beim Zugriff auf die Datenbank ist ein Fehler aufgetreten. Bitte versuchen Sie es später nocheinmal!<BR>";
+ echo "Beim Zugriff auf die Datenbank ist ein Fehler aufgetreten. Bitte versuchen Sie es spÃ¤ter nocheinmal!<BR>";
  exit;
 }
 
-// Prüfe ob User existiert und NP aktiviert ist
+// PrÃ¼fe ob User existiert und NP aktiviert ist
 $query="SELECT u_chathomepage FROM user WHERE u_id=$u_id ";
 $result=mysql_query($query, $conn);
 if ($result && mysql_num_rows($result)==1) 
@@ -100,9 +100,9 @@ $anzeigeauscache = false;
 if (file_exists($cachepfad)) 
 {
 	// Datei ist da
-	// Prüfe ob Größe mit der in DB übereinstimmt
+	// PrÃ¼fe ob GrÃ¶ÃŸe mit der in DB Ã¼bereinstimmt
 	
-	// Hole Größe
+	// Hole GrÃ¶ÃŸe
 	$image = getimagesize($cachepfad);
 	if (is_array($image))
 	{
@@ -116,7 +116,7 @@ if (file_exists($cachepfad))
 			default: $image[2] = "";			
 		}
 			
-		// Größen aus DB
+		// GrÃ¶ÃŸen aus DB
 		$query="SELECT b_width, b_height, b_mime FROM bild WHERE b_user=$u_id AND b_name='$feld'";
 		$result=mysql_query($query, $conn);
 		if ($result && mysql_num_rows($result)==1) 
@@ -148,7 +148,7 @@ if ($anzeigeauscache)
 		fclose($datei);
 	};
 
-	// Alte Daten löschen (mit 0,1% Wahrscheinlichkeit)
+	// Alte Daten lÃ¶schen (mit 0,1% Wahrscheinlichkeit)
         if (mt_rand(1,1000)==1) {
 		$befehl="find ".$cache."/ -mtime +1 -exec rm {} \;";
 		exec($befehl);

@@ -12,13 +12,13 @@ id_lese($id);
 
 $fenster=str_replace("+","",$u_nick);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 // Kopf ausgeben
 ?>
@@ -68,7 +68,7 @@ aktualisiere_online($u_id,$o_raum);
 
 $admin = (($u_level == "C") || ($u_level == "S"));
 
-// Browser prüfen
+// Browser prÃ¼fen
 if (ist_netscape()) 
 {
         $eingabe_breite=40;
@@ -83,8 +83,8 @@ if (ist_netscape())
 
 if ($u_id && $communityfeatures && $u_level!="G") 
 {	
-	// Menü als erstes ausgeben
-	$box = $ft0."Menü Umfrage".$ft1;
+	// MenÃ¼ als erstes ausgeben
+	$box = $ft0."MenÃ¼ Umfrage".$ft1;
 
 	if (isset($adminuebersicht) && $adminuebersicht == "1" && $admin)
 	{
@@ -96,9 +96,9 @@ if ($u_id && $communityfeatures && $u_level!="G")
 		$adminuebersicht = 0;
 	}
 		
-	$text = "<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=\">Übersicht</A>\n|\n".
+	$text = "<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=\">Ãœbersicht</A>\n|\n".
         	"<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=umfragen_aktuell\">Aktuelle Umfragen</A>\n|\n".
-	        "<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=umfragen_zukunft\">Zukünftige Umfragen</A>\n|\n".
+	        "<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=umfragen_zukunft\">ZukÃ¼nftige Umfragen</A>\n|\n".
 	        "<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=umfragen_abgeschlossen\">Abgeschlossene Umfragen</A>\n|\n".
        		"<A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=community\">Hilfe</A>\n";
 
@@ -117,7 +117,7 @@ if ($u_id && $communityfeatures && $u_level!="G")
 		break;
 		
 	case "umfrage":
-		// berechtigungen prüfen
+		// berechtigungen prÃ¼fen
 		// zeiten 1-4
 		// punkte funktion, da link nicht angezeigt werden sollte
 		// erster login funktion, da link nicht angezeigt werden sollte
@@ -147,7 +147,7 @@ if ($u_id && $communityfeatures && $u_level!="G")
 	}
 
 } elseif ($u_level=="G") {
-	echo "<P><B>Fehler:</B> Als Gast stehen Ihnen die Umfragen nicht zur Verfügung.</P>";
+	echo "<P><B>Fehler:</B> Als Gast stehen Ihnen die Umfragen nicht zur VerfÃ¼gung.</P>";
 } else {
 	echo "<P><B>Fehler:</B> Beim Aufruf dieser Seite ist ein Fehler aufgetreten.</P>";
 }

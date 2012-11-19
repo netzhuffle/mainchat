@@ -11,7 +11,7 @@ Sollten Sie den mainChat nur updaten wollen, so lesen Sie bitte LIESMICH.UPDATE
 
 1. Installation mainChat
 
-mainChat benötigt folgende Komponenten:
+mainChat benÃ¶tigt folgende Komponenten:
 - mysql  (http://www.mysql.com/)
 - php4/5 (http://www.php.net/)
 - apache (http://www.apache.org/)
@@ -23,10 +23,10 @@ apache 1.3.x oder apache 2.0.x (diese Anleitung bezieht sich auf 1.3.x)
 gdlib mit GIF-Support (nur in der Community-Version)
 
 Es ist aber anzuraten, die jeweils aktuellste Version der jeweiligen
-Programmpakete zu verwenden. Außerdem ist das vorkompilierte mysql-Paket um
+Programmpakete zu verwenden. AuÃŸerdem ist das vorkompilierte mysql-Paket um
 ca. Faktor 3 schneller als die selbstkompilierte Version.
 
-mySQL ist nach der enthaltenden Dokumentation schnell installiert. Für
+mySQL ist nach der enthaltenden Dokumentation schnell installiert. FÃ¼r
 die Installation von php+apache empfehlen wir die Befolgung der Tips in der
 INSTALL-Datei im php-Packet:
 
@@ -45,9 +45,9 @@ cd ../apache_1.3.6
 make
 
 
-Nachdem mySQL gemäß der enthaltenen Dokumentation installiert wurde, muß der
-User www (oder wwwrun), unter dem der apache läuft, auf die DB zugreifen
-können. Das ist schnell erledigt:
+Nachdem mySQL gemÃ¤ÃŸ der enthaltenen Dokumentation installiert wurde, muss der
+User www (oder wwwrun), unter dem der apache lÃ¤uft, auf die DB zugreifen
+kÃ¶nnen. Das ist schnell erledigt:
 
 > mysql mysql
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -58,13 +58,13 @@ mysql> quit
 > mysqladmin reload
 
 
-In der Konfiguration des WWW-Servers in httpd.conf oder srm.conf muß für den
-WWW-Server folgendes ergänzt werden:
+In der Konfiguration des WWW-Servers in httpd.conf oder srm.conf muss fÃ¼r den
+WWW-Server folgendes ergÃ¤nzt werden:
 
 DirectoryIndex index.php
 
-Es empfiehlt sich, den Webserver für den Chat als "Name Based Virtual Host" in
-der httpd.conf einzurichten. "chat.main.de" muß natürlich durch Ihren
+Es empfiehlt sich, den Webserver fÃ¼r den Chat als "Name Based Virtual Host" in
+der httpd.conf einzurichten. "chat.main.de" muss natÃ¼rlich durch Ihren
 virtuellen Hostnamen ersetzt werden:
 
 <VirtualHost chat.beispieldomain.de>
@@ -80,7 +80,7 @@ virtuellen Hostnamen ersetzt werden:
     php_value output_buffering 0
 </VirtualHost>
 
-Die php-Direktiven können auch über eine ".htaccess"-Datei mit diesem Inhalt
+Die php-Direktiven kÃ¶nnen auch Ã¼ber eine ".htaccess"-Datei mit diesem Inhalt
 gesetzt werden:
 
 php_flag  magic_quotes_gpc  On
@@ -88,64 +88,64 @@ php_flag  short_open_tag On
 php_value output_buffering 0
 DirectoryIndex index.php
 
-Es ist darauf zu achten, der User, unter dem der Apache läuft auch Schreibbe-
-berechtigung im Documentroot hat. Dazu empfiehlt sich, in der httpd.conf für
-User und Group jeweils "www" zu verwenden. Der User und die Gruppe müssen
-selbstverständlich in den entsprechenden Dateien auf Ihrem System angelegt
-sein (User für den Apache-Prozess ist meistens www, wwwrun oder apache).
+Es ist darauf zu achten, der User, unter dem der Apache lÃ¤uft auch Schreibbe-
+berechtigung im Documentroot hat. Dazu empfiehlt sich, in der httpd.conf fÃ¼r
+User und Group jeweils "www" zu verwenden. Der User und die Gruppe mÃ¼ssen
+selbstverstÃ¤ndlich in den entsprechenden Dateien auf Ihrem System angelegt
+sein (User fÃ¼r den Apache-Prozess ist meistens www, wwwrun oder apache).
 
-Das Ausführen von "chown -R www.www *" und "chmod -R ug+w *" im Documentroot 
+Das AusfÃ¼hren von "chown -R www.www *" und "chmod -R ug+w *" im Documentroot 
 ist auch noch zu empfehlen. Dadurch ist sichergestellt, dass die Logdateien
-für den mainChat geschrieben werden können.
+fÃ¼r den mainChat geschrieben werden kÃ¶nnen.
 
 In die crontab des Users www ist dann noch folgender Job einzutragen:
 "0-59  0-23 * * *  /usr/bin/lynx -dump http://localhost/expire.php > /dev/null"
 
-Nach der Änderung muß der httpd die Konfigdatei neu mit einem SIGHUP einlesen:
+Nach der Ã„nderung muss der httpd die Konfigdatei neu mit einem SIGHUP einlesen:
 killall -HUP httpd
 
-Bitte bedenken Sie daß ein solcher SIHUP an den WWW-Server die Ausgabe von
-User die sich gerade im Chat befinden unterbricht und daß Scripte die
-Logfiles rotieren oder den WWW-Server neu starten diese SIGHUPS auslösen.
-Stellen Sie daher bitte sicher daß im Normalbetrieb nur Nachts zu
-unbedenklichen Zeiten ein SIGUP ausgelöst wird um Probleme im Chat zu
+Bitte bedenken Sie daÃŸ ein solcher SIHUP an den WWW-Server die Ausgabe von
+User die sich gerade im Chat befinden unterbricht und daÃŸ Scripte die
+Logfiles rotieren oder den WWW-Server neu starten diese SIGHUPS auslÃ¶sen.
+Stellen Sie daher bitte sicher daÃŸ im Normalbetrieb nur Nachts zu
+unbedenklichen Zeiten ein SIGUP ausgelÃ¶st wird um Probleme im Chat zu
 vermeiden.
 
 Die Dateien des mainChat werden einfach im Serverroot des WWW-Servers
-ausgepackt. Alle Pfade sind relativ, so daß mainChat in jedem Verzeichnis
-läuft.
+ausgepackt. Alle Pfade sind relativ, so daÃŸ mainChat in jedem Verzeichnis
+lÃ¤uft.
 
 
-Für die Installation der Datenbank gibt es zwei Möglichkeiten:
+FÃ¼r die Installation der Datenbank gibt es zwei MÃ¶glichkeiten:
 
 a) Mit dem Installationsprogramm
    Einfach im Browser
    chat/install/install.php
-   aufrufen. Nach dem Ausfüllen der Pflichtfelder läuft der Chat.
+   aufrufen. Nach dem AusfÃ¼llen der Pflichtfelder lÃ¤uft der Chat.
 
 b) Per Hand:
 
-Als erstes muß die Datenbank mainchat angelegt werden. Dies geschieht 
-folgendermaßen:
+Als erstes muss die Datenbank mainchat angelegt werden. Dies geschieht 
+folgendermaÃŸen:
 
 $ mysqladmin create mainchat
 $ mysql mainchat < mysql.def
 
 Dabei wird sowohl die Datenbank als auch die Tabellendefinitionen angelegt. 
-Hiermit wird der User "admin" mit dem Paßwort "admin" erzeugt. Über diesen 
-Benutzer können dann alle Einstellungen in der mainChat-Datenbank gepflegt 
+Hiermit wird der User "admin" mit dem PaÃŸwort "admin" erzeugt. Ãœber diesen 
+Benutzer kÃ¶nnen dann alle Einstellungen in der mainChat-Datenbank gepflegt 
 werden. Die Datei mysql.def ist im Verzeichnis dok des mainchat-Archivs zu
 finden.
 
-In der Datei mysql.def sind sämtliche Felder der verwendeten Tabellen 
+In der Datei mysql.def sind sÃ¤mtliche Felder der verwendeten Tabellen 
 dokumentiert. Bitte lesen Sie zuerst dort nach, wenn Sie Fragen zur
 Datenbank haben.
 
-Nun können Sie sich via Browser (Mozilla, Opera, Netscape oder Explorer im
-mainChat als User "admin" mit dem Paßwort "admin" als SuperUser anmelden und
-sich mit den erweiterten Möglichkeiten eines Admins vertraut machen.
+Nun kÃ¶nnen Sie sich via Browser (Mozilla, Opera, Netscape oder Explorer im
+mainChat als User "admin" mit dem PaÃŸwort "admin" als SuperUser anmelden und
+sich mit den erweiterten MÃ¶glichkeiten eines Admins vertraut machen.
 
-Für die Erstellung der Statistiken wird eine eigene Datenbank benötigt.
+FÃ¼r die Erstellung der Statistiken wird eine eigene Datenbank benÃ¶tigt.
 Gehen Sie analog zur mainchat-Datenbank vor:
 
 $ mysqladmin create statistiken
@@ -155,13 +155,13 @@ Die Einstellungen zur Statistik-Datenbank werden in der conf/config.php
 vorgenommen.
 
 In der Community-Version werden die Bilder der Mitglieder in der Datenbank
-gespeichert, aber aus Performancegründen im Dateisystem temporär
+gespeichert, aber aus PerformancegrÃ¼nden im Dateisystem temporÃ¤r
 gespeichert. Daher muss das Verzeichnis home_bild im Chat-Hauptverzeichnis
-enthalten und für den Apache-Prozess beschreibbar sein. Falls das
+enthalten und fÃ¼r den Apache-Prozess beschreibbar sein. Falls das
 Verzeichnis nicht beschreibbar ist, werden statt der Bilder der Mitglieder
-nur defekte Bilder angezeigt. Der User für diesen Prozess ist meistens
+nur defekte Bilder angezeigt. Der User fÃ¼r diesen Prozess ist meistens
 apache, www oder wwwrun. Unter Linux setzt man die Rechte wie in diesem
-Beispiel für den User www:
+Beispiel fÃ¼r den User www:
 
 $ chmod u+rxw home_bild; chown www home_bild
 
@@ -194,72 +194,72 @@ korrekt.
 
 2. Konfiguration mainChat
 
-Ohne Aufruf des Installationsprogramms install.php müssen Sie die 
+Ohne Aufruf des Installationsprogramms install.php mÃ¼ssen Sie die 
 Datei conf/config.php-tpl nach conf/config.php umbennen. Diese Datei 
 konfigurieren Sie per Hand in einem Editor. 
 Auch wenn die Datei config.php vorhanden ist, ist zwingend eine config.php
 Datei aus dem obigen Beispiel noetig. (z.B.
 config.php-chat.beispieldomain.de mit minimalinhalt <?php ?>)
 
-Die Datei config.php enthält folgende wichtige Variablen:
+Die Datei config.php enthÃ¤lt folgende wichtige Variablen:
 
 $dbase		Die verwendete Datenbank. Immer "mainchat"
 $mysqlhost	Name des Datenbankservers. Hier den Rechnernamen eintragen.
-                Bei lokaler Datenbank genügt "localhost".
+                Bei lokaler Datenbank genÃ¼gt "localhost".
 $mysqluser	Name des Datenbankusers. Immer "www".
-$webmaster	E-Mail Adresse der zuständigen Person. Bitte eintragen.
+$webmaster	E-Mail Adresse der zustÃ¤ndigen Person. Bitte eintragen.
 
-$ivw		URL zum Zählmodul. Sollte angepaßt oder leer gelassen werden.
+$ivw		URL zum ZÃ¤hlmodul. Sollte angepaÃŸt oder leer gelassen werden.
 
 
 Definition der Farben:
 
-Hiermit können Sie das Layout des Chat auf Ihre CI anpassen. Die
-Variablennamen sollten eigentlich selbsterklärend sein. Wir empfehlen den
+Hiermit kÃ¶nnen Sie das Layout des Chat auf Ihre CI anpassen. Die
+Variablennamen sollten eigentlich selbsterklÃ¤rend sein. Wir empfehlen den
 Login in den Chat in einem Browser und das gleichzeitige Editieren der
 Variablen. Bei direktem Vergleich zwischen Konfiguration und Browser ist die
-Einstellung der Farben einfacher. Bitte beachten Sie daß die Farben in
-HTML-Syntax, also hexadezimal als Rot-Grün-Blau eingegeben werden. Falls Sie
-die Farben nicht selbst ermitteln können empfehlen wir die Benutzung eines
+Einstellung der Farben einfacher. Bitte beachten Sie daÃŸ die Farben in
+HTML-Syntax, also hexadezimal als Rot-GrÃ¼n-Blau eingegeben werden. Falls Sie
+die Farben nicht selbst ermitteln kÃ¶nnen empfehlen wir die Benutzung eines
 Farbauswahlmenues in Homesite.
 
 
 Definition der Benutzer-Gruppen. Wir empfehlen diese Liste nicht zu
-verändern:
+verÃ¤ndern:
 
-Level A: Admin(temp) - Der Admin-Status gilt nur bus zum nächsten Login
+Level A: Admin(temp) - Der Admin-Status gilt nur bus zum nÃ¤chsten Login
 Level M: Moderator - Erweitere Ansicht mit Moderationsfunktionen
 Level C: ChatAdmin - Der normale Administrator
 
 Level G: Gast - Diese User werden automatisch nach einigen Minuten nach dem
-         Login gelöscht
-Level S: Superuser - User dieser Gruppe dürfen zusätzlich zu den Rechten des
+         Login gelÃ¶scht
+Level S: Superuser - User dieser Gruppe dÃ¼rfen zusÃ¤tzlich zu den Rechten des
          ChatAdmins andere User zum ChatAdmin oder Superuser ernennen
 Level U: User - normaler User
 Level Z: Gesperrt - Der Login wird abgewiesen
 
-ChatAdmins und Superuser können User verändern und Rechner vom Chat
+ChatAdmins und Superuser kÃ¶nnen User verÃ¤ndern und Rechner vom Chat
 aussperren. Ein Superuser kann andere User zu ChatAdmins oder Superuser
-ändern, ein ChatAdmin kann dies nicht. Gast und User sind auch gleichwertig,
-außer das ein Gast nach dem Logoff gelöscht wird. Ein User, der auf
+Ã¤ndern, ein ChatAdmin kann dies nicht. Gast und User sind auch gleichwertig,
+auÃŸer das ein Gast nach dem Logoff gelÃ¶scht wird. Ein User, der auf
 "Gesperrt" gesetzt wird, kann sich nicht mehr im mainChat anmelden. 
 
 Im Verzeichnis conf/ finden Sie Konfigurationsdateien mit den Texten, die im
 mainChat Verwendung finden. Die Texte sind bis auf die Platzhalter (%TEXT%)
-änderbar.
+Ã¤nderbar.
 
 3. Betrieb
-Bitte beachten Sie, daß alle Verzeichniss und die Logdateien, die von
-mainChat beschrieben werden, auch für den User www oder wwwrun beschreibbar
+Bitte beachten Sie, daÃŸ alle Verzeichniss und die Logdateien, die von
+mainChat beschrieben werden, auch fÃ¼r den User www oder wwwrun beschreibbar
 sind!
 
-Der Expire löscht die alten Daten aus der Datenbank, loggt User nach dem
+Der Expire lÃ¶scht die alten Daten aus der Datenbank, loggt User nach dem
 Timeout aus und erstellt die Statistiken, die Sie im Verzeichnis
-"statistiken" aufgeschlüsselt nach Tag, Uhrzeit oder virtuellem Host abrufen
-können.
+"statistiken" aufgeschlÃ¼sselt nach Tag, Uhrzeit oder virtuellem Host abrufen
+kÃ¶nnen.
 
-Falls Sie schließlich auch in www.webchat.de oder anderen Angeboten mit
-Ihren mainChat gelistet werden möchten, liefert Ihnen die Datei
+Falls Sie schlieÃŸlich auch in www.webchat.de oder anderen Angeboten mit
+Ihren mainChat gelistet werden mÃ¶chten, liefert Ihnen die Datei
 userliste.php eine kompatible Userliste.
 
 
@@ -272,11 +272,11 @@ online, wenn Sie die MYSQL-Datenbank auf einem zweiten Server betreiben.
 4.2 Einsatz einer des vorcompilierten MySQL-Binary (Download unter www.mysql.com)
 
 4.3 Der Apache sollte selbst compiliert werden, um mehr als 256 Prozesse zu
-ermöglichen (Patch der Apache-Sourcen notwendig). Hierbei sollten alle
-überflüssigen Module (z.B: mod_proxy, mod_gzip, o.ä.) deaktiviert werden.
+ermÃ¶glichen (Patch der Apache-Sourcen notwendig). Hierbei sollten alle
+Ã¼berflÃ¼ssigen Module (z.B: mod_proxy, mod_gzip, o.Ã¤.) deaktiviert werden.
 
 4.4 Verwenden einer optimierten Apache-Configurations-Datei. Z.B. hiermit 
-läuft bereits der Chat. Bei 1700 Clients ist der PHP-Accelerator und 
+lÃ¤uft bereits der Chat. Bei 1700 Clients ist der PHP-Accelerator und 
 2 GB Ram erforderlich:
 
 ServerRoot "/usr/local/apache"
@@ -314,7 +314,7 @@ Kenntnisse im Bereich des Systems und TCP/IP voraus. Die vom mainChat
 verwendeten Applikationen MySQL, Apache und PHP-Accelerator sollten nur von
 erfahrenen Unix-Administratoren neu installiert werden.
 
-Wir wünschen Ihnen viel Erfolg mit dem mainChat!
+Wir wÃ¼nschen Ihnen viel Erfolg mit dem mainChat!
 
 
 PS: Bei Fragen oder Problemen wenden Sie sich an die Mainchat Community

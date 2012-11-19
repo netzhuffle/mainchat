@@ -67,7 +67,7 @@ if (strlen($u_id)!=0):
 //			     "   stdparm=''; stdparm2=''; id=''; http_host=''; u_nick=''; raum=''; nlink=''; nick=''; url='';\n".
 			     "</SCRIPT>\n";
 
-		} else {  // kein javascript verfügbar
+		} else {  // kein javascript verfÃ¼gbar
 
 			// Array mit Smilies einlesen, HTML-Tabelle ausgeben
 			reset($smilie); $schalt=TRUE;

@@ -11,7 +11,7 @@ require ("conf/deutsch.php-smilies-grafik.php");
 id_lese($id);
 
 
-// optional Konfiguration für smilies lesen
+// optional Konfiguration fÃ¼r smilies lesen
 if (isset($smiles_config) && $smilies_config && file_exists("conf/".$smilies_config)):
 	unset($smilie);
 	unset($smilietxt);
@@ -87,7 +87,7 @@ if (strlen($u_id)!=0):
 //			     "   stdparm=''; stdparm2=''; id=''; http_host=''; u_nick=''; raum=''; nlink=''; nick=''; url='';\n".
 			     "</SCRIPT>\n";
 			echo "<tr><td colspan=\"2\">&nbsp;</td></tr><tr><td colspan=\"2\" align=\"center\"><a href=# onClick=\"window.close()\">$f3 Fenster schliessen $f4</a></td></tr>\n";
-		} else {  // kein javascript verfügbar
+		} else {  // kein javascript verfÃ¼gbar
 
 			// Array mit Smilies einlesen, HTML-Tabelle ausgeben
 			reset($smilie); $schalt=TRUE;

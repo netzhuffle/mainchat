@@ -8,13 +8,13 @@ require ("functions.php-hash.php");
 
 $fenster=str_replace("+","",$ui_userid);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 	?>
 <HTML>

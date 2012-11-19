@@ -14,13 +14,13 @@ aktualisiere_online($u_id,$o_raum);
 
 $fenster=str_replace("+","",$u_nick);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 // Kopf ausgeben
 ?>
@@ -65,8 +65,8 @@ echo $body_tag;
 // Menue ausgeben
 
 
-// Menü als erstes ausgeben
-$box = $ft0."Menü Top10".$ft1;
+// MenÃ¼ als erstes ausgeben
+$box = $ft0."MenÃ¼ Top10".$ft1;
 $text = "<A HREF=\"top10.php?http_host=$http_host&id=$id&aktion=top10\">Top 10</A>\n";
 $text.= "| <A HREF=\"top10.php?http_host=$http_host&id=$id&aktion=top100\">Top 100</A>\n";
 $text.= "| <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=community#punkte\">Hilfe</A>\n";
@@ -108,7 +108,7 @@ if ($erweitertefeatures) {
 			"&nbsp;&nbsp;&nbsp;&nbsp;Gesamtpunkte</DIV></TD></TR></TABLE>\n";
 
 
-	// im Cache nachsehen, ob aktuelle Daten vorhanden sind (nicht älter als 6 Stunden)
+	// im Cache nachsehen, ob aktuelle Daten vorhanden sind (nicht Ã¤lter als 6 Stunden)
 	$query="select * from top10cache where t_eintrag=1 ".
 		"AND date_add(t_zeit, interval '6' hour)>=NOW()";
 	$result=mysql_query($query, $conn);
@@ -163,7 +163,7 @@ if ($erweitertefeatures) {
 		}
 		@mysql_free_result($result);
 
-		// Daten in Cache schreiben und alle anderen Einträge löschen
+		// Daten in Cache schreiben und alle anderen EintrÃ¤ge lÃ¶schen
 		unset($f);
 		$f['t_eintrag']=1;
 		$f['t_daten']=serialize($array_user);

@@ -23,65 +23,65 @@ function step_1()
 
 	     "<tr bgcolor=\"#007ABE\"><td colspan=\"2\" style=\"font-size:15px;text-align:center;color:White;\"><b>Globale Einstellungen</b></td></tr>\n".
 	     "<tr><td> E-Mail Webmaster:</td><td><input type=\"text\" name=\"chat[webmaster]\" size=\"40\">*</td></tr>\n".
-	     "<tr bgcolor=\"#85D4FF\"><td> Zuständige Person für Hackversuche:</td><td><input type=\"text\" name=\"chat[hackmail]\" size=\"40\">*</td></tr>\n".
+	     "<tr bgcolor=\"#85D4FF\"><td> ZustÃ¤ndige Person fÃ¼r Hackversuche:</td><td><input type=\"text\" name=\"chat[hackmail]\" size=\"40\">*</td></tr>\n".
 	     "<tr><td> Name des Chats:</td><td><input type=\"text\" name=\"chat[chatname]\" size=\"40\">*</td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Voreingestellte Sprachdatei:</td><td><select name=\"chat[language]\">\n".
 	     	"<option value=\"deutsch.php\">Deutsch</option>\n".
 	     	"<option value=\"englisch.php\">Englisch</option>\n".
 	     "</select>".
-	     "<tr><td> Beim Login Auswahl des Raums möglich:</td><td>ja<input type=\"radio\" name=\"chat[raumauswahl]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[raumauswahl]\" value=\"0\"></td></tr>\n".
-	     "<tr bgcolor=\"#85D4FF\"><td> Beim Login Boxen mit Chattern unterdrücken:</td><td>ja<input type=\"radio\" name=\"chat[unterdrueckeraeume]\" value=\"1\">&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[unterdrueckeraeume]\" value=\"0\" checked></td></tr>\n". 
+	     "<tr><td> Beim Login Auswahl des Raums mÃ¶glich:</td><td>ja<input type=\"radio\" name=\"chat[raumauswahl]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[raumauswahl]\" value=\"0\"></td></tr>\n".
+	     "<tr bgcolor=\"#85D4FF\"><td> Beim Login Boxen mit Chattern unterdrÃ¼cken:</td><td>ja<input type=\"radio\" name=\"chat[unterdrueckeraeume]\" value=\"1\">&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[unterdrueckeraeume]\" value=\"0\" checked></td></tr>\n". 
 	     "<tr><td> Lobby (Defaultraum):</td><td><input type=\"text\" name=\"chat[lobby]\" value=\"Lobby\" size=\"40\">*</td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td > Anzeige Indexseite oben:</td><td><input type=\"text\" name=\"chat[layoutkopf]\" size=\"40\"></td></tr>\n".
 	     "<tr><td> Anzeige Indexseite unten:</td><td><input type=\"text\" name=\"chat[layoutfuss]\" size=\"40\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td colspan=\"2\">Metatag:</td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Content-Type:</td><td><input type=\"text\" name=\"chat[contenttype]\" size=\"40\" value=\"text/html; charset=iso-8859-1\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Author:</td><td><input type=\"text\" name=\"chat[author]\" value=\"mainchat@mainmedia.de\" size=\"40\"></td></tr>\n".
-	     "<tr bgcolor=\"#85D4FF\"><td> Description:</td><td><textarea cols=\"30\" rows=\"5\" name=\"chat[description]\">mainChat http://www.mainchat.de - Die HTML-Chat-Community für jede Homepage</textarea></td></tr>\n".
+	     "<tr bgcolor=\"#85D4FF\"><td> Description:</td><td><textarea cols=\"30\" rows=\"5\" name=\"chat[description]\">mainChat http://www.mainchat.de - Die HTML-Chat-Community fÃ¼r jede Homepage</textarea></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Keywords:</td><td><textarea cols=\"30\" rows=\"3\" name=\"chat[keywords]\">Chat Community HTML kostenlos frei Testen Mieten Lizenz</textarea></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Language:</td><td><input type=\"text\" name=\"chat[metalanguage]\" value=\"deutsch, de\" size=\"40\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Date:</td><td><input type=\"text\" name=\"chat[date]\" value=\"08.07.00\" size=\"40\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Expire:</td><td><input type=\"text\" name=\"chat[expire]\" value=\"08.07.01\" size=\"40\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Robots:</td><td><input type=\"text\" name=\"chat[robots1]\" value=\"index\" size=\"40\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Robots:</td><td><input type=\"text\" name=\"chat[robots2]\" value=\"follow\" size=\"40\"></td></tr>\n".
-	     "<tr><td colspan=\"2\">Text für Startseite im Bereich NOFRAMES für Suchmaschinen:</td></tr>\n".
+	     "<tr><td colspan=\"2\">Text fÃ¼r Startseite im Bereich NOFRAMES fÃ¼r Suchmaschinen:</td></tr>\n".
 	     "<tr><td colspan=\"2\"><textarea cols=\"80\" rows=\"5\" name=\"chat[noframes]\"><P><B>mainChat</B> ist die schnelle HTML Chat Community in PHP von \n".
-        	"der <B><A HREF=\"http://www.fidion.de/\">fidion GmbH</A></B> in Würzburg. \n".
+        	"der <B><A HREF=\"http://www.fidion.de/\">fidion GmbH</A></B> in WÃ¼rzburg. \n".
         	"Er wird in einer kostenlosen, einer Miet-Lizenz und einer Lizenz zum Kauf angeboten.<BR>\n".
-        	"<B>Features:</B> Mail, Forum, Punkte, beliebig viele Räume und User, IRC-Befehle, Multihoming, SSL, \n".
-        	"Support für Webchat.de, Smilie-Grafiken (Smilies), Gäste, Administratoren, Top10 / Top100 Listen, \n".
-        	"Freunde, User-Homepages, Profile, Privatnachrichten, öffentliche Nachrichten, Mehrsprachig, \n".
-        	"vordefinierte Sprüche, Nicknamen-Ergänzung, Teergruben, Moderation, Spam-Schutz und vieles mehr.<BR>\n".
+        	"<B>Features:</B> Mail, Forum, Punkte, beliebig viele RÃ¤ume und User, IRC-Befehle, Multihoming, SSL, \n".
+        	"Support fÃ¼r Webchat.de, Smilie-Grafiken (Smilies), GÃ¤ste, Administratoren, Top10 / Top100 Listen, \n".
+        	"Freunde, User-Homepages, Profile, Privatnachrichten, Ã¶ffentliche Nachrichten, Mehrsprachig, \n".
+        	"vordefinierte SprÃ¼che, Nicknamen-ErgÃ¤nzung, Teergruben, Moderation, Spam-Schutz und vieles mehr.<BR>\n".
         	"Weitere Informationen zur <B>mainChat-Community</B> finden Sie auf unserem ".
         	"<B><A HREF=\"http://www.mainchat.de/\">Angebot</A></B>\n".
         	"</P><P ALIGN=\"CENTER\"><A HREF=\"index.php\">weiter</A></P></textarea></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td > Stylesheet:</td><td><textarea cols=\"30\" rows=\"4\" name=\"chat[style]\"><style type=\"text/css\">\n".
                 "td, small, p, b, i, font {font-family:Arial,Helvetica;}\n".
                 "</style>\n</textarea></td></tr>\n". 
-	     "<tr><td> Anonymer Gast-Login möglich:</td><td>ja<input type=\"radio\" name=\"chat[gastlogin]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[gastlogin]\" value=\"0\"></td></tr>\n".
+	     "<tr><td> Anonymer Gast-Login mÃ¶glich:</td><td>ja<input type=\"radio\" name=\"chat[gastlogin]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[gastlogin]\" value=\"0\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td > Beliebig viele Gast-Login von einer IP:</td><td>ja<input type=\"radio\" name=\"chat[gastloginanzahl]\" value=\"1\">&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[gastloginanzahl]\" value=\"0\" checked></td></tr>\n".
-	     "<tr><td> Passwort in DB verschlüsseln:</td><td>ja<input type=\"radio\" name=\"chat[cryptlogin]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[cryptlogin]\" value=\"0\"></td></tr>\n".
-	     "<tr bgcolor=\"#85D4FF\"><td > Erste Buchstabe groß:</td><td>ja<input type=\"radio\" name=\"chat[uppername]\" value=\"1\">&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[uppername]\" value=\"0\" checked></td></tr>\n".
+	     "<tr><td> Passwort in DB verschlÃ¼sseln:</td><td>ja<input type=\"radio\" name=\"chat[cryptlogin]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[cryptlogin]\" value=\"0\"></td></tr>\n".
+	     "<tr bgcolor=\"#85D4FF\"><td > Erste Buchstabe groÃŸ:</td><td>ja<input type=\"radio\" name=\"chat[uppername]\" value=\"1\">&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[uppername]\" value=\"0\" checked></td></tr>\n".
 
              "<tr><td colspan=\"2\"><br><br></td></tr>\n".
 
 	     "<tr bgcolor=\"#007ABE\"><td colspan=\"2\" style=\"font-size:15px; text-align:center;color:White;\"><B>Sonstige Einstellungen</b></td></tr>\n".
-             "<tr><td> Verzeichnis für Logdateien:</td><td><input type=\"text\" name=\"chat[log]\" size=\"40\" value=\"logs\"></td></tr>\n".
-	     "<tr bgcolor=\"#85D4FF\"><td > Datei in der alle Sprüche sind:</td><td><input type=\"text\" name=\"chat[spruchliste]\" size=\"40\" value=\"sprueche.conf\"></td></tr>\n".
-             "<tr><td> Befehl für Traceroute:</td><td><input type=\"text\" name=\"chat[traceroute]\" size=\"40\" value=\"/usr/sbin/traceroute\"></td></tr>\n".
+             "<tr><td> Verzeichnis fÃ¼r Logdateien:</td><td><input type=\"text\" name=\"chat[log]\" size=\"40\" value=\"logs\"></td></tr>\n".
+	     "<tr bgcolor=\"#85D4FF\"><td > Datei in der alle SprÃ¼che sind:</td><td><input type=\"text\" name=\"chat[spruchliste]\" size=\"40\" value=\"sprueche.conf\"></td></tr>\n".
+             "<tr><td> Befehl fÃ¼r Traceroute:</td><td><input type=\"text\" name=\"chat[traceroute]\" size=\"40\" value=\"/usr/sbin/traceroute\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td > Admin zeigen, wer einen Spruch eingegeben hat:</td><td>ja<input type=\"radio\" name=\"chat[showspruch]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[showspruch]\" value=\"0\"></td></tr>\n".
-             "<tr><td> Zusätzliche Adminfeatueres freischalten:</td><td>ja<input type=\"radio\" name=\"chat[adminfeatures]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[adminfeatures]\" value=\"0\"></td></tr>\n". 	     
+             "<tr><td> ZusÃ¤tzliche Adminfeatueres freischalten:</td><td>ja<input type=\"radio\" name=\"chat[adminfeatures]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[adminfeatures]\" value=\"0\"></td></tr>\n". 	     
              "<tr bgcolor=\"#85D4FF\"><td > Lustige Texte einschalten:</td><td>ja<input type=\"radio\" name=\"chat[lustigefeatures]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[lustigefeatures]\" value=\"0\"></td></tr>\n". 	     
              "<tr><td> Erweiterte Funktionen freischalten (Miet- u. Kauflizenz):</td><td>ja<input type=\"radio\" name=\"chat[erfeatures]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[erfeatures]\" value=\"0\"></td></tr>\n".
              "<tr bgcolor=\"#85D4FF\"><td > Communityfeatures:</td><td>ja<input type=\"radio\" name=\"chat[comfeatures]\" value=\"1\">&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[comfeatures]\" value=\"0\" checked></td></tr>\n".
              "<tr><td> Extra Module der Community (Forum):</td><td>ja<input type=\"radio\" name=\"chat[forumfeatures]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[forumfeatures]\" value=\"0\"></td></tr>\n".
-             "<tr bgcolor=\"#85D4FF\"><td > Punktezählung einschalten:</td><td>ja<input type=\"radio\" name=\"chat[punktefeatures]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[punktefeatures]\" value=\"0\"></td></tr>\n".
+             "<tr bgcolor=\"#85D4FF\"><td > PunktezÃ¤hlung einschalten:</td><td>ja<input type=\"radio\" name=\"chat[punktefeatures]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[punktefeatures]\" value=\"0\"></td></tr>\n".
              "<tr><td> Chat versendet SMS:</td><td>ja<input type=\"radio\" name=\"chat[smsfeatures]\" value=\"1\">&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[smsfeatures]\" value=\"0\" checked></td></tr>\n".
              "<tr bgcolor=\"#85D4FF\"><td > Moderationsmodul freigeschalten:</td><td>ja<input type=\"radio\" name=\"chat[modmodul]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[modmodul]\" value=\"0\"></td></tr>\n".
 
              "<tr><td colspan=\"2\"><br><br></td></tr>\n".
 
-	     "<tr bgcolor=\"#007ABE\"><td colspan=\"2\" style=\"font-size:15px; text-align:center;color:White;\"><B>Globale Voreinstellungen für Frames</b></td></tr>\n".
+	     "<tr bgcolor=\"#007ABE\"><td colspan=\"2\" style=\"font-size:15px; text-align:center;color:White;\"><B>Globale Voreinstellungen fÃ¼r Frames</b></td></tr>\n".
 	     "<tr><td> Optionale URL des linken Frames:</td><td><input type=\"text\" name=\"chat[framelinks]\"  size=\"40\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td > Frameset bleibt beim Login in Chat stehen:</td><td>ja<input type=\"radio\" name=\"chat[framesetbleibt]\" size=\"40\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[framesetbleibt]\" size=\"40\"></td></tr>\n".
 
@@ -95,7 +95,7 @@ function step_1()
 
              "<tr><td colspan=\"2\"><br><br></td></tr>\n".
 
-	     "<tr bgcolor=\"#007ABE\"><td colspan=\"2\" style=\"font-size:15px; text-align:center;color:White;\"><B>Einstellungen für das Forum</b></td></tr>\n".
+	     "<tr bgcolor=\"#007ABE\"><td colspan=\"2\" style=\"font-size:15px; text-align:center;color:White;\"><B>Einstellungen fÃ¼r das Forum</b></td></tr>\n".
              "<tr><td> Datenschutzhinweis anzeigen:</td><td>ja<input type=\"radio\" name=\"chat[datenschutz]\" value=\"1\" checked>&nbsp;&nbsp;nein<input type=\"radio\" name=\"chat[datenschutz]\" value=\"0\"></td></tr>\n".
 
 	     "<tr><td colspan=\"2\">Mit * gekennzeichnete Felder sind Pflichtfelder</td></tr>\n".
@@ -150,7 +150,7 @@ function step_2($connect,$select,$chat,$fpconfig)
 	echo "</td></tr>".
 	     "<tr><td colspan=\"2\"><br><br></td></tr>\n";
 
-	echo "<tr><td> Mit <b>Nickname admin und Passwort admin</b> können Sie sich beim ersten Mal anmelden!<br>\n".
+	echo "<tr><td> Mit <b>Nickname admin und Passwort admin</b> kÃ¶nnen Sie sich beim ersten Mal anmelden!<br>\n".
 	     "<a href=\"../index.php\">zum Chat</a></tr></td></table>\n";	
 
 }

@@ -133,8 +133,8 @@ function liste() {
 				}
 				else
 				{					
-					echo "<TD>".$f1."<B>[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=aendern&is_id=$row->is_id\">ƒNDERN</A>]\n".
-						"[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=loeschen&is_id=$row->is_id\">L÷SCHEN</A>]\n";
+					echo "<TD>".$f1."<B>[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=aendern&is_id=$row->is_id\">√ÑNDERN</A>]\n".
+						"[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=loeschen&is_id=$row->is_id\">L√∑SCHEN</A>]\n";
 					if (isset($ip_name) && (strlen($ip_name)>0)):
 						echo "<br>[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=trace&is_id=$row->is_id\">TRACEROUTE</A>]\n";
 					endif;
@@ -156,7 +156,7 @@ function liste() {
 
 			echo "</TABLE>\n";
 
-			// Fuﬂ der Tabelle
+			// Fu√ü der Tabelle
 
 		else:
 			echo "<P ALIGN=CENTER>$t[sonst4]</P>\n";
@@ -241,7 +241,7 @@ if (strlen($u_id)>0 && $admin):
 
 	};
 	
-	// Men¸ als erstes ausgeben
+	// Men√º als erstes ausgeben
 	if (isset($uname)) 
 	{
 		$zusatztxt="'".$uname."'&nbsp;&gt;&gt;&nbsp;";
@@ -252,7 +252,7 @@ if (strlen($u_id)>0 && $admin):
 		$uname = "";
 	}
 	
-	$box=$ft0."$chat Men¸".$ft1;
+	$box=$ft0."$chat Men√º".$ft1;
 	$text="<A HREF=\"sperre.php?http_host=$http_host&id=$id\">$t[menue1]</A>\n".
 		"| <A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=neu\">$t[menue2]</A>\n";
 
@@ -291,7 +291,7 @@ if (strlen($u_id)>0 && $admin):
 	echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
 
 
-	// Soll Datensatz eingetragen oder ge‰ndert werden?
+	// Soll Datensatz eingetragen oder ge√§ndert werden?
 	if ((isset($eintragen)) && ($eintragen==$t['sonst13'])):
 
 		if (!isset($f['is_infotext'])) $f['is_infotext'] = "";
@@ -371,7 +371,7 @@ if (strlen($u_id)>0 && $admin):
 				echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 				echo "<TR><TD>";
 				echo "<A HREF=\"javascript:window.close();\">".
-					"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieﬂen\" ".
+					"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlie√üen\" ".
 					"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 				echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 				echo "</TD></TR></TABLE>\n<PRE>".$f1;
@@ -468,7 +468,7 @@ if (strlen($u_id)>0 && $admin):
 				echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 				echo "<TR><TD>";
 				echo "<A HREF=\"javascript:window.close();\">".
-					"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieﬂen\" ".
+					"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlie√üen\" ".
 					"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 				echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 				echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
@@ -543,7 +543,7 @@ if (strlen($u_id)>0 && $admin):
 
 	case "neu":
 
-		// Werte von [SPERREN] aus Userliste ¸bernehmen, falls vorhanden...
+		// Werte von [SPERREN] aus Userliste √ºbernehmen, falls vorhanden...
 		if (isset($hname)) $f['is_domain']=$hname;
 		elseif (isset($ipaddr)) list($ip1,$ip2,$ip3,$ip4) = preg_split ("/\./",$ipaddr,4);	
 		if (isset($uname)) $f['is_infotext']="Nick ".$uname;
@@ -562,7 +562,7 @@ if (strlen($u_id)>0 && $admin):
 		echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 		echo "<TR><TD>";
 		echo "<A HREF=\"javascript:window.close();\">".
-			"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieﬂen\" ".
+			"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlie√üen\" ".
 			"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 		echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 		echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=1 HEIGHT=13><BR>\n";
@@ -627,7 +627,7 @@ else:
 endif;
 
 
-// Fuﬂ
+// Fu√ü
 if ($o_js):
 	echo $f1."<P ALIGN=CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</P>".$f2."\n";
 endif;

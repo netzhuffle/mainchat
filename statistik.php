@@ -12,16 +12,16 @@ include ("conf/".$sprachconfig."-statistik.php");
 
 // config-bereich
 
-$STAT_TITLE_BACK0 = $farbe_tabelle_kopf;// "#0078BE"; // Farben die für den Rahmen und den Hintergrund der Überschrift und    
-$STAT_TITLE_BACK1 = $farbe_tabelle_koerper; // des Menü verwendet werden sollen. 
-$STAT_BAR_HEIGHT = 300; // Höhe einer Statistiktabelle in Pixel. 
+$STAT_TITLE_BACK0 = $farbe_tabelle_kopf;// "#0078BE"; // Farben die fÃ¼r den Rahmen und den Hintergrund der Ãœberschrift und    
+$STAT_TITLE_BACK1 = $farbe_tabelle_koerper; // des MenÃ¼ verwendet werden sollen. 
+$STAT_BAR_HEIGHT = 300; // HÃ¶he einer Statistiktabelle in Pixel. 
 
-// Hintergründe die für die Statistiktabelle verwendet werden  
+// HintergrÃ¼nde die fÃ¼r die Statistiktabelle verwendet werden  
 $STAT_BAR_BACK0 = "#E5E5E5";
 $STAT_BAR_BACK1 = "#BDC6D5";
 $STAT_BAR_BACK2 = $farbe_tabelle_kopf;
 
-// Images aus denen ein Balken für die Statistik zusammengesetzt werden soll
+// Images aus denen ein Balken fÃ¼r die Statistik zusammengesetzt werden soll
 $STAT_BAR_IMAGE_T = "14,2,pics/bar-t.gif";
 $STAT_BAR_IMAGE_M = "14,2,pics/bar-m.gif";
 $STAT_BAR_IMAGE_B = "14,2,pics/bar-b.gif";
@@ -34,14 +34,14 @@ $STAT_BAR_FONTEND1 = "</SMALL>";
 $STAT_BAR_FONTBEG2 = "<SMALL><B>";
 $STAT_BAR_FONTEND2 = "</B></SMALL>";
 
-// Fontstart und Fontende die zum Anzeigen der Überschrift einer Statistik verwendet werden sollen.                                                          
+// Fontstart und Fontende die zum Anzeigen der Ãœberschrift einer Statistik verwendet werden sollen.                                                          
 $STAT_BAR_FONTBEG3 = "<FONT COLOR=\"#FFFFFF\"><B>";
 $STAT_BAR_FONTEND3 = "</B></FONT>";
 
 
-// Bitte ab hier nichts ändern!
+// Bitte ab hier nichts Ã¤ndern!
 
-// nur admins dürfen Statistik ansehen...
+// nur admins dÃ¼rfen Statistik ansehen...
 if (!$admin || !$erweitertefeatures) return;
 
 $c=@mysql_connect($STAT_DB_HOST, $STAT_DB_USER, $STAT_DB_PASS);
@@ -63,7 +63,7 @@ if (!$c) {
     $fehler=true;
     $msg=$t['statistik4'];
 } else {
-    //testen, ob statisiken überhaupt geschrieben werden:
+    //testen, ob statisiken Ã¼berhaupt geschrieben werden:
     $r1 = mysql_query("SELECT DISTINCT c_host FROM chat WHERE c_host LIKE '$v' ORDER BY c_host");
     if ($r1>0) {
         if (mysql_num_rows($r1)==0) {

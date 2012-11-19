@@ -28,13 +28,13 @@ if (isset($ui_userid) || (isset($aktion) && $aktion != "") || (isset($_SERVER["Q
 
 	$fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 	?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel."_Home"; ?></TITLE>
@@ -90,7 +90,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 	aktualisiere_online($u_id,$o_raum);
 
 
-	// Browser prüfen
+	// Browser prÃ¼fen
 	if (ist_netscape()) {
 	        $eingabe_breite=40;
 	        $eingabe_breite1=49;
@@ -102,14 +102,14 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 	}
 
 	// Voreinstellungen
-	$max_groesse=30;                // Maximale Bild- und Text größe in KB
-        $vor_einstellungen=ARRAY("Straße"=>TRUE,"Tel"=>TRUE,"Fax"=>TRUE,
+	$max_groesse=30;                // Maximale Bild- und Text grÃ¶ÃŸe in KB
+        $vor_einstellungen=ARRAY("StraÃŸe"=>TRUE,"Tel"=>TRUE,"Fax"=>TRUE,
 		"Handy"=>TRUE,"PLZ"=>TRUE,"Ort"=>TRUE,"Land"=>TRUE,"ICQ"=>TRUE,
 		"Hobbies"=>TRUE,"Beruf"=>TRUE,"Geschlecht"=>TRUE,
 		"Geburtsdatum"=>TRUE,"Typ"=>TRUE,"Beziehung"=>TRUE);
 	$farbliste=ARRAY(0=>"bgcolor","info","profil","ui_text","ui_bild1","ui_bild2","ui_bild3","text","link","vlink","aktionen");
 
-	// Farben prüfen Voreinstellungen setzen
+	// Farben prÃ¼fen Voreinstellungen setzen
 	foreach ($farbliste as $val) 
 	{
 	    if (isset($farben) && isset($farben[$val]))
@@ -135,10 +135,10 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 		} elseif(substr($farben[$val],0,-1)=="ui_bild") {
 
 		} elseif(substr($farben[$val],0,1)!="#") {
-			// Raute ergänzen
+			// Raute ergÃ¤nzen
 			$farben[$val]="#".$farben[$val];
 		}
-		// Auf 7 Zeichen kürzen
+		// Auf 7 Zeichen kÃ¼rzen
 		if (substr($farben[$val],0,1)=="#") {
 			$farben[$val]=substr($farben[$val],0,7);
 		}
@@ -149,10 +149,10 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 
 	case "aendern":
 
-		// Userid des Users, dessen Homepage geändert oder angezeigt wird.
+		// Userid des Users, dessen Homepage geÃ¤ndert oder angezeigt wird.
 		$ui_userid=$u_id;
 
-		// Homepage für User $u_id bearbeiten
+		// Homepage fÃ¼r User $u_id bearbeiten
 
 
 		// Body-Tag ausgeben
@@ -167,16 +167,16 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 		echo $body_tag;
 
 
-		// Menü als erstes ausgeben
-		$box = $ft0."Menü Freunde".$ft1;
+		// MenÃ¼ als erstes ausgeben
+		$box = $ft0."MenÃ¼ Freunde".$ft1;
 		$text = "<A HREF=\"home.php?http_host=$http_host&id=$id&ui_userid=$u_id&aktion=&preview=yes\">Meine Homepage zeigen</A>\n".
 			"| <A HREF=\"home.php?http_host=$http_host&id=$id&aktion=aendern\">Meine Homepage bearbeiten</A>\n".
-			"| <A HREF=\"profil.php?http_host=$http_host&id=$id&aktion=aendern\">Profil ändern</A>\n".
+			"| <A HREF=\"profil.php?http_host=$http_host&id=$id&aktion=aendern\">Profil Ã¤ndern</A>\n".
 			"| <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=community#home\">Hilfe</A>\n";
 		
 		show_box2 ($box,$text,"100%");
 
-		// Bild löschen
+		// Bild lÃ¶schen
 		if (isset($loesche) && substr($loesche,0,7) <> "ui_bild")
 		{
 			unset($loesche);
@@ -199,9 +199,9 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 
 
 
-		// Prüfen & in DB schreiben
+		// PrÃ¼fen & in DB schreiben
 		if (isset($home) && is_array($home) && strlen($home['ui_text'])>($max_groesse*1024)) {
-			echo "<P><B>Fehler: </B> Ihr Text ist grösser als $max_groesse!</P>";
+			echo "<P><B>Fehler: </B> Ihr Text ist grÃ¶sser als $max_groesse!</P>";
 			unset($home['ui_text']);
 		}
 
@@ -209,14 +209,14 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 		if (isset($home) && is_array($home) && $home['ui_id']) {
 
 
-			// Einstellungen für Homepage
+			// Einstellungen fÃ¼r Homepage
 			if ($einstellungen['u_chathomepage']=="on") {
 				$einstellungen['u_chathomepage']="J";
 			} else {
 				$einstellungen['u_chathomepage']="N";
 			}
 
-			// Bei Änderung der Einstellung speichern
+			// Bei Ã„nderung der Einstellung speichern
 			if ($einstellungen['u_chathomepage']!=$userdata['u_chathomepage']) {
 				unset($f);
 				$userdata['u_chathomepage']=$einstellungen['u_chathomepage'];
@@ -253,7 +253,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 				$home['ui_farbe']=serialize($farben);
 			}
 
-			// Änderungen in DB schreiben
+			// Ã„nderungen in DB schreiben
 			$ui_id=schreibe_db("userinfo",$home,$home['ui_id'],"ui_id");
 
 		};
@@ -273,7 +273,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 				if (is_array($farbentemp)) $farben=$farbentemp;
 			}
 
-			// Einstellung für u_chathomepage aus Userdaten lesen
+			// Einstellung fÃ¼r u_chathomepage aus Userdaten lesen
 			$einstellungen['u_chathomepage']=$userdata['u_chathomepage'];
 
 			// Bildinfos lesen und in Array speichern
@@ -290,7 +290,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 			}
 			@mysql_free_result($result2);
 			
-			// Hidden Felder für die Farben erzeugen
+			// Hidden Felder fÃ¼r die Farben erzeugen
 			$inputliste = "";
 			foreach ($farbliste as $val) {
 				$inputliste.="<INPUT TYPE=\"HIDDEN\" NAME=\"farben[$val]\" VALUE=\"$farben[$val]\">\n";
@@ -313,7 +313,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 
 			// Erst Profil anlegen
 			echo "<P><B>Hinweis: </B> Sie haben leider noch kein Profil angelegt. Das Profil ".
-				"mit Ihren persönlichen Daten ist aber die Vorraussetzung für die Homepage. ".
+				"mit Ihren persÃ¶nlichen Daten ist aber die Vorraussetzung fÃ¼r die Homepage. ".
 				"Bitte klicken Sie <A HREF=\"profil.php?http_host=$http_host&id=$id&aktion=aendern\">".
 				"weiter zur Anlage eines Profils</A>.</P>\n";
 

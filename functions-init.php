@@ -12,6 +12,7 @@ require "conf/config.php";
 // Liegt lokale Konfigurationsdatei "config.php-http_host" in "conf/" vor? Falls ja einbinden
 if (!(isset($http_host))) $http_host=$_SERVER["HTTP_HOST"];
 $http_host=str_replace(":80","",strtolower($http_host));
+$http_host=str_replace(":8888","",$http_host);
 
 $config="config.php-".$http_host;
 if (file_exists("conf/$config"))
@@ -38,13 +39,13 @@ if ($SSLRedirect == "1")
 		if(!headers_sent()) header('Location: '.$url);
 		die();
 	}
-	// ... für alle Ausgaben einmalig Protokollvariable
+	// ... fÃ¼r alle Ausgaben einmalig Protokollvariable
 	else
 	{
 		$serverprotokoll = 'https';
 	}	
 }
-// Wenn SSL aber nicht zwingend, für alle Ausgaben einmalig Protokollvariable
+// Wenn SSL aber nicht zwingend, fÃ¼r alle Ausgaben einmalig Protokollvariable
 else if	(((isset($_SERVER["HTTPS"]) && ($_SERVER["HTTPS"] == '1' || strtolower($_SERVER["HTTPS"])=='on'))) || $ssl_login)
 {
 	$serverprotokoll = 'https';
@@ -60,7 +61,7 @@ else
 require "conf/$sprachconfig";
 
 
-// Sprachdatei für functions.php einbinden
+// Sprachdatei fÃ¼r functions.php einbinden
 require "conf/".$sprachconfig."-functions.php";
 
 // Liegen lokale Functionen "functions.php-$chat_file" vor? Falls ja einbinden
@@ -77,7 +78,7 @@ if (file_exists("conf/$config")):
 endif;
 
 
-// Falls Texte in Kopfzeilen weiß dargestellt werden sollen, Variable definieren
+// Falls Texte in Kopfzeilen weiÃŸ dargestellt werden sollen, Variable definieren
 if ($farbe_text_weiss==1):
 	$ft0="<FONT COLOR=\"#FFFFFF\">";
 	$ft1="</FONT>";

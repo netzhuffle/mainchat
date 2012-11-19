@@ -14,7 +14,7 @@ id_lese($id);
 aktualisiere_online($u_id,$o_raum);
 
 
-// optional Konfiguration für smilies lesen
+// optional Konfiguration fÃ¼r smilies lesen
 if (isset($smilies_config) && file_exists("conf/".$smilies_config)):
 	unset($smilie);
 	unset($smilietxt);
@@ -82,7 +82,7 @@ if (strlen($u_id)!=0):
 //			     "   stdparm=''; stdparm2=''; id=''; http_host=''; u_nick=''; raum=''; nlink=''; nick=''; url='';\n".
 			     "</SCRIPT>\n";
 
-		} else {  // kein javascript verfügbar
+		} else {  // kein javascript verfÃ¼gbar
 
 			// Array mit Smilies einlesen, HTML-Tabelle ausgeben
 			reset($smilie); $schalt=TRUE;

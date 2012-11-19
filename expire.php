@@ -7,25 +7,25 @@ require ("functions.php");
 umask(700);
 set_time_limit(120);
 
-// Kopf und Fuß definieren
+// Kopf und FuÃŸ definieren
 $kopf_tag="<HTML><HEAD><TITLE>$body_titel</TITLE>$stylesheet</HEAD><BODY><PRE>\n"; 
 $fuss_tag="</PRE></BODY></HTML>\n";
 
 echo $kopf_tag;
 
-// Verzeichnis für Logs definieren
+// Verzeichnis fÃ¼r Logs definieren
 if (strlen($log)==0):
 	$log="logs";
 endif;
 
 
-// Verzeichnis für Logs ggf anlegen
+// Verzeichnis fÃ¼r Logs ggf anlegen
 if (!file_exists($log)):
 	mkdir($log,0700);
 endif;
 
 
-// Chat expire und Kopie in Log für alle öffentlichen Zeilen, die älter als 15 Minuten sind
+// Chat expire und Kopie in Log fÃ¼r alle Ã¶ffentlichen Zeilen, die Ã¤lter als 15 Minuten sind
 echo "Expire Chattexte:\n";
 $query="SELECT *,r_name FROM chat LEFT JOIN raum ON c_raum=r_id ".
 	"WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(c_zeit)) > 900 ".
@@ -65,7 +65,7 @@ if ($rows>0):
 			fclose($handle);
 			chmod($r_name,0700);
 		else:
-			echo "<P><B>Fehler:</B> Kann Logdatei '$r_name' nicht öffnen!</P>\n";      
+			echo "<P><B>Fehler:</B> Kann Logdatei '$r_name' nicht Ã¶ffnen!</P>\n";      
 		endif;
 
 		$loesche.="$row->c_id";
@@ -74,7 +74,7 @@ if ($rows>0):
 	endwhile;
 	mysql_free_result($result);
 
-	// Chat-Zeilen löschen
+	// Chat-Zeilen lÃ¶schen
 	$query="DELETE FROM chat WHERE c_id IN ($loesche)";
 	$result3=mysql_query($query,$conn);
 endif;
@@ -82,7 +82,7 @@ endif;
 
 
 if ($expire_privat):
-	// Chat expire und Kopie in Log für alle privaten Zeilen, die älter als 15 Minuten sind
+	// Chat expire und Kopie in Log fÃ¼r alle privaten Zeilen, die Ã¤lter als 15 Minuten sind
 	$query="SELECT SQL_BUFFER_RESULT * FROM chat ".
 		"WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(c_zeit)) > 900 ".
 		"AND c_typ='P' ".
@@ -115,10 +115,10 @@ if ($expire_privat):
 			fclose($handle);
 			chmod($r_name,0700);
 			else:
-				echo "<P><B>Fehler:</B> Kann Logdatei '".$log."/chat_privatnachrichten' nicht öffnen!</P>\n";      
+				echo "<P><B>Fehler:</B> Kann Logdatei '".$log."/chat_privatnachrichten' nicht Ã¶ffnen!</P>\n";      
 			endif;
 
-			// Chat-Zeile löschen
+			// Chat-Zeile lÃ¶schen
 			$result3=mysql_query("DELETE FROM chat WHERE c_id=$row->c_id",$conn);
 			$i++;
 		endwhile;
@@ -127,7 +127,7 @@ if ($expire_privat):
 
 else:
 
-	// Chat expire für alle privaten Zeilen, die älter als 15 Minuten sind
+	// Chat expire fÃ¼r alle privaten Zeilen, die Ã¤lter als 15 Minuten sind
 	$query="DELETE FROM chat ".
 		"WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(c_zeit)) > 900 ".
 		"AND c_typ='P' ".
@@ -138,8 +138,8 @@ endif;
 
 set_time_limit(120);
 
-// Alle Systemnachrichten löschen
-// Alle leeren Nachrichten löschen
+// Alle Systemnachrichten lÃ¶schen
+// Alle leeren Nachrichten lÃ¶schen
 $query="DELETE FROM chat ".
 	"WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(c_zeit)) > 900 ".
 	"AND c_typ='S' OR c_text='' OR c_text IS NULL OR c_zeit='' OR c_zeit IS NULL";
@@ -147,7 +147,7 @@ $result=mysql_query($query,$conn);
 
 
 
-// User ausloggen, wenn $timeout überschritten wurde
+// User ausloggen, wenn $timeout Ã¼berschritten wurde
 echo "User ausloggen...";
 $query="SELECT SQL_BUFFER_RESULT o_user,o_raum,o_id,o_who,o_name FROM online ".
         "WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) > $timeout";
@@ -167,8 +167,8 @@ endif;
 echo "\n";
 
 
-// Gast-User löschen, falls ausgelogt und älter als 4 Minuten
-echo "Gäste löschen\n";
+// Gast-User lÃ¶schen, falls ausgelogt und Ã¤lter als 4 Minuten
+echo "GÃ¤ste lÃ¶schen\n";
 $query="SELECT SQL_BUFFER_RESULT u_id FROM user left join online on o_user=u_id ".
         "WHERE u_level='G' AND o_id IS NULL ".
 	"AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(u_login)) > 240";
@@ -176,13 +176,13 @@ $result=mysql_query($query,$conn);
 if ($result && mysql_num_rows($result)>0):
 	while($row=mysql_fetch_object($result)):
 
-		// User löschen
+		// User lÃ¶schen
 		$result3=mysql_query("DELETE FROM user WHERE u_id=$row->u_id",$conn);
 
-		// User-Ignore Einträge löschen
+		// User-Ignore EintrÃ¤ge lÃ¶schen
 		$result3=mysql_query("DELETE FROM iignore WHERE i_user_aktiv=$row->u_id OR i_user_passiv=$row->u_id",$conn);
 
-		// Gesperrte Räume löschen
+		// Gesperrte RÃ¤ume lÃ¶schen
 		$query3="DELETE FROM sperre WHERE s_user=$row->u_id"; $result3=mysql_query($query3,$conn);
 
 		$i++;
@@ -191,8 +191,8 @@ endif;
 @mysql_free_result($result);
 
 
-// Leere temporäre Räume löschen, deren Besitzer nicht online ist
-echo "Leere temporäre Räume löschen\n";
+// Leere temporÃ¤re RÃ¤ume lÃ¶schen, deren Besitzer nicht online ist
+echo "Leere temporÃ¤re RÃ¤ume lÃ¶schen\n";
 $query="SELECT SQL_BUFFER_RESULT r_id,r_name FROM raum ".
 	"LEFT JOIN online ON o_user=r_besitzer ".
 	"WHERE r_status2 LIKE 'T' AND o_timestamp IS NULL";
@@ -208,11 +208,11 @@ if ($result && mysql_num_rows($result)>0):
 		if ($result3):
 			if (mysql_num_rows($result3)==0):
 
-				// Raum löschen
+				// Raum lÃ¶schen
 				$query="DELETE FROM raum WHERE r_id=$row->r_id";
 				$result4=mysql_query($query,$conn);
 
-				// Gesperrte Räume löschen
+				// Gesperrte RÃ¤ume lÃ¶schen
 				$query="DELETE FROM sperre WHERE s_raum=$row->r_id";
 				$result4=mysql_query($query,$conn);
 
@@ -224,19 +224,19 @@ if ($result && mysql_num_rows($result)>0):
 	mysql_free_result($result);
 endif;
 
-// Täglicher expire, um  03:10 Uhr
+// TÃ¤glicher expire, um  03:10 Uhr
 $zeit=date("H:i");
 #$zeit="03:10"; #DEBUG
 if ($zeit=="03:10") {
 
-	echo "Täglicher expire\n";
+	echo "TÃ¤glicher expire\n";
 
 	if (!isset($nicknamen_expire) || $nicknamen_expire == 0) { $nicknamen_expire=15724800; }
-	// User löschen, die länger als $nicknamen_expire (config.php default =26 Wochen (=15724800 Sekunden)) nicht online waren
+	// User lÃ¶schen, die lÃ¤nger als $nicknamen_expire (config.php default =26 Wochen (=15724800 Sekunden)) nicht online waren
 	// und nicht auf gesperrt stehen (=Z) und kein Superuser sind (=S)
 	echo "<BR><B>Expire:</B> User "; flush();
 	
-	// Baut den Query, für nicht mehr Expire RB, um
+	// Baut den Query, fÃ¼r nicht mehr Expire RB, um
 	$besitzer = "";
 	$query = "SELECT DISTINCT r_besitzer FROM raum WHERE r_status2 = 'P' ORDER BY r_besitzer";
 	$result=mysql_query($query, $conn);	
@@ -269,26 +269,26 @@ if ($zeit=="03:10") {
 		      ." AND u_level!='Z' AND u_level!='S'";
 	}	
 	
-	// Orginalquery ohne Raumbesitzer Expire wird nimmer benötigt
+	// Orginalquery ohne Raumbesitzer Expire wird nimmer benÃ¶tigt
 	// $query="SELECT SQL_BUFFER_RESULT u_id from user where (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(u_login)) > 15724800 AND u_level!='Z' AND u_level!='S'";
 
 	$result=mysql_query($query,$conn);
 	if ($result){
 		while($row=mysql_fetch_object($result)){
 	
-			// zur sicherheit vor versehentlichem löschen	
+			// zur sicherheit vor versehentlichem lÃ¶schen	
 			if ($row->u_login == 0)
 			{
 				continue;
 			}
 
-			// User löschen
+			// User lÃ¶schen
 			$result3=mysql_query("DELETE FROM user WHERE u_id=$row->u_id",$conn);
 
-			// User-Ignore Einträge löschen
+			// User-Ignore EintrÃ¤ge lÃ¶schen
 			$result3=mysql_query("DELETE FROM iignore WHERE i_user_aktiv=$row->u_id OR i_user_passiv=$row->u_id",$conn);
 
-			// Gesperrte Räume löschen
+			// Gesperrte RÃ¤ume lÃ¶schen
 			$query3="DELETE FROM sperre WHERE s_user=$row->u_id"; $result3=mysql_query($query3,$conn);
 			$i++;
 		};
@@ -296,17 +296,17 @@ if ($zeit=="03:10") {
 	@mysql_free_result($result);
 
 
-	// Lösche alle IP-Sperren, die älter als ein Tag sind
+	// LÃ¶sche alle IP-Sperren, die Ã¤lter als ein Tag sind
 	echo " Sperren "; flush();
 	$query="DELETE from ip_sperre where now()-is_zeit > 36000 AND is_warn!='ja'";
 	$result = mysql_query($query,$conn);
 
-	// Lösche alle Einträge in mail_check (E-Mail für Registrierung), die älter als 7 Tage sind
+	// LÃ¶sche alle EintrÃ¤ge in mail_check (E-Mail fÃ¼r Registrierung), die Ã¤lter als 7 Tage sind
 	echo " mail_check "; flush();
 	$query="DELETE from mail_check where DATE_ADD(datum,INTERVAL 7 DAY)<now()";
 	$result = mysql_query($query,$conn);
 
-	// alle invites löschen, für die es keine User mehr gibt.
+	// alle invites lÃ¶schen, fÃ¼r die es keine User mehr gibt.
 	echo " Einladungen "; flush();
 	$query="SELECT SQL_BUFFER_RESULT inv_id FROM invite LEFT JOIN user on inv_user=u_id WHERE u_id IS NULL";  
 	$result = mysql_query($query,$conn);
@@ -315,7 +315,7 @@ if ($zeit=="03:10") {
 			$result3=mysql_query("DELETE FROM invite WHERE inv_id=".$row->inv_id,$conn);
 	mysql_free_result($result);
 	
-	// alle invites löschen, für die es keine Räume mehr gibt.
+	// alle invites lÃ¶schen, fÃ¼r die es keine RÃ¤ume mehr gibt.
 	$query="SELECT SQL_BUFFER_RESULT inv_id FROM invite LEFT JOIN raum on inv_raum=r_id WHERE r_id IS NULL";  
 	$result = mysql_query($query,$conn);
 	if ($result)
@@ -323,7 +323,7 @@ if ($zeit=="03:10") {
 			$result3=mysql_query("DELETE FROM invite WHERE inv_id=".$row->inv_id,$conn);
 	mysql_free_result($result);
 
-	// alle Bilder löschen, für die es keine User mehr gibt.
+	// alle Bilder lÃ¶schen, fÃ¼r die es keine User mehr gibt.
 	echo " Bilder "; flush();
 	$query="SELECT SQL_BUFFER_RESULT b_id FROM bild LEFT JOIN user on b_user=u_id WHERE u_id IS NULL";  
 	$result = mysql_query($query,$conn);
@@ -332,7 +332,7 @@ if ($zeit=="03:10") {
 			$result3=mysql_query("DELETE FROM bild WHERE b_id=".$row->b_id,$conn);
 	mysql_free_result($result);
 
-	// alle Mails löschen, für die es keine User mehr gibt.
+	// alle Mails lÃ¶schen, fÃ¼r die es keine User mehr gibt.
 	echo " Mails "; flush();
 	$query="SELECT SQL_BUFFER_RESULT m_id FROM mail LEFT JOIN user on m_an_uid=u_id WHERE u_id IS NULL";  
 	$result = mysql_query($query,$conn);
@@ -341,7 +341,7 @@ if ($zeit=="03:10") {
 			$result3=mysql_query("DELETE FROM mail WHERE m_id=".$row->m_id,$conn);
 	mysql_free_result($result);
 
-	// alle Aktionen löschen, für die es keine User mehr gibt.
+	// alle Aktionen lÃ¶schen, fÃ¼r die es keine User mehr gibt.
 	echo " Aktionen "; flush();
 	$query="SELECT SQL_BUFFER_RESULT a_id FROM aktion LEFT JOIN user on a_user=u_id WHERE u_id IS NULL";  
 	$result = mysql_query($query,$conn);
@@ -350,7 +350,7 @@ if ($zeit=="03:10") {
 			$result3=mysql_query("DELETE FROM aktion WHERE a_id=".$row->a_id,$conn);
 	mysql_free_result($result);
 
-	// alle Profile löschen, für die es keine User mehr gibt.
+	// alle Profile lÃ¶schen, fÃ¼r die es keine User mehr gibt.
 	echo " Profile "; flush();
 	$query="SELECT SQL_BUFFER_RESULT ui_id FROM userinfo LEFT JOIN user on ui_userid=u_id WHERE u_id IS NULL";  
 	$result = mysql_query($query,$conn);
@@ -359,7 +359,7 @@ if ($zeit=="03:10") {
 			$result3=mysql_query("DELETE FROM userinfo WHERE ui_id=".$row->ui_id,$conn);
 	mysql_free_result($result);
 
-	// alle User aus der Blacklist löschen, die es nicht mehr gibt.
+	// alle User aus der Blacklist lÃ¶schen, die es nicht mehr gibt.
 	echo " Blacklist "; flush();
 	$query="SELECT SQL_BUFFER_RESULT f_id FROM blacklist LEFT JOIN user on f_blacklistid=u_id WHERE u_id IS NULL;";  
 	$result = mysql_query($query,$conn);
@@ -368,7 +368,7 @@ if ($zeit=="03:10") {
 			$result3=mysql_query("DELETE FROM blacklist WHERE f_id=".$row->f_id,$conn);
 	mysql_free_result($result);
 
-	// alle Ignore löschen, für die es keine User mehr gibt.
+	// alle Ignore lÃ¶schen, fÃ¼r die es keine User mehr gibt.
 	echo " Ignore "; flush();
 	$query="SELECT SQL_BUFFER_RESULT i_id FROM iignore LEFT JOIN user on i_user_aktiv=u_id WHERE u_id IS NULL";  
 	$result = mysql_query($query,$conn);
@@ -439,7 +439,7 @@ if ($zeit=="03:10") {
 			
 			if ($n > 0)
 			{
-					/* Für jeden Virtuellen Host werden die Anzahl der User im Chat	*/
+					/* FÃ¼r jeden Virtuellen Host werden die Anzahl der User im Chat	*/
 					/* aus der OnlineDB geholt.																			*/
 
 				while ($i < $n)
@@ -466,7 +466,7 @@ if ($zeit=="03:10") {
 			}
 		}
 
-			/* Die Anzahl der User im Chat für jeden Virtuellen Host wird	*/
+			/* Die Anzahl der User im Chat fÃ¼r jeden Virtuellen Host wird	*/
 			/* nun in die StatisticDB geschrieben.												*/
 
 		if ((isset($onlinevhosts)) && (count($onlinevhosts) > 0))
@@ -482,7 +482,7 @@ if ($zeit=="03:10") {
 		    
 		    if (!$conn2)
 		    {
-		    	echo "<b>Fehler: Keine Verbindung zum SQL Server für die Statistik</b><br>\n";
+		    	echo "<b>Fehler: Keine Verbindung zum SQL Server fÃ¼r die Statistik</b><br>\n";
 		    }
 		    else
 		    {
@@ -507,7 +507,7 @@ if ($zeit=="03:10") {
 					else
 					{
 							/* Es war bereits ein Eintrag vorhanden. Die Anzahl der	*/
-							/* User wird erneuert wenn sie größer als der alte Wert	*/
+							/* User wird erneuert wenn sie grÃ¶ÃŸer als der alte Wert	*/
 							/* war.																									*/
 
 						$currentnr = @mysql_result($r0, 0, "c_users");

@@ -129,7 +129,7 @@ endif;
 
 
 
-// Menü als erstes ausgeben
+// MenÃ¼ als erstes ausgeben
 $box=$ft0.$t['menue4'].$ft1;
 $text="<A HREF=\"hilfe.php?http_host=$http_host&id=$id\">$t[menue1]</A>\n".
 	"| <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=befehle\">$t[menue2]</A>\n".
@@ -162,12 +162,12 @@ switch($aktion) {
 
 case "befehle":
 
-	// Erklärung zu den Befehlen
+	// ErklÃ¤rung zu den Befehlen
 	$box=$ft0.$t['hilfe0'].$ft1;
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 	echo "<TR><TD>";
 	echo "<A HREF=\"javascript:window.close();\">".
-		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 		"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 	echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 	echo "</TD></TR></TABLE>\n";
@@ -256,22 +256,22 @@ break;
 
 case "sprueche":
 
-	// Erklärung zu den Sprüchen
+	// ErklÃ¤rung zu den SprÃ¼chen
 	$box=$ft0.$t['hilfe3'].$ft1;
 	show_box2 ($box,$hilfe_spruchtext,"100%");
 	echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
 
-	// Liste mit Sprüchen ausgeben
+	// Liste mit SprÃ¼chen ausgeben
 	$box=$ft0.$t['hilfe4'].$ft1;
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 	echo "<TR><TD>";
 	echo "<A HREF=\"javascript:window.close();\">".
-		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 		"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 	echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 	echo "</TD></TR></TABLE>\n";
 
-	// Sprüche in Array einlesen
+	// SprÃ¼che in Array einlesen
 	$spruchliste=file("conf/$datei_spruchliste");
 
 	reset($spruchliste);
@@ -318,7 +318,7 @@ case "legende":
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 	echo "<TR><TD>";
 	echo "<A HREF=\"javascript:window.close();\">".
-		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 		"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 	echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 	echo "</TD></TR></TABLE>\n";
@@ -336,7 +336,7 @@ case "community":
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 	echo "<TR><TD>";
 	echo "<A HREF=\"javascript:window.close();\">".
-		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 		"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 	echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 	echo "</TD></TR></TABLE>\n";
@@ -357,7 +357,7 @@ case "agb":
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 	echo "<TR><TD>";
 	echo "<A HREF=\"javascript:window.close();\">".
-		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 		"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 	echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 	echo "</TD></TR></TABLE>\n";
@@ -372,7 +372,7 @@ case "privacy":
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 	echo "<TR><TD>";
 	echo "<A HREF=\"javascript:window.close();\">".
-		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 		"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 	echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 	echo "</TD></TR></TABLE>\n";
@@ -387,7 +387,7 @@ case "chatiquette":
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 	echo "<TR><TD>";
 	echo "<A HREF=\"javascript:window.close();\">".
-		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 		"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 	echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 	echo "</TD></TR></TABLE>\n";
@@ -414,7 +414,7 @@ default;
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 	echo "<TR><TD>";
 	echo "<A HREF=\"javascript:window.close();\">".
-		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 		"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 	echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 	echo "</TD></TR></TABLE>\n";

@@ -4,7 +4,7 @@
 function nachricht_betrete ($u_id,$r_id,$u_name,$r_name){
 // Eintrittsnachricht in Raum schreiben
 // Aufruf mit Raum-Id, UserName, Raum-Name
-// liefert $back zurück
+// liefert $back zurÃ¼ck
 global $conn,$farbe_chat_background2, $nachricht_b, $lustigefeatures,$u_farbe;
 global $eintritt_individuell, $eintritt_useranzeige;
 
@@ -19,7 +19,7 @@ if ($lustigefeatures)
 	$text=$nachricht_b[mt_rand(1,$anzahl)-1];
 }
 
-// Nachricht auswählen
+// Nachricht auswÃ¤hlen
 if ($eintritt_individuell == "1")
 {
 	$query="SELECT u_eintritt FROM user where u_id = $u_id";
@@ -69,7 +69,7 @@ return($back);
 function nachricht_verlasse ($r_id,$u_name,$r_name){
 // Eintrittsnachricht in Raum schreiben
 // Aufruf mit Raum-Id, UserName, Raum-Name
-// liefert $back (ID des geschriebenen Datensatzes) zurück
+// liefert $back (ID des geschriebenen Datensatzes) zurÃ¼ck
 global $chat,$nachricht_v,$lustigefeatures,$u_farbe, $u_id;
 global $eintritt_individuell, $eintritt_useranzeige;
 
@@ -84,7 +84,7 @@ if ($lustigefeatures)
         $text=$nachricht_v[mt_rand(1,$anzahl)-1];
 }
  
-// Nachricht auswählen
+// Nachricht auswÃ¤hlen
 if ($eintritt_individuell == "1")
 {
         $query="SELECT u_austritt FROM user where u_nick = '$u_name'";

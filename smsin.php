@@ -1,7 +1,7 @@
 <?
 // $Id: smsin.php,v 1.2 2012/10/17 06:16:53 student Exp $
 
-// Über diese Funktion werden alle eingehenden SMS eingelesen und in die MySQL-Datenbank geschrieben...
+// Ãœber diese Funktion werden alle eingehenden SMS eingelesen und in die MySQL-Datenbank geschrieben...
 include("functions.php");
 include("functions-msg.php");
 

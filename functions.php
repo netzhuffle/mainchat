@@ -14,7 +14,7 @@ $mainchat_email="info@fidion.de";
 //	$httpprotocol="http://";
 //}
 
-// Caching unterdrücken
+// Caching unterdrÃ¼cken
     Header("Last-Modified: " . gmDate("D, d M Y H:i:s",Time()) . " GMT");
     Header("Expires: " . gmDate("D, d M Y H:i:s",Time()-3601) . " GMT");
     Header("Pragma: no-cache");
@@ -31,7 +31,7 @@ for($c=0; $c++ < 3 AND (!(isset($conn))); )
               mysql_select_db($dbase, $conn);
 }
 if ( !(isset($conn))) {
- echo "Beim Zugriff auf die Datenbank ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal!<BR>";
+ echo "Beim Zugriff auf die Datenbank ist ein Fehler aufgetreten. Bitte versuchen Sie es spÃ¤ter noch einmal!<BR>";
  exit;
 }
 
@@ -71,7 +71,7 @@ if ($unterdruecke_user_im_raum_anzeige != "1")
 		$i=0;
 		while($row=mysql_fetch_object($result)):
 
-			// Beim ersten Durchlauf Namen des Raums einfügen
+			// Beim ersten Durchlauf Namen des Raums einfÃ¼gen
 			if ($i==0):
 				$text=str_replace("%r_name%",$row->r_name,$t['raum_user1']);
 			endif;
@@ -123,8 +123,8 @@ return($back);
 
 
 function ist_online($user) {
-// Prüft ob User noch online ist
-// liefert 1 oder 0 zurück
+// PrÃ¼ft ob User noch online ist
+// liefert 1 oder 0 zurÃ¼ck
 
 global $dbase,$timeout,$ist_online_raum,$conn,$whotext;
 
@@ -175,8 +175,8 @@ function schreibe_moderation() {
 	if ($result>0) {
 		while ($f=mysql_fetch_array($result)) {
 			unset($c);
-			// vorbereiten für umspeichern... geht leider nicht 1:1, 
-			// weil fetch_array mehr zurückliefert als in $f[] sein darf...
+			// vorbereiten fÃ¼r umspeichern... geht leider nicht 1:1, 
+			// weil fetch_array mehr zurÃ¼ckliefert als in $f[] sein darf...
 			$c['c_von_user']=$f['c_von_user'];
 			$c['c_an_user']=$f['c_an_user'];
 			$c['c_typ']=$f['c_typ'];
@@ -187,7 +187,7 @@ function schreibe_moderation() {
 			$c['c_von_user_id']=$f['c_von_user_id'];
 			// und in moderations-tabelle schreiben
 			schreibe_chat($c);
-			// und datensatz löschen...
+			// und datensatz lÃ¶schen...
 			$query="DELETE FROM moderation WHERE c_id=$f[c_id]";
 			$result2=mysql_query($query, $conn);
 		}
@@ -201,7 +201,7 @@ global $dbase,$conn;
 // Schreiben falls text>0
 if (isset($f['c_text']) && strlen($f['c_text'])>0):
 
-	// Falls Länge c_text mehr als 256 Zeichen, auf mehrere Zeilen aufteilen
+	// Falls LÃ¤nge c_text mehr als 256 Zeichen, auf mehrere Zeilen aufteilen
 	if (strlen($f['c_text'])>256):
 		$temp=$f['c_text'];
 		$laenge=strlen($temp);
@@ -280,7 +280,7 @@ if ($result && mysql_num_rows($result)==1)
 @mysql_free_result($result);
 
 
-// User löschen
+// User lÃ¶schen
 $result2=mysql_query("DELETE FROM online WHERE o_id=$o_id OR o_user=$u_id",$conn);
 // $datum=date("l dS of F Y h:i:s A");
 // system_msg("",0,$u_id,$u_farbe,"<B>DEBUG:</B> Logoff um $datum der o_id/u_id $o_id/$u_id");
@@ -327,7 +327,7 @@ if ($communityfeatures) {
 						$an_u_id=$row->f_userid;
 					}
 				};
-				// Aktion ausführen
+				// Aktion ausfÃ¼hren
 				aktion($wann,$an_u_id,$u_name,"","Freunde",$f);
 		};
         };
@@ -447,7 +447,7 @@ return($back);
 function system_msg($von_user,$von_user_id,$an_user,$farbe,$text) {
 // Schreibt privaten Text als Systemnachricht an User $an_user
 // $von_user wird nicht benutzt
-// $von_user_id ist Absender der Nachricht (normalerweise wie $an_user, notwendig für Spamschutz)
+// $von_user_id ist Absender der Nachricht (normalerweise wie $an_user, notwendig fÃ¼r Spamschutz)
 // Art:           N: Normal
 //	          S: Systemnachricht
 //                P: Privatnachticht
@@ -497,7 +497,7 @@ $browser = $agent  ? $agent  : $_SERVER["HTTP_USER_AGENT"];
 
 $browser = str_replace("MSIE 8.0", "MSIE 7.0", $browser);
 
-// u_id und o_id aus Objekt ermitteln, o_hash, o_browser müssen übereinstimmen
+// u_id und o_id aus Objekt ermitteln, o_hash, o_browser mÃ¼ssen Ã¼bereinstimmen
 
 $query = "SELECT HIGH_PRIORITY *,UNIX_TIMESTAMP(o_timeout_zeit) as o_timeout_zeit,".
 		"UNIX_TIMESTAMP(o_knebel)-UNIX_TIMESTAMP(NOW()) as o_knebel FROM online ".
@@ -521,21 +521,21 @@ if ( $ar = @mysql_fetch_array($result,MYSQL_ASSOC) ) {
     unset($ar['o_userdata3']);
     unset($ar['o_userdata4']);
 
-    // Schleife über alle Variable; Variable setzen
+    // Schleife Ã¼ber alle Variable; Variable setzen
     while ( list($k,$v)=each($ar) ){
 	$$k=$v;
     };
     @mysql_free_result($result);
 
 
-    // o_browser prüfen Userdaten in Array schreiben
+    // o_browser prÃ¼fen Userdaten in Array schreiben
     if (is_array($userdata) && $ar['o_browser']==$browser) {
-          // Schleife über Userdaten, Variable setzen
+          // Schleife Ã¼ber Userdaten, Variable setzen
           while ( list($k,$v)=each($userdata) ){
 		@$$k=$v;
           };
 
-       	// Usereinstellungen überschreiben Default-Einstellungen
+       	// Usereinstellungen Ã¼berschreiben Default-Einstellungen
        	if ( $u_zeilen ) $chat_back=$u_zeilen;
 
        	// ChatAdmin oder Superuser oder moderator?
@@ -548,7 +548,7 @@ if ( $ar = @mysql_fetch_array($result,MYSQL_ASSOC) ) {
 
     } else {
 
-	// Aus Sicherheitsgründen die Variablen löschen
+	// Aus SicherheitsgrÃ¼nden die Variablen lÃ¶schen
 	$userdata="";
 	$u_id="";
 	$u_name="";
@@ -560,7 +560,7 @@ if ( $ar = @mysql_fetch_array($result,MYSQL_ASSOC) ) {
     }
 } else {
 
-	// Aus Sicherheitsgründen die Variablen löschen
+	// Aus SicherheitsgrÃ¼nden die Variablen lÃ¶schen
 	$u_id="";
 	$u_name="";
 	$u_nick="";
@@ -575,7 +575,7 @@ if (isset($_SERVER['HTTP_TE'])) $http_te = $_SERVER['HTTP_TE'];
 // Bei bestimmten Browsern backup_chat setzen
 // HTTP_TE=chunked bei T-Online-Proxy
 // Falls Javascript aus ist (o_js), backup_chat setzen
-// Bei Änderungen auch betrete_chat in functions.php-index.php ändern!
+// Bei Ã„nderungen auch betrete_chat in functions.php-index.php Ã¤ndern!
 if (    preg_match("/(.*)mozilla\/[234](.*)mac(.*)/i",$browser) || 
 	preg_match("/(.*)msie(.*)mac(.*)/i",$browser) || 
 	preg_match("/(.*)Opera 3(.*)/i",$browser) || 
@@ -593,7 +593,7 @@ else:
 endif;
 
 
-// Bei Admins via cookies die Session überprüfen
+// Bei Admins via cookies die Session Ã¼berprÃ¼fen
 if (false && $erweitertefeatures && $admin) {
 
 	if ($HTTP_COOKIE_VARS["MAINCHAT".$u_nick]!=md5($o_id.$id."42")) {
@@ -669,7 +669,7 @@ function iCrypt($passwort, $salt) {
     if ($upgrade_password == 1 && $crypted_password_extern == 0)
     {
         $salt = "";
-        if (CRYPT_SHA256 == 1)
+        if (defined("CRYPT_SHA256"))
         {
             $salt = '$5$rounds=5000$'.gensalt(16).'$';
         }
@@ -679,7 +679,7 @@ function iCrypt($passwort, $salt) {
         }
         else
         {
-            $salt = gensalt(2); // für den Notfall Std. DES
+            $salt = gensalt(2); // fÃ¼r den Notfall Std. DES
         }
         $upgrade_password = 0;
         $v_passwort = crypt($passwort, $salt);
@@ -706,8 +706,8 @@ function iCrypt($passwort, $salt) {
 
 function schreibe_db($db,$f,$id,$id_name) {
 // Assoziatives Array $f in DB $db schreiben 
-// Liefert als Ergebnis die ID des geschriebenen Datensatzes zurück
-// Sonderbehandlung für Passwörter
+// Liefert als Ergebnis die ID des geschriebenen Datensatzes zurÃ¼ck
+// Sonderbehandlung fÃ¼r PasswÃ¶rter
 // Akualiert ggf Kopie des Datensatzes in online-Tabelle
 global $dbase,$conn,$u_id;
 
@@ -752,7 +752,7 @@ if (strlen($id)==0 || $id==0) {
 			if ($name=="u_passwort")
 			{
     			        if (!isset($f['u_salt'])) $f['u_salt'] = substr($inhalt, 0, 2);
-				// Verschlüsseln
+				// VerschlÃ¼sseln
 				$q.="='".iCrypt($inhalt, $f['u_salt'])."'";
 			} else {
 				$q.="='".addslashes($inhalt)."'";
@@ -781,7 +781,7 @@ if (strlen($id)==0 || $id==0) {
 			$q.=",$name";
 		}
 		if ($name=="u_passwort") {
-			// Verschlüsseln
+			// VerschlÃ¼sseln
     		        if (!isset($f['u_salt'])) $f['u_salt'] = substr($inhalt, 0, 2);
 			$q.="='".iCrypt($inhalt, $f['u_salt'])."'";
 		} else {
@@ -798,7 +798,7 @@ if (strlen($id)==0 || $id==0) {
 if ($db=="user" && $id_name=="u_id"):
 
 	// Kopie in Onlinedatenbank aktualisieren
-	// Query muss mit dem Code in login() übereinstimmen
+	// Query muss mit dem Code in login() Ã¼bereinstimmen
 	$query="SELECT u_id,u_name,u_nick,u_level,u_farbe,u_zeilen,u_backup,u_farbe_bg,".
 		"u_farbe_alle,u_farbe_priv,u_farbe_noise,u_farbe_sys,u_clearedit, ".
 		"u_away,u_email,u_adminemail,u_smilie,u_punkte_gesamt,u_punkte_gruppe, ".
@@ -810,13 +810,13 @@ if ($db=="user" && $id_name=="u_id"):
 		$userdata=mysql_fetch_array($result,MYSQL_ASSOC);
 
 
-		// Slashes in jedem Eintrag des Array ergänzen
+		// Slashes in jedem Eintrag des Array ergÃ¤nzen
 		reset($userdata);
 		while (list($ukey,$udata)=each($userdata)) {
 			$udata=addslashes($udata);
 		}
 
-		// Userdaten in 255-Byte Häppchen zerlegen
+		// Userdaten in 255-Byte HÃ¤ppchen zerlegen
 		$userdata_array=zerlege(serialize($userdata));
 
 		if (!isset($userdata_array[0])) $userdata_array[0] = ""; 
@@ -839,14 +839,14 @@ if ($db=="user" && $id_name=="u_id"):
         endif;
 endif;
 
-// ID des Datensatzes zurück geben
+// ID des Datensatzes zurÃ¼ck geben
 return($id);
 
 };
 
 
 function zerlege($daten) {
-// Zerlegt $daten in 255byte-Häppchen und liefert diese in einem Array zurück
+// Zerlegt $daten in 255byte-HÃ¤ppchen und liefert diese in einem Array zurÃ¼ck
 
 $i=0;
 $laenge=strlen($daten);
@@ -899,7 +899,7 @@ echo "<FONT COLOR=$farbe_text><B>$box</B></FONT></TD></TR>\n".
 
 
 function show_box2 ($box, $text, $width="",$button=TRUE) {
-// Gibt Tabelle mit Kopf, Optional Schließ-Button und Inhalt aus 
+// Gibt Tabelle mit Kopf, Optional SchlieÃŸ-Button und Inhalt aus 
 
 global $farbe_text;
 global $farbe_link;
@@ -916,7 +916,7 @@ if ($width){
 $extra = "";
 if ($button) {
 	$extra="<A HREF=\"javascript:window.close();\">".
-		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+		"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 		"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 }
 
@@ -973,7 +973,7 @@ function coreCheckName($name,$check_name)
 // $rubrik ist der Werbeplatz im Adserver
 // $links/$rechts sind die beiden Bereiche im Werbeplatz
 // $before/$after ist Text, der vor/nach der Werbung ausgegeben wird
-// $before/$after wird unterdrückt, falls keine Werbung ausgegeben wird.
+// $before/$after wird unterdrÃ¼ckt, falls keine Werbung ausgegeben wird.
 function p_oas_werb ($rubrik,$links,$rechts,$before,$after) {
 global $ivw_adurl;
 
@@ -1000,9 +1000,9 @@ global $ivw_adurl;
 }
 
 function raum_ist_moderiert($raum) {
-	// Liefert Status des Raums zurück: Moderiert ja/nein
-	// Liefert zusätzlich in $raum_einstellungen alle Einstellungen des Raums zurück
-	// Liefert in ist_moderiert zurück: Moderiert ja/nein
+	// Liefert Status des Raums zurÃ¼ck: Moderiert ja/nein
+	// Liefert zusÃ¤tzlich in $raum_einstellungen alle Einstellungen des Raums zurÃ¼ck
+	// Liefert in ist_moderiert zurÃ¼ck: Moderiert ja/nein
 	global $dbase,$conn,$u_id,$system_farbe,$moderationsmodul,$raum_einstellungen,$ist_moderiert;
 	
 	$moderiert=0;
@@ -1077,16 +1077,16 @@ function warnung($u_id,$u_nick,$art) {
 
 
 function user($zeige_user_id,$userdaten=0,$link=TRUE,$online=FALSE,$trenner="&nbsp;",$online_zeit="",$letzter_login="",$mit_id=TRUE,$extra_kompakt=FALSE,$felder=31) {
-	// Liefert Usernamen + Level + Gruppe + E-Mail + Homepage zurück
+	// Liefert Usernamen + Level + Gruppe + E-Mail + Homepage zurÃ¼ck
 	// Bei link=TRUE wird Link auf Userinfo ausgegeben
 	// Bei online=TRUE wird der Status online/offline und opt die Onlinezeit oder der letzte Login ausgegeben
-	// Falls trenner gesetzt, wird Mail/Home Symbol ausgegeben und trenner vor Mail/Home Symbol eingefügt
+	// Falls trenner gesetzt, wird Mail/Home Symbol ausgegeben und trenner vor Mail/Home Symbol eingefÃ¼gt
 	// $online_zeit -> Zeit in Sekunden seit Login
 	// $letzter_login -> Datum des letzten Logins
 	// Falls mit_id=TRUE wird Session-ID ausgegeben, ansonsten Platzhalter
 	// Falls extra_kompakt=TRUE wird nur Nick ausgegeben
 	// $felder ist bitweise kodiert welche felder ausgegeben werden sollen
-	// Aufschlüsselung wie folgt:
+	// AufschlÃ¼sselung wie folgt:
 	// 1 = Usernamen zeigen
 	// 2 = Level zeigen
 	// 4 = Gruppe zeigen
@@ -1108,7 +1108,7 @@ function user($zeige_user_id,$userdaten=0,$link=TRUE,$online=FALSE,$trenner="&nb
 
 	if (is_array($userdaten)) {
 
-		// Array wurde übergeben
+		// Array wurde Ã¼bergeben
 
 		if (!isset($userdaten['u_chathomepage'])) $userdaten['u_chathomepage'] = 'N';
 		if (!isset($userdaten['u_punkte_anzeigen'])) $userdaten['u_punkte_anzeigen'] = 'N';
@@ -1126,7 +1126,7 @@ function user($zeige_user_id,$userdaten=0,$link=TRUE,$online=FALSE,$trenner="&nb
 		$user_punkte_anzeigen=$userdaten['u_punkte_anzeigen'];
 
 	} elseif (is_object($userdaten)) {
-		// Object wurde übergeben
+		// Object wurde Ã¼bergeben
 		$user_id=$userdaten->u_id;
 		$user_nick=stripslashes($userdaten->u_nick);
 		$user_level=$userdaten->u_level;
@@ -1179,7 +1179,7 @@ function user($zeige_user_id,$userdaten=0,$link=TRUE,$online=FALSE,$trenner="&nb
                     $user_geschlecht = hole_geschlecht ( $zeige_user_id );
 	
 	} else {
-		echo "<P><B>Fehler:</B> Falscher Aufruf von user() für User ";
+		echo "<P><B>Fehler:</B> Falscher Aufruf von user() fÃ¼r User ";
                 if (isset($zeige_user_id)) echo $zeige_user_id;
                 if (isset($userdaten['u_id'])) echo $userdaten['u_id'];
                 if (isset($userdaten->u_id )) echo $userdaten->u_id; 
@@ -1207,13 +1207,13 @@ function user($zeige_user_id,$userdaten=0,$link=TRUE,$online=FALSE,$trenner="&nb
 	// Fensternamen aus Nicknamen erzeugen
 	$fenstername=str_replace("-","",$user_nick);
 	$fenstername=str_replace("+","",$fenstername);
-	$fenstername=str_replace("ä","",$fenstername);
-	$fenstername=str_replace("ö","",$fenstername);
-	$fenstername=str_replace("ü","",$fenstername);
-	$fenstername=str_replace("Ä","",$fenstername);
-	$fenstername=str_replace("Ö","",$fenstername);
-	$fenstername=str_replace("Ü","",$fenstername);
-	$fenstername=str_replace("ß","",$fenstername);
+	$fenstername=str_replace("Ã¤","",$fenstername);
+	$fenstername=str_replace("Ã¶","",$fenstername);
+	$fenstername=str_replace("Ã¼","",$fenstername);
+	$fenstername=str_replace("Ã„","",$fenstername);
+	$fenstername=str_replace("Ã·","",$fenstername);
+	$fenstername=str_replace("Ãœ","",$fenstername);
+	$fenstername=str_replace("ÃŸ","",$fenstername);
 
 	if (($felder & 1) != 1 ) {$user_nick_sik=$user_nick;$user_nick="";}
 	
@@ -1280,7 +1280,7 @@ function user($zeige_user_id,$userdaten=0,$link=TRUE,$online=FALSE,$trenner="&nb
 	};
 
 
-	// Onlinezeit oder Datum des letzten Logins einfügen, falls Online Text fett ausgeben
+	// Onlinezeit oder Datum des letzten Logins einfÃ¼gen, falls Online Text fett ausgeben
 	if ($online_zeit && $online_zeit!="NULL" && $online){
 		$text2.=$trenner.str_replace("%online%",gmdate("H:i:s",$online_zeit),$t['chat_msg92']);
 		$fett1="<B>";
@@ -1317,7 +1317,7 @@ function chat_parse($text) {
 	$trans = array_flip ($trans);
 
 
-	// doppelte/ungültige Zeichen merken und wegspeichern...
+	// doppelte/ungÃ¼ltige Zeichen merken und wegspeichern...
 	$text=str_replace("__","###substr###",$text);
 	$text=str_replace("**","###stern###",$text);
 	$text=str_replace("@@","###klaffe###",$text);
@@ -1334,12 +1334,12 @@ function chat_parse($text) {
 
 	// erst mal testen ob www oder http oder email vorkommen
 	if (preg_match("/(http:|www\.|@)/i",$text)) {
-		// Zerlegen der Zeile in einzelne Bruchstücke. Trennzeichen siehe $split
-		// leider müssen zunächst erstmal in $text die gefundenen urls durch dummies 
+		// Zerlegen der Zeile in einzelne BruchstÃ¼cke. Trennzeichen siehe $split
+		// leider mÃ¼ssen zunÃ¤chst erstmal in $text die gefundenen urls durch dummies 
 		// ersetzt werden, damit bei der Angabge von 2 gleichen urls nicht eine bereits 
-		// ersetzte url nochmal ersetzt wird -> gibt sonst Müll bei der Ausgabe.
+		// ersetzte url nochmal ersetzt wird -> gibt sonst MÃ¼ll bei der Ausgabe.
 
-		// wird evtl. später nochmal gebraucht...
+		// wird evtl. spÃ¤ter nochmal gebraucht...
 		$split='/[ \r\n\t,\)\(]/';
 		$txt=preg_split($split,$text);
 
@@ -1348,7 +1348,7 @@ function chat_parse($text) {
 			if (isset($txt[$i]) && $txt[$i]!="") break;
 		}
 		$text2=$text;
-		// Schleife über alle Worte...
+		// Schleife Ã¼ber alle Worte...
 		for ($j=0; $j<=$i; $j++) {
 			// test, ob am Ende der URL noch ein Sonderzeichen steht...
 			$txt[$j]=preg_replace("!\?$!","",$txt[$j]);
@@ -1377,10 +1377,10 @@ function chat_parse($text) {
 				// Wort=URL mit www am Anfang? -> im text durch dummie ersetzen, im wort durch href.
 				$text=preg_replace("!$txt2!","####$j####",$text);
 
-				// und den ersten Fall wieder Rückwärts, der wird ja später in der schleife nochmal behandelt.
+				// und den ersten Fall wieder RÃ¼ckwÃ¤rts, der wird ja spÃ¤ter in der schleife nochmal behandelt.
 				$text=preg_replace("!-###\d*####/!","http://$txt2/",$text);
 
-				// Ersetzte Zeichen für die URL wieder zurückwandeln
+				// Ersetzte Zeichen fÃ¼r die URL wieder zurÃ¼ckwandeln
 				$txt3=str_replace("###plus###","+",$txt2);
 				$txt3=str_replace("###strich###","|",$txt3);
 				$txt3=str_replace("###auf###","[",$txt3);
@@ -1399,7 +1399,7 @@ function chat_parse($text) {
 			// http://###### in <A HREF="http://###" TARGET=_new>http://###</A>
 			if (preg_match("!^https?://!",$txt[$j])) {
 				// Wort=URL mit http:// am Anfang? -> im text durch dummie ersetzen, im wort durch href.
-				// Zusatzproblematik.... könnte ein http-get-URL sein, mit "?" am Ende oder zwischendrin... urgs.
+				// Zusatzproblematik.... kÃ¶nnte ein http-get-URL sein, mit "?" am Ende oder zwischendrin... urgs.
 
 
 
@@ -1407,10 +1407,10 @@ function chat_parse($text) {
 				$txt2=preg_replace("!\?!","\\?",$txt[$j]);
 				$text=preg_replace("!$txt2!","####$j####",$text);	
 
-				// und wieder Rückwärts, falls zuviel ersetzt wurde...
+				// und wieder RÃ¼ckwÃ¤rts, falls zuviel ersetzt wurde...
 				$text=preg_replace("!####\d*####/!","$txt[$j]/",$text);
 
-				// Ersetzte Zeichen für die URL wieder zurückwandeln
+				// Ersetzte Zeichen fÃ¼r die URL wieder zurÃ¼ckwandeln
 				$txt3=str_replace("###plus###","+",$txt2);
 				$txt3=str_replace("###strich###","|",$txt3);
 				$txt3=str_replace("###auf###","[",$txt3);
@@ -1439,7 +1439,7 @@ function chat_parse($text) {
 	} // ende http, mailto, etc.
 
 
-	// gemerkte Zeichen zurückwandeln.
+	// gemerkte Zeichen zurÃ¼ckwandeln.
 	$text=str_replace("###plus###","+",$text);
 	$text=str_replace("###strich###","|",$text);
 	$text=str_replace("###auf###","[",$text);
@@ -1454,10 +1454,10 @@ function chat_parse($text) {
 
 
 function ist_netscape() {
-	// Browser auf Netscape 4.7x prüfen
+	// Browser auf Netscape 4.7x prÃ¼fen
 	global $HTTP_SERVER_VARS;
 
-	if (preg_match('°mozilla/4\.7°i',$_SERVER["HTTP_USER_AGENT"])) { 
+	if (preg_match('âˆžmozilla/4\.7âˆži',$_SERVER["HTTP_USER_AGENT"])) { 
 		return(true);
 	} else {
 		return(false);
@@ -1473,7 +1473,7 @@ function gensalt($length)
 function genpassword($length)
 { 
     // Generiert ein Passwort
-    // wird auch für gensalt() genutzt
+    // wird auch fÃ¼r gensalt() genutzt
     
     srand((double)microtime()*1000000); 
     $vowels = array("a", "e", "i", "o", "u"); 
@@ -1543,7 +1543,7 @@ function hole_geschlecht ( $userid ) {
     }
     @mysql_free_result ( $result );
     
-    if ( $user_geschlecht == "männlich" )    $user_geschlecht = "geschlecht_maennlich";
+    if ( $user_geschlecht == "mÃ¤nnlich" )    $user_geschlecht = "geschlecht_maennlich";
     else if ( $user_geschlecht == "weiblich" )    $user_geschlecht = "geschlecht_weiblich";
     else    $user_geschlecht = "";
         

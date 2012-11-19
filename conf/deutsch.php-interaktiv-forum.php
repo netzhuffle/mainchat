@@ -6,7 +6,7 @@ $t['farbe1']=	"Es wurde eine neue Farbe gesetzt, %u_nick%";
 $t['farbe2']=	"Farbe:";
 $t['eingabe1']=	"Zeilen";
 
-$t['menue1']=	"RÄUME";
+$t['menue1']=	"RÃ„UME";
 $t['menue2']=	"USER";
 $t['menue3']=	"EINSTELLUNGEN";
 $t['menue4']=	"HILFE";

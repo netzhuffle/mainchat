@@ -1,7 +1,7 @@
 <?php
 
 
-// löst redirekt auf $url aus
+// lÃ¶st redirekt auf $url aus
 if (isset($_POST["url"])) $url = $_POST["url"];
 else if (isset($_GET["url"])) $url = $_GET["url"];
 

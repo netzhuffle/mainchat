@@ -49,8 +49,8 @@ function zeige_blacklist($aktion,$zeilen,$sort) {
 				"date_format(f_zeit,'%d.%m.%y %H:%i') as zeit ".
 				"from blacklist left join user on f_blacklistid=u_id ".
 				"order by $qsort";
-			$button="LÖSCHEN";
-			$titel="Blacklist-Einträge";
+			$button="LÃ·SCHEN";
+			$titel="Blacklist-EintrÃ¤ge";
 
 		// blacklist-expire
 		if ($blacklistmaxdays)
@@ -74,15 +74,15 @@ function zeige_blacklist($aktion,$zeilen,$sort) {
 		$anzahl=mysql_num_rows($result);
 		if ($anzahl==0) {
 
-			// Keine Blacklist-Einträge
+			// Keine Blacklist-EintrÃ¤ge
 			echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=2><DIV style=\"color:$farbe_text;\"><B>Es gibt noch keine $titel:</B><DIV style=\"color:$farbe_text;\"></TD></TR>\n".
-				"<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD>&nbsp;</TD><TD align=\"left\">Es sind keine Blacklist-Einträge vorhanden.</TD></TR>";
+				"<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD>&nbsp;</TD><TD align=\"left\">Es sind keine Blacklist-EintrÃ¤ge vorhanden.</TD></TR>";
 
 		} else {
 
 			// Blacklist anzeigen
 			echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=5><DIV style=\"color:$farbe_text;\"><B>$titel: $anzahl</B></DIV></TD></TR>\n".
-				"<TR><TD WIDTH=\"5%\">".$f1."Löschen".$f2."</TD><TD WIDTH=\"35%\">".$f1.
+				"<TR><TD WIDTH=\"5%\">".$f1."LÃ¶schen".$f2."</TD><TD WIDTH=\"35%\">".$f1.
 				"<A HREF=\"".$blurl.$usort."\">Nickname</A>".$f2."</TD>".
 				"<TD WIDTH=\"35%\">".$f1."Info".$f2."</TD>".
 				"<TD WIDTH=\"13%\" ALIGN=\"CENTER\">".$f1."<A HREF=\"".$blurl.$fsort."\">Datum&nbsp;Eintrag</A>".$f2."</TD>\n".
@@ -107,7 +107,7 @@ function zeige_blacklist($aktion,$zeilen,$sort) {
 
 				} else {
 
-					// User nicht gefunden, Blacklist-Eintrag löschen
+					// User nicht gefunden, Blacklist-Eintrag lÃ¶schen
 					$blacklist_nick="NOBODY";
 					$query="DELETE from blacklist WHERE f_id=$row->f_id";
 					$result2=mysql_query($query,$conn);
@@ -160,7 +160,7 @@ function zeige_blacklist($aktion,$zeilen,$sort) {
 			};
 
 			echo "<TR BGCOLOR=\"$bgcolor\"><TD COLSPAN=2><INPUT TYPE=\"checkbox\" onClick=\"toggle(this.checked)\">".
-                               $f1." Alle Auswählen".$f2."</TD>\n".
+                               $f1." Alle AuswÃ¤hlen".$f2."</TD>\n".
 				"<TD ALIGN=\"right\" COLSPAN=3>".$f1."<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"$button\">".
 				$f2."</TD></TR>\n";
 		};
@@ -173,14 +173,14 @@ function zeige_blacklist($aktion,$zeilen,$sort) {
 
 
 function loesche_blacklist($f_blacklistid) {
-	// Löscht Blacklist-Eintrag aus der Tabelle mit f_blacklistid
+	// LÃ¶scht Blacklist-Eintrag aus der Tabelle mit f_blacklistid
 	// $f_blacklistid User-ID des Blacklist-Eintrags
 
 	global $id,$http_host,$conn,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$dbase,$conn;
 	global $u_id,$u_nick,$admin;
 
 	if (!$admin || !$f_blacklistid) {
-		echo "Fehler beim Löschen des Blacklist-Eintrags $f_blacklistid!<BR>";
+		echo "Fehler beim LÃ¶schen des Blacklist-Eintrags $f_blacklistid!<BR>";
 		return(0);
 	}
 
@@ -201,14 +201,14 @@ function loesche_blacklist($f_blacklistid) {
 
 function formular_neuer_blacklist($neuer_blacklist) {
 
-	// Gibt Formular für Nicknamen zum Hinzufügen als Blacklist-Eintrag aus
+	// Gibt Formular fÃ¼r Nicknamen zum HinzufÃ¼gen als Blacklist-Eintrag aus
 
 	global $id,$http_host,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$conn,$dbase;
 	global $farbe_text,$farbe_tabelle_kopf2,$farbe_tabelle_zeile1,$farbe_tabelle_zeile2;
 
 	if (!$eingabe_breite) $eingabe_breite=30;
 
-	$titel="Neuen Blacklist-Eintrag hinzufügen:";
+	$titel="Neuen Blacklist-Eintrag hinzufÃ¼gen:";
 
 	echo "<FORM NAME=\"blacklist_neu\" ACTION=\"$PHP_SELF\" METHOD=POST>\n".
 		"<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n".
@@ -235,7 +235,7 @@ function formular_neuer_blacklist($neuer_blacklist) {
 
 function neuer_blacklist($f_userid,$blacklist) {
 
-	// Trägt neuen Blacklist-Eintrag in der Datenbank ein
+	// TrÃ¤gt neuen Blacklist-Eintrag in der Datenbank ein
 
 	global $id,$http_host,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$conn,$dbase;
 
@@ -246,7 +246,7 @@ function neuer_blacklist($f_userid,$blacklist) {
 		$blacklist['u_id']=addslashes($blacklist['u_id']); // sec
 		$f_userid=addslashes($f_userid); // sec
 
-		// Prüfen ob Blacklist-Eintrag bereits in Tabelle steht
+		// PrÃ¼fen ob Blacklist-Eintrag bereits in Tabelle steht
 		$query="SELECT f_id from blacklist WHERE ".
 			"(f_userid=$blacklist[u_id] AND f_blacklistid=$f_userid) ".
 			"OR ".
@@ -260,10 +260,10 @@ function neuer_blacklist($f_userid,$blacklist) {
 		} elseif($blacklist['u_id']==$f_userid) {
 
 			// Eigener Blacklist-Eintrag ist verboten
-			echo "<P><B>Fehler:</B> Sie können sich nicht selbst als Blacklist-Eintrag hinzufügen!</P>\n";
+			echo "<P><B>Fehler:</B> Sie kÃ¶nnen sich nicht selbst als Blacklist-Eintrag hinzufÃ¼gen!</P>\n";
 		} else {
 
-			// User ist noch kein Blacklist-Eintrag -> hinzufügen
+			// User ist noch kein Blacklist-Eintrag -> hinzufÃ¼gen
 			$f['f_userid']=$f_userid;
 			$f['f_blacklistid']=$blacklist['u_id'];
 			$f['f_text']=htmlspecialchars($blacklist['f_text']);

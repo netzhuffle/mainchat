@@ -1,8 +1,8 @@
 <?php
 
 // fidion GmbH mainChat
-// chat.php muß mit id=$hash_id aufgerufen werden
-// Optional kann $back als Trigger für die Ausgabe der letzten n-Zeilen angegeben werden
+// chat.php muss mit id=$hash_id aufgerufen werden
+// Optional kann $back als Trigger fÃ¼r die Ausgabe der letzten n-Zeilen angegeben werden
 
 // $Id: chat.php,v 1.5 2012/10/17 06:16:53 student Exp $
 
@@ -23,10 +23,10 @@ if ($u_id) {
 	// Timestamp im Datensatz aktualisieren -> User im Chat / o_who=0
 	aktualisiere_online($u_id,$o_raum,0);
 
-	// eigene Farbe für BG gesetzt? dann die nehmen.
+	// eigene Farbe fÃ¼r BG gesetzt? dann die nehmen.
 	if ($u_farbe_bg!="" && $u_farbe_bg!="-") $farbe_chat_background1=$u_farbe_bg;
 
-	// Algorithmus wählen
+	// Algorithmus wÃ¤hlen
 	if ($backup_chat || $u_backup):
 
 		// n-Zeilen ausgeben und nach Timeout neu laden
@@ -89,13 +89,13 @@ if ($u_id) {
 			$tmp=str_replace("-","",$u_nick);
 			$tmp=str_replace("+","",$tmp);
 			$tmp=str_replace("-","",$tmp);
-			$tmp=str_replace("ä","",$tmp);
-			$tmp=str_replace("ö","",$tmp);
-			$tmp=str_replace("ü","",$tmp);
-			$tmp=str_replace("Ä","",$tmp);
-			$tmp=str_replace("Ö","",$tmp);
-			$tmp=str_replace("Ü","",$tmp);
-			$tmp=str_replace("ß","",$tmp);
+			$tmp=str_replace("Ã¤","",$tmp);
+			$tmp=str_replace("Ã¶","",$tmp);
+			$tmp=str_replace("Ã¼","",$tmp);
+			$tmp=str_replace("Ã„","",$tmp);
+			$tmp=str_replace("Ã·","",$tmp);
+			$tmp=str_replace("Ãœ","",$tmp);
+			$tmp=str_replace("ÃŸ","",$tmp);
 
 
                 	echo "hWnd=window.open(url,\"640_$tmp\",\"resizable=yes,scrollbars=yes,width=780,height=700\");\n".
@@ -127,11 +127,11 @@ if ($u_id) {
 
 		// 1 Sek pro Durchlauf fest eingestellt
 		if ($erweitertefeatures && FALSE):	
-			// Für 0,2 Sek pro Durchlauf
+			// FÃ¼r 0,2 Sek pro Durchlauf
 			$durchlaeufe=$refresh_zeit*5;
 			$zeige_userliste=500;
 		else:
-			// Für 1 Sek pro Durchlauf
+			// FÃ¼r 1 Sek pro Durchlauf
 			$durchlaeufe=$refresh_zeit;
 			$zeige_userliste=100;
 		endif;
@@ -175,17 +175,17 @@ if ($u_id) {
 
 			// Raumwechsel?
 			if (($back==0) && ($o_raum!=$o_raum_alt)):
-				// Trigger für die letzten Nachrichten setzen
+				// Trigger fÃ¼r die letzten Nachrichten setzen
 				$back=1;
 			endif;
 
 			// Chatausgabe, $letzte_id ist global
-			// Falls Result=wahr wurde Text ausgegeben, Timer für Userliste zurücksetzen
+			// Falls Result=wahr wurde Text ausgegeben, Timer fÃ¼r Userliste zurÃ¼cksetzen
 			if (chat_lese($o_id,$o_raum,$u_id,$sysmsg,$ignore,$back)):
 				$i=0;
 			endif;
 
-			// Trigger zurücksetzen
+			// Trigger zurÃ¼cksetzen
 			$back=0;
 
 			// 0,2 oder 1 Sekunde warten
@@ -204,7 +204,7 @@ if ($u_id) {
 		endwhile;
 
 
-		// Trigger für die Ausgabe der letzten 20 Nachrichten setzen
+		// Trigger fÃ¼r die Ausgabe der letzten 20 Nachrichten setzen
 		$back=20;
 
 		echo "</BODY></HTML>\n";

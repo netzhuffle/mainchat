@@ -3,26 +3,26 @@
 // $Id: userinfo.php,v 1.13 2012/10/17 07:43:23 student Exp $
 
 
-// time limit auf 3 sekunden - falls z.B. ein DB-Server hängt, wird
-// hiermit hoffentlich verhindert, daß dieser Prozess zu lange hängt
+// time limit auf 3 sekunden - falls z.B. ein DB-Server hÃ¤ngt, wird
+// hiermit hoffentlich verhindert, daÃŸ dieser Prozess zu lange hÃ¤ngt
 // und den Apache blockiert...
 
 set_time_limit(3);
 
-$userinfo_hilfe="<B>Es wird eine transparente Grafik als JPG erzeugt, welche die aktuelle Zahl\nder User im Chat enthält. ".
+$userinfo_hilfe="<B>Es wird eine transparente Grafik als JPG erzeugt, welche die aktuelle Zahl\nder User im Chat enthÃ¤lt. ".
 	"Falls kein User im Chat ist, wird ein leeres JPG ausgegeben.\n\n".
-"Übergabeparameter:</B>\n".
+"Ãœbergabeparameter:</B>\n".
 " text   - Text nach der Zahl\n".
-" size   - Größe in Punkt für die Schrift\n".
+" size   - GrÃ¶ÃŸe in Punkt fÃ¼r die Schrift\n".
 " hrot   - Hintergrundfarbe Rotanteil\n".
-" hgruen - Hintergrundfarbe Grünanteil\n".
+" hgruen - Hintergrundfarbe GrÃ¼nanteil\n".
 " hblau  - Hintergrundfarbe Blauanteil\n".
 " vrot   - Hintergrundfarbe Rotanteil\n".
-" vgruen - Hintergrundfarbe Grünanteil\n".
+" vgruen - Hintergrundfarbe GrÃ¼nanteil\n".
 " vblau  - Hintergrundfarbe Blauanteil\n".
 " registriert=j  - zeige User-registriert statt User-online\n".
 " art=user       - Zeige Anzahl der User als Grafik oder Text (Voreinstellung)\n".
-" art=raumliste  - Zeige Textliste der Räume, in denen ein Login möglich ist\n".
+" art=raumliste  - Zeige Textliste der RÃ¤ume, in denen ein Login mÃ¶glich ist\n".
 " art=alles      - Zeige Textliste mit den wichtigen Informationen\n".
 " null=j  - Falls j, erfolgt bei \"0 User online\" eine Ausgabe. Ansonsten wird nur ein transparentes leeres JPG ausgegeben.\n".
 " text=j  - es wird statt einer Grafik die Anzahl der User als Text ausgegeben.\n\n".
@@ -31,10 +31,10 @@ $userinfo_hilfe="<B>Es wird eine transparente Grafik als JPG erzeugt, welche die
 "ergibt folgende Grafik:\n\n".
 "<IMG SRC=\"http://chat.main.de/userinfo.php?size=24&text=User+gerade+online+im+Testchat\">\n\n".
 "<B>Beispiel 2:</B>\n&lt;IMG&nbsp;SRC=\"http://chat.main.de/userinfo.php?size=24&hrot=0&hgruen=0&hblau=0&vrot=255&vgruen=255&vblau=0\"&gt;\n".
-"ergibt folgende Grafik in Gelb für einen blauen Hintergrund:\n\n".
+"ergibt folgende Grafik in Gelb fÃ¼r einen blauen Hintergrund:\n\n".
 "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BGCOLOR=\"#0000FF\"><TR><TD><IMG SRC=\"http://chat.main.de/userinfo.php?size=24&hrot=0&hgruen=0&hblau=255&vrot=255&vgruen=255&vblau=0\"></TD></TR></TABLE>\n";
 
-// Falls ?hilfe übergeben wurde, Hilfe anzeigen
+// Falls ?hilfe Ã¼bergeben wurde, Hilfe anzeigen
 
 // voreingestellter Zeichensatz
 $fontname="arialbd.ttf";
@@ -43,7 +43,7 @@ require ("functions-init.php");
 require ("functions.php");
 
 function get_maximum_height($fontname,$fontsize) {
-  $str="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890!\"§%&/()=?ß*+";
+  $str="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890!\"ÃŸ%&/()=?ÃŸ*+";
   $oldheight=0;
   for ($i=0; $i<strlen($str); $i++) {
     unset($b);
@@ -103,7 +103,7 @@ if ($_SERVER['QUERY_STRING']=="hilfe") {
 
 			if ($raum_auswahl && !$beichtstuhl) {
 
-			        // Falls eintrittsraum nicht gesetzt ist, mit Lobby überschreiben
+			        // Falls eintrittsraum nicht gesetzt ist, mit Lobby Ã¼berschreiben
 			        if (strlen($eintrittsraum)==0) {
 			                $eintrittsraum=$lobby;
 			        }
@@ -164,7 +164,7 @@ if ($_SERVER['QUERY_STRING']=="hilfe") {
 					$ergebnis['registriert']=0;
 				}
 
-                		// User online und Räume bestimmen -> merken
+                		// User online und RÃ¤ume bestimmen -> merken
                 		$query="SELECT o_who,o_name,o_level,r_name,r_status1,r_status2, ".
                         		"r_name='$lobby' as lobby ".
                         		"FROM online left join raum on o_raum=r_id  ".
@@ -197,7 +197,7 @@ if ($_SERVER['QUERY_STRING']=="hilfe") {
                         			        $r_name=$whotext[$row->o_who];
 			                                $zeigen=TRUE;
 			                        } else {
-			                                // Nur offene, permanente Räume zeigen
+			                                // Nur offene, permanente RÃ¤ume zeigen
 			                                if (($row->r_status1=='O' || $row->r_status1=='m') && $row->r_status2=='P') {
 			                                        $zeigen=TRUE;
                         			        } else {
@@ -211,7 +211,7 @@ if ($_SERVER['QUERY_STRING']=="hilfe") {
                         			        if (strlen($text)==0){
 			                                        $text=$nick.';';
                         			        } else {
-			                                        // Nur offene, permanente Räume zeigen
+			                                        // Nur offene, permanente RÃ¤ume zeigen
                         			                if ($zeigen_alt) {
                                                 			$ergebnis[$r_name_alt]=$text;
 			                                        }

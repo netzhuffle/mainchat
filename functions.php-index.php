@@ -1,6 +1,6 @@
 <?php
 
-// Funktionen nur für index.php
+// Funktionen nur fÃ¼r index.php
 // $Id: functions.php-index.php,v 1.21 2012/10/17 06:15:29 student Exp $
 
 require_once("functions.php-func-verlasse_chat.php");
@@ -8,7 +8,7 @@ require_once("functions.php-func-nachricht.php");
 
 
 function erzeuge_sequence ($db,$id) {
-	//  Funktion erzeugt einen Datensatz in der Tabelle squence mit der nächsten freien ID
+	//  Funktion erzeugt einen Datensatz in der Tabelle squence mit der nÃ¤chsten freien ID
 
 	global $dbase,$conn;
 
@@ -27,7 +27,7 @@ function erzeuge_sequence ($db,$id) {
 		$query="LOCK  TABLES $db,sequence WRITE";
 		$result=mysql_query($query,$conn);
 
-		// Höchste ID lesen
+		// HÃ¶chste ID lesen
 		$query="select max($id) from $db";
 		$result=mysql_query($query,$conn);
 		if ($result && mysql_num_rows($result)==1) $temp=mysql_result($result,0,0)+1;
@@ -48,8 +48,8 @@ function erzeuge_sequence ($db,$id) {
 
 
 function show_who_is_online($result) {
-	// Funktion gibt Liste der Räume mit Usern aus
-	// $result ist gültiges Ergebnis einer Query, die o_userdata* und r_name enthalten muss
+	// Funktion gibt Liste der RÃ¤ume mit Usern aus
+	// $result ist gÃ¼ltiges Ergebnis einer Query, die o_userdata* und r_name enthalten muss
 
 	global $ft0,$ft1,$t,$whotext;
 
@@ -75,7 +75,7 @@ function show_who_is_online($result) {
 				$r_name=$t['default10'].$whotext[$row->o_who];
 				$zeigen=TRUE;
 			} else {
-				// Nur offene, permanente Räume zeigen
+				// Nur offene, permanente RÃ¤ume zeigen
 				if (($row->r_status1=='O' || $row->r_status1=='m') && $row->r_status2=='P') {
 					$zeigen=TRUE;
 				} else {
@@ -89,7 +89,7 @@ function show_who_is_online($result) {
 				if (strlen($text)==0){
 					$text="$nick ";
 				} else {
-					// Nur offene, permanente Räume zeigen
+					// Nur offene, permanente RÃ¤ume zeigen
 					if ($zeigen_alt) {
 						show_box2(str_replace("%raum%",$r_name_alt,$ft0.$t['default4'].$ft1), $text,"100%",false);
 						echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
@@ -115,7 +115,7 @@ function login($u_id,$u_name,$u_level,$hash_id,$javascript,$ip_historie,$u_agb,
 	$u_punkte_monat,$u_punkte_jahr,$u_punkte_datum_monat,$u_punkte_datum_jahr,
 	$u_punkte_gesamt) {
 // In das System einloggen
-// $o_id wird zurückgeliefert
+// $o_id wird zurÃ¼ckgeliefert
 // u_id=User-ID, u_name ist Nickname, u_level ist Level, hash_id ist Session-ID
 // javascript=JS WAHR/FALSCH, ip_historie ist Array mit IPs alter Logins, u_agb ist AGB gelesen Y/N
 
@@ -166,7 +166,7 @@ unset($http_stuff['REMOTE_PORT']);
 unset($http_stuff['PHP_AUTH_PW']);
                 
 
-// Aktionen initialisieren, nicht für Gäste
+// Aktionen initialisieren, nicht fÃ¼r GÃ¤ste
 if ($u_level!="G" && $communityfeatures) {
 	$query="select a_id FROM aktion WHERE a_user=$u_id ";
 	$result=mysql_query($query, $conn);
@@ -180,7 +180,7 @@ if ($u_level!="G" && $communityfeatures) {
 	mysql_free_result($result);
 };
 
-// Prüfen, ob User noch online ist und ggf. ausloggen
+// PrÃ¼fen, ob User noch online ist und ggf. ausloggen
 $alteloginzeit="";
 $query="select o_id, o_login FROM online WHERE o_user=$u_id ";
 $result=mysql_query($query, $conn);
@@ -192,9 +192,9 @@ if ($result  && mysql_num_rows($result)!=0)
 @mysql_free_result($result);
 
 
-// Userdaten ändern
+// Userdaten Ã¤ndern
 
-// Login als letzten Login merken, dabei away und loginfehler zurücksetzen.
+// Login als letzten Login merken, dabei away und loginfehler zurÃ¼cksetzen.
 $query="UPDATE user SET u_login=NOW(),u_away='',u_loginfehler='' WHERE u_id=$u_id";
 $result=mysql_query($query, $conn);
 if (!$result):
@@ -202,7 +202,7 @@ if (!$result):
 	exit;
 endif;
 
-// Punkte des Vormonats/Vorjahres löschen und Usergruppe ermitteln, falls nicht Gast
+// Punkte des Vormonats/Vorjahres lÃ¶schen und Usergruppe ermitteln, falls nicht Gast
 if ($u_level!="G" && $communityfeatures) {
 
 	// TODO
@@ -239,7 +239,7 @@ if ($u_level!="G" && $communityfeatures) {
 
 
 
-// Aktuelle IP/Datum zu ip_historie hinzufügen
+// Aktuelle IP/Datum zu ip_historie hinzufÃ¼gen
 $datum=time();
 $ip_historie_neu[$datum]=$ip;
 if (is_array($ip_historie)):
@@ -254,7 +254,7 @@ endif;
 if ($u_agb=="Y") $f['u_agb']=$u_agb;
 $f['u_ip_historie']=serialize($ip_historie_neu);
 if ($u_level=="A"):
-	// falls Status bisher Temp-Admin -> zurücksetzen.
+	// falls Status bisher Temp-Admin -> zurÃ¼cksetzen.
 	$f['u_level']="U";
 	$u_level="U";
 endif;
@@ -267,7 +267,7 @@ if (!$u_id):
 endif;
 
 // Aktuelle Daten des Users aus Tabelle iignore lesen
-// Query muss mit Code in ignore übereinstimmen
+// Query muss mit Code in ignore Ã¼bereinstimmen
 $query="SELECT i_user_passiv FROM iignore WHERE i_user_aktiv=$u_id";
 $result=mysql_query($query, $conn);
 if (!$result):
@@ -285,7 +285,7 @@ endif;
 
 $knebelzeit = NULL;
 // Aktuelle Userdaten aus Tabelle user lesen
-// Query muss mit Code in schreibe_db übereinstimmen
+// Query muss mit Code in schreibe_db Ã¼bereinstimmen
 $query="SELECT u_id,u_name,u_nick,u_level,u_farbe,u_zeilen,u_backup,u_farbe_bg,".
 	"u_farbe_alle,u_farbe_priv,u_farbe_noise,u_farbe_sys,u_clearedit, ".
 	"u_away,u_email,u_adminemail,u_smilie,u_punkte_gesamt,u_punkte_gruppe,".
@@ -298,7 +298,7 @@ if (!$result):
 else:
 	$userdata=mysql_fetch_array($result,MYSQL_ASSOC);
 
-	// Slashes in jedem Eintrag des Array ergänzen
+	// Slashes in jedem Eintrag des Array ergÃ¤nzen
 	reset($userdata);
 	while (list($ukey,$udata)=each($userdata)) {
 		$udata=addslashes($udata);              
@@ -308,7 +308,7 @@ else:
 	$http_stuff_array=zerlege(serialize($http_stuff));
 	
 	if (!isset($http_stuff_array[0])) $http_stuff_array[0] = "";
-	if (!isset($http_stuff_array[1])) $http_stuff_array[2] = "";
+	if (!isset($http_stuff_array[1])) $http_stuff_array[1] = "";
 	if (!isset($userdata_array[0])) $userdata_array[0] = "";
 	if (!isset($userdata_array[1])) $userdata_array[1] = "";
 	if (!isset($userdata_array[2])) $userdata_array[2] = "";
@@ -326,8 +326,8 @@ else:
         	
 endif;
 
-// Vorbereitung für Login ist abgeschlossen. Jetzt nochmals Prüfen ob User online ist, 
-// ggf. Session löschen und neue Session schreiben
+// Vorbereitung fÃ¼r Login ist abgeschlossen. Jetzt nochmals PrÃ¼fen ob User online ist, 
+// ggf. Session lÃ¶schen und neue Session schreiben
 
 // Tabellen online+user exklusiv locken
 $query="LOCK   TABLES online WRITE, user WRITE";
@@ -354,7 +354,7 @@ $f['o_userdata2']=$userdata_array[1];
 $f['o_userdata3']=$userdata_array[2];
 $f['o_userdata4']=$userdata_array[3];
 $f['o_ignore']=serialize($ignore);
-$f['o_punkte']=0; // Zähler mit 0 Punkten neu initialisieren
+$f['o_punkte']=0; // ZÃ¤hler mit 0 Punkten neu initialisieren
 $f['o_aktion']=time(); // 5-min Aktionen initialisieren
 
 $o_id=schreibe_db("online",$f,"","o_id");
@@ -378,7 +378,7 @@ $query="UNLOCK TABLES";
 $result=mysql_query($query, $conn);
 
 
-// Bei Admins Cookie setzen zur Überprüfung der Session
+// Bei Admins Cookie setzen zur ÃœberprÃ¼fung der Session
 if ($userdata['u_level']=="C" || $userdata['u_level']=="S") {
 	setcookie("MAINCHAT".$userdata['u_nick'],md5($o_id.$hash_id."42"),0,"/");
 };
@@ -395,7 +395,7 @@ return($o_id);
 function betrete_chat($o_id,$u_id,$u_name,$u_level,$raum,$javascript,$u_backup) {
 // User $u_id betritt Raum $raum (r_id)
 // Nachricht in Raum $raum wird erzeugt
-// Zeiger auf letzte Zeile wird zurückgeliefert
+// Zeiger auf letzte Zeile wird zurÃ¼ckgeliefert
 
 global $dbase,$chat,$conn,$lobby,$eintrittsraum,$t,$hash_id,$communityfeatures,$beichtstuhl,$system_farbe,$u_punkte_gesamt;
 global $HTTP_SERVER_VARS;
@@ -407,7 +407,7 @@ if (strlen($eintrittsraum)==0):
 endif;
 
 // Ist $raum geschlossen oder User ausgesperrt?
-// ausnahme: geschlossener Raum ist Eingangsraum -> für e-rotic-räume
+// ausnahme: geschlossener Raum ist Eingangsraum -> fÃ¼r e-rotic-rÃ¤ume
 // die sind geschlossen, aber bei manchen kostenlosen chats default :-(
 // Ausnahme ist Beichtstuhl-Modus, hier darf beim Login auch ein
 // geschlossener Raum betreten werden
@@ -421,7 +421,7 @@ if (strlen($raum)>0) {
 			switch ($rows->r_status1) {
 			case "G":
 			case "M":
-				// Grundsätzlich nicht in geschlossene oder moderierte räume
+				// GrundsÃ¤tzlich nicht in geschlossene oder moderierte rÃ¤ume
 				$raumeintritt = false;
 
 				// es sei denn, man ist dorthin eingeladen
@@ -456,7 +456,7 @@ if (strlen($raum)>0) {
 
 if (strlen($raum)>0):
 
-	// Prüfung ob User aus Raum ausgesperrt ist
+	// PrÃ¼fung ob User aus Raum ausgesperrt ist
 
 	$query4711="SELECT s_id FROM sperre WHERE s_raum=$raum AND s_user=$u_id";
 	$result=mysql_query($query4711, $conn);
@@ -482,7 +482,7 @@ if (strlen($raum)>0):
 				$result1222b=mysql_query($query1222b, $conn);
 				if (($result1222b > 0) && (mysql_num_rows($result1222b) > 0))
 				{
-					// Es gibt Räume, für die man noch nicht gesperrt ist.
+					// Es gibt RÃ¤ume, fÃ¼r die man noch nicht gesperrt ist.
 					// hiervon den ersten nehmen
 					$raum = mysql_result($result1222b, 0, 0);
 				}
@@ -527,7 +527,7 @@ if (strlen($raum)==0){
 
 } else {
 
-	// Gewählten Raum ermitteln
+	// GewÃ¤hlten Raum ermitteln
 	$query4711="SELECT r_id,r_name,r_eintritt,r_topic ".
 			"FROM raum WHERE r_id=$raum ";
 	$result=mysql_query($query4711, $conn);
@@ -542,7 +542,7 @@ if ($result && $rows==1):
 	$r_name=mysql_result($result,0,"r_name");
 	mysql_free_result($result);
 else:
-	echo "<BODY><P>Fehler: Ungültige Raum-ID $raum beim Login!</P></BODY></HTML>\n";
+	echo "<BODY><P>Fehler: UngÃ¼ltige Raum-ID $raum beim Login!</P></BODY></HTML>\n";
 	exit;
 endif;
 
@@ -588,7 +588,7 @@ else if (strlen($r_eintritt)>0){
 raum_user($r_id,$u_id,$hash_id);
 
 
-// Hat der User sein Profil ausgefüllt?
+// Hat der User sein Profil ausgefÃ¼llt?
 if ($communityfeatures && $u_level!="G") 
 	profil_neu($u_id,$u_name,$hash_id);
 
@@ -616,7 +616,7 @@ if (!$javascript){
 };
 
 
-// Hat der User Aktionen für den Login eingestellt, wie Nachricht bei neuer Mail oder Freunden an sich selbst?
+// Hat der User Aktionen fÃ¼r den Login eingestellt, wie Nachricht bei neuer Mail oder Freunden an sich selbst?
 
 if ($communityfeatures && $u_level!="G") 
 	aktion("Login",$u_id,$u_name,$hash_id);
@@ -656,7 +656,7 @@ if ($communityfeatures) {
 						$an_u_id=$row->f_userid;
 					}
 				};
-				// Aktion ausführen
+				// Aktion ausfÃ¼hren
 				aktion($wann,$an_u_id,$u_name,"","Freunde",$f);
 		};
         };
@@ -671,7 +671,7 @@ return($back);
 
 
 function id_erzeuge($u_id) {
-// Erzeugt eindeutige ID für jeden User
+// Erzeugt eindeutige ID fÃ¼r jeden User
 
 $id=md5(uniqid(mt_rand()));
 return $id;
@@ -694,7 +694,7 @@ function betrete_forum($o_id,$u_id,$u_name,$u_level) {
 	$f['o_chat_id']=system_msg("",0,$u_id,"",str_replace("%u_nick%",$u_name,$t['betrete_forum1']));
 	schreibe_db("online",$f,$o_id,"o_id");
 
-	// Hat der User Aktionen für den Login eingestellt, wie Nachricht bei neuer Mail oder Freunden an sich selbst?
+	// Hat der User Aktionen fÃ¼r den Login eingestellt, wie Nachricht bei neuer Mail oder Freunden an sich selbst?
 	if ($communityfeatures && $u_level!="G")
         	aktion("Login",$u_id,$u_name,$hash_id);
 
@@ -731,7 +731,7 @@ function betrete_forum($o_id,$u_id,$u_name,$u_level) {
                                                 $an_u_id=$row->f_userid;
                                         }
                                 };
-                                // Aktion ausführen
+                                // Aktion ausfÃ¼hren
                                 aktion($wann,$an_u_id,$u_name,"","Freunde",$f);
 		    }
                 };
@@ -807,7 +807,7 @@ function zeige_fuss() {
         endif;
 
         if ($ivw){
-		// In IVW Pixel <IMG SRC=> einfügen (opt)
+		// In IVW Pixel <IMG SRC=> einfÃ¼gen (opt)
 		if (!strpos($ivw,"<IMG")) {
 			$ivw="<IMG SRC=\"$ivw\" ALT=\"\">\n";
 		};
@@ -836,7 +836,7 @@ function RaumNameToRaumID($eintrittsraum) {
 
 function getsalt($feldname, $login) {
 	
-	// Versucht den Salt und die Verschlüsselung des Users zu erkennen
+	// Versucht den Salt und die VerschlÃ¼sselung des Users zu erkennen
 	// $login muss "sicher" kommen
 	global $dbase, $conn;
 	global $upgrade_password;
@@ -850,7 +850,7 @@ function getsalt($feldname, $login) {
 		// User vorhanden, u_passwort untersuchen
 		$pass=mysql_result($result,0,"u_passwort");
 		        
-		if (preg_match('°(^\$6\$rounds\=([0-9]{4,9})\$(.{1,16})\$)°i', $pass, $treffer))
+		if (preg_match('âˆž(^\$6\$rounds\=([0-9]{4,9})\$(.{1,16})\$)âˆži', $pass, $treffer))
         	{
         		// SHA 512 erkannt
         		$salt = $treffer[1];
@@ -858,14 +858,14 @@ function getsalt($feldname, $login) {
 			if (CRYPT_SHA512 == 0) 
 			{
 				// wenn SHA 512 nicht im System bekannt ist, Fehlermeldung
-				// Kann nur bei Systemänderung vorkommen
+				// Kann nur bei SystemÃ¤nderung vorkommen
 				echo "<b>ERROR: CRYPT SHA512 used, but not supported; SALT $salt</b><br>";
 				$salt = "-8";
 			}
 			
         	}
-		else if ((preg_match('°(^\$5\$rounds\=([0-9]{4,9})\$(.{1,16})\$)°i', $pass, $treffer)) ||
-		         (preg_match('°(^\$5\$(.{1,16})\$)°i', $pass, $treffer)))
+		else if ((preg_match('âˆž(^\$5\$rounds\=([0-9]{4,9})\$(.{1,16})\$)âˆži', $pass, $treffer)) ||
+		         (preg_match('âˆž(^\$5\$(.{1,16})\$)âˆži', $pass, $treffer)))
         	{
         		// SHA 256 erkannt
         		$salt = $treffer[1];
@@ -873,13 +873,13 @@ function getsalt($feldname, $login) {
 			if (CRYPT_SHA256 == 0) 
 			{
 				// wenn SHA 256 nicht im System bekannt ist, Fehlermeldung
-				// Kann nur bei Systemänderung vorkommen
+				// Kann nur bei SystemÃ¤nderung vorkommen
 				echo "<b>ERROR: CRYPT SHA256 used, but not supported; SALT $salt</b><br>";
 				$salt = "-7";
 			}
 			
         	}
-		else if (preg_match('°(^\$2(a|x|y)\$([0-9]{1,2})\$(.{21}))°i', $pass, $treffer))
+		else if (preg_match('âˆž(^\$2(a|x|y)\$([0-9]{1,2})\$(.{21}))âˆži', $pass, $treffer))
         	{
         		// Blowfish erkannt
         		$salt = $treffer[1].'$';
@@ -887,13 +887,13 @@ function getsalt($feldname, $login) {
 			if (CRYPT_BLOWFISH == 0) 
 			{
 				// wenn Blowfish nicht im System bekannt ist, Fehlermeldung
-				// Kann nur bei Systemänderung vorkommen
+				// Kann nur bei SystemÃ¤nderung vorkommen
 				echo "<b>ERROR: CRYPT BLOWFISH used, but not supported; SALT $salt</b><br>";
 				$salt = "-6";
 			}
 			
         	}
-		else if (preg_match('°(^\$1\$(.{0,8})\$)°i', $pass, $treffer))
+		else if (preg_match('âˆž(^\$1\$(.{0,8})\$)âˆži', $pass, $treffer))
         	{
         		// CRYPT MD5 erkannt
         		$salt = $treffer[1];
@@ -901,7 +901,7 @@ function getsalt($feldname, $login) {
 			if (CRYPT_MD5 == 0) 
 			{
 				// wenn Crypt MD5 nicht im System bekannt ist, Fehlermeldung
-				// Kann nur bei Systemänderung vorkommen
+				// Kann nur bei SystemÃ¤nderung vorkommen
 				echo "<b>ERROR: CRYPT MD5 used, but not supported; SALT $salt</b><br>";
 				$salt = "-5";
 			}
@@ -915,7 +915,7 @@ function getsalt($feldname, $login) {
 			if (CRYPT_EXT_DES == 0) 
 			{
 				// wenn Ext. DES nicht im System bekannt ist, Fehlermeldung
-				// Kann nur bei Systemänderung vorkommen
+				// Kann nur bei SystemÃ¤nderung vorkommen
 				echo "<b>ERROR: Ext. DES used, but not supported; SALT $salt</b><br>";
 				$salt = "-4";
 			}
@@ -926,7 +926,7 @@ function getsalt($feldname, $login) {
 					$upgrade_password = 1;
 				}
 			}        	}
-		else if ((strlen($pass) == 32) && preg_match('°(^[a-f0-9]{32}$)°i', $pass, $treffer))
+		else if ((strlen($pass) == 32) && preg_match('âˆž(^[a-f0-9]{32}$)âˆži', $pass, $treffer))
         	{
         		// HASH MD5 erkannt
         		$salt = 'MD5';
@@ -934,7 +934,7 @@ function getsalt($feldname, $login) {
 			if (!function_exists('md5')) 
 			{
 				// wenn HASH MD5 nicht im System bekannt ist, Fehlermeldung
-				// Kann nur bei Systemänderung vorkommen
+				// Kann nur bei SystemÃ¤nderung vorkommen
 				echo "<b>ERROR: HASH MD5 used, but not supported; SALT $salt</b><br>";
 				$salt = "-3";
 			}
@@ -954,13 +954,13 @@ function getsalt($feldname, $login) {
 			if (!function_exists('crypt')) 
 			{
 				// wenn Std. DES nicht im System bekannt ist, Fehlermeldung
-				// Kann nur bei Systemänderung vorkommen
+				// Kann nur bei SystemÃ¤nderung vorkommen
 				echo "<b>ERROR: Std. DES used, but not supported; SALT $salt</b><br>";
 				$salt = "-2";
 			}
 			else
 			{
-				if ((CRYPT_SHA256 == 1) || (CRYPT_MD5 == 1)) 
+				if (defined("CRYPT_SHA256") || defined("CRYPT_MD5")) 
 				{
 					$upgrade_password = 1;
 				}
@@ -968,7 +968,7 @@ function getsalt($feldname, $login) {
         	}
         	else
         	{
-			echo "<b>ERROR: Verschlüsselung nicht erkannt <!-- $pass --></b><br>";
+			echo "<b>ERROR: VerschlÃ¼sselung nicht erkannt <!-- $pass --></b><br>";
 			$salt = "-1";
         	}
         	
@@ -979,8 +979,8 @@ function getsalt($feldname, $login) {
 
 function auth_user($feldname,$login,$passwort) {
 
-	// Passwort prüfen und Userdaten lesen
-	// Funktion liefert das mysql_result zurück, wenn auf EINEN User das login/passwort passt
+	// Passwort prÃ¼fen und Userdaten lesen
+	// Funktion liefert das mysql_result zurÃ¼ck, wenn auf EINEN User das login/passwort passt
 	// $login muss "sicher" kommen
 	// feldname = uc_nick oder u_name
 	// passwort = Passwort
@@ -988,7 +988,7 @@ function auth_user($feldname,$login,$passwort) {
 	global $dbase, $conn;
 	global $crypted_password_extern, $upgrade_password;
 
-	// $crypt_login & $md5login ist veraltet und wird nicht mehr unterstützt
+	// $crypt_login & $md5login ist veraltet und wird nicht mehr unterstÃ¼tzt
 	
 	$v_salt = getsalt($feldname, $login);
 
@@ -999,18 +999,18 @@ function auth_user($feldname,$login,$passwort) {
 	}
 	else if (($v_salt > -9) && ($v_salt < 0))
 	{
-		echo "<b>ERROR: Passwortverschlüsselung ungültig</b><br>";
+		echo "<b>ERROR: PasswortverschlÃ¼sselung ungÃ¼ltig</b><br>";
 		return (0);
 	}
 	else
 	{
-		// Nachdem die Verschlüsselung nun bekannt ist
-		// Übergebenes PW verschlüsseln und gegen DB Prüfen
+		// Nachdem die VerschlÃ¼sselung nun bekannt ist
+		// Ãœbergebenes PW verschlÃ¼sseln und gegen DB PrÃ¼fen
 		
 		if ($crypted_password_extern == 1) 
 		{
 			// Nichts tun, da das $passwort von einem Externen System bereits
-			// verschlüsselt übergeben wurde, daher auch nicht "upgraden"
+			// verschlÃ¼sselt Ã¼bergeben wurde, daher auch nicht "upgraden"
 			$v_passwort = $passwort;
 			$upgrade_password = 0;
 		}
@@ -1034,11 +1034,11 @@ function auth_user($feldname,$login,$passwort) {
 
         		if ($upgrade_password == 1)
         		{
-        			// PW war richtig => PW Verschlüsselung verbessern
-				// indem neu gespeichert wird, Verschlüsselung wird in schreibe_db bestimmt
+        			// PW war richtig => PW VerschlÃ¼sselung verbessern
+				// indem neu gespeichert wird, VerschlÃ¼sselung wird in schreibe_db bestimmt
        				unset($f);
       				$f['u_passwort'] = $passwort;
-      				$f['u_salt'] = $v_salt; // Dummy, wird nicht gespeichert, nur übermittelt und seperat ausgewertet
+      				$f['u_salt'] = $v_salt; // Dummy, wird nicht gespeichert, nur Ã¼bermittelt und seperat ausgewertet
        				$f['u_id'] = $usergefunden;	
        				schreibe_db("user",$f,$f['u_id'],"u_id");
         		}

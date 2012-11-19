@@ -1,5 +1,5 @@
 <?php
-// Funktionen für edit.php
+// Funktionen fÃ¼r edit.php
 // $Id: functions.php-edit.php,v 1.15 2012/10/17 06:16:53 student Exp $
 
 require_once("functions.php-func-verlasse_chat.php");
@@ -36,7 +36,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 			echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 			echo "<TR><TD COLSPAN=2>";
 			echo "<A HREF=\"javascript:window.close();\">".
-				"<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+				"<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 				"WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 			echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 			echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
@@ -67,10 +67,10 @@ global $einstellungen_aendern, $eintritt_individuell;
 				echo "<OPTION SELECTED VALUE=\"0\">$t[user_zeige16]";
 			endif;
 
-			echo "</SELECT><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Ändern!\">".
+			echo "</SELECT><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Ã„ndern!\">".
 				$f2."<HR SIZE=2 NOSHADE></TD></TR>\n";
 
-			// Nur für Admins
+			// Nur fÃ¼r Admins
 			if ($admin)
 			{
 				echo "<TR><TD COLSPAN=2>".
@@ -81,7 +81,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 			else if (($einstellungen_aendern) && ($u_level == 'U'))
 			{
 				echo "<TR><TD COLSPAN=2>".
-					$f1."<B>".$t['user_zeige17']."</B> (<a href=\"edit.php?http_host=$http_host&id=$id&aktion=andereadminmail\">ändern</a>)<BR>\n".$f2.
+					$f1."<B>".$t['user_zeige17']."</B> (<a href=\"edit.php?http_host=$http_host&id=$id&aktion=andereadminmail\">Ã¤ndern</a>)<BR>\n".$f2.
 					htmlspecialchars(stripslashes($f['u_name'])).
 					"</TD></TR>\n";
 			}
@@ -96,7 +96,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 					"</TD></TR>\n";
 			endif;
 
-			// Für alle außer Gäste
+			// FÃ¼r alle auÃŸer GÃ¤ste
 			if ($u_level!="G"):
 
 				echo "<TR><TD COLSPAN=2>".
@@ -105,7 +105,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 					"</TD></TR>\n";
 			endif;
 
-			// Nur für Admins
+			// Nur fÃ¼r Admins
 			if ($admin)
 			{
 				echo "<TR><TD COLSPAN=2>".
@@ -116,7 +116,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 			else if (($einstellungen_aendern) && ($u_level == 'U'))
 			{
 				echo "<TR><TD COLSPAN=2>".
-					$f1."<B>".$t['user_zeige3']."</B> (<a href=\"edit.php?http_host=$http_host&id=$id&aktion=andereadminmail\">ändern</a>)<BR>\n".$f2.
+					$f1."<B>".$t['user_zeige3']."</B> (<a href=\"edit.php?http_host=$http_host&id=$id&aktion=andereadminmail\">Ã¤ndern</a>)<BR>\n".$f2.
 					htmlspecialchars(stripslashes($f['u_adminemail'])).
 					"</TD></TR>\n";
 			}
@@ -129,7 +129,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 					"</TD></TR>\n";
 			endif;
 
-			// Für alle außer Gäste
+			// FÃ¼r alle auÃŸer GÃ¤ste
 			if ($u_level!="G"):
 				echo "<TR><TD COLSPAN=2>".
 					$f1."<B>".$t['user_zeige7']."</B><BR>\n".$f2.
@@ -215,7 +215,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 
 
 
-			// Level nur für Admins
+			// Level nur fÃ¼r Admins
 			if ($admin):
 				echo "<TR><TD>".
 					$f1."<B>".$t['user_zeige8']."</B>\n".$f2."</TD><TD>".$f1.
@@ -227,7 +227,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 				$i=0;
 				while ($i<count($level)):
         				$name=key($level);
-						// Alle Level außer Besitzer zur Auswahl geben, für Gäste gibt es nur Gast
+						// Alle Level auÃŸer Besitzer zur Auswahl geben, fÃ¼r GÃ¤ste gibt es nur Gast
 						if ($name != "B") {
 							if ($f['u_level']=="G") {
 								if ($i==0)echo "<OPTION SELECTED VALUE=\"G\">$level[G]\n";
@@ -249,7 +249,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 					$f2."</TD></TR>\n";
 			endif;
 
-			// Einstellungen für Fenstergrößen
+			// Einstellungen fÃ¼r FenstergrÃ¶ÃŸen
 			if ($u_level!="G"){
 				echo "<TR><TD COLSPAN=2><HR SIZE=2 NOSHADE>".$f1."<B>".$t['user_zeige43']."</B>\n".$f2."</TD></TR>\n";
 				foreach ($frame_size['def'] as $key => $val) {
@@ -261,7 +261,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 			}
 
 
-			// Default für Farbe setzen, falls undefiniert
+			// Default fÃ¼r Farbe setzen, falls undefiniert
 			if (strlen($f['u_farbe'])==0):
         			$f['u_farbe']=$user_farbe;
 			endif;
@@ -294,10 +294,10 @@ global $einstellungen_aendern, $eintritt_individuell;
 			
 			echo "</TABLE>\n";
 
-			echo $f1."<HR SIZE=2 NOSHADE><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Ändern!\">".$f2;
+			echo $f1."<HR SIZE=2 NOSHADE><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Ã„ndern!\">".$f2;
 
 			if ($admin):
-				echo $f1."&nbsp;<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Löschen!\">".$f2;
+				echo $f1."&nbsp;<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"LÃ¶schen!\">".$f2;
 			endif;
 
 
@@ -318,7 +318,7 @@ global $einstellungen_aendern, $eintritt_individuell;
 				echo "</TR></TABLE>\n";
 			};
 
-			// Fuß der Tabelle
+			// FuÃŸ der Tabelle
 			echo "</FORM>\n";
 			echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
 

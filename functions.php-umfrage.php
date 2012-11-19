@@ -107,14 +107,14 @@ function anzeige_umfragen_zukuenftig($adm = 0)
         $anzahl = mysql_num_rows($result);
         if ($anzahl == 0)
         {
-            echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=3><DIV style=\"color:$farbe_text;\"><B>Zukünftige Umfragen</B>".
+            echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=3><DIV style=\"color:$farbe_text;\"><B>ZukÃ¼nftige Umfragen</B>".
                  "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD COLSPAN=3 align=\"left\">Keine Umfrage vorhanden.</TD></TR>";  
         }
         else
         {
             $bereich='';
             $i=0;
-            echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=3><B>Zukünftige Umfragen</B>";
+            echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=3><B>ZukÃ¼nftige Umfragen</B>";
             while($row=mysql_fetch_object($result)) 
             {
                 $i++;

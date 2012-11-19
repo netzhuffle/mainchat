@@ -1,27 +1,27 @@
 <?php
 
 // Sprachdefinition deutsch smilies-grafik.php
-// Die Befehle müssen mit & beginnen
+// Die Befehle mÃ¼ssen mit & beginnen
 
 $t['sonst1']=	"REFRESH";
 $t['sonst2']=	"USERLISTE";
 
 $smilie["&mnormal"]="mini-normal.gif";	$smilietxt["&mnormal"]="Normal-Mini";
-$smilie["&mboese"]="mini-boese.gif";	$smilietxt["&mboese"]="Böse-Mini";
+$smilie["&mboese"]="mini-boese.gif";	$smilietxt["&mboese"]="BÃ¶se-Mini";
 $smilie["&mlach"]="mini-lach.gif";	$smilietxt["&mlach"]="Lachen-Mini";
 $smilie["&langeweile"]="kaugummi.gif";	$smilietxt["&langeweile"]="Langeweile";
 $smilie["&normal"]="normal.gif";	$smilietxt["&normal"]="Normal";
-$smilie["&aerger"]="aerger.gif";	$smilietxt["&aerger"]="Ärgerlich";
+$smilie["&aerger"]="aerger.gif";	$smilietxt["&aerger"]="Ã„rgerlich";
 $smilie["&alien"]="alien.gif";		$smilietxt["&alien"]="Alien";
 $smilie["&megaphon"]="megaphon.gif";	$smilietxt["&megaphon"]="Anschreien";
 $smilie["&augen"]="augen.gif";		$smilietxt["&augen"]="Augen";
 $smilie["&baeh"]="baeh.gif";		$smilietxt["&baeh"]="Zum&nbsp;ko....";
-$smilie["&boese"]="boese.gif";		$smilietxt["&boese"]="Böse";
+$smilie["&boese"]="boese.gif";		$smilietxt["&boese"]="BÃ¶se";
 $smilie["&drei"]="drei.gif";		$smilietxt["&drei"]="Lass&nbsp;uns...";
 $smilie["&duell"]="schwert.gif";	$smilietxt["&duell"]="Duell";
 $smilie["&engel"]="engel.gif";		$smilietxt["&engel"]="Engel";
 $smilie["&argh"]="erschreckt-blau.gif";	$smilietxt["&argh"]="Argh!";
-$smilie["&gaehn"]="gaehn.gif";		$smilietxt["&gaehn"]="Gähnen";
+$smilie["&gaehn"]="gaehn.gif";		$smilietxt["&gaehn"]="GÃ¤hnen";
 // $smilie["&gewehr1"]="gewehr1.gif";	$smilietxt["&gewehr1"]="Gewehr1";
 // $smilie["&gewehr2"]="gewehr2.gif";	$smilietxt["&gewehr2"]="Gewehr2";
 $smilie["&riesengrinsen"]="griesengrinsen.gif";$smilietxt["&riesengrinsen"]="Riesengrins";
@@ -33,7 +33,7 @@ $smilie["&hund"]="hund.gif";		$smilietxt["&hund"]="Hund";
 $smilie["&irre"]="irre.gif";		$smilietxt["&irre"]="Total&nbsp;irre";
 $smilie["&kanibale"]="kanibale.gif";	$smilietxt["&kanibale"]="Kanibale";
 $smilie["&karneval"]="karneval.gif";	$smilietxt["&karneval"]="Karneval";
-$smilie["&kuess"]="kuess.gif";		$smilietxt["&kuess"]="Küssen";
+$smilie["&kuess"]="kuess.gif";		$smilietxt["&kuess"]="KÃ¼ssen";
 $smilie["&laber"]="laber.gif";		$smilietxt["&laber"]="Labern";
 $smilie["&lach"]="lach.gif";		$smilietxt["&lach"]="Lachen";
 $smilie["&lach2"]="lach2.gif";		$smilietxt["&lach2"]="Lachen2";

@@ -8,7 +8,7 @@ include ("functions.php");
 // Userdaten setzen
 id_lese($id);
 
-//gültiger User?
+//gÃ¼ltiger User?
 if (strlen($u_id)>0){
 
 	aktualisiere_online($u_id,$o_raum);
@@ -124,7 +124,7 @@ if (strlen($u_id)>0){
                         break;
 	
 		case "thema_alles_gelesen":
-			#print "hier müssten alle postings als gelesen markiert werden...";
+			#print "hier mÃ¼ssten alle postings als gelesen markiert werden...";
 			thema_alles_gelesen($th_id,$u_id);
 			forum_liste();
                         break;
@@ -145,7 +145,7 @@ if (strlen($u_id)>0){
 
 
 		case "thread_alles_gelesen":
-			#print "hier müssten alle postings des Threads als gelesen markiert werden...";
+			#print "hier mÃ¼ssten alle postings des Threads als gelesen markiert werden...";
 			thread_alles_gelesen($th_id, $thread, $u_id);
 //			forum_liste();
 			show_thema();
@@ -192,10 +192,10 @@ if (strlen($u_id)>0){
 			}
                         break;
 		case "show_posting":
-//			Falsch, die Leserechte anhand der $th_id die übergeben wurde zu überprüfen
+//			Falsch, die Leserechte anhand der $th_id die Ã¼bergeben wurde zu Ã¼berprÃ¼fen
 //			$leserechte=pruefe_leserechte($th_id);
 
-// 			Richtig, die $th_id anhand der $po_id zu bestimmen und zu prüfen
+// 			Richtig, die $th_id anhand der $po_id zu bestimmen und zu prÃ¼fen
 			$leserechte=pruefe_leserechte(hole_themen_id_anhand_posting_id($po_id));
 			if ($leserechte)
 			{

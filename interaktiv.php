@@ -1,7 +1,7 @@
 <?php
 
 // fidion GmbH mainChat
-// interaktiv.php muß mit id=$hash_id aufgerufen werden
+// interaktiv.php muss mit id=$hash_id aufgerufen werden
 
 // $Id: interaktiv.php,v 1.6 2012/10/17 06:16:53 student Exp $
 
@@ -20,7 +20,7 @@ $body_tag=$body_tag."TEXT=\"$farbe_chat_text3\" ".
                "VLINK=\"$farbe_chat_vlink3\" ".
                "ALINK=\"$farbe_chat_vlink3\">\n";
 
-// Prüfung, ob User wegen Inaktivität ausgelogt werden soll
+// PrÃ¼fung, ob User wegen InaktivitÃ¤t ausgelogt werden soll
 if ($u_id && $chat_timeout && $u_level!='S'  && $u_level!='C'  && $u_level!='M' && $o_timeout_zeit) {
 
 	if ($o_timeout_warnung=="J" && $chat_timeout < (time()-$o_timeout_zeit)) {
@@ -36,7 +36,7 @@ if ($u_id && $chat_timeout && $u_level!='S'  && $u_level!='C'  && $u_level!='M' 
 
 	} elseif ($o_timeout_warnung!="J" && (($chat_timeout/4)*3) < (time()-$o_timeout_zeit)) {
 
-		// Warnung über bevorstehenden Logout ausgeben
+		// Warnung Ã¼ber bevorstehenden Logout ausgeben
 		system_msg("",0,$u_id,$system_farbe,str_replace("%zeit%",$chat_timeout/60,$t['chat_msg101']));
 		unset($f);
 		$f['o_timeout_warnung']="J";
@@ -73,18 +73,18 @@ if ($u_id):
 	aktualisiere_online($u_id,$o_raum);
 
 
-	// Aktionen ausführen, falls nicht innerhalb der letzten 5
-	// Minuten geprüft wurde (letzte Prüfung=o_aktion)
+	// Aktionen ausfÃ¼hren, falls nicht innerhalb der letzten 5
+	// Minuten geprÃ¼ft wurde (letzte PrÃ¼fung=o_aktion)
 	if ($communityfeatures && (time() > ($o_aktion+300))) {
 		aktion("Alle 5 Minuten",$u_id,$u_nick,$id);
 	}
 
 
-	// Wurde Raum r_id aus Formular übergeben? Falls ja Raum von $o_raum nach $r_id wechseln
+	// Wurde Raum r_id aus Formular Ã¼bergeben? Falls ja Raum von $o_raum nach $r_id wechseln
 	if (isset($r_id) && $o_raum!=$r_id):
 
 		// Raum wechseln
-		// Im Beichtstuhl-Modus dürfen Admins geschlossene Räume betreten
+		// Im Beichtstuhl-Modus dÃ¼rfen Admins geschlossene RÃ¤ume betreten
 		$o_raum=raum_gehe($o_id,$u_id,$u_nick,$o_raum,$r_id,$beichtstuhl);
 		if ($o_raum==$r_id):
 			// User in Raum ausgeben
@@ -99,7 +99,7 @@ if ($u_id):
 		endif;
 	endif;
 
-	// Daten für Raum lesen
+	// Daten fÃ¼r Raum lesen
 	$query="SELECT raum.* ".
 		"FROM raum,online ".
 		"WHERE r_id=o_raum ".
@@ -207,7 +207,7 @@ if ($u_id):
 	{
 	echo $f3."&nbsp;&nbsp;$t[sonst4]<br>&nbsp;<NOBR><SELECT NAME=\"r_id\"\" onChange=\"document.form1.submit()\">\n";
 
-	// Admin sehen alle Räume, andere User nur die offenen
+	// Admin sehen alle RÃ¤ume, andere User nur die offenen
 	if ($admin):
 		raeume_auswahl($o_raum,TRUE,TRUE);
 	else:

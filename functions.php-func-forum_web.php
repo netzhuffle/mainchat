@@ -11,13 +11,13 @@ function kopf_forum($admin) {
 	// Fenstername
 	$fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);	
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);	
 
 	// Body-Tag definieren
 	$body_tag="<BODY BGCOLOR=\"$farbe_chat_background1\" ";
@@ -60,7 +60,7 @@ function kopf_forum($admin) {
 
 }
 
-//Fuss für das Forum
+//Fuss fÃ¼r das Forum
 function fuss_forum() {
         echo "<br><br></center>";
 	// zeige_fuss();
@@ -75,7 +75,7 @@ function show_missing($missing) {
 
 }
 
-//Eingabemaske für neues Forum
+//Eingabemaske fÃ¼r neues Forum
 function maske_forum($fo_id=0) {
 
         global $id, $http_host, $conn;
@@ -100,7 +100,7 @@ function maske_forum($fo_id=0) {
 
 	}
 	
-	#echo "fo_admin: $fo_admin<BR>binär:".decbin($fo_admin)."<BR>";
+	#echo "fo_admin: $fo_admin<BR>binÃ¤r:".decbin($fo_admin)."<BR>";
 
         echo "<form action=\"forum.php\" method=\"post\">";
         echo "<table width=\"760\" cellspacing=\"0\" cellpadding=\"1\" border=\"0\" bgcolor=\"$farbe_tabellenrahmen\"><tr><td>";
@@ -121,7 +121,7 @@ function maske_forum($fo_id=0) {
 	# echo " value=\"1\">$t[forum_no]\n";
         # echo "</select></td></tr>\n";
 
-	# Forumsrechte für Gast einstellen
+	# Forumsrechte fÃ¼r Gast einstellen
         echo "<tr><td>$f1 <DIV style=\"color:$farbe_text; font-weight:bold;\">$t[forum_msg3]</DIV> $f2</td>";
 	if (($fo_admin & 8) == 8) 
 	{ 
@@ -150,7 +150,7 @@ function maske_forum($fo_id=0) {
 	    $selu1=""; 
 	    $selu2="SELECTED";
         }
-	# Forumsrechte für einen User einstellen
+	# Forumsrechte fÃ¼r einen User einstellen
         echo "<tr><td>$f1 <DIV style=\"color:$farbe_text; font-weight:bold;\">$t[forum_msg4]</DIV> $f2</td>";
         echo "<td><select size=\"1\" name=\"fo_user\">";
 	echo "<option value=\"0\">$t[forum_msg7]\n";
@@ -278,7 +278,7 @@ function forum_liste() {
         @mysql_free_result($query);
 }
 
-//Zeigt Erklärung der verschiedenen Folder an
+//Zeigt ErklÃ¤rung der verschiedenen Folder an
 function show_icon_description($mode) {
 
         global $t, $f3, $f4, $chat_grafik;
@@ -305,7 +305,7 @@ function show_icon_description($mode) {
 }
 
 
-//Eingabemaske für Thema
+//Eingabemaske fÃ¼r Thema
 function maske_thema($th_id=0) {
 
         global $id, $http_host, $fo_id, $conn;
@@ -386,7 +386,7 @@ function show_pfad($th_id) {
 	global $seite, $t, $farbe_vlink, $farbe_hervorhebung_forum;
         
 
-	//Infos über Forum und Thema holen
+	//Infos Ã¼ber Forum und Thema holen
         $sql = "select fo_id, fo_name, th_name, th_anzthreads
                 from forum, thema
                 where th_id = $th_id
@@ -616,7 +616,7 @@ function show_thema() {
 			{
 				echo "<td>$f1 $userlink $f2</td>\n";
 			}
-		# hier wohl ändern
+		# hier wohl Ã¤ndern
 		}
 
 		if ($posting['po_date2'] == '01.01.70' || $posting['po_date'] == $posting['po_date2'])
@@ -774,13 +774,13 @@ function maske_posting($mode) {
 	
 	$fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 	
 	echo "<tr><td colspan=\"2\"><A HREF=\"$link_smilies\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster('$link_smilies');return(false)\">$f3 <DIV style=\"color:$farbe_text; \">$t[smilies]</DIV> $f4</A></td></tr>\n";
@@ -790,7 +790,7 @@ function maske_posting($mode) {
                 echo "<tr><td>$f1 <DIV style=\"color:$farbe_text; font-weight:bold;\">$t[posting_msg3]</DIV> $f2<br>$f3 <DIV style=\"color:$farbe_text; \">$t[posting_msg4]</DIV> $f4</td>\n";
                 echo "<td><input type=\"text\" size=\"20\" name=\"autor\" value=\"$autor\"></td></tr>\n";
 
-		// Nur im Obersten Vater die TOP und gesperrt einstellungen ändern lassen
+		// Nur im Obersten Vater die TOP und gesperrt einstellungen Ã¤ndern lassen
 		if ($po_id == $thread)
 		{
 	                echo "<tr><td>$f1 <DIV style=\"color:$farbe_text; font-weight:bold;\">Thread gesperrt</DIV>$f2</td>\n";
@@ -856,7 +856,7 @@ function verbuche_punkte($u_id) {
 function show_pfad_posting($th_id, $po_titel) {
 
         global $conn, $f3, $f4, $id, $http_host, $thread, $seite;
-        //Infos über Forum und Thema holen
+        //Infos Ã¼ber Forum und Thema holen
         $sql = "select fo_id, fo_name, th_name
                 from forum, thema
                 where th_id = $th_id
@@ -874,7 +874,7 @@ function show_pfad_posting($th_id, $po_titel) {
 
 }
 
-//gibt Navigation für Posting aus
+//gibt Navigation fÃ¼r Posting aus
 function navigation_posting($last, $next, $po_u_id, $th_id, $user_nick="", $thread_gelesen_zeigen=FALSE) {
 
         global $f1, $f2, $f3, $f4, $farbe_tabelle_kopf2, $t, $seite, $farbe_tabellenrahmen;
@@ -923,13 +923,13 @@ function navigation_posting($last, $next, $po_u_id, $th_id, $user_nick="", $thre
 	// Beim Target die Sonderzeichen rausamachen
 	$pfenster=str_replace("+","",$user_nick);
 	$pfenster=str_replace("-","",$pfenster);
-	$pfenster=str_replace("ä","",$pfenster);
-	$pfenster=str_replace("ö","",$pfenster);
-	$pfenster=str_replace("ü","",$pfenster);
-	$pfenster=str_replace("Ä","",$pfenster);
-	$pfenster=str_replace("Ö","",$pfenster);
-	$pfenster=str_replace("Ü","",$pfenster);
-	$pfenster=str_replace("ß","",$pfenster);
+	$pfenster=str_replace("Ã¤","",$pfenster);
+	$pfenster=str_replace("Ã¶","",$pfenster);
+	$pfenster=str_replace("Ã¼","",$pfenster);
+	$pfenster=str_replace("Ã„","",$pfenster);
+	$pfenster=str_replace("Ã·","",$pfenster);
+	$pfenster=str_replace("Ãœ","",$pfenster);
+	$pfenster=str_replace("ÃŸ","",$pfenster);
 
 		$mailurl="mail.php?aktion=antworten_forum&id=$id&http_host=$http_host&th_id=$th_id&po_vater_id=$po_id&thread=$thread";
 		echo "<td width=\"50\" ><a href=\"$mailurl\" TARGET=\"640_$pfenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mailurl'); return(false)\">".

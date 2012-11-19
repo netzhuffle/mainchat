@@ -1,8 +1,8 @@
 # fidion GmbH mainChat
 #
-# Änderungen für ein mainChat-Update.
+# Æ’nderungen fÃ¼r ein mainChat-Update.
 # Nur relevant bei einem Update einer alten Version auf die neue Version,
-# für die neuen Chat-Features die Datenbank erweitert werden mußte.
+# fÃ¼r die neuen Chat-Features die Datenbank erweitert werden muï¬‚te.
 #
 # Aufruf: mysql -f -u USER -h HOST DATENBANK < dok/mysql.change
 #
@@ -54,7 +54,7 @@ CREATE TABLE moderation (
   KEY c_moderator (c_moderator)
 );
 
-# Neue Tabelle für Autoknebel (Stopwörter)
+# Neue Tabelle fÃ¼r Autoknebel (StopwË†rter)
 #
 # Table structure for table 'worte'
 #
@@ -71,7 +71,7 @@ CREATE TABLE worte (
    KEY w_status (w_status)
 );
 
-# Änderungen ab 01.09.01
+# Æ’nderungen ab 01.09.01
 ALTER TABLE ip_sperre ADD is_warn ENUM('ja','nein') DEFAULT 'nein' NOT NULL;
 ALTER TABLE ip_sperre ADD INDEX(is_warn);
 ALTER TABLE chat CHANGE c_text c_text varchar(255) NOT NULL;
@@ -85,15 +85,15 @@ ALTER TABLE online CHANGE o_userdata o_userdata varchar(255) NOT NULL;
 ALTER TABLE online CHANGE o_http_stuff o_http_stuff varchar(255) NOT NULL;
 ALTER TABLE online CHANGE o_id o_id int(11) unsigned DEFAULT '0' NOT NULL;
 
-# änderungen ab 12.09.01
+# â€°nderungen ab 12.09.01
 ALTER TABLE chat CHANGE c_typ c_typ CHAR(1) DEFAULT 'N' NOT NULL;
 ALTER TABLE user CHANGE u_level u_level CHAR(1) DEFAULT 'U' NOT NULL;
 ALTER TABLE user ADD INDEX(u_level);
 
-# änderungen ab 29.09.01
+# â€°nderungen ab 29.09.01
 ALTER TABLE raum ADD r_werbung CHAR(255) DEFAULT '' NOT NULL;
 
-# änderungen ab 02.10.01
+# â€°nderungen ab 02.10.01
 ALTER TABLE user ADD u_punkte_gesamt INT UNSIGNED DEFAULT '0' NOT NULL, 
 ADD u_punkte_monat INT UNSIGNED DEFAULT '0' NOT NULL, 
 ADD u_punkte_jahr INT UNSIGNED DEFAULT '0' NOT NULL, 
@@ -102,7 +102,7 @@ ADD u_punkte_datum_jahr CHAR(4) DEFAULT '0000' NOT NULL;
 ALTER TABLE online ADD o_punkte INT DEFAULT '0' NOT NULL;
 
 #
-# Tabellenstruktur für Tabelle userinfo
+# Tabellenstruktur fÃ¼r Tabelle userinfo
   
 CREATE TABLE userinfo (
   ui_id int(11) NOT NULL auto_increment,
@@ -112,7 +112,7 @@ CREATE TABLE userinfo (
   ui_ort char(100) NOT NULL DEFAULT '',    
   ui_land char(100) NOT NULL DEFAULT '',   
   ui_geburt char(12) NOT NULL DEFAULT '',
-  ui_geschlecht SET('keine Angabe','männlich','weiblich') DEFAULT 'keine Angabe',
+  ui_geschlecht SET('keine Angabe','mâ€°nnlich','weiblich') DEFAULT 'keine Angabe',
   ui_beziehung SET('keine Angabe','verheiratet','ledig','single') DEFAULT 'keine Angabe',
   ui_typ SET('keine Angabe','zierlich','schlank','sportlich','normal','mollig','dick') DEFAULT 'keine Angabe',
   ui_beruf char(100) NOT NULL DEFAULT '',
@@ -169,7 +169,7 @@ CREATE TABLE bild (
 ) TYPE=MyISAM;
 
 ALTER TABLE user ADD u_punkte_gruppe char(1) not null default "";
-alter table userinfo change ui_geschlecht  ui_geschlecht SET('keine Angabe','männlich','weiblich') DEFAULT 'keine Angabe';
+alter table userinfo change ui_geschlecht  ui_geschlecht SET('keine Angabe','mâ€°nnlich','weiblich') DEFAULT 'keine Angabe';
 alter table userinfo drop ui_bild1;
 alter table userinfo drop ui_bild1_width;
 alter table userinfo drop ui_bild1_height;
@@ -289,43 +289,43 @@ CREATE TABLE mail_check (
 
 ALTER TABLE `user` ADD `u_nick_historie` VARCHAR(255); 
 
-# Änderung 6.6.2003 - martin
+# Æ’nderung 6.6.2003 - martin
 ALTER TABLE user ADD u_profil_historie VARCHAR(255); 
 
-# Änderung 13.8.2003 - martin
+# Æ’nderung 13.8.2003 - martin
  
 ALTER TABLE `user` ADD `u_kommentar` VARCHAR(255); 
 
-# Änderung 27.9.2003 - martin
+# Æ’nderung 27.9.2003 - martin
 
 ALTER TABLE `user` ADD `u_forum_postingproseite` INT DEFAULT '20' NOT NULL;
 
-###### Diverse Änderungen an der DB-Stuktur um von der letzten MietChatversion auf die aktuelle Version zu kommen 23.4.2004 - martin
+###### Diverse Æ’nderungen an der DB-Stuktur um von der letzten MietChatversion auf die aktuelle Version zu kommen 23.4.2004 - martin
 
 
-# Änderungen an der Tabelle chat
+# Æ’nderungen an der Tabelle chat
 
 ALTER TABLE chat CHANGE c_an_user c_an_user INT(11) unsigned DEFAULT '0' NOT NULL;
 ALTER TABLE chat CHANGE c_raum c_raum INT(11) unsigned DEFAULT '0' NOT NULL;
 ALTER TABLE chat CHANGE c_von_user_id c_von_user_id INT(11) unsigned DEFAULT '0' NOT NULL;
 ALTER TABLE chat PACK_KEYS=1;
 
-# Änderungen an der Tabelle invite
+# Æ’nderungen an der Tabelle invite
 
 ALTER TABLE invite PACK_KEYS=1;
 
 
-# Änderungen an der Tabelle ip_sperre
+# Æ’nderungen an der Tabelle ip_sperre
 
 ALTER TABLE ip_sperre CHANGE is_id is_id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 ALTER TABLE ip_sperre CHANGE is_owner is_owner INT(11) UNSIGNED NOT NULL DEFAULT '0';
 
-# Änderungen an der Tabelle moderation
+# Æ’nderungen an der Tabelle moderation
 
 ALTER TABLE moderation CHANGE c_typ c_typ char(1) default NULL;
 
 
-# Änderungen an der Tabelle online
+# Æ’nderungen an der Tabelle online
 
 ALTER TABLE online CHANGE o_user o_user INT(11) UNSIGNED NOT NULL DEFAULT '0';
 ALTER TABLE online CHANGE o_hash o_hash VARCHAR(255)  DEFAULT '' NOT NULL;
@@ -345,7 +345,7 @@ ALTER TABLE online ADD INDEX(o_js);
 ALTER TABLE online ADD INDEX(o_level);
 ALTER TABLE online PACK_KEYS=1;
 
-# Änderungen an der Tabelle Raum
+# Æ’nderungen an der Tabelle Raum
 
 ALTER TABLE raum CHANGE r_id r_id int(11) unsigned NOT NULL auto_increment;
 ALTER TABLE raum CHANGE r_status1 r_status1 char(1) NOT NULL default '';
@@ -372,13 +372,13 @@ CREATE TABLE smsin (
   PRIMARY KEY  (s_id)
 ) TYPE=MyISAM;
 
-# Änderungen an der Tabelle Sperre
+# Æ’nderungen an der Tabelle Sperre
 ALTER TABLE sperre CHANGE s_id s_id int(11) unsigned NOT NULL auto_increment;
 ALTER TABLE sperre CHANGE s_user s_user int(11) unsigned NOT NULL default '0';
 ALTER TABLE sperre CHANGE s_raum s_raum int(11) unsigned NOT NULL default '0';
 
 
-# Änderungen an der Tabelle user
+# Æ’nderungen an der Tabelle user
 ALTER TABLE user CHANGE u_id u_id int(11) unsigned NOT NULL auto_increment;
 ALTER TABLE user CHANGE u_nick u_nick varchar(64) NOT NULL default '';
 ALTER TABLE user CHANGE u_name u_name varchar(64) NOT NULL  default '';
@@ -386,23 +386,23 @@ ALTER TABLE user CHANGE u_url u_url varchar(160) default NULL;
 ALTER TABLE user CHANGE u_backup u_backup tinyint(1) default NULL;
 ALTER TABLE user CHANGE u_away u_away varchar(255) default NULL;
 
-# Änderungen an der Tabelle userinfo
+# Æ’nderungen an der Tabelle userinfo
 ALTER TABLE userinfo CHANGE ui_text ui_text text NOT NULL;
 
 
-# Änderungen Student 10.03.2006 - Update von 4.10 auf 4.11
+# Æ’nderungen Student 10.03.2006 - Update von 4.10 auf 4.11
 ALTER TABLE raum ADD r_min_punkte INT(10) UNSIGNED DEFAULT '0' NOT NULL;
 ALTER TABLE user ADD u_systemmeldungen CHAR(1) DEFAULT 'Y' NOT NULL;
 ALTER TABLE user ADD u_punkte_anzeigen CHAR(1) DEFAULT 'Y' NOT NULL;
 
 
-# Änderungen Student 10.04.2006 - Update von 4.11 auf 4.12
+# Æ’nderungen Student 10.04.2006 - Update von 4.11 auf 4.12
 ALTER TABLE posting ADD po_threadts BIGINT(14) DEFAULT '0' NOT NULL AFTER po_threadorder;
 ALTER TABLE posting ADD po_threadgesperrt CHAR(1) DEFAULT 'N' NOT NULL AFTER po_threadts;
 ALTER TABLE posting ADD po_topposting CHAR(1) DEFAULT 'N' NOT NULL AFTER po_threadgesperrt;
 ALTER TABLE mail ADD m_geloescht_ts TIMESTAMP(14) AFTER m_zeit;
 
-# Änderungen Student 30.04.2006
+# Æ’nderungen Student 30.04.2006
 ALTER TABLE invite ADD index inv_user (inv_user);
 ALTER TABLE posting ADD INDEX po_themasort (po_th_id, po_vater_id, po_topposting, po_threadts, po_ts);
 ALTER TABLE mail ADD INDEX m_geloescht_ts (m_an_uid, m_status, m_geloescht_ts);
@@ -412,11 +412,11 @@ ALTER TABLE user ADD INDEX u_adminemail (u_adminemail);
 ALTER TABLE user ADD INDEX u_email (u_email);
 ALTER TABLE user ADD INDEX u_name (u_name);
 
-# Änderungen Student 10.02.2006
+# Æ’nderungen Student 10.02.2006
 ALTER TABLE userinfo CHANGE ui_beziehung ui_beziehung SET( 'keine Angabe', 'verheiratet', 'ledig', 'single', 'vergeben' ) NOT NULL DEFAULT 'keine Angabe';
 
-# Änderung Student 09.08.07
+# Æ’nderung Student 09.08.07
 ALTER TABLE user ADD u_knebel TIMESTAMP NOT NULL;
 
-# Änderung Student 23.11.07
+# Æ’nderung Student 23.11.07
 ALTER TABLE posting ADD po_gesperrt CHAR( 1 ) DEFAULT 'N' NOT NULL AFTER po_threadts;

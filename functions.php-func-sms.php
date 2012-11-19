@@ -32,34 +32,34 @@ $absender=$emp."@".$chat.": ";     // Wir basteln uns den Absender der SMS
 
 if (160-strlen($text)-strlen($absender) < 0) { $smszulang=true;}
 
-$text=substr($text,0,160-strlen($absender)); // Text um Absender kürzen
-$text=preg_replace("/[\\\\".chr(1)."-".chr(31)."]/","",$text);  // Ungültige Zeichen filtern
+$text=substr($text,0,160-strlen($absender)); // Text um Absender kÃ¼rzen
+$text=preg_replace("/[\\\\".chr(1)."-".chr(31)."]/","",$text);  // UngÃ¼ltige Zeichen filtern
 
 // $debug=$text;
 // system_msg("",0,$von_user_id,$u_farbe,"<b>mainChat:</b> DEBU $debug");
 
 $complete=$absender.$text;
 
-// Prüfen ob genug Punkte
-#if ($u_punkte_gesamt < $sms[punkte]) { $fehler = "Um SMS verschicken zu dürfen brauchst Du mehr als $sms[punkte] Punkte.";}
+// PrÃ¼fen ob genug Punkte
+#if ($u_punkte_gesamt < $sms[punkte]) { $fehler = "Um SMS verschicken zu dÃ¼rfen brauchst Du mehr als $sms[punkte] Punkte.";}
 
-// Prüfen ob noch genug SMS-Guthaben da
+// PrÃ¼fen ob noch genug SMS-Guthaben da
 $guthaben = hole_smsguthaben($von_user_id);
 
 if (! isset($fehler)) { if ($guthaben <= 0) { $fehler = "Du hast kein SMS-Guthaben mehr!";} }
 
-// Prüfen ob User SMS möchte
+// PrÃ¼fen ob User SMS mÃ¶chte
 $query="SELECT u_sms_ok FROM user WHERE u_id = '$an_user'";
 $result=mysql_query($query);
 $a=mysql_fetch_array($result);
 mysql_free_result($result);
 $sms_ok=$a['u_sms_ok'];
-if (! isset($fehler)) { if ($sms_ok == "N") { $fehler = "Dieser User möchte keine SMS empfangen.";} }
+if (! isset($fehler)) { if ($sms_ok == "N") { $fehler = "Dieser User mÃ¶chte keine SMS empfangen.";} }
 
-// Prüfen auf gültige Handynummer des Empfängers
+// PrÃ¼fen auf gÃ¼ltige Handynummer des EmpfÃ¤ngers
 
 $handynr=hole_handynummer($an_user);
-if (! isset($fehler)) { if (! pruefe_handynummer($handynr)) { $fehler = "Dieser User hat leider keine gültige Handynummer eingetragen.";} }
+if (! isset($fehler)) { if (! pruefe_handynummer($handynr)) { $fehler = "Dieser User hat leider keine gÃ¼ltige Handynummer eingetragen.";} }
 
 if ( isset($fehler) )
                  {
@@ -73,7 +73,7 @@ if ( isset($fehler) )
 		
                 sms_sende($von_user_id,$an_user,$complete);
                 $txt="<B>$chat:</B> sende SMS an $emp2[u_nick]: '$text'";
-                if ($smszulang) { system_msg("",0,$von_user_id,$system_farbe,"<B>Hinweis:</B> Die eingegebene SMS war zu lang. Sie wurde auf 160 Zeichen gekürzt!");}
+                if ($smszulang) { system_msg("",0,$von_user_id,$system_farbe,"<B>Hinweis:</B> Die eingegebene SMS war zu lang. Sie wurde auf 160 Zeichen gekÃ¼rzt!");}
 
                 system_msg("",0,$von_user_id,$system_farbe,$txt);
                 }
@@ -116,13 +116,13 @@ if (pruefe_handynummer($handynummer) && $guthaben > 0)
 			$num=mysql_fetch_array($result);
 			if ($num[zahl] == 0)
 			{
-			$nachricht2="Du erhälst gleich eine SMS aus dem $chat - Um dem User zu antworten schreibe einfach eine SMS an $sms[shortid] mit $sms[keyword] <nick> <nachricht> (0,19EUR/SMS)";
+			$nachricht2="Du erhÃ¤lst gleich eine SMS aus dem $chat - Um dem User zu antworten schreibe einfach eine SMS an $sms[shortid] mit $sms[keyword] <nick> <nachricht> (0,19EUR/SMS)";
 			$nachricht2=urlencode($nachricht2);
 	                $url=$sms[gateway_url][$gw];
 	                $url=str_replace("%sender%",urlencode(substr($chat,0,11)),$url);
                         $url=str_replace("%nummer%",$handynummer,$url);
                         $url=str_replace("%message%",$nachricht2,$url);
-                        if ($dbase == "mainchat") @fopen($url,"r"); // Hier schicken wir die SMS über den Gateway raus
+                        if ($dbase == "mainchat") @fopen($url,"r"); // Hier schicken wir die SMS Ã¼ber den Gateway raus
 			}
 
                         $url=$sms[gateway_url][$gw];
@@ -136,12 +136,12 @@ if (pruefe_handynummer($handynummer) && $guthaben > 0)
 				{
 				 $url=str_replace("%sender%",$sms[shortid],$url); 
 				}
-                        @fopen($url,"r"); // Hier schicken wir die SMS über den Gateway raus
+                        @fopen($url,"r"); // Hier schicken wir die SMS Ã¼ber den Gateway raus
 
                         // Ein Credit abziehen
                         $f[u_sms_guthaben]=$guthaben-1;
 
-                        // Änderungen in DB schreiben
+                        // Ã„nderungen in DB schreiben
                         $f[ui_id]=schreibe_db("user",$f,$von_user_id,"u_id");
                          unset($f);
 
@@ -179,7 +179,7 @@ global $sms,$dbase,$chat;
 				{
 				 $url=str_replace("%sender%",$sms[shortid],$url); 
 				}
-                        @fopen($url,"r"); // Hier schicken wir die SMS über den Gateway raus
+                        @fopen($url,"r"); // Hier schicken wir die SMS Ã¼ber den Gateway raus
 
 }
 
@@ -222,8 +222,8 @@ $netze=array("0151", "0160", "0170", "0171", "0175", "0152","0162", "0172",
              "0173", "0174", "0155", "0157","0163", "0177", "0178", "0159",
              "0176","0179", "0150","0156");
 
-if (! in_array($num[netz],$netze)) { $nummer_ok=false;} // Prüfung ob Netz bekannt
-if (! preg_match("/^([0-9]{7,10})$/i",$num[nummer])) { $nummer_ok=false;} // Prüfung ob Nummer lang genug
+if (! in_array($num[netz],$netze)) { $nummer_ok=false;} // PrÃ¼fung ob Netz bekannt
+if (! preg_match("/^([0-9]{7,10})$/i",$num[nummer])) { $nummer_ok=false;} // PrÃ¼fung ob Nummer lang genug
 return($nummer_ok);
 }
 

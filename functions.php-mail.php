@@ -4,7 +4,7 @@
 
 function formular_neue_email($neue_email,$m_id="") {
 
-	// Gibt Formular für Nicknamen zum Versand einer Mail aus
+	// Gibt Formular fÃ¼r Nicknamen zum Versand einer Mail aus
 
 	global $id,$http_host,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$conn,$dbase;
 	global $farbe_text,$farbe_tabelle_kopf2,$farbe_tabelle_zeile1,$farbe_tabelle_zeile2,$PHP_SELF;
@@ -95,7 +95,7 @@ function formular_neue_email2($neue_email,$m_id="") {
 		$titel="Neue Mail an";
 	};
 
-	// Signatur anfügen
+	// Signatur anfÃ¼gen
 	if (!isset($neue_email['m_text'])) $neue_email['m_text']=htmlspecialchars(erzeuge_fuss(""));
 
 	// Userdaten aus u_id lesen und setzen
@@ -166,7 +166,7 @@ function formular_neue_email2($neue_email,$m_id="") {
 
 function zeige_mailbox($aktion,$zeilen) {
 
-	// Zeigt die Mails in der Übersicht an
+	// Zeigt die Mails in der Ãœbersicht an
 
 	global $id,$conn,$http_host,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$dbase,$conn,$u_nick,$u_id;
 	global $farbe_text,$farbe_tabelle_kopf2,$farbe_tabelle_zeile1,$farbe_tabelle_zeile2,$PHP_SELF,$chat;
@@ -179,8 +179,8 @@ function zeige_mailbox($aktion,$zeilen) {
 				"FROM mail LEFT JOIN user on m_von_uid=u_id ".
 				"WHERE m_an_uid=$u_id ".
 				"order by m_zeit desc";
-			$button="LÖSCHEN";
-			$titel="Mails in der Mailbox für";
+			$button="LÃ·SCHEN";
+			$titel="Mails in der Mailbox fÃ¼r";
 		break;
 
 		case "geloescht":
@@ -200,8 +200,8 @@ function zeige_mailbox($aktion,$zeilen) {
 				"WHERE m_an_uid=$u_id ".
 				"AND m_status!='geloescht' ".
 				"order by m_zeit desc";
-			$button="LÖSCHEN";
-			$titel="Mails in der Mailbox für";
+			$button="LÃ·SCHEN";
+			$titel="Mails in der Mailbox fÃ¼r";
 	};
 
 	echo "<FORM NAME=\"mailbox\" ACTION=\"$PHP_SELF\" METHOD=POST>\n".
@@ -225,7 +225,7 @@ function zeige_mailbox($aktion,$zeilen) {
 
 			// Mails anzeigen
 			echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=5><DIV style=\"color:$farbe_text;\"><B>$anzahl $titel $u_nick:</B></DIV></TD></TR>\n".
-				"<TR><TD>".$f1."Löschen".$f2."</TD><TD>".$f1."von".$f2."</TD><TD>".$f1."Betreff".$f2."</TD><TD>".
+				"<TR><TD>".$f1."LÃ¶schen".$f2."</TD><TD>".$f1."von".$f2."</TD><TD>".$f1."Betreff".$f2."</TD><TD>".
 				$f1."Datum".$f2."</TD><TD>".$f1."Status".$f2."</TD></TR>\n";
 
 			$i=0;
@@ -264,7 +264,7 @@ function zeige_mailbox($aktion,$zeilen) {
 			};
 
 			echo "<TR BGCOLOR=\"$bgcolor\"><TD><INPUT TYPE=\"checkbox\" onClick=\"toggle(this.checked)\">".
-				$f1." Alle Auswählen".$f2."</TD>\n".
+				$f1." Alle AuswÃ¤hlen".$f2."</TD>\n".
 				"<TD ALIGN=\"right\" COLSPAN=4>".$f1."<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"$button\">".
 				$f2."</TD></TR>\n";
 		};
@@ -317,7 +317,7 @@ function zeige_email($m_id) {
 			"<TR BGCOLOR=\"$farbe_tabelle_zeile2\"><TD ALIGN=\"RIGHT\"><B>".$f1."Status:".$f2."</B></TD><TD COLSPAN=3>".$f1.$row->m_status.$f2."</TD></TR>\n".
 			"<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD>&nbsp;</TD><TD COLSPAN=3>".$f1.(stripslashes(str_replace("\n","<BR>\n",$row->m_text))).$f2."</TD></TR>\n";
 
-		// Formular zur Löschen, Beantworten
+		// Formular zur LÃ¶schen, Beantworten
 		echo "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD>&nbsp;</TD>".
 			"<FORM NAME=\"mail_antworten\" ACTION=\"$PHP_SELF\" METHOD=POST>\n".
 			"<TD ALIGN=\"left\">".$f1.
@@ -341,7 +341,7 @@ function zeige_email($m_id) {
 			"<INPUT TYPE=\"HIDDEN\" NAME=\"loesche_email\" VALUE=\"".$row->m_id."\">\n".
 			"<INPUT TYPE=\"HIDDEN\" NAME=\"aktion\" VALUE=\"loesche\">\n".
 			"<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n".
-			"<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"LÖSCHEN\">".
+			"<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"LÃ·SCHEN\">".
 			$f2."</TD></FORM></TR>\n";
 
 		echo "</TABLE>\n";
@@ -362,7 +362,7 @@ function zeige_email($m_id) {
 
 function loesche_mail($m_id,$u_id) {
 
-	// Löscht eine Mail der ID m_id
+	// LÃ¶scht eine Mail der ID m_id
 
 	global $id,$http_host,$eingabe_breite,$PHP_SELF,$f1,$f2,$f3,$f4,$dbase,$conn,$u_nick,$u_id;
 
@@ -386,7 +386,7 @@ function loesche_mail($m_id,$u_id) {
 		};
 		schreibe_db("mail",$f,$row->m_id,"m_id");
 	} else {
-		echo "<P><B>Fehler:</B> Diese Mail nicht kann nicht gelöscht werden!</P>";
+		echo "<P><B>Fehler:</B> Diese Mail nicht kann nicht gelÃ¶scht werden!</P>";
 	}
 	@mysql_free_result($result);
 

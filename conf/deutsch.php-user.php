@@ -2,7 +2,7 @@
 
 // Sprachdefinition deutsch user.php
 
-$t['menue1']=	"Übersicht";
+$t['menue1']=	"Ãœbersicht";
 $t['menue2']=	"User suchen";
 $t['menue3']=	"Admin: User exportieren";
 $t['menue4']=	"Raumliste";
@@ -12,19 +12,19 @@ $t['menue7']=	"Top10/100";
 $t['menue8']=	"Meine Freunde";
 $t['menue9']=	"Admin: Chat&nbsp;Statistiken";
 $t['menue10']=	"Admin: User importieren";
-$t['menue11']=	"Admin: User löschen";
+$t['menue11']=	"Admin: User lÃ¶schen";
 $t['menue12']=	"Adminliste anzeigen";
 $t['menue13']=	"Admin: Umfragen";
 
 
-$t['sonst1']=	"Fenster schließen";
-$t['sonst2']=	"$chat Menü";
+$t['sonst1']=	"Fenster schlieÃŸen";
+$t['sonst2']=	"$chat MenÃ¼";
 $t['sonst3']=	"Traceroute zu";
 $t['sonst4']=	"<B>Es wurden leider keine User gefunden!</B>";
 $t['sonst5']=	"<B>Es wurde leider kein User %suchtext% gefunden!</B>";
 $t['sonst6']=	"<B>Bitte neuen Suchtext eingeben:</B><BR>(% ist Jokerzeichen)";
 $t['sonst7']=	"<B>Bitte Nicknamen oder eine E-Mail Adresse als Suchtext eingeben:</B> (% ist Jokerzeichen)";
-$t['sonst8']=	"flüstert an";
+$t['sonst8']=	"flÃ¼stert an";
 $t['sonst9']=	"<B>Den User gibt's nicht!</B>";
 $t['sonst10']=	"<B>Der User '%uu_nick%' ist nicht mehr online!</B>";
 $t['sonst11']=	"<B>Der User ist nicht mehr in diesem Raum!</B>";
@@ -41,7 +41,7 @@ $t['sonst20']=	"SMILIES";
 $t['sonst21']=	"Usergruppe:";
 $t['sonst22']=	"egal";
 $t['sonst23']=	"Bitte warten...";
-$t['sonst24']=	"Mehr als 2000 User können nicht dargestellt werden. Bitte die Suche genauer spezifizieren!";
+$t['sonst24']=	"Mehr als 2000 User kÃ¶nnen nicht dargestellt werden. Bitte die Suche genauer spezifizieren!";
 $t['sonst25']=	"<B>Bitte Usernamen, Nick oder eine E-Mail Adresse als Suchtext eingeben:</B> (% ist Jokerzeichen)";
 $t['sonst26']=	"Nickname\tUsername\tAdmin E-Mail\tE-Mail\tHomepage\tPunkte\tLetzter Login\tLevel\n";
 $t['sonst26b']=	"Nickname\tAdmin E-Mail\tE-Mail\tLevel\n";
@@ -59,18 +59,18 @@ $t['sonst37']=	"(Anonym)";
 $t['sonst38']=	"Mit Homepage";
 $t['sonst39']=	"Ja";
 $t['sonst40']=    "<P><B>Fehler:</B> Dieser User kann nicht gekickt werden!</P>";
-$t['sonst41']=	"<P><B>Fehler:</B> Diese Funktion steht nur Superusern zur Verfügung!</P>";
+$t['sonst41']=	"<P><B>Fehler:</B> Diese Funktion steht nur Superusern zur VerfÃ¼gung!</P>";
 $t['sonst42']=	"Raum: ";
 $t['sonst43']=	"Im [%whotext%] ist niemand";
 $t['sonst44']=    "Profil-Edit Historie";
 $t['sonst45']=    "Userdaten importieren";
 $t['sonst46']=    "Format: Nickname<TAB>Username<TAB>Admin E-Mail<TAB>Passwort";
-$t['sonst47']=	"<P><B>Fehler:</B> Sie müssen eine Datei hochladen!</P>";
-$t['sonst48']=	"<P><B>Fehler:</B> Fehler beim Öffnen der Datei.</P>";
-$t['sonst49']=	"<P><B>Alle User löschen:</B> Sollen wirklich alle User außer den Admins gelöscht werden?</P>";
+$t['sonst47']=	"<P><B>Fehler:</B> Sie mÃ¼ssen eine Datei hochladen!</P>";
+$t['sonst48']=	"<P><B>Fehler:</B> Fehler beim Ã·ffnen der Datei.</P>";
+$t['sonst49']=	"<P><B>Alle User lÃ¶schen:</B> Sollen wirklich alle User auÃŸer den Admins gelÃ¶scht werden?</P>";
 $t['sonst50']=	"Ja";
-$t['sonst51']=    "User löschen";
-$t['sonst52']=	"User gelöscht.";
+$t['sonst51']=    "User lÃ¶schen";
+$t['sonst52']=	"User gelÃ¶scht.";
 $t['sonst53']=	"Es ist ein Fehler aufgetreten.";
 
 
@@ -78,5 +78,5 @@ $t['statistik1']= "Chat-Statistiken";
 $t['statistik2']= "Chat-Statistik nach Stunden";
 $t['statistik3']= "Chat-Statistik nach Monaten";
 $t['statistik4']= "Es ist ein Fehler beim Datenbankconnect aufgetreten.";
-$t['statistik5']= "Für diesen Chat werden keine Statistiken gespeichert.";
+$t['statistik5']= "FÃ¼r diesen Chat werden keine Statistiken gespeichert.";
 ?>

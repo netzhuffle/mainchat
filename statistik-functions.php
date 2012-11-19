@@ -196,7 +196,7 @@
 			$img_h = trim(strtok(","));
 			$img_p = trim(strtok(","));
 
-				/* Als erstes wird der größte Eintrag im Array und einige Werte	*/
+				/* Als erstes wird der grÃ¶ÃŸte Eintrag im Array und einige Werte	*/
 				/* ermittelt.																										*/
 
 			$b = 0;
@@ -327,7 +327,7 @@
 			$msg.="</TR>\n";
 			$msg.="</TABLE>\n";
 
-				/* Durchschnittliche Anzahl der Benutzer und höchste Anzahl der	*/
+				/* Durchschnittliche Anzahl der Benutzer und hÃ¶chste Anzahl der	*/
 				/* Benutzer ausgeben.																						*/
 			
 			$msg.="<P ALIGN=\"CENTER\">";

@@ -1,8 +1,8 @@
 # fidion GmbH mainChat
 #
-# Änderungen für ein mainChat-Update.
+# Ã„nderungen fÃ¼r ein mainChat-Update.
 # Nur relevant bei einem Update einer alten Version auf die neue Version,
-# da in den Sprachdateien neue Texte hinzugefügt wurden. Bitte vergleichen
+# da in den Sprachdateien neue Texte hinzugefÃ¼gt wurden. Bitte vergleichen
 # Sie Ihre Versionsnummer im Kopf der funktions.php mit der changes.html.
 #
 
@@ -12,7 +12,7 @@ $t[sonst21]=    "SPERRE";
 $t[sonst22]=    "Art (Warnung sperrt nicht):";
 
 31.08.01 index:
-$t[default6]=	"<B>Warnung an alle Admins:</B> User <B>%u_nick%</B> loggt sich über %ip_adr%/%ip_name% im $chat ein (%is_infotext%)!";
+$t[default6]=	"<B>Warnung an alle Admins:</B> User <B>%u_nick%</B> loggt sich Ã¼ber %ip_adr%/%ip_name% im $chat ein (%is_infotext%)!";
 
 26.09.01 raum:
 $t[sonst12]=    "URL des Werbeframes (opt.)";
@@ -21,7 +21,7 @@ $t[sonst12]=    "URL des Werbeframes (opt.)";
 $t[menue7]=     "Top10/100";
 
 09.10.01 functions.php
-$t[chat_msg74]= "<B>Fehler:</B> Diese Funktion ist in diesem Chat nicht verfügbar.";
+$t[chat_msg74]= "<B>Fehler:</B> Diese Funktion ist in diesem Chat nicht verfÃ¼gbar.";
 
 
 15.10.01 user:
@@ -45,13 +45,13 @@ $t[menue10]=    "MAIL";
 18.10.01 functions.php:
 $t[user_zeige40]="MAIL&nbsp;SENDEN";
 $t[chat_msg80]= "<B>$chat:</B> Die Mail an %chatzeile% wurde verschickt."; 
-$t[chat_msg81]= "<B>Fehler:</B> Bitte geben Sie einen Text für Ihre Mail ein.";
+$t[chat_msg81]= "<B>Fehler:</B> Bitte geben Sie einen Text fÃ¼r Ihre Mail ein.";
 $t[chat_msg82]= "<B>$chat:</B> '%u_name%' wird von folgenden Usern ignoriert: ";
 $t[chat_msg83]= "<B>$chat:</B> '%u_name%' ist jetzt Ihr Freund.";
 $t[chat_msg84]= "<B>$chat:</B> '%u_name%' ist jetzt nicht mehr Ihr Freund.";
-$t[chat_msg85]= "<B>Freundesliste für %u_name%. Ihre Freunde sind:</B>";
+$t[chat_msg85]= "<B>Freundesliste fÃ¼r %u_name%. Ihre Freunde sind:</B>";
 $t[chat_msg86]= "<B>$chat:</B> Sie haben derzeit keine Freunde in Ihrer Freundesliste.";
-$t[chat_msg89]= "<B>Fehler:</B> Sie können sich nicht selbst zum Freund machen."; 
+$t[chat_msg89]= "<B>Fehler:</B> Sie kÃ¶nnen sich nicht selbst zum Freund machen."; 
 $t[chat_msg90]= "<B>$chat:</B> %u_name% ist online";    
 $t[chat_msg91]= "%u_name%\nonline %online% Std/Min/sek";
 $t[chat_msg92]= "[online %online% Std/Min/sek]"; 
@@ -59,24 +59,24 @@ $t[chat_msg93]= "[offline]";
 $t[chat_msg94]= "[offline, letzter Login %login%]";
 $t[punkte1]="<b>$chat:</b> %text% Ihnen wurden %punkte% Punkte gutgeschrieben!";
 $t[punkte2]="<b>$chat:</b> %text% Ihnen wurden %punkte% Punkte abgezogen!";
-$t[punkte3]="Braver User! Großes Lob von %user%: ";
-$t[punkte4]="Böser User! Sie wurden von %user% getadelt: ";
+$t[punkte3]="Braver User! GroÃŸes Lob von %user%: ";
+$t[punkte4]="BÃ¶ser User! Sie wurden von %user% getadelt: ";
 $t[punkte5]="Braver User! %user1% hat %user2% %punkte% Punkte gutgeschrieben!";
-$t[punkte6]="Böser User! %user1% hat %user2% %punkte% Punkte abgezogen!";
+$t[punkte6]="BÃ¶ser User! %user1% hat %user2% %punkte% Punkte abgezogen!";
 $t[punkte7]="<B>Fehler:</B> Bitte mindestens einen Punkt vergeben!";
 $t[punkte8]="%user1% hat %user2% %punkte% Punkte gutgeschrieben!";  
 $t[punkte9]="%user1% hat %user2% %punkte% Punkte abgezogen!";  
-$t[punkte10]="<B>Fehler:</B> Sie können sich selbst keine Punkte geben oder abziehen!";
-$t[punkte11]="<B>Fehler:</B> Sie können nicht mehr als 1000 vergeben!";                
-$t[punkte12]="%user% haut sich eines mit der Peitsche über und verliert einen Punkt!";
-$t[punkte13]="%user% denkt über den Sinn des Lebens nach und zieht sich %punkte% Punkte ab!";
-$t[punkte14]="%user% gibt sich mit der Peitsche %punkte% Schläge auf den Rücken und verliert %punkte% Punkte!";
-$t[punkte15]="%user% peitscht sich kräftig aus und verliert %punkte% Punkte!";
+$t[punkte10]="<B>Fehler:</B> Sie kÃ¶nnen sich selbst keine Punkte geben oder abziehen!";
+$t[punkte11]="<B>Fehler:</B> Sie kÃ¶nnen nicht mehr als 1000 vergeben!";                
+$t[punkte12]="%user% haut sich eines mit der Peitsche Ã¼ber und verliert einen Punkt!";
+$t[punkte13]="%user% denkt Ã¼ber den Sinn des Lebens nach und zieht sich %punkte% Punkte ab!";
+$t[punkte14]="%user% gibt sich mit der Peitsche %punkte% SchlÃ¤ge auf den RÃ¼cken und verliert %punkte% Punkte!";
+$t[punkte15]="%user% peitscht sich krÃ¤ftig aus und verliert %punkte% Punkte!";
 $t[punkte16]="%user% peitscht sich ekstatisch aus und verliert %punkte% Punkte!";
 $t[punkte17]="%user% peitscht sich ekstatisch aus und verliert %punkte% Punkte (mehr, mehr, mehr...)!";
 $t[punkte18]="%user% geht in ein Bordell und verliert %punkte% Punkte!";
 $t[punkte19]="%user% geht in ein Casino und verliert %punkte% Punkte!";
-$t[punkte20]="%user% muß zum Finanzamt und verliert %punkte% Punkte!";
+$t[punkte20]="%user% muss zum Finanzamt und verliert %punkte% Punkte!";
 $t[user_zeige41]="FREUND&nbsp;JA/NEIN";
 $t[mail1]="<b>$chat:</b> Sie haben neue Mail. <A %link%>Gleich lesen?</A>";
 $t[mail2]=" Mail von '%nick%' am %zeit%: %betreff%";
@@ -85,23 +85,23 @@ $t[mail4]="\n  Eine Mail aus dem $chat http://".$HTTP_HOST;
 $t[mail5]="Hallo %user%, im $chat sind folgende Freunde online:\n\n";
 $t[mail6]="%anzahl% Freunde onlin(e) im $chat";
 $t[mail7]="<b>$chat:</b> Sie haben eine neue Mail von '%nick%' erhalten: %betreff%";
-$t[mail8]="Hallo %user%, über Ihre Freunde im $chat gibt es etwas neues:\n\n";  
-$t[mail9]="Hallo, über Ihre Freunde im $chat gibt es etwas neues:\n\n";          
+$t[mail8]="Hallo %user%, Ã¼ber Ihre Freunde im $chat gibt es etwas neues:\n\n";  
+$t[mail9]="Hallo, Ã¼ber Ihre Freunde im $chat gibt es etwas neues:\n\n";          
 $t[freunde1]="<b>$chat:</b> Ein Freund ist da: %u_name% betritt Raum %raum%"; 
-$t[freunde2]="<b>$chat:</b> Ein Freund geht weg: %u_name% verlässt den Chat";  
+$t[freunde2]="<b>$chat:</b> Ein Freund geht weg: %u_name% verlÃ¤sst den Chat";  
 $t[freunde3]="%u_name% betritt Raum %raum% im $chat";                        
-$t[freunde4]="%u_name% verlässt den $chat";                                     
+$t[freunde4]="%u_name% verlÃ¤sst den $chat";                                     
 $t[kopfzeile] = "{autor} schrieb am {date}";
-$t[gruss] = "Mit freundlichen Grüßen";
+$t[gruss] = "Mit freundlichen GrÃ¼ÃŸen";
 $t[user_zeige8]="Level";
 $t[user_zeige35]="Smilies";
 $t[user_zeige42]="(Voreinstellung&nbsp;%vor%)";
-$t[user_zeige43]="Einstellungen für Fenstergrößen:";
+$t[user_zeige43]="Einstellungen fÃ¼r FenstergrÃ¶ÃŸen:";
 $t[eingabe]="Eingabe";
 $t[chatuserliste]="User";
 $t[interaktiv]="Interaktiv";   
-$t[user_zeige43]="Einstellungen für Fenstergrößen";
-$t[user_zeige44]="Signatur für Mail und Forum";
+$t[user_zeige43]="Einstellungen fÃ¼r FenstergrÃ¶ÃŸen";
+$t[user_zeige44]="Signatur fÃ¼r Mail und Forum";
 $t[chat_msg95]= "<B>Fehler:</B> User '%chatzeile%' ist ein Gast oder gesperrt.";
 
 10.12.01 hilfe
@@ -131,14 +131,14 @@ $leveltext[B]=          "Besitzer";
 ########################################################
 
 18.01.02 schreibe
-$t[floodsperre2]="Für Chat-Flooding werden Punkte abgezogen: ";                      
+$t[floodsperre2]="FÃ¼r Chat-Flooding werden Punkte abgezogen: ";                      
 
 23.01.02 user:
 $t[sonst40]=    "<P><B>Fehler:</B> Dieser User kann nicht gekickt werden!</P>";
 $t[menue3]=     "Admin: User exportieren";
 $t[menue9]=     "Admin: Chat&nbsp;Statistiken";
 $t[sonst26]=    "Nickname\tUsername\tAdmin E-Mail\tE-Mail\tHomepage\tPunkte\tLetzter Login\n";
-$t[sonst41]=    "<P><B>Fehler:</B> Diese Funktion steht nur Superusern zur Verfügung!</P>";
+$t[sonst41]=    "<P><B>Fehler:</B> Diese Funktion steht nur Superusern zur VerfÃ¼gung!</P>";
 $t[sonst42]=    "Raum: "; 
 $t[sonst43]=    "Im %whotext% ist niemand";
 
@@ -152,25 +152,25 @@ $t[menue12]=    "BLACKLIST";
 $t[menue3]=     "Blacklist";
 
 21.02.02 index:
-$t[login20]=            "Zu viele Fehlversuche beim Login. Der Account %login% wurde für einige Zeit gesperrt!";
-$t[login21]=            "Zu viele Fehlversuche beim Login. Der Account %login% wurde für einige Zeit gesperrt!\n\n".   
+$t[login20]=            "Zu viele Fehlversuche beim Login. Der Account %login% wurde fÃ¼r einige Zeit gesperrt!";
+$t[login21]=            "Zu viele Fehlversuche beim Login. Der Account %login% wurde fÃ¼r einige Zeit gesperrt!\n\n".   
                         "Hinweis: Diese Mail wurde automatisch erzeugt und wird an den Webmaster verschickt. ".
-                        "Über http://www.ripe.net/perl/whois können Sie unter Angabe der IP-Adresse den ".
-                        "Provider ermitteln, über den der Loginversuch stattfand. ".
+                        "Ãœber http://www.ripe.net/perl/whois kÃ¶nnen Sie unter Angabe der IP-Adresse den ".
+                        "Provider ermitteln, Ã¼ber den der Loginversuch stattfand. ".
                         "Um den Verursacher zu ermitteln, wenden Sie sich bitte unter Angabe der IP und des ".
                         "Datums/Uhrzeit direkt an den Provider\n";
 $t[login22]=            "Raum/Forum:";
-$t[login23]=            "<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=login&$t[login10]=los&eintritt=forum\">Beiträge im Forum zeigen</A>]</B> (Automatischer Login als Gast)";
-$t[login24]=            "<P><B>Der Login ist leider nicht möglich!</B></P>".
+$t[login23]=            "<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=login&$t[login10]=los&eintritt=forum\">BeitrÃ¤ge im Forum zeigen</A>]</B> (Automatischer Login als Gast)";
+$t[login24]=            "<P><B>Der Login ist leider nicht mÃ¶glich!</B></P>".
                         "<P>Es sind im $chat bereits %online% User online. ".
-                        "Als %leveltxt% dürfen Sie ab maximal %max% User den $chat nicht mehr betreten.</P>".          
+                        "Als %leveltxt% dÃ¼rfen Sie ab maximal %max% User den $chat nicht mehr betreten.</P>".          
                         "%zusatztext%";    
 $t[login25]=            "<P><B>Fehler beim Login:</B><BR>Der Login als Admin (Superuser oder Chatadmin) ".
-			"ohne aktivierte Cookies ist aus Sicherheitsgründen nicht gestattet. Bitte verwenden ".
+			"ohne aktivierte Cookies ist aus SicherheitsgrÃ¼nden nicht gestattet. Bitte verwenden ".
 			"Sie einen Browser mit aktivieren Cookies ".
 			"</P><P>[<A HREF=\"%url%\">weiter zur Loginseite</A>]</P>";
 $t[default4]=           "User online in %raum%:";
-$t[default8]=           "Im Forum finden sich %beitraege% Beiträge in %themen% Diskussionsthemen.\n";
+$t[default8]=           "Im Forum finden sich %beitraege% BeitrÃ¤ge in %themen% Diskussionsthemen.\n";
 $t[default9]=           "Raum ";
 $t[default10]=          "Community-Bereich ";
 
@@ -181,9 +181,9 @@ $t[user_zeige47]="Aus dem CHAT KICKEN";
 $t[betrete_forum1]="<BR><B>Willkommen im Forum, %u_nick%!</B>";
 $t[user_zeige48]="-> BLACKLIST";
 $t[chat_msg96]= "<B>$chat:</B> '%u_name%' ist auf der Blacklist eingetragen.";
-$t[chat_msg97]= "<B>$chat:</B> '%u_name%' ist von der Blacklist gelöscht.";   
+$t[chat_msg97]= "<B>$chat:</B> '%u_name%' ist von der Blacklist gelÃ¶scht.";   
 $t[chat_msg98]= "<B>$chat:</B> Bitte geben Sie einen Nick an.";
-$t[chat_msg99]= "<B>Fehler:</B> Sie können sich nicht selbst in der Blackliste eintragen.";
+$t[chat_msg99]= "<B>Fehler:</B> Sie kÃ¶nnen sich nicht selbst in der Blackliste eintragen.";
 $t[interaktivforum]="Forum";
 $t[messagesforum1]="Nachrichten- Forum";
 $t[messages_forum1]="<B>Sie befinden sich im Forum.</B><BR>Derzeit liegen keine System- oder Privat-Nachrichten vor.<BR>";
@@ -200,58 +200,58 @@ gesamte legende
 
 22.04.02 functions:
 $t[warnung1]="<BR><B>Warnung:</B> %text%%user%.";
-$t[warnung2]="Sie haben den Chat in den <B>sicheren Modus</B> geschaltet. Dadurch vermindert sich die Qualität der Chatausgabe. Bitte verwenden Sie den ".
-        "sicheren Modus nur, wenn Sie die Probleme durch Änderung Ihrer Proxy- oder Browsereinstellungen nicht beheben können";
-$t[warnung3]="Ihr Browser unterstützt <B>kein JavaScript</B> oder JavaScript ist abgeschaltet. Daher läuft der $chat im <B>sicheren Modus</B>, die Qualität ".
+$t[warnung2]="Sie haben den Chat in den <B>sicheren Modus</B> geschaltet. Dadurch vermindert sich die QualitÃ¤t der Chatausgabe. Bitte verwenden Sie den ".
+        "sicheren Modus nur, wenn Sie die Probleme durch Ã„nderung Ihrer Proxy- oder Browsereinstellungen nicht beheben kÃ¶nnen";
+$t[warnung3]="Ihr Browser unterstÃ¼tzt <B>kein JavaScript</B> oder JavaScript ist abgeschaltet. Daher lÃ¤uft der $chat im <B>sicheren Modus</B>, die QualitÃ¤t ".
         "der Chatausgabe ist vermindert und viele Funktionen im $chat sind abgeschaltet. Bitte aktivieren Sie ".
-        "JavaScript, falls Ihr Browser dies zuläßt";
-$t[chat_msg102]="<B>&lt;&lt;&lt;</B> '%user%' verläßt diesen Raum und den Chat.";
+        "JavaScript, falls Ihr Browser dies zulÃ¤ÃŸt";
+$t[chat_msg102]="<B>&lt;&lt;&lt;</B> '%user%' verlÃ¤ÃŸt diesen Raum und den Chat.";
 
 31.05.02 functions:
 $t[userliste1]="<span class=\"textbold\">%raum_alt% (%user_im_raum% Chatter Im Raum)</span><BR>\n<span class=\"text\">%nicks%</span><br>\n";    
-$t[userliste2]="<p class=\"header2\">Chaträume / User online</p>\n<span class=\"header3\">Gerade sind %anzahl_online% User online, insgesamt sind %anzahl_user% User angemeldet </span><br><br>\n%userliste%";
+$t[userliste2]="<p class=\"header2\">ChatrÃ¤ume / User online</p>\n<span class=\"header3\">Gerade sind %anzahl_online% User online, insgesamt sind %anzahl_user% User angemeldet </span><br><br>\n%userliste%";
 
 07.02.03 index
-$t[neu7]=               "<P><B>Bitte im Feld 'E-Mail (nur intern)' eine gültige E-Mail Adresse eingeben!</B></P>\n";
-$t[neu8]=               "<P><B>Bitte im Feld 'E-Mail (öffentlich)' eine gültige E-Mail Adresse eingeben!</B></P>\n";
+$t[neu7]=               "<P><B>Bitte im Feld 'E-Mail (nur intern)' eine gÃ¼ltige E-Mail Adresse eingeben!</B></P>\n";
+$t[neu8]=               "<P><B>Bitte im Feld 'E-Mail (Ã¶ffentlich)' eine gÃ¼ltige E-Mail Adresse eingeben!</B></P>\n";
 $t[neu17]=              "E-Mail:";  
 $t[neu18]=              "(nur intern)";
 $t[neu19]=              "E-Mail:";  
-$t[neu20]=              "&nbsp;&nbsp;(öffentlich)";
-$t[neu23]=              "<P>Bitte beachten Sie, daß Ihr <B>Name</B> und Ihre <B>E-Mail</B>\n".
-                        "nur für interne Zwecke der Administration genutzt und dritten\n".
-                        "Personen nicht zugänglich gemacht wird. Falls Sie zum Beispiel Ihr Passwort\n".
-                        "vergessen und uns kontaktieren, können wir Ihnen an diese Adresse Ihr ".
-                        "neues Passwort schicken. Die E-Mail Adresse (öffentlich) dagegen ist\n".
-                        "im Chat für alle anderen Mitglieder sichtbar.</P>\n".
-                        "<P>Alle Felder mit <B>*</B> sind Pflichtfelder. Die Felder <B>E-Mail (öffentlich)</B> und\n".   
-                        "<B>Homepage</B> sind öffentlich und müssen nicht ausgefüllt werden.\n".
-                        "Falls Sie <B>Nickname</B> nicht ausfüllen, wird Ihr Name aus dem Feld\n".
-                        "<B>Name</B> als öffentlicher\n".
+$t[neu20]=              "&nbsp;&nbsp;(Ã¶ffentlich)";
+$t[neu23]=              "<P>Bitte beachten Sie, daÃŸ Ihr <B>Name</B> und Ihre <B>E-Mail</B>\n".
+                        "nur fÃ¼r interne Zwecke der Administration genutzt und dritten\n".
+                        "Personen nicht zugÃ¤nglich gemacht wird. Falls Sie zum Beispiel Ihr Passwort\n".
+                        "vergessen und uns kontaktieren, kÃ¶nnen wir Ihnen an diese Adresse Ihr ".
+                        "neues Passwort schicken. Die E-Mail Adresse (Ã¶ffentlich) dagegen ist\n".
+                        "im Chat fÃ¼r alle anderen Mitglieder sichtbar.</P>\n".
+                        "<P>Alle Felder mit <B>*</B> sind Pflichtfelder. Die Felder <B>E-Mail (Ã¶ffentlich)</B> und\n".   
+                        "<B>Homepage</B> sind Ã¶ffentlich und mÃ¼ssen nicht ausgefÃ¼llt werden.\n".
+                        "Falls Sie <B>Nickname</B> nicht ausfÃ¼llen, wird Ihr Name aus dem Feld\n".
+                        "<B>Name</B> als Ã¶ffentlicher\n".
                         "Nickname automatisch eingesetzt.</P>\n";
-$t[neu33]=              "<P><B>Registrierung, 1. Schritt:</B> Um sich neu für den $chat zu registrieren, geben Sie bitte Ihre E-Mail Adresse ein:</P>";
+$t[neu33]=              "<P><B>Registrierung, 1. Schritt:</B> Um sich neu fÃ¼r den $chat zu registrieren, geben Sie bitte Ihre E-Mail Adresse ein:</P>";
 $t[neu34]=              "Ihre E-Mail Adresse:";
 $t[neu35]=              "Absenden";
 $t[neu36]=              "Willkommen beim $chat!\n\nUm nun die Registrierung als neuer User fortzusetzen, klicken Sie bitte auf den folgenden Link:".
                         "\n\n%link% \n-- \n   $chat (http://".$HTTP_HOST.$PHP_SELF.")\n";
-$t[neu37]=              "<P><B>Registrierung, 2. Schritt:</B> Sie erhalten nun eine E-Mail! Um die Registrierung abzuschließen, klicken Sie bitte auf den dort angegebenen Link!</P>";
+$t[neu37]=              "<P><B>Registrierung, 2. Schritt:</B> Sie erhalten nun eine E-Mail! Um die Registrierung abzuschlieÃŸen, klicken Sie bitte auf den dort angegebenen Link!</P>";
 $t[neu38]=              "Ihre Registrierung im $chat";
 $t[neu39]=              "<P><B>Fehler: </B>An die E-Mail Adresse '%email%' wurde bereits verschickt!</P>";
 $t[neu40]=              "Diese E-Mailadresse ist leider gesperrt! Bitte wenden Sie sich an den Webmaster";
-$t[neu41]=              "<P><B>Fehler: </B>Die Eingabe '%email%' ist keine gültige  E-Mail Adresse!</P>";
+$t[neu41]=              "<P><B>Fehler: </B>Die Eingabe '%email%' ist keine gÃ¼ltige  E-Mail Adresse!</P>";
 $t[login25]=            "<P><B>Fehler beim Login:</B><BR>Der Login als Admin (Superuser oder Chatadmin) ".
-                        "ohne aktivierte Cookies ist aus Sicherheitsgründen nicht gestattet. Bitte verwenden ".
+                        "ohne aktivierte Cookies ist aus SicherheitsgrÃ¼nden nicht gestattet. Bitte verwenden ".
                         "Sie einen Browser mit aktivieren Cookies sowie Javascript oder schalten Sie diese ".
                         "Funktionen ein!</P><P>[<A HREF=\"%url%\">weiter zur Loginseite</A>]</P>";
-$t[login26]=            "Lieber Chatter, um diesen Chat zu betreten, müssen Sie ihn über die Webseite %webseite% betreten.";
+$t[login26]=            "Lieber Chatter, um diesen Chat zu betreten, mÃ¼ssen Sie ihn Ã¼ber die Webseite %webseite% betreten.";
 
 07.02.03 functions:
 $t[hack1]="Hackversuch auf den Account %login%!";
-$t[hack2]="Es wurde ein Hackversuch (Übernahme der Session) bei dem Account %login% erkannt!\n\n".
+$t[hack2]="Es wurde ein Hackversuch (Ãœbernahme der Session) bei dem Account %login% erkannt!\n\n".
                 "Datum: %datum%\nIP: %ip%\n\nHeader:\n%header%\n\n".
                 "Hinweis: Diese Mail wurde automatisch erzeugt und wird an den Webmaster verschickt. ".
-                "Über http://www.ripe.net/perl/whois können Sie unter Angabe der IP-Adresse den ".
-                "Provider ermitteln, über den der Loginversuch stattfand. ".
+                "Ãœber http://www.ripe.net/perl/whois kÃ¶nnen Sie unter Angabe der IP-Adresse den ".
+                "Provider ermitteln, Ã¼ber den der Loginversuch stattfand. ".
                 "Um den Verursacher zu ermitteln, wenden Sie sich bitte unter Angabe der IP und des ".
                 "Datums/Uhrzeit direkt an den Provider.\n";
 $t[hack3]="<P>Sehr geehrter Hacker,</P>".
@@ -259,12 +259,12 @@ $t[hack3]="<P>Sehr geehrter Hacker,</P>".
                 "<P>Ihre IP-Adresse und die Daten des gehackten Accounts haben wir gespeichert. ".
                 "Wir werden mit diesen Daten direkt Anzeige erstatten. Nach dem der Staatsanwalt ".
                 "bei Ihrem Provider Ihren Namen und Anschrift erhalten hat, wird er Sie kontaktieren.</P>".
-                "<P>Wir wünschen Ihnen noch einen angenehmen Tag,<BR>".                                  
+                "<P>Wir wÃ¼nschen Ihnen noch einen angenehmen Tag,<BR>".                                  
                 "<A HREF=\"MAILTO:$webmaster\">Ihr $chat Team</A></P><HR NOSHADE\n>";          
 
 17.02.03:
 deutsch.php-functions.php
-$t[chat_msg103]="Sie werden von '%user%' ignoriert und dürfen ihm keine Mail schicken";
+$t[chat_msg103]="Sie werden von '%user%' ignoriert und dÃ¼rfen ihm keine Mail schicken";
 18.02.03:
 $t[chat_msg104]= "<B>$chat:</B> Mail wurde nicht verschickt: Mailbombing-Schutz aktiv!";
 $t[chat_msg105]="<B>$chat:</B> Mail konnte NICHT verschickt werden: Dieser User hat seine Mailbox zugeschlossen!";
@@ -278,18 +278,18 @@ $t[ignore5]=	"<B>$chat:</B> Hey! User '%i_user_name_passiv%' ist Admin und kann 
 
 04.04.03:
 deutsch.php-functions.php
-$t[chat_msg107]="<b>$chat:</b> Fehler! Sie dürfen Ihren Nicknamen nur alle %nickwechsel% Sekunden ändern!";
+$t[chat_msg107]="<b>$chat:</b> Fehler! Sie dÃ¼rfen Ihren Nicknamen nur alle %nickwechsel% Sekunden Ã¤ndern!";
 
 25.04.03:
 deutsch.php.index.php
 $t[neu36]=		"Willkommen beim $chat!\n\nUm nun die Registrierung als neuer User fortzusetzen, klicken Sie bitte auf den folgenden Link:".
-			"\n\n%link% \n\nSollte es zu Problemen beim klicken auf den Registrierungslink kommen, so verwenden Sie diesen Link zum manuellen Prüfen der E-Mailadresse:\n %link2%\n\n".
+			"\n\n%link% \n\nSollte es zu Problemen beim klicken auf den Registrierungslink kommen, so verwenden Sie diesen Link zum manuellen PrÃ¼fen der E-Mailadresse:\n %link2%\n\n".
 			"Ihre E-Mailadresse: %email%\n".
 			"Freischalt-Code   : %hash%\n\n".
 			"-- \n   $chat (http://".$HTTP_HOST.$PHP_SELF.")\n";
 
 $t[neu42]=		"Bitte geben Sie nun Ihre <b>E-Mailadresse</b> und den <b>Hash-Wert</b> ein, den Sie soeben per E-Mail bekommen haben.<BR>".
-			"Sie können hierzu natürlich auch gerne Cut und Paste (Strg+C und Strg+V) verwenden";
+			"Sie kÃ¶nnen hierzu natÃ¼rlich auch gerne Cut und Paste (Strg+C und Strg+V) verwenden";
 $t[neu43]=              "Freischalt-Code:";
 
 13.06.03:
@@ -299,14 +299,14 @@ $t[sonst44]=    "Profil-Edit Historie";
 23.07.03
 user.php: # fido
 $t[menue10]=    "Admin: User importieren";
-$t[menue11]=    "Admin: User löschen";    
+$t[menue11]=    "Admin: User lÃ¶schen";    
 $t[sonst45]=    "Userdaten importieren";             
 $t[sonst46]=    "Format: Nickname<TAB>Username<TAB>Admin E-Mail<TAB>Passwort";
-$t[sonst47]=    "<P><B>Fehler:</B> Sie müssen eine Datei hochladen!</P>"; 
-$t[sonst48]=    "<P><B>Fehler:</B> Fehler beim Öffnen der Datei.</P>";   
-$t[sonst49]=    "<P><B>Alle User löschen:</B> Sollen wirklich alle User außer den Admins gelöscht werden?</P>";     
+$t[sonst47]=    "<P><B>Fehler:</B> Sie mÃ¼ssen eine Datei hochladen!</P>"; 
+$t[sonst48]=    "<P><B>Fehler:</B> Fehler beim Ã·ffnen der Datei.</P>";   
+$t[sonst49]=    "<P><B>Alle User lÃ¶schen:</B> Sollen wirklich alle User auÃŸer den Admins gelÃ¶scht werden?</P>";     
 $t[sonst50]=    "Ja";
-$t[sonst51]=    "User löschen"; 
+$t[sonst51]=    "User lÃ¶schen"; 
 
 2.09.03
 edit.php: #martin
@@ -318,10 +318,10 @@ $t[user_zeige49]="Sperrkommentar";
 
 23.9.03
 deutsch.php-raum.php # martin
-$t[sonst13]=    "<P><B>Fehler: </B><BR>Um neue Räume anlegen zu dürfen, brauchen Sie mindestens %punkte% Punkte oder Sie müssen Admin sein!</P>";
+$t[sonst13]=    "<P><B>Fehler: </B><BR>Um neue RÃ¤ume anlegen zu dÃ¼rfen, brauchen Sie mindestens %punkte% Punkte oder Sie mÃ¼ssen Admin sein!</P>";
 
 deutsch.php-functions.php # martin
-$t[chat_msg108]="<B>Fehler: </B> Um neue Räume anlegen zu dürfen, brauchen Sie mindestens %punkte% Punkte oder Sie müssen Admin sein!";
+$t[chat_msg108]="<B>Fehler: </B> Um neue RÃ¤ume anlegen zu dÃ¼rfen, brauchen Sie mindestens %punkte% Punkte oder Sie mÃ¼ssen Admin sein!";
 
 deutsch.php-forum.php # martin
 $t[alles_gelesen]="Alle Postings als gelesen markieren";
@@ -334,271 +334,271 @@ deutsch-hilfe.php # martin
 
 $hilfe_uebersichtstext=	"<P><B>Erste Hilfe bei Problemen:</B><BR>".
 			"Falls Sie im Chat keinen Text angezeigt bekommen oder von Zeit ".
-			"zu Zeit aus dem Chat fliegen, können Sie in den ".
+			"zu Zeit aus dem Chat fliegen, kÃ¶nnen Sie in den ".
 			"<B><A HREF=\"hilfe.php?http_host=$http_host&id=$id&f[u_backup]=1\">sicheren Modus</A> ".
 			"umschalten!</B>\n".
-			"Sie können natürlich wieder in den ".
+			"Sie kÃ¶nnen natÃ¼rlich wieder in den ".
 			"<B><A HREF=\"hilfe.php?http_host=$http_host&id=$id&f[u_backup]=0\">Normalmodus</A> ".
-			"zurückschalten.</B> ".
-			"Falls die <B>Ausgabe hängt</B> oder andere Fehler auftreten, können Sie mit ".
+			"zurÃ¼ckschalten.</B> ".
+			"Falls die <B>Ausgabe hÃ¤ngt</B> oder andere Fehler auftreten, kÃ¶nnen Sie mit ".
 			"<B><A HREF=\"hilfe.php?http_host=$http_host&id=$id&reset=1\">[RESET]</A></B> ".
 			"alle Fenster des Chats neu laden.<BR><BR>".
 			"<b>Popup-Blocker:</b><BR>".
-			"Bitte beachten Sie, dass Popup-Blocker die Funktionalität des Chats beeinträchtigen können und bei".
-			"eingeschaltetem Popup-Blocker einige Funktionen nicht nutzbar sind. Wir empfehlen Ihnen daher für den $chat ".
+			"Bitte beachten Sie, dass Popup-Blocker die FunktionalitÃ¤t des Chats beeintrÃ¤chtigen kÃ¶nnen und bei".
+			"eingeschaltetem Popup-Blocker einige Funktionen nicht nutzbar sind. Wir empfehlen Ihnen daher fÃ¼r den $chat ".
 			"den Popup-Blocker zu deaktivieren.<BR><BR>".
- 			"<B>Javascript:</B><BR>Bitte beachten Sie, daß die Bedienung des Chats ".
+ 			"<B>Javascript:</B><BR>Bitte beachten Sie, daÃŸ die Bedienung des Chats ".
 			"mit JavaScript einfacher ist und schalten Sie dieses bitte gegebenfalls in ".
 			"Ihrem Browser ein.<BR><BR>".
-			"<B>Befehle:</B><BR>Die meisten Einstellungen können durch <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=befehle\">".
+			"<B>Befehle:</B><BR>Die meisten Einstellungen kÃ¶nnen durch <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=befehle\">".
 			"Befehle im Chat</A> oder direkt im Fenster (<A HREF=\"edit.php?http_host=$http_host&id=$id\">Einstellungen</A>,".
-			" <A HREF=\"raum.php?http_host=$http_host&id=$id\">Räume</A>) verändert werden. Für die voreingestellten".
-			" Sprüche, die im Chat abgerufen werden können, gibt es noch eine <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=sprueche\">".
-			"Übersicht</A>.<BR><BR>".
+			" <A HREF=\"raum.php?http_host=$http_host&id=$id\">RÃ¤ume</A>) verÃ¤ndert werden. FÃ¼r die voreingestellten".
+			" SprÃ¼che, die im Chat abgerufen werden kÃ¶nnen, gibt es noch eine <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=sprueche\">".
+			"Ãœbersicht</A>.<BR><BR>".
 			"<B>Liste:</B><BR>Im Chat wie auch im Fenster (<A HREF=\"edit.php?http_host=$http_host&id=$id\">Userliste</A>) ".
 			"kann eine Liste aller in einem bestimmten Raum chattenden User ausgegeben ".
-			"werden. Im Fenster ist es darüber hinaus möglich, weitere Informationen ".
+			"werden. Im Fenster ist es darÃ¼ber hinaus mÃ¶glich, weitere Informationen ".
 			"abzufragen oder dem User eine private Nachricht zu schreiben.<BR><BR>".
 			"<B>Namen:</B><BR>Jeder User im Chat hat einen Usernamen und ".
-			"einen Nicknamen. Mit beiden Namen ist der Login möglich, im Chat wird ".
+			"einen Nicknamen. Mit beiden Namen ist der Login mÃ¶glich, im Chat wird ".
 			"aber nur der Nickname angezeigt. Der Nick darf keine Leerzeichen ".
 			"enthalten. Nick- wie auch Usernamen sind eindeutig, also kann es keine zwei ".
 			"Benutzer mit demselben Namen geben.<BR><BR>".
-			"<B>Ergänzung des Nicks:</B><BR>Andere Benutzer können im Chat durch den ".
+			"<B>ErgÃ¤nzung des Nicks:</B><BR>Andere Benutzer kÃ¶nnen im Chat durch den ".
 			"Beginn des Nicks, gefolgt von einem Doppelpunkt " .
 			"gezielt angesprochen werden.<br>Aus <b>dil: Hallo!</b> wird beispielsweise <b>".
-			"[zu Dilbert] Hallo!</b><br>Die Nickergänzung funktioniert ".
-			"unter anderem beim Chatten und beim Flüstern. ".
-			"Ein @ vor dem Nicknamen wird ebenfalls zum vollen Nick ergänzt<BR><BR>".
+			"[zu Dilbert] Hallo!</b><br>Die NickergÃ¤nzung funktioniert ".
+			"unter anderem beim Chatten und beim FlÃ¼stern. ".
+			"Ein @ vor dem Nicknamen wird ebenfalls zum vollen Nick ergÃ¤nzt<BR><BR>".
 			"<B>Einstellungen:</B><BR>Jeder User kann sich optional eine E-Mail-Adresse ".
 			"und eine Homepage eintragen, die in der Userliste im Fenster eingezeigt werden. ".
 			"Neben dem Passwort, das neu gesetzt werden kann, ist auch der Wechsel der Farbe ".
-			"durch Klick auf eines der bunten Felder möglich.<BR><BR>".
-			"<B>Räume:</B><BR>Zum Wechsel in einen offenen Raum wählt man einfach den ".
+			"durch Klick auf eines der bunten Felder mÃ¶glich.<BR><BR>".
+			"<B>RÃ¤ume:</B><BR>Zum Wechsel in einen offenen Raum wÃ¤hlt man einfach den ".
 			"passenden Raum im Auswahlfeld unter dem Chat-Eingabefeld aus. ".
 			"Hinter dem Raumnamen wird die Anzahl der User angezeigt, die aktuell in diesem ".
 			"Raum chatten. ".
-			"Jeder User kann beliebig viele Räume aufmachen, die er ".
-			"verändern darf. Nicht-permamente Räume werden aber automatisch nach Verlassen gelöscht. ".
+			"Jeder User kann beliebig viele RÃ¤ume aufmachen, die er ".
+			"verÃ¤ndern darf. Nicht-permamente RÃ¤ume werden aber automatisch nach Verlassen gelÃ¶scht. ".
 			"Ein Besitzer eines Raums oder ein ChatAdmin darf den Raum umbennen, den Ein- ".
-			"und Austrittstext sowie den Raumstatus verändern. Einen offenen Raum ".
-			"darf jeder User betreten, während ein geschlossener Raum nicht ".
-			"betreten werden darf und auch nicht angezeigt wird. Ein Raum darf gelöscht ".
+			"und Austrittstext sowie den Raumstatus verÃ¤ndern. Einen offenen Raum ".
+			"darf jeder User betreten, wÃ¤hrend ein geschlossener Raum nicht ".
+			"betreten werden darf und auch nicht angezeigt wird. Ein Raum darf gelÃ¶scht ".
 			"werden; falls sich User darin aufhalten werden diese in die Lobby geleitet. ".
-			"Mit dem Befehl /kick können im Chat unerwünschte User aus einem Raum entfernt ".
+			"Mit dem Befehl /kick kÃ¶nnen im Chat unerwÃ¼nschte User aus einem Raum entfernt ".
 			"und der Wiedereintritt verboten werden.<BR><BR>".
 			"<B><A HREF=\"user.php?http_host=$http_host&id=$id&aktion=chatuserliste\" TARGET=\"userliste\">".
 			"Userliste</A> im rechten Fenster neben dem Chat (@ &gt; USERNAME)</B><BR>".
 			"In der Userliste werden die Nicknamen aller User, ".
 			"die im aktuellen Raum online sind, angezeigt. ".
 			"Das <B>@</B> (Ad) vor den Nicknamen kopiert den Nicknamen in die Chat-Eingabezeile, dies ".
-			"ist sehr praktisch um einen User <B>öffentlich</B> direkt anzusprechen. ".
-			"Das <B>&gt;</B> (Größer) vor den Nicknamen kopiert den Nicknamen in die Chat-Eingabezeile, ".
-			"um diesen User <B>privat</B> anzuflüstern. ".
+			"ist sehr praktisch um einen User <B>Ã¶ffentlich</B> direkt anzusprechen. ".
+			"Das <B>&gt;</B> (GrÃ¶ÃŸer) vor den Nicknamen kopiert den Nicknamen in die Chat-Eingabezeile, ".
+			"um diesen User <B>privat</B> anzuflÃ¼stern. ".
 			"Falls ein Nick in Klammern () steht, ist der User gerade abwesend (/away). ".
-			"Ein Admin sieht vor dem Nick zusätzlich drei Links <B>G K S</B> zur Ausführung ".
+			"Ein Admin sieht vor dem Nick zusÃ¤tzlich drei Links <B>G K S</B> zur AusfÃ¼hrung ".
 			"der Befehle Gag (Knebel), Kick (Herauswurf) und Sperre im Chat. ".
 			"Ein Raumbesitzer sieht nur den Link auf Kick.<BR><BR>".
 			"<B><A HREF=\"smilies.php?http_host=$http_host&id=$id\" TARGET=\"userliste\">".
 			"Smilie-Liste</A> im rechten Fenster neben dem Chat</B><BR>".
-			"Das Fenster der Userliste kann auf eine Liste mit häufig benutzten ".
+			"Das Fenster der Userliste kann auf eine Liste mit hÃ¤ufig benutzten ".
 			"Smilies umgeschalten werden. Ein Klick auf den Smilie kopiert ihn ".
-			"in die Eingabezeile. Sie können in Ihren Einstellungen die ".
-			"Darstellung der Smilies als Grafiken unterdrücken. In jedem Raum lassen sich ".
-			"ebenfalls die Grafiken unterdrücken (Smilie-Grafiken werden nur in ".
-			"ausgewählten mainChats angeboten).<BR><BR>".
-			"<B>Moderationsmodul für Promichats</B> (nur in ausgewählten mainChats)<BR>".
+			"in die Eingabezeile. Sie kÃ¶nnen in Ihren Einstellungen die ".
+			"Darstellung der Smilies als Grafiken unterdrÃ¼cken. In jedem Raum lassen sich ".
+			"ebenfalls die Grafiken unterdrÃ¼cken (Smilie-Grafiken werden nur in ".
+			"ausgewÃ¤hlten mainChats angeboten).<BR><BR>".
+			"<B>Moderationsmodul fÃ¼r Promichats</B> (nur in ausgewÃ¤hlten mainChats)<BR>".
 			"<UL>".
-			"<LI>In moderierten Räumen kann ein moderierter Chat stattfinden. Alle öffentlichen ".
-			"Nachrichten werden unterdrückt und an einen oder mehrere Moderatoren weitergeleitet, ".
+			"<LI>In moderierten RÃ¤umen kann ein moderierter Chat stattfinden. Alle Ã¶ffentlichen ".
+			"Nachrichten werden unterdrÃ¼ckt und an einen oder mehrere Moderatoren weitergeleitet, ".
 			"solange sich Moderatoren im Raum aufhalten.".
-			"<LI>Die Moderatoren wählen eine oder mehrere Fragen aus und beantworten diese. ".
-			"Nach Beantwortung der Fragen werden diese mit der Antwort im Chat veröffentlicht.".
-			"<LI>Für die Moderatoren steht eine eigene Benutzeroberfläche in HTML zur ".
-			"Verfügung, mit der die Fragen der User schnell und komfortabel durchgeschalten, ".
-			"beantwortet oder unterdrückt werden können.".
-			"<LI>Die Fragen, die ein Moderator zur Beantwortung ausgewählt hat, sind für ".
+			"<LI>Die Moderatoren wÃ¤hlen eine oder mehrere Fragen aus und beantworten diese. ".
+			"Nach Beantwortung der Fragen werden diese mit der Antwort im Chat verÃ¶ffentlicht.".
+			"<LI>FÃ¼r die Moderatoren steht eine eigene BenutzeroberflÃ¤che in HTML zur ".
+			"VerfÃ¼gung, mit der die Fragen der User schnell und komfortabel durchgeschalten, ".
+			"beantwortet oder unterdrÃ¼ckt werden kÃ¶nnen.".
+			"<LI>Die Fragen, die ein Moderator zur Beantwortung ausgewÃ¤hlt hat, sind fÃ¼r ".
 			"alle anderen Moderatoren gesperrt.".
-			"<LI>Öffentliche Ein- und Austrittsnachrichten werden in moderierten Räumen unterdrückt.".
-			"<LI>Die Moderationsfunktionen sind nur in den Räum aktiv, die auf den Status ".
+			"<LI>Ã·ffentliche Ein- und Austrittsnachrichten werden in moderierten RÃ¤umen unterdrÃ¼ckt.".
+			"<LI>Die Moderationsfunktionen sind nur in den RÃ¤um aktiv, die auf den Status ".
 			"\"moderiert\" gesetzt sind.</UL>".
 			"<HR SIZE=3 NOSHADE>";
 
 deutsch-functions.php # martin 4.12.03
-$t[chat_msg109]="Sie werden von '%nick%' ignoriert und können dem User daher keine privaten Nachrichten schicken";
+$t[chat_msg109]="Sie werden von '%nick%' ignoriert und kÃ¶nnen dem User daher keine privaten Nachrichten schicken";
 
 deutsch.php-functions.php # martin 17.12.03
 $t[chat_msg110]="Passwort neu + Email";
 $t[chat_msg111]="Passwort wurde neu gesetzt und an den User gemailt!";
-$t[chat_msg112]="Ihr neues Passwort für den $chat";
-$t[chat_msg113]="Hallo $f[u_nick]!\nIhr Passwort wurde geändert. Ihr neues Passwort lautet: $f[u_passwort]\nViel Spass noch im $chat\n";
+$t[chat_msg112]="Ihr neues Passwort fÃ¼r den $chat";
+$t[chat_msg113]="Hallo $f[u_nick]!\nIhr Passwort wurde geÃ¤ndert. Ihr neues Passwort lautet: $f[u_passwort]\nViel Spass noch im $chat\n";
 
 deutsch.php-index.php # martin 1.3.2004
 $t[neu44]=              "<P><B>Fehler: </B>Pluszeichen nicht im Nicknamen erlaubt!";
 
 deutsch.php-hilfe.php # martin 1.3.2004
 $hilfe_befehlstext=array(1=>"/user\tlistet alle User im aktuellen Raum\t/wer, /who, /w, /list",
-                        "/user RAUM\tlistet alle User im Raum RAUM auf (*=Alle)\t/wer, /who, /w, /list\tFalls RAUM=*, werden alle Räume gezeigt",
-                        "/raum\tlistet alle offenen Räume auf\t/channel, /go",
-                        "/raum RAUM\twechselt in RAUM. Falls RAUM nicht existiert, wird er als temporärer Raum neu angelegt\t/channel, /go",
-                        "/raum RAUM !\twechselt in RAUM, auch wenn der Raum geschlossen ist (nur Admins und Raumbesitzer)\t force, immer\tBitte Privatsphäre beachten!",
-                        "/people\tlistet alle offenen Räume mit Usern auf.\t\t",
-                        "/weg\tsetzt oder löscht einen ich-bin-nicht-da Text.\t/away\tBeispiel: /away muß mal telefonieren.",
-                        "/msg&nbsp;NAME&nbsp;TEXT\tTEXT an User NAME flüstern\t/talk, /tell,<br> /t\tDie Übermittlung ist privat und kann von niemandem mitgelesen werden",
-                        "/msgf&nbsp;NAME&nbsp;TEXT\tTEXT an alle Freunde schicken \t\tDie Übermittlung ist privat und kann von niemandem ausser den Freunden gelesen werden",
+                        "/user RAUM\tlistet alle User im Raum RAUM auf (*=Alle)\t/wer, /who, /w, /list\tFalls RAUM=*, werden alle RÃ¤ume gezeigt",
+                        "/raum\tlistet alle offenen RÃ¤ume auf\t/channel, /go",
+                        "/raum RAUM\twechselt in RAUM. Falls RAUM nicht existiert, wird er als temporÃ¤rer Raum neu angelegt\t/channel, /go",
+                        "/raum RAUM !\twechselt in RAUM, auch wenn der Raum geschlossen ist (nur Admins und Raumbesitzer)\t force, immer\tBitte PrivatsphÃ¤re beachten!",
+                        "/people\tlistet alle offenen RÃ¤ume mit Usern auf.\t\t",
+                        "/weg\tsetzt oder lÃ¶scht einen ich-bin-nicht-da Text.\t/away\tBeispiel: /away muss mal telefonieren.",
+                        "/msg&nbsp;NAME&nbsp;TEXT\tTEXT an User NAME flÃ¼stern\t/talk, /tell,<br> /t\tDie Ãœbermittlung ist privat und kann von niemandem mitgelesen werden",
+                        "/msgf&nbsp;NAME&nbsp;TEXT\tTEXT an alle Freunde schicken \t\tDie Ãœbermittlung ist privat und kann von niemandem ausser den Freunden gelesen werden",
                         "/mail&nbsp;NAME&nbsp;TEXT\tSchreibt Mail mit dem Inhalt TEXT an den User NAME\t/m\tDer Betreff entspicht den ersten Worten",
-                        "/me TEXT\tSpruch im Raum\t/txt\tDer Text wendet sich nicht an einen bestimmten User, sondern ist für alle im Raum bestimmt",
+                        "/me TEXT\tSpruch im Raum\t/txt\tDer Text wendet sich nicht an einen bestimmten User, sondern ist fÃ¼r alle im Raum bestimmt",
                         "/op TEXT\tRuft einen Admin\t\tDer Text wird an die Admins geschickt, die gerade online sind.",
                         "/nick NAME\tSetzt Nickname auf NAME\t/name\tDer neue Nickname wird dauerhaft gespeichert",
                         "/ignoriere\tzeigt die ignorierten User an\t/ignore, /ig",
                         "/ignoriere NAME\tIgnoriert User NAME\t\tNochmalige Eingabe gibt den User NAME wieder frei",
-                        "/kick NAME\tSperrt User NAME aus dem aktuellen Raum dauerhaft aus\t/plop\tNochmalige Eingabe gibt den Eintritt für diesen User wieder frei",
+                        "/kick NAME\tSperrt User NAME aus dem aktuellen Raum dauerhaft aus\t/plop\tNochmalige Eingabe gibt den Eintritt fÃ¼r diesen User wieder frei",
                         "/quit TEXT\tbeendet chat mit den Worten TEXT\t/exit, /ende\tDie Angabe von TEXT ist optional",
                         "/hilfe\tListet die Kurzhilfe auf\t/help, /?",
                         "/freunde NAME\tMacht NAME zu meinem Freund\t\tNochmalige Eingabe nimmt NAME aus der Freundesliste\t/freund,/buddy",
-                        "/einlad NAME\tBearbeitet die geladenen User\t/invite\tnur für Admins oder Raumbesitzer",
-                        "/uebergeberaum NAME\tÜbergibt den aktuellen Raum an den User NAME\t/schenke\tnur für Admins oder Raumbesitzer",
-                        "/aendereraum STATUS\tÄndert den Status des aktuellen Raums auf offen, geschlossen oder moderiert\t\tnur für Admins oder Raumbesitzer",
-                        "/loescheraum RAUM\tLöscht den angegebenen Raum\t\tnur für Admins oder Raumbesitzer",
-                        "/zeige NAME\tGibt die Benutzerinformationen für den Benutzer NAME aus<BR>(% ist Joker).\t/whois\t",
-                        "/wuerfel\tWürfel werfen\t/dice\t/wuerfel 2W6 <br>wirft 2 sechseitige Würfel",
-                        "/suche NAME\tSucht alle Sprüche die das Wort NAME enthalten\t/such\tGut geeignet im einen Spruch passend zum Thema zu finden",
-                        "=spruch&nbsp;NAME&nbsp;ZUSATZ\tgibt vordefinierten Spruch aus\t\tNAME und ZUSATZ ist optional und vom Spruch abhängig. Weitere <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=sprueche\">Info vorhanden</A>",
-                        "*TEXT*\tTEXT wird kursiv dargestellt\t\tWirkt in allen Texten, die öffentlich oder privat im Chat ausgegeben werden",
-                        "_TEXT_\tTEXT wird fett dargestellt\t\tWirkt in allen Texten, die öffentlich oder privat im Chat ausgegeben werden",
+                        "/einlad NAME\tBearbeitet die geladenen User\t/invite\tnur fÃ¼r Admins oder Raumbesitzer",
+                        "/uebergeberaum NAME\tÃœbergibt den aktuellen Raum an den User NAME\t/schenke\tnur fÃ¼r Admins oder Raumbesitzer",
+                        "/aendereraum STATUS\tÃ„ndert den Status des aktuellen Raums auf offen, geschlossen oder moderiert\t\tnur fÃ¼r Admins oder Raumbesitzer",
+                        "/loescheraum RAUM\tLÃ¶scht den angegebenen Raum\t\tnur fÃ¼r Admins oder Raumbesitzer",
+                        "/zeige NAME\tGibt die Benutzerinformationen fÃ¼r den Benutzer NAME aus<BR>(% ist Joker).\t/whois\t",
+                        "/wuerfel\tWÃ¼rfel werfen\t/dice\t/wuerfel 2W6 <br>wirft 2 sechseitige WÃ¼rfel",
+                        "/suche NAME\tSucht alle SprÃ¼che die das Wort NAME enthalten\t/such\tGut geeignet im einen Spruch passend zum Thema zu finden",
+                        "=spruch&nbsp;NAME&nbsp;ZUSATZ\tgibt vordefinierten Spruch aus\t\tNAME und ZUSATZ ist optional und vom Spruch abhÃ¤ngig. Weitere <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=sprueche\">Info vorhanden</A>",
+                        "*TEXT*\tTEXT wird kursiv dargestellt\t\tWirkt in allen Texten, die Ã¶ffentlich oder privat im Chat ausgegeben werden",
+                        "_TEXT_\tTEXT wird fett dargestellt\t\tWirkt in allen Texten, die Ã¶ffentlich oder privat im Chat ausgegeben werden",
                         "/farbe\tZeigt die aktuelle Farbe an\t/color",
-                        "/farbe RRGGBB\tSetzt neue Farbe auf RRGGBB\t/color\tRR steht für Rot, GG für Grün und BB für Blau, jeweils von 00 bis FF",
-                        "/farbealle \tSetzt/zeigt die Farbe für andere User an\t/color2\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbealle -\"",
-                        "/farbenoise \tSetzt/zeigt die Farbe für Noises\t/color3\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbenoise -\"",
-                        "/farbepriv \tSetzt/zeigt die Farbe für private Nachrichten\t/color4\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbepriv -\"",
-                        "/farbesys \tSetzt/zeigt die Farbe für Systemnachrichten des Chats\t/color5\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbesys -\"",
-                        "/farbebg \tSetzt/zeigt die Farbe für den Hintergrund, wird erst nach neuem Laden aktiv.\t/color6\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbebg -\"",
-                        "/farbset X\tSetzt das vordefiniertes Farbset X. \t\t Die möglichen Farbsets werden durch /farbset angezeigt. Beispiel: /farbset 3",
-                        "/farbreset \tSetzt die Farbspielereien wieder zurück auf den Chat-Default",
-                        "/clearedit \tEingabezeile nach Return löschen oder stehen lassen\t\tNochmalige Eingabe schaltet wieder zurück");
+                        "/farbe RRGGBB\tSetzt neue Farbe auf RRGGBB\t/color\tRR steht fÃ¼r Rot, GG fÃ¼r GrÃ¼n und BB fÃ¼r Blau, jeweils von 00 bis FF",
+                        "/farbealle \tSetzt/zeigt die Farbe fÃ¼r andere User an\t/color2\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbealle -\"",
+                        "/farbenoise \tSetzt/zeigt die Farbe fÃ¼r Noises\t/color3\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbenoise -\"",
+                        "/farbepriv \tSetzt/zeigt die Farbe fÃ¼r private Nachrichten\t/color4\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbepriv -\"",
+                        "/farbesys \tSetzt/zeigt die Farbe fÃ¼r Systemnachrichten des Chats\t/color5\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbesys -\"",
+                        "/farbebg \tSetzt/zeigt die Farbe fÃ¼r den Hintergrund, wird erst nach neuem Laden aktiv.\t/color6\t Werte in RRGGBB wie bei /farbe, Abschalten mit \"/farbebg -\"",
+                        "/farbset X\tSetzt das vordefiniertes Farbset X. \t\t Die mÃ¶glichen Farbsets werden durch /farbset angezeigt. Beispiel: /farbset 3",
+                        "/farbreset \tSetzt die Farbspielereien wieder zurÃ¼ck auf den Chat-Default",
+                        "/clearedit \tEingabezeile nach Return lÃ¶schen oder stehen lassen\t\tNochmalige Eingabe schaltet wieder zurÃ¼ck");
 
-deutsch.php-index.php # martin 10.3.2004 Austausch auf Wunsch von Claudia (überarbeite Texte vom Kunden)
+deutsch.php-index.php # martin 10.3.2004 Austausch auf Wunsch von Claudia (Ã¼berarbeite Texte vom Kunden)
 
 $t[agb]=        "<p><b>Nutzungsbestimmungen $chat:</b></p>".
-                "<ol><li>Wir bitten alle User im $chat um ein höfliches, respektvolles und nicht zu aufdringliches ".
+                "<ol><li>Wir bitten alle User im $chat um ein hÃ¶fliches, respektvolles und nicht zu aufdringliches ".
                 "Verhalten. </li>".
-                "<li>Im $chat sollte man grundsätzlich nichts tun, was man im realen Leben auch nicht tun würde. ".
-                "Ausdrücklich untersagt sind Beleidigungen, Pöbeleien, Baggern, Schreiben nur in Großbuchstaben ".
-                "(wird als Anschreien gewertet), anstößige Äußerungen, Spam und nationalsozialistische Sprüche oder ".
+                "<li>Im $chat sollte man grundsÃ¤tzlich nichts tun, was man im realen Leben auch nicht tun wÃ¼rde. ".
+                "AusdrÃ¼cklich untersagt sind Beleidigungen, PÃ¶beleien, Baggern, Schreiben nur in GroÃŸbuchstaben ".
+                "(wird als Anschreien gewertet), anstÃ¶ÃŸige Ã„uÃŸerungen, Spam und nationalsozialistische SprÃ¼che oder ".
                 " Nicknamen. </li>".
-                "<li>Werbung, insbesondere das Einfügen von URLs zum Zweck der Werbung für andere Internet-Angebote ".
+                "<li>Werbung, insbesondere das EinfÃ¼gen von URLs zum Zweck der Werbung fÃ¼r andere Internet-Angebote ".
                 "ist nicht gestattet. </li>".
-                "<li>Admins haben das Recht, User bei Verstößen gegen diese Regeln aus dem $chat zu werfen. Davon ".
-                "wird meist, außer in Extremfällen, erst nach einer Vorwarnung Gebrauch gemacht. </li>".
-                "<li>Admins dürfen zu Administrationszwecken die Userdaten einsehen und ggf. die IP-Adresse des ".
+                "<li>Admins haben das Recht, User bei VerstÃ¶ÃŸen gegen diese Regeln aus dem $chat zu werfen. Davon ".
+                "wird meist, auÃŸer in ExtremfÃ¤llen, erst nach einer Vorwarnung Gebrauch gemacht. </li>".
+                "<li>Admins dÃ¼rfen zu Administrationszwecken die Userdaten einsehen und ggf. die IP-Adresse des ".
                 "Users ermitteln, um die IP-Adresse oder den Provider zu sperren. </li>".
-                "<li>Der Betreiber des $chat behält sich das Recht vor, bei Verstößen gegen die Regeln von seinem".
+                "<li>Der Betreiber des $chat behÃ¤lt sich das Recht vor, bei VerstÃ¶ÃŸen gegen die Regeln von seinem".
                 " Hausrecht Gebrauch zu machen, den User aus dem $chat auszusperren und gegebenenfalls zur Anzeige ".
                 "zu bringen. </li>".
-                "<li>Der Betreiber haftet ausdrücklich nicht für die Inhalte im $chat. </li>".
+                "<li>Der Betreiber haftet ausdrÃ¼cklich nicht fÃ¼r die Inhalte im $chat. </li>".
                 "</ol>".
                 "<p>Bei Fragen oder Anregungen wenden Sie sich bitte an $webmaster.</p>";
 
 
-deutsch.php-hilfe.php # martin 10.3.2004 Austausch auf Wunsch von Claudia (überarbeite Texte vom Kunden)
+deutsch.php-hilfe.php # martin 10.3.2004 Austausch auf Wunsch von Claudia (Ã¼berarbeite Texte vom Kunden)
 
 $chatiquette="
 <p><b>CHATIQUETTE im mainChat</b></p>
 
 <p><b>Wie melde ich mich an? </b></p>
 <p>Wenn man den Chat als Gast betritt, sollte man sich sofort einen Namen zulegen (/nick name), da die meisten User sich nur 
-ungerne mit einer (austauschbaren) Zahl unterhalten. Im realen Leben wird man ja auch mit seinem Namen angesprochen. Über den
+ungerne mit einer (austauschbaren) Zahl unterhalten. Im realen Leben wird man ja auch mit seinem Namen angesprochen. Ãœber den
 Namen ist man leichter ansprechbar und unverwechselbar.
-Merkt man nach einiger Zeit, dass man öfter in den Chat kommen möchte, empfiehlt es sich, einen festen Account (Nicknamen) 
-zuzulegen. Natürlich kann man das auch gleich machen, damit ist der Name dann besetzt und kein anderer kann sich mehr so
-nennen. Hierzu klickt man auf der Startseite auf >>neu anmelden<< und bestätigt die Anmeldung, die per Mail zugesandt wird.
-Dann wählt man sich seinen Chatnamen und sein Zugangspasswort aus.
+Merkt man nach einiger Zeit, dass man Ã¶fter in den Chat kommen mÃ¶chte, empfiehlt es sich, einen festen Account (Nicknamen) 
+zuzulegen. NatÃ¼rlich kann man das auch gleich machen, damit ist der Name dann besetzt und kein anderer kann sich mehr so
+nennen. Hierzu klickt man auf der Startseite auf >>neu anmelden<< und bestÃ¤tigt die Anmeldung, die per Mail zugesandt wird.
+Dann wÃ¤hlt man sich seinen Chatnamen und sein Zugangspasswort aus.
 </p>
 
 <b><p>Wie verhalte ich mich im Chat richtig, wenn ich zum ersten Mal reingehe? </p></b>
 
-<p>Zuerst verschafft man sich am besten eine Übersicht über die Situation im Chat. 
-Wieviele User und Admins anwesend sind, welche Gespräche laufen, 
+<p>Zuerst verschafft man sich am besten eine Ãœbersicht Ã¼ber die Situation im Chat. 
+Wieviele User und Admins anwesend sind, welche GesprÃ¤che laufen, 
 welche Stimmung allgemein herrscht und wie die User miteinander umgehen. </p>
 
-<p>Um ins Gespräch einzusteigen, spricht man am besten jemanden direkt an (name: text) 
+<p>Um ins GesprÃ¤ch einzusteigen, spricht man am besten jemanden direkt an (name: text) 
 oder man gibt ein allgemeines Statement zu einem Thema ab und wartet dann, bis jemand auf einen eingeht.
 Dann ist das Chatten nicht mehr schwer. </p>
 
 <b><p>Was ist ein Admin? </p></b>
-<p>Admin heißt Administrator (=\"Verwalter\")<br>
-Admins im mainChat haben die Aufgabe, dafür zu sorgen, dass sich alle wohl fühlen.
+<p>Admin heiÃŸt Administrator (=\"Verwalter\")<br>
+Admins im mainChat haben die Aufgabe, dafÃ¼r zu sorgen, dass sich alle wohl fÃ¼hlen.
 Sie beantworten gerne Fragen zum Chat, helfen bei Problemen und werfen User aus dem Chat, 
-wenn diese andere belästigen.</p>
+wenn diese andere belÃ¤stigen.</p>
 
-<p>Administrative Tätigkeit ist Freizeit, die nicht bezahlt wird. 
-Deswegen kann nicht gewährleistet werden, dass immer ein Admin zur Stelle ist. 
+<p>Administrative TÃ¤tigkeit ist Freizeit, die nicht bezahlt wird. 
+Deswegen kann nicht gewÃ¤hrleistet werden, dass immer ein Admin zur Stelle ist. 
 Allerdings kennen sich viele Stammuser genauso gut aus und beantworten oft auch gerne Fragen, 
 falls die Admins kurzfristig nicht anwesend oder ansprechbar sind. 
 </p>
 
 
-<b><p>Können Admins private Nachrichten mitlesen? </p></b>
+<b><p>KÃ¶nnen Admins private Nachrichten mitlesen? </p></b>
 
-<p>Immer wieder tauchen im Chat Leute auf, die behaupten, Admins könnten alle privaten Mitteilungen lesen.
-Abgesehen davon, dass wir das moralisch nicht vertreten könnten, ist es technisch auch nicht vorgesehen.
-Private Nachrichten im Chat werden nach einigen Sekunden automatisch wieder gelöscht und *nicht* mitgeloggt, das heißt im 
+<p>Immer wieder tauchen im Chat Leute auf, die behaupten, Admins kÃ¶nnten alle privaten Mitteilungen lesen.
+Abgesehen davon, dass wir das moralisch nicht vertreten kÃ¶nnten, ist es technisch auch nicht vorgesehen.
+Private Nachrichten im Chat werden nach einigen Sekunden automatisch wieder gelÃ¶scht und *nicht* mitgeloggt, das heiÃŸt im 
 Klartext:<br>
-<b>Nein, können Sie nicht.</b> </p>
+<b>Nein, kÃ¶nnen Sie nicht.</b> </p>
 
 <b><p>Bin ich im mainChat anonym? </p></b>
 <p>
 Ja und Nein.<br>
-Man ist anderen Usern gegenüber anonym; Admins jedoch können die IP-Adresse des Rechners, mit dem man online ist, sehen. 
-Das muss auch so sein, damit bei Vorfällen, wie zum Beispiel Beleidigungen, gehandelt werden kann.
+Man ist anderen Usern gegenÃ¼ber anonym; Admins jedoch kÃ¶nnen die IP-Adresse des Rechners, mit dem man online ist, sehen. 
+Das muss auch so sein, damit bei VorfÃ¤llen, wie zum Beispiel Beleidigungen, gehandelt werden kann.
 Benimmt sich jemand dauerhaft daneben und es ist nachvollziehbar, von welchem Provider er kommt, ist es auch kein Problem, 
 sich an den Provider zu wenden und zu beschweren. Die meisten Provider reagieren empfindlich auf solchen Missbrauch und 
 sperren den Zugang.</p>
 
 
-<b><p>Was sollte ich im Chat grundsätzlich nicht tun? </p></b>
-<p>Alles, was ich im realen Leben auch nicht tun würde.<br>
-Ich gehe nicht in eine Kneipe und pöbele sofort die Leute an, dann kommt der Wirt und wirft mich raus.
-Ich gehe auch nicht auf eine Party und baggere die weiblichen Gäste an, dann wollen sie meist schnell nicht mehr mit mir reden.
-Ich frage nicht sofort jeden aus, auch wenn ich über ihn viel wissen möchte, sondern ich warte, bis sich das von selbst ergibt: vielleicht,
-indem ich ein bisschen von mir erzähle.
-Kurz gesagt: Ich benehme mich höflich, respektvoll und nicht zu aufdringlich. </p>
+<b><p>Was sollte ich im Chat grundsÃ¤tzlich nicht tun? </p></b>
+<p>Alles, was ich im realen Leben auch nicht tun wÃ¼rde.<br>
+Ich gehe nicht in eine Kneipe und pÃ¶bele sofort die Leute an, dann kommt der Wirt und wirft mich raus.
+Ich gehe auch nicht auf eine Party und baggere die weiblichen GÃ¤ste an, dann wollen sie meist schnell nicht mehr mit mir reden.
+Ich frage nicht sofort jeden aus, auch wenn ich Ã¼ber ihn viel wissen mÃ¶chte, sondern ich warte, bis sich das von selbst ergibt: vielleicht,
+indem ich ein bisschen von mir erzÃ¤hle.
+Kurz gesagt: Ich benehme mich hÃ¶flich, respektvoll und nicht zu aufdringlich. </p>
 
 <b><p>Wann werde ich von den Admins aus dem Chat geworfen?</p></b> 
 <p>
 Admins haben das Recht, User aus dem Chat zu werfen (\"kicken\"), wenn diese sich daneben benehmen.<br>
-Davon wird meist, außer in Extremfällen, erst nach einer Vorwarnung Gebrauch gemacht. Sieht ein User nicht ein, dass er sich 
+Davon wird meist, auÃŸer in ExtremfÃ¤llen, erst nach einer Vorwarnung Gebrauch gemacht. Sieht ein User nicht ein, dass er sich 
 besser benehmen sollte, kann er auch gesperrt werden. In dem Fall wird die IP (Rechner-Adresse) blockiert, so dass sich der 
-Betreffende nicht mehr in den Chat einloggen kann. Bei wiederholten Verstößen, wird der Provider/ die Bildungseinrichtung 
+Betreffende nicht mehr in den Chat einloggen kann. Bei wiederholten VerstÃ¶ÃŸen, wird der Provider/ die Bildungseinrichtung 
 informiert und der User muss mit entsprechenden Konsequenzen rechnen. 
 </p>
-<b>Gründe zum Kicken sind: </b>
+<b>GrÃ¼nde zum Kicken sind: </b>
 <p>
 <BR>
-<b>Pöbeleien.</b> Jemanden zu beleidigen, den man gar nicht kennt, ist wenig stilvoll und wird nicht geduldet. Bei extremen 
-Vorfällen (dies gilt auch für die Verbreitung nationalsozialistischen Gedankenguts oder von Sex-Urls) wird ohne Vorwarnung
+<b>PÃ¶beleien.</b> Jemanden zu beleidigen, den man gar nicht kennt, ist wenig stilvoll und wird nicht geduldet. Bei extremen 
+VorfÃ¤llen (dies gilt auch fÃ¼r die Verbreitung nationalsozialistischen Gedankenguts oder von Sex-Urls) wird ohne Vorwarnung
 gekickt.
 <BR><BR>
-<b>Schreiben</b> nur mit Grossbuchstaben. Das bedeutet, auf die Realität bezogen, lautes Schreien und ist wenig erwünscht. 
-Wenn etwas betont werden soll, kann man es auch kursiv (*) oder fett (_) darstellen. Ganze Sätze sollte man jedoch nicht betonen; das gilt als unfein. 
+<b>Schreiben</b> nur mit Grossbuchstaben. Das bedeutet, auf die RealitÃ¤t bezogen, lautes Schreien und ist wenig erwÃ¼nscht. 
+Wenn etwas betont werden soll, kann man es auch kursiv (*) oder fett (_) darstellen. Ganze SÃ¤tze sollte man jedoch nicht betonen; das gilt als unfein. 
 </p>
 ";
 
-deutsch.php-hilfe.php # martin 10.3.2004 Austausch auf Wunsch von Claudia (überarbeite Texte vom Kunden)
+deutsch.php-hilfe.php # martin 10.3.2004 Austausch auf Wunsch von Claudia (Ã¼berarbeite Texte vom Kunden)
 
 
 $hilfe_uebersichtstext=	"<p><b>Erste Hilfe bei Problemen:</b><br>".
 			"Falls Sie im Chat keinen Text angezeigt bekommen oder von Zeit zu Zeit aus dem Chat fliegen, ".
-			"können Sie in den <b><A HREF=\"hilfe.php?http_host=$http_host&id=$id&f[u_backup]=1\">sicheren Modus</a> umschalten</b>! Sie können ".
-			"natürlich wieder in den <b><A HREF=\"hilfe.php?http_host=$http_host&id=$id&f[u_backup]=0\">Normalmodus</a> zurückschalten</b>.".
-			"Falls die <b>Ausgabe hängt</b> oder andere Fehler auftreten, können Sie mit ".
+			"kÃ¶nnen Sie in den <b><A HREF=\"hilfe.php?http_host=$http_host&id=$id&f[u_backup]=1\">sicheren Modus</a> umschalten</b>! Sie kÃ¶nnen ".
+			"natÃ¼rlich wieder in den <b><A HREF=\"hilfe.php?http_host=$http_host&id=$id&f[u_backup]=0\">Normalmodus</a> zurÃ¼ckschalten</b>.".
+			"Falls die <b>Ausgabe hÃ¤ngt</b> oder andere Fehler auftreten, kÃ¶nnen Sie mit ".
 			"<b><A HREF=\"hilfe.php?http_host=$http_host&id=$id&reset=1\">[RESET]</a></b> ".
 			"alle Fenster des Chats neu laden.</p>".
 
 			"<p><b>Popup-Blocker:</b><br>".
-			"Bitte beachten Sie, dass Popup-Blocker die Funktionalität des Chats beeinträchtigen können ".
+			"Bitte beachten Sie, dass Popup-Blocker die FunktionalitÃ¤t des Chats beeintrÃ¤chtigen kÃ¶nnen ".
 			"und bei eingeschaltetem Popup-Blocker einige Funktionen nicht nutzbar sind. ".
-			"Wir empfehlen Ihnen daher für den $chat den Popup-Blocker zu deaktivieren.</p>".
+			"Wir empfehlen Ihnen daher fÃ¼r den $chat den Popup-Blocker zu deaktivieren.</p>".
 
 
 			"<p><b>JavaScript:</b><br>".
@@ -606,49 +606,49 @@ $hilfe_uebersichtstext=	"<p><b>Erste Hilfe bei Problemen:</b><br>".
 			"Sie dieses bitte gegebenenfalls in Ihrem Browser ein.</p>".
 
 			"<p><b>Befehle:</b><br>".
-			"Die meisten Einstellungen können durch <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=befehle\">".
+			"Die meisten Einstellungen kÃ¶nnen durch <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=befehle\">".
 			"<B>Befehle im Chat</B></A> oder direkt im ".
 			"Fenster (<A HREF=\"edit.php?http_host=$http_host&id=$id\"><B>Einstellungen</B></A>, ".
-			"<A HREF=\"raum.php?http_host=$http_host&id=$id\"><B>Räume</B></A>) verändert werden. Für die voreingestellten Sprüche, ".
-			"die im Chat abgerufen werden können, gibt es noch eine <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=sprueche\">".
-			"<B>Übersicht</B></A>.</p>".
+			"<A HREF=\"raum.php?http_host=$http_host&id=$id\"><B>RÃ¤ume</B></A>) verÃ¤ndert werden. FÃ¼r die voreingestellten SprÃ¼che, ".
+			"die im Chat abgerufen werden kÃ¶nnen, gibt es noch eine <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=sprueche\">".
+			"<B>Ãœbersicht</B></A>.</p>".
 
 			"<p><b>Liste:</b><br>".
 			"Im Chat wie auch im Fenster (<A HREF=\"edit.php?http_host=$http_host&id=$id\"><B>Userliste</B></A>) ".
 			"kann eine Liste aller in einem bestimmten ".
-			"Raum chattenden User ausgegeben werden. Im Fenster ist es darüber hinaus möglich, ".
+			"Raum chattenden User ausgegeben werden. Im Fenster ist es darÃ¼ber hinaus mÃ¶glich, ".
 			"weitere Informationen abzufragen oder dem User eine private Nachricht zu schreiben.</p>".
 
 			"<p><b>Namen:</b><br>".
 			"Jeder User im Chat hat einen Usernamen und einen Nicknamen. ".
-			"Mit beiden Namen ist der Login möglich; im Chat wird aber nur der Nickname angezeigt. ".
+			"Mit beiden Namen ist der Login mÃ¶glich; im Chat wird aber nur der Nickname angezeigt. ".
 			"Der Nick darf keine Leerzeichen enthalten. Nick- wie auch Usernamen sind eindeutig, ".
 			"also kann es keine zwei Benutzer mit demselben Namen geben.".
 			"</p>".
 
-			"<p><b>Ergänzung des Nicks:</b><br>".
-			"Andere Benutzer können im Chat durch den Beginn des Nicks, gefolgt von einem Doppelpunkt ".
+			"<p><b>ErgÃ¤nzung des Nicks:</b><br>".
+			"Andere Benutzer kÃ¶nnen im Chat durch den Beginn des Nicks, gefolgt von einem Doppelpunkt ".
 			"gezielt angesprochen werden.<br>".
 			"<b>Aus dil: Hallo!</b> wird beispielsweise [<b>zu Dilbert] Hallo!</b><br>".
-			"Die Nickergänzung funktioniert unter anderem beim Chatten und beim Flüstern. ".
-			"Ein @ vor dem Beginn des Nicknamens wird ebenfalls zum vollen Nick ergänzt</p>".
+			"Die NickergÃ¤nzung funktioniert unter anderem beim Chatten und beim FlÃ¼stern. ".
+			"Ein @ vor dem Beginn des Nicknamens wird ebenfalls zum vollen Nick ergÃ¤nzt</p>".
 
 			"<p><b>Einstellungen:</b><br>".
 			"Jeder User kann optional eine E-Mail-Adresse und eine Homepage eintragen, ".
 			"die in der Userliste im Fenster angezeigt werden. Neben dem Passwort, das neu gesetzt werden kann, ".
-			"ist auch der Wechsel der Farbe durch Klick auf eines der bunten Felder möglich.".
+			"ist auch der Wechsel der Farbe durch Klick auf eines der bunten Felder mÃ¶glich.".
 			"</p>".
 
-			"<p><b>Räume:</b><br>".
-			"Zum Wechsel in einen offenen Raum wählt man einfach den passenden Raum im Auswahlfeld ".
+			"<p><b>RÃ¤ume:</b><br>".
+			"Zum Wechsel in einen offenen Raum wÃ¤hlt man einfach den passenden Raum im Auswahlfeld ".
 			"unter dem Chat-Eingabefeld aus. Hinter dem Raumnamen wird die Anzahl der User angezeigt, ".
-			"die aktuell in diesem Raum chatten. Jeder User kann beliebig viele Räume aufmachen, ".
-			"die er verändern darf. Nicht-permamente Räume werden aber automatisch nach Verlassen gelöscht. ".
+			"die aktuell in diesem Raum chatten. Jeder User kann beliebig viele RÃ¤ume aufmachen, ".
+			"die er verÃ¤ndern darf. Nicht-permamente RÃ¤ume werden aber automatisch nach Verlassen gelÃ¶scht. ".
 			"Ein Besitzer eines Raums oder ein ChatAdmin darf den Raum umbenennen und den Ein- und ".
-			"Austrittstext sowie den Raumstatus verändern. Einen offenen Raum darf jeder User betreten, ".
-			"während ein geschlossener Raum nicht betreten werden darf und auch nicht angezeigt wird. ".
-			"Ein Raum darf gelöscht werden; aber falls sich User darin aufhalten, werden diese in die Lobby geleitet. ".
-			"Mit dem Befehl /kick können im Chat unerwünschte User aus einem Raum entfernt und der Wiedereintritt ".
+			"Austrittstext sowie den Raumstatus verÃ¤ndern. Einen offenen Raum darf jeder User betreten, ".
+			"wÃ¤hrend ein geschlossener Raum nicht betreten werden darf und auch nicht angezeigt wird. ".
+			"Ein Raum darf gelÃ¶scht werden; aber falls sich User darin aufhalten, werden diese in die Lobby geleitet. ".
+			"Mit dem Befehl /kick kÃ¶nnen im Chat unerwÃ¼nschte User aus einem Raum entfernt und der Wiedereintritt ".
 			"automatisch damit verboten werden.".
 			"</p>".
 
@@ -656,122 +656,122 @@ $hilfe_uebersichtstext=	"<p><b>Erste Hilfe bei Problemen:</b><br>".
 			" im rechten Fenster neben dem Chat (@ > USERNAME)</b><br>".
 			"In der Userliste werden die Nicknamen aller User, die im aktuellen Raum online sind, ".
 			"angezeigt. Das @ vor dem Nicknamen kopiert den Nicknamen in die Chat-Eingabezeile. ".
-			"Dies ist sehr praktisch, um einen User <b>öffentlich</b> direkt anzusprechen. ".
-			"Das > (Größer) vor den Nicknamen kopiert den Nicknamen in die Chat-Eingabezeile, ".
-			"um diesen User <b>privat</b> anzuflüstern. Falls ein Nick in Klammern () steht, ist der ".
-			"User gerade abwesend (/away). Ein Admin sieht vor dem Nick zusätzlich drei ".
-			"Links <b>G K S</b> zur Ausführung der Befehle Gag (Knebel), Kick (Herauswurf) und ".
+			"Dies ist sehr praktisch, um einen User <b>Ã¶ffentlich</b> direkt anzusprechen. ".
+			"Das > (GrÃ¶ÃŸer) vor den Nicknamen kopiert den Nicknamen in die Chat-Eingabezeile, ".
+			"um diesen User <b>privat</b> anzuflÃ¼stern. Falls ein Nick in Klammern () steht, ist der ".
+			"User gerade abwesend (/away). Ein Admin sieht vor dem Nick zusÃ¤tzlich drei ".
+			"Links <b>G K S</b> zur AusfÃ¼hrung der Befehle Gag (Knebel), Kick (Herauswurf) und ".
 			"Sperre im Chat. Ein Raumbesitzer sieht nur den Link auf Kick.</p>".
 
 			"<p><b><A HREF=\"smilies.php?http_host=$http_host&id=$id\" TARGET=\"userliste\">Smileys-Liste</A>".
 			" im rechten Fenster neben dem Chat</b><br>".
-			"Das Fenster der Userliste kann auf eine Liste mit häufig benutzten Smileys umgeschaltet werden. ".
-			"Ein Klick auf den Smiley kopiert ihn in die Eingabezeile. Sie können in Ihren Einstellungen ".
-			"die Darstellung der Smileys als Grafiken unterdrücken. In jedem Raum lassen sich ebenfalls ".
-			"die Grafiken unterdrücken (Smileys-Grafiken werden nur in ausgewählten mainChats angeboten).</p>".
+			"Das Fenster der Userliste kann auf eine Liste mit hÃ¤ufig benutzten Smileys umgeschaltet werden. ".
+			"Ein Klick auf den Smiley kopiert ihn in die Eingabezeile. Sie kÃ¶nnen in Ihren Einstellungen ".
+			"die Darstellung der Smileys als Grafiken unterdrÃ¼cken. In jedem Raum lassen sich ebenfalls ".
+			"die Grafiken unterdrÃ¼cken (Smileys-Grafiken werden nur in ausgewÃ¤hlten mainChats angeboten).</p>".
 
 			"<p>".
-			"<b>Moderationsmodul für PromiChats (nur in ausgewählten mainChats)</b>".
+			"<b>Moderationsmodul fÃ¼r PromiChats (nur in ausgewÃ¤hlten mainChats)</b>".
 			"<ul>".
-			"<li>In moderierten Räumen kann ein moderierter Chat stattfinden. Alle öffentlichen Nachrichten werden ".
-			"unterdrückt und an einen oder mehrere Moderatoren weitergeleitet, solange sich Moderatoren im Raum aufhalten. ".
-			"<li>Die Moderatoren wählen eine oder mehrere Fragen aus und beantworten diese. Nach Beantwortung der Fragen werden".
-			" diese mit der Antwort im Chat veröffentlicht. ".
-			"<li>Für die Moderatoren steht eine eigene Benutzeroberfläche in HTML zur Verfügung, mit der die Fragen der User schnell".
-			" und komfortabel durchgeschaltet, beantwortet oder unterdrückt werden können. ".
-			"<li>Die Fragen, die ein Moderator zur Beantwortung ausgewählt hat, sind für alle anderen Moderatoren gesperrt. ".
-			"<li>Öffentliche Ein- und Austrittsnachrichten werden in moderierten Räumen unterdrückt. ".
-			"<li>Die Moderationsfunktionen sind nur in den Räumen aktiv, die auf den Status \"moderiert\" gesetzt sind.".
+			"<li>In moderierten RÃ¤umen kann ein moderierter Chat stattfinden. Alle Ã¶ffentlichen Nachrichten werden ".
+			"unterdrÃ¼ckt und an einen oder mehrere Moderatoren weitergeleitet, solange sich Moderatoren im Raum aufhalten. ".
+			"<li>Die Moderatoren wÃ¤hlen eine oder mehrere Fragen aus und beantworten diese. Nach Beantwortung der Fragen werden".
+			" diese mit der Antwort im Chat verÃ¶ffentlicht. ".
+			"<li>FÃ¼r die Moderatoren steht eine eigene BenutzeroberflÃ¤che in HTML zur VerfÃ¼gung, mit der die Fragen der User schnell".
+			" und komfortabel durchgeschaltet, beantwortet oder unterdrÃ¼ckt werden kÃ¶nnen. ".
+			"<li>Die Fragen, die ein Moderator zur Beantwortung ausgewÃ¤hlt hat, sind fÃ¼r alle anderen Moderatoren gesperrt. ".
+			"<li>Ã·ffentliche Ein- und Austrittsnachrichten werden in moderierten RÃ¤umen unterdrÃ¼ckt. ".
+			"<li>Die Moderationsfunktionen sind nur in den RÃ¤umen aktiv, die auf den Status \"moderiert\" gesetzt sind.".
 			"</ul>".
 			"</p>";
 
 
 $hilfe_befehlstext=array(1=>	"/user\tListet alle User im aktuellen Raum\t/wer, /who, /w, /list",
-				"/user RAUM\tListet alle User im Raum RAUM auf (*=Alle)\t/wer, /who, /w, /list\tFalls RAUM=*, werden alle Räume gezeigt.",
-				"/raum\tListet alle offenen Räume auf\t/channel, /go",
-				"/raum RAUM\tWechselt in RAUM. Falls RAUM nicht existiert, wird er als temporärer Raum neu angelegt\t/channel, /go",
-				"/raum RAUM !\tWechselt in RAUM, auch wenn der Raum geschlossen ist (nur Admins und Raumbesitzer)\tforce, immer\tBitte Privatsphäre beachten!",
-				"/people\tListet alle offenen Räume mit Usern auf.",
-				"/weg\tSetzt oder löscht einen ich-bin-nicht-da Text.\t/away\tBeispiel: /away ich telefoniere",
-				"/msg NAME TEXT\tTEXT an User NAME flüstern\t/talk, /tell,",
-				"/t\tDie Übermittlung ist privat und kann von niemandem mitgelesen werden",
+				"/user RAUM\tListet alle User im Raum RAUM auf (*=Alle)\t/wer, /who, /w, /list\tFalls RAUM=*, werden alle RÃ¤ume gezeigt.",
+				"/raum\tListet alle offenen RÃ¤ume auf\t/channel, /go",
+				"/raum RAUM\tWechselt in RAUM. Falls RAUM nicht existiert, wird er als temporÃ¤rer Raum neu angelegt\t/channel, /go",
+				"/raum RAUM !\tWechselt in RAUM, auch wenn der Raum geschlossen ist (nur Admins und Raumbesitzer)\tforce, immer\tBitte PrivatsphÃ¤re beachten!",
+				"/people\tListet alle offenen RÃ¤ume mit Usern auf.",
+				"/weg\tSetzt oder lÃ¶scht einen ich-bin-nicht-da Text.\t/away\tBeispiel: /away ich telefoniere",
+				"/msg NAME TEXT\tTEXT an User NAME flÃ¼stern\t/talk, /tell,",
+				"/t\tDie Ãœbermittlung ist privat und kann von niemandem mitgelesen werden",
 				"/mail NAME TEXT\tSchreibt Mail mit dem Inhalt TEXT an den User NAME\t/m\tDer Betreff entspricht den ersten Worten",
-				"/me TEXT\tSpruch im Raum\t/txt\tDer Text wendet sich nicht an einen bestimmten User, sondern ist für alle im Raum bestimmt",
+				"/me TEXT\tSpruch im Raum\t/txt\tDer Text wendet sich nicht an einen bestimmten User, sondern ist fÃ¼r alle im Raum bestimmt",
 				"/op TEXT\tRuft einen Admin\t \tDer Text wird an die Admins geschickt, die gerade online sind",
 				"/nick NAME\tSetzt Nickname auf NAME\t/name\tDer neue Nickname wird dauerhaft gespeichert",
 				"/ignoriere\tZeigt die ignorierten User an\t/ignore, /ig",
 				"/ignoriere NAME\tIgnoriert User NAME\t \tNochmalige Eingabe gibt den User NAME wieder frei",
-				"/kick NAME\tSperrt User NAME aus dem aktuellen Raum dauerhaft aus\t/plop\tNochmalige Eingabe gibt den Eintritt für diesen User wieder frei",
+				"/kick NAME\tSperrt User NAME aus dem aktuellen Raum dauerhaft aus\t/plop\tNochmalige Eingabe gibt den Eintritt fÃ¼r diesen User wieder frei",
 				"/quit TEXT\tBeendet den Chat mit den Worten TEXT (logoff).\t/exit, /ende\tDie Angabe von TEXT ist optional",
 				"/hilfe\tListet die Kurzhilfe auf\t/help, /?",
 				"/freunde NAME\tMacht NAME zu meinem Freund\t \tNochmalige Eingabe nimmt NAME aus der Freundesliste /freund, /buddy",
-				"/einlad NAME\tLädt einen User in den Raum ein\t/invite\tNur für Admins oder Raumbesitzer",
-				"/uebergeberaum NAME\tÜbergibt den aktuellen Raum an den User NAME.\t/schenke\tNur für Admins oder Raumbesitzer",
-				"/aendereraum STATUS\tÄndert den Status des aktuellen Raums auf offen, geschlossen oder moderiert.\t \tNur für Admins oder Raumbesitzer",
-				"/loescheraum RAUM\tLöscht den angegebenen Raum\t \tNur für Admins oder Raumbesitzer",
-				"/zeige NAME\tGibt die Benutzerinformationen für den Benutzer NAME aus <BR>(% ist Joker).\t/whois",
-				"/wuerfel\tWürfel werfen\t/dice\t/wuerfel 2W6 <BR>wirft 2 sechseitige Würfel",
-				"/suche NAME\tSucht alle Sprüche, die das Wort NAME enthalten\t/such\tGut geeignet, um einen Spruch passend zum Thema zu finden",
-				"=spruch NAME ZUSATZ\tGibt einen vordefinierten Spruch aus (Siehe \"Liste aller Sprüche\")\t \tNAME und ZUSATZ ist optional und vom Spruch abhängig. Weitere Info vorhanden",
-				"*TEXT*\tTEXT wird kursiv dargestellt\t \tWirkt in allen Texten, die öffentlich oder privat im Chat ausgegeben werden",
-				"_TEXT_\tTEXT wird fett dargestellt\t \tWirkt in allen Texten, die öffentlich oder privat im Chat ausgegeben werden",
+				"/einlad NAME\tLÃ¤dt einen User in den Raum ein\t/invite\tNur fÃ¼r Admins oder Raumbesitzer",
+				"/uebergeberaum NAME\tÃœbergibt den aktuellen Raum an den User NAME.\t/schenke\tNur fÃ¼r Admins oder Raumbesitzer",
+				"/aendereraum STATUS\tÃ„ndert den Status des aktuellen Raums auf offen, geschlossen oder moderiert.\t \tNur fÃ¼r Admins oder Raumbesitzer",
+				"/loescheraum RAUM\tLÃ¶scht den angegebenen Raum\t \tNur fÃ¼r Admins oder Raumbesitzer",
+				"/zeige NAME\tGibt die Benutzerinformationen fÃ¼r den Benutzer NAME aus <BR>(% ist Joker).\t/whois",
+				"/wuerfel\tWÃ¼rfel werfen\t/dice\t/wuerfel 2W6 <BR>wirft 2 sechseitige WÃ¼rfel",
+				"/suche NAME\tSucht alle SprÃ¼che, die das Wort NAME enthalten\t/such\tGut geeignet, um einen Spruch passend zum Thema zu finden",
+				"=spruch NAME ZUSATZ\tGibt einen vordefinierten Spruch aus (Siehe \"Liste aller SprÃ¼che\")\t \tNAME und ZUSATZ ist optional und vom Spruch abhÃ¤ngig. Weitere Info vorhanden",
+				"*TEXT*\tTEXT wird kursiv dargestellt\t \tWirkt in allen Texten, die Ã¶ffentlich oder privat im Chat ausgegeben werden",
+				"_TEXT_\tTEXT wird fett dargestellt\t \tWirkt in allen Texten, die Ã¶ffentlich oder privat im Chat ausgegeben werden",
 				"/farbe\tZeigt die aktuelle Farbe an\t/color",
-				"/farbe RRGGBB\tSetzt neue Farbe auf RRGGBB\t/color\tRR steht für Rot, GG für Grün und BB für Blau, jeweils von 00 bis FF",
-				"/farbealle \tSetzt/zeigt die Farbe für andere User an\t/color2\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbealle -\"",
-				"/farbenoise \tSetzt/zeigt die Farbe für Noises\t/color3\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbenoise -\"",
-				"/farbepriv \tSetzt/zeigt die Farbe für private Nachrichten\t/color4\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbepriv -\"",
-				"/farbesys \tSetzt/zeigt die Farbe für Systemnachrichten im Chat\t/color5\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbesys -\"",
-				"/farbebg \tSetzt/zeigt die Farbe für den Hintergrund. Änderung wird erst nach neuem Laden aktiv.\t/color6\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbebg -\"",
-				"/farbset X\tSetzt das vordefinierte Farbset X. \t \tDie möglichen Farbsets werden durch /farbset angezeigt. Beispiel: /farbset 3",
-				"/farbreset \tSetzt die Farbspielereien wieder zurück auf den Chat-Default",
-				"/clearedit \tEingabezeile nach Return löschen oder stehen lassen\t \tNochmalige Eingabe schaltet wieder zurück");
+				"/farbe RRGGBB\tSetzt neue Farbe auf RRGGBB\t/color\tRR steht fÃ¼r Rot, GG fÃ¼r GrÃ¼n und BB fÃ¼r Blau, jeweils von 00 bis FF",
+				"/farbealle \tSetzt/zeigt die Farbe fÃ¼r andere User an\t/color2\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbealle -\"",
+				"/farbenoise \tSetzt/zeigt die Farbe fÃ¼r Noises\t/color3\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbenoise -\"",
+				"/farbepriv \tSetzt/zeigt die Farbe fÃ¼r private Nachrichten\t/color4\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbepriv -\"",
+				"/farbesys \tSetzt/zeigt die Farbe fÃ¼r Systemnachrichten im Chat\t/color5\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbesys -\"",
+				"/farbebg \tSetzt/zeigt die Farbe fÃ¼r den Hintergrund. Ã„nderung wird erst nach neuem Laden aktiv.\t/color6\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbebg -\"",
+				"/farbset X\tSetzt das vordefinierte Farbset X. \t \tDie mÃ¶glichen Farbsets werden durch /farbset angezeigt. Beispiel: /farbset 3",
+				"/farbreset \tSetzt die Farbspielereien wieder zurÃ¼ck auf den Chat-Default",
+				"/clearedit \tEingabezeile nach Return lÃ¶schen oder stehen lassen\t \tNochmalige Eingabe schaltet wieder zurÃ¼ck");
 
 $hilfe_community="<BR>
 <TABLE ALIGN=RIGHT CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR=$farbe_tabelle_kopf>
 ".$legende."
 </table>
 <P><b><A NAME=\"punkte\">Punkte</A></b><BR>
-Unter dem Chat-Menüpunkt \"<B>USER</B>\" führt der Link zur User Top10/100 Liste. 
+Unter dem Chat-MenÃ¼punkt \"<B>USER</B>\" fÃ¼hrt der Link zur User Top10/100 Liste. 
 Alle angemeldeten User bekommen pro einzelnes im Chat geschriebenes Wort
 einen Punkt. Die Voraussetzung ist, dass jedes Wort mindestens vier Buchstaben hat
-und sich der User in einem öffentlichen, permanenten Raum mit mindestens 
-".$punkte_ab_user." Usern befindet. Für das
-erstmalige Ausfüllen des Profils bekommt jeder User 500 Punkte. Die Admins
-haben ferner die Möglichkeit, den Usern Punkte zu schenken oder abzuziehen.
+und sich der User in einem Ã¶ffentlichen, permanenten Raum mit mindestens 
+".$punkte_ab_user." Usern befindet. FÃ¼r das
+erstmalige AusfÃ¼llen des Profils bekommt jeder User 500 Punkte. Die Admins
+haben ferner die MÃ¶glichkeit, den Usern Punkte zu schenken oder abzuziehen.
 Dies geschieht mit den Befehlen \"<B>/lob Nickname Punktezahl</B>\" und \"<B>/tadel
 Nickname Punktezahl</B>\". Wenn Sie dem User Heinz also 100 Punkte schenken
-möchten, tippen Sie im Chat einfach \"/<B>lob Heinz 100</B>\" ein und schon bekommt
+mÃ¶chten, tippen Sie im Chat einfach \"/<B>lob Heinz 100</B>\" ein und schon bekommt
 der User Heinz 100 Punkte gutgeschrieben. Beim Logout des Users werden die
 Punktezahlen jeweils aufaddiert und aktualisiert. Mit Klick auf den
-Menüpunkt Top10/100 kann jeder User Einblick in die Rangliste nehmen. Je
-nach Anzahl der Punke erhält jeder User (sowie auch die Admins) ein
-kleines Würfelsymbol, das seinem Nicknamen im Chat zugeordnet wird.<BR><BR>
+MenÃ¼punkt Top10/100 kann jeder User Einblick in die Rangliste nehmen. Je
+nach Anzahl der Punke erhÃ¤lt jeder User (sowie auch die Admins) ein
+kleines WÃ¼rfelsymbol, das seinem Nicknamen im Chat zugeordnet wird.<BR><BR>
 <B>Tipp 1:</B> Die Punkte werden meistens erst beim Logout aufs Userkonto gutgeschrieben,
-daher gibt's erst nach dem Login einen Würfeln mit mehr Augen.<BR>
+daher gibt's erst nach dem Login einen WÃ¼rfeln mit mehr Augen.<BR>
 <B>Tipp 2:</B> Wer um Punkte bettelt, macht sich unbeliebt.<BR>
-<B>Tipp 3:</B> Wer in leeren Räumen Texte schreibt, um die Punkte nach oben zu
+<B>Tipp 3:</B> Wer in leeren RÃ¤umen Texte schreibt, um die Punkte nach oben zu
 treiben, hat schnell keine Punkte mehr.<BR><BR>
 <b><A NAME=\"profil\">Profile</A></b><br>
 Unter dem Punkt \"<B>EINSTELLUNGEN</B>\" kann ebenfalls jeder Einblick in sein Profil
-nehmen und es gegebenenfalls ändern. Hier kann der User Angaben über seine
+nehmen und es gegebenenfalls Ã¤ndern. Hier kann der User Angaben Ã¼ber seine
 Anschrift, Telefon-, Handynummer, ICQ, Geburtsdatum, Geschlecht, Hobbys und
-vieles mehr hinterlassen. Diese Profile sind im Chat öffentlich abrufbar.
-Das Ausfüllen der Profile ist für die User freiwillig. Admins haben in Ihrem
-eigenen Profil noch die Möglichkeit, sich die Profile aller User ausgeben zu
+vieles mehr hinterlassen. Diese Profile sind im Chat Ã¶ffentlich abrufbar.
+Das AusfÃ¼llen der Profile ist fÃ¼r die User freiwillig. Admins haben in Ihrem
+eigenen Profil noch die MÃ¶glichkeit, sich die Profile aller User ausgeben zu
 lassen.<BR><BR>
 <b><A NAME=\"mail\">Chat-Mail</A></b><br>
 Die Chat-Mail (<B>MAIL</B>, <B>/mail</B>) ist eine im Chat integrierte Mailbox mit
-Weboberfläche. Im Chat selbst steht hinter jedem Nick ein Mailsymbol (blauer
+WeboberflÃ¤che. Im Chat selbst steht hinter jedem Nick ein Mailsymbol (blauer
 Briefumschlag). Somit kann jeder registrierte User im Chat anonym Mail
-empfangen, ohne seine echte Adresse herauszugeben. Um in das Mail-Menü zu
-gelangen, klicken Sie in der unteren Chatleiste auf den Menüpunkt Mail. Nun
-öffnet sich ein neues Fenster, in dem Sie Ihre Webmail-Oberfläche finden.
-Hier können Sie direkt alle Ihre empfangenen Nachrichten sehen und per Klick
-auf die Betreffzeile öffnen. Wenn Sie Nachrichten zum Löschen in den
-Papierkorb verschieben möchten, markieren Sie einfach die betreffende Mail
-durch Klick in das \"<B>Löschen</B>\"-Kästchen und klicken Sie dann auf den
-<B>Löschen</B>-Button rechts unter den Nachrichten.<BR><BR>
-<B>Im Mailmenü haben Sie nun folgende Auswahlmöglichkeiten:</B></P>
+empfangen, ohne seine echte Adresse herauszugeben. Um in das Mail-MenÃ¼ zu
+gelangen, klicken Sie in der unteren Chatleiste auf den MenÃ¼punkt Mail. Nun
+Ã¶ffnet sich ein neues Fenster, in dem Sie Ihre Webmail-OberflÃ¤che finden.
+Hier kÃ¶nnen Sie direkt alle Ihre empfangenen Nachrichten sehen und per Klick
+auf die Betreffzeile Ã¶ffnen. Wenn Sie Nachrichten zum LÃ¶schen in den
+Papierkorb verschieben mÃ¶chten, markieren Sie einfach die betreffende Mail
+durch Klick in das \"<B>LÃ¶schen</B>\"-KÃ¤stchen und klicken Sie dann auf den
+<B>LÃ¶schen</B>-Button rechts unter den Nachrichten.<BR><BR>
+<B>Im MailmenÃ¼ haben Sie nun folgende AuswahlmÃ¶glichkeiten:</B></P>
 <UL>
 <li><I>Mailbox neu laden</I>
 <li><I>Neue Mail schreiben</I>
@@ -780,54 +780,54 @@ durch Klick in das \"<B>Löschen</B>\"-Kästchen und klicken Sie dann auf den
 </ul><P>
 Um eine neue Mail zu verfassen, geben Sie unter dem Punkt \"<B>Neue Mail senden</B>\"
 in das Feld \"<B>Nickname</B>\" den Nicknamen des Users ein, dem Sie eine Nachricht
-zukommen lassen möchten und klicken Sie dann auf \"<B>weiter</B>\". Nun befinden Sie
-sich in der Texteingabe für Ihre Mail. Am Fuße der Box können Sie übrigens
-auswählen, ob Sie die Nachricht an die Chat-interne Mailbox des Users oder
-an seine reguläre E-Mail Adresse schicken möchten, sofern der User diese als
-öffentlich in seinem Chatprofil angegeben hat. Sind Betreff und Textfeld
-fertig ausgefüllt, verschicken Sie die Mail mit Klick auf den
-\"<B>Senden</B>\"-Button. Wenn Sie eine empfangene Mail löschen, so wird sie zuerst
-einmal in den Papierkorb verschoben. Durch Klick auf den Menüpunkt
-\"<B>Papierkorb zeigen</B>\" können Sie sich alle zum Löschen vorgesehenen Mails noch
+zukommen lassen mÃ¶chten und klicken Sie dann auf \"<B>weiter</B>\". Nun befinden Sie
+sich in der Texteingabe fÃ¼r Ihre Mail. Am FuÃŸe der Box kÃ¶nnen Sie Ã¼brigens
+auswÃ¤hlen, ob Sie die Nachricht an die Chat-interne Mailbox des Users oder
+an seine regulÃ¤re E-Mail Adresse schicken mÃ¶chten, sofern der User diese als
+Ã¶ffentlich in seinem Chatprofil angegeben hat. Sind Betreff und Textfeld
+fertig ausgefÃ¼llt, verschicken Sie die Mail mit Klick auf den
+\"<B>Senden</B>\"-Button. Wenn Sie eine empfangene Mail lÃ¶schen, so wird sie zuerst
+einmal in den Papierkorb verschoben. Durch Klick auf den MenÃ¼punkt
+\"<B>Papierkorb zeigen</B>\" kÃ¶nnen Sie sich alle zum LÃ¶schen vorgesehenen Mails noch
 einmal anschauen. Wenn Sie nun sicher sind, dass sie auch alle im Papierkorb
-befindlichen Mails löschen wollen, klicken Sie auf \"<B>Papierkorb leeren</B>\".<BR><BR>
+befindlichen Mails lÃ¶schen wollen, klicken Sie auf \"<B>Papierkorb leeren</B>\".<BR><BR>
 <b><A NAME=\"freunde\">Freunde</A></b><br>
-Bei den Freunden (<B>EINSTELLUNGEN</B>, <B>/freunde</B>) können Sie einfach andere User im
-Chat zu Freunden erklären oder aber aus der Freunde-Liste löschen. So wird
-man stets über den Login/Logoff oder die Anwesenheit von Freunden im Chat
-informiert. Die Freunde-Liste ruft der Chatter über den Punkt \"<B>USER</B>\" direkt
-im Chat auf. Es erscheint ein Fenster, in dem sich auch das Main-Chat Menü
+Bei den Freunden (<B>EINSTELLUNGEN</B>, <B>/freunde</B>) kÃ¶nnen Sie einfach andere User im
+Chat zu Freunden erklÃ¤ren oder aber aus der Freunde-Liste lÃ¶schen. So wird
+man stets Ã¼ber den Login/Logoff oder die Anwesenheit von Freunden im Chat
+informiert. Die Freunde-Liste ruft der Chatter Ã¼ber den Punkt \"<B>USER</B>\" direkt
+im Chat auf. Es erscheint ein Fenster, in dem sich auch das Main-Chat MenÃ¼
 befindet. Durch Klicken auf \"<B>meine Freunde</B>\" gelangt man nun auf die Liste
 und kann ersehen, wen man sich als Freund eingetragen hat oder von wem man
 selbst als Freund aufgenommen wurde.<BR><BR>
 <b><A NAME=\"aktionen\">Aktionen</A></b><br>
-Über den Menüpunkt \"<B>EINSTELLUNGEN</B>\" im Chat gelangen Sie zu den sogenannten
+Ãœber den MenÃ¼punkt \"<B>EINSTELLUNGEN</B>\" im Chat gelangen Sie zu den sogenannten
 \"<B>Aktionen</B>\". Mit den Aktionen steuern Sie, bei welchen Ereignissen Sie mit
 welcher Nachricht informiert werden wollen. Ein Ereignis ist z.B. der Login
 oder Logout eines Freundes, oder auch der Eingang einer neuen Mail. Wann Sie
-die Nachricht erhalten wollen, wählen Sie aus der obersten Zeile aus.
-Möglich ist der Empfang sofort wenn Sie online sind (<B>Sofort/Online</B>) (z.B.
+die Nachricht erhalten wollen, wÃ¤hlen Sie aus der obersten Zeile aus.
+MÃ¶glich ist der Empfang sofort wenn Sie online sind (<B>Sofort/Online</B>) (z.B.
 Freund loggt ein/aus oder zu dem Moment, in dem Sie eine neue Mail
-erhalten), bei Ihrem Login in den Chat oder regelmäßig <B>alle 5 Minuten</B>
-(regelmäßige Information über die vorliegenden neuen Mails oder die
+erhalten), bei Ihrem Login in den Chat oder regelmÃ¤ÃŸig <B>alle 5 Minuten</B>
+(regelmÃ¤ÃŸige Information Ã¼ber die vorliegenden neuen Mails oder die
 Anwesendheit Ihrer Freunde im Chat) Die Benachrichtigungen, die Sie
-erhalten, wenn Sie nicht im Chat sind (offline), wählen Sie unter
+erhalten, wenn Sie nicht im Chat sind (offline), wÃ¤hlen Sie unter
 <B>Sofort/Offline</B> aus. Die Art der Nachricht ist einstellbar, so gibt es <B>keine</B>
 Benachrichtigung, <B>Chat-Mail</B> (chat-interne Mail), eine <B>E-Mail</B> an Ihre
-nicht-öffentliche E-Mail Adresse oder eine <B>OLM</B> (OnLineMessage, direkte
-Nachricht in Chat wie /msg). Zusätzlich sind auch Kombinationen von E-Mail
-und OLM sowie Chat-Mail und OLM möglich, wobei Sie in diesem Fall zwei
+nicht-Ã¶ffentliche E-Mail Adresse oder eine <B>OLM</B> (OnLineMessage, direkte
+Nachricht in Chat wie /msg). ZusÃ¤tzlich sind auch Kombinationen von E-Mail
+und OLM sowie Chat-Mail und OLM mÃ¶glich, wobei Sie in diesem Fall zwei
 Nachrichten erhalten.<BR><BR>
 <b><A NAME=\"home\">User-Homepages</A></b><br>
 Unter dem Punkt \"<B>EINSTELLUNGEN -> Homepage</B>\" kann ebenfalls jeder User mit
 wenigen Klicks seine eigene kleine Homepage erstellen, ohne jegliche
 HTML-Kenntnisse zu besitzen. Nach der \"<B>Freischaltung</B>\" der Homepage wird hinter dem 
-Nicknamen ein <B>Haus-Symbol</B> angezeigt, über das man sich die Homepage ansehen kann. In der 
+Nicknamen ein <B>Haus-Symbol</B> angezeigt, Ã¼ber das man sich die Homepage ansehen kann. In der 
 \"Suche nach Usern\" (<B>USER -> Suche</B>) ist die gezielte Suche nach Usern mit freigeschalteter Homepage
-möglich.<BR><BR>
-Ihre Homepage kann natürlich auch mit folgender Adresse von außerhalb des Chats abgerufen werden:<BR>
+mÃ¶glich.<BR><BR>
+Ihre Homepage kann natÃ¼rlich auch mit folgender Adresse von auÃŸerhalb des Chats abgerufen werden:<BR>
 <B>http://".$CHATHOSTNAME."home.php/NICKNAME</B><BR><BR>
-Grundsätzlich immer dargestellt werden</P>
+GrundsÃ¤tzlich immer dargestellt werden</P>
 <ul>
 <li><I>Nickname des Users</I>
 <li><I>Onlinezeit</I>
@@ -840,11 +840,11 @@ Weiter kann der Chatuser entscheiden:</P>
 <li><I>welche Daten aus seinem Userprofil auf der Homepage dargestellt werden sollen.</I>
 </UL>
 <P>
-<P>Außerdem hat er der die Möglichkeit:</P>
+<P>AuÃŸerdem hat er der die MÃ¶glichkeit:</P>
 <UL>
-<li><I>Schrift-, Hintergrund- und Linkfarben sowie Hintergrundbilder für seine Homepage zu bestimmen,</I>
+<li><I>Schrift-, Hintergrund- und Linkfarben sowie Hintergrundbilder fÃ¼r seine Homepage zu bestimmen,</I>
 <li><I>beliebige Texte (auch mit HTML) in das Textfeld einzugeben,</I>
-<li><I>Bilder von seinem eigenen Rechner hochzuladen und in seine Homepage einzufügen.</I>
+<li><I>Bilder von seinem eigenen Rechner hochzuladen und in seine Homepage einzufÃ¼gen.</I>
 </UL>
 </P>
 
@@ -852,8 +852,8 @@ Weiter kann der Chatuser entscheiden:</P>
 <p><b><A NAME=\"sms\">SMS-Benachrichtigungsfunktion</A></b></p>
 
 <p>Diese Funktion ist eine reine Benachrichtigungsfunktion, d.h. 
-User im Chat können nun auch <b></b>SMS direkt aus dem Chat auf das Handy 
-von anderen Chat-Usern</b> schicken und sich über die \"Aktionen\" 
+User im Chat kÃ¶nnen nun auch <b></b>SMS direkt aus dem Chat auf das Handy 
+von anderen Chat-Usern</b> schicken und sich Ã¼ber die \"Aktionen\" 
 im Chat per SMS informieren lassen. 
 (Mit den Aktionen steuern Sie, bei welchen Ereignissen Sie mit welcher Nachricht 
 informiert werden wollen. Ein Ereignis ist z.B. der Logon oder Logout eines 
@@ -867,61 +867,61 @@ d.h. sie kann nur genutzt werden, wenn in Ihrem Chat auch die Community-Features
 (Punkte, Userprofile etc.) aktiviert sind.</p>
 
 
-<P><b>Die SMS-Features funktionieren folgendermaßen:</b></p>
+<P><b>Die SMS-Features funktionieren folgendermaÃŸen:</b></p>
 
 <li><b>Schritt 1: SMS Guthaben aufladen: </b>
 
-<p>Gehen Sie im Chat-Menü auf den Punkt <b>\"EINSTELLUNGEN\"</b>. 
-Hier klicken Sie auf den Menüpunkt <b>\"SMS\"</b>. 
+<p>Gehen Sie im Chat-MenÃ¼ auf den Punkt <b>\"EINSTELLUNGEN\"</b>. 
+Hier klicken Sie auf den MenÃ¼punkt <b>\"SMS\"</b>. 
 Wenn Sie im Profil Ihre Handy-Nummer angegeben haben, 
-erhalten Sie nun die Möglichkeit, sich eine PIN-Nummer auf Ihr Handy schicken zu lassen. 
-Dieser Punkt ist notwendig um zu verhindern, dass User über fremde Handy-Nummern SMS bestellen. 
+erhalten Sie nun die MÃ¶glichkeit, sich eine PIN-Nummer auf Ihr Handy schicken zu lassen. 
+Dieser Punkt ist notwendig um zu verhindern, dass User Ã¼ber fremde Handy-Nummern SMS bestellen. 
 Nun erhalten Sie eine SMS mit einer vierstelligen PIN-Nummer auf Ihr Handy. 
-Diese PIN-Nummer geben Sie wiederum im Chat im SMS-Menü in das Feld <b>\"PIN eingeben\"</b> ein.</p>
+Diese PIN-Nummer geben Sie wiederum im Chat im SMS-MenÃ¼ in das Feld <b>\"PIN eingeben\"</b> ein.</p>
 
-<p>Der nächste Punkt ist nun das eigentliche Aufladen des SMS-Guthabens. 
+<p>Der nÃ¤chste Punkt ist nun das eigentliche Aufladen des SMS-Guthabens. 
 Sie w&auml;hlen einen Aufladebetrag und es wird Ihnen angezeigt, 
 wie viele SMS Sie mit diesem Betrag verschicken k&ouml;nnen. 
-Mit dem Klick auf \"Jetzt SMS Guthaben aufladen\" bestätigen Sie Ihre Auswahl.</p>
+Mit dem Klick auf \"Jetzt SMS Guthaben aufladen\" bestÃ¤tigen Sie Ihre Auswahl.</p>
 
 <p><b>Die Bezahlung der SMS erfolgt bequem per Lastschrift.</b> 
 
 Hierzu geben Sie Ihre Bankverbindung und Kontonummer an. 
 Ganz wichtig: Es ist unbedingt darauf zu achten, dass 
-im oberen Feld unter \"Kontoinhaber\" nicht der eventuell vorausgefüllte Chatname, 
+im oberen Feld unter \"Kontoinhaber\" nicht der eventuell vorausgefÃ¼llte Chatname, 
 sondern der korrekte Name des Kontoinhabers steht!</p>
 
-<p>Wir versichern, dass sämtliche hier angegebenen 
-Daten absolut diskret und vertrauenswürdig behandelt 
-und ausschließlich zur Bezahlung der SMS und auf keinen 
+<p>Wir versichern, dass sÃ¤mtliche hier angegebenen 
+Daten absolut diskret und vertrauenswÃ¼rdig behandelt 
+und ausschlieÃŸlich zur Bezahlung der SMS und auf keinen 
 Fall zu irgendwelchen anderen Zwecken verwendet werden! </p>
 
-<p>Sind alle Felder korrekt ausgefüllt, werden die Eingaben von Ihnen bestätigt 
+<p>Sind alle Felder korrekt ausgefÃ¼llt, werden die Eingaben von Ihnen bestÃ¤tigt 
 und das SMS Konto wird aufgeladen.</p> 
 
 <p><b>Es gibt allerdings eine Voraussetzung zum Aufladen eine SMS Kontos:<br>
 Sie m&uuml;ssen mindestens 1000 Punkte im Userprofil im Chat haben.</b> 
-Dies bedeutet allerdings auch, dass Chats, die die Punktezählung deaktiviert haben, 
-Ihren Usern die SMS-Funktion leider nicht zur Verfügung stellen können.</p> 
+Dies bedeutet allerdings auch, dass Chats, die die PunktezÃ¤hlung deaktiviert haben, 
+Ihren Usern die SMS-Funktion leider nicht zur VerfÃ¼gung stellen kÃ¶nnen.</p> 
 
 <p>Nun ist das SMS Konto aufgeladen, und es kann losgehen.</p>
 
 <li> <b>Schritt 2: SMS empfangen und versenden: </b>
 
-<p><b>Wichtig: Sie können SMS aus dem Chat auf das Handy eines Users versenden, 
+<p><b>Wichtig: Sie kÃ¶nnen SMS aus dem Chat auf das Handy eines Users versenden, 
 der im Chat die Option aktiviert hat, SMS zu empfangen. 
-Sie können jedoch keine SMS von Ihrem Handy in den Chat schicken. 
-SMS müssen deshalb stets aus dem Chat selbst geschrieben werden!
+Sie kÃ¶nnen jedoch keine SMS von Ihrem Handy in den Chat schicken. 
+SMS mÃ¼ssen deshalb stets aus dem Chat selbst geschrieben werden!
 </b></p>
-<p>Wenn Sie SMS aus dem Chat empfangen möchten, 
-müssen Sie zuerst unter dem Chat-Menüpunkt \"EINSTELLUNGEN / SMS\" das 
-Dropdown-Auswahlfeld neben \"Ich möchte SMS von anderen Usern aus dem Mainchat empfangen\" 
-auf \"JA\" gestellt haben. Dies verhindert, dass User unerwünschte SMS erhalten. 
-Dies bedeutet natürlich auch, dass Sie nur SMS an Chat-User verschicken können, 
-die diese auch ausdrücklich empfangen möchten.</p>
+<p>Wenn Sie SMS aus dem Chat empfangen mÃ¶chten, 
+mÃ¼ssen Sie zuerst unter dem Chat-MenÃ¼punkt \"EINSTELLUNGEN / SMS\" das 
+Dropdown-Auswahlfeld neben \"Ich mÃ¶chte SMS von anderen Usern aus dem Mainchat empfangen\" 
+auf \"JA\" gestellt haben. Dies verhindert, dass User unerwÃ¼nschte SMS erhalten. 
+Dies bedeutet natÃ¼rlich auch, dass Sie nur SMS an Chat-User verschicken kÃ¶nnen, 
+die diese auch ausdrÃ¼cklich empfangen mÃ¶chten.</p>
 
 <p><b>Wichtig, wenn Sie eine SMS aus dem Chat erhalten:</b><br>
- ein einfaches Antworten auf diese SMS mit der regulären Antwort-Funktion Ihres
+ ein einfaches Antworten auf diese SMS mit der regulÃ¤ren Antwort-Funktion Ihres
  Handys funktioniert hier nicht! Bitte SMS immer aus dem Chat schreiben.</p>
 
 
@@ -930,87 +930,87 @@ die diese auch ausdrücklich empfangen möchten.</p>
 <p>Der Befehl zum Verschicken einer SMS auf das Handy eines Chatusers lautet: /sms <nickname> <text><br>
 
 Wenn Sie also eine SMS mit dem Text \"Kommst Du in den Chat?\" auf das Handy des Users \"Pumuckl\" 
-(dieser User muss natürlich in Ihrem Chat registriert sein und muss in
-seinen Einstellungen angegeben haben, dass er SMS empfangen möchte) senden möchten, 
+(dieser User muss natÃ¼rlich in Ihrem Chat registriert sein und muss in
+seinen Einstellungen angegeben haben, dass er SMS empfangen mÃ¶chte) senden mÃ¶chten, 
 tippen Sie im Chat ganz einfach: <br>
 /sms Pumuckl Kommst Du in den Chat?</p>";
 
 
 # deutsch.php-forum.php 6.5.2004 martin
 
-$t[forum_msg3] = "Gäste dürfen:";
-$t[forum_msg4] = "User dürfen:";
+$t[forum_msg3] = "GÃ¤ste dÃ¼rfen:";
+$t[forum_msg4] = "User dÃ¼rfen:";
 $t[forum_msg5] = "nur lesen";
 $t[forum_msg6] = "lesen und schreiben";
 $t[forum_msg7] = "weder lesen noch schreiben";
 
 $t[leserechte] = "<P>Fehler! Sie haben keine Leserechte in diesem Forum!</P>";
-$t[schreibrechte] = "<P>Fehler! Sie haben keine Schreibrechte für dieses Forum!</P>";
-$t[nur_leserechte] = "[SIE DÜRFEN DIESES FORUM NUR LESEN]";
+$t[schreibrechte] = "<P>Fehler! Sie haben keine Schreibrechte fÃ¼r dieses Forum!</P>";
+$t[nur_leserechte] = "[SIE DÃœRFEN DIESES FORUM NUR LESEN]";
 
 # deutsch.php-functions.php 4.6.2004 martin 
-# konnte in kann geändert, da fehlermeldung vorgezogen
+# konnte in kann geÃ¤ndert, da fehlermeldung vorgezogen
 $t[chat_msg105]="<B>$chat:</B> Mail kann NICHT verschickt werden: Dieser User hat seine Mailbox zugeschlossen!";
 
 # deutsch.php-hilfe.php 10.9.2004 martin
 
 $hilfe_befehlstext=array(1=>	"/user\tListet alle User im aktuellen Raum\t/wer, /who, /w, /list",
-				"/user RAUM\tListet alle User im Raum RAUM auf (*=Alle)\t/wer, /who, /w, /list\tFalls RAUM=*, werden alle Räume gezeigt.",
-				"/raum\tListet alle offenen Räume auf\t/channel, /go",
-				"/raum RAUM\tWechselt in RAUM. Falls RAUM nicht existiert, wird er als temporärer Raum neu angelegt\t/channel, /go",
-				"/raum RAUM !\tWechselt in RAUM, auch wenn der Raum geschlossen ist (nur Admins und Raumbesitzer)\tforce, immer\tBitte Privatsphäre beachten!",
-				"/people\tListet alle offenen Räume mit Usern auf.",
-				"/weg\tSetzt oder löscht einen ich-bin-nicht-da Text.\t/away\tBeispiel: /away ich telefoniere",
-				"/msg NAME TEXT\tTEXT an User NAME flüstern\t/talk, /tell,",
-				"/msgf TEXT\tTEXT an alle Freunde flüstern",
-				"/t\tDie Übermittlung ist privat und kann von niemandem mitgelesen werden",
+				"/user RAUM\tListet alle User im Raum RAUM auf (*=Alle)\t/wer, /who, /w, /list\tFalls RAUM=*, werden alle RÃ¤ume gezeigt.",
+				"/raum\tListet alle offenen RÃ¤ume auf\t/channel, /go",
+				"/raum RAUM\tWechselt in RAUM. Falls RAUM nicht existiert, wird er als temporÃ¤rer Raum neu angelegt\t/channel, /go",
+				"/raum RAUM !\tWechselt in RAUM, auch wenn der Raum geschlossen ist (nur Admins und Raumbesitzer)\tforce, immer\tBitte PrivatsphÃ¤re beachten!",
+				"/people\tListet alle offenen RÃ¤ume mit Usern auf.",
+				"/weg\tSetzt oder lÃ¶scht einen ich-bin-nicht-da Text.\t/away\tBeispiel: /away ich telefoniere",
+				"/msg NAME TEXT\tTEXT an User NAME flÃ¼stern\t/talk, /tell,",
+				"/msgf TEXT\tTEXT an alle Freunde flÃ¼stern",
+				"/t\tDie Ãœbermittlung ist privat und kann von niemandem mitgelesen werden",
 				"/mail NAME TEXT\tSchreibt Mail mit dem Inhalt TEXT an den User NAME\t/m\tDer Betreff entspricht den ersten Worten",
-				"/me TEXT\tSpruch im Raum\t/txt\tDer Text wendet sich nicht an einen bestimmten User, sondern ist für alle im Raum bestimmt",
+				"/me TEXT\tSpruch im Raum\t/txt\tDer Text wendet sich nicht an einen bestimmten User, sondern ist fÃ¼r alle im Raum bestimmt",
 				"/op TEXT\tRuft einen Admin\t \tDer Text wird an die Admins geschickt, die gerade online sind",
 				"/nick NAME\tSetzt Nickname auf NAME\t/name\tDer neue Nickname wird dauerhaft gespeichert",
 				"/ignoriere\tZeigt die ignorierten User an\t/ignore, /ig",
 				"/ignoriere NAME\tIgnoriert User NAME\t \tNochmalige Eingabe gibt den User NAME wieder frei",
-				"/kick NAME\tSperrt User NAME aus dem aktuellen Raum dauerhaft aus\t/plop\tNochmalige Eingabe gibt den Eintritt für diesen User wieder frei",
+				"/kick NAME\tSperrt User NAME aus dem aktuellen Raum dauerhaft aus\t/plop\tNochmalige Eingabe gibt den Eintritt fÃ¼r diesen User wieder frei",
 				"/quit TEXT\tBeendet den Chat mit den Worten TEXT (logoff).\t/exit, /ende\tDie Angabe von TEXT ist optional",
 				"/hilfe\tListet die Kurzhilfe auf\t/help, /?",
 				"/freunde NAME\tMacht NAME zu meinem Freund\t \tNochmalige Eingabe nimmt NAME aus der Freundesliste /freund, /buddy",
-				"/einlad NAME\tLädt einen User in den Raum ein\t/invite\tNur für Admins oder Raumbesitzer",
-				"/uebergeberaum NAME\tÜbergibt den aktuellen Raum an den User NAME.\t/schenke\tNur für Admins oder Raumbesitzer",
-				"/aendereraum STATUS\tÄndert den Status des aktuellen Raums auf offen, geschlossen oder moderiert.\t \tNur für Admins oder Raumbesitzer",
-				"/loescheraum RAUM\tLöscht den angegebenen Raum\t \tNur für Admins oder Raumbesitzer",
-				"/zeige NAME\tGibt die Benutzerinformationen für den Benutzer NAME aus <BR>(% ist Joker).\t/whois",
-				"/wuerfel\tWürfel werfen\t/dice\t/wuerfel 2W6 <BR>wirft 2 sechseitige Würfel",
-				"/suche NAME\tSucht alle Sprüche, die das Wort NAME enthalten\t/such\tGut geeignet, um einen Spruch passend zum Thema zu finden",
-				"=spruch NAME ZUSATZ\tGibt einen vordefinierten Spruch aus (Siehe \"Liste aller Sprüche\")\t \tNAME und ZUSATZ ist optional und vom Spruch abhängig. Weitere Info vorhanden",
-				"*TEXT*\tTEXT wird kursiv dargestellt\t \tWirkt in allen Texten, die öffentlich oder privat im Chat ausgegeben werden",
-				"_TEXT_\tTEXT wird fett dargestellt\t \tWirkt in allen Texten, die öffentlich oder privat im Chat ausgegeben werden",
+				"/einlad NAME\tLÃ¤dt einen User in den Raum ein\t/invite\tNur fÃ¼r Admins oder Raumbesitzer",
+				"/uebergeberaum NAME\tÃœbergibt den aktuellen Raum an den User NAME.\t/schenke\tNur fÃ¼r Admins oder Raumbesitzer",
+				"/aendereraum STATUS\tÃ„ndert den Status des aktuellen Raums auf offen, geschlossen oder moderiert.\t \tNur fÃ¼r Admins oder Raumbesitzer",
+				"/loescheraum RAUM\tLÃ¶scht den angegebenen Raum\t \tNur fÃ¼r Admins oder Raumbesitzer",
+				"/zeige NAME\tGibt die Benutzerinformationen fÃ¼r den Benutzer NAME aus <BR>(% ist Joker).\t/whois",
+				"/wuerfel\tWÃ¼rfel werfen\t/dice\t/wuerfel 2W6 <BR>wirft 2 sechseitige WÃ¼rfel",
+				"/suche NAME\tSucht alle SprÃ¼che, die das Wort NAME enthalten\t/such\tGut geeignet, um einen Spruch passend zum Thema zu finden",
+				"=spruch NAME ZUSATZ\tGibt einen vordefinierten Spruch aus (Siehe \"Liste aller SprÃ¼che\")\t \tNAME und ZUSATZ ist optional und vom Spruch abhÃ¤ngig. Weitere Info vorhanden",
+				"*TEXT*\tTEXT wird kursiv dargestellt\t \tWirkt in allen Texten, die Ã¶ffentlich oder privat im Chat ausgegeben werden",
+				"_TEXT_\tTEXT wird fett dargestellt\t \tWirkt in allen Texten, die Ã¶ffentlich oder privat im Chat ausgegeben werden",
 				"/farbe\tZeigt die aktuelle Farbe an\t/color",
-				"/farbe RRGGBB\tSetzt neue Farbe auf RRGGBB\t/color\tRR steht für Rot, GG für Grün und BB für Blau, jeweils von 00 bis FF",
-				"/farbealle \tSetzt/zeigt die Farbe für andere User an\t/color2\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbealle -\"",
-				"/farbenoise \tSetzt/zeigt die Farbe für Noises\t/color3\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbenoise -\"",
-				"/farbepriv \tSetzt/zeigt die Farbe für private Nachrichten\t/color4\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbepriv -\"",
-				"/farbesys \tSetzt/zeigt die Farbe für Systemnachrichten im Chat\t/color5\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbesys -\"",
-				"/farbebg \tSetzt/zeigt die Farbe für den Hintergrund. Änderung wird erst nach neuem Laden aktiv.\t/color6\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbebg -\"",
-				"/farbset X\tSetzt das vordefinierte Farbset X. \t \tDie möglichen Farbsets werden durch /farbset angezeigt. Beispiel: /farbset 3",
-				"/farbreset \tSetzt die Farbspielereien wieder zurück auf den Chat-Default",
-				"/clearedit \tEingabezeile nach Return löschen oder stehen lassen\t \tNochmalige Eingabe schaltet wieder zurück");
+				"/farbe RRGGBB\tSetzt neue Farbe auf RRGGBB\t/color\tRR steht fÃ¼r Rot, GG fÃ¼r GrÃ¼n und BB fÃ¼r Blau, jeweils von 00 bis FF",
+				"/farbealle \tSetzt/zeigt die Farbe fÃ¼r andere User an\t/color2\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbealle -\"",
+				"/farbenoise \tSetzt/zeigt die Farbe fÃ¼r Noises\t/color3\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbenoise -\"",
+				"/farbepriv \tSetzt/zeigt die Farbe fÃ¼r private Nachrichten\t/color4\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbepriv -\"",
+				"/farbesys \tSetzt/zeigt die Farbe fÃ¼r Systemnachrichten im Chat\t/color5\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbesys -\"",
+				"/farbebg \tSetzt/zeigt die Farbe fÃ¼r den Hintergrund. Ã„nderung wird erst nach neuem Laden aktiv.\t/color6\tWerte in RRGGBB wie bei /farbe; abschalten mit \"/farbebg -\"",
+				"/farbset X\tSetzt das vordefinierte Farbset X. \t \tDie mÃ¶glichen Farbsets werden durch /farbset angezeigt. Beispiel: /farbset 3",
+				"/farbreset \tSetzt die Farbspielereien wieder zurÃ¼ck auf den Chat-Default",
+				"/clearedit \tEingabezeile nach Return lÃ¶schen oder stehen lassen\t \tNochmalige Eingabe schaltet wieder zurÃ¼ck");
 
 
 # deutsch.php 10.03.2006 Student
 
 $hilfe_spruchtext=      "<B>Format:</B> '=SPRUCH USER ZUSATZTEXT'<BR><BR>".
-                        "Je nach Typ muß USER (=Name eines Users im Chat) oder ".
+                        "Je nach Typ muss USER (=Name eines Users im Chat) oder ".
                         "ZUSATZTEXT (=freier Text) eingegeben werden:".
                         "<UL><LI><B>Typ 0:</B> kein USER oder ZUSATZTEXT".
                         "<LI><B>Typ 1:</B> nur USER oder stattdessen ZUSATZTEXT (je nach Sinn)".
-                        "<BR>Wenn ein USER angegeben wird, genügt <b>bob</b> um das per Nickergänzung auf <b>bobby</b> zu erweitern.".
-                        "Wird  die Nickergänzung nicht gewünscht, oder ist im ZUSATZTEXT ein Leerzeichen enthalten, muß der Text in \" gesetzt werden.".
+                        "<BR>Wenn ein USER angegeben wird, genÃ¼gt <b>bob</b> um das per NickergÃ¤nzung auf <b>bobby</b> zu erweitern.".
+                        "Wird  die NickergÃ¤nzung nicht gewÃ¼nscht, oder ist im ZUSATZTEXT ein Leerzeichen enthalten, muss der Text in \" gesetzt werden.".
                         "<LI><B>Typ 2:</B> USER und ZUSATZTEXT".
                         "<BR>Hier   kann  auch  USER  und  ZUSATZTEXT Leerzeichen enthalten, wenn der Text in \" gesetzt wird, oder alternativ das Leerzeichen durch ein + ersetzt wird.".
-                        "</UL>In den Sprüchen wird immer <B>´0</B> durch den eigenen Nicknamen ersetzt. ".
-                        "Zum weiteren Verständnis probieren Sie einfach die Sprüche aus.<BR><BR>".
-                        "Um bestimmte Sprüche auszuwählen ist es am einfachsten, im Chat ".
-                        "mit dem /such Befehl und einem Stichwort nach dem gewünschten Spruch ".
+                        "</UL>In den SprÃ¼chen wird immer <B>`0</B> durch den eigenen Nicknamen ersetzt. ".
+                        "Zum weiteren VerstÃ¤ndnis probieren Sie einfach die SprÃ¼che aus.<BR><BR>".
+                        "Um bestimmte SprÃ¼che auszuwÃ¤hlen ist es am einfachsten, im Chat ".
+                        "mit dem /such Befehl und einem Stichwort nach dem gewÃ¼nschten Spruch ".
                         "zu suchen.<BR>";
 ?
 
@@ -1023,25 +1023,25 @@ $t[edit7]=      "<B>Der Name oder der Nickname ist schon vergeben, oder der Nick
 
 $t[edit7]=      "<B>Der Name oder der Nickname ist schon vergeben, oder der Nickname ist im Chat gesperrt!";
 
-$t[raum_gehe7]= "<B>$chat:</B> Sie haben leider zu wenig Punkte (mind. %r_min_punkte% nötig) um Raum %r_name_neu% zu betreten.";
-$t[raum_gehe8]= "<B>$chat:</B> Als Gast können Sie den Raum %r_name_neu% nicht betreten, da hierzu Punkte notwendig sind, die Sie als Gast nicht bekommen können.";
+$t[raum_gehe7]= "<B>$chat:</B> Sie haben leider zu wenig Punkte (mind. %r_min_punkte% nÃ¶tig) um Raum %r_name_neu% zu betreten.";
+$t[raum_gehe8]= "<B>$chat:</B> Als Gast kÃ¶nnen Sie den Raum %r_name_neu% nicht betreten, da hierzu Punkte notwendig sind, die Sie als Gast nicht bekommen kÃ¶nnen.";
 
 $t[chat_msg114]="Heute ist der %datum% um %uhrzeit% Uhr Chat-Zeit.";
 $t[chat_msg115]="<B>Fehler:</B> Nickname '%u_nick%' ist im Chat gesperrt!";
-$t[chat_msg116]="<B>Fehler:</B> User '%u_name%' kann nicht als Freund hinzugefügt werden, da Sie von diesem User ignoriert werden!";
-$t[chat_msg117]="<B>Fehler:</B> User '%u_name%' kann nicht als Freund hinzugefügt werden, da dieser User gesperrt ist!";
-$t[chat_msg118]="<B>Fehler:</B> User '%u_name%' kann nicht als Freund hinzugefügt werden, da dieser User ein Gast ist!";
+$t[chat_msg116]="<B>Fehler:</B> User '%u_name%' kann nicht als Freund hinzugefÃ¼gt werden, da Sie von diesem User ignoriert werden!";
+$t[chat_msg117]="<B>Fehler:</B> User '%u_name%' kann nicht als Freund hinzugefÃ¼gt werden, da dieser User gesperrt ist!";
+$t[chat_msg118]="<B>Fehler:</B> User '%u_name%' kann nicht als Freund hinzugefÃ¼gt werden, da dieser User ein Gast ist!";
 
 $t[user_zeige50]="nicht Anzeigen";
 $t[user_zeige51]="Ein/Austrittsnachrichten";
-$t[user_zeige52]="Eigener Punktewürfel";
+$t[user_zeige52]="Eigener PunktewÃ¼rfel";
 $t[user_zeige53]="Eintrittsnachricht";
 $t[user_zeige54]="Austrittsnachricht";
 
 
 # deutsch.php-index.php 10.03.2006 Student
 
-$t[default11]=          "Info an alle Admins: User %u_nick% loggt sich über %ip_adr%/%ip_name% ein (%is_infotext%)!";
+$t[default11]=          "Info an alle Admins: User %u_nick% loggt sich Ã¼ber %ip_adr%/%ip_name% ein (%is_infotext%)!";
 $t[default12]=          "IP-Sperre umgangen, da mehr als $loginwhileipsperre Punkte (%punkte%)";
 
 
@@ -1049,38 +1049,38 @@ $t[default12]=          "IP-Sperre umgangen, da mehr als $loginwhileipsperre Pun
 # deutsch.php-raum.php 10.03.2006 Student
 
 $t[fehler13]=   "<B>Diese Mindestpunktezahl kann nicht vergeben werden</B>";
-$t[fehler14]=   "<B>Die Mindestpunktezahl in einem permanenten Raum kann nur von einem Admin geändert werden.</B>";
+$t[fehler14]=   "<B>Die Mindestpunktezahl in einem permanenten Raum kann nur von einem Admin geÃ¤ndert werden.</B>";
 
 $t[sonst14]=    "Mindestpunkte";
 
 
 
 # deutsch.php-index.php 31.03.2006 Student
-$t[neu45]=              "<P>Anmerkung: Sie erhalten nicht sofort einen E-Mail. Ihre Anmeldung muß erst vom Webmaster bestätigt werden.</P>";
+$t[neu45]=              "<P>Anmerkung: Sie erhalten nicht sofort einen E-Mail. Ihre Anmeldung muss erst vom Webmaster bestÃ¤tigt werden.</P>";
 $t[neu46]=              "Anfrage um Registrierung im $chat";
-$t[neu47]=              "Hallo!\n\nEin User mit der E-Mailadresse %email% möchte sich in Ihrem Chat $chat anmelden.".
+$t[neu47]=              "Hallo!\n\nEin User mit der E-Mailadresse %email% mÃ¶chte sich in Ihrem Chat $chat anmelden.".
                         "\nZum freigeben dieser E-Mailadresse verwenden Sie bitte diesen Link:\n\n %link1%\n\n".
                         "Freizugebende E-Mailadresse: %email%\n".
                         "Freischalt-Code: %hash%\n\n".
-                        "Dieser User erhält dann automatisch eine Mail mit einem Link mit welchem er/sie sich anmelden kann.\n\n".
-                        "Möchten Sie dem User auf andere Weise den Freischalt-Code mitteilen, so sind folgende Angaben ".
-                        "an den User zu übermitteln:\n\n".
+                        "Dieser User erhÃ¤lt dann automatisch eine Mail mit einem Link mit welchem er/sie sich anmelden kann.\n\n".
+                        "MÃ¶chten Sie dem User auf andere Weise den Freischalt-Code mitteilen, so sind folgende Angaben ".
+                        "an den User zu Ã¼bermitteln:\n\n".
                         "Internetadresse zum Freischalten: %link2%\n".
                         "E-Mailadresse: %email%\n".
                         "Freischalt-Code: %hash%\n\n".
                         "-- \n   $chat (http://".$HTTP_HOST.$PHP_SELF.")\n";
 $t[neu48]=              "<P><B>Registrierung, 2. Schritt:</B> Warten Sie bitte nun, bis Sie vom Webmaster eine E-Mail mit Ihrem ".
-                        "Freischaltcode erhalten! Um dann die Registrierung abzuschließen, benutzen Sie bitte den dort ".
+                        "Freischaltcode erhalten! Um dann die Registrierung abzuschlieÃŸen, benutzen Sie bitte den dort ".
                         "angegebenen Link!</P>";
 $t[neu49]=              "Freizugebende E-Mailadresse:";
-$t[neu50]=              "Bitte geben Sie nun die <b>E-Mailadresse</b>, die Sie freigeben möchten, und den <b>Freischalt-Code</b> ein, ".
+$t[neu50]=              "Bitte geben Sie nun die <b>E-Mailadresse</b>, die Sie freigeben mÃ¶chten, und den <b>Freischalt-Code</b> ein, ".
                         "den Sie soeben per E-Mail bekommen haben.<BR>".
-                        "Sie können hierzu natürlich auch gerne Copy und Paste (Strg+C und Strg+V) verwenden";
+                        "Sie kÃ¶nnen hierzu natÃ¼rlich auch gerne Copy und Paste (Strg+C und Strg+V) verwenden";
 $t[neu51]=              "E-Mailadresse falsch!";
 $t[neu52]=              "Freischaltcode falsch!";
 $t[neu53]=              "Willkommen beim $chat!\n\nDer Webmaster hat Ihre E-Mailadresse nun freigeschaltet.".
-                        "\nZum endgültigen Anmelden verwenden Sie bitte nun den Link: ".
-                        "\n %link%\n\nZum anmelden benötigen Sie dann noch:\n".
+                        "\nZum endgÃ¼ltigen Anmelden verwenden Sie bitte nun den Link: ".
+                        "\n %link%\n\nZum anmelden benÃ¶tigen Sie dann noch:\n".
                         "Ihre E-Mailadresse: %email%\n".
                         "Ihren Freischalt-Code: %hash%\n\n".
                         "-- \n   $chat (http://".$HTTP_HOST.$PHP_SELF.")\n";
@@ -1089,8 +1089,8 @@ $t[neu54]=              "Der User wurde nun per E-Mail der Freischaltcode mitget
 
 # deutsch.php-forum.php 09.04.2006 Student
 $t[thread_alles_gelesen]="Alle Postings dieses Threads als gelesen markieren";
-$t[desc_topposting] = "Beiträge dieser Kategorie stehen im jeweiligen Thema immer ganz oben.";   
-$t[desc_threadgeschlossen] = "Dieser Thread ist geschlossen. Hier können keine Antworten mehr erfolgen.";
+$t[desc_topposting] = "BeitrÃ¤ge dieser Kategorie stehen im jeweiligen Thema immer ganz oben.";   
+$t[desc_threadgeschlossen] = "Dieser Thread ist geschlossen. Hier kÃ¶nnen keine Antworten mehr erfolgen.";
 $t[letztes_posting] = "Letztes&nbsp;Posting&nbsp;am"; 
 $t[verschieben1]=       "Verschiebe Thread: ";
 $t[verschieben2]=       "vom Thema: ";
@@ -1108,16 +1108,16 @@ $t[pwneu1]="<p><b>Neues Passwort, 1. Schritt (von 3):</b> Sie haben Ihr Passwort
            "eine E-Mail mit einem Sicherheitscode, der Sie berechtigt ein neues Passwort anzufordern.</p>";
 $t[pwneu2]="Nickname";
 $t[pwneu3]="E-Mailadresse";
-$t[pwneu5]="Ungültige E-Mailadresse!";
+$t[pwneu5]="UngÃ¼ltige E-Mailadresse!";
 $t[pwneu6]="Nickname und E-Mailadresse passen nicht zusammen!";
 $t[pwneu7]="<p><b>Neues Passwort, 2. Schritt (von 3):</b> An Ihre E-Mailadresse wurde ein Sicherheitscode gesendet. Geben Sie bitte diesen ".
            "Sicherheitscode in das untere Feld ein.</p>";
-$t[pwneu8]="Ihre Passwortanforderung für den $chat";
+$t[pwneu8]="Ihre Passwortanforderung fÃ¼r den $chat";
 $t[pwneu9]="Hallo %nickname%,
 
-Sie oder jemand unbefugtes möchte ein neues Passwort für Ihren Nicknamen.
+Sie oder jemand unbefugtes mÃ¶chte ein neues Passwort fÃ¼r Ihren Nicknamen.
 
-Anbei erhalten Sie den Sicherheitscode, mit dem Sie sich ein neues Passwort erzeugen können. Ohne diesen wird kein neues Passwort erzeugt.  
+Anbei erhalten Sie den Sicherheitscode, mit dem Sie sich ein neues Passwort erzeugen kÃ¶nnen. Ohne diesen wird kein neues Passwort erzeugt.  
 Geben Sie den Sicherheitscode bitte in das vorgegebene Feld ein - oder kopieren Sie es mit \"Copy and Paste\" (markieren, STRG+C und STRG+V)
 
 Sicherheitscode: %hash%
@@ -1127,60 +1127,60 @@ Ihr $chat-Team  ";
 $t[pwneu10]="Sicherheitscode";
 $t[pwneu11]="Der angegebene Sicherheitscode ist leider nicht richtig.";
 $t[pwneu12]="<p><b>Neues Passwort, 3. Schritt (von 3):</b> An Ihre E-Mailadresse wurde soeben ein neues Passwort gesendet.</p>";
-$t[pwneu13]="<p><b>Fehler: Die E-Mail konnte nicht versandt werden. Das Passwort wurde nicht geändert!</b></p>";
-$t[pwneu14]="Ihr neues Passwort für den $chat";
+$t[pwneu13]="<p><b>Fehler: Die E-Mail konnte nicht versandt werden. Das Passwort wurde nicht geÃ¤ndert!</b></p>";
+$t[pwneu14]="Ihr neues Passwort fÃ¼r den $chat";
 $t[pwneu15]="Hallo %nickname%,
 
-Ihr Passwort wurde geändert. Ihr neues Passwort lautet: %passwort%
+Ihr Passwort wurde geÃ¤ndert. Ihr neues Passwort lautet: %passwort%
 
-Viel Spaß noch im $chat";
+Viel SpaÃŸ noch im $chat";
         
 
 # deutsch.php-functions.php 28.04.2006 Student
 $t[knebel10]="<b>$chat:</b> Private Textnachricht - Knebelgrund:";
 
 # deutsch.php-hilfe.php 14.05.2006 Student
-Hinzugefügt zu:
+HinzugefÃ¼gt zu:
 $hilfe_befehlstext=array(1=>
                                 "/time \tGibt die aktuelle Uhrzeit aus",
 
-Geändert bei:
+GeÃ¤ndert bei:
 $hilfe_uebersichtstext= 
                         "<p><b>Einstellungen:</b><br>".
                         "Jeder User kann optional eine E-Mail-Adresse und eine Homepage eintragen, ".
                         "die in der Userliste im Fenster angezeigt werden. Neben dem Passwort, das neu gesetzt werden kann, ".
-                        "ist auch der Wechsel der Farbe durch Klick auf eines der bunten Felder möglich.".
-                        "<br>Zudem kann jeder User seine Systemeintrittsnachricht und -austrittsnachricht in den Raum ändern. (Dies ".
-                        "muß vom Chatbetreiber freigeschaltet sein.) Um hier automatisiert den eigenen Nicknamen einzutragen, kann man ".
+                        "ist auch der Wechsel der Farbe durch Klick auf eines der bunten Felder mÃ¶glich.".
+                        "<br>Zudem kann jeder User seine Systemeintrittsnachricht und -austrittsnachricht in den Raum Ã¤ndern. (Dies ".
+                        "muss vom Chatbetreiber freigeschaltet sein.) Um hier automatisiert den eigenen Nicknamen einzutragen, kann man ".
                         "<b>%nick%</b> eintragen. Um automatisiert den Raumnamen einzutragen ist <b>%raum%</b> einzutragen. <br>".
                         "Weiterhin kann man, soweit im Chat die entsprechenden Features aktiviert sind, die Anzeige seines eigenen ".
-                        "Punktewürfels unterdrücken, die Anzeige der Smilies deaktivieren oder die Anzeige der Ein-/Austrittsnachrichten ".
-                        "unterdrücken.".
+                        "PunktewÃ¼rfels unterdrÃ¼cken, die Anzeige der Smilies deaktivieren oder die Anzeige der Ein-/Austrittsnachrichten ".
+                        "unterdrÃ¼cken.".
                         "</p>".
 
-Hinzugefügt zu:
+HinzugefÃ¼gt zu:
 $hilfe_befehlstext_admin=array(1=>
                         "/gaga\tWie /gag, jedoch Anzeige aller im Chat geknebelten, nicht nur im eigenen Raum",
 
-Geändert bei: CommunityFeatures Chatmail
+GeÃ¤ndert bei: CommunityFeatures Chatmail
 <b><A NAME=\"mail\">Chat-Mail</A></b><br>
 Die Chat-Mail (<B>MAIL</B>, <B>/mail</B>) ist eine im Chat integrierte Mailbox mit
-Weboberfläche. Im Chat selbst steht hinter jedem Nick ein Mailsymbol (blauer
+WeboberflÃ¤che. Im Chat selbst steht hinter jedem Nick ein Mailsymbol (blauer
 Briefumschlag). Somit kann jeder registrierte User im Chat anonym Mail
-empfangen, ohne seine echte Adresse herauszugeben. Um in das Mail-Menü zu
-gelangen, klicken Sie in der unteren Chatleiste auf den Menüpunkt Mail. Nun 
-öffnet sich ein neues Fenster, in dem Sie Ihre Webmail-Oberfläche finden.  
-Hier können Sie direkt alle Ihre empfangenen Nachrichten sehen und per Klick
-auf die Betreffzeile öffnen. Wenn Sie Nachrichten zum Löschen in den
-Papierkorb verschieben möchten, markieren Sie einfach die betreffende Mail
-durch Klick in das \"<B>Löschen</B>\"-Kästchen und klicken Sie dann auf den 
-<B>Löschen</B>-Button rechts unter den Nachrichten.<BR>
-Gelöschte Nachrichten werden automatisch nach einer gewissen Zeit aus dem Papierkorb
-gelöscht. (Standardeinstellung 14 Tage, kann aber vom Chatbetreiber geändert werden)<BR><BR>
+empfangen, ohne seine echte Adresse herauszugeben. Um in das Mail-MenÃ¼ zu
+gelangen, klicken Sie in der unteren Chatleiste auf den MenÃ¼punkt Mail. Nun 
+Ã¶ffnet sich ein neues Fenster, in dem Sie Ihre Webmail-OberflÃ¤che finden.  
+Hier kÃ¶nnen Sie direkt alle Ihre empfangenen Nachrichten sehen und per Klick
+auf die Betreffzeile Ã¶ffnen. Wenn Sie Nachrichten zum LÃ¶schen in den
+Papierkorb verschieben mÃ¶chten, markieren Sie einfach die betreffende Mail
+durch Klick in das \"<B>LÃ¶schen</B>\"-KÃ¤stchen und klicken Sie dann auf den 
+<B>LÃ¶schen</B>-Button rechts unter den Nachrichten.<BR>
+GelÃ¶schte Nachrichten werden automatisch nach einer gewissen Zeit aus dem Papierkorb
+gelÃ¶scht. (Standardeinstellung 14 Tage, kann aber vom Chatbetreiber geÃ¤ndert werden)<BR><BR>
 
 
 # deutsch.php-functions.php 12.02.2007 Student
-$t[chat_msg60]= "<B>$chat:</B> Der Raum <b>%r_name%</b> wurde von <b>%absender%</b> an <b>%user%</b> übergeben.";
+$t[chat_msg60]= "<B>$chat:</B> Der Raum <b>%r_name%</b> wurde von <b>%absender%</b> an <b>%user%</b> Ã¼bergeben.";
 
 # deutsch.php-functions.php 12.02.2007 Student
 $t[chat_msg90]= "<B>$chat:</B> %u_name% ist online im %raum%";
@@ -1192,7 +1192,7 @@ $t[chat_msg122]="User online mit der IP %ip% (%datum%, %uhrzeit%) ";
 $t[knebel2]="Aufruf: %chatzeile% [nick] [minuten]";  
 
 # deutsch.php-forum.php 12.02.2007 Student
-$t[letzte_aenderung]=   "[zuletzt geändert am %datum% um %uhrzeit% von %user%]";
+$t[letzte_aenderung]=   "[zuletzt geÃ¤ndert am %datum% um %uhrzeit% von %user%]";
 
 # deutsch.php-index.php 12.02.2007 Student
 $t[neu55]=              "Der Webmaster hat die Anzahl der Anmeldungen pro User auf %anzahl% begrenzt.";
@@ -1212,10 +1212,10 @@ $t[menue13]=    "Admin: Umfragen";
 $t[menue13]=    "UMFRAGE";
 
 #deutsch.php-functions.php 29.11.2007 Student
-$t[punkte23]="Einem Gast können keine Punkte gutgeschrieben werden!";
+$t[punkte23]="Einem Gast kÃ¶nnen keine Punkte gutgeschrieben werden!";
 
 # deutsch.php-index.php 14.11.2008 Student
-$t[captcha1]="Prüfziffer: (Bitte Ergebnis der Rechenaufgabe als Zahl
+$t[captcha1]="PrÃ¼fziffer: (Bitte Ergebnis der Rechenaufgabe als Zahl
 # eingeben)";
 
 $taufgabe[1] = "plus";
@@ -1227,17 +1227,17 @@ $tzahl[1]="eins";
 $tzahl[2]="zwei";
 $tzahl[3]="drei";
 $tzahl[4]="vier";
-$tzahl[5]="fünf";
+$tzahl[5]="fÃ¼nf";
 $tzahl[6]="sechs";
 $tzahl[7]="sieben";
 $tzahl[8]="acht";
 $tzahl[9]="neun";
 $tzahl[10]="zehn";
 $tzahl[11]="elf";
-$tzahl[12]="zwölf";
+$tzahl[12]="zwÃ¶lf";
 $tzahl[13]="dreizehn";
 $tzahl[14]="vierzehn";
-$tzahl[15]="fünfzehn";
+$tzahl[15]="fÃ¼nfzehn";
 $tzahl[16]="sechzehn";
 $tzahl[17]="siebzehn";
 $tzahl[18]="achtzehn";
@@ -1247,47 +1247,47 @@ $tzahl[21]="einundzwanzig";
 $tzahl[22]="zweiundzwanzig";
 $tzahl[23]="dreiundzwanzig";
 $tzahl[24]="vierundzwanzig";
-$tzahl[25]="fünfundzwanzig";
+$tzahl[25]="fÃ¼nfundzwanzig";
 $tzahl[26]="sechsundzwanzig";
 $tzahl[27]="siebenundzwanzig";
 $tzahl[28]="achtundzwanzig";  
 $tzahl[29]="neunundzwanzig";  
-$tzahl[30]="dreißig";
-$tzahl[31]="einunddreißig";
-$tzahl[32]="zweiunddreißig";
-$tzahl[33]="dreiunddreißig";
-$tzahl[34]="vierunddreißig";
-$tzahl[35]="fünfunddreißig";
-$tzahl[36]="sechsunddreißig";
-$tzahl[37]="siebenunddreißig";
-$tzahl[38]="achtunddreißig";  
-$tzahl[39]="neununddreißig";  
+$tzahl[30]="dreiÃŸig";
+$tzahl[31]="einunddreiÃŸig";
+$tzahl[32]="zweiunddreiÃŸig";
+$tzahl[33]="dreiunddreiÃŸig";
+$tzahl[34]="vierunddreiÃŸig";
+$tzahl[35]="fÃ¼nfunddreiÃŸig";
+$tzahl[36]="sechsunddreiÃŸig";
+$tzahl[37]="siebenunddreiÃŸig";
+$tzahl[38]="achtunddreiÃŸig";  
+$tzahl[39]="neununddreiÃŸig";  
 $tzahl[40]="vierzig";
 $tzahl[41]="einundvierzig";
 $tzahl[42]="zweiundvierzig";
 $tzahl[43]="dreiundvierzig";
 $tzahl[44]="vierundvierzig";
-$tzahl[45]="fünfundvierzig";
+$tzahl[45]="fÃ¼nfundvierzig";
 $tzahl[46]="sechsundvierzig";
 $tzahl[47]="siebenundvierzig";
 $tzahl[48]="achtundvierzig";  
 $tzahl[49]="neunundvierzig";  
-$tzahl[50]="fünfzig";
-$tzahl[51]="einundfünfzig";
-$tzahl[52]="zweiundfünfzig";
-$tzahl[53]="dreiundfünfzig";
-$tzahl[54]="vierundfünfzig";
-$tzahl[55]="fünfundfünfzig";
-$tzahl[56]="sechsundfünfzig";
-$tzahl[57]="siebenundfünfzig";
-$tzahl[58]="achtundfünfzig";  
-$tzahl[59]="neunundfünfzig"; 
+$tzahl[50]="fÃ¼nfzig";
+$tzahl[51]="einundfÃ¼nfzig";
+$tzahl[52]="zweiundfÃ¼nfzig";
+$tzahl[53]="dreiundfÃ¼nfzig";
+$tzahl[54]="vierundfÃ¼nfzig";
+$tzahl[55]="fÃ¼nfundfÃ¼nfzig";
+$tzahl[56]="sechsundfÃ¼nfzig";
+$tzahl[57]="siebenundfÃ¼nfzig";
+$tzahl[58]="achtundfÃ¼nfzig";  
+$tzahl[59]="neunundfÃ¼nfzig"; 
 $tzahl[60]="sechzig";
 $tzahl[61]="einundsechzig";
 $tzahl[62]="zweiundsechzig";
 $tzahl[63]="dreiundsechzig";
 $tzahl[64]="vierundsechzig";
-$tzahl[65]="fünfundsechzig";
+$tzahl[65]="fÃ¼nfundsechzig";
 $tzahl[66]="sechsundsechzig";
 $tzahl[67]="siebenundsechzig";
 $tzahl[68]="achtundsechzig";  
@@ -1297,7 +1297,7 @@ $tzahl[71]="einundsiebzig";
 $tzahl[72]="zweiundsiebzig";
 $tzahl[73]="dreiundsiebzig";
 $tzahl[74]="vierundsiebzig";
-$tzahl[75]="fünfundsiebzig";
+$tzahl[75]="fÃ¼nfundsiebzig";
 $tzahl[76]="sechsundsiebzig";
 $tzahl[77]="siebenundsiebzig";
 $tzahl[78]="achtundsiebzig";  
@@ -1307,7 +1307,7 @@ $tzahl[81]="einundachtzig";
 $tzahl[82]="zweiundachtzig";
 $tzahl[83]="dreiundachtzig";
 $tzahl[84]="vierundachtzig";
-$tzahl[85]="fünfundachtzig";
+$tzahl[85]="fÃ¼nfundachtzig";
 $tzahl[86]="sechsundachtzig";
 $tzahl[87]="siebenundachtzig";
 $tzahl[88]="achtundachtzig";  
@@ -1317,7 +1317,7 @@ $tzahl[91]="einundneunzig";
 $tzahl[92]="zweiundneunzig";
 $tzahl[93]="dreiundneunzig";
 $tzahl[94]="vierundneunzig";
-$tzahl[95]="fünfundneunzig";
+$tzahl[95]="fÃ¼nfundneunzig";
 $tzahl[96]="sechsundneunzig";
 $tzahl[97]="siebenundneunzig";
 $tzahl[98]="achtundneunzig";  

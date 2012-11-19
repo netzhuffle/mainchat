@@ -8,13 +8,13 @@ require ("functions.php");
 
 $fenster=str_replace("+","",$u_nick);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 
 // Kopf ausgeben
@@ -60,7 +60,7 @@ echo $body_tag;
 
 
 
-	// Menü als erstes ausgeben
+	// MenÃ¼ als erstes ausgeben
 	$box = $ft0."Zahlung erfolgreich".$ft1;
 	$text = "Die Zahlung der SMS war erfolgreich. Vielen Dank<BR>";
 	$text.= 'Bitte klicken Sie <a href="javascript:window.close()">hier</a> um das Fenster zu schliessen.';

@@ -1,6 +1,6 @@
 <?php
 
-// Dieses Programm schreibt dem User seine Über IPayment gekauften SMS gut...
+// Dieses Programm schreibt dem User seine Ãœber IPayment gekauften SMS gut...
 include("functions.php");
 
 reset ($HTTP_POST_VARS);

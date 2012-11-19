@@ -16,7 +16,7 @@ else
 {
 	if (!$fp=fopen ($liesmich,"r"))
 	{
-		echo "Datei konnte nicht geöffnet werden!";
+		echo "Datei konnte nicht geÃ¶ffnet werden!";
 	}
 	else
 	{

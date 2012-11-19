@@ -1,6 +1,6 @@
 # fidion GmbH mainChat
 #
-# chat-Datenbank für mySQL
+# chat-Datenbank fÃ¼r mySQL
 #
 #
 
@@ -8,25 +8,25 @@
 # u_id 			ID
 # u_nick		Temp. Nickname im Chat	
 # u_name		Username
-# u_passwort		Paßwort
+# u_passwort		Paï¬‚wort
 # u_email		E-Mail Adresse
 # u_url			URL der Homepage
 # u_level		Userlevel A-Z
 # u_neu			Zeitpunkt der Erstanmeldung
 # u_login		Zeitpunkt des letzten Logins
 # u_farbe		Voreingestellte Farbe
-# u_cookie		Falls 1 -> Cookie erwünscht
-# u_auth		Normalerweise unbelegt, legt die Authentisierung (Cookies, HTTP-Auth) für den user fest
-# u_zeilen		Anzahl der Zeilen, die der User im Chat wünscht (optional)
-# u_backup		1 falls User Backup-Algorithmus für den Chat gewählt hat
-# u_adminemail		E-Mail Adresse für Administatrion, muß angegeben werden
+# u_cookie		Falls 1 -> Cookie erwÃ¼nscht
+# u_auth		Normalerweise unbelegt, legt die Authentisierung (Cookies, HTTP-Auth) fÃ¼r den user fest
+# u_zeilen		Anzahl der Zeilen, die der User im Chat wÃ¼nscht (optional)
+# u_backup		1 falls User Backup-Algorithmus fÃ¼r den Chat gewâ€°hlt hat
+# u_adminemail		E-Mail Adresse fÃ¼r Administatrion, muï¬‚ angegeben werden
 # u_ip_historie 	Liste der IP-Adressen der letzten Logins
-# u_farbe_priv  	Farbe für an den User gerichtete Nachrichten, default falls "-"
-# u_farbe_sys   	Farbe für Nachrichten vom System, default falls "-"
-# u_farbe_bg    	Farbe für Hintergrund, default falls "-"
-# u_farbe_alle  	Farbe für alle anderen user, default falls "-"
-# u_farbe_noise 	Farbe für sog. Noises, default falls "-"
-# u_clearedit   	soll Editzeile gelöscht oder nur markiert werden?
+# u_farbe_priv  	Farbe fÃ¼r an den User gerichtete Nachrichten, default falls "-"
+# u_farbe_sys   	Farbe fÃ¼r Nachrichten vom System, default falls "-"
+# u_farbe_bg    	Farbe fÃ¼r Hintergrund, default falls "-"
+# u_farbe_alle  	Farbe fÃ¼r alle anderen user, default falls "-"
+# u_farbe_noise 	Farbe fÃ¼r sog. Noises, default falls "-"
+# u_clearedit   	soll Editzeile gelË†scht oder nur markiert werden?
 # u_away		away-Text des Benutzers
 # u_smilie		User will Smilie-Grafiken sehen Y/N
 # u_agb			User hat Chatregeln/AGB akzeptiert Y/N
@@ -35,22 +35,22 @@
 # u_punkte_jahr		Punktzahl des aktuellen Jahrs
 # u_punkte_datum_monat	Monat, auf die sich u_punkte_monat bezieht
 # u_punkte_datum_jahr	Jahr, auf die sich u_punkte_datum_jahr bezieht
-# u_punkte_gruppe	Grafik-Symbol für die Punktegruppe
+# u_punkte_gruppe	Grafik-Symbol fÃ¼r die Punktegruppe
 # u_gelesene_postings	ID der gelesenen Postings im Forum
-# u_frames		Voreinstellungen für Frameset (opt)
+# u_frames		Voreinstellungen fÃ¼r Frameset (opt)
 # u_chathomepage	Chathomepage freigeschalten J/N
 # u_eintritt		Eintrittstext
 # u_austritt		Austrittstext
-# u_signatur		Signatur für Mail und Forum
+# u_signatur		Signatur fÃ¼r Mail und Forum
 # u_lastclean           Zeitpunkt der letzten bereinigung von u_gelesene_postings
 # u_loginfehler		Array mit Datum und IP fehlerhafter Logins
 # u_sms_ok		User akzeptiert SMS
 # u_sms_guthaben	Anzahl der SMS im Guthaben
 # u_nick_historie	Nickwechsel Historie       
-# u_profil_historie	Admin-Änderungen am Profil-Historie
+# u_profil_historie	Admin-Æ’nderungen am Profil-Historie
 # u_kommentar		Kommentar, warum ein User gesperrt wurde
 # u_forum_postingproseite	Anzahl der Postings, die pro Seite im Forum angezeigt werden sollen
-# u_punkte_anzeigen	User will seinen PunkteWürfel zeigen Y/N
+# u_punkte_anzeigen	User will seinen PunkteWÃ¼rfel zeigen Y/N
 # u_systemmeldungen	User will System Login/Logout Nachrichten sehen
 # u_knebel		Speichert die Restknebelzeit falls vorhanden 
 
@@ -87,17 +87,17 @@
 # r_status1 		Status1 (offen, geschlossen, moderiert)
 # r_besitzer 		Besitzer des Raums -> u_id
 # r_topic 		Titel des Raums
-# r_status2 		Status2 (permanent, temporär)
+# r_status2 		Status2 (permanent, temporâ€°r)
 # r_smilie		Smilies erlaubt (Y/N)
 # r_werbung		Name des Werbeframes, der diesem Raum zugeordnet ist
-# r_min_punkte		Anzahl der Punkte die ein User haben muß, bevor er den Raum betreten kann
+# r_min_punkte		Anzahl der Punkte die ein User haben muï¬‚, bevor er den Raum betreten kann
           
 # Tabelle online	welcher User ist in welchem Raum online
 # o_id int 		ID
 # o_user 		User -> u_id
 # o_raum 		Raum -> r_id
 # o_hash 		Hash aus IP-Adresse, User
-# o_timestamp 		Zeitpunkt der Änderung dieses Datensatzes
+# o_timestamp 		Zeitpunkt der Æ’nderung dieses Datensatzes
 # o_ip 			IP von der zugegriffen wurde
 # o_who 		Bereich in der Community, in der sich der User befindet
 #			0=Chat, 1=Login, 2=Forum
@@ -117,19 +117,19 @@
 # o_level 		Aktueller Level des Users aus Tabelle user
 # o_login		Zeitpunkt des Logins
 # o_punkte		Aktuelle Anzahl der Punkte des Users
-# o_aktion		Zeitpunkt, wann die letzte Aktion ausgeführt wurde
+# o_aktion		Zeitpunkt, wann die letzte Aktion ausgefÃ¼hrt wurde
 # o_timeout_zeit	Zeitpunkt, wann die letzte Zeile im Chat geschrieben wurde
-# o_timeout_warnung	J=Warnung über bevorstehenden Logout wurde angezeigt
-# o_chat_historie	Enthält die Anzehl der Zeichen mit Timestamp, die
+# o_timeout_warnung	J=Warnung Ã¼ber bevorstehenden Logout wurde angezeigt
+# o_chat_historie	Enthâ€°lt die Anzehl der Zeichen mit Timestamp, die
 #                	der User zuletzt schrieb
 # o_spam_zeit		Sekundengenauer Zeitpunkt (timestamp), aus den sich
 #               	o_spam_zeilen und o_spam_byte bezieht
-# o_spam_zeilen		Enthält serialised die Anzahl der Zeilen pro
+# o_spam_zeilen		Enthâ€°lt serialised die Anzahl der Zeilen pro
 #                 	Sekunde, die der User zuletzt schrieb
-# o_spam_byte		Enthält serialised die Anzahl der Bytes/Zeichen pro
+# o_spam_byte		Enthâ€°lt serialised die Anzahl der Bytes/Zeichen pro
 #                 	Sekunde, die der User zuletzt schrieb
 
-# Tabelle sperre	welcher User ist in welchem Raum für wie lange gesperrt
+# Tabelle sperre	welcher User ist in welchem Raum fÃ¼r wie lange gesperrt
 # s_id int 		ID
 # s_user 		User -> u_id
 # s_raum 		Raum -> r_id
@@ -140,7 +140,7 @@
 # i_user_aktiv 		User -> u_id
 # i_user_passiv 	User -> u_id
                   
-# Tabelle ip_sperre	komplette Sperre für User von bestimmten IPs
+# Tabelle ip_sperre	komplette Sperre fÃ¼r User von bestimmten IPs
 # is_id 		ID
 # is_ip 		IP-Adresse als xxx.yyy.zzz
 # is_ip_byte 		Anzahl der Bytes in is_ip
@@ -148,7 +148,7 @@
 # is_zeit 		Zeitpunkt wann Datensatz angelegt wurde
 # is_owner		Wer diesen Datensatz zuletzt geschrieben hat
 # is_infotext		Text mit dem Grund der Sperre
-# is_warn		ja=Eintrag löst nur Warnmeldung aus / nein=Eintrag sperrt IP oder Netz
+# is_warn		ja=Eintrag lË†st nur Warnmeldung aus / nein=Eintrag sperrt IP oder Netz
 
 
 
@@ -602,7 +602,7 @@ CREATE TABLE userinfo (
   ui_ort varchar(100) NOT NULL default '',
   ui_land varchar(100) NOT NULL default '',
   ui_geburt varchar(12) NOT NULL default '',
-  ui_geschlecht set('keine Angabe','männlich','weiblich') default 'keine Angabe',
+  ui_geschlecht set('keine Angabe','mâ€°nnlich','weiblich') default 'keine Angabe',
   ui_beziehung set('keine Angabe','verheiratet','ledig','single','vergeben') default 'keine Angabe',
   ui_typ set('keine Angabe','zierlich','schlank','sportlich','normal','mollig','dick') default 'keine Angabe',
   ui_beruf varchar(100) NOT NULL default '',
@@ -618,5 +618,5 @@ CREATE TABLE userinfo (
   KEY ui_userid (ui_userid)
 ) TYPE=MyISAM;
 
-INSERT INTO raum set r_name='Lobby',r_eintritt='Hallöle',r_topic='Eingangshalle',r_status1='O',r_status2='P';
+INSERT INTO raum set r_name='Lobby',r_eintritt='HallË†le',r_topic='Eingangshalle',r_status1='O',r_status2='P';
 INSERT INTO user set u_id=1,u_nick='admin',u_name='admin',u_passwort='adpexzg3FUZAk',u_level='S';

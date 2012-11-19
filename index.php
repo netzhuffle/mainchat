@@ -4,6 +4,10 @@
 
 require_once("functions-registerglobals.php");
 
+if (!isset($_SERVER["HTTP_REFERER"])) {
+	$_SERVER["HTTP_REFERER"] = "";
+}
+
 if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 	// Falls diese Seite ohne Parameter aufgerufen wird, wird das oberste Frameset ausgegeben
 
@@ -12,7 +16,7 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 	
 	#print "chat_referer = $chat_referer";
 
-	// Backdoorschutz über den HTTP_REFERER
+	// Backdoorschutz Ã¼ber den HTTP_REFERER
 	if (isset($chat_referer))
 	{
 
@@ -30,7 +34,7 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 		}
 	}
 
-	// Soll Chatserver dynamisch gewählt werden?
+	// Soll Chatserver dynamisch gewÃ¤hlt werden?
 	$chatserver = "";
 	if ($chatserver_dynamisch) {
 	
@@ -64,8 +68,8 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 
 		} else {
 			echo "<HTML><HEAD><TITLE>mainChat - http://www.mainchat.de </TITLE></HEAD><BODY>".
-				"<P>Der mainChat ist leider aus technischen Gründen nicht erreichbar. ".
-				"Bitte versuchen Sie es später noch einmal.</P></BODY></HTML>\n";
+				"<P>Der mainChat ist leider aus technischen GrÃ¼nden nicht erreichbar. ".
+				"Bitte versuchen Sie es spÃ¤ter noch einmal.</P></BODY></HTML>\n";
 			exit();
 		};
 	};
@@ -84,7 +88,7 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 
 	if($opt) echo "<FRAME SRC=\"".$frame_links."\" NAME=\"leftframe\" NORESIZE>\n";
 
-	// Login durch das äußere Frameset durchschleifen
+	// Login durch das Ã¤uÃŸere Frameset durchschleifen
 	if ($frame==1 && $aktion=="login") {
 		$url=$chatserver."index.php?http_host=".$http_host.
 			"&javascript=".$javascript.
@@ -97,7 +101,7 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 		        $url.="&f[".$key."]=".urlencode($val);
 		};
 
-		// Für Kompatibilität zwischen 4.21 und 5.0.0
+		// FÃ¼r KompatibilitÃ¤t zwischen 4.21 und 5.0.0
 		if (isset($md5crypt))
 		{
 			$url.="&md5crypt=".$md5crypt;
@@ -105,7 +109,7 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 		
 		echo "<FRAME SRC=\"".$url."\" SCROLLING=\"AUTO\" NAME=\"topframe\" NORESIZE>\n</FRAMESET><NOFRAMES>\n";
 
-	// E-Mail bestätigung durch das äußere Frameset durchschleifen
+	// E-Mail bestÃ¤tigung durch das Ã¤uÃŸere Frameset durchschleifen
 	} elseif ($frame==1) {
 		echo "<FRAME SRC=\"".$chatserver."index.php?http_host=$http_host&aktion=$aktion&email=$email&hash=$hash\" SCROLLING=\"AUTO\" NAME=\"topframe\" NORESIZE>\n".
 			"</FRAMESET><NOFRAMES>\n";
@@ -139,14 +143,14 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 
 // Seite wurde mit Parametern innerhalb des Framesets aufgerufen: Eingangsseite ausgeben
 
-// Cookie setzen, um Cookies zu überprüfen
+// Cookie setzen, um Cookies zu Ã¼berprÃ¼fen
 // setcookie("MAINCHAT2","on",0,"/");
 
 // Funktionen laden
 require ("functions.php");
 require ("functions.php-werbung.php");
 
-// Backdoorschutz über den HTTP_REFERER - wir prüfen ob bei gesetztem HTTP_HOST ob die index.php in eigenem Frameset läuft sonst => Fehler
+// Backdoorschutz Ã¼ber den HTTP_REFERER - wir prÃ¼fen ob bei gesetztem HTTP_HOST ob die index.php in eigenem Frameset lÃ¤uft sonst => Fehler
 if (isset($chat_referer))
 {
         $tmp=parse_url($serverprotokoll."://".$_SERVER["HTTP_HOST"]);
@@ -159,7 +163,7 @@ if (isset($chat_referer))
 #	print "ref: ".$chat_referer."<BR>";
 #	print "ref original: ".$refereroriginal."<BR>";
 
-	if ( (!preg_match("°".$chat_referer2."°",$_SERVER["HTTP_REFERER"])) && (!preg_match("°".$chat_referer."°",$refereroriginal)) && $aktion != "neu") 
+	if ( (!preg_match("âˆž".$chat_referer2."âˆž",$_SERVER["HTTP_REFERER"])) && (!preg_match("âˆž".$chat_referer."âˆž",$refereroriginal)) && $aktion != "neu") 
 	{
 		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf.
 		     "<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"5; URL=$chat_login_url\">\n".
@@ -194,10 +198,10 @@ $body_tag=$body_tag."TEXT=\"$farbe_text\" ".
 		"ALINK=\"$farbe_vlink\">\n";
 
 
-// Liste offener Räume definieren (optional)
+// Liste offener RÃ¤ume definieren (optional)
 if ($raum_auswahl && !$beichtstuhl):
 
-	// Falls eintrittsraum nicht gesetzt ist, mit Lobby überschreiben
+	// Falls eintrittsraum nicht gesetzt ist, mit Lobby Ã¼berschreiben
 	if (strlen($eintrittsraum)==0):
 		$eintrittsraum=$lobby;
 	endif;
@@ -248,7 +252,7 @@ else:
 endif;
 
 
-// Browser prüfen
+// Browser prÃ¼fen
 if (ist_netscape()) {
         $eingabe_breite=12;
 } else {
@@ -274,7 +278,7 @@ if (($ssl_login) || ($SSLRedirect == "1"))
 	$chat_file="https://".$http_host.$chat_url;
 }
 
-// IP bestimmen und prüfen. Ist Login erlaubt?
+// IP bestimmen und prÃ¼fen. Ist Login erlaubt?
 $abweisen=false;
 $warnung=false;
 $ip_adr = $_SERVER["REMOTE_ADDR"];
@@ -287,7 +291,7 @@ $result=mysql_query($query,$conn);
 if ($result && mysql_num_rows($result) > 0) { $abweisen = true; }
 mysql_free_result($result);
 
-// TEST - Sperrt den Chat für bestimmte Browser komplett
+// TEST - Sperrt den Chat fÃ¼r bestimmte Browser komplett
 //if ($dbase=="mainchat") 
 {
         if (($_SERVER["HTTP_USER_AGENT"] == "Spamy v3.0 with 32 Threads") ||
@@ -329,7 +333,7 @@ if ($rows>0){
 };
 mysql_free_result($result);
 
-// HTTP_X_FORWARDED_FOR IP bestimmen und prüfen. Ist Login erlaubt?
+// HTTP_X_FORWARDED_FOR IP bestimmen und prÃ¼fen. Ist Login erlaubt?
 if (isset($_SERVER["HTTP_X_FORWARDED_FOR"]))
 { 
 	$ip_adr = $_SERVER["HTTP_X_FORWARDED_FOR"];
@@ -363,7 +367,7 @@ if (!$abweisen && $ip_adr && $ip_adr!=$_SERVER["REMOTE_ADDR"]){
 	mysql_free_result($result);
 };
 
-// zweite Prüfung, gibts was, was mit "*" in der mitte schafft? für p3cea9*.t-online.de
+// zweite PrÃ¼fung, gibts was, was mit "*" in der mitte schafft? fÃ¼r p3cea9*.t-online.de
 $query="SELECT * FROM ip_sperre WHERE is_domain like '_%*%_'";
 $result=mysql_query($query,$conn);
 if ($result && mysql_num_rows($result)>0) {
@@ -373,7 +377,7 @@ if ($result && mysql_num_rows($result)>0) {
 			if (substr($ip_name,0,strlen($part[0]))==$part[0] 
 			    && substr($ip_name,strlen($ip_name)-strlen($part[1]),strlen($part[1]))==$part[1]) {
 
-				// IP stimmt überein
+				// IP stimmt Ã¼berein
 				if($row->is_warn=="ja"){
 					// Warnung ausgeben
 					$warnung=true;
@@ -389,8 +393,8 @@ if ($result && mysql_num_rows($result)>0) {
 mysql_free_result($result);
 
 
-// Wenn $abweisen=true, dann ist Login ist für diesen User gesperrt
-// Es sei denn wechsel Forum -> Chat, dann "Relogin", und wechsel trotz IP Sperre in Chat möglich
+// Wenn $abweisen=true, dann ist Login ist fÃ¼r diesen User gesperrt
+// Es sei denn wechsel Forum -> Chat, dann "Relogin", und wechsel trotz IP Sperre in Chat mÃ¶glich
 if ($abweisen && $aktion <> "relogin" && strlen($login)>0)
 {
 	// test: ist user=admin -> dann nicht abweisen...
@@ -405,8 +409,8 @@ if ($abweisen && $aktion <> "relogin" && strlen($login)>0)
 	mysql_free_result($r);
 
 
-	// Prüfung nun auf Admin beendet
-	// Nun Prüfung ob genug Punkte
+	// PrÃ¼fung nun auf Admin beendet
+	// Nun PrÃ¼fung ob genug Punkte
 	$durchgangwegenpunkte = 0;
 
  	if ($communityfeatures && $loginwhileipsperre <> 0)
@@ -416,7 +420,7 @@ if ($abweisen && $aktion <> "relogin" && strlen($login)>0)
 		       "where (u_nick='".coreCheckName($login,$check_name)."' OR u_name='".coreCheckName($login,$check_name)."') ".
 		       "AND (u_level in ('A','C','G','M','S','U')) ";
 		       "AND u_passwort = encrypt('$passwort',u_passwort)"; // Nutzt die MYSQL -> Unix crypt um DES, SHA256, etc. automatisch zu erkennen
-		// Durchleitung wg. Punkten im Fall der MD5() verschlüsselung wird nicht gehen
+		// Durchleitung wg. Punkten im Fall der MD5() verschlÃ¼sselung wird nicht gehen
      		$r=mysql_query($query,$conn);
 		$rw=mysql_num_rows($r);
 
@@ -425,7 +429,7 @@ if ($abweisen && $aktion <> "relogin" && strlen($login)>0)
 			$row=mysql_fetch_object($r);
 			if ($row->u_punkte_gesamt >= $loginwhileipsperre)
 			{
-				// genügend Punkte
+				// genÃ¼gend Punkte
 				// Login zulassen
 				$durchgangwegenpunkte = 1;
 				$abweisen = false;
@@ -491,7 +495,7 @@ if ($abweisen && (strlen($aktion)>0) && $aktion <> "relogin")
 
 
 
-// Login ist für alle User gesperrt
+// Login ist fÃ¼r alle User gesperrt
 if (($chat_offline_kunde) || ((isset($chat_offline)) && (strlen($chat_offline)>0))) {
 	$aktion="gesperrt";
 };
@@ -609,7 +613,7 @@ if ($aktion == "mailcheck" && isset($email) && isset($hash))
 			if ($layout_bodytag)
 			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 			zeige_kopf();
-			echo "<P><B>Fehler:</B> Diese Mail wurde bereits für eine Anmeldung benutzt! Bitte melden Sie sich ".
+			echo "<P><B>Fehler:</B> Diese Mail wurde bereits fÃ¼r eine Anmeldung benutzt! Bitte melden Sie sich ".
 				"<A HREF=\"".$chatserver."index.php?http_host=$http_host\">hier</A> neu an.</P>";
 			zeige_fuss();
 			exit;
@@ -826,7 +830,7 @@ switch ($aktion) {
 	
 	if (!$email || $fehlermeldung) 
 	{
-		// Formular für die Freischaltung/Bestätigung der Mailadress
+		// Formular fÃ¼r die Freischaltung/BestÃ¤tigung der Mailadress
 		echo "<p>".$t['neu50']."</p>";
 		if ($fehlermeldung)
 		{
@@ -869,7 +873,7 @@ switch ($aktion) {
 	zeige_kopf();
 	echo $willkommen;
 
-	// dieser Regex macht eine primitive Prüfung ob eine Mailadresse
+	// dieser Regex macht eine primitive PrÃ¼fung ob eine Mailadresse
 	// der Form name@do.main entspricht, wobei
 	if (isset($email)) 
 	{
@@ -882,10 +886,10 @@ switch ($aktion) {
 
 
 	if (!isset($email)) {
-		// Formular für die Erstregistierung ausgeben, 1. Schritt
+		// Formular fÃ¼r die Erstregistierung ausgeben, 1. Schritt
 		echo "<p>".$t['neu33'];
 		if (strlen($anmeldung_nurmitbest)>0)
-		{   // Anmeldung mit Externer Bestätigung
+		{   // Anmeldung mit Externer BestÃ¤tigung
 		    echo $t['neu45'];
 		}
 		echo "<p><table border=0 cellpadding=3 cellspacing=0>".
@@ -900,7 +904,7 @@ switch ($aktion) {
 
 		$email=trim($email);
 
-		// wir prüfen ob User gesperrt ist
+		// wir prÃ¼fen ob User gesperrt ist
 		// entweder User = gesperrt
 		$query="SELECT * FROM user WHERE ( (u_adminemail='$email') OR (u_email='$email') ) AND u_level='Z'";
 		$result=mysql_query($query);
@@ -936,7 +940,7 @@ switch ($aktion) {
 
 		if (!$gesperrt)
 		{
-		    // Überprüfung auf Formular mehrmals abgeschickt
+		    // ÃœberprÃ¼fung auf Formular mehrmals abgeschickt
 		    $query="DELETE FROM mail_check WHERE email = '$email'";
 		    mysql_query($query);
 
@@ -945,7 +949,7 @@ switch ($aktion) {
 
 		    if (strlen($anmeldung_nurmitbest)>0)
 		    { 
-	     	        // Anmeldung mit externer Bestätigung
+	     	        // Anmeldung mit externer BestÃ¤tigung
 			$link1=$serverprotokoll."://".$http_host.$chatserver.$_SERVER['PHP_SELF']."?http_host=$http_host&aktion=neubestaetigen&frame=1";
 			$link2=$serverprotokoll."://".$http_host.$chatserver.$_SERVER['PHP_SELF']."?http_host=$http_host&aktion=neu2&frame=1";
 
@@ -1027,7 +1031,7 @@ switch ($aktion) {
     case "login":
 
 
-	// Sequence für online- und chat-Tabelle erzeugen
+	// Sequence fÃ¼r online- und chat-Tabelle erzeugen
 	erzeuge_sequence("online","o_id");
 	erzeuge_sequence("chat","c_id");
 
@@ -1040,7 +1044,7 @@ switch ($aktion) {
 		if ($gast_login)
 		{
 
-			// Prüfen, ob von der IP und dem User-Agent schon ein Gast online ist und ggf abweisen
+			// PrÃ¼fen, ob von der IP und dem User-Agent schon ein Gast online ist und ggf abweisen
 			$query4711="SELECT o_id FROM online ".
 					"WHERE o_browser='".$_SERVER["HTTP_USER_AGENT"]."' ".
 					"AND o_ip='".$_SERVER["REMOTE_ADDR"]."' ".
@@ -1052,11 +1056,11 @@ switch ($aktion) {
 
 		}
 
-		// Login abweisen, falls mehr als ein Gast online ist oder Gäste gesperrt sind
+		// Login abweisen, falls mehr als ein Gast online ist oder GÃ¤ste gesperrt sind
 		if (!$gast_login or ($rows>1 && !$gast_login_viele) or $temp_gast_sperre)
 		{
 
-			// Gäste sind gesperrt
+			// GÃ¤ste sind gesperrt
 
 			// Header ausgeben
 			if ($layout_bodytag)
@@ -1073,7 +1077,7 @@ switch ($aktion) {
 				echo $t['login15'];
 			endif;
 
-			// Box für Login
+			// Box fÃ¼r Login
 			if ($frameset_bleibt_stehen):
 				echo "<FORM ACTION=\"$chat_file\" NAME=\"form1\" METHOD=\"POST\">".
 					"<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n";
@@ -1098,7 +1102,7 @@ switch ($aktion) {
 
 		// Login als gast
 
-		// Im Nick alle Sonderzeichen entfernen, Länge prüfen
+		// Im Nick alle Sonderzeichen entfernen, LÃ¤nge prÃ¼fen
 		if (!isset($login)) $login = "";
 		$login=coreCheckName($login,$check_name);
 
@@ -1108,7 +1112,7 @@ switch ($aktion) {
                 }
 
 
-		// Falls kein Nick übergeben, Nick finden
+		// Falls kein Nick Ã¼bergeben, Nick finden
 		if (strlen($login)==0):
 
 			if ($gast_name_auto):
@@ -1141,10 +1145,10 @@ switch ($aktion) {
 
 		endif;
 
-		// Im Nick alle Sonderzeichen entfernen, vorsichtshalber nochmals prüfen
+		// Im Nick alle Sonderzeichen entfernen, vorsichtshalber nochmals prÃ¼fen
 		$login=coreCheckName($login,$check_name);
 
-		// Userdaten für Gast setzen
+		// Userdaten fÃ¼r Gast setzen
 		$f['u_level']="G";		
 		$f['u_passwort']=mt_rand(1,10000);
 		$f['u_name']=$login;
@@ -1152,7 +1156,7 @@ switch ($aktion) {
 		$passwort=$f['u_passwort'];
 		
 
-		// Prüfung, ob dieser User bereits existiert
+		// PrÃ¼fung, ob dieser User bereits existiert
 		$query4711="SELECT u_id FROM user ".
 			"WHERE u_nick='$f[u_nick]' ";
 		$result=mysql_query($query4711,$conn);
@@ -1167,7 +1171,7 @@ switch ($aktion) {
 
 	// Login als registrierter User
 
-	// Testen, ob frühere Loginversuche fehlschlugen (nur Admins)
+	// Testen, ob frÃ¼here Loginversuche fehlschlugen (nur Admins)
 	$query4711="SELECT u_id,u_nick,u_loginfehler,u_login,u_backup FROM user ".
 		"WHERE (u_name = '$login' OR u_nick = '$login') ".
 		"AND (u_level='S' OR u_level='C') ";
@@ -1177,7 +1181,7 @@ switch ($aktion) {
 	// Voreinstellung: Weiter mit Login
 	$login_ok=true;
 
-	// Mehr als ein güliger Account gefunden, nochmals nach nick suchen
+	// Mehr als ein gÃ¼liger Account gefunden, nochmals nach nick suchen
 	if ($result && $rows>1) {
 		mysql_free_result($result);
 		$query4711="SELECT u_id,u_nick,u_loginfehler,u_login,u_backup FROM user ".
@@ -1206,11 +1210,11 @@ switch ($aktion) {
 	// wird die dort vorhandene von function und variablen importiert
         if (file_exists("ext/functions.php-".$http_host)) 
         {
-        	// Speziell für die weitere verwendung in auth_user wird die $crypted_password_extern = 0 oder 1 aus der Datei gelesen
+        	// Speziell fÃ¼r die weitere verwendung in auth_user wird die $crypted_password_extern = 0 oder 1 aus der Datei gelesen
                 require("ext/functions.php-".$http_host);
         }
                                  
-	// Passwort prüfen und Userdaten lesen
+	// Passwort prÃ¼fen und Userdaten lesen
 	$rows=0;
 	$result=auth_user("u_nick",$login,$passwort);
 	if ($result) {
@@ -1220,11 +1224,11 @@ switch ($aktion) {
 	// Nick nicht gefunden, optionales include starten und User ggf. aus externer Datenbank kopieren
 	if ($rows==0 && file_exists("ext/functions.php-".$http_host)) 
 	{
-		// Wenn User = Gast, dann mit leerem Passwort in die Externe Prüfung
+		// Wenn User = Gast, dann mit leerem Passwort in die Externe PrÃ¼fung
 		// erforderlich, da aus externer Schnittstelle Gastdaten ohne PW kommen
 		// Sicherheitsproblem in der Externen Schnittstelle: da jeder unter diesem 
-		// Gastnick einloggen kann, und der ursprüngliche User fliegt raus
-		// Muss daher im Übergeordneten System sichergestellt sein
+		// Gastnick einloggen kann, und der ursprÃ¼ngliche User fliegt raus
+		// Muss daher im Ãœbergeordneten System sichergestellt sein
 		if ($f['u_level']=='G') { $passwort = ''; }
 		 
 		// Function ext_lese_user oben eingebunden
@@ -1268,7 +1272,7 @@ switch ($aktion) {
 		}
 	};
 
-	// güliger Account gefunden, weiter mit Login oder Fehlermeldungen ausgeben
+	// gÃ¼liger Account gefunden, weiter mit Login oder Fehlermeldungen ausgeben
 	if ($result && $rows==1 && $login_ok){
 
 		// Login Ok, Userdaten setzen
@@ -1357,7 +1361,7 @@ switch ($aktion) {
 			unset($u_name);
 			unset($u_nick);
 
-			// Box für Login
+			// Box fÃ¼r Login
 			if ($frameset_bleibt_stehen):
 				echo "<FORM ACTION=\"$chat_file\" NAME=\"form1\" METHOD=\"POST\">".
 					"<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n";
@@ -1396,12 +1400,12 @@ switch ($aktion) {
 
 			if (($captcha_text == 1) && (isset($captcha_text2)) && ($captcha_text2!=md5($u_id+"code"+$captcha_text1."+".date("Y-m-d h")))) { $los="";} 
 
-			// muss User/Gast  noch Nutzungsbestimmungen bestätigen?
+			// muss User/Gast  noch Nutzungsbestimmungen bestÃ¤tigen?
 			if ($los!=$t['login17'] && $u_agb!="Y") {
 
 				// Nutzungsbestimmungen ausgeben
 
-				// ggf. AGBs aus Sprachdatei mit extra AGBs aus config.php überschreiben
+				// ggf. AGBs aus Sprachdatei mit extra AGBs aus config.php Ã¼berschreiben
 				if ((isset($extra_agb)) and ($extra_agb <> "") and ($extra_agb <> "standard")) $t['agb']=$extra_agb;
 
 				// Header ausgeben
@@ -1410,7 +1414,7 @@ switch ($aktion) {
 					"</HEAD>\n";
 				zeige_kopf();
 
-				// Box für Login
+				// Box fÃ¼r Login
 				if ($frameset_bleibt_stehen):
 					echo "<FORM ACTION=\"$chat_file\" NAME=\"form1\" METHOD=\"POST\">".
 						"<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n";
@@ -1485,14 +1489,14 @@ switch ($aktion) {
 				exit;
 
 			} elseif ($los==$t['login17']) {
-				// AGBs wurden bestätigt
+				// AGBs wurden bestÃ¤tigt
 				$u_agb="Y";
 			} else {
 				$u_agb="";
 			};
 
 
-			// User in Blacklist überprüfen
+			// User in Blacklist Ã¼berprÃ¼fen
 			// in den kostenlosen Chats konnte es sein, das die Tabelle nicht vorhanden ist
 			$query2="SELECT f_text from blacklist where f_blacklistid=$u_id";
 			$result2=mysql_query($query2,$conn);
@@ -1538,13 +1542,13 @@ switch ($aktion) {
 			};
 
 
-			// User nicht gesperrt, weiter mit Login und Eintritt in ausgewählten Raum mit ID $eintritt
+			// User nicht gesperrt, weiter mit Login und Eintritt in ausgewÃ¤hlten Raum mit ID $eintritt
 
 
 			// Hash-Wert ermitteln
 			$hash_id=id_erzeuge($u_id);
 
-			// $javascript wird als input type hidden übergeben...
+			// $javascript wird als input type hidden Ã¼bergeben...
 			if (isset($javascript) && $javascript=="on"){
 				$javascript=1;
 			} else {
@@ -1559,13 +1563,13 @@ switch ($aktion) {
 
 
 			// Beichtstuhl-Special
-			// Falls es Räume mit nur einem Admin gibt und niemand in der Lobby ist,
+			// Falls es RÃ¤ume mit nur einem Admin gibt und niemand in der Lobby ist,
 			// Eintritt in einen solchen Raum, ansonsten in Lobby
 			if ($beichtstuhl) {
 
 				$login_in_lobby=FALSE;
 
-				// Prüfen, ob ein User in der Lobby ist
+				// PrÃ¼fen, ob ein User in der Lobby ist
 				$query2="SELECT o_id ".
 					"FROM raum,online WHERE o_raum=r_id ".
 					"AND r_name='$lobby' ".
@@ -1580,7 +1584,7 @@ switch ($aktion) {
 
 				} else {
 
-					// Prüfen, ob es Räume mit genau einem Admin gibt
+					// PrÃ¼fen, ob es RÃ¤ume mit genau einem Admin gibt
 					mysql_free_result($result2);
 					$query2="SELECT r_id,count(o_id) as anzahl, ".
 						"count(o_level='C') as CADMIN, count(o_level='S') as SADMIN ".
@@ -1646,7 +1650,7 @@ switch ($aktion) {
 				// Login ins Forum
 				betrete_forum($o_id,$u_id,$u_nick,$u_level);
 		
-				// Frame-Einstellungen für Browser definieren
+				// Frame-Einstellungen fÃ¼r Browser definieren
 				$user_agent=strtolower($HTTP_USER_AGENT);
 				if (preg_match("/linux/",$user_agent)):
 				        $frame_type="linux";
@@ -1654,7 +1658,7 @@ switch ($aktion) {
 				        $frame_type="solaris";
 				elseif (preg_match("/msie/",$user_agent)):
 				        $frame_type="ie";
-				elseif (preg_match('°mozilla/4\.7°i',$user_agent)):
+				elseif (preg_match('âˆžmozilla/4\.7âˆži',$user_agent)):
 				    $frame_type="nswin";
 				else:
 				        $frame_type="def";
@@ -1665,7 +1669,7 @@ switch ($aktion) {
 				        $frame_online="frame_online.php";
 				};
 
-				// Falls user eigene Einstellungen für das Frameset hat -> überschreiben
+				// Falls user eigene Einstellungen fÃ¼r das Frameset hat -> Ã¼berschreiben
                                 if (is_array($u_frames)) {
                                         foreach ($u_frames as $key => $val) {
                                                 if ($val) $frame_size[$frame_type][$key]=$val;
@@ -1692,7 +1696,7 @@ switch ($aktion) {
 				betrete_chat($o_id,$u_id,$u_nick,$u_level,$eintritt,$javascript,$u_backup);
 				$back=1;
 
-				// Frame-Einstellungen für Browser definieren
+				// Frame-Einstellungen fÃ¼r Browser definieren
 				$user_agent=strtolower($_SERVER["HTTP_USER_AGENT"]);
 				if (preg_match("/linux/",$user_agent)):
 					$frame_type="linux";
@@ -1700,7 +1704,7 @@ switch ($aktion) {
 					$frame_type="solaris";
 				elseif (preg_match("/msie/",$user_agent)):
 					$frame_type="ie";
-				elseif (preg_match('°mozilla/4\.7°i',$user_agent)):
+				elseif (preg_match('âˆžmozilla/4\.7âˆži',$user_agent)):
 					$frame_type="nswin";
 				else:
 					$frame_type="def";
@@ -1715,7 +1719,7 @@ switch ($aktion) {
 					$frame_size[$frame_type]['eingabe']=$frame_size[$frame_type]['eingabe']*2;
 				};
 	
-				// Falls user eigene Einstellungen für das Frameset hat -> überschreiben
+				// Falls user eigene Einstellungen fÃ¼r das Frameset hat -> Ã¼berschreiben
 				if (is_array($u_frames)) {
 					foreach ($u_frames as $key => $val) {
 						if ($val) $frame_size[$frame_type][$key]=$val;
@@ -1805,7 +1809,7 @@ switch ($aktion) {
 			echo $t['login7'];
 		endif;
 
-		// Box für Login
+		// Box fÃ¼r Login
 		if ($frameset_bleibt_stehen):
 			echo "<FORM ACTION=\"$chat_file\" NAME=\"form1\" METHOD=\"POST\">".
 				"<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n";
@@ -1867,7 +1871,7 @@ switch ($aktion) {
 	// Tags aus dem Usernamen raus
 	if (isset($f['u_name'])) $f['u_name']=strip_tags($f['u_name']);
 
-	// Eingaben prüfen
+	// Eingaben prÃ¼fen
 
 	if ($los==$t['neu22']):
 
@@ -1977,7 +1981,7 @@ switch ($aktion) {
 		// print_r($backarray);
 
 
-	// Prüfe ob Mailadresse schon zu oft registriert, durch ZURÜCK Button bei der 1. registrierung
+	// PrÃ¼fe ob Mailadresse schon zu oft registriert, durch ZURÃœCK Button bei der 1. registrierung
 	if ($ok)
 	{
                 if ($begrenzung_anmeld_pro_mailadr > 0)
@@ -2016,7 +2020,7 @@ switch ($aktion) {
 		// Daten in DB als User eintragen
 
 		if (!empty($backarray)) {
-			// fix für magic-quotes...
+			// fix fÃ¼r magic-quotes...
 			$backarray=urldecode($backarray);
 			$backarray=str_replace('\"','"',$backarray);
 			$backarray=unserialize($backarray);
@@ -2066,7 +2070,7 @@ switch ($aktion) {
 			{
 			$query="DELETE FROM mail_check WHERE email = '$f[u_adminemail]'";
 			$result=mysql_query($query);
-			#print "DEBUG: lösche mailadresse aus mail_check";
+			#print "DEBUG: lÃ¶sche mailadresse aus mail_check";
 			}
 
 	endif;
@@ -2088,7 +2092,7 @@ switch ($aktion) {
         // Chat betreten
         $back = betrete_chat($o_id,$u_id,$u_nick,$u_level,$neuer_raum,$o_js,$u_backup);
         
-	// Frame-Einstellungen für Browser definieren
+	// Frame-Einstellungen fÃ¼r Browser definieren
         $user_agent=strtolower($HTTP_USER_AGENT);
         if (preg_match("/linux/",$user_agent)):
                 $frame_type="linux";
@@ -2096,7 +2100,7 @@ switch ($aktion) {
                 $frame_type="solaris";
         elseif (preg_match("/msie/",$user_agent)):   
                 $frame_type="ie";
-        elseif (preg_match('°mozilla/4\.7°i',$user_agent)):
+        elseif (preg_match('âˆžmozilla/4\.7âˆži',$user_agent)):
                 $frame_type="nswin";
         else:
                 $frame_type="def";  
@@ -2109,7 +2113,7 @@ switch ($aktion) {
         endif;
         if ($u_level=="M") $frame_size[$frame_type][interaktiv]=$moderationsgroesse;
 
-	// Falls user eigene Einstellungen für das Frameset hat -> überschreiben
+	// Falls user eigene Einstellungen fÃ¼r das Frameset hat -> Ã¼berschreiben
         $sql = "select u_frames from user where u_id = $u_id";
         $result = mysql_query($sql, $conn);
 	if ($result && mysql_num_rows($result)>0) {
@@ -2176,18 +2180,18 @@ echo "
 Liebe Chatter,<br>
 <br>
 die Novellierung des Jugendmedienschutz-Staatsvertrags wurde im Landtag <br>
-Nordrhein-Westfalens von den Fraktionen von BÜNDNIS90/DIE  GRÜNEN, DIE <br>
+Nordrhein-Westfalens von den Fraktionen von BÃœNDNIS90/DIE  GRÃœNEN, DIE <br>
 LINKE, SPD, CDU und FDP am 16.12.2010 gegen 15:40 Uhr abgelehnt.<br>
 <br>
-Darüber sind wir natürlich sehr froh. Der mainChat wird also <br>
+DarÃ¼ber sind wir natÃ¼rlich sehr froh. Der mainChat wird also <br>
 weiterbetrieben werden.<br>
 <br>
-Bei aller Freude möchten wir alle Chatbetreiber trotzdem noch einmal <br>
-daran erinnern, dass die Regeln des \"alten\" JMStV selbstverständlich <br>
-weiter gelten. Deshalb die Bitte: habt, soweit dies zumutbar und möglich <br>
+Bei aller Freude mÃ¶chten wir alle Chatbetreiber trotzdem noch einmal <br>
+daran erinnern, dass die Regeln des \"alten\" JMStV selbstverstÃ¤ndlich <br>
+weiter gelten. Deshalb die Bitte: habt, soweit dies zumutbar und mÃ¶glich <br>
 ist, ein Auge drauf, was in Eurem Chat passiert.<br>
 <br>
-Bei Problemen hilft Euch das mainChat Team natürlich gerne weiter.<br><br>
+Bei Problemen hilft Euch das mainChat Team natÃ¼rlich gerne weiter.<br><br>
 <hr>
 "; 
 
@@ -2204,7 +2208,7 @@ Bei Problemen hilft Euch das mainChat Team natürlich gerne weiter.<br><br>
 	echo "</td><td><IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=\"4\" HEIGHT=\"4\"></td><td align=\"left\">";
 	werbung("index_right",$werbung_gruppe);
 	echo "</td></tr><tr><td><IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=\"4\" HEIGHT=\"4\"></td></tr></table>\n";
-	// Box für Login
+	// Box fÃ¼r Login
 	if ($frameset_bleibt_stehen):
 		echo "<FORM ACTION=\"$chat_file\" NAME=\"form1\" METHOD=\"POST\">".
 			"<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n";
@@ -2247,7 +2251,7 @@ Bei Problemen hilft Euch das mainChat Team natürlich gerne weiter.<br><br>
 			mysql_free_result($result);
 		};
 
-		// User online und Räume bestimmen -> merken
+		// User online und RÃ¤ume bestimmen -> merken
 		$query="SELECT o_who,o_name,o_level,r_name,r_status1,r_status2, ".
 			"r_name='$lobby' as lobby ".
 			"FROM online left join raum on o_raum=r_id  ".
@@ -2261,7 +2265,7 @@ Bei Problemen hilft Euch das mainChat Team natürlich gerne weiter.<br><br>
 			$text=str_replace("%onlineanzahl%",$onlineanzahl,$t['default2']).
 				str_replace("%useranzahl%",$useranzahl,$t['default3']);
 
-			// Anzahl der Beiträge im Forum ausgeben
+			// Anzahl der BeitrÃ¤ge im Forum ausgeben
 			if ($communityfeatures && $forumfeatures) 
 			{
 				// Anzahl Themen

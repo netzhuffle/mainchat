@@ -27,14 +27,14 @@ $qquery="";
 if (!$sysmsg)
         $qquery.=" AND c_typ!='S'";
 
-// Optional keine öffentlichen oder versteckten Nachrichten
+// Optional keine Ã¶ffentlichen oder versteckten Nachrichten
 if ($nur_privat)
         $qquery.=" AND c_typ!='H' AND c_typ!='N'";
 
 if ($nur_privat_user)
 		{
 		#echo "nur_privat_user ist gesetzt! $nur_privat_user | $u_id";
-			$txt="<b>$u_nick flüstert an ".$user_nick.":</b>";
+			$txt="<b>$u_nick flÃ¼stert an ".$user_nick.":</b>";
 			$len=strlen($txt);
 			#print $txt;
 			$qquery.=" AND (c_an_user = '$u_id' and c_von_user_id != '0' and ( (c_von_user_id = '$u_id' and left(c_text,$len) = '$txt') or c_von_user_id = '$nur_privat_user') )";
@@ -53,7 +53,7 @@ if ($back==1){
 	mysql_free_result($result);
 
 	// Nachrichten ab o_chat_id (Merker) in Tabelle online ausgeben
-	// Nur Nachrichten im aktuellen Raum anzeigen, außer Typ P oder S und an User adressiert
+	// Nur Nachrichten im aktuellen Raum anzeigen, auÃŸer Typ P oder S und an User adressiert
 	$query="SELECT c_id FROM chat WHERE c_raum='$raum' AND c_id >= $o_chat_id".$qquery;
 
 	unset($rows);
@@ -80,7 +80,7 @@ if ($back==1){
 } elseif ($back>1) {
 
 	// o_chat_id lesen (nicht bei Admins)
-	// Admins dürfen alle Nachrichten sehen
+	// Admins dÃ¼rfen alle Nachrichten sehen
 	if (!$admin) {
 		$query="SELECT HIGH_PRIORITY o_chat_id FROM online WHERE o_id=$o_id";
 		$result=mysql_query($query, $conn);
@@ -94,8 +94,8 @@ if ($back==1){
 		$o_chat_id=0;
 	};
 
-	// $back-Zeilen in Tabelle online ausgeben, höchstens  aber ab o_chat_id
-	// Nur Nachrichten im aktuellen Raum anzeigen, außer Typ P oder S und an User adressiert
+	// $back-Zeilen in Tabelle online ausgeben, hÃ¶chstens  aber ab o_chat_id
+	// Nur Nachrichten im aktuellen Raum anzeigen, auÃŸer Typ P oder S und an User adressiert
 	$query="SELECT c_id FROM chat WHERE c_raum='$raum' AND c_id >= $o_chat_id".
 		$qquery;
 
@@ -124,7 +124,7 @@ if ($back==1){
 	if (isset($rows) && is_array($rows)) sort($rows);
 
 	// Erste Zeile ausrechnen, ab der Nachrichten ausgegeben werden
-	// Chat-Zeilen vor $o_chat_id löschen
+	// Chat-Zeilen vor $o_chat_id lÃ¶schen
 	if (isset($rows))
 	{
 		$zeilen=count($rows);
@@ -146,7 +146,7 @@ if ($back==1){
 } else {
 
 	// Die letzten Nachrichten seit $letzte_id ausgeben
-	// Nur Nachrichten im aktuellen Raum anzeigen, außer Typ P oder S und an User adressiert
+	// Nur Nachrichten im aktuellen Raum anzeigen, auÃŸer Typ P oder S und an User adressiert
 	$query="SELECT c_id FROM chat WHERE c_raum=$raum AND c_id > $letzte_id".
 		$qquery;
 
@@ -174,7 +174,7 @@ if ($back==1){
 };
 
 
-// + für regulären Ausdruck filtern
+// + fÃ¼r regulÃ¤ren Ausdruck filtern
 $nick=str_replace("+","\\+",$u_nick);
 
 
@@ -194,9 +194,9 @@ if (isset($result) && $result){
 	while ($row=mysql_fetch_object($result)){
 
 
-		// Falls ID ignoriert werden soll -> Ausgabe überspringen
+		// Falls ID ignoriert werden soll -> Ausgabe Ã¼berspringen
 		// Falls noch kein Text ausgegeben wurde und es eine Zeile in 
-		// der Mitte oder am Ende einer Serie ist -> Ausgabe überspringen
+		// der Mitte oder am Ende einer Serie ist -> Ausgabe Ã¼berspringen
 
 		// Systemnachrichten, die <<< oder >>> an Stelle 4-16 enthalten herausfiltern
 		$ausgeben = true;
@@ -230,7 +230,7 @@ if (isset($result) && $result){
 			// Wenn das 255. Zeichen ein leerzeichen
 			// ist, dann wird es in der Datenbank nicht
 			// gespeichert, da varchar feld
-			// hier wird es reingehängt, wenn es in sequenz am
+			// hier wird es reingehÃ¤ngt, wenn es in sequenz am
 			// anfang oder in der mitte, und der text nur 254
 			// zeichen breit ist
 			if ( (strlen($row->c_text)==254) && (($row->c_br=="erste") || ($row->c_br=="mitte")) )
@@ -247,7 +247,7 @@ if (isset($result) && $result){
 			$text_ausgegeben=TRUE;
 
 
-			// Smilies ausgeben oder unterdrücken
+			// Smilies ausgeben oder unterdrÃ¼cken
 			if ($u_smilie=="N") {
 				$c_text=str_replace("<SMIL","<small>&lt;SMILIE&gt;</small><!--",$c_text);
 				$c_text=str_replace("SMIL>","-->",$c_text);
@@ -257,7 +257,7 @@ if (isset($result) && $result){
 			}
 
 
-			// bugfix: gegen große Is... wg. verwechslung mit kleinen Ls ...
+			// bugfix: gegen groÃŸe Is... wg. verwechslung mit kleinen Ls ...
 			// $row->c_von_user=str_replace("I","i",$row->c_von_user);
 
 			if ($chat_status_klein) {
@@ -269,14 +269,14 @@ if (isset($result) && $result){
 			}
 
 
-			// In Zeilen mit c_br=letzte das Zeilenende/-umbruch ergänzen
+			// In Zeilen mit c_br=letzte das Zeilenende/-umbruch ergÃ¤nzen
 			if ($row->c_br=="erste" || $row->c_br=="mitte") {
 				$br="";
 			} else {
 				$br="<BR>\n";
 			};
 
-			// im Text die Session-IDs in den Platzhalter <ID> einfügen
+			// im Text die Session-IDs in den Platzhalter <ID> einfÃ¼gen
 			if ($id) $c_text=str_replace("<ID>",$id,$c_text);
 
 			// alternativ, falls am ende der Zeile, und das "<ID>" auf 2 Zeilen verteilt wird
@@ -301,7 +301,7 @@ if (isset($result) && $result){
 				}
 			}
 			
-			// im Text die HTTP_HOST in den Platzhalter <HTTP_HOST> einfügen
+			// im Text die HTTP_HOST in den Platzhalter <HTTP_HOST> einfÃ¼gen
 			$c_text=str_replace("<HTTP_HOST>",$http_host,$c_text);
 
 			// Verschienen Nachrichtenarten unterscheiden und Nachricht ausgeben
@@ -343,7 +343,7 @@ if (isset($result) && $result){
 				case "P":
 					// P: Privatnachricht an einen User
 
-					// Falls dies eine Folgezeile ist, Von-Text unterdrücken
+					// Falls dies eine Folgezeile ist, Von-Text unterdrÃ¼cken
 
 					if (strlen($row->c_von_user)!=0):
 						if ($u_farbe_priv!="-") $row->c_farbe="#$u_farbe_priv";
@@ -384,7 +384,7 @@ if (isset($result) && $result){
 						$c_text=str_replace("-->","</b>",$c_text);
 					}
 					if ($row->c_von_user_id!=0):
-						// eigene Farbe für noise, falls gesetzt.
+						// eigene Farbe fÃ¼r noise, falls gesetzt.
 						if ($u_farbe_noise!="-") $row->c_farbe="#$u_farbe_noise";
 						if (!$erste_zeile):
 							$zanfang="";
@@ -415,7 +415,7 @@ if (isset($result) && $result){
 					// eigene Farbe, falls gesetzt
 					if ($row->c_von_user_id!=$u_id && $u_farbe_alle!="-") $row->c_farbe=$u_farbe_alle;
 
-					// eigene Farbe für nachricht an Privat, falls gesetzt.
+					// eigene Farbe fÃ¼r nachricht an Privat, falls gesetzt.
 					if (preg_match("/\[.*&nbsp;$nick\]/i",$c_text) && $u_farbe_priv!="-") $row->c_farbe=$u_farbe_priv;
 
 					// Nur Nick in Userfarbe oder ganze Zeile
@@ -451,8 +451,8 @@ if (isset($result) && $result){
 			echo $zanfang.$c_text.$zende;
 
 			// Ist aktuelle Zeile die erste Zeile oder eine Folgezeile einer Serie ?
-			// Eine Serie steht immer am Stück in der DB (schreiben mit Lock Table)
-			// Falls br gesetzt ist, ist nächste Zeile eine neue Zeile (erste zeile einer Serie)
+			// Eine Serie steht immer am StÃ¼ck in der DB (schreiben mit Lock Table)
+			// Falls br gesetzt ist, ist nÃ¤chste Zeile eine neue Zeile (erste zeile einer Serie)
 			if ($br) {
 				$erste_zeile=TRUE;
 			} else {

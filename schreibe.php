@@ -35,29 +35,29 @@ if (strlen($u_id)>0){
 		$chat_back=$user_chat_back;
 	}
 
-	// sonderfix für das rotieren von text und text2 für ohne javascript...
+	// sonderfix fÃ¼r das rotieren von text und text2 fÃ¼r ohne javascript...
 	if (isset($text2) && strlen($text2)!=0) $text=$text2;
 
-	// Falls private Nachricht, Nicknamen ergänzen
+	// Falls private Nachricht, Nicknamen ergÃ¤nzen
 	if (isset($privat) && strlen($privat)>2) $text="/msgpriv $privat ".$text;
 
 	// Initialisierung der Fehlerbehandlung
 	$fehler=FALSE;
 
 
-        // Falls $text eine Eingabezeile enthält -> verarbeiten
+        // Falls $text eine Eingabezeile enthÃ¤lt -> verarbeiten
 
-        // Prüfung der Eingabe bei Admin und Moderator auf 4 fache Anzahl der Normalen eingabe
+        // PrÃ¼fung der Eingabe bei Admin und Moderator auf 4 fache Anzahl der Normalen eingabe
 	if ((($admin) || ($u_level == "M")) && (strlen($text)!=0) && (strlen($text) < (5 * $chat_max_eingabe)))
 	{
 // debug
 // system_msg("",0,1222,$system_farbe,"Spamschutz deaktiv"); 	
         }
-	// Normale Prüfung für User
+	// Normale PrÃ¼fung fÃ¼r User
         else if (strlen($text)!=0 AND strlen($text)<$chat_max_eingabe)
         {
 
-		// Spamschutz prüfen, falls kein Admin und kein Moderator
+		// Spamschutz prÃ¼fen, falls kein Admin und kein Moderator
 		if ((!$admin) && ($u_level <> "M"))
 		{
 
@@ -72,7 +72,7 @@ if (strlen($u_id)>0){
 				$temp["mon"],$temp["mday"],$temp["year"]);
 
 			// Array-Keys auf die richtige Zeit umrechnen
-			// Alle Einträge im Array löschen, die älter als $chat_max_zeit Sekunden sind
+			// Alle EintrÃ¤ge im Array lÃ¶schen, die Ã¤lter als $chat_max_zeit Sekunden sind
 			unset($neu_spam_zeilen);
 			unset($neu_spam_byte);
 			$zeitdifferenz=$aktuelle_zeit-$o_spam_zeit;
@@ -100,7 +100,7 @@ if (strlen($u_id)>0){
 			// foreach($neu_spam_byte as $key => $value)
 			//	system_msg("",0,$u_id,$system_farbe,"#DEBUG# SPZ:$o_spam_zeit, AZ:$aktuelle_zeit, K:$key, Z:".$neu_spam_zeilen[$key].", B:".$neu_spam_byte[$key]);
 
-			// Prüfen wieviel Byte ind wieviel Zeilen in den letzten $chat_max_zeit Sekunden geschrieben wurde 
+			// PrÃ¼fen wieviel Byte ind wieviel Zeilen in den letzten $chat_max_zeit Sekunden geschrieben wurde 
 			if ((array_sum($neu_spam_zeilen)>$chat_max_zeilen) ||
 				(array_sum($neu_spam_byte)>$chat_max_byte)):
 				$fehler=TRUE;

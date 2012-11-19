@@ -10,13 +10,13 @@ id_lese($id);
 
 $fenster=str_replace("+","",$u_nick);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 
 
@@ -67,7 +67,7 @@ echo $body_tag;
 aktualisiere_online($u_id,$o_raum);
 
 
-// Browser prüfen
+// Browser prÃ¼fen
 if (ist_netscape()) {
         $eingabe_breite=30;
 } else {
@@ -78,12 +78,12 @@ if (ist_netscape()) {
 if ($u_id && $communityfeatures) {
 
 
-	// Menü als erstes ausgeben
-	$box = $ft0."Menü Freunde".$ft1;
+	// MenÃ¼ als erstes ausgeben
+	$box = $ft0."MenÃ¼ Freunde".$ft1;
 	$text = "<A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=\">Meine Freunde listen</A>\n".
-		"| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=neu\">Neuen Freund hinzufügen</A>\n".
+		"| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=neu\">Neuen Freund hinzufÃ¼gen</A>\n".
 		"| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=bestaetigen\">Freundschaften bestaetigen</A>\n";
-if ($admin) $text.="| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=admins\">Alle Admins als Freund hinzufügen</A>\n";
+if ($admin) $text.="| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=admins\">Alle Admins als Freund hinzufÃ¼gen</A>\n";
 	$text.=	"| <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=community#freunde\">Hilfe</A>\n";
 
 	show_box2 ($box,$text,"100%");
@@ -114,7 +114,7 @@ if ($admin) $text.="| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=a
 			$result=mysql_query($query,$conn);
 			if ($result && mysql_num_rows($result)==1) 
 			{
-				// f_id ist zahl und gehört zu dem User, also ist update möglich
+				// f_id ist zahl und gehÃ¶rt zu dem User, also ist update mÃ¶glich
 				$back=edit_freund($f_id,$f_text);
 				echo "<P>$back</P>";
 				zeige_freunde("normal","");
@@ -125,7 +125,7 @@ if ($admin) $text.="| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=a
 
 
 	case "neu":
-		// Formular für neuen Freund ausgeben
+		// Formular fÃ¼r neuen Freund ausgeben
 		if (!isset($neuer_freund)) 
 		{
 			$neuer_freund['u_nick'] = "";
@@ -135,7 +135,7 @@ if ($admin) $text.="| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=a
 		break;
 
 	case "neu2":
-		// Neuer Freund, 2. Schritt: Nick Prüfen
+		// Neuer Freund, 2. Schritt: Nick PrÃ¼fen
                 $neuer_freund['u_nick']=htmlspecialchars(AddSlashes($neuer_freund['u_nick']));
 		$query="SELECT u_id, u_level FROM user WHERE u_nick = '$neuer_freund[u_nick]'";
 		$result=mysql_query($query,$conn);
@@ -185,7 +185,7 @@ if ($admin) $text.="| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=a
 		break;
 
 	case "admins":
-		// Alle Admins (Status C und S) als Freund hinzufügen
+		// Alle Admins (Status C und S) als Freund hinzufÃ¼gen
 		$query="SELECT u_id,u_nick,u_level FROM user WHERE u_level='S' OR u_level='C'";
 		$result=mysql_query($query,$conn);
 		if ($result && mysql_num_rows($result)>0) {
@@ -202,35 +202,35 @@ if ($admin) $text.="| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=a
 		break;
 
 	case "bearbeite":
-		// Freund löschen
+		// Freund lÃ¶schen
 
 		#print "los=$los";
-	if ($los == "LÖSCHEN")
+	if ($los == "LÃ·SCHEN")
 		
 	{	
 		if (isset($f_freundid) && is_array($f_freundid)) {
-			// Mehrere Freunde löschen
+			// Mehrere Freunde lÃ¶schen
 			foreach($f_freundid as $key => $loesche_id){
 				loesche_freund($loesche_id,$u_id);
 			}
 
 		} else {
-			// Einen Freund löschen
+			// Einen Freund lÃ¶schen
 			if (isset($f_freundid) && $f_freundid) loesche_freund($f_freundid,$u_id);
 		}
 	}
 
-	if ($los == "BESTÄTIGEN")
+	if ($los == "BESTÃ„TIGEN")
 	{
 		if (isset($f_freundid) && is_array($f_freundid)) {
-			// Mehrere Freunde bestätigen
+			// Mehrere Freunde bestÃ¤tigen
 			foreach($f_freundid as $key => $bearbeite_id){
 			#print "bearbeite_id: ".$bearbeite_id." u_id = $u_id";
 				bestaetige_freund($bearbeite_id,$u_id);
 			}
 
 		} else {
-			// Einen Freund bestätigen
+			// Einen Freund bestÃ¤tigen
 			if (isset($f_freundid) && $f_freundid) bestaetige_freund($f_freundid,$u_id);
 		}
 	}

@@ -70,7 +70,7 @@ if (strlen($newcolor)<8 && $newcolor>1) {
 ?>
     window.close();
     } else {
-        alert('Bitte w‰hlen Sie die Farbe vorher aus!\nHierzu einfach auf die Farbselectbox klicken.');
+        alert('Bitte w√§hlen Sie die Farbe vorher aus!\nHierzu einfach auf die Farbselectbox klicken.');
     }
 }
 </SCRIPT>
@@ -98,7 +98,7 @@ aktualisiere_online($u_id,$o_raum);
 if ($u_id && $communityfeatures) {
 
 
-	print "<center><b>Bitte w‰hlen Sie die Farbe aus:</b><BR>".
+	print "<center><b>Bitte w√§hlen Sie die Farbe aus:</b><BR>".
 		"<a href=\"home_farben.php?http_host=$http_host&id=$id&mit_grafik=$mit_grafik&feld=$feld&bg=$bg&oldcolor=".urlencode($oldcolor)."&nix\">".
 		"<img src=\"pics/colors2.png\" ismap border=0></a>\n";
 	print "<br clear=all><img src=\"home_makecolor.php?x=135&y=25&text=neue%20Farbe&";
@@ -151,14 +151,14 @@ if ($u_id && $communityfeatures) {
 			"<INPUT TYPE=\"SUBMIT\" NAME=\"GO\" VALUE=\"GO\">$f2</TD></TR>\n".
 			"<TR><TD>".$f1."oder transparent:".$f2."</TD>".
 			"<TD>$f1<B>[<A href=\"home_farben.php?http_host=$http_host&id=$id&mit_grafik=$mit_grafik&feld=$feld&bg=$bg&oldcolor=0&nix\">".
-			"w‰hlen</A>]</B>$f2</TD></TR></TABLE>\n";
+			"w√§hlen</A>]</B>$f2</TD></TR></TABLE>\n";
 
 	} else {
 		echo "<BR>";
 	}
 
 	echo "<BR>".$f1.
-		"<B>[<a href=\"javascript:colorsave();\">Farbe ¸bernehmen</a>]\n".
+		"<B>[<a href=\"javascript:colorsave();\">Farbe √ºbernehmen</a>]\n".
 		"[<a href=\"home_farben.php?http_host=$http_host&id=$id&mit_grafik=$mit_grafik&feld=$feld&bg=$bg&oldcolor=$oldcolor&$oldcolor&nix\">Reset</a>]\n".
 		"[<a href=javascript:window.close();>nicht&nbsp;speichern</a>]</B>".
 		$f2."</CENTER>\n";

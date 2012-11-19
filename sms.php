@@ -74,10 +74,10 @@ function PinvergabeFormular()
 global $f,$http_host,$id,$chat;
 $box="PIN vergeben";
 
-$text.="Damit Sie SMS aus dem $chat versenden können, muß zunächste einmal Ihre Handynummer geprüft werden.";
-$text.="Hierzu bekommen Sie eine PIN aufs Handy geschickt. Sobald Sie die PIN korrekt eingegeben haben, dürfen Sie aufladen.";
+$text.="Damit Sie SMS aus dem $chat versenden kÃ¶nnen, muss zunÃ¤chste einmal Ihre Handynummer geprÃ¼ft werden.";
+$text.="Hierzu bekommen Sie eine PIN aufs Handy geschickt. Sobald Sie die PIN korrekt eingegeben haben, dÃ¼rfen Sie aufladen.";
 $text.="<BR>Hier nochmal Ihre Handynummer: <b>$f[ui_handy]</b><BR>";
-$text.="Sollte die Nummer falsch sein, so können Sie diese <a href=\"profil.php?id=$id&http_host=$httphost&aktion=aendern\">hier</a> korrigieren</a>";
+$text.="Sollte die Nummer falsch sein, so kÃ¶nnen Sie diese <a href=\"profil.php?id=$id&http_host=$httphost&aktion=aendern\">hier</a> korrigieren</a>";
 $text.="<form action=\"sms.php\" method=post><input type=hidden name=\"id\" value=\"$id\"><input type=hidden name=\"http_host\" value=\"$http_host\">";
 $text.="<input type=hidden name=\"aktion\" value=\"pinsenden\"><input type=submit value=\"PIN senden\">";
 show_box2 ($box,$text,"100%");
@@ -126,7 +126,7 @@ if (mysql_numrows($result) > 0)
 		}
 	}
 	$atext.="</table>\n";
-	$box="SMS History (Ihre fünf zuletzt versandten SMS)";
+	$box="SMS History (Ihre fÃ¼nf zuletzt versandten SMS)";
 	show_box2 ($box,$atext,"100%");
 	}
 @mysql_free_result($result);
@@ -137,7 +137,7 @@ function PINErrorFormular()
 global $a,$id,$http_host;
 	$box = $ft0."Fehler!".$ft1;
 	unset($text);
-	$text="Sie haben bei der PIN-Eingabe mehr als 3 Fehler in den letzten 24h gemacht! Sie müssen nun 24h warten, dann können Sie sich eine neue PIN aufs Handy schicken lassen!";
+	$text="Sie haben bei der PIN-Eingabe mehr als 3 Fehler in den letzten 24h gemacht! Sie mÃ¼ssen nun 24h warten, dann kÃ¶nnen Sie sich eine neue PIN aufs Handy schicken lassen!";
 	show_box2 ($box,$text,"100%");
 	echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
 }
@@ -158,14 +158,14 @@ function SMSEmpfangFormular()
 		$seln="";
 	}
 	$text ="<form action='sms.php' name='ok'>";
-	$text.= "Ich möchte SMS von anderen Usern aus dem $chat empfangen: ";
+	$text.= "Ich mÃ¶chte SMS von anderen Usern aus dem $chat empfangen: ";
 	$text.= "<select name='u_sms_ok'>\n";
 	$text.= "<option value='J' $selj>Ja</option>\n";
 	$text.= "<option value='N' $seln>Nein</option>\n";
 	$text.= "</select>\n";
 	$text.= "<input type='hidden' name='http_host' value='$http_host'>\n";
 	$text.= "<input type='hidden' name='id' value='$id'>\n";
-	$text.= "<input type=submit name='aktion' value='Änderungen speichern'><BR>";
+	$text.= "<input type=submit name='aktion' value='Ã„nderungen speichern'><BR>";
 	$text.= "</form>\n";
 	$text.= "Dein SMS-Guthaben: $a[u_sms_guthaben] SMS<BR>";
 	show_box2 ($box,$text,"100%");
@@ -175,15 +175,15 @@ function SMSAnleitung ()
 	global $sms,$dbase,$ft0,$ft1;
 	$box = $ft0."SMS-Anleitung".$ft1;
 $text="Kurze Anleitung zu den SMS-Features:<BR><BR>
-Nachdem Sie Ihr SMS Guthaben aufgeladen haben, können Sie mit dem Befehl:<BR>
+Nachdem Sie Ihr SMS Guthaben aufgeladen haben, kÃ¶nnen Sie mit dem Befehl:<BR>
 <B>/sms &lt;nickname&gt; &lt;text&gt;</b> - eine SMS an einen anderen User im Chat schicken.
 <BR>";
-if ($dbase=="mainchat") { $text.="<BR>Sie können sogar dem User aus dem Chat wieder per SMS antworten:<BR>
+if ($dbase=="mainchat") { $text.="<BR>Sie kÃ¶nnen sogar dem User aus dem Chat wieder per SMS antworten:<BR>
 Schicken Sie hierzu eine SMS mit dem Text <B>MC</B> &lt;nickname&gt &lt;Ihre Nachricht&gt; an die Nummer <b>86677</b> (0,19EUR/SMS)<BR>";
 }
 $text.="
 <BR>
-Auch können Sie sich per SMS über neue Mails, den Login von Freunden und Antwort
+Auch kÃ¶nnen Sie sich per SMS Ã¼ber neue Mails, den Login von Freunden und Antwort
 auf eigene Postings im Forum benachrichtigen lassen.<BR>
 <BR>
 ";
@@ -194,9 +194,9 @@ function AufladeFormular()
 {
 GLOBAL $f,$userdata,$sms,$chat,$u_id, $farbe_tabelle_zeile1,$farbe_tabelle_zeile2,$http_host,$u_nick;
 	$box = $ft0."Guthaben aufladen".$ft1;
-	$text.= "Wenn Sie SMS aus dem $chat verschicken möchten, so müssen Sie zuerst ein SMS Guthaben kaufen.<BR>";
+	$text.= "Wenn Sie SMS aus dem $chat verschicken mÃ¶chten, so mÃ¼ssen Sie zuerst ein SMS Guthaben kaufen.<BR>";
 	$text.= "Dies funktioniert bequem im Lastschriftverfahren von Ihrem Bankkonto.";
-	$text.= "<BR>Jede SMS kostet Sie nur <B>$sms[preis] Cent</B>. <BR>Sie können die SMS in verschiedenen Staffelungen kaufen.";
+	$text.= "<BR>Jede SMS kostet Sie nur <B>$sms[preis] Cent</B>. <BR>Sie kÃ¶nnen die SMS in verschiedenen Staffelungen kaufen.";
 $handynr=$userdata['u_sms_extra'];
 $handynr=unserialize($handynr);
 $handynr=$handynr['handynr'];
@@ -212,7 +212,7 @@ function pruefe()
 {
 alertmsg="";
 pos=document.forms["sms"].trx_amount.selectedIndex;
-if (pos == "0"){ alertmsg = "Bitte eine Betrag > 0 wählen";}
+if (pos == "0"){ alertmsg = "Bitte eine Betrag > 0 wÃ¤hlen";}
 
     if (alertmsg == "") {
         return true;
@@ -246,7 +246,7 @@ if (pos == "0"){ alertmsg = "Bitte eine Betrag > 0 wählen";}
 <input type=hidden name="trx_currency" value="EUR">
 <input type=hidden name="trx_paymenttyp" value="elv">
 <select name="trx_amount" onChange=CalcSMS()>
-<option value="000">bitte wählen
+<option value="000">bitte wÃ¤hlen
 <option value="300">3.00 Euro
 <option value="500">5.00 Euro
 <option value="1000">10.00 Euro
@@ -254,7 +254,7 @@ if (pos == "0"){ alertmsg = "Bitte eine Betrag > 0 wählen";}
 <option value="2000">20.00 Euro
 <option value="2500">25.00 Euro
 </select>
-<tr><td>Dafür bekommen Sie</td><td><input name="smsanz" readonly size=5> SMS</td></tr>
+<tr><td>DafÃ¼r bekommen Sie</td><td><input name="smsanz" readonly size=5> SMS</td></tr>
 <TR><TD COLSPAN=2>
 <input type=submit value="Jetzt SMS Guthaben aufladen">
 </TD></TR>
@@ -280,7 +280,7 @@ echo $body_tag;
 aktualisiere_online($u_id,$o_raum);
 
 
-// Browser prüfen
+// Browser prÃ¼fen
 if (ist_netscape()) {
         $eingabe_breite=45;
 } else {
@@ -306,8 +306,8 @@ if ($u_id && $communityfeatures) {
 	erzwingeNeuePin();
 
 
-	// Menü als erstes ausgeben
-	$box = $ft0."Menü SMS".$ft1;
+	// MenÃ¼ als erstes ausgeben
+	$box = $ft0."MenÃ¼ SMS".$ft1;
 	$text = "<A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=community#sms\">Hilfe</A>\n";
 	show_box2 ($box,$text,"100%");
 	echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
@@ -317,7 +317,7 @@ if ($u_id && $communityfeatures) {
 	if (!CheckHandynummerVorhanden()) {
 
 		$box = "Fehler!";
-                $text = "<br>Sie habe in Ihrem <a href=\"profil.php?id=$id&http_host=$httphost&aktion=aendern\">Profil</a> keine Handynummer hinterlegt. Um die SMS-Funktionen nutzen zu können, müssen Sie <a href=\"profil.php?id=$id&http_host=$httphost&aktion=aendern\">hier</a> Ihre Handynummer eingeben!";
+                $text = "<br>Sie habe in Ihrem <a href=\"profil.php?id=$id&http_host=$httphost&aktion=aendern\">Profil</a> keine Handynummer hinterlegt. Um die SMS-Funktionen nutzen zu kÃ¶nnen, mÃ¼ssen Sie <a href=\"profil.php?id=$id&http_host=$httphost&aktion=aendern\">hier</a> Ihre Handynummer eingeben!";
                 show_box2 ($box,$text,"100%");
 
 	} else {
@@ -460,21 +460,21 @@ $errmsg="";
         // SMS Payment-Gateway eingetragen?
         if ((!isset($sms['ipayment'])) || (!$sms['ipayment'])) {
 		
-		$box="Keine Aufladung möglich!";
-		$atext='<BR>Es ist keine Aufladung Ihres Guthabens möglich.';
+		$box="Keine Aufladung mÃ¶glich!";
+		$atext='<BR>Es ist keine Aufladung Ihres Guthabens mÃ¶glich.';
 		show_box2 ($box,$atext,"100%");
 
 	} elseif ($u_punkte_gesamt < $sms[punkte])  {
 
 		$box="Fehler!";
-		$atext='<BR>Um Ihr Guthaben per Lastschrift aufladen zu können, brauchen Sie mindestens '.$sms[punkte].' Chat-Punkte. Sie haben aber nur '.$u_punkte_gesamt.' Punkte';
+		$atext='<BR>Um Ihr Guthaben per Lastschrift aufladen zu kÃ¶nnen, brauchen Sie mindestens '.$sms[punkte].' Chat-Punkte. Sie haben aber nur '.$u_punkte_gesamt.' Punkte';
 		show_box2 ($box,$atext,"100%");
 
 	} else {
 
 		$u=unserialize($userdata['u_sms_extra']);
 
-		// User bekommt eine PIN wenn, a) noch eine PIN vergeben oder b) PIN älter 24h und handynrok==false
+		// User bekommt eine PIN wenn, a) noch eine PIN vergeben oder b) PIN Ã¤lter 24h und handynrok==false
 		if ( ($userdata['u_sms_extra'] == "") || ($u['pintime']+86400 < date("U") && $u['handynrok']==false )) { PinVergabeFormular($message);}
 
 		// Wenn PIN gesetzt UND PIN-Vergabe in den letzten 24h UND PINVERSUCHE <= 4 UND HANDYNUMMER == FALSCH dann PinEingabeFormular

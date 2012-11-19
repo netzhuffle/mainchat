@@ -11,13 +11,13 @@ id_lese($id);
 // Fenstername
 $fenster=str_replace("+","",$u_nick);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 
 // Kopf ausgeben
@@ -67,7 +67,7 @@ echo $body_tag;
 aktualisiere_online($u_id,$o_raum);
 
 
-// Browser prüfen
+// Browser prÃ¼fen
 if (ist_netscape()) {
         $eingabe_breite=30;
 } else {
@@ -78,10 +78,10 @@ if (ist_netscape()) {
 if ($admin && $u_id && $communityfeatures) {
 
 
-	// Menü als erstes ausgeben
-	$box = $ft0."Menü Blacklist".$ft1;
+	// MenÃ¼ als erstes ausgeben
+	$box = $ft0."MenÃ¼ Blacklist".$ft1;
 	$text = "<A HREF=\"blacklist.php?http_host=$http_host&id=$id&aktion=\">Blacklist zeigen</A>\n".
-		"| <A HREF=\"blacklist.php?http_host=$http_host&id=$id&aktion=neu\">Neuen Eintrag hinzufügen</A>\n".
+		"| <A HREF=\"blacklist.php?http_host=$http_host&id=$id&aktion=neu\">Neuen Eintrag hinzufÃ¼gen</A>\n".
 		"| <A HREF=\"sperre.php?http_host=$http_host&id=$id\">Zugangssperren</A>\n";
 
 	show_box2 ($box,$text,"100%");
@@ -94,12 +94,12 @@ if ($admin && $u_id && $communityfeatures) {
 	switch($aktion) {
 
 	case "neu":
-		// Formular für neuen Eintrag ausgeben
+		// Formular fÃ¼r neuen Eintrag ausgeben
 		formular_neuer_blacklist($neuer_blacklist);
 		break;
 
 	case "neu2":
-		// Neuer Eintrag, 2. Schritt: Nick Prüfen
+		// Neuer Eintrag, 2. Schritt: Nick PrÃ¼fen
 		$neuer_blacklist['u_nick']=AddSlashes($neuer_blacklist['u_nick']); // sec
 		$query="SELECT u_id FROM user WHERE u_nick = '$neuer_blacklist[u_nick]'";
 		$result=mysql_query($query,$conn);
@@ -121,17 +121,17 @@ if ($admin && $u_id && $communityfeatures) {
 		break;
 
 	case "loesche":
-		// Eintrag löschen
+		// Eintrag lÃ¶schen
 
 
 		if (isset($f_blacklistid) && is_array($f_blacklistid)) {
-			// Mehrere Einträge löschen
+			// Mehrere EintrÃ¤ge lÃ¶schen
 			foreach($f_blacklistid as $key => $loesche_id){
 				loesche_blacklist($loesche_id);
 			}
 
 		} else {
-			// Einen Eintrag löschen
+			// Einen Eintrag lÃ¶schen
 			if (isset($f_blacklistid)) loesche_blacklist($f_blacklistid);
 		}
 

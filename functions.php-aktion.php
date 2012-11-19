@@ -16,7 +16,7 @@ function zeige_aktionen($aktion) {
 			$query="SELECT * from aktion ".
 				"WHERE a_user=$u_id ";
 			$button="EINTRAGEN";
-			$titel1="Für";
+			$titel1="FÃ¼r";
 			$titel2="sind folgende Aktionen eingetragen";
 	};
 
@@ -41,7 +41,7 @@ function zeige_aktionen($aktion) {
 	$i=0;
 	$bgcolor=$farbe_tabelle_zeile1;
 
-	// Alle möglichen a_wann in Array lesen
+	// Alle mÃ¶glichen a_wann in Array lesen
 	$query="SHOW COLUMNS FROM aktion like 'a_wann'";
 	$result=mysql_query($query, $conn);
 	if ($result && mysql_num_rows($result)!=0) {
@@ -50,7 +50,7 @@ function zeige_aktionen($aktion) {
 	};
 	$anzahl_spalten=count($a_wann);
 
-	// Alle möglichen a_wie in Array lesen
+	// Alle mÃ¶glichen a_wie in Array lesen
 	$query="SHOW COLUMNS FROM aktion like 'a_wie'";
 	$result=mysql_query($query, $conn);
 	if ($result && mysql_num_rows($result)!=0) {
@@ -65,7 +65,7 @@ function zeige_aktionen($aktion) {
 	// SMS merken
 	$sms=$a_wie[4];
 
-	// Wenn keine SMS angeboten werden, dann machen auch die Einstellungen diesbezüglich keinen Sinn
+	// Wenn keine SMS angeboten werden, dann machen auch die Einstellungen diesbezÃ¼glich keinen Sinn
 	if (!$smsfeatures)
 	{
 		unset($a_wie[4]);
@@ -77,7 +77,7 @@ function zeige_aktionen($aktion) {
 		unset($def_was[2]);
 	}
 
-	// Spezial Offline-Nachrichten (OLM löschen)
+	// Spezial Offline-Nachrichten (OLM lÃ¶schen)
 	$offline_wie=$a_wie;
 	for($i=0;$i<$anzahl_wie;$i++){
 		if ($offline_wie[$i]==$onlinemessage) unset($offline_wie[$i]);
@@ -162,7 +162,7 @@ function eintrag_aktionen($aktion_datensatz) {
 
 	global $def_was,$dbase,$u_id,$u_nick,$conn;
 
-	// Alle möglichen a_wann in Array lesen
+	// Alle mÃ¶glichen a_wann in Array lesen
 	$query="SHOW COLUMNS FROM aktion like 'a_wann'";
 	$result=mysql_query($query, $conn);
 	if ($result && mysql_num_rows($result)!=0) {

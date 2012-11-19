@@ -26,8 +26,8 @@ $nummer_ok=true;
 
 $netze=array("0151", "0160", "0170", "0171", "0175", "0152","0162", "0172", "0173", "0174", "0155", "0157","0163", "0177", "0178", "0159", "0176","0179", "0150","0156");
 
-if (! in_array($num[netz],$netze)) { $nummer_ok=false;} // Prüfung ob Netz bekannt
-if (! preg_match("/^([0-9]{7,12})$/i",$num[nummer])) { $nummer_ok=false;} // Prüfung ob Mobilnummer mindests 7 max 10 Ziffern
+if (! in_array($num[netz],$netze)) { $nummer_ok=false;} // PrÃ¼fung ob Netz bekannt
+if (! preg_match("/^([0-9]{7,12})$/i",$num[nummer])) { $nummer_ok=false;} // PrÃ¼fung ob Mobilnummer mindests 7 max 10 Ziffern
 if ($num[nummer] == "") { $nummer_ok=false;}
 return($nummer_ok);
 }

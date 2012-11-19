@@ -57,13 +57,13 @@ if (strlen($u_id)!=0):
 // Fenstername
 $fenster=str_replace("+","",$u_nick);
 $fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("Ö","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster=str_replace("Ã¤","",$fenster);
+$fenster=str_replace("Ã¶","",$fenster);
+$fenster=str_replace("Ã¼","",$fenster);
+$fenster=str_replace("Ã„","",$fenster);
+$fenster=str_replace("Ã·","",$fenster);
+$fenster=str_replace("Ãœ","",$fenster);
+$fenster=str_replace("ÃŸ","",$fenster);
 
 // Ggf Farbe aktualisieren
 if (isset($farbe) && strlen($farbe)>0):
@@ -94,7 +94,7 @@ if (isset($farbe) && strlen($farbe)>0):
 	unset($f['u_farbe']);
 endif;
 
-// Benutzer darf Passwort nicht ändern (optional)
+// Benutzer darf Passwort nicht Ã¤ndern (optional)
 if (!$einstellungen_aendern):
 	unset($f['u_passwort']);
 endif;
@@ -171,7 +171,7 @@ case "andereadminmail":
 	echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
 	echo "<TR><TD COLSPAN=2>";
 	echo "<A HREF=\"javascript:window.close();\">".
-    	     "<IMG SRC=\"pics/button-x.gif\" ALT=\"schließen\" ".
+    	     "<IMG SRC=\"pics/button-x.gif\" ALT=\"schlieÃŸen\" ".
 	     "WIDTH=15 HEIGHT=13 ALIGN=\"RIGHT\" BORDER=0></A>\n";
 	echo "<FONT SIZE=-1 COLOR=$farbe_text><B>$box</B></FONT>\n";
 	echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
@@ -188,9 +188,9 @@ case "andereadminmail":
 		
 	echo "<TR><TD COLSPAN=2>".
 	     $f1.
-	     "Sie können hier Ihren Username und die Interne E-Mailadresse abändern.<br><br>".
-	     "Nach dem Ändern werden Sie automatisch ausgeloggt, und ein neues Passwort an ".
-	     "Ihre neue E-Mailadresse gesendet. Mit dem neuen Passwort können Sie sich sofort ".
+	     "Sie kÃ¶nnen hier Ihren Username und die Interne E-Mailadresse abÃ¤ndern.<br><br>".
+	     "Nach dem Ã„ndern werden Sie automatisch ausgeloggt, und ein neues Passwort an ".
+	     "Ihre neue E-Mailadresse gesendet. Mit dem neuen Passwort kÃ¶nnen Sie sich sofort ".
 	     "einloggen und ggf. Ihr Passwort wieder anpassen.<br><br>".
 	     "\n".$f2.
 	     "</TD></TR>\n";
@@ -219,7 +219,7 @@ case "andereadminmail":
 
 																				
 	echo "</TABLE>\n";
-	echo $f1."<BR><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Ändern!\">".$f2;
+	echo $f1."<BR><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Ã„ndern!\">".$f2;
 	echo "</FORM>\n";
 	echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
 																																								 
@@ -228,7 +228,7 @@ break;
 
 case "edit2":
 
-	if (($eingabe=="Ändern!") && ($u_id==$f['u_id']) && ($einstellungen_aendern))
+	if (($eingabe=="Ã„ndern!") && ($u_id==$f['u_id']) && ($einstellungen_aendern))
 	{
 		
 		$query="SELECT user.* FROM user WHERE u_id=$u_id ";
@@ -243,7 +243,7 @@ case "edit2":
 
 			unset ($p);
 			
-			// Länge des Feldes und Format Mailadresse werden weiter oben geprüft
+			// LÃ¤nge des Feldes und Format Mailadresse werden weiter oben geprÃ¼ft
 			$p['u_id'] = $u_id;
 			$p['u_name'] = addslashes($f['u_name']);	
 			$p['u_adminemail'] = $f['u_adminemail'];	
@@ -252,11 +252,11 @@ case "edit2":
                                                 
 			$ok=mail($p['u_adminemail'],$t['chat_msg112'],str_replace("%passwort%",$p['u_passwort'],$t['chat_msg113']),"From: $webmaster ($chat)");
 	                if ($ok) {
-				echo "Die Änderungen wurden gespeichert und Sie wurden ausgeloggt. Ihr neues Passwort wurde an Ihre neue E-Mailadresse gesendet.";	                        
+				echo "Die Ã„nderungen wurden gespeichert und Sie wurden ausgeloggt. Ihr neues Passwort wurde an Ihre neue E-Mailadresse gesendet.";	                        
 				echo $f1.$t['chat_msg111'].$f2;
 				schreibe_db("user",$p,$p['u_id'],"u_id");
 	                } else {
-	                        echo $f1."<P><B>Fehler: Die Mail konnte nicht verschickt werden. Es wurden keine Einstellungen geändert!</B></P>".$f2;
+	                        echo $f1."<P><B>Fehler: Die Mail konnte nicht verschickt werden. Es wurden keine Einstellungen geÃ¤ndert!</B></P>".$f2;
 	                };
 
 			$user=$row->u_nick;
@@ -266,7 +266,7 @@ case "edit2":
 		        if ($result && mysql_num_rows($result)>0){
 	        	        $row=mysql_fetch_object($result);
 		                verlasse_chat($f['u_id'],$row->o_name,$row->o_raum);
-	        	        logout($row->o_id,$f['u_id'],"edit->einständerung");
+	        	        logout($row->o_id,$f['u_id'],"edit->einstÃ¤nderung");
 	                	mysql_free_result($result);
 			};
 
@@ -281,28 +281,28 @@ break;
 
 case "loesche":
 
-	if ($eingabe=="Löschen!" && $admin):
+	if ($eingabe=="LÃ¶schen!" && $admin):
 
 		if ($u_id == $f['u_id']) {
-			// nicht sich selbst löschen...
+			// nicht sich selbst lÃ¶schen...
 			print "$t[edit16]<BR>";
 		} else {
-			// test, ob zu löschender Admin ist...
+			// test, ob zu lÃ¶schender Admin ist...
 			$query="SELECT * FROM user WHERE u_id=$f[u_id] ";
 			$result=mysql_query($query, $conn);
 			$del_level=mysql_result($result,0,"u_level");
 			if ($del_level!="S" && $del_level!="C" && $del_level!="M") {
 
-				// Userdaten löschen
+				// Userdaten lÃ¶schen
 				echo "<P><B>".str_replace("%u_nick%",$f['u_nick'],$t['menue5'])."</B></P>\n";
 				$query="DELETE FROM user WHERE u_id=$f[u_id] ";
 				$result=mysql_query($query, $conn);
 
-				// Ignore-Einträge löschen
+				// Ignore-EintrÃ¤ge lÃ¶schen
 				$query="DELETE FROM iignore WHERE i_user_aktiv=$f[u_id] OR i_user_passiv=$f[u_id]";
 				$result=mysql_query($query, $conn);
 
-				// Gesperrte Räume löschen
+				// Gesperrte RÃ¤ume lÃ¶schen
 				$query="DELETE FROM sperre WHERE s_user=$f[u_id]";
 				$result=mysql_query($query, $conn);
 			} else {
@@ -319,18 +319,18 @@ break;
 case "edit":
 
 
-	if ( ((isset($eingabe) && $eingabe=="Ändern!") || (isset($farben['u_farbe']) && $farben['u_farbe'])) && ($u_id==$f['u_id'] || $admin)):
+	if ( ((isset($eingabe) && $eingabe=="Ã„ndern!") || (isset($farben['u_farbe']) && $farben['u_farbe'])) && ($u_id==$f['u_id'] || $admin)):
 
 		// In Namen die unerlaubten Zeichen entfernen
 		$f['u_nick']=coreCheckName($f['u_nick'],$check_name);
 
-		// Bestimmte Felder dürfen nicht geändert werden
+		// Bestimmte Felder dÃ¼rfen nicht geÃ¤ndert werden
 		unset($f['u_neu']);
 		unset($f['u_login']);
 		unset($f['u_agb']);
 		unset($f['u_ip_historie']);
 
-		// Nicht-Admin darf Einstellungen nicht ändern
+		// Nicht-Admin darf Einstellungen nicht Ã¤ndern
 		if (!$admin):
 			unset($f['u_name']);
 			unset($f['u_adminemail']);
@@ -338,7 +338,7 @@ case "edit":
 			unset($f['u_kommentar']);
 		endif;
 
-		// Gast darf Daten nicht ändern
+		// Gast darf Daten nicht Ã¤ndern
 		if ($u_level=="G"):
 		        unset($f['u_email']);
 		        unset($f['u_auth']);
@@ -350,7 +350,7 @@ case "edit":
 		// Farbe aus Farb-Popup in Hidden-Feld
 		if ($farben['u_farbe']) $f['u_farbe']=$farben['u_farbe'];
 
-		// Farbe direkt über Input-Feld
+		// Farbe direkt Ã¼ber Input-Feld
 		if (substr($f['u_farbe'],0,1)=="#") 
 		{
                         $f['u_farbe']=substr($f['u_farbe'],1,6);
@@ -372,7 +372,7 @@ case "edit":
 			$ok=0;
 		}
 
-		// Name muß 4-50 Zeichen haben
+		// Name muss 4-50 Zeichen haben
 		if ($admin && (strlen($f['u_name'])<4 || strlen($f['u_name'])>50)):
 			echo "<P><B>$t[edit2]</B></P>\n";
 			unset($f['u_name']);
@@ -381,21 +381,21 @@ case "edit":
 
 
 
-		// Nick muß 4-20 Zeichen haben
+		// Nick muss 4-20 Zeichen haben
 		if (isset($keineloginbox) && !$keineloginbox && (strlen($f['u_nick'])<4 || strlen($f['u_nick'])>20)) 
 		{
 		
-			// Wenn man den Nicknamen nicht ändern darf, und man User ist, dann den Parameter
-			// sicherheitshalber löschen
+			// Wenn man den Nicknamen nicht Ã¤ndern darf, und man User ist, dann den Parameter
+			// sicherheitshalber lÃ¶schen
 			if (!$einstellungen_aendern && !$admin)
 			{
 				unset($f['u_nick']);
 			}
 
-			// Falls er oben gelöscht wurde, den Alten aus der Datenbank holen
+			// Falls er oben gelÃ¶scht wurde, den Alten aus der Datenbank holen
 			if ((!$einstellungen_aendern) && (strlen($f['u_nick'])==0)) 
 			{
-				// wird nicht übergeben, wenn $einstellungen_aendern==0, also aus DB laden falls $admin.
+				// wird nicht Ã¼bergeben, wenn $einstellungen_aendern==0, also aus DB laden falls $admin.
 				$query="SELECT u_nick FROM user WHERE u_id=$f[u_id]";
 				$result=mysql_query($query, $conn);
 				if ($result) {
@@ -404,8 +404,8 @@ case "edit":
 			}
 
 			// immernoch keine 4-20 Zeichen?
-			// Hier müsste aus den oberen beiden Fällen der Nickname nun da sein,
-			// Jetzt wird geprüft, ob man normalerweise den Nick ändern darf, und dort 4-20 
+			// Hier mÃ¼sste aus den oberen beiden FÃ¤llen der Nickname nun da sein,
+			// Jetzt wird geprÃ¼ft, ob man normalerweise den Nick Ã¤ndern darf, und dort 4-20 
 			// Zeichen eingegeben hat
 			if (!$keineloginbox && (strlen($f['u_nick'])<4 || strlen($f['u_nick'])>20)) {
 				echo "<P><B>$t[edit3]</B></P>\n";
@@ -420,7 +420,7 @@ case "edit":
 			$f['u_url']="http://".$f['u_url'];
 		endif;
 
-		// nur Zahlen zulassen bei den Fenstergrößen
+		// nur Zahlen zulassen bei den FenstergrÃ¶ÃŸen
 		$size['eingabe']=preg_replace("/[^0-9]/","",$size['eingabe']);
 		$size['interaktiv']=preg_replace("/[^0-9]/","",$size['interaktiv']);
 		$size['chatuserliste']=preg_replace("/[^0-9]/","",$size['chatuserliste']);
@@ -441,12 +441,12 @@ case "edit":
 				$ok=0;
 			endif;
 		else:
-			// Nickname nicht schreiben (keine Änderung oder ungültiger Text)
+			// Nickname nicht schreiben (keine Ã„nderung oder ungÃ¼ltiger Text)
 			unset($f['u_nick']);
 		endif;
 
 
-		// Wenn noch keine 30 Sekunden Zeit seit der letzten Änderung vorbei sind, 
+		// Wenn noch keine 30 Sekunden Zeit seit der letzten Ã„nderung vorbei sind, 
 		// dann Nickname nicht speichern
 		if (isset($f['u_nick']) && $f['u_nick'])
 		{
@@ -469,7 +469,7 @@ case "edit":
 			
 				if ($differenz < $nickwechsel)
 				{
-					echo "<P><B>Sie dürfen Ihren Nicknamen nur alle $nickwechsel Sekunden ändern!</B></P>\n";
+					echo "<P><B>Sie dÃ¼rfen Ihren Nicknamen nur alle $nickwechsel Sekunden Ã¤ndern!</B></P>\n";
 					unset($f['u_nick']);
 				}
 				else
@@ -494,7 +494,7 @@ case "edit":
 			echo $t['edit18'];
 		}
 		
-		// aufpassen, wenn Admin sich selbst ändert -> keine leveländerung zulassen.
+		// aufpassen, wenn Admin sich selbst Ã¤ndert -> keine levelÃ¤nderung zulassen.
 		if ($u_id==$f['u_id'] && $admin) {
 			if ($u_level!=$f['u_level']) print "$t[edit16]";
 			unset($f['u_level']);
@@ -505,18 +505,18 @@ case "edit":
 		if ($result && mysql_num_rows($result)>0) {
 			$uu_level=mysql_result($result,0,"u_level");
 
-			// Falls Userlevel G -> Änderung verboten
+			// Falls Userlevel G -> Ã„nderung verboten
 			if (isset($f['u_level']) && strlen($f['u_level'])!=0 && $f['u_level']!="G" && $uu_level=="G") {
 						echo $t['edit15'];
 						unset($f['u_level']);
 			}
 
-			// uu_level = Level des Users, der geändert wird
-			// u_level  = Level des Users, der ändert
-			// Admin (C) darf für anderen Admin (C oder S) nicht ändern: Level, Passwort, Admin-EMail
+			// uu_level = Level des Users, der geÃ¤ndert wird
+			// u_level  = Level des Users, der Ã¤ndert
+			// Admin (C) darf fÃ¼r anderen Admin (C oder S) nicht Ã¤ndern: Level, Passwort, Admin-EMail
 			if ($u_id!=$f['u_id'] && $u_level=="C" && ($uu_level=="S" || $uu_level=="C")) {
 
-				// Array Löschen
+				// Array LÃ¶schen
 				echo $t['edit17']."<BR>";
 				$ok=0;
 			        $f=array(u_id=>$f['u_id']);
@@ -526,7 +526,7 @@ case "edit":
 
 		} else {
 
-			// Per default nichts ändern -> Array Löschen
+			// Per default nichts Ã¤ndern -> Array LÃ¶schen
 			echo $t['edit17']."<BR>";
 			$ok=0;
 		        $f=array(u_id=>$f['u_id']);
@@ -549,13 +549,13 @@ case "edit":
 				echo "<P><B>$t[edit5]</B></P>\n";
 				$ok=0;
  			else:
-				// Paßwort neu eintragen
+				// PaÃŸwort neu eintragen
 				echo "<P><B>$t[edit6]</B></P>\n";
 				$f['u_passwort']=$passwort1;
 			endif;		
 		endif; 
 
-		// Fenstergrößen setzen
+		// FenstergrÃ¶ÃŸen setzen
 		if(is_array($size)) {
 			$f['u_frames']=serialize($size);
 		}
@@ -566,7 +566,7 @@ case "edit":
 
 			if (isset($zeige_loesch) && $zeige_loesch!=1):
 
-				// Änderungen anzeigen
+				// Ã„nderungen anzeigen
 
 				$query="SELECT o_userdata,o_userdata2,o_userdata3,o_userdata4,o_raum ".
 					"FROM online ".
@@ -611,7 +611,7 @@ case "edit":
 			schreibe_db("user",$f,$f['u_id'],"u_id");
 
 
-			// Hat der User den u_level = 'Z', dann lösche die Ignores, wo er der Aktive ist
+			// Hat der User den u_level = 'Z', dann lÃ¶sche die Ignores, wo er der Aktive ist
 			if (isset($f['u_level']) && $f['u_level'] == "Z")
 			{
 				$queryii="SELECT u_nick,u_id from user,iignore ".
@@ -629,7 +629,7 @@ case "edit":
 				}
 				@mysql_free_result($resultii);
 			}
-                        // Hat der User den u_level = 'C' oder 'S', dann lösche die Ignores, wo er der Passive ist
+                        // Hat der User den u_level = 'C' oder 'S', dann lÃ¶sche die Ignores, wo er der Passive ist
                         else if ((isset($f['u_level']) && $f['u_level'] == "C") || (isset($f['u_level']) && $f['u_level'] == "S"))
                         {
                                 $queryii="SELECT u_nick,u_id from user,iignore ".
@@ -649,7 +649,7 @@ case "edit":
                         }
 
 
-			// Warnung für sicheren Modus ausgeben
+			// Warnung fÃ¼r sicheren Modus ausgeben
                         if (($u_backup == 0) && ($f['u_backup']==1) && ($u_id == $f['u_id'])) warnung($u_id,$u_nick,"sicherer_modus");
 
 			// Eingabe-Frame mit Farben aktualisieren
@@ -711,7 +711,7 @@ case "edit":
 		mysql_free_result($result);
 
 
-		// Bei Änderungen an u_smilie, u_systemmeldungen, u_punkte_anzeigen chat-Fenster neu laden
+		// Bei Ã„nderungen an u_smilie, u_systemmeldungen, u_punkte_anzeigen chat-Fenster neu laden
 		if (($u_smilie!=$f['u_smilie'] || $u_systemmeldungen!=$f['u_systemmeldungen'] || $u_punkte_anzeigen!=$f['u_punkte_anzeigen']) && $o_who==0):
 			echo "<SCRIPT LANGUAGE=JavaScript>".
 				"opener_reload('chat.php?http_host=$http_host&id=$id&back=$chat_back','1')".
@@ -719,8 +719,8 @@ case "edit":
 		endif;
 
 
-	elseif ((isset($eingabe) && $eingabe=="Löschen!") && $admin):
-		// User löschen
+	elseif ((isset($eingabe) && $eingabe=="LÃ¶schen!") && $admin):
+		// User lÃ¶schen
 
                 // Ist User noch Online?
                 if (!ist_online($f['u_id'])):
@@ -734,7 +734,7 @@ case "edit":
 				"<INPUT TYPE=\"HIDDEN\" NAME=\"f[u_name]\" VALUE=\"$f[u_name]\">\n".
 				"<INPUT TYPE=\"HIDDEN\" NAME=\"f[u_nick]\" VALUE=\"$f[u_nick]\">\n".
 				"<INPUT TYPE=\"HIDDEN\" NAME=\"aktion\" VALUE=\"loesche\">\n";
-			echo $f1."<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Löschen!\">";
+			echo $f1."<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"LÃ¶schen!\">";
 			echo "&nbsp;<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Abbrechen\">".$f2;
 			echo "</FORM>\n";
 		else:
@@ -774,11 +774,11 @@ case "edit":
 
 		endif;
 
-	elseif (isset($eingabe) && $eingabe=="Homepage löschen!" && $admin):
+	elseif (isset($eingabe) && $eingabe=="Homepage lÃ¶schen!" && $admin):
 
 	if ($aktion3 == "loeschen")
 	{
-	print "<font face=\"Arial\">Homepage wurde gelöscht!</font>";
+	print "<font face=\"Arial\">Homepage wurde gelÃ¶scht!</font>";
 	$query="DELETE FROM userinfo WHERE ui_userid = '$f[u_id]'";
 	mysql_query($query);
 
@@ -798,7 +798,7 @@ case "edit":
               "<INPUT TYPE=\"HIDDEN\" NAME=\"f[u_nick]\" VALUE=\"$f[u_nick]\">\n".
 	      "<INPUT TYPE=\"HIDDEN\" NAME=\"aktion\" VALUE=\"edit\">\n".
               "<INPUT TYPE=\"HIDDEN\" NAME=\"aktion3\" VALUE=\"loeschen\">\n".
-              "<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Homepage löschen!\">".$f2.
+              "<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Homepage lÃ¶schen!\">".$f2.
 
               "</FORM>\n";
 
@@ -817,7 +817,7 @@ case "edit":
 		$f['u_passwort']=$pwdneu;
 		$uu_level=$x['u_level'];
 
-		// Prüfung ob der User das überhaupt darf...
+		// PrÃ¼fung ob der User das Ã¼berhaupt darf...
 
 		if ($f['u_adminemail']=="") {
 			echo $f1."<P><B>Fehler: Keine E-Mail Adresse hinterlegt!</B></P>".$f2;
@@ -838,7 +838,7 @@ case "edit":
 		        if ($result && mysql_num_rows($result)>0){
 	        	        $row=mysql_fetch_object($result);
 		                verlasse_chat($f['u_id'],$row->o_name,$row->o_raum);
-	        	        logout($row->o_id,$f['u_id'],"edit->pwänderung");
+	        	        logout($row->o_id,$f['u_id'],"edit->pwÃ¤nderung");
 	                	mysql_free_result($result);
 			};
 		} else { 
@@ -935,7 +935,7 @@ endif;
 
 
 
-// Fuß
+// FuÃŸ
 if ($o_js):
 	echo $f1."<P ALIGN=CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst2]</A>]</P>".$f2."\n";
 endif;

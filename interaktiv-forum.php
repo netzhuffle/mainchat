@@ -16,7 +16,7 @@ $body_tag=$body_tag."TEXT=\"$farbe_chat_text3\" ".
                "VLINK=\"$farbe_chat_vlink3\" ".
                "ALINK=\"$farbe_chat_vlink3\">\n";
 
-// Prüfung, ob User wegen Inaktivität ausgelogt werden soll
+// PrÃ¼fung, ob User wegen InaktivitÃ¤t ausgelogt werden soll
 if ($u_id && $chat_timeout && $u_level!='S'  && $u_level!='C'  && $u_level!='M' && $o_timeout_zeit) {
 
 	if ($o_timeout_warnung=="J" && $chat_timeout < (time()-$o_timeout_zeit)) {
@@ -33,7 +33,7 @@ if ($u_id && $chat_timeout && $u_level!='S'  && $u_level!='C'  && $u_level!='M' 
 
 	} elseif ($o_timeout_warnung!="J" && (($chat_timeout/4)*3) < (time()-$o_timeout_zeit)) {
 
-	// Warnung über bevorstehenden Logout ausgeben
+	// Warnung Ã¼ber bevorstehenden Logout ausgeben
 		system_msg("",0,$u_id,$system_farbe,str_replace("%zeit%",$chat_timeout/60,$t['chat_msg101']));
 		unset($f);
 		$f[o_timeout_warnung]="J";
@@ -54,13 +54,13 @@ if ($u_id):
 	// Fenstername
 	$fenster=str_replace("+","",$u_nick);
 	$fenster=str_replace("-","",$fenster);
-	$fenster=str_replace("ä","",$fenster);
-	$fenster=str_replace("ö","",$fenster);
-	$fenster=str_replace("ü","",$fenster);
-	$fenster=str_replace("Ä","",$fenster);
-	$fenster=str_replace("Ö","",$fenster);
-	$fenster=str_replace("Ü","",$fenster);
-	$fenster=str_replace("ß","",$fenster);
+	$fenster=str_replace("Ã¤","",$fenster);
+	$fenster=str_replace("Ã¶","",$fenster);
+	$fenster=str_replace("Ã¼","",$fenster);
+	$fenster=str_replace("Ã„","",$fenster);
+	$fenster=str_replace("Ã·","",$fenster);
+	$fenster=str_replace("Ãœ","",$fenster);
+	$fenster=str_replace("ÃŸ","",$fenster);
 
 	?>
 
@@ -89,8 +89,8 @@ function window_reload(file,win_name) {
 	// Timestamp im Datensatz aktualisieren
 	aktualisiere_online($u_id,$o_raum);
 
-	// Aktionen ausführen, falls nicht innerhalb der letzten 5
-        // Minuten geprüft wurde (letzte Prüfung=o_aktion)
+	// Aktionen ausfÃ¼hren, falls nicht innerhalb der letzten 5
+        // Minuten geprÃ¼ft wurde (letzte PrÃ¼fung=o_aktion)
         if ($communityfeatures && (time() > ($o_aktion+300))) {
                 aktion("Alle 5 Minuten",$u_id,$u_nick,$id);
         }
@@ -164,7 +164,7 @@ function window_reload(file,win_name) {
         }
                                     
 	
-	// Falls eintrittsraum nicht gesetzt ist, mit Lobby überschreiben
+	// Falls eintrittsraum nicht gesetzt ist, mit Lobby Ã¼berschreiben
         if (strlen($eintrittsraum)==0):
                 $eintrittsraum=$lobby;
         endif;
@@ -178,7 +178,7 @@ function window_reload(file,win_name) {
 
 	echo $f3."<NOBR><SELECT NAME=\"neuer_raum\"\" onChange=\"document.form1.submit()\">\n";
 
-	// Admin sehen alle Räume, andere User nur die offenen
+	// Admin sehen alle RÃ¤ume, andere User nur die offenen
 	if ($admin):
 		raeume_auswahl($lobby_id,TRUE,TRUE);
 	else:
