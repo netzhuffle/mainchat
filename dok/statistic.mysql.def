@@ -1,0 +1,53 @@
+-- MySQL dump 9.10
+--
+-- Host: chatdb5    Database: miet_chat_statistik
+-- ------------------------------------------------------
+-- Server version	4.0.18-standard
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE chat (
+  c_users int(11) NOT NULL default '0',
+  c_host char(255) NOT NULL default '',
+  c_timestamp timestamp(14) NOT NULL,
+  KEY c_users (c_users),
+  KEY c_host (c_host)
+) TYPE=MyISAM PACK_KEYS=1;
+
+--
+-- Table structure for table `log`
+--
+
+CREATE TABLE log (
+  l_id bigint(20) NOT NULL auto_increment,
+  l_chat varchar(255) NOT NULL default '',
+  l_timestamp timestamp(14) NOT NULL,
+  l_text text NOT NULL,
+  l_raum varchar(255) NOT NULL default '',
+  l_typ char(1) NOT NULL default '',
+  PRIMARY KEY  (l_id),
+  KEY l_chat (l_chat),
+  KEY l_raum (l_raum)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `logouts`
+--
+
+CREATE TABLE logouts (
+  lo_id bigint(20) NOT NULL auto_increment,
+  lo_chat varchar(255) NOT NULL default '',
+  lo_logout timestamp(14) NOT NULL,
+  lo_nick varchar(255) NOT NULL default '',
+  lo_aktion varchar(255) NOT NULL default '',
+  lo_timeout_zeit varchar(255) NOT NULL default '',
+  lo_ip varchar(255) NOT NULL default '',
+  lo_browser varchar(255) NOT NULL default '',
+  lo_onlinedump text NOT NULL,
+  lo_timeout_warnung varchar(255) NOT NULL default '',
+  lo_login int(14) NOT NULL default '0',
+  PRIMARY KEY  (lo_id)
+) TYPE=MyISAM;
+

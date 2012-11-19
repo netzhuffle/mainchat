@@ -1,0 +1,422 @@
+# fidion GmbH mainChat
+#
+# Änderungen für ein mainChat-Update.
+# Nur relevant bei einem Update einer alten Version auf die neue Version,
+# für die neuen Chat-Features die Datenbank erweitert werden mußte.
+#
+# Aufruf: mysql -f -u USER -h HOST DATENBANK < dok/mysql.change
+#
+
+#
+# Changes: Table structure for table 'user'
+#
+ALTER TABLE user CHANGE u_admin_email u_adminemail char(80) not null default '';
+ALTER TABLE user ADD COLUMN u_farbe_bg char(6) not null default "-";
+ALTER TABLE user ADD COLUMN u_farbe_sys char(6) not null default "-";
+ALTER TABLE user ADD COLUMN u_farbe_alle char(6) not null default "-";
+ALTER TABLE user ADD COLUMN u_farbe_noise char(6) not null default "-";
+ALTER TABLE user ADD COLUMN u_farbe_priv char(6) not null default "-";
+ALTER TABLE user ADD COLUMN u_clearedit tinyint(1) not null default 1;
+ALTER TABLE online ADD COLUMN o_js tinyint(1) default 0;
+ALTER TABLE online ADD COLUMN o_http_stuff blob;
+ALTER TABLE online ADD COLUMN o_userdata blob;
+ALTER TABLE online ADD COLUMN o_level char(1) NOT NULL;
+ALTER TABLE online ADD COLUMN o_ignore blob;
+ALTER TABLE online ADD COLUMN o_login timestamp(14);
+ALTER TABLE user ADD COLUMN u_ip_historie varchar(255);
+ALTER TABLE ip_sperre ADD COLUMN is_infotext text;
+ALTER TABLE user ADD u_smilie CHAR DEFAULT 'Y' not null;
+ALTER TABLE user ADD u_agb CHAR DEFAULT 'N' not null;
+ALTER TABLE raum ADD r_smilie CHAR DEFAULT 'Y' not null;
+ALTER TABLE raum ADD INDEX(r_smilie);
+ALTER TABLE ip_sperre ADD is_infotext text;
+ALTER TABLE chat ADD c_br ENUM('normal','letzte','erste','mitte') DEFAULT 'normal' NOT NULL;
+
+# neue Tabelle, wird zur Moderation verwendet.
+#
+# Table structure for table 'moderation'
+#
+CREATE TABLE moderation (
+  c_id int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
+  c_von_user varchar(64) DEFAULT '' NOT NULL,
+  c_an_user int(11) unsigned DEFAULT '0' NOT NULL,
+  c_typ char(1),
+  c_raum int(11) unsigned DEFAULT '0' NOT NULL,
+  c_text text,
+  c_zeit timestamp(14),
+  c_farbe varchar(6),
+  c_von_user_id int(11) unsigned DEFAULT '0' NOT NULL,
+  c_moderator int(11) DEFAULT '0' NOT NULL,
+  PRIMARY KEY (c_id),
+  KEY c_an_user (c_an_user),
+  KEY c_raum (c_raum),
+  KEY c_von_user_id (c_von_user_id),
+  KEY c_moderator (c_moderator)
+);
+
+# Neue Tabelle für Autoknebel (Stopwörter)
+#
+# Table structure for table 'worte'
+#
+
+CREATE TABLE worte (
+   w_id int(11) NOT NULL auto_increment,
+   w_wort char(255) NOT NULL,
+   w_timestamp timestamp(14),
+   w_user int(11) DEFAULT '0' NOT NULL,
+   w_status char(1) NOT NULL,
+   PRIMARY KEY (w_id),
+   KEY w_timestamp (w_timestamp),
+   KEY w_user (w_user),
+   KEY w_status (w_status)
+);
+
+# Änderungen ab 01.09.01
+ALTER TABLE ip_sperre ADD is_warn ENUM('ja','nein') DEFAULT 'nein' NOT NULL;
+ALTER TABLE ip_sperre ADD INDEX(is_warn);
+ALTER TABLE chat CHANGE c_text c_text varchar(255) NOT NULL;
+ALTER TABLE chat CHANGE c_id c_id int(11) unsigned DEFAULT '0' NOT NULL;
+ALTER TABLE online ADD o_userdata2 CHAR(255) NOT NULL AFTER o_userdata;
+ALTER TABLE online ADD o_userdata3 CHAR(255) NOT NULL AFTER o_userdata2;
+ALTER TABLE online ADD o_userdata4 CHAR(255) NOT NULL AFTER o_userdata3;
+ALTER TABLE online ADD o_http_stuff2 CHAR(255) NOT NULL AFTER o_http_stuff;
+ALTER TABLE online CHANGE o_ignore o_ignore CHAR(255) NOT NULL;
+ALTER TABLE online CHANGE o_userdata o_userdata varchar(255) NOT NULL;
+ALTER TABLE online CHANGE o_http_stuff o_http_stuff varchar(255) NOT NULL;
+ALTER TABLE online CHANGE o_id o_id int(11) unsigned DEFAULT '0' NOT NULL;
+
+# änderungen ab 12.09.01
+ALTER TABLE chat CHANGE c_typ c_typ CHAR(1) DEFAULT 'N' NOT NULL;
+ALTER TABLE user CHANGE u_level u_level CHAR(1) DEFAULT 'U' NOT NULL;
+ALTER TABLE user ADD INDEX(u_level);
+
+# änderungen ab 29.09.01
+ALTER TABLE raum ADD r_werbung CHAR(255) DEFAULT '' NOT NULL;
+
+# änderungen ab 02.10.01
+ALTER TABLE user ADD u_punkte_gesamt INT UNSIGNED DEFAULT '0' NOT NULL, 
+ADD u_punkte_monat INT UNSIGNED DEFAULT '0' NOT NULL, 
+ADD u_punkte_jahr INT UNSIGNED DEFAULT '0' NOT NULL, 
+ADD u_punkte_datum_monat CHAR(2) DEFAULT '00' NOT NULL, 
+ADD u_punkte_datum_jahr CHAR(4) DEFAULT '0000' NOT NULL;
+ALTER TABLE online ADD o_punkte INT DEFAULT '0' NOT NULL;
+
+#
+# Tabellenstruktur für Tabelle userinfo
+  
+CREATE TABLE userinfo (
+  ui_id int(11) NOT NULL auto_increment,
+  ui_userid int(11) NOT NULL DEFAULT 0,
+  ui_strasse char(100) NOT NULL DEFAULT '',
+  ui_plz char(6) NOT NULL DEFAULT '',
+  ui_ort char(100) NOT NULL DEFAULT '',    
+  ui_land char(100) NOT NULL DEFAULT '',   
+  ui_geburt char(12) NOT NULL DEFAULT '',
+  ui_geschlecht SET('keine Angabe','männlich','weiblich') DEFAULT 'keine Angabe',
+  ui_beziehung SET('keine Angabe','verheiratet','ledig','single') DEFAULT 'keine Angabe',
+  ui_typ SET('keine Angabe','zierlich','schlank','sportlich','normal','mollig','dick') DEFAULT 'keine Angabe',
+  ui_beruf char(100) NOT NULL DEFAULT '',
+  ui_hobby char(255) NOT NULL DEFAULT '',
+  ui_tel char(100) NOT NULL DEFAULT '',
+  ui_fax char(100) NOT NULL DEFAULT '',
+  ui_handy char(100) NOT NULL DEFAULT '',
+  ui_icq char(100) NOT NULL DEFAULT '',
+  ui_text blob NOT NULL DEFAULT '',
+  ui_farbe blob NOT NULL DEFAULT '',
+  PRIMARY KEY  (ui_id),
+  KEY ui_userid (ui_userid)
+) TYPE=MyISAM;
+
+ALTER TABLE online ADD o_aktion int(11) unsigned DEFAULT '0' NOT NULL;
+
+CREATE TABLE mail (
+  m_id int(11) unsigned NOT NULL auto_increment,
+  m_status enum('neu','gelesen','geloescht','neu/verschickt') NOT NULL default 'neu',
+  m_von_uid int(11) unsigned NOT NULL default '0',
+  m_an_uid int(11) unsigned NOT NULL default '0',
+  m_zeit timestamp(14) NOT NULL,
+  m_betreff varchar(255) NOT NULL default '',
+  m_text text NOT NULL default '',
+  PRIMARY KEY  (m_id),
+  KEY m_status (m_status),
+  KEY m_von_uid (m_von_uid),
+  KEY m_an_uid (m_an_uid)
+) TYPE=MyISAM;
+
+CREATE TABLE aktion (
+  a_id int(11) unsigned NOT NULL auto_increment,
+  a_user int(11) unsigned NOT NULL default '0',
+  a_wann enum('Sofort/Offline','Sofort/Online','Login','Alle 5 Minuten') NOT NULL default 'Login',                     
+  a_was varchar(255) NOT NULL default '',
+  a_wie set('keine','Chat-Mail','E-Mail','OLM') NOT NULL default 'keine',
+  a_text varchar(255) NOT NULL default '',
+  a_zeit timestamp(14) NOT NULL,
+  PRIMARY KEY  (a_id),
+  KEY a_user (a_user),
+  KEY a_wann (a_wann)
+) TYPE=MyISAM;
+
+CREATE TABLE bild (
+  b_id int(11) unsigned NOT NULL auto_increment,
+  b_user int(11) unsigned NOT NULL default '0', 
+  b_name varchar(255) NOT NULL default '',
+  b_bild blob NOT NULL default '',
+  b_mime varchar(255) NOT NULL default '',
+  b_width int(11) unsigned NOT NULL default '0',
+  b_height int(11) unsigned NOT NULL default '0',
+  PRIMARY KEY  (b_id),
+  KEY b_user (b_user)
+) TYPE=MyISAM;
+
+ALTER TABLE user ADD u_punkte_gruppe char(1) not null default "";
+alter table userinfo change ui_geschlecht  ui_geschlecht SET('keine Angabe','männlich','weiblich') DEFAULT 'keine Angabe';
+alter table userinfo drop ui_bild1;
+alter table userinfo drop ui_bild1_width;
+alter table userinfo drop ui_bild1_height;
+alter table userinfo drop ui_bild1_mime;
+alter table userinfo change ui_farbe ui_farbe blob NOT NULL DEFAULT '';
+alter table online change o_punkte o_punkte int(11) NOT NULL default '0';
+
+ALTER TABLE user ADD u_frames VARCHAR(255) NOT NULL default "";
+ALTER TABLE user ADD u_chathomepage CHAR(1) NOT NULL default "N";
+ALTER TABLE user ADD u_eintritt VARCHAR(100) NOT NULL default "";
+ALTER TABLE user ADD u_austritt VARCHAR(100) NOT NULL default "";
+ALTER TABLE user DROP INDEX u_nick; ALTER TABLE user ADD UNIQUE(u_nick);
+ALTER TABLE online DROP INDEX o_user; ALTER TABLE online ADD UNIQUE(o_user);
+ALTER TABLE online DROP INDEX o_name; ALTER TABLE online ADD UNIQUE(o_name);
+ALTER TABLE online CHANGE o_raum o_raum int(11) DEFAULT '0' NOT NULL;
+ALTER TABLE userinfo ADD ui_einstellungen char(255) NOT NULL DEFAULT '';
+ALTER TABLE user ADD u_signatur VARCHAR(255) NOT NULL default "";
+
+CREATE TABLE forum (
+	fo_id SMALLINT (5) UNSIGNED NOT NULL AUTO_INCREMENT, 
+	fo_name VARCHAR (200) NOT NULL , 
+	fo_order SMALLINT (5) NOT NULL,
+	fo_admin TINYINT (1) NOT NULL DEFAULT '0', 
+	PRIMARY KEY (fo_id) 
+);
+
+CREATE TABLE thema (
+	th_id INT (10) UNSIGNED NOT NULL AUTO_INCREMENT, 
+	th_fo_id SMALLINT (5) NOT NULL, 
+	th_name VARCHAR (200) NOT NULL,
+	th_desc VARCHAR (255),
+	th_anzthreads MEDIUMINT (8) NOT NULL DEFAULT '0',
+	th_anzreplys MEDIUMINT (8) NOT NULL DEFAULT '0',
+	th_postings LONGTEXT,
+	th_order SMALLINT (5) NOT NULL,
+	PRIMARY KEY (th_id), 
+	KEY th_fo_id(th_fo_id) 
+);
+
+CREATE TABLE posting (
+	po_id INT (10) UNSIGNED NOT NULL AUTO_INCREMENT, 
+	po_th_id INT (10) NOT NULL, 
+	po_u_id INT (11) NOT NULL, 
+	po_vater_id INT (10) NOT NULL, 
+	po_ts BIGINT (14) NOT NULL, 
+	po_tiefe SMALLINT (3) NOT NULL, 
+	po_threadorder MEDIUMTEXT,
+	po_titel VARCHAR (200) NOT NULL, 
+	po_text LONGTEXT NOT NULL, 
+	PRIMARY KEY (po_id), 
+	KEY po_th_id(po_th_id), 
+	KEY po_u_id(po_u_id), 
+	KEY po_vater_id(po_vater_id) 
+);
+ALTER TABLE chat CHANGE c_br c_br ENUM('normal','letzte','erste','mitte') DEFAULT 'normal' NOT NULL;
+ALTER TABLE user ADD u_loginfehler BLOB NOT NULL default "";
+ALTER TABLE chat CHANGE c_von_user c_von_user varchar(255) NOT NULL;
+ALTER TABLE moderation CHANGE c_von_user c_von_user varchar(255) NOT NULL;
+
+CREATE TABLE blacklist (
+  f_id int(11) unsigned NOT NULL auto_increment,
+  f_userid int(11) unsigned NOT NULL default '0',
+  f_blacklistid int(11) unsigned NOT NULL default '0',
+  f_zeit timestamp(14) NOT NULL,
+  f_text varchar(255) NOT NULL default '',
+  PRIMARY KEY  (f_id),
+  KEY f_blacklistid (f_blacklistid)
+) TYPE=MyISAM;
+
+ALTER TABLE raum CHANGE r_topic r_topic text;
+ALTER TABLE raum CHANGE r_austritt r_austritt text;
+ALTER TABLE raum CHANGE r_eintritt r_eintritt text;
+
+ALTER TABLE user ADD u_gelesene_postings MEDIUMTEXT not null default "";
+ALTER TABLE user ADD u_lastclean BIGINT (14) NOT NULL DEFAULT '0';
+
+CREATE TABLE top10cache (
+  t_id int(11) unsigned NOT NULL auto_increment,
+  t_zeit timestamp(14) NOT NULL,
+  t_eintrag int(11) unsigned NOT NULL default '1',
+  t_daten mediumblob,
+  PRIMARY KEY  (t_id)
+) TYPE=MyISAM;
+
+CREATE TABLE sms (
+  s_id int(11) unsigned NOT NULL auto_increment,
+  s_zeit timestamp(14) NOT NULL,
+  s_von_user_id int(11) unsigned NOT NULL default '0',
+  s_an_user_id int(11) unsigned NOT NULL default '0',
+  s_status char(1) NOT NULL default 'W',
+  s_text varchar(255) NOT NULL default '',
+  PRIMARY KEY  (s_id)
+) TYPE=MyISAM;
+
+ALTER TABLE online add  o_timeout_zeit char(14) NOT NULL default '0';
+ALTER TABLE online add  o_timeout_warnung char(1) NOT NULL default 'N';
+ALTER TABLE online add  o_chat_historie varchar(255) NOT NULL default '';
+
+ALTER TABLE user ADD   u_sms_ok char(1) NOT NULL default 'N';
+ALTER TABLE user ADD   u_sms_guthaben int(10) unsigned NOT NULL default '0';
+ALTER TABLE user ADD   u_sms_extra varchar(255) NOT NULL default '';
+
+ALTER TABLE chat CHANGE c_typ c_typ CHAR(1) DEFAULT 'N' NOT NULL;
+
+ALTER TABLE online add o_spam_zeilen varchar(255) NOT NULL default '';
+ALTER TABLE online add o_spam_byte varchar(255) NOT NULL default '';
+ALTER TABLE online add o_spam_zeit varchar(255) NOT NULL default '';
+
+ALTER TABLE freunde ADD f_status ENUM('beworben','bestaetigt') DEFAULT 'bestaetigt' NOT NULL;
+
+CREATE TABLE mail_check (
+  email varchar(255) NOT NULL default '',
+  datum date NOT NULL default '0000-00-00',
+  u_id int(11) NOT NULL default '0',
+  PRIMARY KEY  (email)
+) TYPE=MyISAM;
+
+ALTER TABLE `user` ADD `u_nick_historie` VARCHAR(255); 
+
+# Änderung 6.6.2003 - martin
+ALTER TABLE user ADD u_profil_historie VARCHAR(255); 
+
+# Änderung 13.8.2003 - martin
+ 
+ALTER TABLE `user` ADD `u_kommentar` VARCHAR(255); 
+
+# Änderung 27.9.2003 - martin
+
+ALTER TABLE `user` ADD `u_forum_postingproseite` INT DEFAULT '20' NOT NULL;
+
+###### Diverse Änderungen an der DB-Stuktur um von der letzten MietChatversion auf die aktuelle Version zu kommen 23.4.2004 - martin
+
+
+# Änderungen an der Tabelle chat
+
+ALTER TABLE chat CHANGE c_an_user c_an_user INT(11) unsigned DEFAULT '0' NOT NULL;
+ALTER TABLE chat CHANGE c_raum c_raum INT(11) unsigned DEFAULT '0' NOT NULL;
+ALTER TABLE chat CHANGE c_von_user_id c_von_user_id INT(11) unsigned DEFAULT '0' NOT NULL;
+ALTER TABLE chat PACK_KEYS=1;
+
+# Änderungen an der Tabelle invite
+
+ALTER TABLE invite PACK_KEYS=1;
+
+
+# Änderungen an der Tabelle ip_sperre
+
+ALTER TABLE ip_sperre CHANGE is_id is_id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE ip_sperre CHANGE is_owner is_owner INT(11) UNSIGNED NOT NULL DEFAULT '0';
+
+# Änderungen an der Tabelle moderation
+
+ALTER TABLE moderation CHANGE c_typ c_typ char(1) default NULL;
+
+
+# Änderungen an der Tabelle online
+
+ALTER TABLE online CHANGE o_user o_user INT(11) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE online CHANGE o_hash o_hash VARCHAR(255)  DEFAULT '' NOT NULL;
+ALTER TABLE online CHANGE o_ip o_ip VARCHAR(16) default '' NOT NULL;
+ALTER TABLE online CHANGE o_who o_who SMALLINT(3) UNSIGNED DEFAULT NULL;
+ALTER TABLE online CHANGE o_chat_id o_chat_id INT(11) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE online CHANGE o_browser o_browser VARCHAR(255) NOT NULL default '';
+ALTER TABLE online CHANGE o_name o_name VARCHAR(64) NOT NULL default '';
+ALTER TABLE online CHANGE o_js o_js tinyint(1) NOT NULL default '0';
+ALTER TABLE online ADD UNIQUE(o_user);
+ALTER TABLE online ADD UNIQUE(o_name);
+ALTER TABLE online ADD INDEX(o_timestamp);
+ALTER TABLE online ADD INDEX(o_hash);
+ALTER TABLE online ADD INDEX(o_ip);
+ALTER TABLE online ADD INDEX(o_browser);
+ALTER TABLE online ADD INDEX(o_js);
+ALTER TABLE online ADD INDEX(o_level);
+ALTER TABLE online PACK_KEYS=1;
+
+# Änderungen an der Tabelle Raum
+
+ALTER TABLE raum CHANGE r_id r_id int(11) unsigned NOT NULL auto_increment;
+ALTER TABLE raum CHANGE r_status1 r_status1 char(1) NOT NULL default '';
+ALTER TABLE raum CHANGE r_besitzer r_besitzer int(11) unsigned  NOT NULL default '0';
+ALTER TABLE raum CHANGE r_status2 r_status2 char(1) NOT NULL default '';
+ALTER TABLE raum DROP INDEX r_smilie_2;
+ALTER TABLE raum DROP INDEX r_smilie_5;
+ALTER TABLE raum DROP INDEX r_smilie_6;
+ALTER TABLE raum DROP INDEX r_smilie;
+ALTER TABLE raum ADD INDEX (r_status1);
+ALTER TABLE raum ADD INDEX (r_status2);
+ALTER TABLE raum ADD INDEX (r_smilie);
+
+
+# Erzeugung der Tabelle smsin
+
+CREATE TABLE smsin (
+  s_id int(11) NOT NULL auto_increment,
+  s_handynummer varchar(25) NOT NULL default '',
+  s_shortnumber varchar(15) NOT NULL default '',
+  s_keyword varchar(30) NOT NULL default '',
+  s_timestamp datetime default NULL,
+  s_text varchar(160) NOT NULL default '',
+  PRIMARY KEY  (s_id)
+) TYPE=MyISAM;
+
+# Änderungen an der Tabelle Sperre
+ALTER TABLE sperre CHANGE s_id s_id int(11) unsigned NOT NULL auto_increment;
+ALTER TABLE sperre CHANGE s_user s_user int(11) unsigned NOT NULL default '0';
+ALTER TABLE sperre CHANGE s_raum s_raum int(11) unsigned NOT NULL default '0';
+
+
+# Änderungen an der Tabelle user
+ALTER TABLE user CHANGE u_id u_id int(11) unsigned NOT NULL auto_increment;
+ALTER TABLE user CHANGE u_nick u_nick varchar(64) NOT NULL default '';
+ALTER TABLE user CHANGE u_name u_name varchar(64) NOT NULL  default '';
+ALTER TABLE user CHANGE u_url u_url varchar(160) default NULL;
+ALTER TABLE user CHANGE u_backup u_backup tinyint(1) default NULL;
+ALTER TABLE user CHANGE u_away u_away varchar(255) default NULL;
+
+# Änderungen an der Tabelle userinfo
+ALTER TABLE userinfo CHANGE ui_text ui_text text NOT NULL;
+
+
+# Änderungen Student 10.03.2006 - Update von 4.10 auf 4.11
+ALTER TABLE raum ADD r_min_punkte INT(10) UNSIGNED DEFAULT '0' NOT NULL;
+ALTER TABLE user ADD u_systemmeldungen CHAR(1) DEFAULT 'Y' NOT NULL;
+ALTER TABLE user ADD u_punkte_anzeigen CHAR(1) DEFAULT 'Y' NOT NULL;
+
+
+# Änderungen Student 10.04.2006 - Update von 4.11 auf 4.12
+ALTER TABLE posting ADD po_threadts BIGINT(14) DEFAULT '0' NOT NULL AFTER po_threadorder;
+ALTER TABLE posting ADD po_threadgesperrt CHAR(1) DEFAULT 'N' NOT NULL AFTER po_threadts;
+ALTER TABLE posting ADD po_topposting CHAR(1) DEFAULT 'N' NOT NULL AFTER po_threadgesperrt;
+ALTER TABLE mail ADD m_geloescht_ts TIMESTAMP(14) AFTER m_zeit;
+
+# Änderungen Student 30.04.2006
+ALTER TABLE invite ADD index inv_user (inv_user);
+ALTER TABLE posting ADD INDEX po_themasort (po_th_id, po_vater_id, po_topposting, po_threadts, po_ts);
+ALTER TABLE mail ADD INDEX m_geloescht_ts (m_an_uid, m_status, m_geloescht_ts);
+ALTER TABLE thema ADD INDEX th_name (th_name);
+ALTER TABLE user ADD INDEX u_ip_historie (u_ip_historie);
+ALTER TABLE user ADD INDEX u_adminemail (u_adminemail);
+ALTER TABLE user ADD INDEX u_email (u_email);
+ALTER TABLE user ADD INDEX u_name (u_name);
+
+# Änderungen Student 10.02.2006
+ALTER TABLE userinfo CHANGE ui_beziehung ui_beziehung SET( 'keine Angabe', 'verheiratet', 'ledig', 'single', 'vergeben' ) NOT NULL DEFAULT 'keine Angabe';
+
+# Änderung Student 09.08.07
+ALTER TABLE user ADD u_knebel TIMESTAMP NOT NULL;
+
+# Änderung Student 23.11.07
+ALTER TABLE posting ADD po_gesperrt CHAR( 1 ) DEFAULT 'N' NOT NULL AFTER po_threadts;
