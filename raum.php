@@ -103,7 +103,7 @@ if (isset($f['r_name'])) {
 	endif;
 
 	// Status moderiert nur falls kommerzielle Version
-	if ((strtolower($f['r_status1'])=="m") && $moderationsmodul==0) {
+	if (isset($f['r_status1']) && (strtolower($f['r_status1'])=="m") && $moderationsmodul==0) {
 		echo "<P>".str_replace("%r_status%",$raumstatus1[$f['r_status1']],$t['fehler11'])."</P>\n"; 
 		unset($f['r_status1']);
 	} 
@@ -112,7 +112,7 @@ if (isset($f['r_name'])) {
 
 
 	// Nur Admin darf andere Stati als offen oder geschlossen setzen
-	if ($f['r_status1']!="O" && $f['r_status1']!="G" && !$admin) {
+	if (isset($f['r_status1']) && $f['r_status1']!="O" && $f['r_status1']!="G" && !$admin) {
 		$tmp=str_replace("%r_status%",$raumstatus1[$f['r_status1']],$t['fehler10']); 
 		echo "<P>".str_replace("%r_name%",$f['r_name'],$tmp)."</P>\n"; 
 		unset($f['r_status1']);

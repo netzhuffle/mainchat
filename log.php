@@ -31,7 +31,7 @@ endif;
 // Userdaten setzen
 id_lese($id);
 
-if (($eingabe_light_log=="1") && (!$admin))
+if (isset($eingabe_light_log) && ($eingabe_light_log=="1") && (!$admin))
 {
 	echo "Sorry, deaktiviert";
 	exit();

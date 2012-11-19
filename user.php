@@ -495,7 +495,7 @@ case "suche":
 		$select = "SELECT * FROM user ";
 
 		// Where bedingung anhand des Suchtextes und des Levels
-		if (!$suchtext)
+		if (!isset($suchtext) || !$suchtext)
 		{
 			// Kein Suchtext, aber evtl subquery
 			$where[0] = "WHERE ";
@@ -778,7 +778,7 @@ default;
 
 	// Beichtstuhlmodus (siehe config.php)
 	// ID der Lobby merken
-	if ($beichtstuhl && !$admin) {
+	if (isset($beichtstuhl) && $beichtstuhl && !$admin) {
 
 		// Id der Lobby als Voreinstellung ermitteln
 		$query="SELECT r_id FROM raum WHERE r_name LIKE '$lobby' ";
@@ -804,7 +804,7 @@ default;
 			// Array mit Userdaten und Infotexten aufbauen
 			$userdata=unserialize($row['o_userdata'].$row['o_userdata2'].$row['o_userdata3'].$row['o_userdata4']);
 
-			if (!$beichtstuhl || $admin || $userdata['u_id']==$u_id || $lobby_id==$schau_raum || $userdata['u_level']=="S" || $userdata['u_level']=="C") {
+			if ((!isset($beichtstuhl) || !$beichtstuhl) || $admin || $userdata['u_id']==$u_id || $lobby_id==$schau_raum || $userdata['u_level']=="S" || $userdata['u_level']=="C") {
 				// Variable aus o_userdata setzen
 				$larr[$i]['u_email']=str_replace("\\","",htmlspecialchars($userdata['u_email']));
 				$larr[$i]['u_nick']=strtr(str_replace("\\","",htmlspecialchars($userdata['u_nick'])),"I","i");
@@ -897,7 +897,7 @@ default;
 		} else {
                         $linkuser = "href=\"user.php?http_host=$http_host&id=$id&aktion=chatuserliste\"";
 			echo "<CENTER>".$f3."[<a onMouseOver=\"return(true)\" ".$linkuser.">".$t['sonst19']."</A>]";
-				if (!$beichtstuhl && $smilies_datei!="" && !$smilies_aus) {
+				if ((!isset($beichtstuhl) || !$beichtstuhl) && $smilies_datei!="" && (!isset($smilies_aus) || !$smilies_aus)) {
 		                        $linksmilies = "href=\"".$smilies_datei."?http_host=$http_host&id=$id\"";
 					echo "&nbsp;[<a onMouseOver=\"return(true)\" $linksmilies>".$t['sonst20']."</A>]";
 				}

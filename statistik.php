@@ -49,7 +49,7 @@ if ($c) mysql_select_db($STAT_DB_NAME, $c);
 $v=$http_host;
 
 // Wenn User Statistiken gesammelt werden, dann nicht HTTP_HOST sondern die Zeichenkette aus $STAT_DB_COLLECT
-if (strlen($STAT_DB_COLLECT)>0) 
+if (isset($STAT_DB_COLLECT) && strlen($STAT_DB_COLLECT)>0) 
 {
     $v = $STAT_DB_COLLECT;
 }

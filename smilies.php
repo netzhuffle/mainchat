@@ -42,6 +42,9 @@ if (strlen($u_id)!=0):
 
 
 		// Menue ausgeben, Tabelle aufbauen
+		if (!isset($r_name)) {
+			$r_name = "";
+		}
 		$linkuser = "href=\"user.php?http_host=$http_host&id=$id&aktion=chatuserliste\"";
 		$linksmilies = "href=\"".$smilies_datei."?http_host=$http_host&id=$id\"";
 		echo "<CENTER><B>$r_name</B><BR>$f3<B>[<a onMouseOver=\"return(true)\" $linksmilies>".$t['sonst1']."</A>]&nbsp;".

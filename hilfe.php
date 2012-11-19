@@ -8,7 +8,7 @@ require ("functions.php");
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
 id_lese($id);
 
-if (($eingabe_light_hilfe=="1") && ($reset<>"1") && (!$admin))
+if (isset($eingabe_light_hilfe) && $eingabe_light_hilfe=="1" && ($reset<>"1") && (!$admin))
 {
 	echo "Sorry, deaktiviert";
 	exit();

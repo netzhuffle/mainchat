@@ -850,7 +850,7 @@ function getsalt($feldname, $login) {
 		// User vorhanden, u_passwort untersuchen
 		$pass=mysql_result($result,0,"u_passwort");
 		        
-		if (preg_match('∞(^\$6\$rounds\=([0-9]{4,9})\$(.{1,16})\$)∞i', $pass, $treffer))
+		if (preg_match('#(^\$6\$rounds\=([0-9]{4,9})\$(.{1,16})\$)#i', $pass, $treffer))
         	{
         		// SHA 512 erkannt
         		$salt = $treffer[1];
@@ -864,8 +864,8 @@ function getsalt($feldname, $login) {
 			}
 			
         	}
-		else if ((preg_match('∞(^\$5\$rounds\=([0-9]{4,9})\$(.{1,16})\$)∞i', $pass, $treffer)) ||
-		         (preg_match('∞(^\$5\$(.{1,16})\$)∞i', $pass, $treffer)))
+		else if ((preg_match('#(^\$5\$rounds\=([0-9]{4,9})\$(.{1,16})\$)#i', $pass, $treffer)) ||
+		         (preg_match('#(^\$5\$(.{1,16})\$)#i', $pass, $treffer)))
         	{
         		// SHA 256 erkannt
         		$salt = $treffer[1];
@@ -879,7 +879,7 @@ function getsalt($feldname, $login) {
 			}
 			
         	}
-		else if (preg_match('∞(^\$2(a|x|y)\$([0-9]{1,2})\$(.{21}))∞i', $pass, $treffer))
+		else if (preg_match('#(^\$2(a|x|y)\$([0-9]{1,2})\$(.{21}))#i', $pass, $treffer))
         	{
         		// Blowfish erkannt
         		$salt = $treffer[1].'$';
@@ -893,7 +893,7 @@ function getsalt($feldname, $login) {
 			}
 			
         	}
-		else if (preg_match('∞(^\$1\$(.{0,8})\$)∞i', $pass, $treffer))
+		else if (preg_match('#(^\$1\$(.{0,8})\$)#i', $pass, $treffer))
         	{
         		// CRYPT MD5 erkannt
         		$salt = $treffer[1];
@@ -926,7 +926,7 @@ function getsalt($feldname, $login) {
 					$upgrade_password = 1;
 				}
 			}        	}
-		else if ((strlen($pass) == 32) && preg_match('∞(^[a-f0-9]{32}$)∞i', $pass, $treffer))
+		else if ((strlen($pass) == 32) && preg_match('#(^[a-f0-9]{32}$)#i', $pass, $treffer))
         	{
         		// HASH MD5 erkannt
         		$salt = 'MD5';

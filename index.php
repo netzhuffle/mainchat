@@ -17,7 +17,7 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 	#print "chat_referer = $chat_referer";
 
 	// Backdoorschutz über den HTTP_REFERER
-	if (isset($chat_referer))
+	if (isset($chat_referer) && $chat_referer != "")
 	{
 
 		if (!preg_match("/".$chat_referer."/",$_SERVER["HTTP_REFERER"]) && $aktion != "neu") 
@@ -151,7 +151,7 @@ require ("functions.php");
 require ("functions.php-werbung.php");
 
 // Backdoorschutz über den HTTP_REFERER - wir prüfen ob bei gesetztem HTTP_HOST ob die index.php in eigenem Frameset läuft sonst => Fehler
-if (isset($chat_referer))
+if (isset($chat_referer) && $chat_referer != "")
 {
         $tmp=parse_url($serverprotokoll."://".$_SERVER["HTTP_HOST"]);
 	$chat_referer2=$tmp['scheme']."://".$tmp['host'];
@@ -163,7 +163,7 @@ if (isset($chat_referer))
 #	print "ref: ".$chat_referer."<BR>";
 #	print "ref original: ".$refereroriginal."<BR>";
 
-	if ( (!preg_match("∞".$chat_referer2."∞",$_SERVER["HTTP_REFERER"])) && (!preg_match("∞".$chat_referer."∞",$refereroriginal)) && $aktion != "neu") 
+	if ( (!preg_match("#".$chat_referer2."#",$_SERVER["HTTP_REFERER"])) && (!preg_match("#".$chat_referer."#",$refereroriginal)) && $aktion != "neu") 
 	{
 		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf.
 		     "<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"5; URL=$chat_login_url\">\n".
@@ -199,7 +199,7 @@ $body_tag=$body_tag."TEXT=\"$farbe_text\" ".
 
 
 // Liste offener Räume definieren (optional)
-if ($raum_auswahl && !$beichtstuhl):
+if ($raum_auswahl && (!isset($beichtstuhl) || !$beichtstuhl)):
 
 	// Falls eintrittsraum nicht gesetzt ist, mit Lobby überschreiben
 	if (strlen($eintrittsraum)==0):
@@ -273,7 +273,7 @@ $logintext .=
 	"</TR></TABLE>\n".$t['login3'];
 
 // SSL?
-if (($ssl_login) || ($SSLRedirect == "1"))
+if (($ssl_login) || (isset($SSLRedirect) && $SSLRedirect == "1"))
 {
 	$chat_file="https://".$http_host.$chat_url;
 }
@@ -1565,7 +1565,7 @@ switch ($aktion) {
 			// Beichtstuhl-Special
 			// Falls es Räume mit nur einem Admin gibt und niemand in der Lobby ist,
 			// Eintritt in einen solchen Raum, ansonsten in Lobby
-			if ($beichtstuhl) {
+			if (isset($beichtstuhl) && $beichtstuhl) {
 
 				$login_in_lobby=FALSE;
 
@@ -1658,7 +1658,7 @@ switch ($aktion) {
 				        $frame_type="solaris";
 				elseif (preg_match("/msie/",$user_agent)):
 				        $frame_type="ie";
-				elseif (preg_match('∞mozilla/4\.7∞i',$user_agent)):
+				elseif (preg_match('#mozilla/4\.7#i',$user_agent)):
 				    $frame_type="nswin";
 				else:
 				        $frame_type="def";
@@ -1704,7 +1704,7 @@ switch ($aktion) {
 					$frame_type="solaris";
 				elseif (preg_match("/msie/",$user_agent)):
 					$frame_type="ie";
-				elseif (preg_match('∞mozilla/4\.7∞i',$user_agent)):
+				elseif (preg_match('#mozilla/4\.7#i',$user_agent)):
 					$frame_type="nswin";
 				else:
 					$frame_type="def";
@@ -2100,7 +2100,7 @@ switch ($aktion) {
                 $frame_type="solaris";
         elseif (preg_match("/msie/",$user_agent)):   
                 $frame_type="ie";
-        elseif (preg_match('∞mozilla/4\.7∞i',$user_agent)):
+        elseif (preg_match('#mozilla/4\.7#i',$user_agent)):
                 $frame_type="nswin";
         else:
                 $frame_type="def";  
@@ -2240,7 +2240,7 @@ Bei Problemen hilft Euch das mainChat Team natürlich gerne weiter.<br><br>
 		str_replace("%farbe_text%",$farbe_text,$disclaimer).$f4."</DIV>\n</FORM>";
 	werbung("index_popup",$werbung_gruppe);
 
-	if (!$beichtstuhl) {
+	if (!isset($beichtstuhl) || !$beichtstuhl) {
 
 		// Wie viele User sind in der DB?
 		$query="SELECT count(u_id) FROM user WHERE u_level in ('A','C','G','M','S','U')";

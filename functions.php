@@ -1457,7 +1457,7 @@ function ist_netscape() {
 	// Browser auf Netscape 4.7x prüfen
 	global $HTTP_SERVER_VARS;
 
-	if (preg_match('∞mozilla/4\.7∞i',$_SERVER["HTTP_USER_AGENT"])) { 
+	if (preg_match('#mozilla/4\.7#i',$_SERVER["HTTP_USER_AGENT"])) { 
 		return(true);
 	} else {
 		return(false);

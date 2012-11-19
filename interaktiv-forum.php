@@ -127,12 +127,12 @@ function window_reload(file,win_name) {
 	$mlnk[13] = "forum-suche.php?http_host=$http_host&id=$id";
 
 	echo $f1."<b>";
-	if (!$eingabe_light_hilfe) echo "[<A HREF=\"$mlnk[1]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[1]');return(false)\">$t[menue4]</A>]&nbsp;";
+	if (!isset($eingabe_light_hilfe) || !$eingabe_light_hilfe) echo "[<A HREF=\"$mlnk[1]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[1]');return(false)\">$t[menue4]</A>]&nbsp;";
         echo "[<A HREF=\"$mlnk[3]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster('$mlnk[3]');return(false)\">$t[menue2]</A>]&nbsp;";
 
 	if ($o_js) echo "[<A HREF=\"$mlnk[6]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster3('$mlnk[6]');return(false)\">$t[menue9]</A>]&nbsp;";
 
-	if (!$eingabe_light_log) echo "[<A HREF=\"$mlnk[8]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster3('$mlnk[8]');return(false)\">$t[menue7]</A>]&nbsp;";
+	if (!isset($eingabe_light_log) || !$eingabe_light_log) echo "[<A HREF=\"$mlnk[8]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster3('$mlnk[8]');return(false)\">$t[menue7]</A>]&nbsp;";
 	echo "[<A HREF=\"$mlnk[7]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[7]');return(false)\">$t[menue10]</A>]&nbsp;";
 
 

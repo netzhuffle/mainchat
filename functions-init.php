@@ -30,7 +30,7 @@ $chat_url=dirname($phpself);
 if (substr($chat_url,-1)!="/") $chat_url.="/";
 
 // Wenn zwingend SSL, dann ... 
-if ($SSLRedirect == "1")
+if (isset($SSLRedirect) && $SSLRedirect == "1")
 {
 	// ... weiterleiten auf HTTPS wenn nicht schon sowieso aufgerufen
 	if (!((isset($_SERVER["HTTPS"]) && ($_SERVER["HTTPS"] == '1' || strtolower($_SERVER["HTTPS"])=='on'))))
