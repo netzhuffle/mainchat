@@ -2628,7 +2628,7 @@ default:
 		// Spruch suchen
 		// Sprüche in Array lesen
 		$sp_list = file("conf/$datei_spruchliste");
-                $sp_such = "^".$spruchname."\t".$spruchart."\t";
+                $sp_such = "^".preg_quote($spruchname, "/")."\t".$spruchart."\t";
                 for(@reset($sp_list); (list(,$sp_text)=each($sp_list)) AND (!preg_match("/".$sp_such."/",$sp_text)); );
 
 
@@ -2670,7 +2670,7 @@ default:
 
 			// Hinweise ausgeben
 	                for(@reset($sp_list); list(,$sp_text)=each($sp_list) ; )
-	                     if ( preg_match("/^".$spruchname."\t/i",$sp_text) ) {
+	                     if ( preg_match("/^".preg_quote($spruchname, "/")."\t/i",$sp_text) ) {
 					$spruchtmp=preg_split("/\t/", $sp_text, 3);
 					$txt="<SMALL><B>$t[chat_spruch4] <I>".
 						$spruchtmp[0]." ".
