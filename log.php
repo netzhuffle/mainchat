@@ -19,7 +19,7 @@ if ($aktion=="abspeichern"):
         header("Content-Disposition: attachment; filename=\"$dateiname\"");
         header("Content-Location: $dateiname");
         
-        if ($SSLRedirect == "1")      
+        if (isset($SSLRedirect) && $SSLRedirect == "1")      
 	{       
 		header("Cache-Control: maxage=15"); //In seconds
 		header("Pragma: public");

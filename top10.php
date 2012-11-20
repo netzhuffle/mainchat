@@ -166,7 +166,7 @@ if ($erweitertefeatures) {
 		// Daten in Cache schreiben und alle anderen Einträge löschen
 		unset($f);
 		$f['t_eintrag']=1;
-		$f['t_daten']=serialize($array_user);
+		$f['t_daten']=isset($array_user) ? serialize($array_user) : null;
 		$t_id=schreibe_db("top10cache",$f,0,"t_id");
 		$query="DELETE FROM top10cache WHERE t_eintrag=1 AND t_id!='$t_id'";
 		$result=mysql_query($query, $conn);

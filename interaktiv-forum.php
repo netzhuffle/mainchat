@@ -158,7 +158,7 @@ function window_reload(file,win_name) {
 			"&nbsp;&nbsp;&nbsp;[<A HREF=\"$mlnk[5]\" onMouseOver=\"return(true)\" TARGET=\"$logouttarget\">$t[menue6]</A>]&nbsp;";
 	};
         echo "</b><br><br>\n";
-        if (!(($u_level == 'U' || $level == 'G') && ($useronline_anzeige_deaktivieren == "1")))
+        if (!(($u_level == 'U' || $level == 'G') && (isset($useronline_anzeige_deaktivieren) && $useronline_anzeige_deaktivieren == "1")))
         {
                 echo str_replace("%anzahl_gesamt%",$anzahl_gesamt,$t['forum_interaktiv_txt']).$f2."<BR>\n";
         }

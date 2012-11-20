@@ -213,17 +213,17 @@ function window_reload(file,win_name) {
 
 	// Code funktioniert mit und ohne javascript
 	echo "<TR><TD></TD><TD><B>".$f1;
-	if (!$eingabe_light_hilfe) echo "[<A HREF=\"$mlnk[4]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[4]');return(false)\">$t[menue4]</A>]&nbsp;";
-	if (!$eingabe_light) if (!isset($beichtstuhl) || !$beichtstuhl || $admin) echo "[<A HREF=\"$mlnk[1]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[1]');return(false)\">$t[menue1]</A>]&nbsp;".
+	if (!isset($eingabe_light_hilfe) || !$eingabe_light_hilfe) echo "[<A HREF=\"$mlnk[4]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[4]');return(false)\">$t[menue4]</A>]&nbsp;";
+	if (!isset($eingabe_light) || !$eingabe_light) if (!isset($beichtstuhl) || !$beichtstuhl || $admin) echo "[<A HREF=\"$mlnk[1]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[1]');return(false)\">$t[menue1]</A>]&nbsp;".
 					"[<A HREF=\"$mlnk[2]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster('$mlnk[2]');return(false)\">$t[menue2]</A>]&nbsp;";
-	if (!$eingabe_light) if ($communityfeatures && (!isset($beichtstuhl) || !$beichtstuhl || $admin)) echo "[<A HREF=\"$mlnk[10]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[10]');return(false)\">$t[menue10]</A>]&nbsp;";
-	if (!$eingabe_light) if ($forumfeatures && $communityfeatures && (!isset($beichtstuhl) || !$beichtstuhl || $admin) && ((isset($aktraum) && $aktraum->r_status1<>"L") || $admin)) echo "[<A HREF=\"$mlnk[11]\" onMouseOver=\"return(true)\" TARGET=\"topframe\">$t[menue11]</A>]&nbsp;";
-	if (!$eingabe_light) if ($umfrageanzeigen && (!$beichtstuhl || $admin)) echo "[<A HREF=\"$mlnk[13]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[13]');return(false)\">$t[menue13]</A>]&nbsp;";
-	if (!$eingabe_light) if (!isset($beichtstuhl) || !$beichtstuhl || $admin) echo "[<A HREF=\"$mlnk[3]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster('$mlnk[3]');return(false)\">$t[menue3]</A>]&nbsp;";
-	if (!$eingabe_light) if ($admin) echo "[<A HREF=\"$mlnk[5]\" TARGET=\"640_$fenster\" onClick=\"neuesFenster2('$mlnk[5]');return(false)\">$t[menue5]</A>]&nbsp;";
+	if (!isset($eingabe_light) || !$eingabe_light) if ($communityfeatures && (!isset($beichtstuhl) || !$beichtstuhl || $admin)) echo "[<A HREF=\"$mlnk[10]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[10]');return(false)\">$t[menue10]</A>]&nbsp;";
+	if (!isset($eingabe_light) || !$eingabe_light) if ($forumfeatures && $communityfeatures && (!isset($beichtstuhl) || !$beichtstuhl || $admin) && ((isset($aktraum) && $aktraum->r_status1<>"L") || $admin)) echo "[<A HREF=\"$mlnk[11]\" onMouseOver=\"return(true)\" TARGET=\"topframe\">$t[menue11]</A>]&nbsp;";
+	if (!isset($eingabe_light) || !$eingabe_light) if ($umfrageanzeigen && (!$beichtstuhl || $admin)) echo "[<A HREF=\"$mlnk[13]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[13]');return(false)\">$t[menue13]</A>]&nbsp;";
+	if (!isset($eingabe_light) || !$eingabe_light) if (!isset($beichtstuhl) || !$beichtstuhl || $admin) echo "[<A HREF=\"$mlnk[3]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster('$mlnk[3]');return(false)\">$t[menue3]</A>]&nbsp;";
+	if (!isset($eingabe_light) || !$eingabe_light) if ($admin) echo "[<A HREF=\"$mlnk[5]\" TARGET=\"640_$fenster\" onClick=\"neuesFenster2('$mlnk[5]');return(false)\">$t[menue5]</A>]&nbsp;";
 	if ($admin && $communityfeatures) echo "[<A HREF=\"$mlnk[12]\" TARGET=\"640_$fenster\" onClick=\"neuesFenster2('$mlnk[12]');return(false)\">$t[menue12]</A>]&nbsp;";
 	if ($u_level=="M") echo "[<A HREF=\"$mlnk[8]\" TARGET=\"$fenster\" onClick=\"neuesFenster2('$mlnk[8]');return(false)\">$t[menue8]</A>]&nbsp;";
-	if (!$eingabe_light_log) echo "[<A HREF=\"$mlnk[7]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster3('$mlnk[7]');return(false)\">$t[menue7]</A>]&nbsp;";
+	if (!isset($eingabe_light_log) || !$eingabe_light_log) echo "[<A HREF=\"$mlnk[7]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster3('$mlnk[7]');return(false)\">$t[menue7]</A>]&nbsp;";
 	if ($o_js) echo "[<A HREF=\"$mlnk[9]\" TARGET=\"$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster3('$mlnk[9]');return(false)\">$t[menue9]</A>]&nbsp;";
 	echo "&nbsp;&nbsp;";
         if (isset($chat_logout_url)) 
@@ -240,7 +240,7 @@ function window_reload(file,win_name) {
 
 	unset($aktraum);
 
-	if ((!$eingabe_light) && (!isset($eingabe_light_farbe) || !$eingabe_light_farbe) && (!$admin)) {
+	if ((!isset($eingabe_light) || !$eingabe_light) && (!isset($eingabe_light_farbe) || !$eingabe_light_farbe) && (!$admin)) {
 		echo "<TD ALIGN=RIGHT><FONT SIZE=-1 COLOR=\"#".$u_farbe."\"><B>$t[farbe2]</B>&nbsp;</FONT></TD>";
 		for (@reset($farbe_chat_user); list($nummer,$ufarbe)=each($farbe_chat_user); ) {
 			echo "<TD BGCOLOR=\"#$ufarbe\">".

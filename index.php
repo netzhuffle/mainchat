@@ -888,7 +888,7 @@ switch ($aktion) {
 	if (!isset($email)) {
 		// Formular für die Erstregistierung ausgeben, 1. Schritt
 		echo "<p>".$t['neu33'];
-		if (strlen($anmeldung_nurmitbest)>0)
+		if (isset($anmeldung_nurmitbest) && strlen($anmeldung_nurmitbest)>0)
 		{   // Anmeldung mit Externer Bestätigung
 		    echo $t['neu45'];
 		}
@@ -924,7 +924,7 @@ switch ($aktion) {
                 for ($i=0; $i<count($domaingesperrt); $i++) 
 		{ 
 			$teststring = strtolower($email);
- 			if (($domaingesperrt[$i]) && (preg_match($domaingesperrt[$i],$teststring))) 
+ 			if (isset($domaingesperrt[$i]) && $domaingesperrt[$i] && (preg_match($domaingesperrt[$i],$teststring))) 
 			{ $gesperrt=true; print $t['neu40']; }
 		}   	
 		unset($teststring);
@@ -947,7 +947,7 @@ switch ($aktion) {
 		    $hash=md5($email."+".date("Y-m-d"));
 		    $email=urlencode($email);
 
-		    if (strlen($anmeldung_nurmitbest)>0)
+		    if (isset($anmeldung_nurmitbest) && strlen($anmeldung_nurmitbest)>0)
 		    { 
 	     	        // Anmeldung mit externer Bestätigung
 			$link1=$serverprotokoll."://".$http_host.$chatserver.$_SERVER['PHP_SELF']."?http_host=$http_host&aktion=neubestaetigen&frame=1";

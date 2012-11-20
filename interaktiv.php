@@ -85,7 +85,7 @@ if ($u_id):
 
 		// Raum wechseln
 		// Im Beichtstuhl-Modus dürfen Admins geschlossene Räume betreten
-		$o_raum=raum_gehe($o_id,$u_id,$u_nick,$o_raum,$r_id,$beichtstuhl);
+		$o_raum=raum_gehe($o_id,$u_id,$u_nick,$o_raum,$r_id,isset($beichtstuhl) ? $beichtstuhl : null);
 		if ($o_raum==$r_id):
 			// User in Raum ausgeben
 			raum_user($r_id,$u_id,$id);
@@ -184,7 +184,7 @@ if ($u_id):
 			$txt=str_replace("%chattern%",$chattext['chattern'],$txt);
 		};
 	};
-        if (!(($u_level == 'U' || $level == 'G') && ($useronline_anzeige_deaktivieren == "1")))
+        if (!(($u_level == 'U' || $level == 'G') && (isset($useronline_anzeige_deaktivieren) && $useronline_anzeige_deaktivieren == "1")))
         {
             echo " ".str_replace("%anzahl_gesamt%",$anzahl_gesamt,$txt).$f2."</TD>";
         }

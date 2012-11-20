@@ -80,7 +80,7 @@ function zeige_aktionen($aktion) {
 	// Spezial Offline-Nachrichten (OLM löschen)
 	$offline_wie=$a_wie;
 	for($i=0;$i<$anzahl_wie;$i++){
-		if ($offline_wie[$i]==$onlinemessage) unset($offline_wie[$i]);
+		if (isset($offline_wie[$i]) && $offline_wie[$i]==$onlinemessage) unset($offline_wie[$i]);
 	};	
 	// Alle Kombinationen von offline_wie mit sms erstellen
 	if ($smsfeatures){
@@ -128,11 +128,11 @@ function zeige_aktionen($aktion) {
 			// Nachrichtentypen einzeln als Auswahl ausgeben
 			foreach($wie as $auswahl) {
 
-				if ($was[$def_was_eintrag][$a_wann_eintrag]['a_wie']==$auswahl) {
+				if (isset($was[$def_was_eintrag][$a_wann_eintrag]) && $was[$def_was_eintrag][$a_wann_eintrag]['a_wie']==$auswahl) {
 					echo "<OPTION SELECTED VALUE=\"".$was[$def_was_eintrag][$a_wann_eintrag]['a_id'].
 						"|".$auswahl."\">".str_replace(",","+",$auswahl)."\n";
 				} else {
-					echo "<OPTION VALUE=\"".$was[$def_was_eintrag][$a_wann_eintrag]['a_id'].
+					echo "<OPTION VALUE=\"".(isset($was[$def_was_eintrag][$a_wann_eintrag]) ? $was[$def_was_eintrag][$a_wann_eintrag]['a_id'] : "").
 						"|".$auswahl."\">".str_replace(","," + ",$auswahl)."\n";
 				};
 			}
