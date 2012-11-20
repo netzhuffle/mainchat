@@ -210,7 +210,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 
 
 			// Einstellungen für Homepage
-			if ($einstellungen['u_chathomepage']=="on") {
+			if (isset($einstellungen['u_chathomepage']) && $einstellungen['u_chathomepage']=="on") {
 				$einstellungen['u_chathomepage']="J";
 			} else {
 				$einstellungen['u_chathomepage']="N";
@@ -239,7 +239,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 			if (is_array($einstellungen)) {
 				unset($einstellungen['u_chathomepage']);
 				foreach ($vor_einstellungen as $key => $val) {
-					if ($einstellungen[$key]=="on") {
+					if (isset($einstellungen[$key]) && $einstellungen[$key]=="on") {
 						$einstellungen[$key]=TRUE;
 					} else {
 						$einstellungen[$key]=FALSE;
@@ -293,7 +293,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 			// Hidden Felder für die Farben erzeugen
 			$inputliste = "";
 			foreach ($farbliste as $val) {
-				$inputliste.="<INPUT TYPE=\"HIDDEN\" NAME=\"farben[$val]\" VALUE=\"$farben[$val]\">\n";
+				$inputliste.="<INPUT TYPE=\"HIDDEN\" NAME=\"farben[$val]\" VALUE=\"" . (isset($farben) ? $farben[$val] : "") . "\">\n";
 			};
 
 			echo "<FORM ENCTYPE=\"multipart/form-data\" NAME=\"home\" ACTION=\"$PHP_SELF\" METHOD=POST>\n".
@@ -306,7 +306,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 				"<input TYPE=\"HIDDEN\" NAME=\"MAX_FILE_SIZE\" VALUE=\"".($max_groesse*1024)."\">\n";
 
 			if (!isset($bilder)) $bilder = "";
-			edit_home($ui_userid,$u_nick,$home,$einstellungen,$farben,$bilder,$aktion);
+			edit_home($ui_userid,$u_nick,$home,$einstellungen,(isset($farben) ? $farben : null),$bilder,$aktion);
 			echo "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"SPEICHERN\"></FORM>\n";
 
 		} else {

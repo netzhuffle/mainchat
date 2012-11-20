@@ -140,9 +140,9 @@ function home_profil($u_id,$u_nick,$home,$farben,$aktion) {
 		$text.="<TR><TD colspan=4>&nbsp;</TD></TR>\n";
 	};
 
-	if (strlen($farben['profil'])>7) {
+	if (is_array($farben) && strlen($farben['profil'])>7) {
 		$bg="BACKGROUND=\"home_bild.php?http_host=$http_host&u_id=$u_id&feld=".$farben['profil']."\"";
-	} elseif (strlen($farben['profil'])==7) {
+	} elseif (is_array($farben) && strlen($farben['profil'])==7) {
 		$bg="BGCOLOR=\"$farben[profil]\"";
 	} else {
 		$bg="";
@@ -243,9 +243,9 @@ function home_info($u_id,$u_nick,$farben,$aktion) {
 			$text.="<TR><TD colspan=4>&nbsp;</TD></TR>\n";
 		};
 	}
-	if (strlen($farben['info'])>7) {
+	if (is_array($farben) && strlen($farben['info'])>7) {
 		$bg="BACKGROUND=\"home_bild.php?http_host=$http_host&u_id=$u_id&feld=".$farben['info']."\"";
-	} elseif (strlen($farben['info'])==7) {
+	} elseif (is_array($farben) && strlen($farben['info'])==7) {
 		$bg="BGCOLOR=\"$farben[info]\"";
 	} else {
 		$bg="";
@@ -320,9 +320,9 @@ function home_text($u_id,$u_nick,$home,$feld,$farben,$aktion) {
 		$text="<TR><TD COLSPAN=4 VALIGN=\"TOP\">".$text."</TD></TR>";
 	};
 
-	if (strlen($farben['ui_text'])>7) {
+	if (is_array($farben) && strlen($farben['ui_text'])>7) {
 		$bg="BACKGROUND=\"home_bild.php?http_host=$http_host&u_id=$u_id&feld=".$farben['ui_text']."\"";
-	} elseif (strlen($farben['ui_text'])==7) {
+	} elseif (is_array($farben) && strlen($farben['ui_text'])==7) {
 		$bg="BGCOLOR=\"$farben[ui_text]\"";
 	} else {
 		$bg="";
@@ -432,9 +432,9 @@ function home_aktionen($u_id,$u_nick,$home,$farben,$aktion) {
 			home_farbe($u_id,$u_nick,$home,"aktionen",$farben['aktionen'])."</TD>";
 	};
 
-	if (strlen($farben['aktionen'])>7) {
+	if (is_array($farben) && strlen($farben['aktionen'])>7) {
 		$bg="BACKGROUND=\"home_bild.php?http_host=$http_host&u_id=$u_id&feld=".$farben['aktionen']."\"";
-	} elseif (strlen($farben['aktionen'])==7) {
+	} elseif (is_array($farben) && strlen($farben['aktionen'])==7) {
 		$bg="BGCOLOR=\"$farben[aktionen]\"";
 	} else {
 		$bg="";
@@ -708,11 +708,14 @@ function zeige_home($u_id,$force=FALSE,$defaultfarben="") {
 	};
 
 	if ($ok) {
-		$body_tag="<BODY $bg ".
-			"TEXT=\"$farben[text]\" ".
+		$body_tag="<BODY $bg";
+		if (is_array($farben)) {
+			$body_tag .= " TEXT=\"$farben[text]\" ".
 			"LINK=\"$farben[link]\" ".
 			"VLINK=\"$farben[vlink]\" ".
-			"ALINK=\"$farben[vlink]\">\n";
+			"ALINK=\"$farben[vlink]\"";
+		}
+		$body_tag .= ">\n";
 
 
 		echo $body_tag.

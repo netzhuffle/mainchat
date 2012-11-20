@@ -36,9 +36,9 @@ if ($x<16) {
     $B=(floor($x/64)+4*floor($y/64))*16;
  } 
 $newcolor=sprintf("%02x%02x%02x",$R,$G,$B);
-if ($mit_grafik && $farbe_grafik) {
+if ($mit_grafik && isset($farbe_grafik) && $farbe_grafik) {
 	$newcolor=$farbe_grafik;
-} elseif ($mit_grafik && $setcolor) {
+} elseif ($mit_grafik && isset($setcolor) && $setcolor) {
 	$newcolor=$setcolor;
 } elseif ($x=="" && $mit_grafik && strlen($oldcolor)>7) {
 	$farbe_grafik=$oldcolor;
