@@ -1713,7 +1713,7 @@ case "/msgpriv": // Extra behandlung für Private Nachrichten im Userfenster, f�
 		// Empfänger im Chat suchen
 		// /talk muss z.B. mit "/talk kleiner" auch dann an kleiner gehen 
 		// wenn kleiner in anderem Raum ist und im eigenen Raum ein kleinerpfuscher anwesend ist.
-		if (isset($nick) && $nick['u_nick']=="") 
+		if (!isset($nick) || $nick['u_nick']=="") 
 		{
 			if ($chatzeile[0] == "/msgpriv") // Keine Nickergänzung bei diesem Nachrichtentyp
 			{
