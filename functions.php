@@ -1015,7 +1015,7 @@ function raum_ist_moderiert($raum) {
 	}
 	@mysql_free_result($result);
 	// system_msg("",0,$u_id,$system_farbe,"DEBUG: $raum_einstellungen[r_status1],$raum_einstellungen[r_status2],$raum_einstellungen[r_name]");
-	if ($r_status1=="m" || $r_status1=="M") {
+	if (isset($r_status1) && ($r_status1=="m" || $r_status1=="M")) {
 		$query="SELECT o_user FROM online ".
 			"WHERE o_raum=$raum AND o_level='M' ";
 		// system_msg("",0,$u_id,$system_farbe,$query." - $r_status1");

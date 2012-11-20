@@ -594,7 +594,7 @@ if (strlen($u_id)>0 && $admin):
 
 		echo "<TR><TD><B>$t[sonst22]</B></TD><TD>".$f1.
 			"<SELECT NAME=\"f[is_warn]\">";
-			if ($f['is_warn']=="ja"):
+			if (isset($f['is_warn']) && $f['is_warn']=="ja"):
 				echo "<OPTION SELECTED VALUE=\"ja\">$t[sonst20]";
 				echo "<OPTION VALUE=\"nein\">$t[sonst21]";
 			else:

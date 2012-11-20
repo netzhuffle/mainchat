@@ -130,8 +130,8 @@ $text=preg_replace('|\*(.*?)\*|','<i>\1</i>',
 			// erst mal nick_replace, falls Wort mit "@" beginnt.
 			if (substr($txt[$j],0,1)=="@") {
 				$nick=nick_ergaenze($txt[$j],"raum",1);		 // fehlermeldungen unterdrücken.
-				if (($admin || $u_level=="A") && $nick[u_nick]=="") $nick=nick_ergaenze($txt[$j],"online",1);		 // fehlermeldungen unterdrücken.
-				if ($nick[u_nick]!="") 
+				if (($admin || $u_level=="A") && $nick['u_nick']=="") $nick=nick_ergaenze($txt[$j],"online",1);		 // fehlermeldungen unterdrücken.
+				if ($nick['u_nick']!="") 
 				{
 					if ($at_sonderbehandlung == 1) // in /me sprüchen kein [zu Nick] an den anfang stellen, sondern nur nick ergänzen
 					{
@@ -140,7 +140,7 @@ $text=preg_replace('|\*(.*?)\*|','<i>\1</i>',
 					}
 					else
 					{
-						$rep="[".$t[chat_spruch6]."&nbsp;".$nick[u_nick]."] ";	
+						$rep="[".$t['chat_spruch6']."&nbsp;".$nick['u_nick']."] ";	
 						$text=$rep.preg_replace("!$txt[$j]!","",$text);	
 					}
 				}

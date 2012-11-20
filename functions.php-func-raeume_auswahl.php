@@ -50,7 +50,7 @@ if ($forumfeatures && $communityfeatures && !$nur_chat) {
 	@mysql_free_result($result);
 
 	foreach($whotext as $key => $whotxt) {
-		if ($key>1 && $anzahl_who[$key])
+		if ($key>1 && isset($anzahl_who) && $anzahl_who[$key])
 			$zusatz_select.="<OPTION VALUE=\"".($key*(-1))."\">&gt;&gt;".$whotxt."&lt;&lt; (".$anzahl_who[$key].")\n";
 	}
 }

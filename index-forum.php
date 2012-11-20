@@ -102,6 +102,6 @@ echo "</FRAMESET>\n";
 echo "<FRAME SRC=\"schreibe.php?http_host=$http_host&id=$id&o_who=2\" name=\"schreibe\" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO>\n";
 echo "</FRAMESET>\n";
 echo "<NOFRAMES>\n";
-echo $body_tag.$t[login6];
+echo $body_tag.(isset($t['login6']) ? $t['login6'] : "");
 
 ?>

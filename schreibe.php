@@ -48,13 +48,13 @@ if (strlen($u_id)>0){
         // Falls $text eine Eingabezeile enthält -> verarbeiten
 
         // Prüfung der Eingabe bei Admin und Moderator auf 4 fache Anzahl der Normalen eingabe
-	if ((($admin) || ($u_level == "M")) && (strlen($text)!=0) && (strlen($text) < (5 * $chat_max_eingabe)))
+	if ((($admin) || ($u_level == "M")) && isset($text) && (strlen($text)!=0) && (strlen($text) < (5 * $chat_max_eingabe)))
 	{
 // debug
 // system_msg("",0,1222,$system_farbe,"Spamschutz deaktiv"); 	
         }
 	// Normale Prüfung für User
-        else if (strlen($text)!=0 AND strlen($text)<$chat_max_eingabe)
+        else if (isset($text) && strlen($text)!=0 && strlen($text)<$chat_max_eingabe)
         {
 
 		// Spamschutz prüfen, falls kein Admin und kein Moderator
@@ -88,13 +88,25 @@ if (strlen($u_id)>0){
 			};
 
 			// Aktuelle Eingabe im Array summieren
+			if (!isset($neu_spam_zeilen)) {
+				$neu_spam_zeilen = array();
+			}
+			if (!isset($neu_spam_zeilen[0])) {
+				$neu_spam_zeilen[0] = 0;
+			}
 			$neu_spam_zeilen[0]+=1;
+			if (!isset($neu_spam_byte)) {
+				$neu_spam_byte = array();
+			}
+			if (!isset($neu_spam_byte[0])) {
+				$neu_spam_byte[0] = 0;
+			}
 			$neu_spam_byte[0]+=strlen($text);
 
 			unset($f);
-			$f[o_spam_zeit]=$aktuelle_zeit;
-			$f[o_spam_zeilen]=serialize($neu_spam_zeilen);
-			$f[o_spam_byte]=serialize($neu_spam_byte);
+			$f['o_spam_zeit']=$aktuelle_zeit;
+			$f['o_spam_zeilen']=serialize($neu_spam_zeilen);
+			$f['o_spam_byte']=serialize($neu_spam_byte);
 			schreibe_db("online",$f,$o_id,"o_id");
 
 			// foreach($neu_spam_byte as $key => $value)
@@ -115,7 +127,7 @@ if (strlen($u_id)>0){
 		@mysql_free_result($result);
 
 	}
-	else if (strlen($text) >= $chat_max_eingabe)
+	else if (isset($text) && strlen($text) >= $chat_max_eingabe)
 	{
 		$fehler=TRUE;
         }
@@ -127,7 +139,7 @@ if (strlen($u_id)>0){
                 {
                         $u_farbe=$user_farbe;
                 } 
-                chat_msg($o_id,$u_id,$u_nick,$u_farbe,$admin,$o_raum,$text,"");
+                chat_msg($o_id,$u_id,$u_nick,$u_farbe,$admin,$o_raum,isset($text) ? $text : "","");
         }
         // Spam -> Fehler ausgeben
     	else if ($fehler)

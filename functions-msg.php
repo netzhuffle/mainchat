@@ -3213,7 +3213,7 @@ function auto_knebel($text) {
 			$testtext=str_replace("_","",$testtext);
 			#$testtext=str_replace(".","\.",$testtext);
 			
-			if ($ak[$i]) {
+			if (isset($ak[$i]) && $ak[$i]) {
 				if (preg_match($ak[$i],$testtext,$treffer)) {
 				system_msg("",0,$u_id,$system_farbe,$t['knebel7']); 
 
