@@ -1748,7 +1748,7 @@ case "/msgpriv": // Extra behandlung für Private Nachrichten im Userfenster, f�
 		}
 
 		// Falls Empfänger gefunden, Nachricht versenden
-		if ($nick['u_nick'] != "") {
+		if (isset($nick) && $nick['u_nick'] != "") {
 
 			// nick gefunden und Eindeutig.
 			if ($text!=" "){

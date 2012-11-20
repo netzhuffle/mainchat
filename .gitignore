@@ -3,3 +3,4 @@
 .settings
 /conf/config.php*
 /seitenkoepfe/*
+/logs/*

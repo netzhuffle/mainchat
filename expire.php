@@ -423,7 +423,7 @@ if ($zeit=="03:10") {
 			/* mittelt.						
 			// bzw. gesammt gespeichert wenn $STAT_DB_COLLECT gesetzt ist 																			*/
 
-		if (strlen($STAT_DB_COLLECT)>0)
+		if (isset($STAT_DB_COLLECT) && strlen($STAT_DB_COLLECT)>0)
 		{
 		    $r0 = @mysql_query("SELECT '$STAT_DB_COLLECT'",$conn);
 		}
@@ -445,7 +445,7 @@ if ($zeit=="03:10") {
 				while ($i < $n)
 				{
 
-					if (strlen($STAT_DB_COLLECT)>0)
+					if (isset($STAT_DB_COLLECT) && strlen($STAT_DB_COLLECT)>0)
 					{
 						$o_vhost = $STAT_DB_COLLECT;
 					        $r1 = @mysql_query("SELECT COUNT(o_id) AS anzahl FROM online ",$conn);
