@@ -8,7 +8,7 @@ umask(700);
 set_time_limit(120);
 
 // Kopf und Fuß definieren
-$kopf_tag="<HTML><HEAD><TITLE>$body_titel</TITLE>$stylesheet</HEAD><BODY><PRE>\n"; 
+$kopf_tag="<HTML><HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>$stylesheet</HEAD><BODY><PRE>\n"; 
 $fuss_tag="</PRE></BODY></HTML>\n";
 
 echo $kopf_tag;

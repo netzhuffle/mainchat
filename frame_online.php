@@ -14,7 +14,7 @@ $body_tag=$body_tag."TEXT=\"$farbe_text\" ".
 		"VLINK=\"$farbe_vlink\" ".
 		"ALINK=\"$farbe_vlink\">\n";
  
-echo "<HTML><HEAD><TITLE>$body_titel</TITLE>\n".
+echo "<HTML><HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".
 	"$stylesheet</HEAD>\n$body_tag\n";
 
 ?>

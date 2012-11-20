@@ -57,7 +57,7 @@ if (strlen($u_id)>0):
 	// Kopf ausgeben
 ?>
 <HTML>
-<HEAD><TITLE><?php echo $body_titel."-Log ".date("d.m.y H:i"); ?></TITLE>
+<HEAD><TITLE><?php echo $body_titel."-Log ".date("d.m.y H:i"); ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT LANGUAGE=JavaScript>
         window.focus()     
         function neuesFenster(url,name) {

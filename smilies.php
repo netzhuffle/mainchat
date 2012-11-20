@@ -14,7 +14,7 @@ id_lese($id);
 aktualisiere_online($u_id,$o_raum);
 
 
-echo "<HTML>\n<HEAD><TITLE>".$body_titel."_Info</TITLE>\n";
+echo "<HTML>\n<HEAD><TITLE>".$body_titel."_Info</TITLE><META CHARSET=UTF-8>\n";
 
 echo "<SCRIPT LANGUAGE=\"JavaScript\">\n";
 echo "  var http_host='$http_host';\n";

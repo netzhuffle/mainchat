@@ -20,7 +20,7 @@ $fenster=str_replace("ß","",$fenster);
 // Kopf ausgeben
 ?>
 <HTML>
-<HEAD><TITLE><?php echo $body_titel."_SMS-Payment"; ?></TITLE>
+<HEAD><TITLE><?php echo $body_titel."_SMS-Payment"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT LANGUAGE=JavaScript>
         window.focus()
         function win_reload(file,win_name) {

@@ -19,7 +19,7 @@ $body_tag.="TEXT=\"$farbe_chat_text3\" ".
 
 if (strlen($u_id)>0) {
 	// Kopf ausgeben
-	echo "<HTML><HEAD><TITLE>$body_titel</TITLE>\n";
+	echo "<HTML><HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n";
 
 	// Falls keine Texte zur Moderation gefunden wurden, nach 10 Sek reload
 	if ($o_js) { 

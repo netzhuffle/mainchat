@@ -172,7 +172,7 @@ function liste() {
 // Kopf ausgeben
 ?>
 <HTML>
-<HEAD><TITLE><?php echo $body_titel."_Info"; ?></TITLE>
+<HEAD><TITLE><?php echo $body_titel."_Info"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT LANGUAGE=JavaScript>
         window.focus()     
 </SCRIPT>

@@ -18,7 +18,7 @@ if (isset($eingabe_light_hilfe) && $eingabe_light_hilfe=="1" && ($reset<>"1") &&
 // Kopf ausgeben
 ?>
 <HTML>
-<HEAD><TITLE><?php echo $body_titel."_Info"; ?></TITLE>
+<HEAD><TITLE><?php echo $body_titel."_Info"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT LANGUAGE=JavaScript>
         window.focus()
         function win_reload(file,win_name) {

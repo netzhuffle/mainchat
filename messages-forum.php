@@ -31,7 +31,7 @@ if (strlen($u_id)>0){
 	$fenster=str_replace("Ü","",$fenster);
 	$fenster=str_replace("ß","",$fenster);
 	?>
-<HTML><HEAD><TITLE><?php echo $body_titel; ?></TITLE>
+<HTML><HEAD><TITLE><?php echo $body_titel; ?></TITLE><META CHARSET=UTF-8>
 <META HTTP-EQUIV="REFRESH" CONTENT="<?php echo intval($timeout/3) ."; URL=messages-forum.php?http_host=$http_host&id=$id";?>">
 <?php echo $stylesheet.
         "<SCRIPT LANGUAGE=JavaScript>\n".

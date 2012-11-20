@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>LIESMICH</title>
+<title>LIESMICH</TITLE><META CHARSET=UTF-8>
 </head>
 
 <body>

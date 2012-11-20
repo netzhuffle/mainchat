@@ -22,7 +22,7 @@ if (isset($smilies_config) && file_exists("conf/".$smilies_config)):
 endif;
 
 
-echo "<HTML>\n<HEAD><TITLE>".$body_titel."_Info</TITLE>\n";
+echo "<HTML>\n<HEAD><TITLE>".$body_titel."_Info</TITLE><META CHARSET=UTF-8>\n";
 
 echo "<SCRIPT LANGUAGE=\"JavaScript\">\n";
 echo "  var http_host='$http_host';\n";

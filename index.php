@@ -22,7 +22,7 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 
 		if (!preg_match("/".$chat_referer."/",$_SERVER["HTTP_REFERER"]) && $aktion != "neu") 
 		{
-			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf.
+			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf.
 			     "<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"5; URL=$chat_login_url\">\n".
 			     "</HEAD>\n";
 			zeige_kopf();
@@ -67,7 +67,7 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 			
 
 		} else {
-			echo "<HTML><HEAD><TITLE>mainChat - http://www.mainchat.de </TITLE></HEAD><BODY>".
+			echo "<HTML><HEAD><TITLE>mainChat - http://www.mainchat.de </TITLE><META CHARSET=UTF-8></HEAD><BODY>".
 				"<P>Der mainChat ist leider aus technischen Gründen nicht erreichbar. ".
 				"Bitte versuchen Sie es später noch einmal.</P></BODY></HTML>\n";
 			exit();
@@ -83,7 +83,7 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 	};
 
 	// Frameset ausgeben
-	echo "<HTML><HEAD>\n<TITLE>".$body_titel."</TITLE>\n".$metatag."\n</HEAD>".
+	echo "<HTML><HEAD>\n<TITLE>".$body_titel."</TITLE><META CHARSET=UTF-8>\n".$metatag."\n</HEAD>".
 		"<FRAMESET COLS=\"".$opt."100%,*\" BORDER=\"0\" FRAMEBORDER=\"0\">\n";
 
 	if($opt) echo "<FRAME SRC=\"".$frame_links."\" NAME=\"leftframe\" NORESIZE>\n";
@@ -165,7 +165,7 @@ if (isset($chat_referer) && $chat_referer != "")
 
 	if ( (!preg_match("#".$chat_referer2."#",$_SERVER["HTTP_REFERER"])) && (!preg_match("#".$chat_referer."#",$refereroriginal)) && $aktion != "neu") 
 	{
-		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf.
+		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf.
 		     "<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"5; URL=$chat_login_url\">\n".
 		     "</HEAD>\n";
 		zeige_kopf();
@@ -510,7 +510,7 @@ if ($aktion=="logoff"):
 
 	// Header ausgeben
 	if (($layout_bodytag) && (!isset($chat_logout_url)))
-		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 
 	// Logoff falls noch online
 	if (strlen($u_id)>0):
@@ -520,7 +520,7 @@ if ($aktion=="logoff"):
 	endif;
 
 	if (isset($chat_logout_url) && ($chat_logout_url <> "")) {
-		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf.
+		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf.
 		     "<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0; URL=$chat_logout_url\">\n".
 		     "</HEAD>\n";
 		zeige_kopf();
@@ -564,7 +564,7 @@ if ($aktion == "neu" &&
     $hash != md5($f['u_adminemail']."+".date("Y-m-d")))
 		{
 		if ($layout_bodytag)
-					echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+					echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 					zeige_kopf();
 					echo "<P><B>Fehler:</B> Die URL ist nicht korrekt! Bitte melden Sie sich ".
 						"<A HREF=\"".$chatserver."index.php?http_host=$http_host\">hier</A> neu an.</P>";
@@ -597,7 +597,7 @@ if ($aktion == "mailcheck" && isset($email) && isset($hash))
 					{ 
 					// Header ausgeben
 					if ($layout_bodytag)
-					echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+					echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 					zeige_kopf();
 					echo "<P><B>Fehler:</B> Die URL ist nicht korrekt! Bitte melden Sie sich ".
 						"<A HREF=\"".$chatserver."index.php?http_host=$http_host\">hier</A> neu an.</P>";
@@ -611,7 +611,7 @@ if ($aktion == "mailcheck" && isset($email) && isset($hash))
 		{
 			// Header ausgeben
 			if ($layout_bodytag)
-			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 			zeige_kopf();
 			echo "<P><B>Fehler:</B> Diese Mail wurde bereits für eine Anmeldung benutzt! Bitte melden Sie sich ".
 				"<A HREF=\"".$chatserver."index.php?http_host=$http_host\">hier</A> neu an.</P>";
@@ -624,7 +624,7 @@ switch ($aktion) {
     case "passwort_neu":
 
 	if ($layout_bodytag)
-		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 	zeige_kopf();
 	echo $willkommen;
 	
@@ -780,7 +780,7 @@ switch ($aktion) {
 
     case "neubestaetigen":
 	if ($layout_bodytag)
-		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 	zeige_kopf();
 	echo $willkommen;
 
@@ -850,7 +850,7 @@ switch ($aktion) {
 	break;
 
     case "mailcheckm":
-	echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+	echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 	zeige_kopf();
 	echo $willkommen;
 	echo "<p>".$t['neu42']."</p>";
@@ -869,7 +869,7 @@ switch ($aktion) {
 
 	// Header ausgeben
 	if ($layout_bodytag)
-	echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+	echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 	zeige_kopf();
 	echo $willkommen;
 
@@ -998,7 +998,7 @@ switch ($aktion) {
 
 	// Header ausgeben
 	if ($layout_bodytag)
-	echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+	echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 	zeige_kopf();
 
 	echo $t['login4'];
@@ -1013,7 +1013,7 @@ switch ($aktion) {
 
 	// Header ausgeben
 	if ($layout_bodytag)
-	echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+	echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 	zeige_kopf();
 
 	if ($chat_offline_kunde) {
@@ -1065,7 +1065,7 @@ switch ($aktion) {
 			// Header ausgeben
 			if ($layout_bodytag)
 			{
-			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n";
+			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n";
 				"</HEAD>\n";
 			}
 			zeige_kopf();
@@ -1318,7 +1318,7 @@ switch ($aktion) {
 
 			// Header ausgeben
 			if ($layout_bodytag)
-				echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+				echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 			zeige_kopf();
 
 			echo str_replace("%u_name%",$u_name,
@@ -1332,7 +1332,7 @@ switch ($aktion) {
 			
 			// Header ausgeben
 			if ($layout_bodytag)
-			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
+			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
 				"</HEAD>\n";
 			zeige_kopf();
 
@@ -1348,7 +1348,7 @@ switch ($aktion) {
 
 			// Header ausgeben
 			if ($layout_bodytag)
-			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
+			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
 				"</HEAD>\n";
 			zeige_kopf();
 
@@ -1410,7 +1410,7 @@ switch ($aktion) {
 
 				// Header ausgeben
 				if ($layout_bodytag)
-				echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
+				echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
 					"</HEAD>\n";
 				zeige_kopf();
 
@@ -1643,7 +1643,7 @@ switch ($aktion) {
 			
 			// Kopf ausgeben
 			if ($layout_bodytag)
-				echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+				echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 
 			if ($communityfeatures && $eintritt == "forum") {
 
@@ -1780,7 +1780,7 @@ switch ($aktion) {
 
 		// Header ausgeben
 		if ($layout_bodytag)
-			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
+			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n</HEAD>\n";
 		zeige_kopf();
 		unset($u_name);
 		unset($u_nick);
@@ -1794,7 +1794,7 @@ switch ($aktion) {
 
 		// Header ausgeben
 		if ($layout_bodytag)
-			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
+			echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
 				"</script>\n</HEAD>\n";
 		zeige_kopf();
 
@@ -1854,7 +1854,7 @@ switch ($aktion) {
 
 	// Header ausgeben
 	if ($layout_bodytag)
-		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
+		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
 			"</script>\n</HEAD>\n";
 	zeige_kopf();
 	echo $willkommen;
@@ -2163,7 +2163,7 @@ switch ($aktion) {
 	// Kopf
 	// Header ausgeben
 	if ($layout_bodytag)
-		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
+		echo "<HTML>\n<HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n".$metatag.$stylesheet."\n".$zusatztext_kopf."\n".
 			"</HEAD>\n";
 	zeige_kopf();
 	echo $willkommen;

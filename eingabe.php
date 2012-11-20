@@ -47,7 +47,7 @@ if ( $u_id ) {
 // Kopf ausgeben
 ?>
 <HTML>
-<HEAD><TITLE><?php echo $body_titel; ?></TITLE>
+<HEAD><TITLE><?php echo $body_titel; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT LANGUAGE="JavaScript">
 function resetinput() {
 

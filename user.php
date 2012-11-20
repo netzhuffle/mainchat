@@ -50,7 +50,7 @@ if (ist_netscape()) {
 
 
 if ($aktion!="zeigalle" || $u_level!="S") {
-	echo "<HTML>\n<HEAD><TITLE>".$body_titel."_Info</TITLE>\n";
+	echo "<HTML>\n<HEAD><TITLE>".$body_titel."_Info</TITLE><META CHARSET=UTF-8>\n";
 
 	if ($aktion=="chatuserliste") {
 		echo "<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"".intval($timeout/3)."; URL=user.php?http_host=$http_host&id=$id&aktion=chatuserliste\">\n";

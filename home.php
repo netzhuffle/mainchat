@@ -37,7 +37,7 @@ if (isset($ui_userid) || (isset($aktion) && $aktion != "") || (isset($_SERVER["Q
 	$fenster=str_replace("ß","",$fenster);
 	?>
 <HTML>
-<HEAD><TITLE><?php echo $body_titel."_Home"; ?></TITLE>
+<HEAD><TITLE><?php echo $body_titel."_Home"; ?></TITLE><META CHARSET=UTF-8>
  <SCRIPT LANGUAGE=JavaScript>
         window.focus()
         function win_reload(file,win_name) {
@@ -333,7 +333,7 @@ $url="zeige_home.php?http_host=$http_host&ui_userid=$ui_userid&hash=$hash";
 if (isset($preview) && $preview=="yes") $url="zeige_home.php?http_host=$http_host&ui_userid=$ui_userid&hash=$hash&preview=yes&preview_id=$id";
 print '
 <html><head>
-<title>DEREFER</title>
+<title>DEREFER</TITLE><META CHARSET=UTF-8>
 <META HTTP-EQUIV="REFRESH" CONTENT="0; URL='. $url.' ">
 </head>
 <body bgcolor="#ffffff" link="#666666" vlink="#666666">

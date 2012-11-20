@@ -53,7 +53,7 @@ if ($u_id):
 
 	// Kopf ausgeben
 	?>
-<HTML><HEAD><TITLE><?php echo $body_titel; ?></TITLE>
+<HTML><HEAD><TITLE><?php echo $body_titel; ?></TITLE><META CHARSET=UTF-8>
 <META HTTP-EQUIV="REFRESH" CONTENT="<?php echo intval($timeout/3) ."; URL=interaktiv.php?http_host=$http_host&id=$id&o_raum_alt=$o_raum";?>">
 <SCRIPT LANGUAGE=JavaScript>
         function chat_reload(file) {

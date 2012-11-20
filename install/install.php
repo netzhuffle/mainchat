@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Mainchat Installation</title>
+<title>Mainchat Installation</TITLE><META CHARSET=UTF-8>
 <script language="javascript">
 function newWindow(url,name) 
 {

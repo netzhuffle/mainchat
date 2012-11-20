@@ -30,7 +30,7 @@ function kopf_forum($admin) {
                     "ALINK=\"$farbe_chat_vlink1\">\n";
 
   	?>
-	<HTML><HEAD><TITLE><?php echo (isset($body_titel) ? $body_titel : ""); ?></TITLE>
+	<HTML><HEAD><TITLE><?php echo (isset($body_titel) ? $body_titel : ""); ?></TITLE><META CHARSET=UTF-8>
 	<?php echo $stylesheet; ?>
 	<SCRIPT LANGUAGE="JavaScript">
 	function ask(text) {

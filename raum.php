@@ -22,7 +22,7 @@ $fenster=str_replace("ß","",$fenster);
 // Kopf ausgeben
 ?>
 <HTML>
-<HEAD><TITLE><?php echo $body_titel."_Info"; ?></TITLE>
+<HEAD><TITLE><?php echo $body_titel."_Info"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT LANGUAGE=JavaScript>
         window.focus()     
 	function neuesFenster(url,name) { 

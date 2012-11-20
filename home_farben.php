@@ -12,7 +12,7 @@ id_lese($id);
 // Kopf ausgeben
 ?>
 <HTML>
-<HEAD><TITLE><?php echo $body_titel."_Farben"; ?></TITLE>
+<HEAD><TITLE><?php echo $body_titel."_Farben"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT LANGUAGE=JavaScript>
 window.focus()
 function colorsave() {

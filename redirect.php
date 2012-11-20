@@ -26,7 +26,7 @@ if ($url) {
 	if (substr($url,0,7)!="http://") $url="http://".$url;
 ?>
 <html><head>
-<title>DEREFER</title>
+<title>DEREFER</TITLE><META CHARSET=UTF-8>
 <META HTTP-EQUIV="REFRESH" CONTENT="0; URL=<?php echo $url;?>">
 </head>
 <body bgcolor="#ffffff" link="#666666" vlink="#666666">
