@@ -1087,6 +1087,7 @@ case "/kick":
 			else:
 
 				// user nicht gefunden oder nicht online? dann testen, ob gespeert, damit man das 
+				// user nicht gefunden oder nicht online? dann testen, ob gesperrt, damit man das 
 				// gesperrt auch wieder raus bekommt.
 				$query="SELECT u_nick,u_id from user left join sperre ".
 					" on u_id = s_user ".
@@ -1104,6 +1105,7 @@ case "/kick":
 				@mysql_free_result($result);                                                                                                                                                                                                                                                                                                
 			endif;
 	       	 	mysql_free_result($result);
+	       	 	@mysql_free_result($result);
 		else:
 			system_msg("",0,$u_id,$system_farbe,$t['chat_msg15']);
 		endif;
@@ -1714,6 +1716,7 @@ case "/msgpriv": // Extra behandlung für Private Nachrichten im Userfenster, f�
 		// /talk muss z.B. mit "/talk kleiner" auch dann an kleiner gehen 
 		// wenn kleiner in anderem Raum ist und im eigenen Raum ein kleinerpfuscher anwesend ist.
 		if ($nick['u_nick']=="") 
+		if (isset($nick) && $nick['u_nick']=="") 
 		{
 			if ($chatzeile[0] == "/msgpriv") // Keine Nickergänzung bei diesem Nachrichtentyp
 			{
