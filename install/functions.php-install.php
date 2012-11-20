@@ -35,7 +35,7 @@ function step_1()
 	     "<tr bgcolor=\"#85D4FF\"><td > Anzeige Indexseite oben:</td><td><input type=\"text\" name=\"chat[layoutkopf]\" size=\"40\"></td></tr>\n".
 	     "<tr><td> Anzeige Indexseite unten:</td><td><input type=\"text\" name=\"chat[layoutfuss]\" size=\"40\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td colspan=\"2\">Metatag:</td></tr>\n".
-	     "<tr bgcolor=\"#85D4FF\"><td> Content-Type:</td><td><input type=\"text\" name=\"chat[contenttype]\" size=\"40\" value=\"text/html; charset=iso-8859-1\"></td></tr>\n".
+	     "<tr bgcolor=\"#85D4FF\"><td> Content-Type:</td><td><input type=\"text\" name=\"chat[contenttype]\" size=\"40\" value=\"text/html; charset=utf-8\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Author:</td><td><input type=\"text\" name=\"chat[author]\" value=\"mainchat@mainmedia.de\" size=\"40\"></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Description:</td><td><textarea cols=\"30\" rows=\"5\" name=\"chat[description]\">mainChat http://www.mainchat.de - Die HTML-Chat-Community für jede Homepage</textarea></td></tr>\n".
 	     "<tr bgcolor=\"#85D4FF\"><td> Keywords:</td><td><textarea cols=\"30\" rows=\"3\" name=\"chat[keywords]\">Chat Community HTML kostenlos frei Testen Mieten Lizenz</textarea></td></tr>\n".

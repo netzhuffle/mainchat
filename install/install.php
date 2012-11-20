@@ -79,6 +79,7 @@ switch ($aktion)
 				}
 				else
 				{
+					mysql_set_charset("utf8");
 					if (!$select=mysql_select_db ($chat['dbase'],$connect))
 					{
 						if (!$create_db=mysql_query("CREATE DATABASE $chat[dbase]",$connect))

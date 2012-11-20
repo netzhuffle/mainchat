@@ -27,8 +27,10 @@ if ($communityfeatures) require_once "functions-community.php";
 // DB-Connect, ggf. 3 mal versuchen
 for($c=0; $c++ < 3 AND (!(isset($conn))); ) 
 {
-         if ( $conn = @mysql_connect($mysqlhost, $mysqluser, $mysqlpass) )
+         if ( $conn = @mysql_connect($mysqlhost, $mysqluser, $mysqlpass) ) {
+		      mysql_set_charset("utf8");
               mysql_select_db($dbase, $conn);
+         }
 }
 if ( !(isset($conn))) {
  echo "Beim Zugriff auf die Datenbank ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal!<BR>";
@@ -1524,11 +1526,13 @@ function logout_debug($o_id,$info) {
 	foreach($logout as $key => $val)  $query.="$key='".str_replace("'","\\'",$val)."', ";
 	$query=substr($query,0,-2);
 	$conn2=mysql_connect($STAT_DB_HOST, $STAT_DB_USER, $STAT_DB_PASS);
+	mysql_set_charset("utf8");
 	mysql_select_db($STAT_DB_NAME, $conn2);
 	if ($conn2) mysql_query($query, $conn2);
 	
 
 	$conn=mysql_connect($mysqlhost,$mysqluser,$mysqlpass);
+	mysql_set_charset("utf8");
 	mysql_select_db($dbase,$conn);
 };
 

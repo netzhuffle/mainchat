@@ -41,6 +41,8 @@ if ( (!isset($http_host) && !isset($login)) || ($frame == 1) ){
 		// Datenbankconnect
 		$connect=@mysql_connect($chatserver_mysqlhost,$mysqluser,$mysqlpass);
 		if ($connect){
+		
+			mysql_set_charset("utf8");
 
 			// Alle Hosts bestimmen, die in den letzten 150sek erreichbar waren und die den Typ "apache" haben...
                         mysql_select_db("chat_info", $connect);

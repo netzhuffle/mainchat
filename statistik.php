@@ -45,7 +45,10 @@ $STAT_BAR_FONTEND3 = "</B></FONT>";
 if (!$admin || !$erweitertefeatures) return;
 
 $c=@mysql_connect($STAT_DB_HOST, $STAT_DB_USER, $STAT_DB_PASS);
-if ($c) mysql_select_db($STAT_DB_NAME, $c);
+if ($c) {
+	mysql_set_charset("utf8");
+	mysql_select_db($STAT_DB_NAME, $c);
+}
 $v=$http_host;
 
 // Wenn User Statistiken gesammelt werden, dann nicht HTTP_HOST sondern die Zeichenkette aus $STAT_DB_COLLECT

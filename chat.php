@@ -33,6 +33,7 @@ if ($u_id) {
 
 		// Kopf ausgeben
 		echo "<HTML><HEAD>\n".
+			"<TITLE></TITLE><META CHARSET=\"UTF-8\">".
 			"<META HTTP-EQUIV=\"expires\" content=\"0\" />\n".
 			"<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"7; ".
 			"URL=chat.php?http_host=$http_host&id=$id\" />\n".

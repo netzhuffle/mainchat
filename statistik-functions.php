@@ -41,6 +41,7 @@
 		global $grapharray;
 		
 		@mysql_connect($STAT_DB_HOST, $STAT_DB_USER, $STAT_DB_PASS);
+		mysql_set_charset("utf8");
 
 		$m = date("m", time());
 		$y = date("Y", time());	

@@ -69,8 +69,10 @@ $conn = 0;
 // DB-Connect, ggf. 50 mal versuchen (insgesamt 10 sek)
 for($c=0; $c++<50 AND !$conn; ) 
 {
-       	 if ( $conn=@mysql_connect($mysqlhost,$mysqluser,$mysqlpass) )
+       	 if ( $conn=@mysql_connect($mysqlhost,$mysqluser,$mysqlpass) ) {
               @mysql_select_db($dbase,$conn);
+              mysql_set_charset("utf8");
+    	}
          usleep(200000);
 }
 if ( !$conn) {
