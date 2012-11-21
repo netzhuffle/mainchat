@@ -1961,9 +1961,9 @@ switch ($aktion) {
 		"<TR><TD ALIGN=RIGHT><B>".$t['neu15']."</B></TD>".
 		"<TD>".$f1."<INPUT TYPE=\"PASSWORD\" NAME=\"u_passwort2\" VALUE=\"$f[u_passwort]\" SIZE=40>".$f2."</TD>".
 		"<TD><B>*</B>".$f1.$t['neu16'].$f2."</TD></TR>";
-	if ($ro=="") {
+	if (!isset($ro) || $ro=="") {
 		$text.="<TR><TD ALIGN=RIGHT><B>".$t['neu17']."</B></TD>".
-			"<TD>".$f1."<INPUT TYPE=\"TEXT\" NAME=\"f[u_adminemail]\" VALUE=\"$f[u_adminemail]\" SIZE=40>".$f2."</TD>".
+			"<TD>".$f1."<INPUT TYPE=\"TEXT\" NAME=\"f[u_adminemail]\" VALUE=\"".(isset($f[u_adminemail]) ? $f[u_adminemail] : "")."\" SIZE=40>".$f2."</TD>".
 			"<TD><B>*</B>&nbsp;".$f1.$t['neu18'].$f2."</TD></TR>";
 	} else {
 		$text.="<TR><TD COLSPAN=3>".
@@ -1975,7 +1975,7 @@ switch ($aktion) {
 		"<TR><TD ALIGN=RIGHT><B>".$t['neu21']."</B></TD>\n".
 		"<TD>".$f1."<INPUT TYPE=\"TEXT\" NAME=\"f[u_url]\" VALUE=\"$f[u_url]\" SIZE=40>".$f2."</TD>\n".
 		"<TD>".$f1."<INPUT TYPE=\"HIDDEN\" NAME=\"aktion\" VALUE=\"neu\">\n".
-		"<TD>".$f1."<INPUT TYPE=\"HIDDEN\" NAME=\"hash\" VALUE=\"$hash\">\n";
+		"<TD>".$f1."<INPUT TYPE=\"HIDDEN\" NAME=\"hash\" VALUE=\"".(isset($hash) ? $hash : "")."\">\n";
 		if (!empty($backarray)) $text.="<INPUT TYPE=\"HIDDEN\" NAME=\"backarray\" VALUE=\"".urlencode(urldecode($backarray))."\">";
 		$text.= "<B><INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"".$t['neu22']."\"></B>".$f2."</TD>\n".
 		"</TR></TABLE>";

@@ -337,7 +337,7 @@ function home_text($u_id,$u_nick,$home,$feld,$farben,$aktion) {
 function home_bild($u_id,$u_nick,$home,$feld,$farben,$aktion,$bilder,$beschreibung="") {
 	global $PHP_SELF,$f1,$f2,$f3,$f4,$id,$eingabe_breite,$http_host;
 
-	if (is_array($bilder) && $bilder[$feld]['b_mime']) {
+	if (is_array($bilder) && isset($bilder[$feld]) && $bilder[$feld]['b_mime']) {
 
 		$width=$bilder[$feld]['b_width'];
 		$height=$bilder[$feld]['b_height'];
@@ -555,36 +555,36 @@ function bild_holen($u_id,$name,$ui_bild,$groesse) {
 		if (is_array($image)) {
 			$fd = fopen ($ui_bild,"rb");
 			if ($fd) {
-				$f[b_bild]=fread($fd, filesize($ui_bild));
+				$f['b_bild']=fread($fd, filesize($ui_bild));
 				fclose ($fd);
 			};
 
 			switch ($image[2]) { 
 				case 1: 
-					$f[b_mime]="image/gif";
+					$f['b_mime']="image/gif";
 					break;
 				case 2: 
-					$f[b_mime]="image/jpeg";
+					$f['b_mime']="image/jpeg";
 					break;
 				case 3: 
-					$f[b_mime]="image/png";
+					$f['b_mime']="image/png";
 					break;
 				case 4: 
-					$f[b_mime]="application/x-shockwave-flash";
+					$f['b_mime']="application/x-shockwave-flash";
 					break;
 
 				default:
-					$f[b_mime]="";
+					$f['b_mime']="";
 			}
 
-			$f[b_width]=$image[0];
-			$f[b_height]=$image[1];
-			$f[b_user]=$u_id;
-			$f[b_name]=$name;
+			$f['b_width']=$image[0];
+			$f['b_height']=$image[1];
+			$f['b_user']=$u_id;
+			$f['b_name']=$name;
 		
-			if ($f[b_mime]) {
+			if ($f['b_mime']) {
 				$query="SELECT b_id FROM bild WHERE b_user=$u_id AND b_name='$name'";
-				$result=mysql_query($query, $conn);
+				$result=mysql_query($query, $conn); // TODO: $conn ist doch immer undefiniert!?
 				if ($result && mysql_num_rows($result)!=0) {
 					$b_id=mysql_result($result,0,0);
 				}
@@ -619,7 +619,7 @@ function bild_holen($u_id,$name,$ui_bild,$groesse) {
 	// print_r($home);
 	// echo "</PRE>";
 
-	return($home);
+	return($home); // TODO: Wo wird $home definiert?
 }
 
 function home_url_parse($tag,$url) {

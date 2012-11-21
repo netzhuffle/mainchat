@@ -229,7 +229,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
 			// hochgeladene Bilder in DB speichern
 			$bildliste=ARRAY("ui_bild1","ui_bild2","ui_bild3","ui_bild4","ui_bild5","ui_bild6");
 			foreach ($bildliste as $val) {
-				if (is_uploaded_file($_FILES[$val]['tmp_name'])) {
+				if (issen($_FILES[$val]) && is_uploaded_file($_FILES[$val]['tmp_name'])) {
 					// Abspeichern
 					bild_holen($ui_userid,$val,$_FILES[$val]['tmp_name'],$_FILES[$val]['size']);
 				}

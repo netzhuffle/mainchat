@@ -54,7 +54,7 @@ $b_mime = "";
 
 $url=parse_url($HTTP_REFERER);
 
-if ($check_np_referer == "1")
+if (isset($check_np_referer) && $check_np_referer == "1")
                 if ($url['host'] != $http_host)
                 {
                 print "referer error! ";
@@ -175,12 +175,12 @@ if ($anzeigeauscache)
 	if (!@stat($cache."/".$http_host."/".substr($u_id,0,2)."/".$u_id)) mkdir($cache."/".$http_host."/".substr($u_id,0,2)."/".$u_id,0777);
 
 
-	$datei=fopen($cachepfad,w);
+	$datei=fopen($cachepfad,"w");
 	if ($datei) {
 		fputs($datei,$bild,strlen($bild));
 		fclose($datei);
 	};
-	$datei=fopen($cachepfad."-mime",wb);
+	$datei=fopen($cachepfad."-mime","wb");
 	if ($datei) {
 		fwrite($datei,$b_mime);
 		fclose($datei);

@@ -63,7 +63,7 @@ if ($rows>0):
 			$text=$text." ".$row->c_text;
 			fputs($handle,"$text\n");
 			fclose($handle);
-			chmod($r_name,0700);
+			@chmod($r_name,0700);
 		else:
 			echo "<P><B>Fehler:</B> Kann Logdatei '$r_name' nicht öffnen!</P>\n";      
 		endif;

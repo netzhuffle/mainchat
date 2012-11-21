@@ -56,7 +56,7 @@ if ($userdata['u_adminemail']) {
 }
 if ($userdata['u_url']) {
 	echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Homepage:</TD><TD colspan=3><A HREF=\"".htmlspecialchars(stripslashes($userdata['u_url'])).
-		"\" TARGET=\"_new\">".htmlspecialchars(stripslashes($userdata[u_url]))."</A></TD></TR>\n";
+		"\" TARGET=\"_new\">".htmlspecialchars(stripslashes($userdata['u_url']))."</A></TD></TR>\n";
 	if ($bgcolor==$farbe_tabelle_zeile1){ $bgcolor=$farbe_tabelle_zeile2; }else{ $bgcolor=$farbe_tabelle_zeile1; };
 }
 echo "<TR><TD><FORM NAME=\"profil\" ACTION=\"profil.php\" METHOD=POST>\n";

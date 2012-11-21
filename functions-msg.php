@@ -1162,14 +1162,14 @@ case "/nick":
 				$query="SELECT u_nick_historie FROM user WHERE u_id = '$u_id'";
 				$result=mysql_query($query);
 				$xyz=mysql_fetch_array($result);
-				$nick_historie=unserialize($xyz[u_nick_historie]);
+				$nick_historie=unserialize($xyz['u_nick_historie']);
 				
 				if (is_array($nick_historie)):
 					reset ($nick_historie);
 					list($key, $value) = each ($nick_historie);
 					$differenz=time()-$key;
 				endif;
-				if (!$differenz) $differenz=999;
+				if (!isset($differenz)) $differenz=999;
 				if ($admin) $differenz=999;
 
 		// Sonderzeichen filtern
@@ -1224,7 +1224,7 @@ case "/nick":
 				$query="SELECT u_nick_historie FROM user WHERE u_id = '$u_id'";
 				$result=mysql_query($query);
 				$xyz=mysql_fetch_array($result);
-				$nick_historie=unserialize($xyz[u_nick_historie]);
+				$nick_historie=unserialize($xyz['u_nick_historie']);
 				
 				$datum=time();
 				$nick_historie_neu[$datum]=$u_name;
@@ -1729,8 +1729,8 @@ case "/msgpriv": // Extra behandlung fÃ¼r Private Nachrichten im Userfenster, fÃ
 					                          mysql_result($result,0,"o_userdata2").
                    					          mysql_result($result,0,"o_userdata3").
 								  mysql_result($result,0,"o_userdata4"));
-						$nick['u_nick'] = mysql_result($result,$i,"o_name");
-						$nick['u_id'] = mysql_result($result,$i,"o_user");
+						$nick['u_nick'] = mysql_result($result,0,"o_name");
+						$nick['u_id'] = mysql_result($result,0,"o_user");
 					}
 	  				else
 					{
@@ -2955,7 +2955,7 @@ $result2=mysql_query($query);
 $a=mysql_fetch_array($result2);
 
 $isadmin=false;
-if ($a[u_level] == "C" || $a[u_level] == "S" || $a[u_level] == "A")  $isadmin=true;
+if ($a['u_level'] == "C" || $a['u_level'] == "S" || $a['u_level'] == "A")  $isadmin=true;
 
 #if ($isadmin==true)  system_msg("",0,$i_user_aktiv,$system_farbe,"DEBUG: user ist admin");
 #if ($isadmin==false)  system_msg("",0,$i_user_aktiv,$system_farbe,"DEBUG: user ist kein admin");
@@ -2969,8 +2969,8 @@ if ($result && mysql_num_rows($result)==0):
 	$f['i_user_passiv']=$i_user_passiv;
 	schreibe_db("iignore",$f,"","i_id");
 
-	system_msg("",0,$i_user_aktiv,$system_farbe,str_replace("%i_user_name_passiv%",$i_user_name_passiv,$t['ignore1']));
-	system_msg("",0,$i_user_passiv,$system_farbe,str_replace("%i_user_name_passiv%",$i_user_name_passiv,str_replace("%i_user_name_aktiv%",$i_user_name_aktiv,$t['ignore2'])));
+	system_msg("",0,$i_user_aktiv,(isset($system_farbe) ? $system_farbe : ""),str_replace("%i_user_name_passiv%",$i_user_name_passiv,$t['ignore1']));
+	system_msg("",0,$i_user_passiv,(isset($system_farbe) ? $system_farbe : ""),str_replace("%i_user_name_passiv%",$i_user_name_passiv,str_replace("%i_user_name_aktiv%",$i_user_name_aktiv,$t['ignore2'])));
 	}
 	else
 	{
@@ -3006,7 +3006,7 @@ if ($result):
 
 	if (mysql_num_rows($result)>0):
 		while ($iignore=mysql_fetch_array($result)):
-			$ignore[$iignore[i_user_passiv]]=TRUE;
+			$ignore[$iignore['i_user_passiv']]=TRUE;
 		endwhile;
 	else:
 		$ignore[0]=FALSE;

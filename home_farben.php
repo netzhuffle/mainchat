@@ -18,8 +18,8 @@ window.focus()
 function colorsave() {
 <?php
    
-list ($params,$query)=preg_split("/\?/",$QUERY_STRING);
-list ($x,$y)=preg_split("/,/",$query);
+list ($params,$query)=preg_split("/\?/",$QUERY_STRING."?"); // ? am Ende um mindestens zwei Elemente zu haben
+list ($x,$y)=preg_split("/,/",$query.","); // , am Ende um mindestens zwei Elemente zu haben
     
 if ($y>256) $y=256;
 if ($x<16) {

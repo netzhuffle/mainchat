@@ -201,7 +201,7 @@ if (strlen($text)>0) {
 		$text=str_replace("%text%",$text,$t['punkte2']);
 		$text=str_replace("%punkte%",$anzahl*(-1),$text);
 	}
-	if ($u_id!=0) system_msg("",0,$u_id,$system_farbe,$text);
+	if ($u_id!=0) system_msg("",0,$u_id,(isset($system_farbe) ? $system_farbe : ""),$text);
 }
 
 // Optional Punkte sofort in Userdaten übertragen

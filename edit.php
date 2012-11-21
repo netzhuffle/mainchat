@@ -365,7 +365,7 @@ case "edit":
 		}
 
 		// E-Mail ok
-	        if ((strlen($f['u_email'])>0) && (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})",addslashes($f['u_email']))))
+	        if (isset($f['u_email']) && (strlen($f['u_email'])>0) && (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})",addslashes($f['u_email']))))
 		{ 
 			echo "<P><B>$t[edit1]</B></P>\n";
 			unset($f['u_email']);
@@ -416,16 +416,16 @@ case "edit":
 
 
 		// Homepage muss http:// enthalten
-		if (!preg_match("/^http:\/\//i",$f['u_url']) && strlen($f['u_url'])>0):
+		if (isset($f['u_url']) && strlen($f['u_url'])>0 && !preg_match("/^http:\/\//i",$f['u_url'])):
 			$f['u_url']="http://".$f['u_url'];
 		endif;
 
 		// nur Zahlen zulassen bei den Fenstergrößen
-		$size['eingabe']=preg_replace("/[^0-9]/","",$size['eingabe']);
-		$size['interaktiv']=preg_replace("/[^0-9]/","",$size['interaktiv']);
-		$size['chatuserliste']=preg_replace("/[^0-9]/","",$size['chatuserliste']);
-		$size['interaktivforum']=preg_replace("/[^0-9]/","",$size['interaktivforum']);
-		$size['messagesforum']=preg_replace("/[^0-9]/","",$size['messagesforum']);
+		$size['eingabe']=preg_replace("/[^0-9]/","",(isset($size['eingabe']) ? $size['eingabe'] : ""));
+		$size['interaktiv']=preg_replace("/[^0-9]/","",(isset($size['interaktiv']) ? $size['interaktiv'] : ""));
+		$size['chatuserliste']=preg_replace("/[^0-9]/","",(isset($size['chatuserliste']) ? $size['chatuserliste'] : ""));
+		$size['interaktivforum']=preg_replace("/[^0-9]/","",(isset($size['interaktivforum']) ? $size['interaktivforum'] : ""));
+		$size['messagesforum']=preg_replace("/[^0-9]/","",(isset($size['messagesforum']) ? $size['messagesforum'] : ""));
 
 		// Gibts den User/Nicknamen schon?
 		if ($f['u_nick']):
@@ -541,7 +541,7 @@ case "edit":
 		endif;
 
 		// Ist passwort gesetzt?
-		if (strlen($passwort1)>0):
+		if (isset($passwort1) && strlen($passwort1)>0):
 			if ($passwort1!=$passwort2):
 				echo "<P><B>$t[edit4]</B></P>\n";
 				$ok=0;
@@ -605,8 +605,8 @@ case "edit":
                     		endwhile;
             		endif;
 			$f['u_profil_historie']=serialize($u_profil_historie_neu);
-			$f['u_eintritt']=addslashes($f['u_eintritt']);
-			$f['u_austritt']=addslashes($f['u_austritt']);
+			$f['u_eintritt']=addslashes(isset($f['u_eintritt']) ? $f['u_eintritt'] : "");
+			$f['u_austritt']=addslashes(isset($f['u_austritt']) ? $f['u_austritt'] : "");
 
 			schreibe_db("user",$f,$f['u_id'],"u_id");
 
