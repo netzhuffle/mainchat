@@ -48,7 +48,7 @@ if ($u_id && $chat_timeout && $u_level!='S'  && $u_level!='C'  && $u_level!='M' 
 };
 
 
-if ($u_id):
+if (isset($u_id) && $u_id):
 
 
 	// Kopf ausgeben

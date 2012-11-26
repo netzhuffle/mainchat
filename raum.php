@@ -374,7 +374,7 @@ case "neu":
 		#print "raumanlegenpunkte=$raumanlegenpunkte<br>";
 		#print "u_punkte_gesamt=$u_punkte_gesamt<br>";
 		
-		if ($u_punkte_gesamt < $raumanlegenpunkte)
+		if (isset($raumanlegenpunkte) && $u_punkte_gesamt < $raumanlegenpunkte)
 				{
 				#echo "Um Räume anlegen zu dürfen, brauchst Du mindestens $raumanlegenpunkte Punkte";
 				echo str_replace("%punkte%",$raumanlegenpunkte,$t['sonst13']);

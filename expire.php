@@ -185,7 +185,7 @@ if ($result && mysql_num_rows($result)>0):
 		// Gesperrte Räume löschen
 		$query3="DELETE FROM sperre WHERE s_user=$row->u_id"; $result3=mysql_query($query3,$conn);
 
-		$i++;
+		$i++; // TODO needed?
 	endwhile;
 endif;
 @mysql_free_result($result);
