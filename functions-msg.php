@@ -1556,9 +1556,9 @@ case "/wuerfel":
 			$t['chat_msg34']=str_replace("%wuerfel%",$tmp,$t['chat_msg34']);
 
 			$summe=0;
-			srand((double)microtime()*1000000);
+			//mt_srand((double)microtime()*1000000);
 			for ($i=0; $i<$w[0]; $i++) {
-				$wurf=rand(1,$w[1]);
+				$wurf=mt_rand(1,$w[1]);
 				$summe=$summe+$wurf;
 				$t['chat_msg34']=$t['chat_msg34'] . " $wurf";	
 			}

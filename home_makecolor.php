@@ -97,7 +97,7 @@
 		ImageString($img,$font,$tx,$ty,"text=[text]",$fgcol);
 	}
 
-    $n_name=md5(uniqid(rand()));
+    $n_name=md5(uniqid(mt_rand()));
     Header("Last-Modified: " . gmDate("D, d M Y H:i:s",Time()) . " GMT");
     Header("Expires: " . gmDate("D, d M Y H:i:s",Time()-3601) . " GMT");
     Header("Pragma: no-cache");

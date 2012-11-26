@@ -1477,7 +1477,7 @@ function genpassword($length)
     // Generiert ein Passwort
     // wird auch für gensalt() genutzt
     
-    srand((double)microtime()*1000000); 
+    //mt_srand((double)microtime()*1000000); 
     $vowels = array("a", "e", "i", "o", "u"); 
     $cons = array("b", "c", "d", "g", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "u", "v", "w", "tr", "cr", "br", "fr", "th", "dr", "ch", "ph", "wr", "st", "sp", "sw", "pr", "sl", "cl"); 
     $num_vowels = count($vowels); 
@@ -1486,7 +1486,7 @@ function genpassword($length)
     $password = "";
     for($i = 0; $i < $length; $i++)
     { 
-	$password .= $cons[rand(0, $num_cons - 1)] . $vowels[rand(0, $num_vowels - 1)]; 
+	$password .= $cons[mt_rand(0, $num_cons - 1)] . $vowels[mt_rand(0, $num_vowels - 1)]; 
     } 
                     
     return substr($password, 0, $length); 

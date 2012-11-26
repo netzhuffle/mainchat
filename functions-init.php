@@ -99,7 +99,7 @@ ini_set("magic_quotes_runtime", 0);
 //ini_set('zlib.output_compression', 0);
 //ini_set('implicit_flush', 1);
 
-mt_srand((double)microtime()*1000000);
+//mt_srand((double)microtime()*1000000);
 
 if (substr(phpversion(),0,strpos(phpversion(), '.')) >= 5)
 {

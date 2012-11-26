@@ -357,7 +357,7 @@ if ($u_id && $communityfeatures) {
 	 if ($aktion == "pinsenden" && ( $u['pintime'] + 86400 < date("U") || $u['pintime'] == "") )
 		{
 		unset($u);
-		mt_srand((double)microtime()*1000000);
+		//mt_srand((double)microtime()*1000000);
 		$u['pin']=mt_rand(1000,9999);
 		$u['pintime']=date("U");
 		$u['handynr']=$f['ui_handy'];
