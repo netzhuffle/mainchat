@@ -318,7 +318,7 @@ if (isset($result) && $result){
 						if(!$erste_zeile):
 							$zanfang="";
 						else:
-							$zanfang=$sm1."<FONT COLOR=\"$system_farbe\">";
+							$zanfang=$sm1."<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\">";
 						endif;
 						if($br==""):
 							$zende="";
@@ -330,7 +330,7 @@ if (isset($result) && $result){
 						if(!$erste_zeile):
 							$zanfang="";
 						else:
-							$zanfang=$sm1."<FONT COLOR=\"$system_farbe\"><B>$chat:</B>&nbsp;";
+							$zanfang=$sm1."<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><B>$chat:</B>&nbsp;";
 						endif;
 						if($br==""):
 							$zende="";
@@ -352,7 +352,7 @@ if (isset($result) && $result){
 						else:
 							$temp_von_user=str_replace("<ID>",$id,$row->c_von_user);
 							$temp_von_user=str_replace("<HTTP_HOST>",$http_host,$temp_von_user);
-							$zanfang="<FONT COLOR=\"".$row->c_farbe."\"><B>".$temp_von_user."&nbsp;($t[chat_lese1]):</B> ";
+							$zanfang="<FONT COLOR=\"".$row->c_farbe."\" TITLE=\"$row->c_zeit\"><B>".$temp_von_user."&nbsp;($t[chat_lese1]):</B> ";
 							#$zanfang="<FONT COLOR=\"".$row->c_farbe."\"><B>&nbsp;($t[chat_lese1]):</B> ";
 							#$zanfang=htmlentities($zanfang);
 						endif;
@@ -367,7 +367,7 @@ if (isset($result) && $result){
 						else:
 							$temp_von_user=str_replace("<ID>",$id,$row->c_von_user);
 							$temp_von_user=str_replace("<HTTP_HOST>",$http_host,$temp_von_user);
-							$zanfang=$sm1."<FONT COLOR=\"$system_farbe\"><B>".$temp_von_user."&nbsp;($t[chat_lese1]):</B> ";
+							$zanfang=$sm1."<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><B>".$temp_von_user."&nbsp;($t[chat_lese1]):</B> ";
 						endif;
 						if($br==""):
 							$zende="";
@@ -389,7 +389,7 @@ if (isset($result) && $result){
 						if (!$erste_zeile):
 							$zanfang="";
 						else:
-							$zanfang="<FONT COLOR=\"$row->c_farbe\"><I>&lt;";
+							$zanfang="<FONT COLOR=\"$row->c_farbe\" TITLE=\"$row->c_zeit\"><I>&lt;";
 						endif;
 						if($br==""):
 							$zende="";
@@ -400,7 +400,7 @@ if (isset($result) && $result){
 						if (!$erste_zeile):
 							$zanfang="";
 						else:
-							$zanfang=$sm1."<FONT COLOR=\"$system_farbe\"><I>&lt;";
+							$zanfang=$sm1."<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><I>&lt;";
 						endif;
 						if($br==""):
 							$zende="";
@@ -425,7 +425,7 @@ if (isset($result) && $result){
 						else:
 							$temp_von_user=str_replace("<ID>",$id,$row->c_von_user);
 							$temp_von_user=str_replace("<HTTP_HOST>",$http_host,$temp_von_user);
-							$zanfang="<FONT COLOR=\"".$row->c_farbe."\"><B>".$temp_von_user.":</B> </FONT><FONT COLOR=\"$system_farbe\"> ";
+							$zanfang="<FONT COLOR=\"".$row->c_farbe."\" TITLE=\"$row->c_zeit\"><B>".$temp_von_user.":</B> </FONT><FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"> ";
 						endif;
 						if($br==""):
 							$zende="";
@@ -438,7 +438,7 @@ if (isset($result) && $result){
 						else:
 							$temp_von_user=str_replace("<ID>",$id,$row->c_von_user);
 							$temp_von_user=str_replace("<HTTP_HOST>",$http_host,$temp_von_user);
-							$zanfang="<FONT COLOR=\"".$row->c_farbe."\">"."<B>".$temp_von_user.":</B> ";
+							$zanfang="<FONT COLOR=\"".$row->c_farbe."\" TITLE=\"$row->c_zeit\">"."<B>".$temp_von_user.":</B> ";
 						endif;
 						if($br==""):
 							$zende="";

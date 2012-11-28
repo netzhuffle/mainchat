@@ -79,7 +79,7 @@ if ($u_id) {
 		//	"</SCRIPT>\n".
 		//	"$stylesheet</HEAD>\n";
 
-		echo "<HTML><HEAD>".
+		echo "<HTML><HEAD><META CHARSET=\"UTF-8\"><TITLE></TITLE>".
 			"<META HTTP-EQUIV=\"expires\" content=\"0\" />\n".
 			"<SCRIPT LANGUAGE=JavaScript>\n".
 		        "setInterval(\"window.scrollTo(1,300000)\",100)\n".
@@ -210,7 +210,7 @@ if ($u_id) {
 
 		echo "</BODY></HTML>\n";
 		// echo "\n\n--myboundary\nContent-Type: text/html\n\n";
-		echo "<HTML><HEAD>".
+		echo "<HTML><HEAD><META CHARSET=\"UTF-8\"><TITLE></TITLE>".
 			"</HEAD><BODY onLoad='parent.chat.location=\"chat.php?http_host=$http_host&id=$id&back=$back\"'>\n".
 			"</BODY></HTML>";
 		flush();
@@ -221,7 +221,8 @@ if ($u_id) {
 } else {
 	// Auf Chat-Eingangsseite leiten
 	echo "</BODY></HTML>\n";
-	echo "<HTML><BODY onLoad='parent.location=\"index.php?http_host=$http_host\"'>\n";
+	echo "<HTML><HEAD><META CHARSET=\"UTF-8\"><TITLE></TITLE>";
+	echo "</HEAD><BODY onLoad='parent.location=\"index.php?http_host=$http_host\"'>\n";
 	echo "</BODY></HTML>\n";
 	exit;
 };
