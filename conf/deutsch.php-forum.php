@@ -1,7 +1,7 @@
 <?php
 
 //Texte für obere Menueleiste
-$menue[1]=      "Neues Forum";
+$menue[1] = "Neues Forum";
 
 //Texte für neues Forum/Thema
 $t['forum_neu'] = "Neues Forum anlegen";
@@ -45,12 +45,12 @@ $t['desc_threadgeschlossen'] = "Dieser Thread ist geschlossen. Hier können kein
 
 //Texte für Posting-Liste
 $t['neuer_thread'] = "Neuen Thread starten";
-$t['alles_gelesen']="Alle Postings als gelesen markieren";
+$t['alles_gelesen'] = "Alle Postings als gelesen markieren";
 $t['autor'] = "von&nbsp;";
 $t['datum'] = "Geschrieben&nbsp;am&nbsp;";
 $t['letztes_posting'] = "Letztes&nbsp;Posting&nbsp;am";
 $t['anzneue'] = "Ungelesen";
-$t['thread_alles_gelesen']="Alle Postings dieses Threads als gelesen markieren";
+$t['thread_alles_gelesen'] = "Alle Postings dieses Threads als gelesen markieren";
 
 //Texte für Maske Posting
 $t['neuer_thread_button'] = "Posting anlegen";
@@ -68,7 +68,7 @@ $t['smilies'] = "Smilies zum Einfügen anzeigen";
 
 //Text für Bestätigung zum Löschen eines Postings, Themas, Forums
 $t['conf_delete'] = "Wollen Sie dieses Posting wirklich löschen? Es werden auch ALLE ANTWORTEN AUF DIESES POSTING gelöscht!!!!";
-$t['conf_delete_forum'] = "Wollen Sie das komplette Forum mit ALLEN THEMEN UND POSTINGS löschen???"; 
+$t['conf_delete_forum'] = "Wollen Sie das komplette Forum mit ALLEN THEMEN UND POSTINGS löschen???";
 $t['conf_delete_thema'] = "Wollen Sie das komplette Thema mit ALLEN POSTINGS löschen???";
 
 //Texte für fehlende Eingaben
@@ -90,11 +90,11 @@ $t['schreibrechte'] = "<P>Fehler! Sie haben keine Schreibrechte für dieses Foru
 $t['nur_leserechte'] = "[SIE DÜRFEN DIESES FORUM NUR LESEN]";
 
 //Texte fürs Verschieben
-$t['verschieben1']=       "Verschiebe Thread: ";
-$t['verschieben2']=       "vom Thema: ";
-$t['verschieben3']=       "nach Thema: ";
-$t['verschieben4']=       "VERSCHIEBEN";
+$t['verschieben1'] = "Verschiebe Thread: ";
+$t['verschieben2'] = "vom Thema: ";
+$t['verschieben3'] = "nach Thema: ";
+$t['verschieben4'] = "VERSCHIEBEN";
 
-$t['letzte_aenderung']=   "[zuletzt geändert am %datum% um %uhrzeit% von %user%]";
+$t['letzte_aenderung'] = "[zuletzt geändert am %datum% um %uhrzeit% von %user%]";
 
 ?>

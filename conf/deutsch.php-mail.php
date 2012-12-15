@@ -2,6 +2,6 @@
 
 // Sprachdefinition deutsch mail.php
 
-$t['sonst1']=	"Fenster schließen";
+$t['sonst1'] = "Fenster schließen";
 
 ?>

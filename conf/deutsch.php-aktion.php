@@ -2,6 +2,6 @@
 
 // Sprachdefinition deutsch aktion.php
 
-$t['sonst1']=	"Fenster schließen";
+$t['sonst1'] = "Fenster schließen";
 
 ?>

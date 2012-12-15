@@ -2,23 +2,23 @@
 // fidion GmbH mainChat
 // $Id: zeige_home.php,v 1.3 2012/10/17 06:16:53 student Exp $
 
-require ("functions.php");
+require("functions.php");
 require_once("functions.php-home.php");
-require ("functions.php-hash.php");
+require("functions.php-hash.php");
 
-$fenster=str_replace("+","",$ui_userid);
-$fenster=str_replace("-","",$fenster);
-$fenster=str_replace("ä","",$fenster);
-$fenster=str_replace("ö","",$fenster);
-$fenster=str_replace("ü","",$fenster);
-$fenster=str_replace("Ä","",$fenster);
-$fenster=str_replace("÷","",$fenster);
-$fenster=str_replace("Ü","",$fenster);
-$fenster=str_replace("ß","",$fenster);
+$fenster = str_replace("+", "", $ui_userid);
+$fenster = str_replace("-", "", $fenster);
+$fenster = str_replace("ä", "", $fenster);
+$fenster = str_replace("ö", "", $fenster);
+$fenster = str_replace("ü", "", $fenster);
+$fenster = str_replace("Ä", "", $fenster);
+$fenster = str_replace("÷", "", $fenster);
+$fenster = str_replace("Ü", "", $fenster);
+$fenster = str_replace("ß", "", $fenster);
 
-	?>
+?>
 <HTML>
-<HEAD><TITLE><?php echo $body_titel."_Home"; ?></TITLE><META CHARSET=UTF-8>
+<HEAD><TITLE><?php echo $body_titel . "_Home"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT LANGUAGE=JavaScript>
         window.focus()
         function win_reload(file,win_name) {
@@ -31,35 +31,36 @@ $fenster=str_replace("ß","",$fenster);
                 hWnd=window.open(url,name,"resizable=yes,scrollbars=yes,width=300,height=580");
         }
         function neuesFenster2(url) {
-                hWnd=window.open(url,"<?php echo "640_".$fenster; ?>","resizable=yes,scrollbars=yes,width=780,height=580");
+                hWnd=window.open(url,"<?php echo "640_" . $fenster; ?>","resizable=yes,scrollbars=yes,width=780,height=580");
         }
 </SCRIPT>
 <?php echo $stylesheet; ?>
 </HEAD> 
-
 <?php
 
 // Pfad auf Cache
-$cache="home_bild";
+$cache = "home_bild";
 
-if (!checkhash($hash,$ui_userid)) { print "<B>Fehler!</B> Hash stimmt nicht!";exit;}
+if (!checkhash($hash, $ui_userid)) {
+    print "<B>Fehler!</B> Hash stimmt nicht!";
+    exit;
+}
 
-		if (!$ui_userid) $ui_userid=$u_id;
+if (!$ui_userid)
+    $ui_userid = $u_id;
 
-if (isset($preview) && $preview=="yes")
-		{
-		id_lese($preview_id);
-		}
+if (isset($preview) && $preview == "yes") {
+    id_lese($preview_id);
+}
 
-		if (!isset($farben)) $farben = "";
-		
-		if (isset($u_id) && $ui_userid==$u_id) {
-			zeige_home($ui_userid,TRUE,$farben);
-		} else {
-			zeige_home($ui_userid,FALSE,$farben);
-		}
+if (!isset($farben))
+    $farben = "";
 
-
+if (isset($u_id) && $ui_userid == $u_id) {
+    zeige_home($ui_userid, TRUE, $farben);
+} else {
+    zeige_home($ui_userid, FALSE, $farben);
+}
 
 ?>
 </HTML>

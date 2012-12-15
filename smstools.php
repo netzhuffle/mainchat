@@ -1,6 +1,5 @@
 <?
 
-
 function SplitMobile($number)
 {
 $number = urldecode($number);
@@ -62,7 +61,6 @@ if (in_array($num[netz],$d1)) $netz="D1";
 if (in_array($num[netz],$d2)) $netz="D2";
 if (in_array($num[netz],$eplus)) $netz="E+";
 if (in_array($num[netz],$o2)) $netz="O2";
-
 
 return ($netz);
 }
