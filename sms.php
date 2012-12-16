@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: sms.php,v 1.5 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 require_once("functions.php-func-sms.php");
 
@@ -13,7 +10,7 @@ id_lese($id);
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_SMS"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;
@@ -195,7 +192,7 @@ function AufladeFormular()
     $handynr = unserialize($handynr);
     $handynr = $handynr['handynr'];
     $text2 .= '
-<script language="Javascript">
+<script>
 function CalcSMS()
 {
 pos=document.forms["sms"].trx_amount.selectedIndex;
@@ -277,9 +274,9 @@ if (pos == "0"){ alertmsg = "Bitte eine Betrag > 0 wählen";}
 }
 // Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";
@@ -299,13 +296,9 @@ if ($u_id && $communityfeatures) {
     
     if (isset($u_sms_ok) && isset($aktion)) {
         $f['u_sms_ok'] = $u_sms_ok;
-        // $f[u_sms_extra]="";
-        // Zu Debugging-Zwecken Kommentar weg..
-        
         $f['ui_id'] = schreibe_db("user", $f, $u_id, "u_id");
         
         unset($f);
-        #print "update..";
     }
     
     //nach 24 Stunden muss Pin geloescht werden
@@ -361,7 +354,6 @@ if ($u_id && $communityfeatures) {
         if ($aktion == "pinsenden"
             && ($u['pintime'] + 86400 < date("U") || $u['pintime'] == "")) {
             unset($u);
-            //mt_srand((double)microtime()*1000000);
             $u['pin'] = mt_rand(1000, 9999);
             $u['pintime'] = date("U");
             $u['handynr'] = $f['ui_handy'];
@@ -480,8 +472,8 @@ if ($u_id && $communityfeatures) {
             
             // User bekommt eine PIN wenn, a) noch eine PIN vergeben oder b) PIN älter 24h und handynrok==false
             if (($userdata['u_sms_extra'] == "")
-                || ($u['pintime'] + 86400 < date("U") && $u['handynrok']
-                        == false)) {
+                || ($u['pintime'] + 86400 < date("U")
+                    && $u['handynrok'] == false)) {
                 PinVergabeFormular($message);
             }
             

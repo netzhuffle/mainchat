@@ -1,9 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-
-// $Id: smilies-grafik.php
-
 require("functions.php");
 require("conf/deutsch.php-smilies-grafik.php");
 
@@ -12,16 +8,17 @@ id_lese($id);
 
 // optional Konfiguration für smilies lesen
 if (isset($smiles_config) && $smilies_config
-    && file_exists("conf/" . $smilies_config)) :
+    && file_exists("conf/" . $smilies_config)) {
     unset($smilie);
     unset($smilietxt);
     require("conf/" . $smilies_config);
-endif;
+}
 
 echo "<HTML>\n<HEAD><TITLE>" . $body_titel
     . "_Info</TITLE><META CHARSET=UTF-8>\n";
-
-echo "<SCRIPT LANGUAGE=\"JavaScript\">\n";
+?>
+<SCRIPT>
+<?php
 echo "  var http_host='$http_host';\n";
 echo "  var id='$id';\n";
 echo "  var stdparm='?http_host='+http_host+'&id='+id;\n";
@@ -37,25 +34,22 @@ function appendtext_opener( text ) {
      opener.parent.frames['forum'].document.forms['form'].elements['po_text'].value=text + opener.parent.frames['forum'].document.forms['form'].elements['po_text'].value;
      opener.parent.frames['forum'].document.forms['form'].elements['po_text'].focus();
 }
+</SCRIPT>
 <?php
-echo "</SCRIPT>\n";
-
 echo $stylesheet . "<style type=\"text/css\">\n"
     . "a { text-decoration: none; font-weight:bold }\n" . "</style></HEAD>\n";
 
-// Body-Tag definieren
 echo "<BODY BGCOLOR=\"$farbe_mini_background\" "
     . (strlen($grafik_mini_background) > 0 ? "BACKGROUND=\"$grafik_mini_background\" "
         : "") . "TEXT=\"$farbe_mini_text\" " . "LINK=\"$farbe_mini_link\" "
     . "VLINK=\"$farbe_mini_vlink\" " . "ALINK=\"$farbe_mini_vlink\">\n";
 
 // Login ok?
-if (strlen($u_id) != 0) :
-    // Farben einstellen
-    if ($smilies_hintergrund) :
+if (strlen($u_id) != 0) {
+    if ($smilies_hintergrund) {
         $farbe_tabelle_zeile1 = $smilies_hintergrund;
         $farbe_tabelle_zeile2 = $smilies_hintergrund;
-    endif;
+    }
     
     echo "<CENTER><TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"3\">\n";
     
@@ -101,10 +95,10 @@ if (strlen($u_id) != 0) :
     }
     
     echo "</TABLE></CENTER>";
-
-else :
+    
+} else {
     echo "<P ALIGN=CENTER>$t[sonst15]</P>\n";
-endif;
+}
 
 ?>
 

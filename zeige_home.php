@@ -1,6 +1,4 @@
 <?php
-// fidion GmbH mainChat
-// $Id: zeige_home.php,v 1.3 2012/10/17 06:16:53 student Exp $
 
 require("functions.php");
 require_once("functions.php-home.php");
@@ -19,7 +17,7 @@ $fenster = str_replace("ß", "", $fenster);
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Home"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;

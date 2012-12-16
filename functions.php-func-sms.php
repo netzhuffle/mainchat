@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: functions.php-func-sms.php,v 1.4 2012/10/17 06:16:53 student Exp $
-
 function sms_msg(
     $von_user,
     $von_user_id,
@@ -11,7 +8,6 @@ function sms_msg(
     $text,
     $userdata = "")
 {
-    // Martin 26.2.02 abgeleitet von priv_msg
     // Schreibt privaten Text von $von_user an User $an_user
     // Art:           N: Normal
     //                S: Systemnachricht
@@ -19,17 +15,6 @@ function sms_msg(
     //                H: Versteckte Nachricht
     
     global $conn, $chat, $http_host, $u_punkte_gesamt, $sms;
-    
-    // Optional Link auf User erzeugen
-    
-    // if ($von_user_id && is_array($userdata)) {
-    //      $f[c_von_user]=user($von_user_id,$userdata,TRUE,FALSE,"&nbsp;","","",FALSE,TRUE);
-    // } else {
-    //      $f[c_von_user]=$von_user;
-    // };
-    
-    // $debug="DEBUG: von_user = $von_user, von_user_id=$von_user_id, an_user = $an_user, farbe=$farbe, text=$text, userdata=$userdata";
-    // system_msg("",0,$von_user_id,$u_farbe,"<b>mainChat:</b> $debug");
     
     unset($fehler);
     
@@ -44,9 +29,6 @@ function sms_msg(
     
     $text = substr($text, 0, 160 - strlen($absender)); // Text um Absender kürzen
     $text = preg_replace("/[\\\\" . chr(1) . "-" . chr(31) . "]/", "", $text); // Ungültige Zeichen filtern
-    
-    // $debug=$text;
-    // system_msg("",0,$von_user_id,$u_farbe,"<b>mainChat:</b> DEBU $debug");
     
     $complete = $absender . $text;
     
@@ -101,20 +83,16 @@ function sms_msg(
         system_msg("", 0, $von_user_id, $system_farbe, $txt);
     }
     
-    // system_msg("",0,$von_user_id,$u_farbe,"<B>DEBUG:</B> $complete ");
-    // $back=schreibe_chat($f);
     // In Session Timeout-Zeit auf jetzt setzen
     if ($von_user_id) {
         $query = "UPDATE online SET o_timeout_zeit=DATE_FORMAT(NOW(),\"%Y%m%d%H%i%s\"), o_timeout_warnung='N' "
             . "WHERE o_user=$von_user_id";
         $result = mysql_query($query, $conn);
     }
-    ;
     
     return ($back);
     
 }
-;
 
 function sms_sende($von_user_id, $an_user, $nachricht)
 {
@@ -141,7 +119,8 @@ function sms_sende($von_user_id, $an_user, $nachricht)
             $nachricht2 = "Du erhälst gleich eine SMS aus dem $chat - Um dem User zu antworten schreibe einfach eine SMS an $sms[shortid] mit $sms[keyword] <nick> <nachricht> (0,19EUR/SMS)";
             $nachricht2 = urlencode($nachricht2);
             $url = $sms[gateway_url][$gw];
-            $url = str_replace("%sender%", urlencode(substr($chat, 0, 11)), $url);
+            $url = str_replace("%sender%", urlencode(substr($chat, 0, 11)),
+                $url);
             $url = str_replace("%nummer%", $handynummer, $url);
             $url = str_replace("%message%", $nachricht2, $url);
             if ($dbase == "mainchat")
@@ -153,7 +132,8 @@ function sms_sende($von_user_id, $an_user, $nachricht)
         $url = str_replace("%nummer%", $handynummer, $url);
         $url = str_replace("%message%", $nachricht, $url);
         if ($dbase != "mainchat") {
-            $url = str_replace("%sender%", urlencode(substr($chat, 0, 11)), $url);
+            $url = str_replace("%sender%", urlencode(substr($chat, 0, 11)),
+                $url);
         } else {
             $url = str_replace("%sender%", $sms[shortid], $url);
         }

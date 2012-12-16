@@ -10,9 +10,9 @@ if ($u_farbe_bg != "" && $u_farbe_bg != "-")
     $farbe_chat_background1 = $u_farbe_bg;
 
 $body_tag = "<BODY BGCOLOR=\"$farbe_chat_background1\" onLoad=\"window.scrollTo(1,300000)\" ";
-if (strlen($grafik_background3) > 0) :
+if (strlen($grafik_background3) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_background3\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_chat_text3\" "
     . "LINK=\"$farbe_chat_link3\" " . "VLINK=\"$farbe_chat_vlink3\" "
     . "ALINK=\"$farbe_chat_vlink3\">\n";
@@ -38,7 +38,7 @@ if (strlen($u_id) > 0) {
 <HTML><HEAD><TITLE><?php echo $body_titel; ?></TITLE><META CHARSET=UTF-8>
 <META HTTP-EQUIV="REFRESH" CONTENT="<?php echo intval(15)
         . "; URL=messages-popup.php?http_host=$http_host&id=$id&user=$user&user_nick=$userfuerrefresh"; ?>">
-<?php echo $stylesheet . "<SCRIPT LANGUAGE=JavaScript>\n"
+<?php echo $stylesheet . "<SCRIPT>\n"
         . "function neuesFenster(url,name) {\n"
         . "hWnd=window.open(url,name,\"resizable=yes,scrollbars=yes,width=300,height=580\");\n"
         . "}\n" . "function neuesFenster2(url) {\n"
@@ -59,18 +59,13 @@ if (strlen($u_id) > 0) {
     } else {
         $table_option = "BGCOLOR=\"$farbe_chat_background1\"";
     }
-    ;
     echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"5\" border=\"0\">\n";
     echo "<tr><td><table $table_option width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" border=\"0\"><tr><td>\n";
     
     // Aktuelle Privat- und Systemnachrichten oder Statusmeldung ausgeben
     if (!chat_lese($o_id, $o_raum, $u_id, TRUE, $ignore, 10, TRUE, $user)) {
-        #echo $f1.$t[messages_forum1].$f2."\n";
-        # echo "DEBUG: derzeit keine private nachrichten...";
-        #echo $farbe_chat_background1;
         echo $t['chat_msg106'];
     }
-    ;
     
     echo "</td></tr></table></td></tr></table></BODY></HTML>\n";
     

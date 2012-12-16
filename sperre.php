@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: sperre.php,v 1.7 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, o_js, u_level, admin
@@ -50,7 +47,7 @@ function liste()
     $result = mysql_query($query, $conn);
     $rows = mysql_Num_Rows($result);
     
-    if ($rows > 0) :
+    if ($rows > 0) {
         $i = 0;
         $bgcolor = $farbe_tabelle_zeile1;
         
@@ -59,51 +56,51 @@ function liste()
         echo "<TABLE CELLPADDING=4 CELLSPACING=0 BORDER=0 WIDTH=100%>\n";
         echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\">$t[sonst3]</TR>\n";
         
-        while ($i < $rows) :
+        while ($i < $rows) {
             // Ausgabe in Tabelle
             $row = mysql_fetch_object($result);
             
-            if (strlen($row->isip) > 0) :
-                if ($row->is_ip_byte == 1) :
+            if (strlen($row->isip) > 0) {
+                if ($row->is_ip_byte == 1) {
                     $isip = $row->isip . ".xxx.yyy.zzz";
-                elseif ($row->is_ip_byte == 2) :
+                } elseif ($row->is_ip_byte == 2) {
                     $isip = $row->isip . ".yyy.zzz";
-                elseif ($row->is_ip_byte == 3) :
+                } elseif ($row->is_ip_byte == 3) {
                     $isip = $row->isip . ".zzz";
-                else :
+                } else {
                     $isip = $row->isip;
-                endif;
+                }
                 
                 flush();
                 
-                if ($row->is_ip_byte == 4) :
+                if ($row->is_ip_byte == 4) {
                     $ip_name = @gethostbyaddr($row->isip);
-                    if ($ip_name == $row->isip) :
+                    if ($ip_name == $row->isip) {
                         unset($ip_name);
                         echo "<TR VALIGN=TOP BGCOLOR=\"$bgcolor\"><TD><B>"
                             . $f1 . $row->isip . $f2 . "</B></TD>\n";
-                    else :
+                    } else {
                         echo "<TR VALIGN=TOP BGCOLOR=\"$bgcolor\"><TD><B>"
                             . $f1 . $row->isip . "<br>(" . $ip_name . $f2
                             . ")</B></TD>\n";
-                    endif;
-                else :
+                    }
+                } else {
                     echo "<TR VALIGN=TOP BGCOLOR=\"$bgcolor\"><TD><B>" . $f1
                         . $isip . $f2 . "</B></TD>\n";
-                endif;
-            else :
+                }
+            } else {
                 flush();
                 $ip_name = gethostbyname($row->is_domain);
-                if ($ip_name == $row->is_domain) :
+                if ($ip_name == $row->is_domain) {
                     unset($ip_name);
                     echo "<TR VALIGN=TOP BGCOLOR=\"$bgcolor\"><TD><B>" . $f1
                         . stripslashes($row->is_domain) . $f2 . "</B></TD>\n";
-                else :
+                } else {
                     echo "<TR VALIGN=TOP BGCOLOR=\"$bgcolor\"><TD><B>" . $f1
                         . stripslashes($row->is_domain) . "<br>(" . $ip_name
                         . $f2 . ")</B></TD>\n";
-                endif;
-            endif;
+                }
+            }
             
             // Infotext
             echo "<TD>" . $f1 . stripslashes($row->is_infotext) . "&nbsp;"
@@ -129,7 +126,7 @@ function liste()
                 echo "<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=loginsperre0\">"
                     . "[DEAKTIVIEREN]" . "</A>\n";
                 echo "</B>" . $f2 . "</TD>\n";
-            } else if ($row->is_domain == "-GAST-") {
+            } elseif ($row->is_domain == "-GAST-") {
                 echo "<TD>" . $f1 . "<B>\n";
                 echo "<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=loginsperregast0\">"
                     . "[DEAKTIVIEREN]" . "</A>\n";
@@ -138,52 +135,45 @@ function liste()
                 echo "<TD>" . $f1
                     . "<B>[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=aendern&is_id=$row->is_id\">ÄNDERN</A>]\n"
                     . "[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=loeschen&is_id=$row->is_id\">L÷SCHEN</A>]\n";
-                if (isset($ip_name) && (strlen($ip_name) > 0)) :
+                if (isset($ip_name) && (strlen($ip_name) > 0)) {
                     echo "<br>[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=trace&is_id=$row->is_id\">TRACEROUTE</A>]\n";
-                endif;
+                }
                 echo "</B>" . $f2 . "</TD>";
             }
             echo "</TR>\n";
             
             // Farben umschalten
-            if (($i % 2) > 0) :
+            if (($i % 2) > 0) {
                 $bgcolor = $farbe_tabelle_zeile1;
-            else :
+            } else {
                 $bgcolor = $farbe_tabelle_zeile2;
-            endif;
+            }
             
             $i++;
             
-        endwhile;
+        }
         
         echo "</TABLE>\n";
-    
-    // Fuß der Tabelle
-    
-    else :
+        
+    } else {
         echo "<P ALIGN=CENTER>$t[sonst4]</P>\n";
-    endif;
+    }
     mysql_free_result($result);
     
 }
-;
-
-// Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Info"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()     
 </SCRIPT>
 <?php echo $stylesheet; ?>
 </HEAD> 
 <?php
-
-// Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";
@@ -192,7 +182,7 @@ echo $body_tag;
 // Timestamp im Datensatz aktualisieren
 aktualisiere_online($u_id, $o_raum);
 
-if (strlen($u_id) > 0 && $admin) :
+if (strlen($u_id) > 0 && $admin) {
     switch ($aktion) {
         
         case "loginsperre0":
@@ -231,7 +221,6 @@ if (strlen($u_id) > 0 && $admin) :
         
         default;
     }
-    ;
     
     // Menü als erstes ausgeben
     if (isset($uname)) {
@@ -276,7 +265,7 @@ if (strlen($u_id) > 0 && $admin) :
     echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
     
     // Soll Datensatz eingetragen oder geändert werden?
-    if ((isset($eintragen)) && ($eintragen == $t['sonst13'])) :
+    if ((isset($eintragen)) && ($eintragen == $t['sonst13'])) {
         if (!isset($f['is_infotext']))
             $f['is_infotext'] = "";
         if (!isset($f['is_domain']))
@@ -287,50 +276,50 @@ if (strlen($u_id) > 0 && $admin) :
         
         // IP zusamensetzen
         $f['is_ip'] = $ip1 . "." . $ip2 . "." . $ip3 . "." . $ip4;
-        if (strlen($f['is_domain']) > 0 && $f['is_ip'] != "...") :
+        if (strlen($f['is_domain']) > 0 && $f['is_ip'] != "...") {
             echo "<P>$t[sonst5]</P>\n";
             $aktion = "neu";
-        elseif (strlen($f['is_domain']) > 0) :
-            if (strlen($f['is_domain']) > 4) :
+        } elseif (strlen($f['is_domain']) > 0) {
+            if (strlen($f['is_domain']) > 4) {
                 // Eintrag Domain in DB
                 unset($f['is_ip']);
                 $f['is_owner'] = $u_id;
                 schreibe_db("ip_sperre", $f, $f['is_id'], "is_id");
-            else :
+            } else {
                 echo "<P>$t[sonst5]</P>\n";
                 $aktion = "neu";
-            endif;
-        elseif ($f['is_ip'] != "...") :
-            if (strlen($ip1) > 0 && $ip1 < 256) :
+            }
+        } elseif ($f['is_ip'] != "...") {
+            if (strlen($ip1) > 0 && $ip1 < 256) {
                 // Eintrag IP in DB
                 if (strlen($ip4) > 0 && $ip4 < 256 && strlen($ip3) > 0
-                    && $ip3 < 256 && strlen($ip2) > 0 && $ip2 < 256) :
+                    && $ip3 < 256 && strlen($ip2) > 0 && $ip2 < 256) {
                     $f['is_ip_byte'] = 4;
-                elseif (strlen($ip3) > 0 && $ip3 < 256 && strlen($ip2) > 0
-                    && $ip2 < 256) :
+                } elseif (strlen($ip3) > 0 && $ip3 < 256 && strlen($ip2) > 0
+                    && $ip2 < 256) {
                     $f['is_ip_byte'] = 3;
                     $f['is_ip'] = $ip1 . "." . $ip2 . "." . $ip3 . ".";
-                elseif (strlen($ip2) > 0 && $ip2 < 256) :
+                } elseif (strlen($ip2) > 0 && $ip2 < 256) {
                     $f['is_ip_byte'] = 2;
                     $f['is_ip'] = $ip1 . "." . $ip2 . "..";
-                else :
+                } else {
                     $f['is_ip_byte'] = 1;
                     $f['is_ip'] = $ip1 . "...";
-                endif;
+                }
                 $f['is_owner'] = $u_id;
                 if (!isset($f['is_id']))
                     $f['is_id'] = 0;
                 schreibe_db("ip_sperre", $f, $f['is_id'], "is_id");
-            else :
+            } else {
                 echo "<P>$t[sonst6]</P>\n";
                 $aktion = "neu";
-            endif;
-        else :
+            }
+        } else {
             echo "<P>$t[sonst7]</P>\n";
             $aktion = "neu";
-        endif;
-    
-    endif;
+        }
+        
+    }
     
     if (!isset($aktion))
         $aktion = "";
@@ -339,14 +328,14 @@ if (strlen($u_id) > 0 && $admin) :
         
         case "trace":
         // ID gesetzt?
-            if (strlen($is_id) > 0) :
+            if (strlen($is_id) > 0) {
                 $query = "SELECT is_infotext,is_domain,is_ip FROM ip_sperre "
                     . "WHERE is_id=$is_id";
                 
                 $result = mysql_query($query);
                 $rows = mysql_Num_Rows($result);
                 
-                if ($rows == 1) :
+                if ($rows == 1) {
                     // Zeile lese
                     $row = mysql_fetch_object($result);
                     
@@ -365,19 +354,19 @@ if (strlen($u_id) > 0 && $admin) :
                             "<b>config anpassen \$traceroute</b>");
                     }
                     
-                    if (strlen($row->is_domain) > 0) :
+                    if (strlen($row->is_domain) > 0) {
                         system("$traceroute $row->is_domain", $ergebnis);
-                    else :
+                    } else {
                         system("$traceroute $row->is_ip", $ergebnis);
-                    endif;
+                    }
                     
                     echo $f2 . "</PRE>\n";
-                
-                else :
+                    
+                } else {
                     echo "<P>$t[sonst9]</P>\n";
-                endif;
+                }
                 mysql_free_result($result);
-            endif;
+            }
             
             echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
             liste();
@@ -385,14 +374,14 @@ if (strlen($u_id) > 0 && $admin) :
         
         case "loeschen":
         // ID gesetzt?
-            if (strlen($is_id) > 0) :
+            if (strlen($is_id) > 0) {
                 $query = "SELECT is_infotext,is_domain,is_ip_byte,SUBSTRING_INDEX(is_ip,'.',is_ip_byte) as isip FROM ip_sperre "
                     . "WHERE is_id=$is_id";
                 
                 $result = mysql_query($query);
                 $rows = mysql_Num_Rows($result);
                 
-                if ($rows == 1) :
+                if ($rows == 1) {
                     // Zeile lesen, IP zerlegen
                     $row = mysql_fetch_object($result);
                     
@@ -400,42 +389,42 @@ if (strlen($u_id) > 0 && $admin) :
                     
                     $result2 = mysql_query($query2);
                     
-                    if (strlen($row->is_domain) > 0) :
+                    if (strlen($row->is_domain) > 0) {
                         echo "<P>"
                             . str_replace("%row->is_domain%", $row->is_domain,
                                 $t['sonst10']) . "</P>\n";
-                    else :
-                        if ($row->is_ip_byte == 1) :
+                    } else {
+                        if ($row->is_ip_byte == 1) {
                             $isip = $row->isip . ".xxx.yyy.zzz";
-                        elseif ($row->is_ip_byte == 2) :
+                        } elseif ($row->is_ip_byte == 2) {
                             $isip = $row->isip . ".yyy.zzz";
-                        elseif ($row->is_ip_byte == 3) :
+                        } elseif ($row->is_ip_byte == 3) {
                             $isip = $row->isip . ".zzz";
-                        else :
+                        } else {
                             $isip = $row->isip;
-                        endif;
+                        }
                         echo "<P>"
                             . str_replace("%row->is_domain%", $row->is_domain,
                                 $t['sonst10']) . "</P>\n";
-                    endif;
-                else :
+                    }
+                } else {
                     echo "<P>$t[sonst9]</P>\n";
-                endif;
+                }
                 mysql_free_result($result);
-            endif;
+            }
             liste();
             break;
         
         case "aendern":
         // ID gesetzt?
-            if (strlen($is_id) > 0) :
+            if (strlen($is_id) > 0) {
                 $query = "SELECT is_infotext,is_domain,is_ip,is_ip_byte,is_warn FROM ip_sperre "
                     . "WHERE is_id=$is_id";
                 
                 $result = mysql_query($query);
                 $rows = mysql_Num_Rows($result);
                 
-                if ($rows == 1) :
+                if ($rows == 1) {
                     // Zeile lesen, IP zerlegen
                     $row = mysql_fetch_object($result);
                     $ip = explode(".", $row->is_ip);
@@ -465,12 +454,12 @@ if (strlen($u_id) > 0 && $admin) :
                         . "</TD></TR>\n";
                     
                     // Domain/IP-Adresse
-                    if (strlen($row->is_domain) > 0) :
+                    if (strlen($row->is_domain) > 0) {
                         echo "<TR><TD><B>$t[sonst11]</B></TD>";
                         echo "<TD>" . $f1
                             . "<INPUT TYPE=\"TEXT\" NAME=\"f[is_domain]\" "
                             . "VALUE=\"$row->is_domain\" SIZE=24>\n";
-                    else :
+                    } else {
                         echo "<TR><TD><B>$t[sonst12]</B></TD>";
                         echo "<TD>" . $f1
                             . "<INPUT TYPE=\"TEXT\" NAME=\"ip1\" "
@@ -481,18 +470,18 @@ if (strlen($u_id) > 0 && $admin) :
                             . "VALUE=\"$ip[2]\" SIZE=3 maxlength=3><B>.</B>"
                             . "<INPUT TYPE=\"TEXT\" NAME=\"ip4\" "
                             . "VALUE=\"$ip[3]\" SIZE=3 maxlength=3></TD></TR>\n";
-                    endif;
+                    }
                     
                     // Warnung ja/nein
                     echo "<TR><TD><B>$t[sonst22]</B></TD><TD>" . $f1
                         . "<SELECT NAME=\"f[is_warn]\">";
-                    if ($row->is_warn == "ja") :
+                    if ($row->is_warn == "ja") {
                         echo "<OPTION SELECTED VALUE=\"ja\">$t[sonst20]";
                         echo "<OPTION VALUE=\"nein\">$t[sonst21]";
-                    else :
+                    } else {
                         echo "<OPTION VALUE=\"ja\">$t[sonst20]";
                         echo "<OPTION SELECTED VALUE=\"nein\">$t[sonst21]";
-                    endif;
+                    }
                     echo "</SELECT>";
                     
                     // Submitknopf
@@ -505,11 +494,11 @@ if (strlen($u_id) > 0 && $admin) :
                         . "<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n"
                         . "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n";
                     echo "</FORM>\n";
-                endif;
+                }
                 mysql_free_result($result);
-            else :
+            } else {
                 echo "<P>$t[sonst9]</P>\n";
-            endif;
+            }
             
             // Liste ausgeben
             echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
@@ -574,13 +563,13 @@ if (strlen($u_id) > 0 && $admin) :
             
             echo "<TR><TD><B>$t[sonst22]</B></TD><TD>" . $f1
                 . "<SELECT NAME=\"f[is_warn]\">";
-            if (isset($f['is_warn']) && $f['is_warn'] == "ja") :
+            if (isset($f['is_warn']) && $f['is_warn'] == "ja") {
                 echo "<OPTION SELECTED VALUE=\"ja\">$t[sonst20]";
                 echo "<OPTION VALUE=\"nein\">$t[sonst21]";
-            else :
+            } else {
                 echo "<OPTION VALUE=\"ja\">$t[sonst20]";
                 echo "<OPTION SELECTED VALUE=\"nein\">$t[sonst21]";
-            endif;
+            }
             echo "</SELECT>&nbsp;&nbsp;&nbsp;"
                 . "<B><INPUT TYPE=\"SUBMIT\" VALUE=\"$t[sonst13]\" NAME=\"eintragen\"></B>\n"
                 . $f2 . "</TD></TR>\n";
@@ -599,18 +588,16 @@ if (strlen($u_id) > 0 && $admin) :
             liste();
         
     }
-    ;
-
-else :
+    
+} else {
     echo "<P ALIGN=CENTER>$t[sonst16]</P>\n";
-endif;
+}
 
-// Fuß
-if ($o_js) :
+if ($o_js) {
     echo $f1
         . "<P ALIGN=CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</P>"
         . $f2 . "\n";
-endif;
+}
 
 ?>
 

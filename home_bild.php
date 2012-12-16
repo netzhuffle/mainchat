@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: home_bild.php,v 1.7 2012/10/17 06:16:53 student Exp $
-
 // Liefert ein Bild inkl. Header zur direkten Darstellung im Browser
 // Übergabeparameter:	http_host -> Virtueller Host des Chats
 //			u_id -> User, zu dem das Bild gehört
@@ -38,7 +35,6 @@ $http_host = str_replace("\\", "", $http_host);
 $http_host = str_replace("/", "", $http_host);
 $config = "config.php-" . $http_host;
 
-//if (!preg_match("/[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]{2,5}$/", $http_host) && $http_host != "")
 if ($http_host != "" && (!file_exists("conf/$config"))) {
     echo "Fehlerhafter 'http_host' in 'home_bild.php'<BR>";
     exit;
@@ -58,7 +54,6 @@ if (isset($check_np_referer) && $check_np_referer == "1")
 // Überprüfen, ob ein gecached Bild vorhanden ist
 $cachepfad = $cache . "/" . $http_host . "/" . substr($u_id, 0, 2) . "/"
     . $u_id . "/" . $feld;
-#print "$cachepfad <br />\n\n";
 
 $conn = 0;
 // DB-Connect, ggf. 50 mal versuchen (insgesamt 10 sek)
@@ -138,20 +133,17 @@ if ($anzeigeauscache) {
         $bild = fread($datei, filesize($cachepfad));
         fclose($datei);
     }
-    ;
     $datei = fopen($cachepfad . "-mime", 'r');
     if ($datei) {
         $b_mime = fread($datei, 1024);
         fclose($datei);
     }
-    ;
     
     // Alte Daten löschen (mit 0,1% Wahrscheinlichkeit)
     if (mt_rand(1, 1000) == 1) {
         $befehl = "find " . $cache . "/ -mtime +1 -exec rm {} \;";
         exec($befehl);
     }
-    ;
     
 } else {
     
@@ -172,29 +164,26 @@ if ($anzeigeauscache) {
         mkdir($cache . "/" . $http_host, 0777);
     if (!@stat($cache . "/" . $http_host . "/" . substr($u_id, 0, 2)))
         mkdir($cache . "/" . $http_host . "/" . substr($u_id, 0, 2), 0777);
-    if (!@stat($cache . "/" . $http_host . "/" . substr($u_id, 0, 2) . "/"
-        . $u_id))
-        mkdir($cache . "/" . $http_host . "/" . substr($u_id, 0, 2) . "/"
-            . $u_id, 0777);
+    if (!@stat(
+        $cache . "/" . $http_host . "/" . substr($u_id, 0, 2) . "/" . $u_id))
+        mkdir(
+            $cache . "/" . $http_host . "/" . substr($u_id, 0, 2) . "/" . $u_id,
+            0777);
     
     $datei = fopen($cachepfad, "w");
     if ($datei) {
         fputs($datei, $bild, strlen($bild));
         fclose($datei);
     }
-    ;
     $datei = fopen($cachepfad . "-mime", "wb");
     if ($datei) {
         fwrite($datei, $b_mime);
         fclose($datei);
     }
-    ;
 }
-;
 
 if ($b_mime) {
     header("Content-Type: $b_mime");
     echo $bild;
 }
-;
 ?>

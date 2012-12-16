@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: top10.php,v 1.5 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
@@ -25,7 +22,7 @@ $fenster = str_replace("ß", "", $fenster);
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Top10"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;
@@ -35,7 +32,7 @@ $fenster = str_replace("ß", "", $fenster);
 }
 </SCRIPT>
 <?php echo $stylesheet; ?>
-<SCRIPT LANGUAGE="JavaScript">
+<SCRIPT>
 function neuesFenster(url) { 
         hWnd=window.open(url,"<?php echo $fenster; ?>","resizable=yes,scrollbars=yes,width=300,height=580"); 
 }
@@ -46,12 +43,10 @@ function neuesFenster2(url) {
 
 </HEAD> 
 <?php
-
-// Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";
@@ -68,24 +63,18 @@ show_box2($box, $text, "100%");
 echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
 
 if ($erweitertefeatures) {
-    
     switch ($aktion) {
-        
         case "top100":
             $anzahl = 100;
             break;
-        
         case "top1000":
             $anzahl = 1000;
             break;
-        
         case "top10":
         default:
             $anzahl = 10;
-        
     }
     
-    // Tabellenkopf ausgeben
     $bgcolor = $farbe_tabelle_zeile1;
     echo "<TABLE WIDTH=100% BORDER=0 CELLPADDING=2 CELLSPACING=0>\n"
         . "<TR BGCOLOR=\"$farbe_tabelle_kopf2\" align=\"left\"><TD WIDTH=\"4%\">&nbsp;</TD>"
@@ -105,11 +94,8 @@ if ($erweitertefeatures) {
     if ($result && mysql_num_rows($result) > 0) {
         $t_id = mysql_result($result, 0, "t_id");
         $array_user = unserialize(mysql_result($result, 0, "t_daten"));
-        
     } else {
-        
         unset($array_user);
-        
         // Top 100 Punkte im aktuellen Monat als Array aufbauen
         $query = "select u_punkte_monat as punkte,u_nick,u_id,u_level,u_punkte_gesamt,u_punkte_gruppe,u_chathomepage from user "
             . "where u_punkte_monat!=0 " . "and u_punkte_datum_monat="
@@ -160,7 +146,6 @@ if ($erweitertefeatures) {
         $query = "DELETE FROM top10cache WHERE t_eintrag=1 AND t_id!='$t_id'";
         $result = mysql_query($query, $conn);
     }
-    ;
     
     // Array als Tabelle ausgeben
     if (is_array($array_user)) {
@@ -195,11 +180,11 @@ if ($erweitertefeatures) {
     echo "<BR>\n";
 }
 
-if ($o_js || !$u_id) :
+if ($o_js || !$u_id) {
     echo $f1
         . "<CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</CENTER>"
         . $f2 . "<BR>\n";
-endif;
+}
 
 ?>
 </BODY></HTML>

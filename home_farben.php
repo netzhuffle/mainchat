@@ -1,18 +1,13 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: home_farben.php,v 1.3 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
 id_lese($id);
-
-// Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Farben"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
 window.focus()
 function colorsave() {
 <?php
@@ -55,17 +50,17 @@ if (strlen($newcolor) < 8 && $newcolor > 1) {
     $setcolor = $oldcolor;
 }
 
-print "    FARBE='" . $newcolor . "';\n";
-print "    if (FARBE!= \"\") {\n";
-print "    opener.document.forms[0].elements['farben[$feld]'].value=FARBE;\n";
+echo "    FARBE='" . $newcolor . "';\n";
+echo "    if (FARBE!= \"\") {\n";
+echo "    opener.document.forms[0].elements['farben[$feld]'].value=FARBE;\n";
 if ($bg == "Y") {
-    print "    opener.document.forms[0].submit();\n";
+    echo "    opener.document.forms[0].submit();\n";
 } else {
-    print "    opener.document.images[\"img_$feld\"].src=\"home_makecolor.php?";
+    echo "    opener.document.images[\"img_$feld\"].src=\"home_makecolor.php?";
     if ($bg != "N") {
-        print "bg=$bg&fg=$newcolor\";\n";
+        echo "bg=$bg&fg=$newcolor\";\n";
     } else {
-        print "bg=$newcolor&text=%20\"\n";
+        echo "bg=$newcolor&text=%20\"\n";
     }
 }
 
@@ -79,8 +74,6 @@ if ($bg == "Y") {
 <?php echo $stylesheet; ?>
 </HEAD> 
 <?php
-
-// Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
 if (strlen($grafik_mini_background) > 0) :
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
@@ -94,30 +87,27 @@ echo $body_tag;
 aktualisiere_online($u_id, $o_raum);
 
 if ($u_id && $communityfeatures) {
-    
-    print 
-        "<center><b>Bitte wählen Sie die Farbe aus:</b><BR>"
-            . "<a href=\"home_farben.php?http_host=$http_host&id=$id&mit_grafik=$mit_grafik&feld=$feld&bg=$bg&oldcolor="
-            . urlencode($oldcolor) . "&nix\">"
-            . "<img src=\"pics/colors2.png\" ismap border=0></a>\n";
-    print 
-        "<br clear=all><img src=\"home_makecolor.php?x=135&y=25&text=neue%20Farbe&";
+    echo "<center><b>Bitte wählen Sie die Farbe aus:</b><BR>"
+        . "<a href=\"home_farben.php?http_host=$http_host&id=$id&mit_grafik=$mit_grafik&feld=$feld&bg=$bg&oldcolor="
+        . urlencode($oldcolor) . "&nix\">"
+        . "<img src=\"pics/colors2.png\" ismap border=0></a>\n";
+    echo "<br clear=all><img src=\"home_makecolor.php?x=135&y=25&text=neue%20Farbe&";
     
     if ($bg != "Y" && $bg != "N") {
-        print "bg=" . urlencode($bg) . "&fg=" . urlencode($newcolor) . "\";\n";
+        echo "bg=" . urlencode($bg) . "&fg=" . urlencode($newcolor) . "\";\n";
     } else {
-        print "bg=" . urlencode($newcolor) . "\"\n";
+        echo "bg=" . urlencode($newcolor) . "\"\n";
     }
-    print " height=25 width=135 border=0>";
-    print "<img src=\"home_makecolor.php?x=135&y=25&text=aktuelle%20Farbe&";
+    echo " height=25 width=135 border=0>";
+    echo "<img src=\"home_makecolor.php?x=135&y=25&text=aktuelle%20Farbe&";
     
     if ($bg != "Y" && $bg != "N") {
-        print "bg=" . urlencode($bg) . "&fg=" . urlencode($oldcolor)
+        echo "bg=" . urlencode($bg) . "&fg=" . urlencode($oldcolor)
             . "&nix\";\n";
     } else {
-        print "bg=" . urlencode($oldcolor) . "&nix\"\n";
+        echo "bg=" . urlencode($oldcolor) . "&nix\"\n";
     }
-    print " height=25 width=135 border=0><BR>";
+    echo " height=25 width=135 border=0><BR>";
     
     // Optional Auswahl einer Grafik statt der Farbe
     if ($mit_grafik) {

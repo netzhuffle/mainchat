@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: blacklist.php,v 1.5 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, o_js
@@ -18,12 +15,10 @@ $fenster = str_replace("Ä", "", $fenster);
 $fenster = str_replace("÷", "", $fenster);
 $fenster = str_replace("Ü", "", $fenster);
 $fenster = str_replace("ß", "", $fenster);
-
-// Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Blacklist"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;
@@ -48,8 +43,6 @@ $fenster = str_replace("ß", "", $fenster);
 <?php echo $stylesheet; ?>
 </HEAD> 
 <?php
-
-// Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
 if (strlen($grafik_mini_background) > 0) :
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
@@ -141,7 +134,6 @@ if ($admin && $u_id && $communityfeatures) {
 } else {
     echo "<P ALIGN=CENTER><B>Fehler:</B> Sie sind ausgelogt oder haben keine Berechtigung!</P>\n";
 }
-;
 
 if ($o_js || !$u_id) :
     echo $f1

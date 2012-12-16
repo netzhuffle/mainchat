@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: freunde.php,v 1.7 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
@@ -18,41 +15,38 @@ $fenster = str_replace("÷", "", $fenster);
 $fenster = str_replace("Ü", "", $fenster);
 $fenster = str_replace("ß", "", $fenster);
 
-// Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Freunde"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
-                win_name.location.href=file;
+            win_name.location.href=file;
         }
         function opener_reload(file,frame_number) {
-                opener.parent.frames[frame_number].location.href=file;
+            opener.parent.frames[frame_number].location.href=file;
         }
         function neuesFenster(url,name) {
-                hWnd=window.open(url,name,"resizable=yes,scrollbars=yes,width=300,height=580");
+            hWnd=window.open(url,name,"resizable=yes,scrollbars=yes,width=300,height=580");
         }
         function neuesFenster2(url) {
-                hWnd=window.open(url,"<?php echo "640_" . $fenster; ?>","resizable=yes,scrollbars=yes,width=780,height=580");
+            hWnd=window.open(url,"<?php echo "640_" . $fenster; ?>","resizable=yes,scrollbars=yes,width=780,height=580");
         }
         function toggle(tostat ) {
-                for(i=0; i<document.forms["freund_loeschen"].elements.length; i++) {
-                     e = document.forms["freund_loeschen"].elements[i];
-                     if ( e.type=='checkbox' )
-                         e.checked=tostat;
-                }
+            for(i=0; i<document.forms["freund_loeschen"].elements.length; i++) {
+                 e = document.forms["freund_loeschen"].elements[i];
+                 if ( e.type=='checkbox' )
+                     e.checked=tostat;
+            }
         }
 </SCRIPT>
 <?php echo $stylesheet; ?>
 </HEAD> 
 <?php
-
-// Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";
@@ -190,8 +184,6 @@ if ($u_id && $communityfeatures) {
         
         case "bearbeite":
         // Freund löschen
-        
-        #print "los=$los";
             if ($los == "L÷SCHEN") {
                 if (isset($f_freundid) && is_array($f_freundid)) {
                     // Mehrere Freunde löschen
@@ -210,7 +202,6 @@ if ($u_id && $communityfeatures) {
                 if (isset($f_freundid) && is_array($f_freundid)) {
                     // Mehrere Freunde bestätigen
                     foreach ($f_freundid as $key => $bearbeite_id) {
-                        #print "bearbeite_id: ".$bearbeite_id." u_id = $u_id";
                         bestaetige_freund($bearbeite_id, $u_id);
                     }
                     
@@ -234,11 +225,11 @@ if ($u_id && $communityfeatures) {
     
 }
 
-if ($o_js || !$u_id) :
+if ($o_js || !$u_id) {
     echo $f1
         . "<CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</CENTER>"
         . $f2 . "<BR>\n";
-endif;
+}
 
 ?>
 </BODY></HTML>

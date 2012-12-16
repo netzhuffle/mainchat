@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: forum.php,v 1.12 2012/10/17 06:16:53 student Exp $
-
 include("functions.php");
 
 // Userdaten setzen
@@ -124,7 +121,6 @@ if (strlen($u_id) > 0) {
             break;
         
         case "thema_alles_gelesen":
-        #print "hier müssten alle postings als gelesen markiert werden...";
             thema_alles_gelesen($th_id, $u_id);
             forum_liste();
             break;
@@ -142,9 +138,7 @@ if (strlen($u_id) > 0) {
             break;
         
         case "thread_alles_gelesen":
-        #print "hier müssten alle postings des Threads als gelesen markiert werden...";
             thread_alles_gelesen($th_id, $thread, $u_id);
-            //			forum_liste();
             show_thema();
             break;
         

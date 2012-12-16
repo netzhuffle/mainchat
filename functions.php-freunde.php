@@ -32,7 +32,6 @@ function zeige_freunde($aktion, $zeilen)
             $titel2 = "noch zu bestätigende Freunde";
             break;
     }
-    ;
     
     echo "<FORM NAME=\"freund_loeschen\" ACTION=\"$PHP_SELF\" METHOD=POST>\n"
         . "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n"
@@ -89,8 +88,8 @@ function zeige_freunde($aktion, $zeilen)
                     
                     // User gefunden -> Ausgeben
                     $row2 = mysql_fetch_object($result2);
-                    $freund_nick = "<B>" . user($row2->u_id, $row2, TRUE, FALSE)
-                        . "</B>";
+                    $freund_nick = "<B>"
+                        . user($row2->u_id, $row2, TRUE, FALSE) . "</B>";
                     
                 } else {
                     
@@ -100,7 +99,6 @@ function zeige_freunde($aktion, $zeilen)
                     $result2 = mysql_query($query, $conn);
                     
                 }
-                ;
                 
                 // Unterscheidung online ja/nein, Text ausgeben
                 if ($row2->o_id) {
@@ -128,7 +126,6 @@ function zeige_freunde($aktion, $zeilen)
                 } else {
                     $freundid = $row->f_freundid;
                 }
-                ;
                 
                 echo "<TR BGCOLOR=\"$bgcolor\"><TD ALIGN=\"CENTER\">" . $auf
                     . "<INPUT TYPE=\"CHECKBOX\" NAME=\"f_freundid[]\" VALUE=\""
@@ -146,10 +143,8 @@ function zeige_freunde($aktion, $zeilen)
                 } else {
                     $bgcolor = $farbe_tabelle_zeile2;
                 }
-                ;
                 $i++;
             }
-            ;
             
             echo "<TR BGCOLOR=\"$bgcolor\"><TD COLSPAN=2><INPUT TYPE=\"checkbox\" onClick=\"toggle(this.checked)\">"
                 . $f1 . " Alle Auswählen" . $f2 . "</TD>\n";
@@ -159,12 +154,9 @@ function zeige_freunde($aktion, $zeilen)
             echo "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"$button\">" . $f2
                 . "</TD></TR>\n";
         }
-        ;
         
         echo "</TABLE></FORM>\n";
-        
     }
-    ;
 }
 
 function loesche_freund($f_freundid, $f_userid)
@@ -193,11 +185,9 @@ function loesche_freund($f_freundid, $f_userid)
         $f_nick = mysql_result($result, 0, 0);
         $back = "<P><B>Hinweis:</B> '$f_nick' ist nicht mehr Ihr Freund.</P>";
     }
-    ;
     @mysql_free_result($result);
     return ($back);
 }
-;
 
 function formular_neuer_freund($neuer_freund)
 {
@@ -231,7 +221,6 @@ function formular_neuer_freund($neuer_freund)
         . "</TD></TR>\n" . "</TABLE></FORM>\n";
     
 }
-;
 
 function formular_editieren($f_id, $f_text)
 {
@@ -261,7 +250,6 @@ function formular_editieren($f_id, $f_text)
         . $f2 . "</TD></TR>\n" . "</TABLE></FORM>\n";
     
 }
-;
 
 function neuer_freund($f_userid, $freund)
 {
@@ -330,7 +318,6 @@ function neuer_freund($f_userid, $freund)
         }
         
     }
-    ;
     return ($back);
 }
 

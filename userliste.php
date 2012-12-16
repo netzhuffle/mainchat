@@ -1,7 +1,5 @@
 <?php
 
-// $Id: userliste.php,v 1.5 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // User die gerade Online sind als Liste ausgeben
@@ -11,7 +9,6 @@ if (preg_match("/hilfe/", $REQUEST_URI)) {
     echo "optionale Parameter:<br>";
     echo "userliste2.php?zeit=j&klammer=j&datenbank=j&raum=j";
     exit;
-    
 }
 
 if ($keinbr == "j")
@@ -67,9 +64,7 @@ if ($rows > 0) {
         echo "$br";
         $i++;
     }
-    ;
     mysql_free_result($result);
 }
-;
 
 ?>

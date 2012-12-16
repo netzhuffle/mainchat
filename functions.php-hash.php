@@ -3,9 +3,9 @@
 function genhash($u_id)
 {
     $zeit = floor(date("U") / 1000);
-    
     $s = $u_id . " " . $zeit;
     $hash = md5($s);
+    
     return $hash;
 }
 

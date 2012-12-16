@@ -1,7 +1,6 @@
 <?php
 
 // fidion GmbH mainChat
-// $Id: config.php-tpl,v 1.8 2012/10/17 06:24:41 student Exp $ 
 
 // Konfigurationsdatei für mainChat
 // Die voreingestellte Konfigurationsdatei muss "config.php" heißen.
@@ -321,7 +320,6 @@ $werbung_default="default.php";
 $log="%log%";				// Verzeichnis für Logdateien 
 $datei_spruchliste="%spruchliste%";	// Datei in der alle Sprüche enthalten sind
 $traceroute="/usr/bin/traceroute";	// Befehl für Traceroute
-$grep="/bin/grep";     // Befehl für Grep
 
 // Disclaimer
 $disclaimer="<a href=\"http://www.mainchat.de/\" style=\"color:%farbe_text%;\">mainChat</a> ist ein ".

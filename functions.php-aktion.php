@@ -10,15 +10,10 @@ function zeige_aktionen($aktion)
     global $farbe_tabelle_kopf2, $farbe_tabelle_zeile1, $farbe_tabelle_zeile2, $def_was, $eingabe_breite;
     global $farbe_text, $smsfeatures, $forumfeatures;
     
-    switch ($aktion) {
-        case "normal":
-        default;
-            $query = "SELECT * from aktion " . "WHERE a_user=$u_id ";
-            $button = "EINTRAGEN";
-            $titel1 = "Für";
-            $titel2 = "sind folgende Aktionen eingetragen";
-    }
-    ;
+    $query = "SELECT * from aktion " . "WHERE a_user=$u_id ";
+    $button = "EINTRAGEN";
+    $titel1 = "Für";
+    $titel2 = "sind folgende Aktionen eingetragen";
     
     echo "<FORM NAME=\"freund_loeschen\" ACTION=\"$PHP_SELF\" METHOD=POST>\n"
         . "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n"
@@ -32,9 +27,7 @@ function zeige_aktionen($aktion)
         while ($row = mysql_fetch_array($result)) {
             $was[$row['a_was']][$row['a_wann']] = $row;
         }
-        ;
     }
-    ;
     
     // Aktionen zeigen
     echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=5><DIV style=\"color:$farbe_text;\"><B>$titel1 $u_nick $titel2:</B></DIV></TD></TR>\n"
@@ -47,22 +40,20 @@ function zeige_aktionen($aktion)
     $query = "SHOW COLUMNS FROM aktion like 'a_wann'";
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) != 0) {
-        $txt = str_replace("'", "", substr(mysql_result($result, 0, "Type"), 5,
-            -1));
+        $txt = str_replace("'", "",
+            substr(mysql_result($result, 0, "Type"), 5, -1));
         $a_wann = explode(",", $txt);
     }
-    ;
     $anzahl_spalten = count($a_wann);
     
     // Alle möglichen a_wie in Array lesen
     $query = "SHOW COLUMNS FROM aktion like 'a_wie'";
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) != 0) {
-        $txt = str_replace("'", "", substr(mysql_result($result, 0, "Type"), 4,
-            -1));
+        $txt = str_replace("'", "",
+            substr(mysql_result($result, 0, "Type"), 4, -1));
         $a_wie = explode(",", $txt);
     }
-    ;
     $anzahl_wie = count($a_wie);
     
     // OLM merken
@@ -87,15 +78,12 @@ function zeige_aktionen($aktion)
         if (isset($offline_wie[$i]) && $offline_wie[$i] == $onlinemessage)
             unset($offline_wie[$i]);
     }
-    ;
     // Alle Kombinationen von offline_wie mit sms erstellen
     if ($smsfeatures) {
         for ($i = 1; $i < $anzahl_wie - 2; $i++) {
             $offline_wie[] = $offline_wie[$i] . "," . $sms;
         }
-        ;
     }
-    ;
     
     // Alle Kombinationen von a_wie mit onlinemessage erstellen
     // Keine muss als erstes, OLM als letztes definiert sein!
@@ -108,7 +96,6 @@ function zeige_aktionen($aktion)
         for ($i = 1; $i < $anzahl_wie - 1; $i++) {
             $a_wie[] = $a_wie[$i] . "," . $sms;
         }
-        ;
     }
     
     // Zeile der a_wann ausgeben
@@ -152,12 +139,10 @@ function zeige_aktionen($aktion)
                             : "") . "|" . $auswahl . "\">"
                         . str_replace(",", " + ", $auswahl) . "\n";
                 }
-                ;
             }
             echo "</SELECT>" . $f4 . "</TD>\n";
             
         }
-        ;
         echo "</TR>\n";
         
         if (($i % 2) > 0) {
@@ -165,7 +150,6 @@ function zeige_aktionen($aktion)
         } else {
             $bgcolor = $farbe_tabelle_zeile2;
         }
-        ;
         $i++;
     }
     
@@ -174,7 +158,6 @@ function zeige_aktionen($aktion)
         . "</TD></TR>\n" . "</TABLE></FORM>\n";
     
 }
-;
 
 function eintrag_aktionen($aktion_datensatz)
 {
@@ -187,11 +170,10 @@ function eintrag_aktionen($aktion_datensatz)
     $query = "SHOW COLUMNS FROM aktion like 'a_wann'";
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) != 0) {
-        $txt = str_replace("'", "", substr(mysql_result($result, 0, "Type"), 5,
-            -1));
+        $txt = str_replace("'", "",
+            substr(mysql_result($result, 0, "Type"), 5, -1));
         $a_wann = explode(",", $txt);
     }
-    ;
     
     foreach ($def_was as $def_was_eintrag) {
         
@@ -207,7 +189,6 @@ function eintrag_aktionen($aktion_datensatz)
                     . "AND a_wann='$a_wann_eintrag' " . "AND a_user='$u_id'";
                 $result = mysql_query($query, $conn);
             }
-            ;
             
             $f['a_wie'] = $temp[1];
             $f['a_was'] = $def_was_eintrag;
@@ -215,17 +196,8 @@ function eintrag_aktionen($aktion_datensatz)
             $f['a_user'] = $u_id;
             $f['a_text'] = $u_nick;
             schreibe_db("aktion", $f, $temp[0], "a_id");
-            
-            // echo "<PRE>#DEBUG# $temp[0]<BR>";
-            // echo print_r($f);
-            // echo "</PRE>";
-            
         }
-        ;
-        
     }
-    ;
 }
-;
 
 ?>

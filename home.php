@@ -1,16 +1,10 @@
 <?php
-// fidion GmbH mainChat
-// $Id: home.php,v 1.12 2012/10/17 06:16:53 student Exp $
 
 // Kopf nur ausgeben, wenn $ui_userid oder mit $argv[0] aufgerufen
 // Sonst geht der redirekt nicht mehr.
-#include("functions.php-home.php");
+
 require_once("functions-registerglobals.php");
 
-//if (!isset($ui_userid)) $ui_userid = false;
-//if (!isset($argc)) $argc = 0;
-
-//if ($ui_userid || $argc>0)  {
 if (isset($ui_userid) || (isset($aktion) && $aktion != "")
     || (isset($_SERVER["QUERY_STRING"]) && $_SERVER["QUERY_STRING"] <> "")) {
     require("functions.php");
@@ -36,7 +30,7 @@ if (isset($ui_userid) || (isset($aktion) && $aktion != "")
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Home"; ?></TITLE><META CHARSET=UTF-8>
- <SCRIPT LANGUAGE=JavaScript>
+ <SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;
@@ -63,20 +57,12 @@ if (isset($ui_userid) || (isset($aktion) && $aktion != "")
         $suchwort = substr($suchwort, 0, -1);
     $suchwort = strtolower(substr($suchwort, strrpos($suchwort, "/") + 1));
     
-    //      echo "DEBUG PHP_SELF: $PHP_SELF<br>"; 
-    // 	echo "DEBUG REQUEST_URI: ".$_SERVER['REQUEST_URI']."<br>";
-    //  	echo "DEBUG PATH_INFO: ".$_SERVER['PATH_INFO']."<br>";    
-    //	echo "DEBUG QueryString: ".$_SERVER['QUERY_STRING']."<br>";                                 
-    //	echo "DEBUG Location: http://".$_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]."?".$suchwort."<br>";
-    
     if (strlen($suchwort) >= 4) {
         header(
             "Location: http://" . $_SERVER["HTTP_HOST"]
                 . $_SERVER["SCRIPT_NAME"] . "?" . $suchwort);
-        //		die();
     }
 }
-;
 
 // Pfad auf Cache
 $cache = "home_bild";
@@ -101,8 +87,9 @@ if (isset($u_id) && $u_id && $communityfeatures) {
     $max_groesse = 30; // Maximale Bild- und Text größe in KB
     $vor_einstellungen = ARRAY("Straße" => TRUE, "Tel" => TRUE, "Fax" => TRUE,
         "Handy" => TRUE, "PLZ" => TRUE, "Ort" => TRUE, "Land" => TRUE,
-        "ICQ" => TRUE, "Hobbies" => TRUE, "Beruf" => TRUE, "Geschlecht" => TRUE,
-        "Geburtsdatum" => TRUE, "Typ" => TRUE, "Beziehung" => TRUE);
+        "ICQ" => TRUE, "Hobbies" => TRUE, "Beruf" => TRUE,
+        "Geschlecht" => TRUE, "Geburtsdatum" => TRUE, "Typ" => TRUE,
+        "Beziehung" => TRUE);
     $farbliste = ARRAY(0 => "bgcolor", "info", "profil", "ui_text", "ui_bild1",
         "ui_bild2", "ui_bild3", "text", "link", "vlink", "aktionen");
     
@@ -139,7 +126,6 @@ if (isset($u_id) && $u_id && $communityfeatures) {
             }
         }
     }
-    ;
     
     switch ($aktion) {
         
@@ -188,10 +174,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
                     unlink($cachepfad);
                     unlink($cachepfad . "-mime");
                 }
-                ;
-                
             }
-            ;
             
             // Prüfen & in DB schreiben
             if (isset($home) && is_array($home)
@@ -218,7 +201,6 @@ if (isset($u_id) && $u_id && $communityfeatures) {
                     $f['u_chathomepage'] = $einstellungen['u_chathomepage'];
                     schreibe_db("user", $f, $ui_userid, "u_id");
                 }
-                ;
                 
                 // hochgeladene Bilder in DB speichern
                 $bildliste = ARRAY("ui_bild1", "ui_bild2", "ui_bild3",
@@ -231,7 +213,6 @@ if (isset($u_id) && $u_id && $communityfeatures) {
                             $_FILES[$val]['size']);
                     }
                 }
-                ;
                 
                 // Einstellungen aus Checkboxen True/False setzen und in ui_einstellungen packen
                 if (is_array($einstellungen)) {
@@ -256,7 +237,6 @@ if (isset($u_id) && $u_id && $communityfeatures) {
                 $ui_id = schreibe_db("userinfo", $home, $home['ui_id'], "ui_id");
                 
             }
-            ;
             
             // Daten laden und Editor anzeigen
             unset($home);
@@ -295,7 +275,6 @@ if (isset($u_id) && $u_id && $communityfeatures) {
                     $inputliste .= "<INPUT TYPE=\"HIDDEN\" NAME=\"farben[$val]\" VALUE=\""
                         . (isset($farben) ? $farben[$val] : "") . "\">\n";
                 }
-                ;
                 
                 echo "<FORM ENCTYPE=\"multipart/form-data\" NAME=\"home\" ACTION=\"$PHP_SELF\" METHOD=POST>\n"
                     . $inputliste
@@ -323,7 +302,6 @@ if (isset($u_id) && $u_id && $communityfeatures) {
                     . "weiter zur Anlage eines Profils</A>.</P>\n";
                 
             }
-            ;
             @mysql_free_result($result);
             
             if ($o_js || !$u_id)
@@ -340,30 +318,17 @@ if (isset($u_id) && $u_id && $communityfeatures) {
             $url = "zeige_home.php?http_host=$http_host&ui_userid=$ui_userid&hash=$hash";
             if (isset($preview) && $preview == "yes")
                 $url = "zeige_home.php?http_host=$http_host&ui_userid=$ui_userid&hash=$hash&preview=yes&preview_id=$id";
-            print 
-                '
+            echo '
 <html><head>
 <title>DEREFER</TITLE><META CHARSET=UTF-8>
 <META HTTP-EQUIV="REFRESH" CONTENT="0; URL=' . $url
-                    . ' ">
+                . ' ">
 </head>
 <body bgcolor="#ffffff" link="#666666" vlink="#666666">
 <table width="100%" height="100%" border="0"><tr><td align="center"><a href="'
-                    . $url
-                    . '"><font face="Arial, Helvetica, sans-serif" size="2" color="#666666">Einen Moment bitte, die angeforderte Seite wird geladen...</font></a></td></tr></table>
+                . $url
+                . '"><font face="Arial, Helvetica, sans-serif" size="2" color="#666666">Einen Moment bitte, die angeforderte Seite wird geladen...</font></a></td></tr></table>
 </body></html>';
-            
-            #print "Hier war mal die Homepage!";
-            exit;
-            if (!$ui_userid)
-                $ui_userid = $u_id;
-            
-            if ($ui_userid == $u_id) {
-                zeige_home($ui_userid, TRUE, $farben);
-            } else {
-                zeige_home($ui_userid, FALSE, $farben);
-            }
-        
     }
     
 } else {

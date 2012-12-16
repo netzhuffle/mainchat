@@ -8,7 +8,6 @@ require("functions.php");
 if (strlen($eintrittsraum) == 0) {
     $eintrittsraum = $lobby;
 }
-;
 
 // Raumauswahlliste erstellen
 $query = "SELECT r_name,r_id FROM raum "
@@ -19,7 +18,6 @@ $result = mysql_query($query, $conn);
 if ($result) {
     $rows = mysql_num_rows($result);
 }
-;
 
 $raeume = "";
 
@@ -36,9 +34,7 @@ if ($rows > 0) {
         }
         $i++;
     }
-    ;
 }
-;
 mysql_free_result($result);
 
 echo "$raeume";

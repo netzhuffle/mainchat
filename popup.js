@@ -1,14 +1,8 @@
-		
-
-function w(line){
- document.write(line);
+function w(line) {
+	document.write(line);
 }
-// parent.init=0;
-// parent.chanchange=0;
-// parent.flag=0;
 w('<html><head>');
 w('<style type="text/css">');
-// w('font{font-size: 15px;}');
 w('.skin0{position:absolute; width:120px; border:1px solid #000000; background-color:#d0f0ff; font-family:Arial; line-height:12px; cursor:yellow; font-size:10px; z-index:100; visibility:hidden; }');
 w('.menuitems{ padding-left:8px; padding-right:8px; border-color = green; color: blue; }');
 w('.button {   padding-left:4px;   border: none ;   background-color:  #E8E8FF;   font-family: Arial, Helvetica, sans-serif;     font-size: 10px;    border-bottom-width: 0px;    border-bottom: 0px;    bottom: 0px;    margin-bottom: 0px;    padding-bottom: 0px; color: #000000;}');
@@ -16,7 +10,6 @@ w('<\/style>');
 w('<script language="javascript">');
 w('var menu_to; ');
 w('var last_menu_to; ');
-// w('var session = ""');
 w('<\/script><\/head>');
 w('<div align="left" id="ie5menu" class="skin0" onMouseover="highlightie5(event)" onMouseout="lowlightie5(event)" display:none>');
 w('<form name="menuform">');
@@ -24,12 +17,18 @@ w('<div class="button"><input class="button" type="text" name="button" value="">
 w('<div class="menuitems" onClick="c(1)">ignorieren ja/nein<\/div>');
 w('<div class="menuitems" onClick="c(2)">mail senden<\/div>');
 w('<div class="menuitems" onClick="c(3)">freund ja/nein<\/div>');
-if (level2=='admin') w('<div class="menuitems" onClick="c(4)">knebeln<\/div>');
-if (level2=='admin') w('<div class="menuitems" onClick="c(5)">kicken<\/div>');
-if (level2=='admin') w('<div class="menuitems" onClick="c(6)">sperren<\/div>');
-if (level2=='admin') w('<div class="menuitems" onClick="c(7)">aus dem chat kicken<\/div>');
-if (level2=='admin') w('<div class="menuitems" onClick="c(8)">kicken und sperren<\/div>');
-if (level2=='admin') w('<div class="menuitems" onClick="c(9)">blacklist<\/div>');
+if (level2 == 'admin')
+	w('<div class="menuitems" onClick="c(4)">knebeln<\/div>');
+if (level2 == 'admin')
+	w('<div class="menuitems" onClick="c(5)">kicken<\/div>');
+if (level2 == 'admin')
+	w('<div class="menuitems" onClick="c(6)">sperren<\/div>');
+if (level2 == 'admin')
+	w('<div class="menuitems" onClick="c(7)">aus dem chat kicken<\/div>');
+if (level2 == 'admin')
+	w('<div class="menuitems" onClick="c(8)">kicken und sperren<\/div>');
+if (level2 == 'admin')
+	w('<div class="menuitems" onClick="c(9)">blacklist<\/div>');
 w('<\/div>');
 w('<\/form>');
 w('<script type="text/javascript">');
@@ -57,7 +56,6 @@ w('  menuobj.style.top=ie5? document.body.scrollTop+event.clientY : window.pageY
 w('   ');
 w('menuobj.style.left=\'75px\';');
 w('  menuobj.style.visibility="visible"; ');
-// w('alert(menuobj.style.left);');
 w('  return false; ');
 w('} ');
 w('} ');
@@ -98,12 +96,6 @@ w('  document.onclick=hidemenuie5; ');
 w('} ');
 w(' ');
 w(' ');
-//w('function OpenUserpage(file) { ');
-//w('  var newWindow; ');
-//w('  newWindow=window.open(file,"userpage","scrollbars=yes,directories=no,width=640,height=480"); ');
-//w('  if (newWindow != null && newWindow.opener == null) ');
-//w('    newWindow.opener=window; ');
-//w('} ');
 w(' ');
 w(' ');
 w('function a(nick){ ');
@@ -115,12 +107,9 @@ w('   ');
 w('} ');
 w(' ');
 w('function b(){ ');
-// w('alert(\'out\');');
-// w('  menu_to = 0; ');
 w('} ');
 w(' ');
 w('function c(action){ ');
-//w('alert(menu_to);');
 w('  switch (action){ ');
 w(' ');
 w('    case 1:  ');
@@ -129,7 +118,8 @@ w('  parent.frames[\'schreibe\'].location=url;');
 w('      break; ');
 w('    case 2:  ');
 w(' url=\'mail.php?http_host=\'+http_host+\'&id=\'+id+\'&aktion=neu2&neue_email[an_nick]=\'+menu_to;');
-w('window.open(url,\'640_'+menu_to+'\',\'resizable=yes,scrollbars=yes,width=780,height=580\');');
+w('window.open(url,\'640_' + menu_to
+		+ '\',\'resizable=yes,scrollbars=yes,width=780,height=580\');');
 w('      break; ');
 w('    case 3:  ');
 w(' url=\'schreibe.php?http_host=\'+http_host+\'&id=\'+id+\'&text=/freund%20\'+menu_to;');
@@ -178,7 +168,8 @@ w('}');
 w('      break; ');
 w('    case 9:  ');
 w(' url=\'blacklist.php?http_host=\'+http_host+\'&id=\'+id+\'&aktion=neu&neuer_blacklist[u_nick]=\'+menu_to;');
-w('window.open(url,\'640_'+menu_to+'\',\'resizable=yes,scrollbars=yes,width=780,height=580\');');
+w('window.open(url,\'640_' + menu_to
+		+ '\',\'resizable=yes,scrollbars=yes,width=780,height=580\');');
 w('      break; ');
 
 w('    default: ');
@@ -187,4 +178,3 @@ w('  } ');
 w('  return false; ');
 w('} ');
 w('<\/script>');
-	

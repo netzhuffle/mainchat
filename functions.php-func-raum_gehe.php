@@ -1,7 +1,5 @@
 <?php
 
-// $Id: functions.php-func-raum_gehe.php,v 1.17 2012/10/17 06:16:53 student Exp $
-
 function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
 {
     // user $u_id/$u_name geht von $raum_alt in Raum $raum_neu
@@ -20,20 +18,20 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
     
     $result = mysql_query($query, $conn);
     
-    if ($result && mysql_num_rows($result) == 1) :
+    if ($result && mysql_num_rows($result) == 1) {
         $alt = mysql_fetch_object($result);
         mysql_free_result($result);
-    endif;
+    }
     
     // Ist User aus dem Raum ausgesperrt?
     $query = "SELECT s_id FROM sperre WHERE s_raum=$raum_neu AND s_user=$u_id";
     $result = @mysql_query($query, $conn);
     $rows = @mysql_Num_Rows($result);
-    if ($rows == 0) :
+    if ($rows == 0) {
         $gesperrt = 0;
-    else :
+    } else {
         $gesperrt = 1;
-    endif;
+    }
     @mysql_free_result($result);
     
     // Info zu neuem Raum lesen
@@ -41,7 +39,7 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
     
     $result = mysql_query($query, $conn);
     
-    if ($result && mysql_num_rows($result) == 1) :
+    if ($result && mysql_num_rows($result) == 1) {
         $neu = mysql_fetch_object($result);
         mysql_free_result($result);
         
@@ -134,7 +132,6 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
             @mysql_free_result($result);
             
         }
-        ;
         
         // Darf Raum nun betreten werden?
         if ($raumwechsel) {
@@ -198,7 +195,7 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
                     mysql_free_result($result2);
                     
                     system_msg("", 0, $u_id, "",
-                        "<SCRIPT LANGUAGE=JavaScript>parent.frames[3].location.href='eingabe.php?http_host=$online->o_vhost&id=$online->o_hash';</SCRIPT>");
+                        "<SCRIPT>parent.frames[3].location.href='eingabe.php?http_host=$online->o_vhost&id=$online->o_hash';</SCRIPT>");
                     
                     unset($online);
                 }
@@ -272,7 +269,7 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
             
             $raum = $raum_alt;
         }
-    endif;
+    }
     
     return ($raum);
 }

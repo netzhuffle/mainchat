@@ -1,7 +1,5 @@
 <?php
 
-// $id$
-
 function umfrage_aendern($umfrage)
 {
     global $id, $http_host, $eingabe_breite, $PHP_SELF, $f1, $f2, $f3, $f4, $conn, $dbase;

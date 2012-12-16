@@ -1,7 +1,4 @@
 <?php
-// fidion GmbH mainChat
-
-// $Id: raum.php,v 1.13 2012/10/17 06:16:53 student Exp $
 
 require("functions.php");
 
@@ -22,7 +19,7 @@ $fenster = str_replace("ß", "", $fenster);
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Info"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()     
 	function neuesFenster(url,name) { 
                 hWnd=window.open(url,name,"resizable=yes,scrollbars=yes,width=300,height=580"); 
@@ -37,16 +34,16 @@ $fenster = str_replace("ß", "", $fenster);
 
 // Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";
 echo $body_tag;
 
 // Login ok?
-if (strlen($u_id) != 0) :
+if (strlen($u_id) != 0) {
     // Timestamp im Datensatz aktualisieren
     aktualisiere_online($u_id, $o_raum);
     
@@ -93,12 +90,12 @@ if (strlen($u_id) != 0) :
         }
         
         // Nur Admin darf Nicht-Temporäre Räume setzen
-        if (!$admin && $f['r_status2'] == "P") :
+        if (!$admin && $f['r_status2'] == "P") {
             echo "<P>"
                 . str_replace("%r_status%", $raumstatus2[$f['r_status2']],
                     $t['fehler10']) . "</P>\n";
             unset($f['r_status2']);
-        endif;
+        }
         
         // Status moderiert nur falls kommerzielle Version
         if (isset($f['r_status1']) && (strtolower($f['r_status1']) == "m")
@@ -160,9 +157,9 @@ if (strlen($u_id) != 0) :
     // bei keinen Admins ist nur temporär erlaubt
     if ($f['r_id'] != "" && strlen($f['r_name']) > 3
         && strlen($f['r_name']) < $raum_max && $los == "$t[sonst9]" && !$neu
-        && ($admin || $u_id == $r_besitzer)) :
+        && ($admin || $u_id == $r_besitzer)) {
         schreibe_db("raum", $f, $f['r_id'], "r_id");
-    endif;
+    }
     
     if (!isset($loesch))
         $loesch = "";
@@ -173,7 +170,7 @@ if (strlen($u_id) != 0) :
     // bei keinen Admins ist nur temporär erlaubt
     if (strlen($f['r_name']) > 3 && strlen($f['r_name']) < $raum_max
         && $los == "$t[sonst9]" && $loesch != "$t[sonst4]" && $neu
-        && ($u_level != "G")) :
+        && ($u_level != "G")) {
         // Voreinstellungen für den Raumstatus
         if (!$f['r_status1'])
             $f['r_status1'] = "O";
@@ -185,38 +182,37 @@ if (strlen($u_id) != 0) :
         $result = mysql_query($query, $conn);
         $rows = mysql_num_rows($result);
         
-        if ($rows == 0) :
+        if ($rows == 0) {
             // Raum neu eintragen und in Raum gehen
             $raum_neu = schreibe_db("raum", $f, "", "r_id");
             $o_raum = raum_gehe($o_id, $u_id, $u_nick, $o_raum, $raum_neu, TRUE);
             raum_user($o_raum, $u_id, $id);
-        
-        else :
+        } else {
             echo "<P>" . str_replace("%r_name%", $f['r_name'], $t['fehler0'])
                 . "</P>\n";
-        endif;
+        }
         mysql_free_result($result);
-    
-    endif;
+        
+    }
     
     // Raum löschen
-    if ($los != "$t[sonst9]" && $loesch == "$t[sonst4]") :
+    if ($los != "$t[sonst9]" && $loesch == "$t[sonst4]") {
         $aktion = "loesch";
-    endif;
+    }
     
     // Raum löschen abgebrochen
-    if ($loesch2 == "$t[sonst5]") :
+    if ($loesch2 == "$t[sonst5]") {
         $aktion = "";
-    endif;
+    }
     
     // Fehlermeldung für Raum-anlegen
     if (strlen($f['r_name']) <= 3 && $los == "$t[sonst9]"
-        && $loesch != "$t[sonst4]" && $neu) :
+        && $loesch != "$t[sonst4]" && $neu) {
         echo $t['fehler1'];
-    endif;
-    if (strlen($f['r_name']) >= $raum_max) :
+    }
+    if (strlen($f['r_name']) >= $raum_max) {
         echo $t['fehler2'];
-    endif;
+    }
     
     $box = $ft0 . $t['sonst10'] . $ft1;
     $tabellenkopf = "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
@@ -248,17 +244,17 @@ if (strlen($u_id) != 0) :
             
             $result = mysql_query($query, $conn);
             
-            if ($result AND mysql_num_rows($result) > 0) :
+            if ($result AND mysql_num_rows($result) > 0) {
                 $row = mysql_fetch_object($result);
                 
                 // Berechtigung prüfen, alle User in Lobby werfen und löschen
-                if ($admin || ($row->r_besitzer == $u_id)) :
+                if ($admin || ($row->r_besitzer == $u_id)) {
                     // Lobby suchen
                     $query = "SELECT r_id FROM raum WHERE r_name='$lobby' ";
                     $result2 = mysql_query($query, $conn);
-                    if ($result2 AND mysql_num_rows($result2) > 0) :
+                    if ($result2 AND mysql_num_rows($result2) > 0) {
                         $lobby_id = mysql_result($result2, 0, "r_id");
-                    endif;
+                    }
                     @mysql_free_result($result2);
                     
                     // Raum ist nicht Lobby -> Löschen
@@ -277,7 +273,7 @@ if (strlen($u_id) != 0) :
                             . "WHERE o_raum=$f[r_id] ";
                         
                         $result2 = mysql_query($query, $conn);
-                        while ($row2 = mysql_fetch_object($result2)) :
+                        while ($row2 = mysql_fetch_object($result2)) {
                             system_msg("", 0, $row2->o_user, $system_farbe,
                                 str_replace("%r_name%", $row->r_name,
                                     $t['fehler4']));
@@ -285,7 +281,7 @@ if (strlen($u_id) != 0) :
                                 $row2->o_name, $f['r_id'], $lobby_id, FALSE);
                             raum_user($lobby_id, $row2->o_user, $id);
                             $i++;
-                        endwhile;
+                        }
                         @mysql_free_result($result2);
                         
                         $query = "DELETE FROM raum WHERE r_id=$f[r_id] ";
@@ -302,18 +298,18 @@ if (strlen($u_id) != 0) :
                             . str_replace("%r_name%", $row->r_name,
                                 $t['fehler3']) . "</P>\n";
                     }
-                
-                else :
+                    
+                } else {
                     echo "<P>"
                         . str_replace("%r_name%", $row->r_name, $t['fehler5'])
                         . "</P>\n";
-                endif;
+                }
                 
                 mysql_free_result($result);
-            
-            else :
+                
+            } else {
                 echo "<P>$t[fehler6]</P>\n";
-            endif;
+            }
             break;
         
         case "loesch":
@@ -323,7 +319,7 @@ if (strlen($u_id) != 0) :
             
             $result = mysql_query($query, $conn);
             
-            if ($result AND mysql_num_rows($result) > 0) :
+            if ($result AND mysql_num_rows($result) > 0) {
                 // Kopf Tabelle
                 $box = $ft0 . $t['sonst6'] . $ft1;
                 echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
@@ -363,10 +359,10 @@ if (strlen($u_id) != 0) :
                 // Fuß der Tabelle
                 echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
                 mysql_free_result($result);
-            
-            else :
+                
+            } else {
                 echo "<P>$t[fehler8]</P>\n";
-            endif;
+            }
             break;
         
         case "neu":
@@ -384,12 +380,8 @@ if (strlen($u_id) != 0) :
                     $u_punkte_gesamt = mysql_result($result, 0, 0);
                 }
                 
-                #print "raumanlegenpunkte=$raumanlegenpunkte<br>";
-                #print "u_punkte_gesamt=$u_punkte_gesamt<br>";
-                
                 if (isset($raumanlegenpunkte)
                     && $u_punkte_gesamt < $raumanlegenpunkte) {
-                    #echo "Um Räume anlegen zu dürfen, brauchst Du mindestens $raumanlegenpunkte Punkte";
                     echo str_replace("%punkte%", $raumanlegenpunkte,
                         $t['sonst13']);
                     break;
@@ -443,32 +435,32 @@ if (strlen($u_id) != 0) :
                 . "</TD>" . "<TD>" . $f1 . "<SELECT NAME=\"f[r_status2]\">\n";
             
             $i = 0;
-            while ($i < count($raumstatus2)) :
+            while ($i < count($raumstatus2)) {
                 $keynum = key($raumstatus2);
                 $status2 = $raumstatus2[$keynum];
-                if ($keynum == $r_status2) :
+                if ($keynum == $r_status2) {
                     echo "<OPTION SELECTED VALUE=\"$keynum\">$status2\n";
-                else :
+                } else {
                     echo "<OPTION VALUE=\"$keynum\">$status2\n";
-                endif;
+                }
                 next($raumstatus2);
                 $i++;
-            endwhile;
+            }
             
             echo "</SELECT>" . $f2 . "</TD></TR>\n";
             
-            if ($smilies_pfad && $erweitertefeatures) :
+            if ($smilies_pfad && $erweitertefeatures) {
                 echo "<TR><TD>" . $f1 . "<B>" . $t['raum_user7'] . "</B>" . $f2
                     . "</TD><TD>" . $f1 . "<SELECT NAME=\"f[r_smilie]\">";
-                if ($r_smilie == "Y") :
+                if ($r_smilie == "Y") {
                     echo "<OPTION SELECTED VALUE=\"Y\">$t[raum_user8]";
                     echo "<OPTION VALUE=\"N\">$t[raum_user9]";
-                else :
+                } else {
                     echo "<OPTION VALUE=\"Y\">$t[raum_user8]";
                     echo "<OPTION SELECTED VALUE=\"N\">$t[raum_user9]";
-                endif;
+                }
                 echo "</SELECT>" . $f2 . "</TD></TR>\n";
-            endif;
+            }
             
             if ($erweitertefeatures) {
                 // Punkte zum Betreten des Raumes
@@ -513,13 +505,13 @@ if (strlen($u_id) != 0) :
             if (!isset($r_werbung)) {
                 $r_werbung = "";
             }
-            if ($admin && $erweitertefeatures) :
+            if ($admin && $erweitertefeatures) {
                 echo "<TR><TD>" . $f1 . "<B>" . $t['sonst12'] . "</B>" . $f2
                     . "</TD>" . "<TD>" . $f1
                     . "<INPUT TYPE=\"TEXT\" NAME=\"f[r_werbung]\" VALUE=\""
                     . stripslashes($r_werbung) . "\" SIZE=$eingabe_breite>"
                     . $f2 . "</TD></TR>\n";
-            endif;
+            }
             
             echo "<TR><TD COLSPAN=2>" . $f1
                 . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"$t[sonst9]\">"
@@ -548,16 +540,16 @@ if (strlen($u_id) != 0) :
                 // Kopf Tabelle
                 echo $tabellenkopf;
                 
-                while ($rows = mysql_fetch_object($result)) :
-                    if (!isset($fussaus)) :
+                while ($rows = mysql_fetch_object($result)) {
+                    if (!isset($fussaus)) {
                         $fussaus = TRUE;
-                    else :
+                    } else {
                         echo $tabellenfuss;
                         echo $tabellenkopf;
-                    endif;
+                    }
                     
                     // Ausgabe in Tabelle
-                    if ($admin || $rows->u_id == $u_id) :
+                    if ($admin || $rows->u_id == $u_id) {
                         // für diesen Raum Admin
                         echo "<FORM NAME=\"$rows->r_name\" ACTION=\"raum.php\" METHOD=POST>\n";
                         echo "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n"
@@ -565,12 +557,12 @@ if (strlen($u_id) != 0) :
                         echo "<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=1>\n";
                         
                         echo "<TR><TD><B>$t[sonst2]</B></TD>";
-                        if ($rows->r_name == $lobby) :
+                        if ($rows->r_name == $lobby) {
                             echo "<TD><B>$rows->r_name</B>"
                                 . "<INPUT TYPE=\"HIDDEN\" NAME=\"f[r_name]\" "
                                 . "VALUE=\"$rows->r_name\" SIZE=$eingabe_breite>"
                                 . $f2 . "</TD></TR>\n";
-                        else :
+                        } else {
                             echo "<TD>" . $f1
                                 . "<INPUT TYPE=\"TEXT\" NAME=\"f[r_name]\" "
                                 . "VALUE=\"$rows->r_name\" SIZE=$eingabe_breite>"
@@ -587,17 +579,17 @@ if (strlen($u_id) != 0) :
                             
                             $a = 0;
                             reset($raumstatus1);
-                            while ($a < count($raumstatus1)) :
+                            while ($a < count($raumstatus1)) {
                                 $keynum = key($raumstatus1);
                                 $status1 = $raumstatus1[$keynum];
-                                if ($keynum == $rows->r_status1) :
+                                if ($keynum == $rows->r_status1) {
                                     echo "<OPTION SELECTED VALUE=\"$keynum\">$status1\n";
-                                else :
+                                } else {
                                     echo "<OPTION VALUE=\"$keynum\">$status1\n";
-                                endif;
+                                }
                                 next($raumstatus1);
                                 $a++;
-                            endwhile;
+                            }
                             
                             echo "</SELECT>" . $f2 . "</TD></TR>\n";
                             
@@ -608,35 +600,35 @@ if (strlen($u_id) != 0) :
                             
                             $a = 0;
                             reset($raumstatus2);
-                            while ($a < count($raumstatus2)) :
+                            while ($a < count($raumstatus2)) {
                                 $keynum = key($raumstatus2);
                                 $status2 = $raumstatus2[$keynum];
-                                if ($keynum == $rows->r_status2) :
+                                if ($keynum == $rows->r_status2) {
                                     echo "<OPTION SELECTED VALUE=\"$keynum\">$status2\n";
-                                else :
+                                } else {
                                     echo "<OPTION VALUE=\"$keynum\">$status2\n";
-                                endif;
+                                }
                                 next($raumstatus2);
                                 $a++;
-                            endwhile;
+                            }
                             
                             echo "</SELECT>" . $f2 . "</TD></TR>\n";
+                            
+                        }
                         
-                        endif;
-                        
-                        if ($smilies_pfad && $erweitertefeatures) :
+                        if ($smilies_pfad && $erweitertefeatures) {
                             echo "<TR><TD>" . $f1 . "<B>" . $t['raum_user7']
                                 . "</B>" . $f2 . "</TD><TD>" . $f1
                                 . "<SELECT NAME=\"f[r_smilie]\">";
-                            if ($rows->r_smilie == "Y") :
+                            if ($rows->r_smilie == "Y") {
                                 echo "<OPTION SELECTED VALUE=\"Y\">$t[raum_user8]";
                                 echo "<OPTION VALUE=\"N\">$t[raum_user9]";
-                            else :
+                            } else {
                                 echo "<OPTION VALUE=\"Y\">$t[raum_user8]";
                                 echo "<OPTION SELECTED VALUE=\"N\">$t[raum_user9]";
-                            endif;
+                            }
                             echo "</SELECT>" . $f2 . "</TD></TR>\n";
-                        endif;
+                        }
                         
                         if ($erweitertefeatures && $rows->r_name != $lobby
                             && $rows->r_status1 != "L") {
@@ -669,14 +661,14 @@ if (strlen($u_id) != 0) :
                             . $f2 . "</TD></TR>\n";
                         
                         // Werbung für Frame
-                        if ($admin && $erweitertefeatures) :
+                        if ($admin && $erweitertefeatures) {
                             echo "<TR><TD>" . $f1 . "<B>" . $t['sonst12']
                                 . "</B>" . $f2 . "</TD>" . "<TD>" . $f1
                                 . "<INPUT TYPE=\"TEXT\" NAME=\"f[r_werbung]\" VALUE=\""
                                 . stripslashes($rows->r_werbung)
                                 . "\" SIZE=$eingabe_breite>" . $f2
                                 . "</TD></TR>\n";
-                        endif;
+                        }
                         
                         echo "<TR><TD COLSPAN=2>" . $f1
                             . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"$t[sonst9]\">"
@@ -689,8 +681,8 @@ if (strlen($u_id) != 0) :
                         echo "<INPUT TYPE=\"HIDDEN\" NAME=\"f[r_id]\" VALUE=\"$rows->r_id\">";
                         echo "<INPUT TYPE=\"HIDDEN\" NAME=\"f[r_besitzer]\" VALUE=\"$rows->r_besitzer\">";
                         echo "</FORM>\n";
-                    
-                    else :
+                        
+                    } else {
                         // Normalsterblicher
                         echo "<TABLE WIDTH=100% BORDER=0 CELLSPACING=0>\n";
                         if ($rows->r_name)
@@ -707,10 +699,10 @@ if (strlen($u_id) != 0) :
                                     stripslashes($rows->r_eintritt)) . $f2
                                 . "</TD></TR>\n";
                         echo "</TR></TABLE>\n";
+                        
+                    }
                     
-                    endif;
-                    
-                endwhile;
+                }
                 
                 // Fuß der Tabelle
                 echo $tabellenfuss;
@@ -727,9 +719,9 @@ if (strlen($u_id) != 0) :
                 //system_msg("",0,$u_id,"#000000","Debug: ".$query);
                 $result = mysql_query($query, $conn);
                 
-                while ($row = mysql_fetch_object($result)) :
+                while ($row = mysql_fetch_object($result)) {
                     $anzahl_user[$row->r_id] = $row->anzahl;
-                endwhile;
+                }
                 mysql_free_result($result);
                 
                 // Liste der Räume und der Raumbesitzer lesen
@@ -742,7 +734,7 @@ if (strlen($u_id) != 0) :
                     echo $tabellenkopf;
                     // extended==Ansicht mit Details im extra beiten Fenster
                     if ($admin && $adminfeatures == 1) {
-                        if (isset($extended) && ($extended == 1)) :
+                        if (isset($extended) && ($extended == 1)) {
                             $rlink = "<CENTER>" . $f1
                                 . "<B><A HREF=\"raum.php?http_host=$http_host&id=$id&order=$order\">"
                                 . $t['menue7'] . "</A></B>" . $f2
@@ -750,59 +742,55 @@ if (strlen($u_id) != 0) :
                             echo "<script language=\"javascript\">\n"
                                 . "window.resizeTo(800,600); window.focus();"
                                 . "</script>\n";
-                        else :
+                        } else {
                             $rlink = "<CENTER>" . $f1
                                 . "<B><A HREF=\"raum.php?http_host=$http_host&id=$id&order=$order&extended=1\">"
                                 . $t['menue6'] . "</A></B>" . $f2
                                 . "</CENTER>\n";
-                        endif;
+                        }
                         echo "$rlink<br>";
                     }
                     echo "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=\"$farbe_tabelle_koerper\">\n";
                     $rlink = "<A HREF=\"raum.php?http_host=$http_host&id=$id&order=r_name\">"
                         . $t['sonst2'] . "</A>";
-                    print "<tr><td><small><b>" . $rlink . "</b></small></td>";
+                    echo "<tr><td><small><b>" . $rlink . "</b></small></td>";
                     if ($admin || TRUE) {
-                        print "<td>&nbsp;</td>";
+                        echo "<td>&nbsp;</td>";
                         $rlink = "<A HREF=\"raum.php?http_host=$http_host&id=$id&order=r_status1,r_name\">S</A>";
-                        print "<td><small><b>" . $rlink
+                        echo "<td><small><b>" . $rlink
                             . "</b>&nbsp;</small></td>";
                         $rlink = "<A HREF=\"raum.php?http_host=$http_host&id=$id&order=r_status2,r_name\">S</A>";
-                        print "<td><small><b>" . $rlink
+                        echo "<td><small><b>" . $rlink
                             . "</b>&nbsp;</small></td>";
                         $rlink = "<A HREF=\"raum.php?http_host=$http_host&id=$id&order=u_nick\">"
                             . $t['raum_user2'] . "</A>";
-                        print 
-                            "<td><small><b>" . $rlink
-                                . "</b></small></td><TD>&nbsp</TD>";
+                        echo "<td><small><b>" . $rlink
+                            . "</b></small></td><TD>&nbsp</TD>";
                         if (isset($extended) && $extended) {
                             if ($smilies_pfad && $erweitertefeatures) {
                                 $rlink = $t['raum_user10'];
-                                print 
-                                    "<td><small><b>" . $rlink
-                                        . "</b></small></td>";
+                                echo "<td><small><b>" . $rlink
+                                    . "</b></small></td>";
                             }
-                            ;
                             
                             if ($erweitertefeatures) {
                                 $rlink = $t['sonst14'];
-                                print 
-                                    "<td><small><b>" . $rlink
-                                        . "</b></small></td>";
+                                echo "<td><small><b>" . $rlink
+                                    . "</b></small></td>";
                             }
                             
                             $rlink = $t['sonst3'];
-                            print "<td><small><b>" . $rlink
+                            echo "<td><small><b>" . $rlink
                                 . "</b></small></td>";
                             $rlink = $t['sonst7'];
-                            print "<td><small><b>" . $rlink
+                            echo "<td><small><b>" . $rlink
                                 . "</b></small></td>";
                             $rlink = $t['sonst8'];
-                            print "<td><small><b>" . $rlink
+                            echo "<td><small><b>" . $rlink
                                 . "</b></small></td>";
                         }
                     }
-                    print "</tr>\n";
+                    echo "</tr>\n";
                     $i = 1;
                     $bgcolor = $farbe_tabelle_zeile1;
                     while ($row = mysql_fetch_array($result)) {
@@ -816,8 +804,9 @@ if (strlen($u_id) != 0) :
                         }
                         // raum nur anzeigen falls offen, moderiert, besitzer oder admin...
                         // "m" -> moderiert, "M" -> moderiert+geschlossen.
-                        if ($row['r_status1'] == "O" || $row['r_status1']
-                                == "m" || $uu_id == $u_id || $admin) {
+                        if ($row['r_status1'] == "O"
+                            || $row['r_status1'] == "m" || $uu_id == $u_id
+                            || $admin) {
                             
                             $rlink = "<A HREF=\"raum.php?http_host=$http_host&id=$id&aktion=edit&raum="
                                 . $row['r_id'] . "\">" . $row['r_name']
@@ -825,36 +814,30 @@ if (strlen($u_id) != 0) :
                             
                             // Anzahl der User online ermitteln
                             if ((isset($anzahl_user[$row['r_id']]))
-                                && ($anzahl_user[$row['r_id']] > 0)) :
+                                && ($anzahl_user[$row['r_id']] > 0)) {
                                 $anzahl = $anzahl_user[$row['r_id']];
-                            else :
+                            } else {
                                 $anzahl = 0;
-                            endif;
+                            }
                             $ulink = "<A HREF=\"user.php?http_host=$http_host&id=$id&schau_raum="
                                 . $row['r_id'] . "\">$anzahl</A>";
                             
-                            print 
-                                "<tr bgcolor=$bgcolor><td>$b1" . $rlink
-                                    . "$b2</td>";
-                            print "<td align=right>$b1" . $ulink
+                            echo "<tr bgcolor=$bgcolor><td>$b1" . $rlink
+                                . "$b2</td>";
+                            echo "<td align=right>$b1" . $ulink
                                 . "$b2&nbsp;</td>";
                             
                             if ($admin || TRUE) {
-                                print 
-                                    "<td>$b1"
-                                        . substr(
-                                            $raumstatus1[$row['r_status1']], 0,
-                                            1) . "$b2&nbsp;</td>";
-                                print 
-                                    "<td>$b1"
-                                        . substr(
-                                            $raumstatus2[$row['r_status2']], 0,
-                                            1) . "$b2&nbsp;</td>";
-                                print 
-                                    "<td>$b1"
-                                        . user($row['u_id'], $row, TRUE, FALSE,
-                                            "$b2</td><td align=RIGHT>$b1")
-                                        . $b2 . "</td>";
+                                echo "<td>$b1"
+                                    . substr($raumstatus1[$row['r_status1']],
+                                        0, 1) . "$b2&nbsp;</td>";
+                                echo "<td>$b1"
+                                    . substr($raumstatus2[$row['r_status2']],
+                                        0, 1) . "$b2&nbsp;</td>";
+                                echo "<td>$b1"
+                                    . user($row['u_id'], $row, TRUE, FALSE,
+                                        "$b2</td><td align=RIGHT>$b1") . $b2
+                                    . "</td>";
                                 if ((isset($extended)) && ($extended)) {
                                     
                                     if ($smilies_pfad && $erweitertefeatures) {
@@ -863,17 +846,13 @@ if (strlen($u_id) != 0) :
                                         } else {
                                             $r_smilie = $t['raum_user9'];
                                         }
-                                        ;
-                                        print 
-                                            "<td>$b1" . $r_smilie
-                                                . "&nbsp;$b2</td>";
+                                        echo "<td>$b1" . $r_smilie
+                                            . "&nbsp;$b2</td>";
                                     }
-                                    ;
                                     
                                     if ($erweitertefeatures) {
-                                        print 
-                                            "<td>$b1" . $row['r_min_punkte']
-                                                . "&nbsp;$b2</td>";
+                                        echo "<td>$b1" . $row['r_min_punkte']
+                                            . "&nbsp;$b2</td>";
                                     }
                                     
                                     $temp = htmlspecialchars(
@@ -882,7 +861,7 @@ if (strlen($u_id) != 0) :
                                     $temp = str_replace('&amp;gt;', '>', $temp);
                                     $temp = str_replace('&amp;quot;', '"',
                                         $temp);
-                                    print "<td>$b1" . $temp . "&nbsp;$b2</td>";
+                                    echo "<td>$b1" . $temp . "&nbsp;$b2</td>";
                                     
                                     $temp = htmlspecialchars(
                                         stripslashes($row['r_eintritt']));
@@ -890,7 +869,7 @@ if (strlen($u_id) != 0) :
                                     $temp = str_replace('&amp;gt;', '>', $temp);
                                     $temp = str_replace('&amp;quot;', '"',
                                         $temp);
-                                    print "<td>$b1" . $temp . "&nbsp;$b2</td>";
+                                    echo "<td>$b1" . $temp . "&nbsp;$b2</td>";
                                     
                                     $temp = htmlspecialchars(
                                         stripslashes($row['r_austritt']));
@@ -898,10 +877,10 @@ if (strlen($u_id) != 0) :
                                     $temp = str_replace('&amp;gt;', '>', $temp);
                                     $temp = str_replace('&amp;quot;', '"',
                                         $temp);
-                                    print "<td>$b1" . $temp . "&nbsp;$b2</td>";
+                                    echo "<td>$b1" . $temp . "&nbsp;$b2</td>";
                                 }
                             }
-                            print "</tr>\n";
+                            echo "</tr>\n";
                             $i++;
                             if (($i % 2) > 0)
                                 $bgcolor = $farbe_tabelle_zeile1;
@@ -916,18 +895,16 @@ if (strlen($u_id) != 0) :
             }
         
     }
-    ;
     
-    // Fuß
-    if ($o_js) :
+    if ($o_js) {
         echo $f1
             . "<P ALIGN=CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</P>"
             . $f2 . "\n";
-    endif;
-
-else :
+    }
+    
+} else {
     echo "<P ALIGN=CENTER>$t[sonst11]</P>\n";
-endif;
+}
 
 ?>
 

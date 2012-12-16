@@ -8,9 +8,9 @@ require_once("functions.php-werbung.php");
 id_lese($id);
 
 $body_tag = "<BODY BGCOLOR=\"$farbe_chat_background3\" ";
-if (strlen($grafik_background3) > 0) :
+if (strlen($grafik_background3) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_background3\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_chat_text3\" "
     . "LINK=\"$farbe_chat_link3\" " . "VLINK=\"$farbe_chat_vlink3\" "
     . "ALINK=\"$farbe_chat_vlink3\">\n";
@@ -22,7 +22,7 @@ if ($u_id && $chat_timeout && $u_level != 'S' && $u_level != 'C'
     if ($o_timeout_warnung == "J" && $chat_timeout < (time() - $o_timeout_zeit)) {
         
         // User ausloggen
-        $zusatzjavascript = "<SCRIPT LANGUAGE=JavaScript>\n"
+        $zusatzjavascript = "<SCRIPT>\n"
             . "window.open(\"hilfe.php?http_host=$http_host&id=$id&aktion=logout\",'Logout',\"resizable=yes,scrollbars=yes,width=300,height=300\")\n"
             . "</SCRIPT>\n";
         require_once("functions.php-func-verlasse_chat.php");
@@ -46,9 +46,8 @@ if ($u_id && $chat_timeout && $u_level != 'S' && $u_level != 'C'
 } else {
     $zusatzjavascript = "";
 }
-;
 
-if ($u_id) :
+if ($u_id) {
     // Kopf ausgeben
     
     // Fenstername
@@ -66,8 +65,9 @@ if ($u_id) :
     
 <HTML><HEAD><TITLE><?php echo $body_titel; ?></TITLE><META CHARSET=UTF-8>
 <META HTTP-EQUIV="REFRESH" CONTENT="<?php echo intval($timeout / 3)
-        . "; URL=interaktiv-forum.php?http_host=$http_host&id=$id&o_raum_alt=$o_raum"; ?>">
-<SCRIPT LANGUAGE="JavaScript">
+        . "; URL=interaktiv-forum.php?http_host=$http_host&id=$id&o_raum_alt=$o_raum";
+                                    ?>">
+<SCRIPT>
 function neuesFenster(url) {
         hWnd=window.open(url,"<?php echo $fenster; ?>","resizable=yes,scrollbars=yes,width=300,height=580");
 }
@@ -105,10 +105,10 @@ function window_reload(file,win_name) {
     $query = "SELECT count(o_id) as anzahl FROM online "
         . "WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout";
     $result = mysql_query($query, $conn);
-    if ($result && mysql_Num_Rows($result) != 0) :
+    if ($result && mysql_Num_Rows($result) != 0) {
         $anzahl_gesamt = mysql_result($result, 0, "anzahl");
         mysql_free_result($result);
-    endif;
+    }
     
     echo "<tr><td ALIGN=\"CENTER\">";
     
@@ -154,7 +154,6 @@ function window_reload(file,win_name) {
             . "&nbsp;&nbsp;&nbsp;[<A HREF=\"$mlnk[13]\" TARGET=\"640_$fenster\" onMouseOver=\"return(true)\" onClick=\"neuesFenster2('$mlnk[13]');return(false)\">$t[menue13]</A>]&nbsp;"
             . "&nbsp;&nbsp;&nbsp;[<A HREF=\"$mlnk[5]\" onMouseOver=\"return(true)\" TARGET=\"$logouttarget\">$t[menue6]</A>]&nbsp;";
     }
-    ;
     echo "</b><br><br>\n";
     if (!(($u_level == 'U' || $level == 'G')
         && (isset($useronline_anzeige_deaktivieren)
@@ -164,9 +163,9 @@ function window_reload(file,win_name) {
     }
     
     // Falls eintrittsraum nicht gesetzt ist, mit Lobby überschreiben
-    if (strlen($eintrittsraum) == 0) :
+    if (strlen($eintrittsraum) == 0) {
         $eintrittsraum = $lobby;
-    endif;
+    }
     
     $sql = "select r_id from raum where r_name like '$eintrittsraum'";
     $query = mysql_query($sql, $conn);
@@ -178,11 +177,11 @@ function window_reload(file,win_name) {
         . "<NOBR><SELECT NAME=\"neuer_raum\"\" onChange=\"document.form1.submit()\">\n";
     
     // Admin sehen alle Räume, andere User nur die offenen
-    if ($admin) :
+    if ($admin) {
         raeume_auswahl($lobby_id, TRUE, TRUE);
-    else :
+    } else {
         raeume_auswahl($lobby_id, FALSE, TRUE);
-    endif;
+    }
     
     echo "</SELECT>";
     
@@ -196,13 +195,13 @@ function window_reload(file,win_name) {
         . "</td></tr><TR><TD ALIGN=\"CENTER\"><IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=2><BR>\n";
     werbung('interaktiv', $werbung_gruppe);
     echo "</TD></TR></TABLE></CENTER></FORM>\n" . "</BODY></HTML>\n";
-
-else :
+    
+} else {
     // User wird nicht gefunden. Login ausgeben
     echo "<HTML><HEAD>$zusatzjavascript</HEAD><HTML>";
     echo "<BODY onLoad='javascript:parent.location.href=\"index.php?http_host=$http_host\"'>\n";
     echo "</BODY></HTML>\n";
     exit;
-endif;
+}
 
         ?>

@@ -1,6 +1,5 @@
 <?php
 
-// $Id: functions.php-werbung.php,v 1.4 2012/10/17 06:16:53 student Exp $
 // Funktionen, die NUR von interaktiv.php verwendet werden.
 
 function werbung($werbung_flaeche, $werbung_gruppe)
@@ -23,11 +22,8 @@ function werbung($werbung_flaeche, $werbung_gruppe)
         while ($werbunggelesen == 0 && !empty($gruppen[$i])) {
             $gruppen[$i] = str_replace(".php", "", $gruppen[$i]) . ".php";
             $werbung_gruppe = $gruppen[$i];
-            // print "<!-- ".str_replace(".php","",$werbung_gruppe)." -->";
-            // print "<!-- lese: werbung/$werbung_gruppe -->";
             if (file_exists("werbung/$werbung_gruppe")) {
                 include("werbung/$werbung_gruppe");
-                // print "<!-- gelesen: werbung/$werbung_gruppe -->";
                 $werbunggelesen = 1;
             }
             $i++;
@@ -44,7 +40,6 @@ function werbung($werbung_flaeche, $werbung_gruppe)
                 while ($werbunggelesen == 0 && !empty($wfb[$werbung_gruppe])
                     && $j < 10) {
                     $werbung_gruppe = $wfb[$werbung_gruppe];
-                    // print $werbung_gruppe;
                     if (file_exists("werbung/$werbung_gruppe")) {
                         include("werbung/$werbung_gruppe");
                         $werbunggelesen = 1;

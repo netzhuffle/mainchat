@@ -1,7 +1,5 @@
 <?php
 
-// $Id: useronline.php,v 1.4 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Anzahl der User, die gerade Online sind, als kurzliste ausgeben
@@ -16,7 +14,6 @@ $result = @mysql_query($query, $conn);
 if ($result && mysql_Num_Rows($result) > 0) {
     $anzahl_user = mysql_result($result, 0, 0);
 }
-;
 @mysql_free_result($result);
 
 $query = "SELECT count(o_id) as anzahl_online FROM online "
@@ -26,7 +23,6 @@ $result = @mysql_query($query, $conn);
 if ($result && mysql_Num_Rows($result) > 0) {
     $anzahl_online = mysql_result($result, 0, 0);
 }
-;
 @mysql_free_result($result);
 
 $query = "SELECT o_name,r_name,UNIX_TIMESTAMP(o_aktiv) as login FROM raum,online "
@@ -51,28 +47,22 @@ if ($result && mysql_Num_Rows($result) > 0) {
                 $user_im_raum = 0;
                 $raum_alt = $row->r_name;
             }
-            ;
         }
-        ;
         
         if ($nicks) {
             $nicks .= ", " . $row->o_name;
         } else {
             $nicks .= $row->o_name;
         }
-        ;
         $user_im_raum++;
     }
-    ;
     if ($user_im_raum) {
         $txt = str_replace("%raum_alt%", $raum_alt, $t[userliste1]);
         $txt = str_replace("%user_im_raum%", $user_im_raum, $txt);
         $userliste .= str_replace("%nicks%", $nicks, $txt);
         $nicks = "";
     }
-    ;
 }
-;
 @mysql_free_result($result);
 
 if ($anzahl_online && $anzahl_user)

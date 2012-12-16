@@ -1,6 +1,5 @@
 <?php
 // Anzahl der User, die gerade Online sind, als Grafik ausgeben
-// $Id: userinfo.php,v 1.13 2012/10/17 07:43:23 student Exp $
 
 // time limit auf 3 sekunden - falls z.B. ein DB-Server hängt, wird
 // hiermit hoffentlich verhindert, daß dieser Prozess zu lange hängt
@@ -71,7 +70,6 @@ function JPGText($str, $fontname, $fontsize, $backcol, $txtcol)
     $bla = get_maximum_height($fontname, $fontsize);
     $height = $bla[0] + 3;
     $bl = $bla[1];
-    //$height=$a[7]+$a[1];
     $im = ImageCreate($width, $height);
     $bgcol = ImageColorAllocate($im, $backcol['red'], $backcol['green'],
         $backcol['blue']);
@@ -88,10 +86,8 @@ function JPGText($str, $fontname, $fontsize, $backcol, $txtcol)
             $fontname, $str);
         imagegif($im);
     }
-    ;
     ImageDestroy($im);
 }
-;
 
 if ($_SERVER['QUERY_STRING'] == "hilfe") {
     // Hilfe anzeigen
@@ -126,9 +122,9 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                     $raeume = $raeume
                         . "<OPTION VALUE=\"forum\">&gt;&gt;Forum&lt;&lt;\n";
                 if ($result && mysql_num_rows($result) > 0) {
-                    while ($row = mysql_fetch_object($result)) :
-                        if ((!isset($eintritt) AND $row->r_name
-                                == $eintrittsraum)
+                    while ($row = mysql_fetch_object($result)) {
+                        if ((!isset($eintritt)
+                            AND $row->r_name == $eintrittsraum)
                             || (isset($eintritt) AND $row->r_id == $eintritt)) {
                             $raeume = $raeume
                                 . "<OPTION SELECTED VALUE=\"$row->r_id\">$row->r_name\n";
@@ -137,7 +133,7 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                                 . "<OPTION VALUE=\"$row->r_id\">$row->r_name\n";
                         }
                         $i++;
-                    endwhile;
+                    }
                 }
                 if ($communityfeatures && $forumfeatures)
                     $raeume = $raeume
@@ -212,8 +208,9 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                             $zeigen = TRUE;
                         } else {
                             // Nur offene, permanente Räume zeigen
-                            if (($row->r_status1 == 'O' || $row->r_status1
-                                    == 'm') && $row->r_status2 == 'P') {
+                            if (($row->r_status1 == 'O'
+                                || $row->r_status1 == 'm')
+                                && $row->r_status2 == 'P') {
                                 $zeigen = TRUE;
                             } else {
                                 $zeigen = FALSE;
@@ -232,16 +229,13 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                                 }
                                 $text = $nick . ';';
                             }
-                            ;
                             $r_name_alt = $r_name;
                             $zeigen_alt = $zeigen;
                         } else {
                             $text .= $nick . ';';
                         }
-                        ;
                         $i++;
                     }
-                    ;
                     if ($zeigen_alt) {
                         $ergebnis[$r_name_alt] = $text;
                     }
@@ -321,7 +315,6 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                     } else {
                         $text0 = "0";
                     }
-                    ;
                     if ($size > 64) {
                         $size = 64;
                     }
@@ -336,8 +329,10 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                     
                     // Aufgabe JPG
                     JPGText(urldecode($text), $fontname, $size,
-                        array("red" => $hrot, "green" => $hgruen, "blue" => $hblau),
-                        array("red" => $vrot, "green" => $vgruen, "blue" => $vblau));
+                        array("red" => $hrot, "green" => $hgruen,
+                            "blue" => $hblau),
+                        array("red" => $vrot, "green" => $vgruen,
+                            "blue" => $vblau));
                     
                 } else {
                     if ($text == "j") {
@@ -350,7 +345,6 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                 }
             }
     }
-    ;
 }
 
 ?>

@@ -1,5 +1,4 @@
 <?php
-// $Id: functions.php-func-nachricht.php,v 1.12 2012/10/17 06:16:53 student Exp $
 
 function nachricht_betrete($u_id, $r_id, $u_name, $r_name)
 {
@@ -59,10 +58,9 @@ function nachricht_betrete($u_id, $r_id, $u_name, $r_name)
         if ($num < 15)
             $back = global_msg($u_id, $r_id, "<B>&gt;&gt;&gt;</b> " . $text);
     }
-    return ($back);
     
+    return $back;
 }
-;
 
 function nachricht_verlasse($r_id, $u_name, $r_name)
 {
@@ -115,6 +113,5 @@ function nachricht_verlasse($r_id, $u_name, $r_name)
     return ($back);
     
 }
-;
 
 ?>

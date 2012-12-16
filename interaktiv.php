@@ -1,9 +1,6 @@
 <?php
 
-// fidion GmbH mainChat
 // interaktiv.php muss mit id=$hash_id aufgerufen werden
-
-// $Id: interaktiv.php,v 1.6 2012/10/17 06:16:53 student Exp $
 
 require("functions.php");
 
@@ -11,9 +8,9 @@ require("functions.php");
 id_lese($id);
 
 $body_tag = "<HTML><HEAD></HEAD><BODY BGCOLOR=\"$farbe_chat_background3\" ";
-if (strlen($grafik_background3) > 0) :
+if (strlen($grafik_background3) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_background3\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_chat_text3\" "
     . "LINK=\"$farbe_chat_link3\" " . "VLINK=\"$farbe_chat_vlink3\" "
     . "ALINK=\"$farbe_chat_vlink3\">\n";
@@ -25,7 +22,7 @@ if ($u_id && $chat_timeout && $u_level != 'S' && $u_level != 'C'
     if ($o_timeout_warnung == "J" && $chat_timeout < (time() - $o_timeout_zeit)) {
         
         // User ausloggen
-        $zusatzjavascript = "<SCRIPT LANGUAGE=JavaScript>\n"
+        $zusatzjavascript = "<SCRIPT>\n"
             . "window.open(\"hilfe.php?http_host=$http_host&id=$id&aktion=logout\",'Logout',\"resizable=yes,scrollbars=yes,width=300,height=300\")\n"
             . "</SCRIPT>\n";
         require_once("functions.php-func-verlasse_chat.php");
@@ -48,15 +45,14 @@ if ($u_id && $chat_timeout && $u_level != 'S' && $u_level != 'C'
 } else {
     $zusatzjavascript = "";
 }
-;
 
-if (isset($u_id) && $u_id) :
-    // Kopf ausgeben
+if (isset($u_id) && $u_id) {
 ?>
 <HTML><HEAD><TITLE><?php echo $body_titel; ?></TITLE><META CHARSET=UTF-8>
 <META HTTP-EQUIV="REFRESH" CONTENT="<?php echo intval($timeout / 3)
-        . "; URL=interaktiv.php?http_host=$http_host&id=$id&o_raum_alt=$o_raum"; ?>">
-<SCRIPT LANGUAGE=JavaScript>
+        . "; URL=interaktiv.php?http_host=$http_host&id=$id&o_raum_alt=$o_raum";
+                                    ?>">
+<SCRIPT>
         function chat_reload(file) {
                 parent.chat.location.href=file;
 }
@@ -79,23 +75,23 @@ if (isset($u_id) && $u_id) :
     }
     
     // Wurde Raum r_id aus Formular übergeben? Falls ja Raum von $o_raum nach $r_id wechseln
-    if (isset($r_id) && $o_raum != $r_id) :
+    if (isset($r_id) && $o_raum != $r_id) {
         // Raum wechseln
         // Im Beichtstuhl-Modus dürfen Admins geschlossene Räume betreten
         $o_raum = raum_gehe($o_id, $u_id, $u_nick, $o_raum, $r_id,
             isset($beichtstuhl) ? $beichtstuhl : null);
-        if ($o_raum == $r_id) :
+        if ($o_raum == $r_id) {
             // User in Raum ausgeben
             raum_user($r_id, $u_id, $id);
-        endif;
+        }
         
         // Falls Pull-Chat, chat-Fenster neu laden
-        if ($backup_chat || $u_backup) :
+        if ($backup_chat || $u_backup) {
             echo "<SCRIPT LANGUAGE=JavaScript>"
                 . "chat_reload('chat.php?http_host=$http_host&id=$id')"
                 . "</SCRIPT>\n";
-        endif;
-    endif;
+        }
+    }
     
     // Daten für Raum lesen
     $query = "SELECT raum.* " . "FROM raum,online " . "WHERE r_id=o_raum "
@@ -103,14 +99,11 @@ if (isset($u_id) && $u_id) :
     
     $result = mysql_query($query, $conn);
     
-    if ($result && mysql_Num_Rows($result) != 0) :
+    if ($result && mysql_Num_Rows($result) != 0) {
         $row = mysql_fetch_object($result);
         $o_raum = $row->r_id;
-    endif;
+    }
     mysql_free_result($result);
-    
-    // echo "DEBUG: Raum: $row->r_name|$o_raum|$o_raum_alt|$row->r_werbung|$row->r_besitzer|$u_id Online: $o_id|";
-    // system_msg("",0,$u_id,$system_farbe,"DEBUG: $row->r_name|$o_raum|$o_raum_alt|$row->r_id|$row->r_werbung|$row->r_besitzer|$u_id Online: $o_id|");
     
     if (!isset($o_raum_alt))
         $o_raum_alt = -9;
@@ -118,10 +111,10 @@ if (isset($u_id) && $u_id) :
     // Optional via JavaScript den oberen Werbeframe mit dem Werbeframe des Raums neu laden
     if ($erweitertefeatures && $o_js && $o_raum_alt != $o_raum) {
         if (isset($row->r_werbung) && strlen($row->r_werbung) > 7) {
-            echo "<SCRIPT LANGUAGE=JavaScript>\n"
+            echo "<SCRIPT>\n"
                 . "frame_online_reload('$row->r_werbung?http_host=$http_host');\n</SCRIPT>\n";
         } elseif (isset($frame_online) && $frame_online != "") {
-            echo "<SCRIPT LANGUAGE=JavaScript>\n"
+            echo "<SCRIPT>\n"
                 . "frame_online_reload('$frame_online?http_host=$http_host');\n</SCRIPT>\n";
         }
     }
@@ -138,27 +131,26 @@ if (isset($u_id) && $u_id) :
     $query = "SELECT count(o_id) as anzahl FROM online "
         . "WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout";
     $result = mysql_query($query, $conn);
-    if ($result && mysql_Num_Rows($result) != 0) :
+    if ($result && mysql_Num_Rows($result) != 0) {
         $anzahl_gesamt = mysql_result($result, 0, "anzahl");
         mysql_free_result($result);
-    endif;
+    }
     
     // Anzahl der User in diesem Raum feststellen
     $query = "SELECT count(o_id) as anzahl FROM online "
         . "WHERE o_raum=$o_raum AND "
         . "(UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout";
     $result = mysql_query($query, $conn);
-    if ($result && mysql_Num_Rows($result) != 0) :
+    if ($result && mysql_Num_Rows($result) != 0) {
         $anzahl_raum = mysql_result($result, 0, "anzahl");
         mysql_free_result($result);
-    endif;
+    }
     
     if ($u_level != "M") {
         echo "<TR><TD>&nbsp;</TD><TD>";
     } else {
         echo "<TR><TD>";
     }
-    ;
     echo $f1;
     
     if ($anzahl_raum == 1) {
@@ -170,7 +162,6 @@ if (isset($u_id) && $u_id) :
             $txt = str_replace("%chatter%", $chattext['chatter'], $txt);
             $txt = str_replace("%einzahl%", $chattext['einzahl'], $txt);
         }
-        ;
     } else {
         $txt = str_replace("%anzahl_raum%", $anzahl_raum, $t['sonst3']);
         if (!isset($chattext['chattern'])) {
@@ -178,9 +169,7 @@ if (isset($u_id) && $u_id) :
         } else {
             $txt = str_replace("%chattern%", $chattext['chattern'], $txt);
         }
-        ;
     }
-    ;
     if (!(($u_level == 'U' || $level == 'G')
         && (isset($useronline_anzeige_deaktivieren)
             && $useronline_anzeige_deaktivieren == "1"))) {
@@ -193,7 +182,6 @@ if (isset($u_id) && $u_id) :
     } else {
         echo "</TD></TR><TR><TD>";
     }
-    ;
     
     // Special: Bei nur einem Raum kein Auswahl
     $query = "SELECT count(*) as zahl FROM raum";
@@ -209,11 +197,11 @@ if (isset($u_id) && $u_id) :
             . "&nbsp;&nbsp;$t[sonst4]<br>&nbsp;<NOBR><SELECT NAME=\"r_id\"\" onChange=\"document.form1.submit()\">\n";
         
         // Admin sehen alle Räume, andere User nur die offenen
-        if ($admin) :
+        if ($admin) {
             raeume_auswahl($o_raum, TRUE, TRUE);
-        else :
+        } else {
             raeume_auswahl($o_raum, FALSE, TRUE);
-        endif;
+        }
         
         echo "</SELECT>" . "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">"
             . "<INPUT TYPE=\"HIDDEN\" NAME=\"o_raum_alt\" VALUE=\"$o_raum\">"
@@ -228,8 +216,6 @@ if (isset($u_id) && $u_id) :
                 . "<INPUT TYPE=\"SUBMIT\" NAME=\"raum_submit\" VALUE=\"Go!\">&nbsp;</NOBR>"
                 . $f4 . "</TD>\n" . "</tr><tr>";
         }
-        ;
-        
     }
     
     echo "<TD>\n";
@@ -238,18 +224,15 @@ if (isset($u_id) && $u_id) :
     if ($u_level != "M") {
         werbung('interaktiv', $werbung_gruppe);
     }
-    ;
     
     echo "</TD></TR>\n" . "</TABLE></FORM>\n";
-    
     echo "</BODY></HTML>\n";
-
-else :
+    
+} else {
     // User wird nicht gefunden. Login ausgeben
     echo "<HTML><HEAD>$zusatzjavascript</HEAD>"
         . "<BODY onLoad='javascript:parent.location.href=\"index.php?http_host=$http_host\"'>\n"
         . "</BODY></HTML>\n";
     exit;
-endif;
-
+}
         ?>

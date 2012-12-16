@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: functions-init.php,v 1.7 2012/10/17 06:16:53 student Exp $
-
 require_once "functions-registerglobals.php";
 
 // Konfigurationsdatei einbinden
@@ -20,7 +17,6 @@ if (file_exists("conf/$config")) {
 }
 
 // Pfad des Chats auf dem WWW-Server
-// $phpself=($phpself?$phpself:$_SERVER["PHP_SELF"]);
 $phpself = $_SERVER['PHP_SELF'];
 
 $chat_file = basename($phpself);
@@ -63,37 +59,34 @@ require "conf/" . $sprachconfig . "-functions.php";
 
 // Liegen lokale Functionen "functions.php-$chat_file" vor? Falls ja einbinden
 $functions = "functions.php-" . $chat_file;
-if (file_exists("$functions")) :
+if (file_exists("$functions")) {
     require "$functions";
-endif;
+}
 
 // Liegt lokale Sprachdatei "$sprachconfig-$chat_file" vor? Falls ja einbinden
 $config = $sprachconfig . "-" . $chat_file;
-if (file_exists("conf/$config")) :
+if (file_exists("conf/$config")) {
     require "conf/$config";
-endif;
+}
 
 // Falls Texte in Kopfzeilen weiß dargestellt werden sollen, Variable definieren
-if ($farbe_text_weiss == 1) :
+if ($farbe_text_weiss == 1) {
     $ft0 = "<FONT COLOR=\"#FFFFFF\">";
     $ft1 = "</FONT>";
-else :
+} else {
     $ft0 = "";
     $ft1 = "";
-endif;
+}
 
 // Globales
 $crypted_password_extern = 0;
 $upgrade_password = 0;
 
-//set_magic_quotes_runtime(0); - veraltet
 ini_set("magic_quotes_runtime", 0);
 
 //apache_setenv('no-gzip', 1);
 //ini_set('zlib.output_compression', 0);
 //ini_set('implicit_flush', 1);
-
-//mt_srand((double)microtime()*1000000);
 
 if (substr(phpversion(), 0, strpos(phpversion(), '.')) >= 5) {
     date_default_timezone_set('Europe/Berlin');

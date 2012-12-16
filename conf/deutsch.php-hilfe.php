@@ -37,8 +37,7 @@ $t['hilfe16'] = "<P>Sie wurden automatisch aus dem $chat ausgelogt, weil Sie %ze
 
 $t['sonst1'] = "Fenster schließen";
 
-// AusführlicheHilfstext für die interaktive Hilfe
-
+// Ausführlicher Hilfstext für die interaktive Hilfe
 $hilfe_befehlstext = array(
     1 => "/user\tListet alle User im aktuellen Raum\t/wer, /who, /w, /list",
     "/user RAUM\tListet alle User im Raum RAUM auf (*=Alle)\t/wer, /who, /w, /list\tFalls RAUM=*, werden alle Räume gezeigt.",

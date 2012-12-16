@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: moderator.php,v 1.3 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, admin
@@ -16,7 +13,6 @@ $body_tag .= "TEXT=\"$farbe_chat_text3\" " . "LINK=\"$farbe_chat_link3\" "
     . "VLINK=\"$farbe_chat_vlink3\" " . "ALINK=\"$farbe_chat_vlink3\">\n";
 
 if (strlen($u_id) > 0) {
-    // Kopf ausgeben
     echo "<HTML><HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n";
     
     // Falls keine Texte zur Moderation gefunden wurden, nach 10 Sek reload
@@ -27,7 +23,7 @@ if (strlen($u_id) > 0) {
         }
     }
     
-    echo "<SCRIPT LANGUAGE=JavaScript>\n" . "  function chat_reload(file) {\n"
+    echo "<SCRIPT>\n" . "  function chat_reload(file) {\n"
         . "  parent.chat.location.href=file;\n}\n" . "</SCRIPT>\n";
     echo $stylesheet;
     echo "</HEAD>\n";
@@ -56,15 +52,9 @@ if (strlen($u_id) > 0) {
                 $f['c_von_user_id'] = $u_id;
                 $f['c_moderator'] = $u_id;
                 $f['c_typ'] = "P";
-                /*
-                print "<pre>\n";
-                var_dump($f);
-                print "\n</pre>\n";
-                 */
                 if (!isset($answer))
                     $answer = 0;
                 schreibe_db("moderation", $f, $answer, "c_id");
-                // schreibe_moderiert($f);
                 zeige_moderations_antworten($o_raum);
                 break;
             case "answeredit":
@@ -97,9 +87,6 @@ if (strlen($u_id) > 0) {
                     echo $t['moderation2'] . "\n";
                     echo $t['moderation3'] . "\n";
                     echo $t['moderation4'] . "\n";
-                    //					echo $t['moderation5']."\n";
-                    //					echo $t['moderation6']."\n";
-                    //					echo $t['moderation7']."\n";
                 }
                 echo "\n\n";
                 flush();

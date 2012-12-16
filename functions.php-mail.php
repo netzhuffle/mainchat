@@ -1,7 +1,5 @@
 <?php
 
-// $id$
-
 function formular_neue_email($neue_email, $m_id = "")
 {
     
@@ -29,7 +27,6 @@ function formular_neue_email($neue_email, $m_id = "")
     } else {
         $titel = "Neue Mail senden:";
     }
-    ;
     
     echo "<FORM NAME=\"mail_neu\" ACTION=\"$PHP_SELF\" METHOD=POST>\n"
         . "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n"
@@ -48,7 +45,6 @@ function formular_neue_email($neue_email, $m_id = "")
         . "</TD></TR>\n" . "</TABLE></FORM>\n";
     
 }
-;
 
 function formular_neue_email2($neue_email, $m_id = "")
 {
@@ -102,14 +98,12 @@ function formular_neue_email2($neue_email, $m_id = "")
                 $neue_email['m_text']);
             
         }
-        ;
         @mysql_free_result($result);
         
     } else {
         // Neue Mail versenden
         $titel = "Neue Mail an";
     }
-    ;
     
     // Signatur anfügen
     if (!isset($neue_email['m_text']))
@@ -152,12 +146,7 @@ function formular_neue_email2($neue_email, $m_id = "")
                 if ($darfsms)
                     $email_select .= "<OPTION VALUE=\"2\">SMS\n";
             }
-            ;
             $email_select .= "</SELECT>\n";
-            #} else {
-            #	$email="";
-            #	$email_select="&nbsp;";
-            #}
             
             echo "<FORM NAME=\"mail_neu\" ACTION=\"$PHP_SELF\" METHOD=POST>\n"
                 . "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n"
@@ -197,7 +186,6 @@ function formular_neue_email2($neue_email, $m_id = "")
         }
     }
 }
-;
 
 function zeige_mailbox($aktion, $zeilen)
 {
@@ -237,7 +225,6 @@ function zeige_mailbox($aktion, $zeilen)
             $button = "L÷SCHEN";
             $titel = "Mails in der Mailbox für";
     }
-    ;
     
     echo "<FORM NAME=\"mailbox\" ACTION=\"$PHP_SELF\" METHOD=POST>\n"
         . "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n"
@@ -245,7 +232,6 @@ function zeige_mailbox($aktion, $zeilen)
         . "<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n"
         . "<TABLE WIDTH=100% BORDER=0 CELLPADDING=3 CELLSPACING=0>";
     
-    // system_msg("",0,$u_id,$system_farbe,"DEBUG: $query");
     $result = mysql_query($query, $conn);
     if ($result) {
         
@@ -272,8 +258,8 @@ function zeige_mailbox($aktion, $zeilen)
                 $url = "<A HREF=\"" . $PHP_SELF
                     . "?id=$id&http_host=$http_host&aktion=zeige&m_id="
                     . $row->m_id . "\">";
-                if ($row->m_status == "neu" || $row->m_status
-                        == "neu/verschickt") {
+                if ($row->m_status == "neu"
+                    || $row->m_status == "neu/verschickt") {
                     $auf = "<B>" . $f1;
                     $zu = $f2 . "</B>";
                 } else {
@@ -302,10 +288,8 @@ function zeige_mailbox($aktion, $zeilen)
                 } else {
                     $bgcolor = $farbe_tabelle_zeile2;
                 }
-                ;
                 $i++;
             }
-            ;
             
             echo "<TR BGCOLOR=\"$bgcolor\"><TD><INPUT TYPE=\"checkbox\" onClick=\"toggle(this.checked)\">"
                 . $f1 . " Alle Auswählen" . $f2 . "</TD>\n"
@@ -313,14 +297,10 @@ function zeige_mailbox($aktion, $zeilen)
                 . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"$button\">"
                 . $f2 . "</TD></TR>\n";
         }
-        ;
         
         echo "</TABLE></FORM>\n";
-        
     }
-    
 }
-;
 
 function zeige_email($m_id)
 {
@@ -338,7 +318,6 @@ function zeige_email($m_id)
     $query = "SELECT mail.*,date_format(m_zeit,'%d.%m.%y um %H:%i') as zeit,u_nick,u_id,u_level,u_punkte_gesamt,u_punkte_gruppe "
         . "FROM mail LEFT JOIN user on m_von_uid=u_id "
         . "WHERE m_an_uid=$u_id " . "AND m_id=$m_id " . "order by m_zeit desc";
-    // system_msg("",0,$u_id,$system_farbe,"DEBUG: $query");
     $result = mysql_query($query, $conn);
     
     if ($result && mysql_num_rows($result) == 1) {
@@ -412,11 +391,8 @@ function zeige_email($m_id)
             $f['m_zeit'] = $row->m_zeit;
             schreibe_db("mail", $f, $row->m_id, "m_id");
         }
-        
     }
-    
 }
-;
 
 function loesche_mail($m_id, $u_id)
 {
@@ -448,6 +424,5 @@ function loesche_mail($m_id, $u_id)
     @mysql_free_result($result);
     
 }
-;
 
 ?>

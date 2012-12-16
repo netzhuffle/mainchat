@@ -1,7 +1,4 @@
 <?php
-// fidion mainChat
-// (C) fidion GmbH
-// $Id: functions.php,v 1.92 2012/10/17 06:16:53 student Exp $
 
 // Version / Copyright - nicht entfernen!
 $mainchat_version = "Open mainChat 5.0.0 (c) by fidion GmbH 1999-2012";
@@ -66,14 +63,14 @@ function raum_user($r_id, $u_id, $id)
         $result = mysql_query($query, $conn);
         $rows = @mysql_Num_Rows($result);
         
-        if ($result AND $rows > 0) :
+        if ($result AND $rows > 0) {
             $i = 0;
-            while ($row = mysql_fetch_object($result)) :
+            while ($row = mysql_fetch_object($result)) {
                 // Beim ersten Durchlauf Namen des Raums einfügen
-                if ($i == 0) :
+                if ($i == 0) {
                     $text = str_replace("%r_name%", $row->r_name,
                         $t['raum_user1']);
-                endif;
+                }
                 
                 // Userdaten lesen, Liste ausgeben
                 $userdata = unserialize(
@@ -91,25 +88,22 @@ function raum_user($r_id, $u_id, $id)
                 } else {
                     $uu_nick = user($userdata['u_id'], $userdata, FALSE, FALSE);
                 }
-                ;
                 
                 if ($userdata['u_away'] != "") {
                     $text .= "(" . $uu_nick . ")";
                 } else {
                     $text .= $uu_nick;
                 }
-                ;
                 
                 $i++;
-                if ($i < $rows) :
+                if ($i < $rows) {
                     $text = $text . ", ";
-                endif;
-            endwhile;
-        
-        else :
+                }
+            }
+            
+        } else {
             $text = "";
-        // $text=$t[raum_user3];
-        endif;
+        }
         $back = system_msg("", 0, $u_id, "", $text);
         
         @mysql_free_result($result);
@@ -120,7 +114,6 @@ function raum_user($r_id, $u_id, $id)
     return ($back);
     
 }
-;
 
 function ist_online($user)
 {
@@ -139,19 +132,17 @@ function ist_online($user)
     
     $result = mysql_query($query, $conn);
     
-    if ($result && mysql_NumRows($result) > 0) :
+    if ($result && mysql_NumRows($result) > 0) {
         $ist_online_raum = mysql_result($result, 0, "r_name");
         if (!$ist_online_raum || $ist_online_raum == "NULL")
             $ist_online_raum = "[" . $whotext[2] . "]";
         @mysql_free_result($result);
         return (1);
-    else :
+    } else {
         @mysql_free_result($result);
         return (0);
-    endif;
-    
+    }
 }
-;
 
 function schreibe_moderiert($f)
 {
@@ -160,14 +151,13 @@ function schreibe_moderiert($f)
     global $dbase;
     global $conn;
     // Schreiben falls text>0
-    if (strlen($f['c_text']) > 0) :
+    if (strlen($f['c_text']) > 0) {
         $back = schreibe_db("moderation", $f, "", "c_id");
-    else :
+    } else {
         $back = 0;
-    endif;
+    }
     return ($back);
 }
-;
 
 function schreibe_moderation()
 {
@@ -206,41 +196,40 @@ function schreibe_chat($f)
     global $dbase, $conn;
     
     // Schreiben falls text>0
-    if (isset($f['c_text']) && strlen($f['c_text']) > 0) :
+    if (isset($f['c_text']) && strlen($f['c_text']) > 0) {
         // Falls Länge c_text mehr als 256 Zeichen, auf mehrere Zeilen aufteilen
-        if (strlen($f['c_text']) > 256) :
+        if (strlen($f['c_text']) > 256) {
             $temp = $f['c_text'];
             $laenge = strlen($temp);
             $i = 0;
             // Tabelle LOCK
             $result = mysql_query("LOCK TABLES chat WRITE", $conn);
-            while ($i < $laenge) :
+            while ($i < $laenge) {
                 $f['c_text'] = substr($temp, $i, 255);
-                if ($i == 0) :
+                if ($i == 0) {
                     // erste Zeile
                     $f['c_br'] = "erste";
-                elseif (($i + 255) >= $laenge) :
+                } elseif (($i + 255) >= $laenge) {
                     // letzte Zeile
                     $f['c_br'] = "letzte";
-                else :
+                } else {
                     // mittlere Zeile
                     $f['c_br'] = "mitte";
-                endif;
+                }
                 $i = $i + 255;
                 $back = schreibe_db("chat", $f, "", "c_id");
-            endwhile;
+            }
             $result = mysql_query("UNLOCK TABLES chat", $conn);
-        else :
+        } else {
             // Normale Zeile in Tabelle schreiben
             $f['c_br'] = "normal";
             $back = schreibe_db("chat", $f, "", "c_id");
-        endif;
-    else :
+        }
+    } else {
         $back = 0;
-    endif;
+    }
     return ($back);
 }
-;
 
 function logout($o_id, $u_id, $info = "")
 {
@@ -282,8 +271,6 @@ function logout($o_id, $u_id, $info = "")
     // User löschen
     $result2 = mysql_query(
         "DELETE FROM online WHERE o_id=$o_id OR o_user=$u_id", $conn);
-    // $datum=date("l dS of F Y h:i:s A");
-    // system_msg("",0,$u_id,$u_farbe,"<B>DEBUG:</B> Logoff um $datum der o_id/u_id $o_id/$u_id");
     
     // Lock freigeben
     $query = "UNLOCK TABLES";
@@ -327,32 +314,27 @@ function logout($o_id, $u_id, $info = "")
                         $an_u_id = $row->f_userid;
                     }
                 }
-                ;
                 // Aktion ausführen
                 aktion($wann, $an_u_id, $u_name, "", "Freunde", $f);
             }
-            ;
         }
-        ;
         @mysql_free_result($result);
     }
-    
 }
-;
 
 function global_msg($u_id, $r_id, $text)
 {
     // Schreibt Text $text in Raum $r_id an alle User
     // Art:           N: Normal
-    //	          S: Systemnachricht
+    //	              S: Systemnachricht
     //                P: Privatnachticht
     //                H: Versteckte Nachricht
     
     global $conn;
     
-    if (strlen($r_id) > 0) :
+    if (strlen($r_id) > 0) {
         $f['c_raum'] = $r_id;
-    endif;
+    }
     $f['c_typ'] = "S";
     $f['c_von_user_id'] = $u_id;
     $f['c_text'] = $text;
@@ -366,18 +348,15 @@ function global_msg($u_id, $r_id, $text)
             . "WHERE o_user=$u_id";
         $result = mysql_query($query, $conn);
     }
-    ;
     
     return ($back);
-    
 }
-;
 
 function hidden_msg($von_user, $von_user_id, $farbe, $r_id, $text)
 {
     // Schreibt Text in Raum r_id
     // Art:           N: Normal
-    //	          S: Systemnachricht
+    //	              S: Systemnachricht
     //                P: Privatnachticht
     //                H: Versteckte Nachricht
     
@@ -398,12 +377,9 @@ function hidden_msg($von_user, $von_user_id, $farbe, $r_id, $text)
             . "WHERE o_user=$von_user_id";
         $result = mysql_query($query, $conn);
     }
-    ;
     
     return ($back);
-    
 }
-;
 
 function priv_msg(
     $von_user,
@@ -415,7 +391,7 @@ function priv_msg(
 {
     // Schreibt privaten Text von $von_user an User $an_user
     // Art:           N: Normal
-    //	          S: Systemnachricht
+    //	              S: Systemnachricht
     //                P: Privatnachticht
     //                H: Versteckte Nachricht
     
@@ -429,15 +405,11 @@ function priv_msg(
     } else {
         $f['c_von_user'] = $von_user;
     }
-    ;
-    
     $f['c_von_user_id'] = $von_user_id;
     $f['c_an_user'] = $an_user;
     $f['c_farbe'] = $farbe;
     $f['c_typ'] = "P";
     $f['c_text'] = $text;
-    
-    // system_msg("",0,$von_user_id,$u_farbe,"<B>DEBUG:</B> $f[c_von_user], $f[c_von_user_id], $f[c_an_user], $f[c_farbe], $f[c_typ], $f[c_text] # $von_user, $userdata[u_nick] ");
     
     $back = schreibe_chat($f);
     
@@ -448,12 +420,9 @@ function priv_msg(
             . "WHERE o_user=$von_user_id";
         $result = mysql_query($query, $conn);
     }
-    ;
     
     return ($back);
-    
 }
-;
 
 function system_msg($von_user, $von_user_id, $an_user, $farbe, $text)
 {
@@ -461,7 +430,7 @@ function system_msg($von_user, $von_user_id, $an_user, $farbe, $text)
     // $von_user wird nicht benutzt
     // $von_user_id ist Absender der Nachricht (normalerweise wie $an_user, notwendig für Spamschutz)
     // Art:           N: Normal
-    //	          S: Systemnachricht
+    //	              S: Systemnachricht
     //                P: Privatnachticht
     //                H: Versteckte Nachricht
     
@@ -474,9 +443,7 @@ function system_msg($von_user, $von_user_id, $an_user, $farbe, $text)
     $back = schreibe_chat($f);
     
     return ($back);
-    
 }
-;
 
 function aktualisiere_online($u_id, $o_raum)
 {
@@ -487,7 +454,6 @@ function aktualisiere_online($u_id, $o_raum)
     $result = mysql_query($query, $conn);
     @mysql_free_result($result);
 }
-;
 
 function id_lese($id, $auth_id = "", $ipaddr = "", $agent = "", $referrer = "")
 {
@@ -519,7 +485,6 @@ function id_lese($id, $auth_id = "", $ipaddr = "", $agent = "", $referrer = "")
         echo "Fehler: " . mysql_error() . "<br><b>$query</b><br>";
         exit;
     }
-    ;
     
     if ($ar = @mysql_fetch_array($result, MYSQL_ASSOC)) {
         
@@ -539,7 +504,6 @@ function id_lese($id, $auth_id = "", $ipaddr = "", $agent = "", $referrer = "")
         while (list($k, $v) = each($ar)) {
             $$k = $v;
         }
-        ;
         @mysql_free_result($result);
         
         // o_browser prüfen Userdaten in Array schreiben
@@ -548,7 +512,6 @@ function id_lese($id, $auth_id = "", $ipaddr = "", $agent = "", $referrer = "")
             while (list($k, $v) = each($userdata)) {
                 @$$k = $v;
             }
-            ;
             
             // Usereinstellungen überschreiben Default-Einstellungen
             if ($u_zeilen)
@@ -602,12 +565,12 @@ function id_lese($id, $auth_id = "", $ipaddr = "", $agent = "", $referrer = "")
         || preg_match("/(.*)Konqueror(.*)/i", $browser)
         || preg_match("/(.*)mozilla\/5(.*)Netscape6(.*)/i", $browser)
         || preg_match("/(.*)mozilla\/[23](.*)/i", $browser)
-        || preg_match("/(.*)AOL [123](.*)/i", $browser) || $http_te
-            == 'chunked' || !$o_js) :
+        || preg_match("/(.*)AOL [123](.*)/i", $browser)
+        || $http_te == 'chunked' || !$o_js) {
         $backup_chat = 1;
-    else :
+    } else {
         $backup_chat = 0;
-    endif;
+    }
     
     // Bei Admins via cookies die Session überprüfen
     if (false && $erweitertefeatures && $admin) {
@@ -672,15 +635,9 @@ function id_lese($id, $auth_id = "", $ipaddr = "", $agent = "", $referrer = "")
             $u_level = "";
             $userdata = "";
             $ignore = "";
-            
-            // echo $t[hack3];
         }
-        ;
     }
-    ;
-    
 }
-;
 
 function iCrypt($passwort, $salt)
 {
@@ -692,14 +649,14 @@ function iCrypt($passwort, $salt)
         $salt = "";
         if (defined("CRYPT_SHA256")) {
             $salt = '$5$rounds=5000$' . gensalt(16) . '$';
-        } else if (CRYPT_MD5 == 1) {
+        } elseif (CRYPT_MD5 == 1) {
             $salt = '$1$' . gensalt(8) . '$';
         } else {
             $salt = gensalt(2); // für den Notfall Std. DES
         }
         $upgrade_password = 0;
         $v_passwort = crypt($passwort, $salt);
-    } else if ($crypted_password_extern == 0) {
+    } elseif ($crypted_password_extern == 0) {
         $upgrade_password = 0;
         if ($salt == 'MD5') {
             $v_passwort = md5($passwort);
@@ -720,38 +677,35 @@ function schreibe_db($db, $f, $id, $id_name)
     // Akualiert ggf Kopie des Datensatzes in online-Tabelle
     global $dbase, $conn, $u_id;
     
-    // echo "Debug:<PRE>";print_r($f);echo "</PRE>";
-    
     if (strlen($id) == 0 || $id == 0) {
         
         // ID generieren
-        if ($db == "online" || $db == "chat") :
+        if ($db == "online" || $db == "chat") {
             // ID aus sequence verwenden
             $query = "LOCK TABLES sequence WRITE";
             $result = mysql_query($query, $conn);
             $query = "SELECT se_nextid FROM sequence WHERE se_name='$db'";
             $result = mysql_query($query, $conn);
-            if ($result) :
+            if ($result) {
                 $id = mysql_result($result, 0, 0);
                 mysql_free_result($result);
                 $query = "UPDATE sequence SET se_nextid='" . ($id + 1)
                     . "' WHERE se_name='$db'";
                 $result = mysql_query($query, $conn);
-            else :
+            } else {
                 echo "Schwerer Fehler in $query: " . mysql_errno() . " - "
                     . mysql_error();
                 $query = "UNLOCK TABLES";
                 $result = mysql_query($query, $conn);
                 die();
-            endif;
+            }
             $query = "UNLOCK TABLES";
             $result = mysql_query($query, $conn);
-        
-        else :
+            
+        } else {
             // ID mit auto_increment erzeugen
             $id = 0;
-        
-        endif;
+        }
         
         // Datensatz neu schreiben
         $q = "";
@@ -766,11 +720,8 @@ function schreibe_db($db, $f, $id, $id_name)
                 } else {
                     $q .= "='" . addslashes($inhalt) . "'";
                 }
-                ;
             }
-            ;
         }
-        ;
         
         $query = "INSERT INTO $db SET $id_name=$id " . $q;
         $result = mysql_query($query, $conn);
@@ -779,10 +730,8 @@ function schreibe_db($db, $f, $id, $id_name)
                 . mysql_error();
             die();
         }
-        ;
         if ($id == 0)
             $id = mysql_insert_id();
-        //       	echo "DEBUG: $query, ID:$id<BR>"; 
         
     } else {
         
@@ -803,18 +752,13 @@ function schreibe_db($db, $f, $id, $id_name)
                 } else {
                     $q .= "='" . addslashes($inhalt) . "'";
                 }
-                ;
             }
-            ;
         }
-        ;
         $q = "UPDATE $db SET " . $q . " WHERE $id_name=$id";
-        # echo "DEBUG: $q  <BR>"; 
         $result = mysql_query($q, $conn);
     }
-    ;
     
-    if ($db == "user" && $id_name == "u_id") :
+    if ($db == "user" && $id_name == "u_id") {
         // Kopie in Onlinedatenbank aktualisieren
         // Query muss mit dem Code in login() übereinstimmen
         $query = "SELECT u_id,u_name,u_nick,u_level,u_farbe,u_zeilen,u_backup,u_farbe_bg,"
@@ -823,7 +767,7 @@ function schreibe_db($db, $f, $id, $id_name)
             . "u_chathomepage,u_systemmeldungen,u_punkte_anzeigen "
             . "FROM user WHERE u_id=$id";
         $result = mysql_query($query, $conn);
-        if ($result && mysql_num_rows($result) == 1) :
+        if ($result && mysql_num_rows($result) == 1) {
             $userdata = mysql_fetch_array($result, MYSQL_ASSOC);
             
             // Slashes in jedem Eintrag des Array ergänzen
@@ -851,18 +795,14 @@ function schreibe_db($db, $f, $id, $id_name)
                 . addslashes($userdata_array[3]) . "', " . "o_level='"
                 . addslashes($userdata['u_level']) . "', " . "o_name='"
                 . addslashes($userdata['u_nick']) . "' " . "WHERE o_user=$id";
-            // echo "DEBUG: $query<BR>";
             mysql_query($query, $conn);
             mysql_free_result($result);
-        
-        endif;
-    endif;
+            
+        }
+    }
     
-    // ID des Datensatzes zurück geben
     return ($id);
-    
 }
-;
 
 function zerlege($daten)
 {
@@ -872,18 +812,18 @@ function zerlege($daten)
     $laenge = strlen($daten);
     $fertig = array();
     
-    if ($laenge != 0) :
+    if ($laenge != 0) {
         $j = 0;
         $i = 0;
-        while ($j < $laenge) :
+        while ($j < $laenge) {
             $fertig[] = substr($daten, $j, 255);
             // system_msg("",0,1225,0,"<B>DEBUG:</B> $i,$j,'$fertig[$i]'");
             $j = $j + 255;
             $i++;
-        endwhile;
-    endif;
-    return ($fertig);
+        }
+    }
     
+    return ($fertig);
 }
 
 function show_box($box, $text, $url = "", $width = "")
@@ -900,9 +840,9 @@ function show_box($box, $text, $url = "", $width = "")
     global $f1;
     global $f2;
     
-    if (strlen($width) > 0) :
+    if (strlen($width) > 0) {
         $width = "WIDTH=\"" . $width . "\"";
-    endif;
+    }
     
     echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 $width BGCOLOR=\"$farbe_tabelle_kopf2\">\n";
     echo "<TR BGCOLOR=\"$farbe_tabelle_kopf\"><TD>";
@@ -911,12 +851,9 @@ function show_box($box, $text, $url = "", $width = "")
             . "<IMG SRC=/pics/button-x.gif WIDTH=15 HEIGHT=13 ALIGN=RIGHT BORDER=0>"
             . "</A>\n";
     }
-    ;
     echo "<FONT COLOR=$farbe_text><B>$box</B></FONT></TD></TR>\n" . "<TR><TD>"
         . $text . "</TD></TR></TABLE>\n";
-    
 }
-;
 
 function show_box2($box, $text, $width = "", $button = TRUE)
 {
@@ -934,7 +871,6 @@ function show_box2($box, $text, $width = "", $button = TRUE)
     if ($width) {
         $width = "WIDTH=\"" . $width . "\"";
     }
-    ;
     $extra = "";
     if ($button) {
         $extra = "<A HREF=\"javascript:window.close();\">"
@@ -951,41 +887,41 @@ function show_box2($box, $text, $width = "", $button = TRUE)
         . "</TD></TR></TABLE></TD></TR></TABLE>\n";
     
 }
-;
 
 function coreCheckName($name, $check_name)
 {
     global $upper_name;
     // Nicht-druckbare Zeichen, Leerzeichen, \, " und ' entfernen
-    $name = preg_replace("/[\\\\ '" . chr(34) . chr(1) . "-" . chr(31) . "]/", "", $name);
+    $name = preg_replace("/[\\\\ '" . chr(34) . chr(1) . "-" . chr(31) . "]/",
+        "", $name);
     $name = str_replace("#", "", $name);
     $name = str_replace("+", "", $name);
     $name = trim($name);
     
-    if ((strlen($check_name) > 0) && (strlen($name) > 0)) :
+    if ((strlen($check_name) > 0) && (strlen($name) > 0)) {
         $i = 0;
-        while ($i < strlen($name)) :
-            if (!strstr($check_name, substr($name, $i, 1))) :
-                if ($i > 0 && $i < strlen($name) - 1) :
+        while ($i < strlen($name)) {
+            if (!strstr($check_name, substr($name, $i, 1))) {
+                if ($i > 0 && $i < strlen($name) - 1) {
                     $name = substr($name, 0, $i) . substr($name, $i + 1);
-                elseif ($i > 0) :
+                } elseif ($i > 0) {
                     $name = substr($name, 0, -1);
-                else :
+                } else {
                     $name = substr($name, $i + 1);
-                endif;
-            else :
+                }
+            } else {
                 $i++;
-            endif;
-        endwhile;
+            }
+        }
         
-        if (!strstr($check_name, substr($name, 0, 1))) :
+        if (!strstr($check_name, substr($name, 0, 1))) {
             return (substr($name, 1));
-        endif;
-    endif;
+        }
+    }
     
-    if ($upper_name) :
+    if ($upper_name) {
         $name = UCFirst($name);
-    endif;
+    }
     
     return (addslashes($name));
 }
@@ -1002,21 +938,20 @@ function p_oas_werb($rubrik, $links, $rechts, $before, $after)
     // Werbung Ausgeben
     $bereich = "$links,$rechts";
     
-    if (substr($rubrik, 0, 1) != "/") :
+    if (substr($rubrik, 0, 1) != "/") {
         $rubrik = "/$rubrik";
-    endif;
+    }
     
     $ivw_adurl1 = "$ivw_adurl$rubrik/" . time() . "@$bereich!$links";
-    // echo "\nDebug: $ivw_adurl1, $before, $after|<BR>\n";
     $arr = file($ivw_adurl1);
     $out = join($arr, '');
     
     if (!strpos($out, "empty.gif") && !strpos($out, "_RM_EMPTY_") && $out) {
         $ivw_adurl2 = "$ivw_adurl$rubrik/" . time() . "@$bereich!$rechts";
         echo "$before$out";
-        if ($rechts) :
+        if ($rechts) {
             @readfile($ivw_adurl2);
-        endif;
+        }
         echo "$after\n";
     }
 }
@@ -1037,11 +972,9 @@ function raum_ist_moderiert($raum)
         $r_status1 = $raum_einstellungen['r_status1'];
     }
     @mysql_free_result($result);
-    // system_msg("",0,$u_id,$system_farbe,"DEBUG: $raum_einstellungen[r_status1],$raum_einstellungen[r_status2],$raum_einstellungen[r_name]");
     if (isset($r_status1) && ($r_status1 == "m" || $r_status1 == "M")) {
         $query = "SELECT o_user FROM online "
             . "WHERE o_raum=$raum AND o_level='M' ";
-        // system_msg("",0,$u_id,$system_farbe,$query." - $r_status1");
         $result = mysql_query($query, $conn);
         if (mysql_num_rows($result) > 0)
             $moderiert = 1;
@@ -1099,7 +1032,6 @@ function warnung($u_id, $u_nick, $art)
         default:
             $text = str_replace("%user%", $user, $t['warnung1']);
     }
-    ;
     
     if ($u_id)
         system_msg("", 0, $u_id, $system_farbe, $text);
@@ -1214,7 +1146,6 @@ function user(
             $letzter_login = $userdaten->login;
             
         }
-        ;
         @mysql_free_result($result);
         
         if ($show_geschlecht == true)
@@ -1229,9 +1160,9 @@ function user(
         if (isset($userdaten->u_id))
             echo $userdaten->u_id;
         echo "</P>";
-        return ("");
+        
+        return "";
     }
-    ;
     
     // Wenn die $user_punkte_anzeigen nicht im Array war, dann seperat abfragen
     if (!isset($user_punkte_anzeigen)
@@ -1242,15 +1173,13 @@ function user(
             $userdaten = mysql_fetch_object($result);
             $user_punkte_anzeigen = $userdaten->u_punkte_anzeigen;
         }
-        ;
         @mysql_free_result($result);
     }
     
     if ($user_id != $zeige_user_id) {
         echo "<P><B>Fehler: </B> $user_id!=$zeige_user_id</P>\n";
-        return ("");
+        return "";
     }
-    ;
     
     // Fensternamen aus Nicknamen erzeugen
     $fenstername = str_replace("-", "", $user_nick);
@@ -1275,7 +1204,6 @@ function user(
     } else {
         $text = $user_nick;
     }
-    ;
     
     if ($show_geschlecht AND $user_geschlecht)
         $text .= $chat_grafik[$user_geschlecht];
@@ -1288,7 +1216,8 @@ function user(
     $text2 = "";
     if (!isset($leveltext[$user_level]))
         $leveltext[$user_level] = "";
-    if (!$extra_kompakt && $leveltext[$user_level] != "" && (($felder & 2) == 2))
+    if (!$extra_kompakt && $leveltext[$user_level] != ""
+        && (($felder & 2) == 2))
         $text2 .= "&nbsp;(" . $leveltext[$user_level] . ")";
     
     if (!$extra_kompakt && $link) {
@@ -1299,7 +1228,6 @@ function user(
         $grafikurl1 = "";
         $grafikurl2 = "";
     }
-    ;
     
     if (!$extra_kompakt && $user_punkte_gruppe != 0 && $communityfeatures
         && $user_punkte_anzeigen == "Y" && (($felder & 4) == 4)) {
@@ -1312,9 +1240,7 @@ function user(
             $text2 .= "&nbsp;" . $grafikurl1 . $punkte_grafik[2]
                 . $user_punkte_gruppe . $punkte_grafik[3] . $grafikurl2;
         }
-        ;
     }
-    ;
     
     if (!$extra_kompakt && ($user_chathomepage == "J" OR $homep_ext_link != "")
         && $communityfeatures && $link && (($felder & 16) == 16)) {
@@ -1322,13 +1248,12 @@ function user(
             $url = $homep_ext_link . $user_nick;
             $text2 .= "&nbsp;"
                 . "<A HREF=\"#\" TARGET=\"640_$fenstername\" onClick=\"neuesFenster2('$url'); return(false)\">$chat_grafik[home]</A>";
-        } else if ($user_chathomepage == "J") {
+        } elseif ($user_chathomepage == "J") {
             $url = "home.php?http_host=$http_hosttag&ui_userid=$user_id&id=$idtag";
             $text2 .= "&nbsp;"
                 . "<A HREF=\"#\" TARGET=\"640_$fenstername\" onClick=\"neuesFenster2('$url'); return(false)\">$chat_grafik[home]</A>";
         }
     }
-    ;
     
     if (!$extra_kompakt && $link && $trenner != "" && $communityfeatures
         && (($felder & 8) == 8)) {
@@ -1340,7 +1265,6 @@ function user(
     } elseif (!$extra_kompakt && $link && $trenner != "") {
         $text2 .= $trenner;
     }
-    ;
     
     // Onlinezeit oder Datum des letzten Logins einfügen, falls Online Text fett ausgeben
     if ($online_zeit && $online_zeit != "NULL" && $online) {
@@ -1527,9 +1451,8 @@ function chat_parse($text)
     $text = str_replace("###klaffe###", "@", $text);
     $text = str_replace("###ausruf###", "!", $text);
     
-    return ($text);
+    return $text;
 }
-;
 
 function ist_netscape()
 {
@@ -1543,7 +1466,6 @@ function ist_netscape()
     }
     
 }
-;
 
 function gensalt($length)
 {
@@ -1554,8 +1476,6 @@ function genpassword($length)
 {
     // Generiert ein Passwort
     // wird auch für gensalt() genutzt
-    
-    //mt_srand((double)microtime()*1000000); 
     $vowels = array("a", "e", "i", "o", "u");
     $cons = array("b", "c", "d", "g", "h", "j", "k", "l", "m", "n", "p", "r",
         "s", "t", "u", "v", "w", "tr", "cr", "br", "fr", "th", "dr", "ch",
@@ -1594,7 +1514,6 @@ function logout_debug($o_id, $info)
         $logout['lo_onlinedump'] = serialize($row);
         @mysql_free_result($result);
     }
-    ;
     $result = mysql_query(
         "select u_login FROM user WHERE u_nick='$logout[lo_nick]'", $conn);
     if ($result && mysql_num_rows($result) == 1) {
@@ -1602,7 +1521,6 @@ function logout_debug($o_id, $info)
         $logout[lo_login] = $row[u_login];
         @mysql_free_result($result);
     }
-    ;
     
     $query = "INSERT INTO logouts SET ";
     foreach ($logout as $key => $val)
@@ -1618,7 +1536,6 @@ function logout_debug($o_id, $info)
     mysql_set_charset("utf8");
     mysql_select_db($dbase, $conn);
 }
-;
 
 function hole_geschlecht($userid)
 {
@@ -1634,7 +1551,7 @@ function hole_geschlecht($userid)
     
     if ($user_geschlecht == "männlich")
         $user_geschlecht = "geschlecht_maennlich";
-    else if ($user_geschlecht == "weiblich")
+    elseif ($user_geschlecht == "weiblich")
         $user_geschlecht = "geschlecht_weiblich";
     else $user_geschlecht = "";
     

@@ -7,7 +7,6 @@ if (!$u_id) {
     echo "<HTML><BODY><B>Fehler:</B> Diese Seite darf nur aus dem User-Menue als Admin aufgerufen werden!</BODY></HTML>\n";
     die();
 }
-;
 
 include("statistik-functions.php");
 include("conf/" . $sprachconfig . "-statistik.php");
@@ -58,7 +57,7 @@ if (isset($STAT_DB_COLLECT) && strlen($STAT_DB_COLLECT) > 0) {
     $v = $STAT_DB_COLLECT;
 }
 
-// Testen, ob Statistiken funktionieren...//{{{
+// Testen, ob Statistiken funktionieren...
 $fehler = false;
 
 if (!$c) {
@@ -84,21 +83,19 @@ if (!$c) {
 if ($fehler) {
     show_box2($t['statistik1'], $msg, "100%");
     return;
-}//}}}
+}
 
-// Menu ausgeben//{{{
+// Menu ausgeben
 $msg = "[<a href=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=statistik&type=monat\">"
     . $t['statistik3'] . "</a>]\n"
     . "[<a href=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=statistik&type=stunde\">"
     . $t['statistik2'] . "</a>]";
 show_box2($t['statistik1'], $msg, "100%");
-print "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><br>";
-//}}}
+echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><br>";
 
 switch ($type) {
-    case "monat": //{{{
-    
-    // Auswahlbox Monat //{{{
+    case "monat":
+    // Auswahlbox Monat
         $y = urldecode($y);
         $m = urldecode($m);
         $v = urldecode($v);
@@ -165,9 +162,8 @@ switch ($type) {
         $msg .= "</FORM>\n";
         $msg .= "</TABLE>\n";
         $msg .= "</CENTER>\n";
-        //}}}
         
-        // Statistiken einzeln nach Monaten//{{{
+        // Statistiken einzeln nach Monaten
         
         $r1 = @mysql_query(
             "SELECT DISTINCT c_host FROM chat WHERE date(c_timestamp) LIKE '$y-$m%' AND c_host LIKE '$v' ORDER BY c_host");
@@ -203,13 +199,12 @@ switch ($type) {
                 
                 $j++;
             }
-        }//}}}
+        }
         
         show_box2($t['statistik3'], $msg, "100%");
-        break;//}}}
-        
-    case "stunde"://{{{
+        break;
     
+    case "stunde":
         $h = 24;
         $msg = "";
         
@@ -237,7 +232,7 @@ switch ($type) {
         }
         
         show_box2($t['statistik2'], $msg, "100%");
-        break;//}}}
+        break;
 } // switch
 
 ?>

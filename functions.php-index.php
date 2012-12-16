@@ -1,7 +1,6 @@
 <?php
 
 // Funktionen nur für index.php
-// $Id: functions.php-index.php,v 1.21 2012/10/17 06:15:29 student Exp $
 
 require_once("functions.php-func-verlasse_chat.php");
 require_once("functions.php-func-nachricht.php");
@@ -14,7 +13,7 @@ function erzeuge_sequence($db, $id)
     
     $query = "select se_nextid from sequence where se_name='$db'";
     $result = mysql_query($query, $conn);
-    if (!($result && mysql_num_rows($result) == 1)) :
+    if (!($result && mysql_num_rows($result) == 1)) {
         // Tabelle neu anlegen
         $query = "CREATE TABLE sequence ("
             . "se_name varchar(127) NOT NULL default '',"
@@ -43,8 +42,8 @@ function erzeuge_sequence($db, $id)
         // Sperre aufheben
         $query = "UNLOCK TABLES";
         $result = mysql_query($query, $conn);
-    
-    endif;
+        
+    }
     @mysql_free_result($result);
 }
 
@@ -60,12 +59,6 @@ function show_who_is_online($result)
     $zeigen_alt = TRUE;
     if ($result) {
         while ($row = mysql_fetch_object($result)) {
-            // $userdata=unserialize($row->o_userdata.$row->o_userdata2.$row->o_userdata3.$row->o_userdata4);
-            // if ($userdata[u_away]=="") {
-            // 	$nick=$userdata[u_nick]." ";
-            // } else {
-            // 	$nick="(".$userdata[u_nick].") ";
-            // }
             if (($row->o_level == "S") || ($row->o_level == "C")) {
                 $nick = "<b>$row->o_name</b>";
             } else {
@@ -108,10 +101,7 @@ function show_who_is_online($result)
             } else {
                 $text .= "$nick ";
             }
-            ;
-            //			$i++;
         }
-        ;
         if ($zeigen_alt) {
             show_box2(
                 str_replace("%raum%", $r_name_alt, $ft0 . $t['default4'] . $ft1),
@@ -120,7 +110,6 @@ function show_who_is_online($result)
         }
         mysql_free_result($result);
     }
-    ;
 }
 
 function login(
@@ -209,10 +198,8 @@ function login(
                 "INSERT INTO aktion set a_user=$u_id, a_text='$u_name', a_wann='Alle 5 Minuten',	a_was='Neue Mail',	a_wie='OLM'",
                 $conn);
         }
-        ;
         mysql_free_result($result);
     }
-    ;
     
     // Prüfen, ob User noch online ist und ggf. ausloggen
     $alteloginzeit = "";
@@ -229,10 +216,10 @@ function login(
     // Login als letzten Login merken, dabei away und loginfehler zurücksetzen.
     $query = "UPDATE user SET u_login=NOW(),u_away='',u_loginfehler='' WHERE u_id=$u_id";
     $result = mysql_query($query, $conn);
-    if (!$result) :
+    if (!$result) {
         echo "Fehler beim Login: $query<BR>";
         exit;
-    endif;
+    }
     
     // Punkte des Vormonats/Vorjahres löschen und Usergruppe ermitteln, falls nicht Gast
     if ($u_level != "G" && $communityfeatures) {
@@ -266,55 +253,52 @@ function login(
                 $f['u_punkte_gruppe'] = dechex($key);
             }
         }
-        ;
-        
     }
-    ;
     
     // Aktuelle IP/Datum zu ip_historie hinzufügen
     $datum = time();
     $ip_historie_neu[$datum] = $ip;
-    if (is_array($ip_historie)) :
+    if (is_array($ip_historie)) {
         $i = 0;
-        while (($i < 3) AND list($datum, $ip_adr) = each($ip_historie)) :
+        while (($i < 3) AND list($datum, $ip_adr) = each($ip_historie)) {
             $ip_historie_neu[$datum] = $ip_adr;
             $i++;
-        endwhile;
-    endif;
+        }
+    }
     
     // u_agb, ip_historie und Temp-Admin schreiben
     if ($u_agb == "Y")
         $f['u_agb'] = $u_agb;
     $f['u_ip_historie'] = serialize($ip_historie_neu);
-    if ($u_level == "A") :
+    if ($u_level == "A") {
         // falls Status bisher Temp-Admin -> zurücksetzen.
         $f['u_level'] = "U";
         $u_level = "U";
-    endif;
+    }
     $u_id = schreibe_db("user", $f, $u_id, "u_id");
-    if (!$u_id) :
+    if (!$u_id) {
         echo "Fataler Fehler beim Login:<PRE>";
         print_r($f);
         echo "</PRE>";
         exit;
-    endif;
+    }
     
     // Aktuelle Daten des Users aus Tabelle iignore lesen
     // Query muss mit Code in ignore übereinstimmen
     $query = "SELECT i_user_passiv FROM iignore WHERE i_user_aktiv=$u_id";
     $result = mysql_query($query, $conn);
-    if (!$result) :
+    if (!$result) {
         echo "Fehler beim Login (iignore): $query<BR>";
         exit;
-    else :
-        if (mysql_num_rows($result) == 0) :
+    } else {
+        if (mysql_num_rows($result) == 0) {
             $ignore[0] = FALSE;
-        else :
-            while ($iignore = mysql_fetch_array($result)) :
+        } else {
+            while ($iignore = mysql_fetch_array($result)) {
                 $ignore[$iignore[i_user_passiv]] = TRUE;
-            endwhile;
-        endif;
-    endif;
+            }
+        }
+    }
     
     $knebelzeit = NULL;
     // Aktuelle Userdaten aus Tabelle user lesen
@@ -325,10 +309,10 @@ function login(
         . "u_chathomepage,u_systemmeldungen,u_punkte_anzeigen "
         . "FROM user WHERE u_id=$u_id";
     $result = mysql_query($query, $conn);
-    if (!$result) :
+    if (!$result) {
         echo "Fehler beim Login: $query<BR>";
         exit;
-    else :
+    } else {
         $userdata = mysql_fetch_array($result, MYSQL_ASSOC);
         
         // Slashes in jedem Eintrag des Array ergänzen
@@ -361,8 +345,7 @@ function login(
             $knebelzeit = $row->u_knebel;
         }
         @mysql_free_result($result);
-    
-    endif;
+    }
     
     // Vorbereitung für Login ist abgeschlossen. Jetzt nochmals Prüfen ob User online ist, 
     // ggf. Session löschen und neue Session schreiben
@@ -396,12 +379,12 @@ function login(
     $f['o_aktion'] = time(); // 5-min Aktionen initialisieren
     
     $o_id = schreibe_db("online", $f, "", "o_id");
-    if (!$o_id) :
+    if (!$o_id) {
         echo "Fataler Fehler beim Login:<PRE>";
         print_r($f);
         echo "</PRE>";
         exit;
-    endif;
+    }
     
     // Timestamps im Datensatz aktualisieren -> User gilt als eingeloggt
     if ($alteloginzeit != "") {
@@ -417,18 +400,15 @@ function login(
     
     // Bei Admins Cookie setzen zur Überprüfung der Session
     if ($userdata['u_level'] == "C" || $userdata['u_level'] == "S") {
-        setcookie("MAINCHAT" . $userdata['u_nick'], md5($o_id . $hash_id . "42"),
-            0, "/");
+        setcookie("MAINCHAT" . $userdata['u_nick'],
+            md5($o_id . $hash_id . "42"), 0, "/");
     }
-    ;
     
     if ($logout_logging)
         logout_debug($o_id, "login");
     
     return ($o_id);
-    
 }
-;
 
 function betrete_chat(
     $o_id,
@@ -448,9 +428,9 @@ function betrete_chat(
     global $raum_eintrittsnachricht_kurzform, $raum_eintrittsnachricht_anzeige_deaktivieren;
     
     // Falls eintrittsraum nicht definiert, lobby voreinstellen
-    if (strlen($eintrittsraum) == 0) :
+    if (strlen($eintrittsraum) == 0) {
         $eintrittsraum = $lobby;
-    endif;
+    }
     
     // Ist $raum geschlossen oder User ausgesperrt?
     // ausnahme: geschlossener Raum ist Eingangsraum -> für e-rotic-räume
@@ -494,7 +474,6 @@ function betrete_chat(
                                     $t['raum_gehe4']));
                             unset($raum);
                         }
-                        ;
                         break;
                     default:
                         break;
@@ -503,9 +482,8 @@ function betrete_chat(
         }
         @mysql_free_result($result);
     }
-    ;
     
-    if (strlen($raum) > 0) :
+    if (strlen($raum) > 0) {
         // Prüfung ob User aus Raum ausgesperrt ist
         
         $query4711 = "SELECT s_id FROM sperre WHERE s_raum=$raum AND s_user=$u_id";
@@ -538,7 +516,7 @@ function betrete_chat(
             }
             mysql_free_result($result);
         }
-    endif;
+    }
     
     // print $raum;
     // Welchen Raum betreten?
@@ -585,16 +563,16 @@ function betrete_chat(
         
     }
     
-    if ($result && $rows == 1) :
+    if ($result && $rows == 1) {
         $r_id = mysql_result($result, 0, "r_id");
         $r_eintritt = mysql_result($result, 0, "r_eintritt");
         $r_topic = mysql_result($result, 0, "r_topic");
         $r_name = mysql_result($result, 0, "r_name");
         mysql_free_result($result);
-    else :
+    } else {
         echo "<BODY><P>Fehler: Ungültige Raum-ID $raum beim Login!</P></BODY></HTML>\n";
         exit;
-    endif;
+    }
     
     // Aktuellen Raum merken, o_who auf chat setzen
     $f['o_raum'] = $r_id;
@@ -656,12 +634,11 @@ function betrete_chat(
         || preg_match("/(.*)Konqueror(.*)/i", $browser)
         || preg_match("/(.*)mozilla\/5(.*)Netscape6(.*)/i", $browser)
         || preg_match("/(.*)mozilla\/[23](.*)/i", $browser)
-        || preg_match("/(.*)AOL [123](.*)/i", $browser) || $http_te
-            == 'chunked') {
+        || preg_match("/(.*)AOL [123](.*)/i", $browser)
+        || $http_te == 'chunked') {
         $u_nick = "";
         warnung($u_id, $u_nick, "sicherer_modus");
     }
-    ;
     
     // Hat der User Aktionen für den Login eingestellt, wie Nachricht bei neuer Mail oder Freunden an sich selbst?
     
@@ -701,21 +678,15 @@ function betrete_chat(
                         $an_u_id = $row->f_userid;
                     }
                 }
-                ;
                 // Aktion ausführen
                 aktion($wann, $an_u_id, $u_name, "", "Freunde", $f);
             }
-            ;
         }
-        ;
         @mysql_free_result($result);
     }
-    ;
     
     return ($back);
-    
 }
-;
 
 function id_erzeuge($u_id)
 {
@@ -725,7 +696,6 @@ function id_erzeuge($u_id)
     return $id;
     
 }
-;
 
 function betrete_forum($o_id, $u_id, $u_name, $u_level)
 {
@@ -778,14 +748,11 @@ function betrete_forum($o_id, $u_id, $u_name, $u_level)
                         $an_u_id = $row->f_userid;
                     }
                 }
-                ;
                 // Aktion ausführen
                 aktion($wann, $an_u_id, $u_name, "", "Freunde", $f);
             }
         }
-        ;
     }
-    ;
     @mysql_free_result($result);
     
 }
@@ -795,20 +762,20 @@ function zeige_kopf()
     // Gibt den HTML-Kopf auf der Eingangsseite aus
     global $body_tag, $layout_kopf, $layout_include, $layout_parse, $voreinstellung_body_tag, $layout_bodytag;
     
-    if ($voreinstellung_body_tag) :
+    if ($voreinstellung_body_tag) {
         echo $voreinstellung_body_tag . "\n";
-    elseif ($layout_bodytag) :
+    } elseif ($layout_bodytag) {
         echo $body_tag;
-    endif;
+    }
     
-    if (strlen($layout_kopf) > 0 && !$layout_parse) :
+    if (strlen($layout_kopf) > 0 && !$layout_parse) {
         // Direkt einlesen
-        if ($layout_include == 1) :
+        if ($layout_include == 1) {
             include($layout_kopf);
-        else :
+        } else {
             readfile($layout_kopf);
-        endif;
-    elseif (strlen($layout_kopf) > 0 && $layout_parse) :
+        }
+    } elseif (strlen($layout_kopf) > 0 && $layout_parse) {
         // Lesen und ersetzen
         $fd = fopen($layout_kopf, "r");
         $out = @fread($fd, 100000);
@@ -820,9 +787,8 @@ function zeige_kopf()
             "background=\"" . $layout_parse, $out);
         $out = preg_replace("/" . $layout_parse . "\//i", $layout_parse, $out);
         echo $out;
-    endif;
+    }
 }
-;
 
 function zeige_fuss()
 {
@@ -831,19 +797,19 @@ function zeige_fuss()
     global $f3, $f4, $mainchat_version;
     
     echo "<DIV align=center>" . $f3 . $mainchat_version
-        . "<BR><A HREF=\"https://github.com/netzhuffle/mainchat\">mainChat Open Source</A>" . $f4
-        . "</DIV>\n<BR CLEAR=ALL>\n" . "<BR CLEAR=ALL>\n";
+        . "<BR><A HREF=\"https://github.com/netzhuffle/mainchat\">mainChat Open Source</A>"
+        . $f4 . "</DIV>\n<BR CLEAR=ALL>\n" . "<BR CLEAR=ALL>\n";
     
     if (isset($banner) && strlen($banner) > 0) {
         readfile($banner);
     }
-    if (strlen($layout_fuss) > 0 && !$layout_parse) :
-        if ($layout_include == 1) :
+    if (strlen($layout_fuss) > 0 && !$layout_parse) {
+        if ($layout_include == 1) {
             include($layout_fuss);
-        else :
+        } else {
             readfile($layout_fuss);
-        endif;
-    elseif (strlen($layout_fuss) > 0 && $layout_parse) :
+        }
+    } elseif (strlen($layout_fuss) > 0 && $layout_parse) {
         // Lesen und ersetzen
         $fd = fopen($layout_fuss, "r");
         $out = @fread($fd, 100000);
@@ -853,22 +819,19 @@ function zeige_fuss()
         $out = preg_replace("/action=\"\//i", "action=\"" . $layout_parse, $out);
         $out = preg_replace("/" . $layout_parse . "\//i", $layout_parse, $out);
         echo $out;
-    endif;
+    }
     
     if ($ivw) {
         // In IVW Pixel <IMG SRC=> einfügen (opt)
         if (!strpos($ivw, "<IMG")) {
             $ivw = "<IMG SRC=\"$ivw\" ALT=\"\">\n";
         }
-        ;
         echo $ivw . "\n";
     }
-    ;
     
     if ($layout_bodytag)
         echo "</BODY></HTML>\n";
 }
-;
 
 function RaumNameToRaumID($eintrittsraum)
 {

@@ -1,5 +1,4 @@
 <?php
-// $Id: functions.php-func-verlasse_chat.php,v 1.11 2012/10/17 06:16:53 student Exp $
 
 function verlasse_chat($u_id, $u_name, $raum)
 {
@@ -50,9 +49,8 @@ function verlasse_chat($u_id, $u_name, $raum)
         
         $back = global_msg($u_id, $raum, $text);
     }
-    return ($back);
     
+    return ($back);
 }
-;
 
 ?>

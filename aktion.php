@@ -1,18 +1,13 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: aktion.php,v 1.3 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
 id_lese($id);
-
-// Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Aktionen"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;
@@ -25,7 +20,6 @@ id_lese($id);
 </HEAD> 
 <?php
 
-// Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
 if (strlen($grafik_mini_background) > 0) :
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
@@ -93,14 +87,13 @@ if ($u_id && $communityfeatures) {
             . "Konto können Sie <A HREF=\"sms.php?http_host=$http_host&id=$id\">hier aufladen</A>. "
             . "Auch SMS können Sie wie OLM mit anderen Benachrichtigungsformen kombinieren.</P>";
     }
-    ;
 }
 
-if ($o_js || !$u_id) :
+if ($o_js || !$u_id) {
     echo $f1
         . "<CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</CENTER>"
         . $f2 . "<BR>\n";
-endif;
+}
 
 ?>
 </BODY></HTML>

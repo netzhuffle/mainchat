@@ -1,6 +1,4 @@
 <?php
-// Funktionen für edit.php
-// $Id: functions.php-edit.php,v 1.15 2012/10/17 06:16:53 student Exp $
 
 require_once("functions.php-func-verlasse_chat.php");
 require_once("functions.php-func-nachricht.php");
@@ -16,9 +14,6 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
     global $frame_size, $u_id, $communityfeatures, $punktefeatures;
     global $einstellungen_aendern, $eintritt_individuell;
     
-    // Kopf Tabelle
-    
-    // Browserunterscheidung
     if (ist_netscape()) {
         $input_breite = 15;
         $passwort_breite = 6;
@@ -26,7 +21,6 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
         $input_breite = 32;
         $passwort_breite = 15;
     }
-    ;
     
     if (ist_online($f['u_id'])) {
         $box = $ft0 . str_replace("%user%", $f['u_nick'], $t['user_zeige20'])
@@ -35,7 +29,6 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
         $box = $ft0 . str_replace("%user%", $f['u_nick'], $t['user_zeige21'])
             . $ft1;
     }
-    ;
     
     echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
     echo "<TR><TD COLSPAN=2>";
@@ -59,15 +52,15 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
     // Backup-Algotithmus einschalten?
     echo "<TR><TD COLSPAN=2>" . $f1 . $t['user_zeige14']
         . "<SELECT NAME=\"f[u_backup]\">";
-    if ($backup_chat) :
+    if ($backup_chat) {
         echo "<OPTION VALUE=\"0\">$t[user_zeige15]";
-    elseif ($f['u_backup'] == 1) :
+    } elseif ($f['u_backup'] == 1) {
         echo "<OPTION SELECTED VALUE=\"1\">$t[user_zeige15]";
         echo "<OPTION VALUE=\"0\">$t[user_zeige16]";
-    else :
+    } else {
         echo "<OPTION VALUE=\"1\">$t[user_zeige15]";
         echo "<OPTION SELECTED VALUE=\"0\">$t[user_zeige16]";
-    endif;
+    }
     
     echo "</SELECT><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Ändern!\">"
         . $f2 . "<HR SIZE=2 NOSHADE></TD></TR>\n";
@@ -85,23 +78,23 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
             . "</TD></TR>\n";
     }
     
-    if (!$einstellungen_aendern) :
+    if (!$einstellungen_aendern) {
         echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige18']
             . "</B>&nbsp;&nbsp;\n" . $f['u_nick'] . $f2 . "</TD></TR>\n";
-    else :
+    } else {
         echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige18']
             . "</B><BR>\n" . $f2
             . "<INPUT TYPE=\"TEXT\" VALUE=\"$f[u_nick]\" NAME=\"f[u_nick]\" SIZE=$input_breite>"
             . "</TD></TR>\n";
-    endif;
+    }
     
     // Für alle außer Gäste
-    if ($u_level != "G") :
+    if ($u_level != "G") {
         echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige6']
             . "</B><BR>\n" . $f2
             . "<INPUT TYPE=\"TEXT\" VALUE=\"$f[u_email]\" NAME=\"f[u_email]\" SIZE=$input_breite>"
             . "</TD></TR>\n";
-    endif;
+    }
     
     // Nur für Admins
     if ($admin) {
@@ -116,17 +109,17 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
             . "</TD></TR>\n";
     }
     
-    if ($admin) :
+    if ($admin) {
         if (!isset($f['u_kommentar']))
             $f['u_kommentar'] = "";
         echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige49']
             . "</B><BR>\n" . $f2 . "<INPUT TYPE=\"TEXT\" VALUE=\""
             . htmlspecialchars(stripslashes($f['u_kommentar']))
             . "\" NAME=\"f[u_kommentar]\" SIZE=$input_breite>" . "</TD></TR>\n";
-    endif;
+    }
     
     // Für alle außer Gäste
-    if ($u_level != "G") :
+    if ($u_level != "G") {
         echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige7']
             . "</B><BR>\n" . $f2
             . "<INPUT TYPE=\"TEXT\" VALUE=\"$f[u_url]\" NAME=\"f[u_url]\" SIZE=$input_breite>"
@@ -154,60 +147,58 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
         }
         
         // Passwort
-        if ($einstellungen_aendern) :
+        if ($einstellungen_aendern) {
             echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige19']
                 . "</B><BR>\n" . $f2
                 . "<INPUT TYPE=\"PASSWORD\" NAME=\"passwort1\" SIZE=$passwort_breite>"
                 . "<INPUT TYPE=\"PASSWORD\" NAME=\"passwort2\" SIZE=$passwort_breite>"
                 . "</TD></TR>\n";
-        endif;
-    endif;
+        }
+    }
     
     // System Ein/Austrittsnachrichten Y/N
     echo "<TR><TD COLSPAN=2><HR SIZE=2 NOSHADE></TD></TR>\n";
     echo "<TR><TD>" . $f1 . "<B>" . $t['user_zeige51'] . "</B>\n" . $f2
         . "</TD><TD>" . $f1 . "<SELECT NAME=\"f[u_systemmeldungen]\">";
-    if ($f['u_systemmeldungen'] == "Y") :
+    if ($f['u_systemmeldungen'] == "Y") {
         echo "<OPTION SELECTED VALUE=\"Y\">$t[user_zeige36]";
         echo "<OPTION VALUE=\"N\">$t[user_zeige37]";
-    else :
+    } else {
         echo "<OPTION VALUE=\"Y\">$t[user_zeige36]";
         echo "<OPTION SELECTED VALUE=\"N\">$t[user_zeige37]";
-    endif;
+    }
     echo "</SELECT>" . $f2 . "</TD></TR>\n";
     
     // Smilies Y/N
-    if ($smilies_pfad && $erweitertefeatures) :
+    if ($smilies_pfad && $erweitertefeatures) {
         echo "<TR><TD>" . $f1 . "<B>" . $t['user_zeige35'] . "</B>\n" . $f2
             . "</TD><TD>" . $f1 . "<SELECT NAME=\"f[u_smilie]\">";
-        if ($f['u_smilie'] == "Y") :
+        if ($f['u_smilie'] == "Y") {
             echo "<OPTION SELECTED VALUE=\"Y\">$t[user_zeige36]";
             echo "<OPTION VALUE=\"N\">$t[user_zeige37]";
-        else :
+        } else {
             echo "<OPTION VALUE=\"Y\">$t[user_zeige36]";
             echo "<OPTION SELECTED VALUE=\"N\">$t[user_zeige37]";
-        endif;
-        
+        }
         echo "</SELECT>" . $f2 . "</TD></TR>\n";
-    endif;
+    }
     
     // Punkte Anzeigen Y/N
     if ($communityfeatures && $u_level <> 'G' && $punktefeatures) {
         echo "<TR><TD>" . $f1 . "<B>" . $t['user_zeige52'] . "</B>\n" . $f2
             . "</TD><TD>" . $f1 . "<SELECT NAME=\"f[u_punkte_anzeigen]\">";
-        if ($f['u_punkte_anzeigen'] == "Y") :
+        if ($f['u_punkte_anzeigen'] == "Y") {
             echo "<OPTION SELECTED VALUE=\"Y\">$t[user_zeige36]";
             echo "<OPTION VALUE=\"N\">$t[user_zeige37]";
-        else :
+        } else {
             echo "<OPTION VALUE=\"Y\">$t[user_zeige36]";
             echo "<OPTION SELECTED VALUE=\"N\">$t[user_zeige37]";
-        endif;
-        
+        }
         echo "</SELECT>" . $f2 . "</TD></TR>\n";
     }
     
     // Level nur für Admins
-    if ($admin) :
+    if ($admin) {
         echo "<TR><TD>" . $f1 . "<B>" . $t['user_zeige8'] . "</B>\n" . $f2
             . "</TD><TD>" . $f1 . "<SELECT NAME=\"f[u_level]\">\n";
         
@@ -215,7 +206,7 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
         
         reset($level);
         $i = 0;
-        while ($i < count($level)) :
+        while ($i < count($level)) {
             $name = key($level);
             // Alle Level außer Besitzer zur Auswahl geben, für Gäste gibt es nur Gast
             if ($name != "B") {
@@ -231,14 +222,12 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
                         endif;
                     }
                 }
-                ;
             }
             next($level);
             $i++;
-        endwhile;
-        
+        }
         echo "</SELECT>" . $f2 . "</TD></TR>\n";
-    endif;
+    }
     
     // Einstellungen für Fenstergrößen
     if ($u_level != "G") {
@@ -251,13 +240,12 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
                 . str_replace("%vor%", $val, $t['user_zeige42']) . $f2
                 . "</TD></TR>\n";
         }
-        ;
     }
     
     // Default für Farbe setzen, falls undefiniert
-    if (strlen($f['u_farbe']) == 0) :
+    if (strlen($f['u_farbe']) == 0) {
         $f['u_farbe'] = $user_farbe;
-    endif;
+    }
     
     $link = "";
     // Farbe direkt einstellen
@@ -267,7 +255,6 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
                 . urlencode($f['u_farbe']);
             $link = "<B>[<A HREF=\"$url\" TARGET=\"Farben\" onclick=\"window.open('$url','Farben','resizable=yes,scrollbars=yes,width=400,height=500'); return(false);\">$t[user_zeige46]</A>]</B>";
         }
-        ;
         echo "<TR><TD COLSPAN=2><HR SIZE=2 NOSHADE></TD></TR>"
             . "<TR><TD>$f1<B>" . $t['user_zeige45'] . "</B>\n" . $f2
             . "</TD><TD>" . $f1
@@ -289,11 +276,11 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
         . "<HR SIZE=2 NOSHADE><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Ändern!\">"
         . $f2;
     
-    if ($admin) :
+    if ($admin) {
         echo $f1
             . "&nbsp;<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Löschen!\">"
             . $f2;
-    endif;
+    }
     
     // Farbenliste & aktuelle Farbe
     
@@ -309,16 +296,13 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
                 . "<IMG SRC=\"pics/fuell.gif\" WIDTH=$farbe_chat_user_groesse "
                 . "HEIGHT=$farbe_chat_user_groesse ALT=\"\" BORDER=0></A></TD>\n";
         }
-        ;
         echo "</TR></TABLE>\n";
     }
-    ;
     
     // Fuß der Tabelle
     echo "</FORM>\n";
     echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
     
 }
-;
 
 ?>

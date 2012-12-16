@@ -1,5 +1,4 @@
 <?php
-// $Id: functions.php-func-chat_lese.php,v 1.14 2012/10/17 06:16:53 student Exp $
 
 function chat_lese(
     $o_id,
@@ -75,7 +74,6 @@ function chat_lese(
                 $rows[] = $row[0];
             }
         }
-        ;
         mysql_free_result($result);
         
         $query = "SELECT c_id FROM chat WHERE c_typ IN ('P','S') AND c_an_user=$u_id AND c_id >= $o_chat_id"
@@ -86,7 +84,6 @@ function chat_lese(
                 $rows[] = $row[0];
             }
         }
-        ;
         mysql_free_result($result);
         if (isset($rows) && is_array($rows))
             sort($rows);
@@ -108,7 +105,6 @@ function chat_lese(
         } else {
             $o_chat_id = 0;
         }
-        ;
         
         // $back-Zeilen in Tabelle online ausgeben, höchstens  aber ab o_chat_id
         // Nur Nachrichten im aktuellen Raum anzeigen, außer Typ P oder S und an User adressiert
@@ -122,14 +118,10 @@ function chat_lese(
                 $rows[] = $row[0];
             }
         }
-        ;
         mysql_free_result($result);
         
         $query = "SELECT c_id FROM chat WHERE c_typ IN ('P','S') AND c_an_user=$u_id AND c_id >= $o_chat_id"
             . $qquery;
-        
-        ##### zu debug-zwecken dies mal einkommentieren ####
-        #print htmlentities($query);
         
         $result = mysql_query($query, $conn);
         if ($result) {
@@ -137,7 +129,6 @@ function chat_lese(
                 $rows[] = $row[0];
             }
         }
-        ;
         mysql_free_result($result);
         if (isset($rows) && is_array($rows))
             sort($rows);
@@ -156,9 +147,7 @@ function chat_lese(
                     unset($rows[$key]);
                 }
             }
-            ;
         }
-        ;
         
     } else {
         
@@ -174,7 +163,6 @@ function chat_lese(
                 $rows[] = $row[0];
             }
         }
-        ;
         @mysql_free_result($result);
         
         $query = "SELECT c_id FROM chat WHERE c_typ IN ('P','S') AND c_an_user=$u_id AND c_id > $letzte_id"
@@ -186,13 +174,11 @@ function chat_lese(
                 $rows[] = $row[0];
             }
         }
-        ;
         @mysql_free_result($result);
         if (isset($rows) && is_array($rows))
             sort($rows);
         
     }
-    ;
     
     // + für regulären Ausdruck filtern
     $nick = str_replace("+", "\\+", $u_nick);
@@ -205,7 +191,6 @@ function chat_lese(
     } else {
         unset($result);
     }
-    ;
     
     // Nachrichten zeilenweise ausgeben
     if (isset($result) && $result) {
@@ -304,7 +289,8 @@ function chat_lese(
                     $c_text = str_replace("<ID>", $id, $c_text);
                 
                 // alternativ, falls am ende der Zeile, und das "<ID>" auf 2 Zeilen verteilt wird
-                if (($id) && (($row->c_br == "erste") || ($row->c_br == "mitte"))) {
+                if (($id)
+                    && (($row->c_br == "erste") || ($row->c_br == "mitte"))) {
                     if (substr($c_text, -3) == '<ID') {
                         $text_weitergabe = substr($c_text, -3);
                         $c_text = substr($c_text, 0, -3);
@@ -333,33 +319,33 @@ function chat_lese(
                             $c_text = str_replace("-->", "", $c_text);
                         }
                         // S: Systemnachricht
-                        if ($row->c_an_user) :
+                        if ($row->c_an_user) {
                             // an aktuellen User
-                            if (!$erste_zeile) :
+                            if (!$erste_zeile) {
                                 $zanfang = "";
-                            else :
+                            } else {
                                 $zanfang = $sm1
                                     . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\">";
-                            endif;
-                            if ($br == "") :
+                            }
+                            if ($br == "") {
                                 $zende = "";
-                            else :
+                            } else {
                                 $zende = "</FONT>" . $sm2 . $br;
-                            endif;
-                        else :
+                            }
+                        } else {
                             // an alle User
-                            if (!$erste_zeile) :
+                            if (!$erste_zeile) {
                                 $zanfang = "";
-                            else :
+                            } else {
                                 $zanfang = $sm1
                                     . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><B>$chat:</B>&nbsp;";
-                            endif;
-                            if ($br == "") :
+                            }
+                            if ($br == "") {
                                 $zende = "";
-                            else :
+                            } else {
                                 $zende = "</FONT>" . $sm2 . $br;
-                            endif;
-                        endif;
+                            }
+                        }
                         break;
                     
                     case "P":
@@ -367,12 +353,12 @@ function chat_lese(
                     
                     // Falls dies eine Folgezeile ist, Von-Text unterdrücken
                     
-                        if (strlen($row->c_von_user) != 0) :
+                        if (strlen($row->c_von_user) != 0) {
                             if ($u_farbe_priv != "-")
                                 $row->c_farbe = "#$u_farbe_priv";
-                            if (!$erste_zeile) :
+                            if (!$erste_zeile) {
                                 $zanfang = "";
-                            else :
+                            } else {
                                 $temp_von_user = str_replace("<ID>", $id,
                                     $row->c_von_user);
                                 $temp_von_user = str_replace("<HTTP_HOST>",
@@ -381,18 +367,16 @@ function chat_lese(
                                     . "\" TITLE=\"$row->c_zeit\"><B>"
                                     . $temp_von_user
                                     . "&nbsp;($t[chat_lese1]):</B> ";
-                            #$zanfang="<FONT COLOR=\"".$row->c_farbe."\"><B>&nbsp;($t[chat_lese1]):</B> ";
-                            #$zanfang=htmlentities($zanfang);
-                            endif;
-                            if ($br == "") :
+                            }
+                            if ($br == "") {
                                 $zende = "";
-                            else :
+                            } else {
                                 $zende = "</FONT>" . $br;
-                            endif;
-                        else :
-                            if (!$erste_zeile) :
+                            }
+                        } else {
+                            if (!$erste_zeile) {
                                 $zanfang = "";
-                            else :
+                            } else {
                                 $temp_von_user = str_replace("<ID>", $id,
                                     $row->c_von_user);
                                 $temp_von_user = str_replace("<HTTP_HOST>",
@@ -401,13 +385,13 @@ function chat_lese(
                                     . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><B>"
                                     . $temp_von_user
                                     . "&nbsp;($t[chat_lese1]):</B> ";
-                            endif;
-                            if ($br == "") :
+                            }
+                            if ($br == "") {
                                 $zende = "";
-                            else :
+                            } else {
                                 $zende = "</FONT>" . $sm2 . $br;
-                            endif;
-                        endif;
+                            }
+                        }
                         break;
                     
                     case "H":
@@ -416,40 +400,40 @@ function chat_lese(
                             $c_text = str_replace("<!--", "<b>", $c_text);
                             $c_text = str_replace("-->", "</b>", $c_text);
                         }
-                        if ($row->c_von_user_id != 0) :
+                        if ($row->c_von_user_id != 0) {
                             // eigene Farbe für noise, falls gesetzt.
                             if ($u_farbe_noise != "-")
                                 $row->c_farbe = "#$u_farbe_noise";
-                            if (!$erste_zeile) :
+                            if (!$erste_zeile) {
                                 $zanfang = "";
-                            else :
+                            } else {
                                 $zanfang = "<FONT COLOR=\"$row->c_farbe\" TITLE=\"$row->c_zeit\"><I>&lt;";
-                            endif;
-                            if ($br == "") :
+                            }
+                            if ($br == "") {
                                 $zende = "";
-                            else :
+                            } else {
                                 $zende = "&gt;</I></FONT>" . $br;
-                            endif;
-                        else :
-                            if (!$erste_zeile) :
+                            }
+                        } else {
+                            if (!$erste_zeile) {
                                 $zanfang = "";
-                            else :
+                            } else {
                                 $zanfang = $sm1
                                     . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><I>&lt;";
-                            endif;
-                            if ($br == "") :
+                            }
+                            if ($br == "") {
                                 $zende = "";
-                            else :
+                            } else {
                                 $zende = "&gt;</I></FONT>" . $sm2 . $br;
-                            endif;
-                        endif;
+                            }
+                        }
                         break;
                     
                     default:
                     // N: Normal an alle mit Absender
                     // eigene Farbe, falls gesetzt
-                        if ($row->c_von_user_id != $u_id && $u_farbe_alle
-                                != "-")
+                        if ($row->c_von_user_id != $u_id
+                            && $u_farbe_alle != "-")
                             $row->c_farbe = $u_farbe_alle;
                         
                         // eigene Farbe für nachricht an Privat, falls gesetzt.
@@ -459,9 +443,9 @@ function chat_lese(
                         
                         // Nur Nick in Userfarbe oder ganze Zeile
                         if ($farbe_user_fest) {
-                            if (!$erste_zeile) :
+                            if (!$erste_zeile) {
                                 $zanfang = "";
-                            else :
+                            } else {
                                 $temp_von_user = str_replace("<ID>", $id,
                                     $row->c_von_user);
                                 $temp_von_user = str_replace("<HTTP_HOST>",
@@ -470,16 +454,16 @@ function chat_lese(
                                     . "\" TITLE=\"$row->c_zeit\"><B>"
                                     . $temp_von_user
                                     . ":</B> </FONT><FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"> ";
-                            endif;
-                            if ($br == "") :
+                            }
+                            if ($br == "") {
                                 $zende = "";
-                            else :
+                            } else {
                                 $zende = "</FONT>" . $br;
-                            endif;
+                            }
                         } else {
-                            if (!$erste_zeile) :
+                            if (!$erste_zeile) {
                                 $zanfang = "";
-                            else :
+                            } else {
                                 $temp_von_user = str_replace("<ID>", $id,
                                     $row->c_von_user);
                                 $temp_von_user = str_replace("<HTTP_HOST>",
@@ -487,16 +471,14 @@ function chat_lese(
                                 $zanfang = "<FONT COLOR=\"" . $row->c_farbe
                                     . "\" TITLE=\"$row->c_zeit\">" . "<B>"
                                     . $temp_von_user . ":</B> ";
-                            endif;
-                            if ($br == "") :
+                            }
+                            if ($br == "") {
                                 $zende = "";
-                            else :
+                            } else {
                                 $zende = "</FONT>" . $br;
-                            endif;
+                            }
                         }
-                        ;
                 }
-                ;
                 // Chatzeile ausgeben
                 echo $zanfang . $c_text . $zende;
                 
@@ -510,13 +492,8 @@ function chat_lese(
                 }
                 
             }
-            ;
-            
         }
-        ;
-        
     }
-    ;
     
     if (isset($result))
         mysql_free_result($result);
@@ -525,6 +502,5 @@ function chat_lese(
     return ($text_ausgegeben);
     
 }
-;
 
 ?>

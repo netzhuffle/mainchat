@@ -1,9 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-
-// $Id: smilies.php
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, o_js, u_level, admin
@@ -15,11 +11,11 @@ aktualisiere_online($u_id, $o_raum);
 echo "<HTML>\n<HEAD><TITLE>" . $body_titel
     . "_Info</TITLE><META CHARSET=UTF-8>\n";
 
-echo "<SCRIPT LANGUAGE=\"JavaScript\">\n";
+echo "<SCRIPT>\n";
 echo "  var http_host='$http_host';\n";
 echo "  var id='$id';\n";
 echo "  var stdparm='?http_host='+http_host+'&id='+id;\n";
-echo "</SCRIPT><SCRIPT LANGUAGE=\"JavaScript\" src=\"jscript.js\"></script>\n";
+echo "</SCRIPT><SCRIPT src=\"jscript.js\"></script>\n";
 
 echo $stylesheet . "<style type=\"text/css\">\n"
     . "a { text-decoration: none; font-weight:bold }\n" . "</style></HEAD>\n";
@@ -31,7 +27,7 @@ echo "<BODY BGCOLOR=\"$farbe_mini_background\" "
     . "VLINK=\"$farbe_mini_vlink\" " . "ALINK=\"$farbe_mini_vlink\">\n";
 
 // Login ok?
-if (strlen($u_id) != 0) :
+if (strlen($u_id) != 0) {
     // Menue ausgeben, Tabelle aufbauen
     if (!isset($r_name)) {
         $r_name = "";
@@ -45,7 +41,7 @@ if (strlen($u_id) != 0) :
         . "</A>]</B>$f4<BR>"
         . "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\" >\n";
     
-    // Unterscheidung Jacascript an/aus
+    // Unterscheidung JavaScript an/aus
     if ($o_js) {
         
         // Array mit Smilies einlesen, Tabelle in Javascript ausgeben
@@ -59,9 +55,7 @@ if (strlen($u_id) != 0) :
             . "   var color = new Array('$farbe_tabelle_zeile1','$farbe_tabelle_zeile2');\n"
             . "   var fett  = new Array('$f1<B>','</B>$f2','$f3','$f4','$f1','$f2');\n"
             . "   var liste = new Array(\n   " . @implode(",\n   ", $jsarr)
-            . "   );\n" . "   showsmilies(liste);\n" . 
-            //			     "   stdparm=''; stdparm2=''; id=''; http_host=''; u_nick=''; raum=''; nlink=''; nick=''; url='';\n".
-            "</SCRIPT>\n";
+            . "   );\n" . "   showsmilies(liste);\n" . "</SCRIPT>\n";
         
     } else { // kein javascript verfügbar
     
@@ -87,10 +81,10 @@ if (strlen($u_id) != 0) :
         . $t['sonst1'] . "</A>]&nbsp;"
         . "[<a onMouseOver=\"return(true)\" $linkuser>" . $t['sonst2']
         . "</A>]</B>$f4</CENTER>";
-
-else :
+    
+} else {
     echo "<P ALIGN=CENTER>$t[sonst15]</P>\n";
-endif;
+}
 
 ?>
 

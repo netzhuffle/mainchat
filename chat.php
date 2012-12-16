@@ -1,10 +1,7 @@
 <?php
 
-// fidion GmbH mainChat
 // chat.php muss mit id=$hash_id aufgerufen werden
 // Optional kann $back als Trigger für die Ausgabe der letzten n-Zeilen angegeben werden
-
-// $Id: chat.php,v 1.5 2012/10/17 06:16:53 student Exp $
 
 require("functions.php");
 
@@ -31,12 +28,11 @@ if ($u_id) {
     if ($backup_chat || $u_backup) :
         // n-Zeilen ausgeben und nach Timeout neu laden
         
-        // Kopf ausgeben
         echo "<HTML><HEAD>\n" . "<TITLE></TITLE><META CHARSET=\"UTF-8\">"
             . "<META HTTP-EQUIV=\"expires\" content=\"0\" />\n"
             . "<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"7; "
             . "URL=chat.php?http_host=$http_host&id=$id\" />\n"
-            . "<SCRIPT LANGUAGE=JavaScript>\n"
+            . "<SCRIPT>\n"
             . "setInterval(\"window.scrollTo(1,300000)\",100)\n"
             . "function neuesFenster(url,name) {\n"
             . "hWnd=window.open(url,name,\"resizable=yes,scrollbars=yes,width=300,height=700\");\n"

@@ -41,7 +41,6 @@ function zeige_blacklist($aktion, $zeilen, $sort)
             $fsort = "f_zeit";
             $usort = "u_nick";
     }
-    ;
     
     switch ($aktion) {
         case "normal":
@@ -59,7 +58,6 @@ function zeige_blacklist($aktion, $zeilen, $sort)
                 mysql_query($query2);
             }
     }
-    ;
     
     echo "<FORM NAME=\"blacklist_loeschen\" ACTION=\"$PHP_SELF\" METHOD=POST>\n"
         . "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n"
@@ -116,7 +114,6 @@ function zeige_blacklist($aktion, $zeilen, $sort)
                     $result2 = mysql_query($query, $conn);
                     
                 }
-                ;
                 
                 // Unterscheidung online ja/nein, Text ausgeben
                 if ($row2->o_id) {
@@ -161,10 +158,8 @@ function zeige_blacklist($aktion, $zeilen, $sort)
                 } else {
                     $bgcolor = $farbe_tabelle_zeile2;
                 }
-                ;
                 $i++;
             }
-            ;
             
             echo "<TR BGCOLOR=\"$bgcolor\"><TD COLSPAN=2><INPUT TYPE=\"checkbox\" onClick=\"toggle(this.checked)\">"
                 . $f1 . " Alle Auswählen" . $f2 . "</TD>\n"
@@ -172,12 +167,9 @@ function zeige_blacklist($aktion, $zeilen, $sort)
                 . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"$button\">"
                 . $f2 . "</TD></TR>\n";
         }
-        ;
         
         echo "</TABLE></FORM>\n";
-        
     }
-    ;
 }
 
 function loesche_blacklist($f_blacklistid)
@@ -204,10 +196,8 @@ function loesche_blacklist($f_blacklistid)
         $f_nick = mysql_result($result, 0, 0);
         echo "<P><B>Hinweis:</B> '$f_nick' ist nicht mehr in der Blackliste eingetragen.</P>";
     }
-    ;
     @mysql_free_result($result);
 }
-;
 
 function formular_neuer_blacklist($neuer_blacklist)
 {
@@ -248,7 +238,6 @@ function formular_neuer_blacklist($neuer_blacklist)
         . "</TD></TR>\n" . "</TABLE></FORM>\n";
     
 }
-;
 
 function neuer_blacklist($f_userid, $blacklist)
 {
@@ -291,6 +280,5 @@ function neuer_blacklist($f_userid, $blacklist)
         }
         
     }
-    ;
 }
 ?>

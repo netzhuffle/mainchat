@@ -1,8 +1,4 @@
 <?php
-// fidion mainChat
-// (C) fidion GmbH
-// // Funktionen nur für die Community
-// $Id: functions-community.php,v 1.15 2012/10/17 06:16:53 student Exp $
 
 require_once("functions.php-func-sms.php");
 
@@ -47,7 +43,6 @@ function mail_neu($u_id, $u_nick, $id, $nachricht = "OLM")
         . "FROM mail LEFT JOIN user on m_von_uid=u_id "
         . "WHERE m_an_uid=$u_id " . "AND m_status='neu' "
         . "order by m_zeit desc";
-    // system_msg("",0,$u_id,$system_farbe,"DEBUG: $query");
     $result = mysql_query($query, $conn);
     
     if ($result && mysql_num_rows($result) > 0) {
@@ -59,7 +54,6 @@ function mail_neu($u_id, $u_nick, $id, $nachricht = "OLM")
             system_msg("", 0, $u_id, $system_farbe,
                 str_replace("%link%", $url, $t['mail1']));
         }
-        ;
         
         while ($row = mysql_fetch_object($result)) {
             
@@ -73,7 +67,6 @@ function mail_neu($u_id, $u_nick, $id, $nachricht = "OLM")
                     } else {
                         $txt = str_replace("%nick%", $chat, $txt);
                     }
-                    ;
                     system_msg("", 0, $u_id, $system_farbe,
                         str_replace("%betreff%", $row->m_betreff, $txt));
                     break;
@@ -103,7 +96,6 @@ function mail_neu($u_id, $u_nick, $id, $nachricht = "OLM")
                     } else {
                         $txt = str_replace("%nick%", $chat, $txt);
                     }
-                    ;
                     sms_sende($u_id, $u_id,
                         str_replace("%betreff%", $row->m_betreff, $txt));
                     break;
@@ -115,7 +107,6 @@ function mail_neu($u_id, $u_nick, $id, $nachricht = "OLM")
     @mysql_free_result($result);
     
 }
-;
 
 function profil_neu($u_id, $u_nick, $id)
 {
@@ -146,7 +137,6 @@ function profil_neu($u_id, $u_nick, $id)
     @mysql_free_result($result);
     
 }
-;
 
 function autoselect($name, $voreinstellung, $tabelle, $feld)
 {
@@ -171,11 +161,9 @@ function autoselect($name, $voreinstellung, $tabelle, $feld)
             } else {
                 echo "<OPTION VALUE=$set_name>$set_name\n";
             }
-            ;
         }
         echo "</SELECT>\n";
     }
-    ;
     mysql_free_result($result);
 }
 
@@ -197,7 +185,6 @@ function punkte($anzahl, $o_id, $u_id = 0, $text = "", $sofort = FALSE)
         $query = "UPDATE online set o_punkte=o_punkte+$anzahl " . $where;
         mysql_query($query, $conn);
     }
-    ;
     
     // Meldung an User ausgeben
     if (strlen($text) > 0) {
@@ -270,9 +257,7 @@ function punkte($anzahl, $o_id, $u_id = 0, $text = "", $sofort = FALSE)
                     $f['u_punkte_gruppe'] = dechex($key);
                 }
             }
-            ;
         }
-        # system_msg("",0,$u_id,$system_farbe,"DEBUG: Punkte-Gruppe". $f[u_punkte_gruppe]);
         
         schreibe_db("user", $f, $u_id, "u_id");
         
@@ -338,7 +323,6 @@ function punkte_offline($anzahl, $u_id)
                 $f['u_punkte_gruppe'] = dechex($key);
             }
         }
-        ;
     }
     schreibe_db("user", $f, $u_id, "u_id");
     
@@ -361,7 +345,13 @@ function punkte_offline($anzahl, $u_id)
     
 }
 
-function aktion($typ, $an_u_id, $u_nick, $id = "", $suche_was = "", $inhalt = "")
+function aktion(
+    $typ,
+    $an_u_id,
+    $u_nick,
+    $id = "",
+    $suche_was = "",
+    $inhalt = "")
 {
     
     // Programmierbare Aktionen für User $an_u_id von User $u_nick
@@ -391,10 +381,8 @@ function aktion($typ, $an_u_id, $u_nick, $id = "", $suche_was = "", $inhalt = ""
                     $a_was[$row->a_was][$a_wie] = TRUE;
                 }
             }
-            ;
             
         }
-        ;
         @mysql_free_result($result);
         
         switch ($typ) {
@@ -403,7 +391,6 @@ function aktion($typ, $an_u_id, $u_nick, $id = "", $suche_was = "", $inhalt = ""
             case "Sofort/Online":
                 if ($suche_was != "" && isset($a_was)
                     && is_array($a_was[$suche_was])) {
-                    // system_msg("",0,$u_id,$system_farbe, "DEBUG $typ $an_u_id,$u_nick,$id");
                     foreach ($a_was[$suche_was] as $wie => $was) {
                         aktion_sende($suche_was, $wie, $inhalt, $an_u_id,
                             $u_id, $u_nick, $id);
@@ -413,7 +400,6 @@ function aktion($typ, $an_u_id, $u_nick, $id = "", $suche_was = "", $inhalt = ""
             
             case "Alle 5 Minuten":
             // Aktionen ausführen
-            //system_msg("",0,$u_id,$system_farbe, "DEBUG 5min $an_u_id,$u_nick,$id");
                 if (isset($a_was["Freunde"]["OLM"]))
                     freunde_online($an_u_id, $u_nick, $id, "OLM");
                 if (isset($a_was["Freunde"]["Chat-Mail"]))
@@ -449,7 +435,6 @@ function aktion($typ, $an_u_id, $u_nick, $id = "", $suche_was = "", $inhalt = ""
             case "Login":
             default:
             // Aktionen ausführen
-            // system_msg("",0,$u_id,$system_farbe, "DEBUG Login $an_u_id,$u_nick,$id");
                 if (isset($a_was["Freunde"]["OLM"]))
                     freunde_online($an_u_id, $u_nick, $id, "OLM");
                 if (isset($a_was["Freunde"]["Chat-Mail"]))
@@ -511,18 +496,15 @@ function aktion_sende(
                 case "Freunde":
                 // Nachricht von Login/Logoff erzeugen
                     if ($inhalt['aktion'] == "Login" && $inhalt['raum']) {
-                        //							$txt=str_replace("%u_name%",$u_nick,$t[freunde1]);
                         $txt = str_replace("%u_name%", $userlink,
                             $t['freunde1']);
                         $txt = str_replace("%raum%", $inhalt['raum'], $txt);
                     } elseif ($inhalt['aktion'] == "Login") {
-                        //							$txt=str_replace("%u_name%",$u_nick,$t[freunde5]);
                         $txt = str_replace("%u_name%", $userlink,
                             $t['freunde5']);
                     } else {
                         $txt = str_replace("%u_name%", $u_nick, $t['freunde2']);
                     }
-                    ;
                     if ($inhalt['f_text'])
                         $txt .= " (" . $inhalt['f_text'] . ")";
                     system_msg("", 0, $an_u_id, $system_farbe, $txt);
@@ -551,8 +533,6 @@ function aktion_sende(
                     system_msg("", 0, $an_u_id, $system_farbe, $text);
                     break;
             }
-            ;
-            
             break;
         
         case "Chat-Mail":
@@ -572,14 +552,13 @@ function aktion_sende(
                         $betreff = str_replace("%u_name%", $u_nick,
                             $t['freunde4']);
                     }
-                    ;
                     if ($inhalt['f_text']) {
                         $txt = $t['mail9'] . $betreff . " ("
                             . $inhalt['f_text'] . ")";
                     } else {
                         $txt = $t['mail9'] . $betreff;
                     }
-                    # ??? Mail-Absender nun immer MainChat
+                    // Mail-Absender ist MainChat
                     $von_u_id = 0;
                     mail_sende($von_u_id, $an_u_id, $txt, $betreff);
                     break;
@@ -605,9 +584,7 @@ function aktion_sende(
                     
                     mail_sende($von_u_id, $an_u_id, $text, $betreff);
                     break;
-                
             }
-            ;
             break;
         
         case "E-Mail":
@@ -627,7 +604,6 @@ function aktion_sende(
                         $betreff = str_replace("%u_name%", $u_nick,
                             $t['freunde4']);
                     }
-                    ;
                     if ($inhalt['f_text']) {
                         $txt = $t['mail8'] . $betreff . " ("
                             . $inhalt['f_text'] . ")";
@@ -665,9 +641,7 @@ function aktion_sende(
                     
                     email_versende($von_u_id, $an_u_id, $text, $betreff);
                     break;
-                
             }
-            ;
             break;
         
         case "SMS":
@@ -683,10 +657,8 @@ function aktion_sende(
                     } else {
                         $txt = str_replace("%u_name%", $u_nick, $t['freunde2']);
                     }
-                    ;
                     if ($inhalt['f_text'])
                         $txt .= " (" . $inhalt['f_text'] . ")";
-                    // system_msg("",0,$an_u_id,$system_farbe,$txt);
                     sms_sende($an_u_id, $an_u_id, $txt);
                     break;
                 
@@ -702,7 +674,6 @@ function aktion_sende(
                     
                     // Nachricht versenden
                     sms_sende($an_u_id, $an_u_id, $txt);
-                    // system_msg("",0,$an_u_id,$system_farbe,$txt);
                     break;
                 case "Antwort auf eigenes Posting":
                     $text = str_replace("%po_titel%", $inhalt['po_titel'],
@@ -715,23 +686,16 @@ function aktion_sende(
                     sms_sende($an_u_id, $an_u_id, $text);
                     break;
             }
-            ;
-            
             break;
-        #sms
-        
     }
 }
-;
 
 function mail_sende($von, $an, $text, $betreff = "")
 {
     
-    global $t;
     // Verschickt Mail von ID $von an ID $an mit Text $text
+    global $t;
     global $u_nick;
-    
-    // system_msg("",0,$von,$system_farbe,"DEBUG: $text");
     
     $mailversand_ok = true;
     $fehlermeldung = "";
@@ -766,7 +730,6 @@ function mail_sende($von, $an, $text, $betreff = "")
         $zeit = 999;
     }
     
-    //  system_msg("",0,$von,$system_farbe,"DEBUG: Zeit in Sekunden seit letzten Mail vom selben User: $zeit");
     if ($zeit < 30) {
         $mailversand_ok = false;
         $fehlermeldung = $t['chat_msg104'];
@@ -805,11 +768,9 @@ function mail_sende($von, $an, $text, $betreff = "")
     if (!isset($f['m_id']))
         $f['m_id'] = "";
     $ret = array($f['m_id'], $fehlermeldung);
-    // if ($mailversand_ok==false) system_msg("",0,$von,$system_farbe,"DEBUG: $fehlermeldung");
     return ($ret);
     
 }
-;
 
 function email_versende(
     $von_user_id,
@@ -869,7 +830,6 @@ function email_versende(
         @mysql_free_result($result);
         return (FALSE);
     }
-    ;
 }
 
 function freunde_online($u_id, $u_nick, $id, $nachricht = "OLM")
@@ -884,8 +844,6 @@ function freunde_online($u_id, $u_nick, $id, $nachricht = "OLM")
         . "UNION "
         . "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_freundid=$u_id AND f_status = 'bestaetigt' "
         . "ORDER BY f_zeit desc ";
-    
-    //	 system_msg("",0,$u_id,$system_farbe,"DEBUG: $query");
     $result = mysql_query($query, $conn);
     
     if ($result && mysql_num_rows($result) > 0) {
@@ -1023,9 +981,7 @@ function freunde_online($u_id, $u_nick, $id, $nachricht = "OLM")
         
     }
     @mysql_free_result($result);
-    
 }
-;
 
 //prüft ob neue Antworten auf eigene Postings 
 //vorhanden sind und benachrichtigt entsprechend

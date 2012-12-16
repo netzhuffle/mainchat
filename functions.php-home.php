@@ -51,7 +51,6 @@ function edit_home(
         . "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
     
 }
-;
 
 function home_profil($u_id, $u_nick, $home, $farben, $aktion)
 {
@@ -73,7 +72,6 @@ function home_profil($u_id, $u_nick, $home, $farben, $aktion)
         } else {
             $ui_einstellungen = unserialize($home['ui_einstellungen']);
         }
-        ;
         
         // Profil ausgeben
         if ($ui_einstellungen["Straße"] && $home['ui_strasse'])
@@ -177,7 +175,6 @@ function home_profil($u_id, $u_nick, $home, $farben, $aktion)
     } else {
         $text .= "<TR><TD colspan=4>&nbsp;</TD></TR>\n";
     }
-    ;
     
     if (is_array($farben) && strlen($farben['profil']) > 7) {
         $bg = "BACKGROUND=\"home_bild.php?http_host=$http_host&u_id=$u_id&feld="
@@ -187,12 +184,9 @@ function home_profil($u_id, $u_nick, $home, $farben, $aktion)
     } else {
         $bg = "";
     }
-    ;
     
     return ("<TABLE $bg CELLPADDING=\"2\" CELLSPACING=\"0\" BORDER=\"0\" WIDTH=\"100%\" >$text</TABLE>");
-    
 }
-;
 
 function home_info($u_id, $u_nick, $farben, $aktion)
 {
@@ -232,7 +226,6 @@ function home_info($u_id, $u_nick, $farben, $aktion)
         } else {
             $userdaten_bearbeiten = "&nbsp;";
         }
-        ;
         
         if (!$id) {
             $links_an = FALSE;
@@ -256,7 +249,6 @@ function home_info($u_id, $u_nick, $farben, $aktion)
                 . $f1 . str_replace("%login%", $letzter_login, $t['chat_msg94'])
                 . $f2 . "</B></TD></TR>\n";
         }
-        ;
         
         // Level
         $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1
@@ -280,7 +272,6 @@ function home_info($u_id, $u_nick, $farben, $aktion)
                     str_replace("%monat%", strftime("%B", time()),
                         $t['user_zeige39'])) . $f2 . "</B></TD></TR>\n";
         }
-        ;
         
         // Farbwähler & Link auf Editor ausgeben
         if ($aktion == "aendern") {
@@ -293,7 +284,6 @@ function home_info($u_id, $u_nick, $farben, $aktion)
         } else {
             $text .= "<TR><TD colspan=4>&nbsp;</TD></TR>\n";
         }
-        ;
     }
     if (is_array($farben) && strlen($farben['info']) > 7) {
         $bg = "BACKGROUND=\"home_bild.php?http_host=$http_host&u_id=$u_id&feld="
@@ -303,12 +293,9 @@ function home_info($u_id, $u_nick, $farben, $aktion)
     } else {
         $bg = "";
     }
-    ;
     
     return ("<TABLE $bg CELLPADDING=\"2\" CELLSPACING=\"0\" BORDER=\"0\" WIDTH=\"100%\">$text</TABLE>");
-    
 }
-;
 
 function unhtmlentities($string)
 {
@@ -318,6 +305,7 @@ function unhtmlentities($string)
     // replace literal entities
     $trans_tbl = get_html_translation_table(HTML_ENTITIES);
     $trans_tbl = array_flip($trans_tbl);
+    
     return strtr($string, $trans_tbl);
 }
 
@@ -355,16 +343,6 @@ function home_text($u_id, $u_nick, $home, $feld, $farben, $aktion)
     // on gefolgt von 3-12 Buchstaben wird durch off ersetzt
     
     $text = preg_replace('|\son([a-z]{3,12})\s*=|i', ' off\\1=', $text);
-    /*
-     auskommentiert weil code nicht mehr notwenig ist, da sessionid nicht mehr beim Aufruf der Homepage benötigt wird
-     falls er wieder benötigt wird, muss er komplett neu programmiert werden, weil er so nicht fehlerfrei  funktioniert
-     z.B. werden Tags ohne Anführungszeichen nicht berücksichtigt
-    
-        $text = preg_replace("|href\s*=\s*\"([^\"]+)\"|ie","home_url_parse(\"href\",\"\\1\")",$text);
-        $text = preg_replace("|action\s*=\s*\"([^\"]+)\"|ie","home_url_parse(\"action\",\"\\1\")",$text);
-        $text = preg_replace("|href\s*=\s*'([^\"]+)'|ie","home_url_parse(\"href\",\"\\1\")",$text);
-        $text = preg_replace("|action\s*=\s*'([^\"]+)'|ie","home_url_parse(\"action\",\"\\1\")",$text);
-     */
     
     if ($aktion == "aendern") {
         $text = "<TR><TD COLSPAN=4 VALIGN=\"TOP\">$f1<B>Ihr Text über sich selbst:</B>$f2<BR><TEXTAREA COLS="
@@ -376,7 +354,6 @@ function home_text($u_id, $u_nick, $home, $feld, $farben, $aktion)
     } else {
         $text = "<TR><TD COLSPAN=4 VALIGN=\"TOP\">" . $text . "</TD></TR>";
     }
-    ;
     
     if (is_array($farben) && strlen($farben['ui_text']) > 7) {
         $bg = "BACKGROUND=\"home_bild.php?http_host=$http_host&u_id=$u_id&feld="
@@ -386,12 +363,9 @@ function home_text($u_id, $u_nick, $home, $feld, $farben, $aktion)
     } else {
         $bg = "";
     }
-    ;
     
     return ("<TABLE $bg CELLPADDING=\"5\" CELLSPACING=\"0\" BORDER=\"0\" WIDTH=\"100%\">$text</TABLE>");
-    
 }
-;
 
 function home_bild(
     $u_id,
@@ -415,7 +389,6 @@ function home_bild(
             $info = $f3 . "<BR>Info: " . $width . "x" . $height . " als "
                 . $mime . $f4;
         }
-        ;
         
         if (!isset($info))
             $info = "";
@@ -433,7 +406,6 @@ function home_bild(
                 . "<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=aendern&loesche=$feld\">L÷SCHEN</A>]</B>"
                 . $f4 . "</TD>\n";
         }
-        ;
         
     } elseif ($aktion == "aendern" || $aktion == "aendern_ohne_farbe") {
         
@@ -448,7 +420,6 @@ function home_bild(
         $text = "";
         
     }
-    ;
     
     if (!isset($farben[$feld])) {
         $bg = "";
@@ -460,7 +431,6 @@ function home_bild(
     } else {
         $bg = "";
     }
-    ;
     
     if ($beschreibung)
         $text = "<TD align=\"RIGHT\">" . $f1 . $beschreibung . $f2 . "</TD>"
@@ -471,12 +441,9 @@ function home_bild(
         $text = "<TABLE $bg CELLPADDING=\"5\" CELLSPACING=\"0\"  WIDTH=\"100%\" BORDER=\"0\" ><TR>"
             . $text . "</TR></TABLE>";
     }
-    ;
     
     return ($text);
-    
 }
-;
 
 function home_aktionen($u_id, $u_nick, $home, $farben, $aktion)
 {
@@ -502,7 +469,6 @@ function home_aktionen($u_id, $u_nick, $home, $farben, $aktion)
         #$text.="Ihr könnt mir eine Mail schicken, wenn Ihr euch vorher im ".
         #	"<A HREF=\"index.html\">$chat anmeldet</A>.<BR><BR>\n";
     }
-    ;
     
     if ($userdata['u_url']) {
         $text .= "Mehr&nbsp;über&nbsp;mich: <B><A HREF=\"redirect.php?url="
@@ -517,7 +483,6 @@ function home_aktionen($u_id, $u_nick, $home, $farben, $aktion)
             . home_farbe($u_id, $u_nick, $home, "aktionen", $farben['aktionen'])
             . "</TD>";
     }
-    ;
     
     if (is_array($farben) && strlen($farben['aktionen']) > 7) {
         $bg = "BACKGROUND=\"home_bild.php?http_host=$http_host&u_id=$u_id&feld="
@@ -527,15 +492,12 @@ function home_aktionen($u_id, $u_nick, $home, $farben, $aktion)
     } else {
         $bg = "";
     }
-    ;
     
     $text = "<TABLE $bg CELLPADDING=\"5\" CELLSPACING=\"0\" BORDER=\"0\" WIDTH=\"100%\"><TR>"
         . $text . "</TR></TABLE>";
     
     return ($text);
-    
 }
-;
 
 function home_hintergrund($u_id, $u_nick, $farben, $home, $bilder)
 {
@@ -573,12 +535,9 @@ function home_hintergrund($u_id, $u_nick, $farben, $home, $bilder)
     } else {
         $bg = "";
     }
-    ;
     
     return ("<TABLE $bg CELLPADDING=\"2\" CELLSPACING=\"0\" BORDER=\"0\"  WIDTH=\"100%\">$text</TABLE>");
-    
 }
-;
 
 function home_einstellungen($u_id, $u_nick, $home, $einstellungen)
 {
@@ -595,7 +554,6 @@ function home_einstellungen($u_id, $u_nick, $home, $einstellungen)
     } else {
         $checked = "";
     }
-    ;
     $text = "<TR><TD align=\"RIGHT\">" . $f1 . "Homepage freigeben: " . $f2
         . "</TD>"
         . "<TD><INPUT TYPE=\"CHECKBOX\" NAME=\"einstellungen[u_chathomepage]\" $checked></TD></TR>\n";
@@ -606,7 +564,6 @@ function home_einstellungen($u_id, $u_nick, $home, $einstellungen)
     } else {
         $ui_einstellungen = unserialize($home['ui_einstellungen']);
     }
-    ;
     
     // Einstellungen fürs Profil ausgeben
     foreach ($vor_einstellungen as $key => $val) {
@@ -623,7 +580,6 @@ function home_einstellungen($u_id, $u_nick, $home, $einstellungen)
     return ("<TABLE CELLPADDING=\"2\" CELLSPACING=\"0\" BORDER=\"0\" WIDTH=\"100%\">$text</TABLE>");
     
 }
-;
 
 function home_farbe(
     $u_id,
@@ -642,10 +598,9 @@ function home_farbe(
     $link = $f3
         . "<B>[<A HREF=\"$url\" TARGET=\"Farben\" onclick=\"window.open('$url','Farben','resizable=yes,scrollbars=yes,width=400,height=500'); return(false);\">FARBE</A>]</B>"
         . $f4;
-    return ($link);
     
+    return ($link);
 }
-;
 
 function bild_holen($u_id, $name, $ui_bild, $groesse)
 {
@@ -669,7 +624,6 @@ function bild_holen($u_id, $name, $ui_bild, $groesse)
                 $f['b_bild'] = fread($fd, filesize($ui_bild));
                 fclose($fd);
             }
-            ;
             
             switch ($image[2]) {
                 case 1:
@@ -704,7 +658,6 @@ function bild_holen($u_id, $name, $ui_bild, $groesse)
             } else {
                 echo "<P><B>Fehler: </B> Es wurde kein gültiges Bildformat (PNG, JPEG, GIF, Flash) hochgeladen!</P>\n";
             }
-            ;
             
             // Bild löschen
             unlink($ui_bild);
@@ -717,23 +670,16 @@ function bild_holen($u_id, $name, $ui_bild, $groesse)
                 unlink($cachepfad);
                 unlink($cachepfad . "-mime");
             }
-            ;
             
         } else {
             echo "<P><B>Fehler: </B> Es wurde kein gültiges Bildformat (PNG, JPEG, GIF, Flash) hochgeladen!</P>\n";
             unlink($ui_bild);
         }
-        ;
         
     } elseif ($groesse >= ($max_groesse * 1024)) {
         echo "<P><B>Fehler: </B> Das Bild muss kleiner als $max_groesse KB sein!</P>\n";
     }
-    
-    // echo "DEBUG $name $ui_bild<BR>";
-    // echo "<PRE>";
-    // print_r($home);
-    // echo "</PRE>";
-    
+
     return ($home); // TODO: Wo wird $home definiert?
 }
 
@@ -763,7 +709,6 @@ function zeige_home($u_id, $force = FALSE, $defaultfarben = "")
         if ($homepage_extern == "0")
             $query = "";
     }
-    ;
     
     // Userdaten lesen
     if ($query) {
@@ -773,10 +718,8 @@ function zeige_home($u_id, $force = FALSE, $defaultfarben = "")
             $u_chathomepage = $row->u_chathomepage;
             $u_id = $row->u_id;
         }
-        ;
         @mysql_free_result($result);
     }
-    ;
     
     // Profil lesen
     if ($u_id) {
@@ -793,7 +736,6 @@ function zeige_home($u_id, $force = FALSE, $defaultfarben = "")
         } else {
             $ok = FALSE;
         }
-        ;
         @mysql_free_result($result);
         
         // Bildinfos lesen und in Array speichern
@@ -830,7 +772,6 @@ function zeige_home($u_id, $force = FALSE, $defaultfarben = "")
     } else {
         $bg = "";
     }
-    ;
     
     if ($ok) {
         $body_tag = "<BODY $bg";
@@ -872,7 +813,6 @@ function zeige_home($u_id, $force = FALSE, $defaultfarben = "")
             ;
             echo $ivw . "\n";
         }
-        ;
         
         echo "</BODY>\n";
         
@@ -887,10 +827,8 @@ function zeige_home($u_id, $force = FALSE, $defaultfarben = "")
             if (!strpos($ivw, "<IMG")) {
                 $ivw = "<IMG SRC=\"$ivw\" ALT=\"\">\n";
             }
-            ;
             echo $ivw . "\n";
         }
-        ;
         
         echo "</BODY>\n";
         
@@ -905,10 +843,8 @@ function zeige_home($u_id, $force = FALSE, $defaultfarben = "")
             if (!strpos($ivw, "<IMG")) {
                 $ivw = "<IMG SRC=\"$ivw\" ALT=\"\">\n";
             }
-            ;
             echo $ivw . "\n";
         }
-        ;
         echo "</BODY>\n";
         
     }

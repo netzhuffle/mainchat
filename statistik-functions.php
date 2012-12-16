@@ -1,8 +1,8 @@
 <?php
 $coreroot = ".";
 
-Function coreMakeBackground($back)//{{{
 // Wandelt eine Background-Variable in den entsprechenden HTML-Source (bgcolor, background) um.
+function coreMakeBackground($back)
 {
     $backc = trim(strtok("$back", ":"));
     $backp = trim(strtok(":"));
@@ -13,19 +13,19 @@ Function coreMakeBackground($back)//{{{
         if ("$backp" != "")
             return (" BACKGROUND=\"$backp\"");
     } else return (" BGCOLOR=\"$backc\" BACKGROUND=\"$backp\"");
-}//}}}
+}
 
-Function coreMakeImage($image)//{{{
 // Wandelt eine Image-Variable in den entsprechenden HTML-Source (Src, Width, Height) um.
+function coreMakeImage($image)
 {
     $img_w = strtok("$image", ",");
     $img_h = strtok(",");
     $img_p = strtok(",");
     
     return ("SRC=\"$img_p\" WIDTH=\"$img_w\" HEIGHT=\"$img_h\"");
-}//}}}
+}
 
-Function statsOverview($v = "%")//{{{
+function statsOverview($v = "%")
 {
     global $STAT_DB_HOST;
     global $STAT_DB_USER;
@@ -129,9 +129,9 @@ Function statsOverview($v = "%")//{{{
             echo ("</TABLE>\n");
         }
     }
-}//}}}
+}
 
-Function statsResetMonth($year, $month)//{{{
+function statsResetMonth($year, $month)
 {
     global $grapharray;
     
@@ -149,9 +149,9 @@ Function statsResetMonth($year, $month)//{{{
         
         $i++;
     }
-}//}}}
+}
 
-Function statsResetHours($zeit, $hours)//{{{
+function statsResetHours($zeit, $hours)
 {
     global $grapharray;
     
@@ -171,9 +171,9 @@ Function statsResetHours($zeit, $hours)//{{{
         if ($c > 23)
             $c = 0;
     }
-}//}}}
+}
 
-Function statsPrintGraph($title, $text_l, $text_b)//{{{
+function statsPrintGraph($title, $text_l, $text_b)
 {
     global $grapharray;
     global $STAT_TXT;
@@ -327,7 +327,7 @@ Function statsPrintGraph($title, $text_l, $text_b)//{{{
         $msg .= "</TABLE>\n";
         
         /* Durchschnittliche Anzahl der Benutzer und höchste Anzahl der	*/
-        /* Benutzer ausgeben.																						*/
+        /* Benutzer ausgeben. */
         
         $msg .= "<P ALIGN=\"CENTER\">";
         $msg .= $STAT_BAR_FONTBEG0;
@@ -339,6 +339,6 @@ Function statsPrintGraph($title, $text_l, $text_b)//{{{
     
     unset($grapharray);
     return $msg;
-}//}}}
+}
 
 ?>

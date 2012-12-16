@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: payment_ok.php,v 1.3 2004/09/10 13:12:43 martin Exp $
-
 require("functions.php");
 // Target Sonderzeichen raus
 
@@ -15,12 +12,10 @@ $fenster = str_replace("Ä", "", $fenster);
 $fenster = str_replace("÷", "", $fenster);
 $fenster = str_replace("Ü", "", $fenster);
 $fenster = str_replace("ß", "", $fenster);
-
-// Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_SMS-Payment"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;
@@ -45,12 +40,10 @@ $fenster = str_replace("ß", "", $fenster);
 <?php echo $stylesheet; ?>
 </HEAD> 
 <?php
-
-// Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";

@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: forum-suche.php,v 1.10 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 require("functions.php-func-forum_lib.php");
 
@@ -20,8 +17,10 @@ function show_pfad_posting2($th_id)
                 and fo_id = th_fo_id";
     $query = mysql_query($sql, $conn);
     $fo_id = htmlspecialchars(stripslashes(mysql_result($query, 0, "fo_id")));
-    $fo_name = htmlspecialchars(stripslashes(mysql_result($query, 0, "fo_name")));
-    $th_name = htmlspecialchars(stripslashes(mysql_result($query, 0, "th_name")));
+    $fo_name = htmlspecialchars(
+        stripslashes(mysql_result($query, 0, "fo_name")));
+    $th_name = htmlspecialchars(
+        stripslashes(mysql_result($query, 0, "th_name")));
     @mysql_free_result($query);
     
     return "$f3<a href=\"#\" onClick=\"opener_reload('forum.php?id=$id&http_host=$http_host#$fo_id',1); return(false);\">$fo_name</a> > <a href=\"#\" onclick=\"opener_reload('forum.php?id=$id&http_host=$http_host&th_id=$th_id&show_tree=$thread&aktion=show_thema&seite=1',1); return(false);\">$th_name</a>$f4";
@@ -93,8 +92,8 @@ function such_bereich()
                 $themaalt = $thema['fo_name'];
             }
             echo "<OPTION ";
-            if ($suche['thema'] == "B" . $thema['fo_id'] . "T"
-                    . $thema['th_id'])
+            if ($suche['thema']
+                == "B" . $thema['fo_id'] . "T" . $thema['th_id'])
                 echo "SELECTED ";
             echo "VALUE=\"B" . $thema['fo_id'] . "T" . $thema['th_id']
                 . "\">&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" . $thema['th_name']
@@ -489,16 +488,14 @@ function such_ergebnis()
     }
     
 }
-
-// Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Info"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()     
 </SCRIPT>
 <?php echo $stylesheet; ?>
-        <SCRIPT LANGUAGE="JavaScript">
+        <SCRIPT>
         function neuesFenster(url) {
                 hWnd=window.open(url,"<?php echo $fenster; ?>","resizable=yes,scrollbars=yes,width=300,height=580");
         }
@@ -517,12 +514,10 @@ function such_ergebnis()
 </SCRIPT>
 </HEAD> 
 <?php
-
-// Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";
@@ -531,7 +526,7 @@ echo $body_tag;
 // Timestamp im Datensatz aktualisieren
 aktualisiere_online($u_id, $o_raum);
 
-if (strlen($u_id) > 0) :
+if (strlen($u_id) > 0) {
     // Menü als erstes ausgeben
     $box = $ft0 . "$chat Menü" . $ft1;
     $text = "<A HREF=\"forum-suche.php?http_host=$http_host&id=$id\">$t[menue1]</A>\n";
@@ -541,29 +536,23 @@ if (strlen($u_id) > 0) :
     
     // Auswahl
     switch ($aktion) {
-        
         case "suche":
             such_bereich();
             flush();
             such_ergebnis();
             break;
-        
         default;
             such_bereich();
-        
     }
-    ;
-
-else :
+} else {
     echo "<P ALIGN=CENTER>$t[sonst2]</P>\n";
-endif;
+}
 
-// Fuß
-if ($o_js) :
+if ($o_js) {
     echo $f1
         . "<P ALIGN=CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</P>"
         . $f2 . "\n";
-endif;
+}
 
 ?>
 

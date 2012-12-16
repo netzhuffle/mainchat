@@ -1,6 +1,6 @@
 
 #################################################################################
-# Tabelle für Chatstatistiken                                   [Tabelle: chat] #
+# Tabelle f√ºr Chatstatistiken                                   [Tabelle: chat] #
 #################################################################################
 # c_timestamp                            Timestamp wann der Eintrag gemacht wurde
 # c_users                                                     Anzahl der Benutzer

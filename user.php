@@ -1,7 +1,4 @@
 <?php
-// fidion GmbH mainChat
-
-// $Id: user.php,v 1.20 2012/10/17 06:16:53 student Exp $
 
 require_once("functions.php");
 require_once("functions.php-func-verlasse_chat.php");
@@ -37,8 +34,6 @@ if ((isset($schau_raum)) && $schau_raum < 0) {
     $schau_raum = $o_raum;
     $raum_subquery = "AND r_id=$schau_raum";
 }
-;
-// echo "### $schau_raum, $o_who, $raum_subquery<BR>";
 
 // Welcher Browser wird benutzt? Breite der Eingabefelder einstellen
 if (ist_netscape()) {
@@ -46,7 +41,6 @@ if (ist_netscape()) {
 } else {
     $eingabe_breite = 31;
 }
-;
 
 if ($aktion != "zeigalle" || $u_level != "S") {
     echo "<HTML>\n<HEAD><TITLE>" . $body_titel
@@ -68,8 +62,7 @@ if ($aktion != "zeigalle" || $u_level != "S") {
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
     
-    echo "<SCRIPT LANGUAGE=\"JavaScript\">\n"
-        . "  var http_host='$http_host';\n" . "  var id='$id';\n"
+    echo "<SCRIPT>\n" . "  var http_host='$http_host';\n" . "  var id='$id';\n"
         . "  var u_nick='" . $fenster . "';\n" . "  var raum='$schau_raum';\n"
         . "  var communityfeatures='$communityfeatures';\n";
     if (($admin) || ($u_level == 'M')) {
@@ -91,7 +84,7 @@ function resetinput() {
     document.forms['form'].elements['text'].value=document.forms['form'].elements['text2'].value;
 		<?php
         if ($u_clearedit == 1) {
-            print "    document.forms['form'].elements['text2'].value='';\n";
+            echo "    document.forms['form'].elements['text2'].value='';\n";
         }
         ?>
     document.forms['form'].submit();
@@ -103,9 +96,7 @@ function resetinput() {
    }
 		<?php
     }
-    ;
     echo "</SCRIPT>\n";
-    #echo "<SCRIPT LANGUAGE=\"JavaScript\" src=\"popup.js\"></script>\n";
     echo "<SCRIPT LANGUAGE=\"JavaScript\" src=\"jscript.js\"></script>\n";
     echo $stylesheet;
     
@@ -117,10 +108,9 @@ function resetinput() {
             : "") . "TEXT=\"$farbe_mini_text\" " . "LINK=\"$farbe_mini_link\" "
         . "VLINK=\"$farbe_mini_vlink\" " . "ALINK=\"$farbe_mini_vlink\">\n";
 }
-;
 
 // Login ok?
-if (strlen($u_id) != 0) :
+if (strlen($u_id) != 0) {
     // Fenstername
     $fenster = str_replace("+", "", $u_nick);
     $fenster = str_replace("-", "", $u_nick);
@@ -156,9 +146,7 @@ if (strlen($u_id) != 0) :
                 $text .= "<LI><A HREF=\"user.php?http_host=$http_host&id=$id&schau_raum=$schau_raum&aktion=userimport\">$t[menue10]</A>\n";
                 $text .= "<LI><A HREF=\"user.php?http_host=$http_host&id=$id&schau_raum=$schau_raum&aktion=userloeschen\">$t[menue11]</A>\n";
             }
-            ;
         }
-        ;
         if ($erweitertefeatures && $admin) {
             $ur1 = "user.php?http_host=$http_host&id=$id&aktion=statistik";
             $url = "HREF=\"$ur1\" TARGET=\"640_statistik\" onclick=\"window.open('$ur1','640_statistik','resizable=yes,scrollbars=yes,width=780,height=580'); return(false);\"";
@@ -226,9 +214,9 @@ if (strlen($u_id) != 0) :
                         while (!feof($file)) {
                             $zeile = rtrim(fgets($file, 4096));
                             $userd = explode("\t", $zeile);
-                            if ($userd[0] != "Nickname" AND strlen($userd[0])
-                                    > 2 AND $userd[1] AND $userd[2]
-                                AND $userd[3]) {
+                            if ($userd[0] != "Nickname"
+                                AND strlen($userd[0]) > 2 AND $userd[1]
+                                AND $userd[2] AND $userd[3]) {
                                 
                                 echo " $i " . $userd[0];
                                 
@@ -244,17 +232,14 @@ if (strlen($u_id) != 0) :
                                     $ui_userid = mysql_result($result, 0, 0);
                                     echo " ID: $ui_userid";
                                 }
-                                ;
                                 
                                 if (schreibe_db("user", $f, $ui_userid, "u_id")) {
                                     echo " Ok";
                                 }
-                                ;
                                 
                                 echo "<BR>\n";
                                 $i++;
                             }
-                            ;
                         }
                         echo "</SMALL><BR><BR>";
                         
@@ -263,15 +248,12 @@ if (strlen($u_id) != 0) :
                     } else {
                         echo $t['sonst48'];
                     }
-                    ;
                 } else {
                     echo $t['sonst47'];
                 }
-                ;
             } else {
                 echo "<HTML><BODY>$t[sonst41]</BODY></HTML>\n";
             }
-            ;
         
         case "userimport":
         // User im Format "Nickname\tUsername\tAdmin E-Mail\tPasswort" importieren
@@ -301,7 +283,6 @@ if (strlen($u_id) != 0) :
             } else {
                 echo "<HTML><BODY>$t[sonst41]</BODY></HTML>\n";
             }
-            ;
             break;
         
         case "userloeschen":
@@ -320,7 +301,6 @@ if (strlen($u_id) != 0) :
             } else {
                 echo "<HTML><BODY>$t[sonst41]</BODY></HTML>\n";
             }
-            ;
             break;
         
         case "userloeschen2":
@@ -334,7 +314,6 @@ if (strlen($u_id) != 0) :
                 } else {
                     $ok = $t['sonst53'];
                 }
-                ;
                 
                 $box = $ft0 . $t['sonst51'] . $ft1;
                 $text = "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>"
@@ -346,7 +325,6 @@ if (strlen($u_id) != 0) :
             } else {
                 echo "<HTML><BODY>$t[sonst41]</BODY></HTML>\n";
             }
-            ;
             break;
         
         case "zeigalle":
@@ -411,13 +389,12 @@ if (strlen($u_id) != 0) :
             } else {
                 echo "<HTML><BODY>$t[sonst41]</BODY></HTML>\n";
             }
-            ;
             break;
         
         case "suche":
         // Suchmaske für Ergebnis oder Suchmaske für erste Suche ausgeben
             if (strlen($suchtext) > 3
-                OR (isset($suchtext_eingabe) && $suchtext_eingabe == "Go!")) {
+                || (isset($suchtext_eingabe) && $suchtext_eingabe == "Go!")) {
                 
                 // Suchergebnis mit Formular ausgeben
                 $box = $ft0 . $t['sonst16'] . $ft1;
@@ -453,10 +430,8 @@ if (strlen($u_id) != 0) :
                             } else {
                                 $text .= "<OPTION VALUE=\"$levelname\">$levelbezeichnung\n";
                             }
-                            ;
                         }
                     }
-                    ;
                     
                     $text .= "</SELECT>" . $f2 . "</TD></TR>\n";
                     
@@ -510,7 +485,7 @@ if (strlen($u_id) != 0) :
                 if (!isset($suchtext) || !$suchtext) {
                     // Kein Suchtext, aber evtl subquery
                     $where[0] = "WHERE ";
-                } else if (strpos($suchtext, "%") >= 0) {
+                } elseif (strpos($suchtext, "%") >= 0) {
                     if ($admin) {
                         $where[0] = "WHERE (u_name LIKE '$suchtext' OR u_nick LIKE '$suchtext' OR u_email LIKE '$suchtext' "
                             . " OR u_adminemail LIKE '$suchtext') ";
@@ -535,33 +510,33 @@ if (strlen($u_id) != 0) :
                     // Optional level ergänzen
                     if ($f['level'] && $subquery)
                         $subquery .= "AND u_level = '$f[level]' ";
-                    else if ($f['level'])
+                    elseif ($f['level'])
                         $subquery = " u_level = '$f[level]' ";
                     
                     if ($f['ip'] && $subquery)
                         $subquery .= "AND u_ip_historie LIKE '%$f[ip]%' ";
-                    else if ($f['ip'])
+                    elseif ($f['ip'])
                         $subquery = " u_ip_historie LIKE '%$f[ip]%' ";
                 }
                 
                 if ($f['u_chathomepage'] == "J" && $subquery)
                     $subquery .= "AND u_chathomepage='J' ";
-                else if ($f['u_chathomepage'] == "J")
+                elseif ($f['u_chathomepage'] == "J")
                     $subquery = " u_chathomepage='J' ";
                 
                 if ($f['user_neu'] && $subquery)
                     $subquery .= "AND u_neu IS NOT NULL AND date_add(u_neu, interval '$f[user_neu]' day)>=NOW() ";
-                else if ($f['user_neu'])
+                elseif ($f['user_neu'])
                     $subquery = " u_neu IS NOT NULL AND date_add(u_neu, interval '$f[user_neu]' day)>=NOW() ";
                 
                 if ($f['user_login'] && $subquery)
                     $subquery .= "AND date_add(u_login, interval '$f[user_login]' hour)>=NOW() ";
-                else if ($f['user_login'])
+                elseif ($f['user_login'])
                     $subquery = " date_add(u_login, interval '$f[user_login]' hour)>=NOW() ";
                 
                 if ($u_level == "U" && $subquery)
                     $subquery .= "AND u_level IN ('A','C','G','M','S','U') ";
-                else if ($u_level == "U")
+                elseif ($u_level == "U")
                     $subquery = " u_level IN ('A','C','G','M','S','U') ";
                 
                 // Zur Sicherheit, falls ein Gast die Such URL direkt aufruft
@@ -579,9 +554,9 @@ if (strlen($u_id) != 0) :
                 $query = $select;
                 if ($where[0] == "WHERE " && $subquery)
                     $query .= $where[0] . " " . $subquery;
-                else if ($where[0] != "WHERE " && $subquery)
+                elseif ($where[0] != "WHERE " && $subquery)
                     $query .= $where[0] . " AND " . $subquery;
-                else if ($where[0] != "WHERE ")
+                elseif ($where[0] != "WHERE ")
                     $query .= $where[0];
                 
                 for ($i = 1; $i < count($where); $i++) {
@@ -595,7 +570,6 @@ if (strlen($u_id) != 0) :
                 
                 $result = mysql_query($query, $conn);
                 $anzahl = mysql_num_rows($result);
-                //echo '<br>'.$query.'<br>';
                 
                 if ($anzahl == 0) {
                     // Kein user gefunden
@@ -655,8 +629,8 @@ if (strlen($u_id) != 0) :
                         mysql_free_result($result);
                         
                         $rows = count($larr);
-                        $CELLPADDING = (($aktion == "chatuserliste" OR $rows
-                                > 15) ? 0 : 3);
+                        $CELLPADDING = (($aktion == "chatuserliste"
+                            OR $rows > 15) ? 0 : 3);
                         user_liste($larr, $rows);
                     }
                     
@@ -678,7 +652,6 @@ if (strlen($u_id) != 0) :
                     $text .= "<TR><TD colspan=2>" . $f1 . $t['sonst7'] . $f2
                         . "</TD></TR>";
                 }
-                ;
                 
                 $text .= "<TR><TD colspan=2>" . $f1
                     . "&nbsp;<INPUT TYPE=\"TEXT\" NAME=\"suchtext\" VALUE=\"$suchtext\" SIZE=\"$eingabe_breite\">"
@@ -704,7 +677,7 @@ if (strlen($u_id) != 0) :
                         . "<OPTION VALUE=\"\">$t[sonst22]\n";
                     
                     reset($level);
-                    while (list($levelname, $levelbezeichnung) = each($level)) :
+                    while (list($levelname, $levelbezeichnung) = each($level)) {
                         if ($levelname != "B") {
                             if ($f['level'] == $levelname) {
                                 $text .= "<OPTION SELECTED VALUE=\"$levelname\">$levelbezeichnung\n";
@@ -712,7 +685,7 @@ if (strlen($u_id) != 0) :
                                 $text .= "<OPTION VALUE=\"$levelname\">$levelbezeichnung\n";
                             }
                         }
-                    endwhile;
+                    }
                     
                     $text .= "</SELECT>" . $f2 . "</TD></TR>\n";
                     
@@ -825,10 +798,8 @@ if (strlen($u_id) != 0) :
                 if ($rows > 0) {
                     $lobby_id = mysql_result($result, 0, "r_id");
                 }
-                ;
                 @mysql_free_result($result);
             }
-            ;
             
             // Raum listen
             $query = "SELECT raum.*,o_user,o_name,o_ip,o_userdata,o_userdata2,o_userdata3,o_userdata4,r_besitzer=o_user AS isowner "
@@ -847,8 +818,8 @@ if (strlen($u_id) != 0) :
                 
                 if ((!isset($beichtstuhl) || !$beichtstuhl) || $admin
                     || $userdata['u_id'] == $u_id || $lobby_id == $schau_raum
-                    || $userdata['u_level'] == "S" || $userdata['u_level']
-                        == "C") {
+                    || $userdata['u_level'] == "S"
+                    || $userdata['u_level'] == "C") {
                     // Variable aus o_userdata setzen
                     $larr[$i]['u_email'] = str_replace("\\", "",
                         htmlspecialchars($userdata['u_email']));
@@ -877,7 +848,6 @@ if (strlen($u_id) != 0) :
                     } else {
                         $larr[$i]['r_name'] = $t['sonst42'] . $row['r_name'];
                     }
-                    ;
                     
                 } else {
                     // Anonyme User
@@ -893,15 +863,12 @@ if (strlen($u_id) != 0) :
                     } else {
                         $larr[$i]['r_name'] = $t['sonst42'] . $row['r_name'];
                     }
-                    ;
                     
                 }
-                ;
                 // Spezialbehandlung für Admins
                 if (!$admin) {
                     $larr[$i]['o_ip'] = "";
                 }
-                ;
                 
                 // Raumbesitzer einstellen, falls Level=User
                 if ($larr[$i]['isowner'] && $userdata['u_level'] == "U")
@@ -969,7 +936,6 @@ if (strlen($u_id) != 0) :
                 } else {
                     user_liste($larr, 0);
                 }
-                ;
                 
                 if ($aktion != "chatuserliste")
                     echo "<P ALIGN=\"CENTER\">" . $f1 . $t['sonst12'] . $f2
@@ -1013,11 +979,11 @@ if (strlen($u_id) != 0) :
                     . $f1
                     . "<SELECT NAME=\"schau_raum\" onChange=\"document.raum.submit()\">\n";
                 
-                if ($admin) :
+                if ($admin) {
                     raeume_auswahl($schau_raum, TRUE, FALSE, FALSE);
-                else :
+                } else {
                     raeume_auswahl($schau_raum, FALSE, FALSE, FALSE);
-                endif;
+                }
                 
                 echo "</SELECT>"
                     . "<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Go!\">"
@@ -1030,11 +996,10 @@ if (strlen($u_id) != 0) :
             }
         
     }
-    ;
-
-else :
+    
+} else {
     echo "<P ALIGN=CENTER>$t[sonst15]</P>\n";
-endif;
+}
 
 // Fuß
 if ($aktion != "zeigalle" || $u_level != "S") {
@@ -1045,6 +1010,5 @@ if ($aktion != "zeigalle" || $u_level != "S") {
     }
     echo "</BODY></HTML>\n";
 }
-;
         ?>
 

@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Mainchat Installation</TITLE><META CHARSET=UTF-8>
-<script language="javascript">
+<script>
 function newWindow(url,name) 
 {
 	hWnd=window.open(url,name,'resizable=yes,scrollbars=yes,width=800,height=400');

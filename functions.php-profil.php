@@ -73,7 +73,6 @@ function profil_editor($u_id, $u_nick, $f)
         } else {
             $bgcolor = $farbe_tabelle_zeile1;
         }
-        ;
     }
     if ($userdata['u_adminemail']) {
         echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">E-Mail:</TD><TD colspan=3>"
@@ -84,7 +83,6 @@ function profil_editor($u_id, $u_nick, $f)
         } else {
             $bgcolor = $farbe_tabelle_zeile1;
         }
-        ;
     }
     if ($userdata['u_url']) {
         echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Homepage:</TD><TD colspan=3><A HREF=\""
@@ -97,7 +95,6 @@ function profil_editor($u_id, $u_nick, $f)
         } else {
             $bgcolor = $farbe_tabelle_zeile1;
         }
-        ;
     }
     echo "<TR><TD><FORM NAME=\"profil\" ACTION=\"profil.php\" METHOD=POST>\n";
     echo "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n"
@@ -117,7 +114,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">PLZ:</TD><TD>" . $f1
         . "<INPUT TYPE=\"TEXT\" NAME=\"f[ui_plz]\" VALUE=\"$f[ui_plz]\" SIZE=8>"
@@ -131,7 +127,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Land:</TD><TD colspan=3>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"f[ui_land]\" VALUE=\""
@@ -142,7 +137,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Telefon:</TD><TD colspan=3>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"f[ui_tel]\" VALUE=\""
@@ -153,7 +147,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Handy:</TD><TD colspan=3>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"f[ui_handy]\" VALUE=\""
@@ -164,7 +157,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Telefax:</TD><TD colspan=3>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"f[ui_fax]\" VALUE=\""
@@ -175,7 +167,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">ICQ:</TD><TD colspan=3>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"f[ui_icq]\" VALUE=\""
@@ -186,7 +177,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Geburtsdatum:</TD><TD colspan=3>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"f[ui_geburt]\" VALUE=\""
@@ -197,7 +187,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Geschlecht:</TD><TD colspan=3>"
         . $f1;
@@ -209,7 +198,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Beziehung:</TD><TD colspan=3>"
         . $f1;
@@ -221,7 +209,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Typ:</TD><TD colspan=3>"
         . $f1;
@@ -232,7 +219,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">Beruf:</TD><TD colspan=3>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"f[ui_beruf]\" VALUE=\""
@@ -243,7 +229,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\" valign=\"top\">Hobbies:</TD><TD colspan=3>"
         . $f1 . "<TEXTAREA NAME=\"f[ui_hobby]\" VALUE=\""
@@ -255,7 +240,6 @@ function profil_editor($u_id, $u_nick, $f)
     } else {
         $bgcolor = $farbe_tabelle_zeile1;
     }
-    ;
     
     echo "<TR BGCOLOR=\"$bgcolor\"><TD align=\"right\">&nbsp;</TD><TD colspan=3>"
         . $f1 . "<INPUT TYPE=\"HIDDEN\" NAME=\"f[ui_id]\" VALUE=\"$f[ui_id]\">"
@@ -268,6 +252,5 @@ function profil_editor($u_id, $u_nick, $f)
         . "</TD></TR>\n" . "</TABLE>\n";
     
 }
-;
 
 ?>

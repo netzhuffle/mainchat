@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: mail.php,v 1.12 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 require_once("functions.php-func-sms.php");
 
@@ -20,12 +17,10 @@ $fenster = str_replace("Ä", "", $fenster);
 $fenster = str_replace("÷", "", $fenster);
 $fenster = str_replace("Ü", "", $fenster);
 $fenster = str_replace("ß", "", $fenster);
-
-// Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Mail"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;
@@ -50,12 +45,10 @@ $fenster = str_replace("ß", "", $fenster);
 <?php echo $stylesheet; ?>
 </HEAD> 
 <?php
-
-// Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";
@@ -85,8 +78,6 @@ if ($u_id && $communityfeatures && $u_level != "G") {
             mktime(0, 0, 0, date("m"), date("d") - $mailloescheauspapierkorb,
                 date("Y"))) . "'";
     $result2 = mysql_query($query2, $conn);
-    
-    //	echo "DEBGUG: $query2";
     
     // Menü als erstes ausgeben
     $box = $ft0 . "Menü Mail" . $ft1;
@@ -218,7 +209,6 @@ if ($u_id && $communityfeatures && $u_level != "G") {
                     } else {
                         echo "<P><B>Fehler: </B>Ihre E-Mail an '$an_nick' wurde nicht verschickt.</P>";
                     }
-                    ;
                     
                 } elseif ($neue_email['typ'] == 2) {
                     
@@ -234,8 +224,8 @@ if ($u_id && $communityfeatures && $u_level != "G") {
                     }
                     
                     $text = substr($text, 0, 160 - strlen($absender)); // Text um Absender kürzen
-                    $text = preg_replace("/[\\\\" . chr(1) . "-" . chr(31)
-                            . "]/", "", $text); // Ungültige Zeichen filtern
+                    $text = preg_replace(
+                        "/[\\\\" . chr(1) . "-" . chr(31) . "]/", "", $text); // Ungültige Zeichen filtern
                     $complete = $absender . str_replace("-- ", "\n", $text);
                     
                     // Prüfen ob genug Punkte
@@ -283,14 +273,12 @@ if ($u_id && $communityfeatures && $u_level != "G") {
                         $guthaben = hole_smsguthaben($u_id);
                         echo "Restguthaben: $guthaben SMS";
                         if ($smszulang) {
-                            print 
-                                "<p><b>Fehler! Die eingegebene SMS war zu lang. Sie wurde auf 160 Zeichen gekürzt!</p></b>";
+                            echo "<p><b>Fehler! Die eingegebene SMS war zu lang. Sie wurde auf 160 Zeichen gekürzt!</p></b>";
                         }
                         
                     }
                     
-                }
- else {
+                } else {
                     
                     $result = mail_sende($u_id, $neue_email['m_an_uid'],
                         $neue_email['m_text'], $neue_email['m_betreff']);
@@ -301,10 +289,8 @@ if ($u_id && $communityfeatures && $u_level != "G") {
                         echo "<P><B>Fehler: </B>Ihre Mail an '$an_nick' wurde nicht verschickt.</P>";
                         echo "<P>$result[1]</P>";
                     }
-                    ;
                     
                 }
-                ;
                 unset($neue_email);
                 
                 if (!isset($neue_email))
@@ -492,11 +478,11 @@ if ($u_id && $communityfeatures && $u_level != "G") {
     echo "<P><B>Fehler:</B> Beim Aufruf dieser Seite ist ein Fehler aufgetreten.</P>";
 }
 
-if ($o_js || !$u_id) :
+if ($o_js || !$u_id) {
     echo $f1
         . "<CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</CENTER>"
         . $f2 . "<BR>\n";
-endif;
+}
 
 ?>
 </BODY></HTML>

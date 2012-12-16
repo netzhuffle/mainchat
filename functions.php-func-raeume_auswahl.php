@@ -1,7 +1,5 @@
 <?php
 
-// $Id: functions.php-func-raeume_auswahl.php,v 1.5 2012/10/17 06:16:53 student Exp $
-
 function raeume_auswahl($raum, $offen, $alle, $nur_chat = TRUE)
 {
     // Gibt Liste aller Räume aus, wenn $offen=0
@@ -19,13 +17,11 @@ function raeume_auswahl($raum, $offen, $alle, $nur_chat = TRUE)
     } else {
         $subquery1 = "WHERE ((UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout)";
     }
-    ;
     
     // Liste der Räume mit der Anzahl der User aufstellen
     $query = "SELECT r_id,count(o_id) as anzahl FROM raum "
         . "LEFT JOIN online ON r_id=o_raum " . "$subquery1 " . "GROUP BY r_id";
     
-    // system_msg("",0,$u_id,"#000000","Debug: ".$query);
     $result = mysql_query($query, $conn);
     while ($row = mysql_fetch_object($result))
         $anzahl_user[$row->r_id] = $row->anzahl;
@@ -57,8 +53,6 @@ function raeume_auswahl($raum, $offen, $alle, $nur_chat = TRUE)
         $query = "SELECT r_id FROM raum LEFT JOIN invite ON inv_raum=r_id "
             . "WHERE inv_user='$u_id' ";
         
-        # system_msg("",0,$u_id,"#000000","Debug: ".$query);
-        
         $rows = array();
         $result = mysql_query($query, $conn);
         if ($result) {
@@ -67,11 +61,9 @@ function raeume_auswahl($raum, $offen, $alle, $nur_chat = TRUE)
             }
             mysql_free_result($result);
         }
-        ;
         
         $query = "SELECT r_id FROM raum "
             . "WHERE r_status1='O' OR r_status1 like binary 'm' OR r_besitzer=$u_id OR r_id=$o_raum";
-        # system_msg("",0,$u_id,"#000000","Debug: ".$query);
         
         $result = mysql_query($query, $conn);
         if ($result) {
@@ -80,9 +72,7 @@ function raeume_auswahl($raum, $offen, $alle, $nur_chat = TRUE)
             }
             mysql_free_result($result);
         }
-        ;
     }
-    ;
     
     // offen=TRUE alle Räume anzeigen
     if ($offen) {
@@ -91,47 +81,43 @@ function raeume_auswahl($raum, $offen, $alle, $nur_chat = TRUE)
         $query = "SELECT r_status1,r_name,r_id FROM raum WHERE r_id IN ("
             . implode(",", $rows) . ") ORDER BY r_name";
     } else {
-        return (1);
+        return 1;
     }
-    ;
     $result = mysql_query($query, $conn);
-    # system_msg("",0,$u_id,"#000000","Debug: ".$query);
     
     echo $zusatz_select;
-    while ($row = mysql_fetch_object($result)) :
-        if ($row->r_status1 != "O") :
+    while ($row = mysql_fetch_object($result)) {
+        if ($row->r_status1 != "O") {
             // L->t und G->g übersetzen
-            if ($row->r_status1 == "L") :
+            if ($row->r_status1 == "L") {
                 $status = "/t";
-            elseif ($row->r_status1 == "G") :
+            } elseif ($row->r_status1 == "G") {
                 $status = "/g";
-            else :
+            } else {
                 $status = "/" . $row->r_status1;
-            endif;
-        else :
+            }
+        } else {
             $status = "";
-        endif;
-        if (isset($anzahl_user[$row->r_id]) && $anzahl_user[$row->r_id] > 0) :
+        }
+        if (isset($anzahl_user[$row->r_id]) && $anzahl_user[$row->r_id] > 0) {
             $anzahl = $anzahl_user[$row->r_id];
-        else :
+        } else {
             $anzahl = 0;
-        endif;
+        }
         
         // Alle Räume oder nur die Räume mit Usern zeigen
-        if (($anzahl > 0) OR $alle) :
-            if ($row->r_id == $raum) :
+        if (($anzahl > 0) || $alle) {
+            if ($row->r_id == $raum) {
                 echo "<OPTION SELECTED VALUE=\"$row->r_id\">$row->r_name ("
                     . $anzahl . $status . ")\n";
-            else :
+            } else {
                 echo "<OPTION VALUE=\"$row->r_id\">$row->r_name (" . $anzahl
                     . $status . ")\n";
-            endif;
-        endif;
-    endwhile;
+            }
+        }
+    }
     echo $zusatz_select;
     @mysql_free_result($result);
-    
 }
-;
 
 ?>

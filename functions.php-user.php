@@ -1,6 +1,5 @@
 <?php
 
-// $Id: functions.php-user.php,v 1.17 2012/10/17 06:16:53 student Exp $
 // functions nur für user.php
 
 require_once("functions.php-func-html_parse.php");
@@ -38,15 +37,12 @@ function user_liste($larr, $anzahl)
     if (($u_level == "C" || $u_level == "S") && $adminfeatures)
         $level2 = "admin";
     
-    #system_msg("",0,$u_id,"","DEBUG: u_level = $u_level");
-    
     // Wartetext ausgeben
     if ($anzahl > 10)
         echo $f1 . "<B>$t[sonst23] $anzahl $t[sonst36]</B><BR>\n" . $f2;
     flush();
     
     if ($o_js) {
-        
         if ($show_geschlecht == true) {
             $geschl = array();
             foreach ($larr as $k => $v)
@@ -72,7 +68,8 @@ function user_liste($larr, $anzahl)
         }
         
         // Mit Javascript ausgeben, vollständiges Menü
-        for ($k = 0; isset($larr[$k]) AND is_array($larr[$k]) AND $v = $larr[$k]; $k++) {
+        for ($k = 0; isset($larr[$k]) AND is_array($larr[$k])
+            AND $v = $larr[$k]; $k++) {
             if ($level != "admin") {
                 $v['hostname'] = "";
                 $v['o_ip'] = "";
@@ -118,7 +115,8 @@ function user_liste($larr, $anzahl)
                     . user($v['u_id'], $v, TRUE, FALSE, $trenner = "</TD><TD>")
                     . ")";
             } else {
-                $user = user($v['u_id'], $v, TRUE, FALSE, $trenner = "</TD><TD>");
+                $user = user($v['u_id'], $v, TRUE, FALSE,
+                    $trenner = "</TD><TD>");
             }
             ;
             $trow .= "<TR BGCOLOR=\""
@@ -146,7 +144,6 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
     } else {
         $eingabe_breite = 29;
     }
-    ;
     
     // User listen
     $query = "SELECT user.*,"
@@ -155,7 +152,7 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
         . "FROM user WHERE u_id=$user ";
     $result = mysql_query($query, $conn);
     
-    if ($result AND mysql_num_rows($result) == 1) :
+    if ($result AND mysql_num_rows($result) == 1) {
         $row = mysql_fetch_object($result);
         $uu_away = str_replace("\\", "",
             htmlspecialchars(stripslashes($row->u_away)));
@@ -183,30 +180,30 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
         $uu_kommentar = $row->u_kommentar;
         
         // Default für Farbe setzen, falls undefiniert
-        if (strlen($uu_farbe) == 0) :
+        if (strlen($uu_farbe) == 0) {
             $uu_farbe = $user_farbe;
-        endif;
+        }
         
         // IP bestimmen
         unset($o_http_stuff);
         $query = "SELECT r_name,online.*,UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_login) AS onlinezeit "
             . " FROM online left join raum on o_raum=r_id WHERE o_user=$user ";
         $result = mysql_query($query, $conn);
-        if ($result && $rows = mysql_num_rows($result) == 1) :
+        if ($result && $rows = mysql_num_rows($result) == 1) {
             $o_row = mysql_fetch_object($result);
             $onlinezeit = $o_row->onlinezeit;
-            if ($admin) :
+            if ($admin) {
                 $host_name = htmlspecialchars(gethostbyaddr($o_row->o_ip));
                 $o_http_stuff = $o_row->o_http_stuff . $o_row->o_http_stuff2;
-            endif;
+            }
             if (isset($o_http_stuff))
                 $http_stuff = unserialize($o_http_stuff);
-        endif;
+        }
         
         // Kopf Tabelle "Private Nachricht"
-        if (isset($onlinezeit) && $onlinezeit && $u_level != "G") :
-            $box = $ft0 . str_replace("%uu_nick%", $uu_nick, $t['user_zeige11'])
-                . $ft1;
+        if (isset($onlinezeit) && $onlinezeit && $u_level != "G") {
+            $box = $ft0
+                . str_replace("%uu_nick%", $uu_nick, $t['user_zeige11']) . $ft1;
             
             echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n"
                 . "<FORM NAME=\"form\" METHOD=POST TARGET=\"schreibe\" ACTION=\"schreibe.php\" onSubmit=\"resetinput(); return false;\">"
@@ -223,15 +220,11 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
             echo $f1;
             
             if ($msgpopup) {
-                
-                print 
-                    '<iframe src="messages-popup.php?id=' . $id . '&http_host='
-                        . $http_host . '&user=' . $user . '&user_nick='
-                        . $uu_nick
-                        . '" width=100% height=200 marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0></iframe>';
-                print 
-                    "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
-                # echo("DEBUG: $user $uu_nick <br>\n");
+                echo '<iframe src="messages-popup.php?id=' . $id
+                    . '&http_host=' . $http_host . '&user=' . $user
+                    . '&user_nick=' . $uu_nick
+                    . '" width=100% height=200 marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0></iframe>';
+                echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
             }
             
             echo "<INPUT NAME=\"text2\" SIZE=\"" . $eingabe_breite
@@ -249,17 +242,17 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
             // Fuß der Tabelle
             echo "</TD></TR></TABLE></TD></TR></FORM></TABLE>\n"
                 . "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
-        endif;
+        }
         
         // Kopf Tabelle Userinfo
         
-        if (isset($onlinezeit) && $onlinezeit) :
+        if (isset($onlinezeit) && $onlinezeit) {
             $box = $ft0 . str_replace("%user%", $uu_nick, $t['user_zeige20'])
                 . $ft1;
-        else :
+        } else {
             $box = $ft0 . str_replace("%user%", $uu_nick, $t['user_zeige21'])
                 . $ft1;
-        endif;
+        }
         
         echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n"
             . "<TR><TD><A HREF=\"javascript:window.close();\">"
@@ -289,40 +282,41 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
         
         echo "</B></TD></TR>\n";
         
-        if ($admin) :
+        if ($admin) {
             // Name
-            if (strlen($uu_name) > 0) :
+            if (strlen($uu_name) > 0) {
                 echo "<TR><TD><B>" . $f1 . $t['user_zeige2'] . $f2
                     . "</B></TD><TD><B>" . $f1 . "$uu_name" . $f2
                     . "</B></TD></TR>\n";
-            endif;
-        endif;
+            }
+        }
         
         // Raum
-        if (isset($o_row) && $o_row->r_name && $o_row->o_who == 0) :
+        if (isset($o_row) && $o_row->r_name && $o_row->o_who == 0) {
             echo "<TR><TD><B>" . $f1 . $t['user_zeige23'] . $f2
                 . "</B></TD><TD><B>" . $f1 . $o_row->r_name . "&nbsp;["
                 . $whotext[$o_row->o_who] . "]" . $f2 . "</B></TD></TR>\n";
-        elseif (isset($o_row) && $o_row->o_who) :
+        } elseif (isset($o_row) && $o_row->o_who) {
             echo "<TR><TD>" . $f1 . "&nbsp;" . $f2 . "</TD>" . "<TD><B>" . $f1
                 . "[" . $whotext[$o_row->o_who] . "]" . $f2
                 . "</B></TD></TR>\n";
-        endif;
-        if (isset($onlinezeit) && $onlinezeit) :
+        }
+        if (isset($onlinezeit) && $onlinezeit) {
             echo "<TR><TD>" . $f1 . $t['user_zeige33'] . $f2
-                . "</TD><TD VALIGN=BOTTOM>" . $f3 . gmdate("H:i:s", $onlinezeit)
-                . "&nbsp;" . $t['sonst27'] . $f4 . "</TD></TR>\n";
-        else :
+                . "</TD><TD VALIGN=BOTTOM>" . $f3
+                . gmdate("H:i:s", $onlinezeit) . "&nbsp;" . $t['sonst27'] . $f4
+                . "</TD></TR>\n";
+        } else {
             echo "<TR><TD>" . $f1 . $t['user_zeige9'] . $f2
                 . "</TD><TD VALIGN=TOP>" . $f1 . "$letzter_login" . $f2
                 . "</TD></TR>\n";
-        endif;
+        }
         
-        if ($erster_login && $erster_login != "01.01.1970 01:00") :
+        if ($erster_login && $erster_login != "01.01.1970 01:00") {
             echo "<TR><TD>" . $f1 . $t['user_zeige32'] . $f2
                 . "</TD><TD VALIGN=TOP>" . $f1 . "$erster_login" . $f2
                 . "</TD></TR>\n";
-        endif;
+        }
         
         // Punkte
         if ($communityfeatures && $uu_punkte_gesamt) {
@@ -336,10 +330,10 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
                 . "</TD><TD VALIGN=TOP>" . $f3 . $uu_punkte_gesamt . "/"
                 . $uu_punkte_jahr . "/" . $uu_punkte_monat . "&nbsp;"
                 . str_replace("%jahr%", substr(strftime("%Y", time()), 2, 2),
-                    str_replace("%monat%", substr(strftime("%B", time()), 0, 3),
+                    str_replace("%monat%",
+                        substr(strftime("%B", time()), 0, 3),
                         $t['user_zeige39'])) . $f4 . "</TD></TR>\n";
         }
-        ;
         
         if ($admin) {
             // Admin E-Mail
@@ -349,9 +343,7 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
                     . "<A HREF=\"MAILTO:$uu_adminemail\">$uu_adminemail</A>"
                     . $f4 . "</TD></TR>\n";
             }
-            ;
         }
-        ;
         
         if ($communityfeatures) {
             
@@ -376,7 +368,6 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
                 . "<A HREF=\"MAILTO:$uu_email\">$uu_email</A>" . $f4
                 . "</TD></TR>\n";
         }
-        ;
         
         if ($communityfeatures && $uu_chathomepage == "J") {
             $url = "home.php?ui_userid=$uu_id&id=" . $id;
@@ -388,7 +379,6 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
                 . "<A HREF=\"$uu_url\" TARGET=\"_new\">$uu_url</A>" . $f4
                 . "</TD></TR>\n";
         }
-        ;
         
         echo "<TR><TD>" . $f1 . $t['user_zeige8'] . $f2 . "</TD><TD>" . $f1
             . "$level[$uu_level]" . $f2 . "</TD></TR>\n";
@@ -396,50 +386,48 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
         echo "<TR><TD>" . $f1 . $t['user_zeige10'] . $f2 . "</TD>"
             . "<TD BGCOLOR=\"#" . $uu_farbe . "\">&nbsp;</TD></TR>\n";
         
-        if ($uu_kommentar && $admin) :
+        if ($uu_kommentar && $admin) {
             echo "<TR><TD VALIGN=TOP>" . $f1 . $t['user_zeige49'] . $f2
                 . "</TD><TD>" . $f3;
             echo htmlspecialchars(stripslashes($uu_kommentar)) . "<BR>\n";
             echo $f4 . "</TD></TR>\n";
-        endif;
+        }
         
-        if ($admin) :
+        if ($admin) {
             if (is_array($uu_profil_historie)) {
-                print "<TR><TD VALIGN=TOP>";
-                #print $f1."Profil-Edit-Historie".$f2;
-                #print "</TD>";
+                echo "<TR><TD VALIGN=TOP>";
                 
-                while (list($datum, $nick) = each($uu_profil_historie)) :
-                    if (!isset($erstes)) :
+                while (list($datum, $nick) = each($uu_profil_historie)) {
+                    if (!isset($erstes)) {
                         echo "<TR><TD VALIGN=TOP>" . $f1 . $t['sonst44'] . $f2
                             . "</TD><TD>" . $f3;
                         $erstes = TRUE;
-                    else :
+                    } else {
                         echo "<TR><TD></TD><TD>" . $f3;
-                    endif;
+                    }
                     echo $nick . "&nbsp;("
                         . str_replace(" ", "&nbsp;", date("d.m.y H:i", $datum))
                         . ")" . $f4 . "</TD></TR>\n";
-                endwhile;
-                print "</TR>";
+                }
+                echo "</TR>";
             }
             
             // IPs ausgeben
-            if (isset($o_row) && $o_row->o_ip) :
+            if (isset($o_row) && $o_row->o_ip) {
                 echo "<TR><TD VALIGN=TOP>" . $f1 . $t['user_zeige4'] . $f2
                     . "</TD><TD>" . $f3 . $host_name . $f4 . "</TD></TR>\n"
                     . "<TR><TD VALIGN=TOP>" . $f1 . "IP" . $f2 . "</TD><TD>"
                     . $f3 . $o_row->o_ip . " " . $t['sonst28'] . $f4
                     . "</TD></TR>\n";
                 
-                if ($zeigeip == 1 && is_array($ip_historie)) :
-                    while (list($datum, $ip_adr) = each($ip_historie)) :
+                if ($zeigeip == 1 && is_array($ip_historie)) {
+                    while (list($datum, $ip_adr) = each($ip_historie)) {
                         echo "<TR><TD></TD><TD>" . $f3 . $ip_adr . "&nbsp;("
                             . str_replace(" ", "&nbsp;",
                                 date("d.m.y H:i", $datum)) . ")" . $f4
                             . "</TD></TR>\n";
-                    endwhile;
-                endif;
+                    }
+                }
                 
                 echo "<TR><TD VALIGN=TOP>" . $f1 . $t['user_zeige5'] . $f2
                     . "</TD><TD>" . $f3 . htmlspecialchars($o_row->o_browser)
@@ -449,7 +437,7 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
                     . "\" target=_new>$serverprotokoll://" . $o_row->o_vhost
                     . "</a>" . $f4 . "</TD></TR>\n";
                 
-                if ($o_http_stuff) :
+                if ($o_http_stuff) {
                     echo "<TR><TD VALIGN=TOP>" . $f1 . $t['user_zeige31'] . $f2
                         . "</TD><TD>" . $f3;
                     if (is_array($http_stuff)) {
@@ -464,33 +452,32 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
                             }
                         }
                     }
-                    ;
                     echo $f4 . "</TD></TR>\n";
-                endif;
-            
-            elseif ($zeigeip == 1 && is_array($ip_historie)) :
-                while (list($datum, $ip_adr) = each($ip_historie)) :
-                    if (!$erstes) :
+                }
+                
+            } elseif ($zeigeip == 1 && is_array($ip_historie)) {
+                while (list($datum, $ip_adr) = each($ip_historie)) {
+                    if (!$erstes) {
                         echo "<TR><TD VALIGN=TOP>" . $f1 . $t['sonst29'] . $f2
                             . "</TD><TD>" . $f3;
                         $erstes = TRUE;
-                    else :
+                    } else {
                         echo "<TR><TD></TD><TD>" . $f3;
-                    endif;
+                    }
                     echo $ip_adr . "&nbsp;("
                         . str_replace(" ", "&nbsp;", date("d.m.y H:i", $datum))
                         . ")" . $f4 . "</TD></TR>\n";
-                endwhile;
-            endif;
-        
-        endif;
+                }
+            }
+            
+        }
         
         // Fenstername
         $fenster = str_replace("+", "", $uu_nick);
         $fenster = str_replace("-", "", $uu_nick);
         
         // Usermenue mit Aktionen
-        if ($u_level != "G") :
+        if ($u_level != "G") {
             $mlnk[1] = "schreibe.php?http_host=$http_host&id=$id&text=/ignore%20$uu_nick";
             $mlnk[2] = "schreibe.php?http_host=$http_host&id=$id&text=/einlad%20$uu_nick";
             echo "<TR><TD VALIGN=TOP><B>" . $f1 . $t['user_zeige24'] . $f2
@@ -504,18 +491,17 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
                 echo "[<A HREF=\"$mlnk[8]\" TARGET=\"640_$fenster\" onclick=\"window.open('$mlnk[8]','640_$fenster','resizable=yes,scrollbars=yes,width=780,height=580'); return(false);\">$t[user_zeige40]</A>]<BR>\n"
                     . "[<A HREF=\"$mlnk[9]\" TARGET=\"schreibe\" onclick=\"opener.parent.frames['schreibe'].location='$mlnk[9]';return(false);\">$t[user_zeige41]</A>]<BR>\n";
             }
-            ;
-        
-        endif;
+            
+        }
         
         // Adminmenue
-        if ($admin) :
+        if ($admin) {
             $mlnk[7] = "user.php?http_host=$http_host&id=$id&zeigeip=1&aktion=zeig&user=$user&schau_raum=$schau_raum";
             echo "[<A HREF=\"$mlnk[7]\">" . $t['user_zeige34'] . "</A>]<BR>\n";
-        endif;
+        }
         
         // Adminmenue
-        if ($admin && $rows == 1) :
+        if ($admin && $rows == 1) {
             $mlnk[8] = "user.php?http_host=$http_host&id=$id&kick_user_chat=1&aktion=zeig&user=$user&schau_raum=$schau_raum";
             $mlnk[3] = "user.php?http_host=$http_host&id=$id&trace="
                 . urlencode($host_name)
@@ -529,7 +515,7 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
                 . "[<A HREF=\"$mlnk[5]\" TARGET=\"schreibe\" onclick=\"opener.parent.frames['schreibe'].location='$mlnk[5]';return(false);\">$t[user_zeige27]</A>]<BR>\n"
                 . "[<A HREF=\"$mlnk[6]\" TARGET=\"640_$fenster\" onclick=\"window.open('$mlnk[6]','640_$fenster','resizable=yes,scrollbars=yes,width=780,height=580'); return(false);\">$t[user_zeige26]</A>]<BR>\n";
             echo "[<A HREF=\"$mlnk[8]\">" . $t['user_zeige47'] . "</A>]<BR>\n";
-        endif;
+        }
         
         // Adminmenue
         if ($admin && $communityfeatures) {
@@ -545,7 +531,7 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
         echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
         
         // Admin-Menü 3
-        if ($admin) :
+        if ($admin) {
             $box = $ft0 . $t['user_zeige12'] . $ft1;
             
             echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
@@ -584,7 +570,7 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
                 || ($u_level == "S"))
                 echo "<BR><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"$t[chat_msg110]\">";
             echo "</FORM>\n";
-        endif;
+        }
         
         // Fuß der Tabelle
         echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
@@ -592,10 +578,8 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
         // ggf Profil ausgeben, wenn ein externes Profil eingebunden werden soll (Nickname: $uu_nick)
         
         mysql_free_result($result);
-    
-    endif;
-    
+        
+    }
 }
-;
 
 ?>

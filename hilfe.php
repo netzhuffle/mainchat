@@ -1,24 +1,20 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: hilfe.php,v 1.8 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
 id_lese($id);
 
-if (isset($eingabe_light_hilfe) && $eingabe_light_hilfe == "1" && ($reset
-        <> "1") && (!$admin)) {
+if (isset($eingabe_light_hilfe) && $eingabe_light_hilfe == "1"
+    && ($reset <> "1") && (!$admin)) {
     echo "Sorry, deaktiviert";
     exit();
 }
 
-// Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Info"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;
@@ -33,9 +29,9 @@ if (isset($eingabe_light_hilfe) && $eingabe_light_hilfe == "1" && ($reset
 
 // Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";
@@ -61,7 +57,7 @@ if ($erweitertefeatures) {
 if (isset($reset) && $reset && $o_js) {
     if (isset($forum) && $forum) {
         
-        echo "<SCRIPT LANGUAGE=JavaScript>";
+        echo "<SCRIPT>";
         if ($frame_online != "")
             echo "opener_reload('$frame_online?http_host=$http_host','0');\n";
         echo "opener_reload('forum.php?http_host=$http_host&id=$id','1');\n"
@@ -69,7 +65,7 @@ if (isset($reset) && $reset && $o_js) {
             . "opener_reload('interaktiv-forum.php?http_host=$http_host&id=$id','4');\n"
             . "window.close();\n" . "</SCRIPT>\n";
     } elseif ($u_level == "M") {
-        echo "<SCRIPT LANGUAGE=JavaScript>";
+        echo "<SCRIPT>";
         if ($frame_online != "")
             echo "opener_reload('$frame_online?http_host=$http_host','0');\n";
         echo "opener_reload('chat.php?http_host=$http_host&id=$id&back=$chat_back','1');\n";
@@ -83,7 +79,7 @@ if (isset($reset) && $reset && $o_js) {
             . "opener_reload('interaktiv.php?http_host=$http_host&id=$id&o_raum_alt=$o_raum','5');\n"
             . "window.close();\n" . "</SCRIPT>\n";
     } else {
-        echo "<SCRIPT LANGUAGE=JavaScript>";
+        echo "<SCRIPT>";
         if (isset($frame_online) && $frame_online != "")
             echo "opener_reload('$frame_online?http_host=$http_host','0');\n";
         echo "opener_reload('chat.php?http_host=$http_host&id=$id&back=$chat_back','1');\n";
@@ -96,13 +92,11 @@ if (isset($reset) && $reset && $o_js) {
             . "opener_reload('interaktiv.php?http_host=$http_host&id=$id&o_raum_alt=$o_raum','4');\n"
             . "window.close();\n" . "</SCRIPT>\n";
     }
-    ;
 }
-;
 
 // Chat bei u_backup neu aufbauen, damit nach Umstellung der Chat refresht wird
 // u_backup in DB eintragen
-if (strlen($u_id) > 0 && isset($f['u_backup']) && strlen($f['u_backup']) > 0) :
+if (strlen($u_id) > 0 && isset($f['u_backup']) && strlen($f['u_backup']) > 0) {
     unset($f['u_id']);
     unset($f['u_level']);
     unset($f['u_name']);
@@ -112,13 +106,13 @@ if (strlen($u_id) > 0 && isset($f['u_backup']) && strlen($f['u_backup']) > 0) :
     schreibe_db("user", $f, $u_id, "u_id");
     if ($f['u_backup'] == 1)
         warnung($u_id, $u_nick, "sicherer_modus");
-    if ($o_js) :
+    if ($o_js) {
         echo "<SCRIPT LANGUAGE=JavaScript>"
             . "opener_reload('chat.php?http_host=$http_host&id=$id&back=$chat_back','1')\n"
             . "opener_reload('eingabe.php?http_host=$http_host&id=$id','3')"
             . "</SCRIPT>\n";
-    endif;
-endif;
+    }
+}
 
 // Menü als erstes ausgeben
 $box = $ft0 . $t['menue4'] . $ft1;
@@ -144,7 +138,6 @@ if ($aktion != "logout") {
     show_box2($box, $text, "100%");
     echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
 }
-;
 
 switch ($aktion) {
     
@@ -171,7 +164,7 @@ switch ($aktion) {
         echo "<TR><TD COLSPAN=4 ALIGN=CENTER>$t[hilfe1]</CENTER></TD></TR>";
         echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\">$t[hilfe2]</TR>\n";
         
-        while ($i < $anzahl) :
+        while ($i < $anzahl) {
             $spname = key($hilfe_befehlstext);
             $spruchtmp = preg_split("/\t/", $hilfe_befehlstext[$spname], 4);
             if (!isset($spruchtmp[0]))
@@ -190,14 +183,14 @@ switch ($aktion) {
             next($hilfe_befehlstext);
             
             // Farben umschalten
-            if (($i % 2) > 0) :
+            if (($i % 2) > 0) {
                 $bgcolor = $farbe_tabelle_zeile1;
-            else :
+            } else {
                 $bgcolor = $farbe_tabelle_zeile2;
-            endif;
+            }
             
             $i++;
-        endwhile;
+        }
         echo "</TABLE>\n";
         
         if ($admin && $hilfe_befehlstext_admin_ok == 1) {
@@ -212,7 +205,7 @@ switch ($aktion) {
             echo "<TR><TD COLSPAN=4 ALIGN=CENTER><b>$t[hilfe8]</b></CENTER></TD></TR>";
             echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\">$t[hilfe2]</TR>\n";
             
-            while ($i < $anzahl) :
+            while ($i < $anzahl) {
                 $spname = key($hilfe_befehlstext_admin);
                 $spruchtmp = preg_split("/\t/",
                     $hilfe_befehlstext_admin[$spname], 4);
@@ -232,14 +225,14 @@ switch ($aktion) {
                 next($hilfe_befehlstext_admin);
                 
                 // Farben umschalten
-                if (($i % 2) > 0) :
+                if (($i % 2) > 0) {
                     $bgcolor = $farbe_tabelle_zeile1;
-                else :
+                } else {
                     $bgcolor = $farbe_tabelle_zeile2;
-                endif;
+                }
                 
                 $i++;
-            endwhile;
+            }
             echo "</TABLE>\n";
         }
         
@@ -273,7 +266,7 @@ switch ($aktion) {
         echo "<TABLE WIDTH=100% BORDER=0 CELLPADDING=4 CELLSPACING=0><TR BGCOLOR=\"$farbe_tabelle_kopf2\">"
             . "$t[hilfe5]</TR></TABLE>\n";
         
-        while ($i < $anzahl) :
+        while ($i < $anzahl) {
             $spname = key($spruchliste);
             $spruchtmp = preg_split("/\t/",
                 substr($spruchliste[$spname], 0,
@@ -293,14 +286,14 @@ switch ($aktion) {
             next($spruchliste);
             
             // Farben umschalten
-            if (($i % 2) > 0) :
+            if (($i % 2) > 0) {
                 $bgcolor = $farbe_tabelle_zeile1;
-            else :
+            } else {
                 $bgcolor = $farbe_tabelle_zeile2;
-            endif;
+            }
             
             $i++;
-        endwhile;
+        }
         
         echo "</TABLE>\n";
         break;
@@ -406,7 +399,6 @@ switch ($aktion) {
         echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
     
 }
-;
 
 echo "<P>$t[hilfe7]</P>\n";
 

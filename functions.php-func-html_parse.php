@@ -1,7 +1,6 @@
 <?php
-// function html_parse wird von user und interaktiv benötigt.
-// $Id: functions.php-func-html_parse.php,v 1.9 2012/10/17 06:16:53 student Exp $
 
+// function html_parse wird von user und interaktiv benötigt.
 function html_parse($privat, $text, $at_sonderbehandlung = 0)
 {
     // Filtert Text, ersetzt Smilies und ersetzt folgende Zeichen:
@@ -19,40 +18,40 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
     // Für Gäste gesperrt
     // $ist_moderiert ist in raum_ist_moderiert() (Caching!) gesetzt worden!
     
-    if (!$ist_moderiert && $erweitertefeatures) :
+    if (!$ist_moderiert && $erweitertefeatures) {
         preg_match_all("/(&amp;[^ ]+)/", $text, $test, PREG_PATTERN_ORDER);
         $anzahl = count($test[0]);
-        if ($anzahl > 0) :
-            if ($anzahl > $smilies_anzahl) :
+        if ($anzahl > 0) {
+            if ($anzahl > $smilies_anzahl) {
                 // Fehlermeldung ausgeben
                 system_msg("", 0, $u_id, $system_farbe, $t[chat_msg54]);
-            elseif ($u_level == "G") :
+            } elseif ($u_level == "G") {
                 system_msg("", 0, $u_id, $system_farbe, $t[chat_msg55]);
-            endif;
+            }
             
             // Prüfen, ob im aktuellen Raum smilies erlaubt sind
-            if (!$privat) :
+            if (!$privat) {
                 $query = "SELECT r_smilie FROM raum WHERE r_id=$o_raum ";
                 $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) > 0
-                    && mysql_result($result, 0, 0) != "Y") :
+                    && mysql_result($result, 0, 0) != "Y") {
                     $smilie_ok = FALSE;
-                else :
+                } else {
                     $smilie_ok = TRUE;
-                endif;
-            else :
+                }
+            } else {
                 $smilie_ok = TRUE;
-            endif;
+            }
             
             if ($smilies_aus == "1")
                 $smilie_ok = false;
             
             // Konfiguration für smilies lesen
-            if ($smilies_config) :
+            if ($smilies_config) {
                 @require("conf/" . $smilies_config);
-            else :
+            } else {
                 @require("conf/" . $sprachconfig . "-" . $smilies_datei);
-            endif;
+            }
             
             if (!$smilie_ok && $smilies_datei != "") {
                 // Nur die Fehlermeldung ausgeben, falls es das angegeben Smile auch gibt
@@ -67,26 +66,24 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                     system_msg("", 0, $u_id, $system_farbe, $t[chat_msg76]);
                 
             } else {
-                while (list($i, $smilie_code) = each($test[0])) :
-                    if ($anzahl > $smilies_anzahl || $u_level == "G") :
+                while (list($i, $smilie_code) = each($test[0])) {
+                    if ($anzahl > $smilies_anzahl || $u_level == "G") {
                         // Mehr als $smilies_anzahl Smilies sind nicht erlaubt
                         $text = str_replace(" " . $smilie_code . " ", "", $text);
-                    else :
+                    } else {
                         // Falls smilie existiert, ersetzen
                         $smilie_code2 = str_replace("&amp;", "&", $smilie_code);
-                        if ($smilie[$smilie_code2]) :
+                        if ($smilie[$smilie_code2]) {
                             $text = str_replace($smilie_code,
                                 "<SMIL SRC=\"" . $smilies_pfad
                                     . $smilie[$smilie_code2] . "\" SMIL>",
                                 $text);
-                        endif;
-                    
-                    endif;
-                endwhile;
-                
+                        }
+                    }
+                }
             }
-        endif;
-    endif;
+        }
+    }
     
     // doppelte Zeichen merken und wegspeichern...
     $text = str_replace("__", "###substr###", $text);
@@ -103,8 +100,6 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
         $text = preg_replace('|\*(.*?)\*|', '<i>\1</i>',
             preg_replace('|_(.*?)_|', '<b>\1</b>', $text));
     }
-    
-    // if ($u_level!="G"):
     
     // erst mal testen ob www oder http oder email vorkommen
     if (preg_match("/(http:|www\.|@)/i", $text)) {
@@ -147,17 +142,15 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                         $text = $rep . preg_replace("!$txt[$j]!", "", $text);
                     }
                 }
-                // $txt[$j]="nick....nick";
                 
                 if ($u_level == "G") {
                     break;
                 }
             }
             
-            if ($u_level != "G") :
+            if ($u_level != "G") {
                 // E-Mail Adressen in A-Tag mit Mailto
                 // E-Mail-Adresse -> Format = *@*.*
-                // (ssilk, 20.06.03): Besser und schneller ist
                 if (preg_match(
                     '/^[\w][\w.-]*@[[:alnum:].-]+\.[[:alnum:]-]{2,}$/',
                     $txt[$j])) {
@@ -169,7 +162,8 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                         . " onclick=\"ww=window.open('mailto:" . $txt[$j]
                         . "','Chat_Klein','resizable=yes,scrollbars=yes,width=10,height=10'); ww.window.close(); return(false);\">"
                         . $txt[$j] . "</a>";
-                    $txt[$j] = preg_replace("/" . $txt[$j] . "/", $rep, $txt[$j]);
+                    $txt[$j] = preg_replace("/" . $txt[$j] . "/", $rep,
+                        $txt[$j]);
                 }
                 
                 // www.###### in <A HREF="http://###" TARGET=_new>http://###</A>
@@ -211,8 +205,7 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                         "<a href=\"redirect.php?url=" . urlencode($txt2)
                             . "\" target=_blank>$txt2</a>", $txt[$j]);
                 }
-            
-            endif;
+            }
         }
         
         // nun noch die Dummy-Strings durch die urls ersetzen...
@@ -235,8 +228,7 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
     $text = str_replace("###stern###", "*", $text);
     $text = str_replace("###klaffe###", "@", $text);
     
-    return ($text);
+    return $text;
 }
-;
 
 ?>

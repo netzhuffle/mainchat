@@ -163,17 +163,6 @@ function lese_gelesene_postings($u_id)
     if (mysql_num_rows($query) > 0)
         $gelesene = mysql_result($query, 0, "u_gelesene_postings");
     $u_gelesene = unserialize($gelesene);
-    /* DEBUG
-    while (list($k,$v)=each($u_gelesene)) {
-    
-        echo $k . ":";
-    
-        while (list($key,$val) = each($u_gelesene[$k]))
-            echo $u_gelesene[$k][$key] . " ";
-    
-        echo "<br>";
-    }
-     */
     @mysql_free_result($query);
 }
 
@@ -198,8 +187,6 @@ function thema_alles_gelesen($th_id, $u_id)
         $sql = "update user set u_gelesene_postings = '$gelesene' where u_id = $u_id";
         mysql_query($sql, $conn);
     }
-    
-    #print "Alles Postings des Themas als gelesen markiert...";
 }
 
 // markiert einen Thread als gelesen
@@ -229,9 +216,6 @@ function thread_alles_gelesen($th_id, $thread_id, $u_id)
         $gelesene = serialize($u_gelesene);
         $sql = "update user set u_gelesene_postings = '$gelesene' where u_id = $u_id";
         mysql_query($sql, $conn);
-        
-        #print "Alles Postings des Themas als gelesen markiert...";
-        
     }
 }
 
@@ -240,8 +224,6 @@ function markiere_als_gelesen($po_id, $u_id, $th_id)
 {
     
     global $conn, $u_gelesene;
-    
-    #print "aufruf: makiere_als_gelesen mit (po_id, u_id, th_id) ($po_id, $u_id, $th_id)";
     
     if (!$u_gelesene[$th_id])
         $u_gelesene[$th_id][0] = $po_id;
@@ -369,9 +351,6 @@ function anzahl_ungelesene3(&$arr_postings, $th_id)
             $diff--;
     }
     
-    #echo "<tr><td colspan=5 bgcolor=#FFFFFF><pre>".print_r($arr).": $th_id</pre>";
-    #echo "</td></tr>";
-    
     return $diff;
     
 }
@@ -418,12 +397,7 @@ function schreibe_forum()
     global $fo_gast, $fo_user;
     
     $f['fo_name'] = $fo_name;
-    #$f["fo_admin"] = $fo_admin;
-    
     $f['fo_admin'] = $fo_gast + $fo_user + 1;
-    #print "fo_gast: $fo_gast<BR>";
-    #print "fo_user: $fo_user<BR>";
-    #print "DEBUG: setze fo_admin auf: $f[fo_admin]<BR>Dies ist binär: ".decbin($f[fo_admin]);
     
     //groesste Order holen
     $sql = "select max(fo_order) as maxorder from forum";
@@ -455,9 +429,6 @@ function aendere_forum()
     
     $f['fo_name'] = $fo_name;
     $f['fo_admin'] = $fo_gast + $fo_user + 1;
-    #print "fo_gast: $fo_gast<BR>";
-    #print "fo_user: $fo_user<BR>";
-    #print "DEBUG: setze fo_admin auf: $f[fo_admin]<BR>Dies ist binär: ".decbin($f[fo_admin]);
     schreibe_db("forum", $f, $fo_id, "fo_id");
     
 }
@@ -761,11 +732,7 @@ function schreibe_posting()
             $f['po_text'] .= $append;
         }
         
-        #$f[po_text] = $po_text;
         schreibe_db("posting", $f, $po_id, "po_id");
-        #print "DEBUG: edit-mode: <PRE>";
-        #print_r($f);
-        #print "</PRE>";
     } else { //neues Posting
     
         $f['po_th_id'] = $th_id;
@@ -787,8 +754,6 @@ function schreibe_posting()
         if (!$new_po_id)
             exit;
         
-        #print "neue posting-id: $new_po_id<BR>";
-        
         //falls reply muss po_threadorder des vaters neu geschrieben werden
         if ($po_vater_id != 0) {
             
@@ -803,8 +768,6 @@ function schreibe_posting()
             $threadorder = mysql_result($query, 0, "po_threadorder");
             @mysql_free_result($query);
             
-            #print "alte threadorder: $threadorder<BR>";
-            
             //erste Antwort?
             if ($threadorder == "0")
                 $threadorder = $new_po_id;
@@ -812,10 +775,6 @@ function schreibe_posting()
                 //jetzt hab ich arbeit...
                 //rekursiv das unterste Posting dieses Teilbaums holen
                 $insert_po_id = hole_letzten($po_vater_id, $new_po_id);
-                
-                #print "po_vater_id = $po_vater_id<BR>";
-                #print "new_po_id = $new_po_id<BR>";
-                #print "unterstes posting des teilbaums: $insert_po_id<BR>";
                 
                 //alte threadorder in feld aufsplitten
                 $threadorder_array = explode(",", $threadorder);
@@ -924,16 +883,11 @@ function hole_letzten($root_id, $new_po_id)
                 order by po_ts desc
                 limit 1";
     
-    #print "<P>Aufruf-Funktion: hole_letzten ($root_id, $new_po_id)<P>";
-    #print $sql."<p>";
-    
     $query = mysql_query($sql, $conn);
     $anzahl = mysql_num_rows($query);
     if ($anzahl > 0)
         $new_root_id = mysql_result($query, 0, "po_id");
     @mysql_free_result($query);
-    
-    #print "<BR>new_root_id = $new_root_id<BR>";
     
     if ($anzahl > 0) {
         //es geht noch tiefer...
@@ -1237,14 +1191,12 @@ function verschiebe_posting_ausfuehren()
             for ($i = 0; $i < count($postings2); $i++) {
                 $sqlupdate = "UPDATE posting SET po_th_id = $verschiebe_nach WHERE po_id = "
                     . $postings2[$i];
-                //				echo "DEBUG: $sqlupdate<br>";
                 mysql_query($sqlupdate, $conn);
             }
         }
         
         // Verschiebt den Vater
         $sqlupdate = "UPDATE posting SET po_th_id = $verschiebe_nach WHERE po_id = $thread_verschiebe";
-        //		echo "DEBUG: $sqlupdate<br>";
         mysql_query($sqlupdate, $conn);
         
         // Baut Threadorder des Themas ALT und NEU komplett neu auf		
@@ -1260,7 +1212,6 @@ function verschiebe_posting_ausfuehren()
             }
         }
         $sqlupdate = "UPDATE thema SET th_postings = \"$neuethreadorder\" WHERE th_id = $verschiebe_von";
-        //		echo "DEBUG: $sqlupdate<br>";
         mysql_query($sqlupdate, $conn);
         
         $sql2 = "SELECT po_id FROM posting WHERE po_th_id = $verschiebe_nach ";
@@ -1274,7 +1225,6 @@ function verschiebe_posting_ausfuehren()
             }
         }
         $sqlupdate = "UPDATE thema SET th_postings = \"$neuethreadorder\" WHERE th_id = $verschiebe_nach";
-        //		echo "DEBUG: $sqlupdate<br>";
         mysql_query($sqlupdate, $conn);
         
         $sql = "UNLOCK TABLES";

@@ -1,9 +1,6 @@
 <?php
 
-// fidon GmbH mainChat
 // eingabe.php muss mit id=$hash_id aufgerufen werden
-
-// $Id: eingabe.php,v 1.12 2012/10/17 06:16:53 student Exp $
 
 require("functions.php");
 
@@ -41,21 +38,17 @@ if ($u_id) {
     $fenster = str_replace("÷", "", $fenster);
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
-    
-    // Kopf ausgeben
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE="JavaScript">
+<SCRIPT>
 function resetinput() {
-    
     document.forms['form'].elements['text'].value=document.forms['form'].elements['text2'].value;
 <?php
     if ($u_clearedit == 1) {
-        print "    document.forms['form'].elements['text2'].value='';\n";
+        echo "    document.forms['form'].elements['text2'].value='';\n";
     }
 ?>
-    
     document.forms['form'].submit();
     document.forms['form'].elements['text2'].focus();
     document.forms['form'].elements['text2'].select();
@@ -79,9 +72,9 @@ function window_reload(file,win_name) {
     
     // Body-Tag definieren
     $body_tag = "<BODY BGCOLOR=\"$farbe_chat_background2\" ";
-    if (strlen($grafik_background2) > 0) :
+    if (strlen($grafik_background2) > 0) {
         $body_tag = $body_tag . "BACKGROUND=\"$grafik_background2\" ";
-    endif;
+    }
     $body_tag = $body_tag . "TEXT=\"$farbe_chat_text2\" "
         . "LINK=\"$farbe_chat_link2\" " . "VLINK=\"$farbe_chat_vlink2\" "
         . "ALINK=\"$farbe_chat_vlink2\">\n";
@@ -105,7 +98,6 @@ function window_reload(file,win_name) {
             . ($chat_max_eingabe - 1) . "\" VALUE=\"\" SIZE=\""
             . $chat_eingabe_breite . "\">";
     }
-    ;
     
     // Unterscheidung Normal oder sicherer Modus
     if ($backup_chat || $u_backup) {
@@ -118,17 +110,18 @@ function window_reload(file,win_name) {
             $chat_eingabe_breite = $chat_eingabe_breite - 11;
             $mindestbreite = 44;
         }
-        ;
         
         // Bei zu schmaler Eingabenzeilen diese für rundes Layout auf Mindesbreite setzen
-        if ($chat_eingabe_breite < $mindestbreite)
+        if ($chat_eingabe_breite < $mindestbreite) {
             $chat_eingabe_breite = $mindestbreite;
+        }
         
         echo $text2_typ . "<INPUT NAME=\"text\" VALUE=\"\" TYPE=\"HIDDEN\">"
             . "<SELECT NAME=\"user_chat_back\">\n";
-        for ($i = 5; $i < 40; $i++)
+        for ($i = 5; $i < 40; $i++) {
             echo "<OPTION " . ($chat_back == $i ? "SELECTED" : "")
                 . " VALUE=\"$i\">$i&nbsp;$t[eingabe1]\n";
+        }
         echo "</SELECT>"
             . "<INPUT NAME=\"http_host\" VALUE=\"$http_host\" TYPE=\"HIDDEN\">"
             . "<INPUT NAME=\"id\" VALUE=\"$id\" TYPE=\"HIDDEN\">"
@@ -145,7 +138,6 @@ function window_reload(file,win_name) {
         } else {
             $mindestbreite = 55;
         }
-        ;
         
         // Bei zu schmaler Eingabenzeilen diese für rundes Layout auf Mindesbreite setzen
         if ($chat_eingabe_breite < $mindestbreite)

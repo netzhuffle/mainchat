@@ -1,8 +1,5 @@
 <?php
 
-// fidion GmbH mainChat
-// $Id: umfrage.php,v 1.3 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
@@ -24,7 +21,7 @@ $fenster = str_replace("ß", "", $fenster);
 ?>
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Umfrage"; ?></TITLE><META CHARSET=UTF-8>
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT>
         window.focus()
         function win_reload(file,win_name) {
                 win_name.location.href=file;
@@ -52,9 +49,9 @@ $fenster = str_replace("ß", "", $fenster);
 
 // Body-Tag definieren
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
-if (strlen($grafik_mini_background) > 0) :
+if (strlen($grafik_mini_background) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_mini_background\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_mini_text\" "
     . "LINK=\"$farbe_mini_link\" " . "VLINK=\"$farbe_mini_vlink\" "
     . "ALINK=\"$farbe_mini_vlink\">\n";
@@ -140,11 +137,11 @@ if ($u_id && $communityfeatures && $u_level != "G") {
     echo "<P><B>Fehler:</B> Beim Aufruf dieser Seite ist ein Fehler aufgetreten.</P>";
 }
 
-if ($o_js || !$u_id) :
+if ($o_js || !$u_id) {
     echo "<BR />" . $f1
         . "<CENTER>[<A HREF=\"javascript:window.close();\">$t[sonst1]</A>]</CENTER>"
         . $f2 . "<BR>\n";
-endif;
+}
 
 ?>
 </BODY></HTML>

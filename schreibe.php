@@ -1,7 +1,5 @@
 <?php
 
-// $Id: schreibe.php,v 1.7 2012/10/17 06:16:53 student Exp $
-
 require("functions.php");
 require_once("functions-msg.php");
 
@@ -12,9 +10,9 @@ id_lese($id);
 raum_ist_moderiert($o_raum);
 
 $body_tag = "<BODY BGCOLOR=\"$farbe_chat_background3\" ";
-if (strlen($grafik_background3) > 0) :
+if (strlen($grafik_background3) > 0) {
     $body_tag = $body_tag . "BACKGROUND=\"$grafik_background3\" ";
-endif;
+}
 $body_tag = $body_tag . "TEXT=\"$farbe_chat_text3\" "
     . "LINK=\"$farbe_chat_link3\" " . "VLINK=\"$farbe_chat_vlink3\" "
     . "ALINK=\"$farbe_chat_vlink3\">\n";
@@ -45,12 +43,10 @@ if (strlen($u_id) > 0) {
     // Prüfung der Eingabe bei Admin und Moderator auf 4 fache Anzahl der Normalen eingabe
     if ((($admin) || ($u_level == "M")) && isset($text) && (strlen($text) != 0)
         && (strlen($text) < (5 * $chat_max_eingabe))) {
-        // debug
-        // system_msg("",0,1222,$system_farbe,"Spamschutz deaktiv"); 	
     }
     // Normale Prüfung für User
- else if (isset($text) && strlen($text) != 0 && strlen($text)
-            < $chat_max_eingabe) {
+ elseif (isset($text) && strlen($text) != 0
+        && strlen($text) < $chat_max_eingabe) {
         
         // Spamschutz prüfen, falls kein Admin und kein Moderator
         if ((!$admin) && ($u_level <> "M")) {
@@ -77,11 +73,9 @@ if (strlen($u_id) > 0) {
                         $neu_spam_byte[$key - $zeitdifferenz] = $spam_byte[$key];
                     }
                 }
-                ;
             } else {
                 $o_spam_zeit = $aktuelle_zeit;
             }
-            ;
             
             // Aktuelle Eingabe im Array summieren
             if (!isset($neu_spam_zeilen)) {
@@ -105,24 +99,17 @@ if (strlen($u_id) > 0) {
             $f['o_spam_byte'] = serialize($neu_spam_byte);
             schreibe_db("online", $f, $o_id, "o_id");
             
-            // foreach($neu_spam_byte as $key => $value)
-            //	system_msg("",0,$u_id,$system_farbe,"#DEBUG# SPZ:$o_spam_zeit, AZ:$aktuelle_zeit, K:$key, Z:".$neu_spam_zeilen[$key].", B:".$neu_spam_byte[$key]);
-            
             // Prüfen wieviel Byte ind wieviel Zeilen in den letzten $chat_max_zeit Sekunden geschrieben wurde 
             if ((array_sum($neu_spam_zeilen) > $chat_max_zeilen)
-                || (array_sum($neu_spam_byte) > $chat_max_byte)) :
+                || (array_sum($neu_spam_byte) > $chat_max_byte)) {
                 $fehler = TRUE;
-            endif;
+            }
             
         }
         
-        #$text=str_replace("_*","",$text);		
-        #$text=str_replace("*_","",$text);		
-        # testweise mal auskommentiert		
-        
         @mysql_free_result($result);
         
-    } else if (isset($text) && strlen($text) >= $chat_max_eingabe) {
+    } elseif (isset($text) && strlen($text) >= $chat_max_eingabe) {
         $fehler = TRUE;
     }
     
@@ -135,10 +122,10 @@ if (strlen($u_id) > 0) {
             isset($text) ? $text : "", "");
     }
     // Spam -> Fehler ausgeben
- else if ($fehler) {
+ elseif ($fehler) {
         // Systemnachricht mit Fehlermeldung an User schreiben
-        system_msg("", 0, $u_id, $system_farbe, $t['floodsperre1'] . " "
-            . $text);
+        system_msg("", 0, $u_id, $system_farbe,
+            $t['floodsperre1'] . " " . $text);
         
         // Zur Strafe 10 Punkte abziehen
         if ($communityfeatures && $punktefeatures) {
@@ -180,6 +167,5 @@ if (strlen($u_id) > 0) {
     echo "</BODY></HTML>\n";
     exit;
 }
-;
 
 ?>

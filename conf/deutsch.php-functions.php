@@ -2,8 +2,6 @@
 
 // Sprachdefinition deutsch functions.php
 
-// str_replace("%i_user_name_passiv%",$i_user_name_passiv,$t[ignore1])
-
 $t['sperre1'] = "<B>Fehler:</B> Lobby kann nicht ermittelt werden!";
 $t['sperre2'] = "gibt User";
 $t['sperre3'] = "einen Schubs und wirft ihn/sie aus dem Raum!";
