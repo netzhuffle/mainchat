@@ -2297,6 +2297,7 @@ Bei Problemen hilft Euch das mainChat Team natürlich gerne weiter.<br><br>
 			echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
 		};
 
+		if (!isset($unterdruecke_raeume)) $unterdruecke_raeume = 0;
 		if (!$unterdruecke_raeume && $abweisen==false) {
 
 			// Wer ist online? Boxen mit Usern erzeugen, Topic ist Raumname

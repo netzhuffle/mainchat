@@ -4,7 +4,7 @@
 // $Id: functions.php,v 1.92 2012/10/17 06:16:53 student Exp $
 
 // Version / Copyright - nicht entfernen!
-$mainchat_version="mainChat 5.0.0 (c) by fidion GmbH 1999-2012";
+$mainchat_version="mainChat 5.0.1 (c) by fidion GmbH 1999-2012";
 $mainchat_email="info@fidion.de";
 
 // HTTPS ja oder nein?

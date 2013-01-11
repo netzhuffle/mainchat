@@ -382,7 +382,8 @@ case "edit":
 
 
 		// Nick muﬂ 4-20 Zeichen haben
-		if (isset($keineloginbox) && !$keineloginbox && (strlen($f['u_nick'])<4 || strlen($f['u_nick'])>20)) 
+		if (!isset($keineloginbox)) $keineloginbox = 0;
+		if (!$keineloginbox && (strlen($f['u_nick'])<4 || strlen($f['u_nick'])>20)) 
 		{
 		
 			// Wenn man den Nicknamen nicht ‰ndern darf, und man User ist, dann den Parameter
