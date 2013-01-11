@@ -277,7 +277,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
     $ip_adr = $_SERVER["REMOTE_ADDR"];
     $ip_name = @gethostbyaddr($ip_adr);
     
-    // TEST - Sperrt den Chat, wenn in der Sperre Domain "-GLOBAL-" ist
+    // Sperrt den Chat, wenn in der Sperre Domain "-GLOBAL-" ist
     $query = "SELECT is_domain FROM ip_sperre WHERE is_domain = '-GLOBAL-'";
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) > 0) {
@@ -285,7 +285,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
     }
     mysql_free_result($result);
     
-    // TEST - Sperrt den Chat für bestimmte Browser komplett
+    // Sperrt den Chat für bestimmte Browser komplett
     if (($_SERVER["HTTP_USER_AGENT"] == "Spamy v3.0 with 32 Threads")
         || ($_SERVER["HTTP_USER_AGENT"]
             == "Powered by Spamy The Spambot v5.2.1")) {
@@ -1104,7 +1104,9 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                     $login = "";
                 $login = coreCheckName($login, $check_name);
                 
-                if (isset($keineloginbox) && !$keineloginbox) {
+                if (!isset($keineloginbox))
+                    $keineloginbox = false;
+                if (!$keineloginbox) {
                     if (strlen($login) < 4 || strlen($login) > 20)
                         $login = "";
                 }
@@ -1785,7 +1787,8 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                         echo "<FRAME SRC=\"chat.php?http_host=$http_host&id=$hash_id&back=$back\" name=\"chat\" MARGINWIDTH=4 MARGINHEIGHT=0>\n";
                         if (!isset($userframe_url))
                             echo "<FRAME SRC=\"user.php?http_host=$http_host&id=$hash_id&aktion=chatuserliste\" MARGINWIDTH=4 MARGINHEIGHT=0 name=\"userliste\">\n";
-                        else echo "<FRAME SRC=\"$userframe_url\" MARGINWIDTH=4 MARGINHEIGHT=0 name=\"userliste\">\n";
+                        else
+                            echo "<FRAME SRC=\"$userframe_url\" MARGINWIDTH=4 MARGINHEIGHT=0 name=\"userliste\">\n";
                         
                         echo "</FRAMESET>\n";
                         echo "<FRAME SRC=\"eingabe.php?http_host=$http_host&id=$hash_id\" name=\"eingabe\" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO>\n";
@@ -2356,6 +2359,8 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                     echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
                 }
                 
+                if (!isset($unterdruecke_raeume))
+                    $unterdruecke_raeume = 0;
                 if (!$unterdruecke_raeume && $abweisen == false) {
                     
                     // Wer ist online? Boxen mit Usern erzeugen, Topic ist Raumname

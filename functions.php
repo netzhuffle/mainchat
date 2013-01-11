@@ -1,7 +1,7 @@
 <?php
 
 // Version / Copyright - nicht entfernen!
-$mainchat_version = "Open mainChat 5.0.0 (c) by fidion GmbH 1999-2012";
+$mainchat_version = "Open mainChat 5.0.2 (c) by fidion GmbH 1999-2012";
 $mainchat_email = "info@fidion.de";
 
 // HTTPS ja oder nein?
@@ -1553,7 +1553,8 @@ function hole_geschlecht($userid)
         $user_geschlecht = "geschlecht_maennlich";
     elseif ($user_geschlecht == "weiblich")
         $user_geschlecht = "geschlecht_weiblich";
-    else $user_geschlecht = "";
+    else
+        $user_geschlecht = "";
     
     return $user_geschlecht;
 }

@@ -362,7 +362,10 @@ if (strlen($u_id) != 0) {
                 }
                 
                 // Nick muss 4-20 Zeichen haben
-                if (isset($keineloginbox) && !$keineloginbox
+                if (!isset($keineloginbox)) {
+                    $keineloginbox = 0;
+                }
+                if (!$keineloginbox
                     && (strlen($f['u_nick']) < 4 || strlen($f['u_nick']) > 20)) {
                     
                     // Wenn man den Nicknamen nicht ändern darf, und man User ist, dann den Parameter
