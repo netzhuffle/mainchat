@@ -1,6 +1,6 @@
 <?php 
 // fidion GmbH mainChat
-// $Id: index.php,v 1.52 2012/10/18 09:36:37 student Exp $
+// $Id: index.php,v 1.53 2012/12/17 07:09:37 student Exp $
 
 require_once("functions-registerglobals.php");
 
@@ -281,13 +281,13 @@ $ip_adr = $_SERVER["REMOTE_ADDR"];
 $ip_name= @gethostbyaddr($ip_adr);
 
 
-// TEST - Sperrt den Chat, wenn in der Sperre Domain "-GLOBAL-" ist
+// Sperrt den Chat, wenn in der Sperre Domain "-GLOBAL-" ist
 $query="SELECT is_domain FROM ip_sperre WHERE is_domain = '-GLOBAL-'";
 $result=mysql_query($query,$conn);
 if ($result && mysql_num_rows($result) > 0) { $abweisen = true; }
 mysql_free_result($result);
 
-// TEST - Sperrt den Chat für bestimmte Browser komplett
+// Sperrt den Chat für bestimmte Browser komplett
 //if ($dbase=="mainchat") 
 {
         if (($_SERVER["HTTP_USER_AGENT"] == "Spamy v3.0 with 32 Threads") ||
@@ -1102,11 +1102,11 @@ switch ($aktion) {
 		if (!isset($login)) $login = "";
 		$login=coreCheckName($login,$check_name);
 
-                if (isset($keineloginbox) && !$keineloginbox)
+		if (!isset($keineloginbox)) $keineloginbox = false;
+                if (!$keineloginbox)
                 {
                         if (strlen($login)<4 || strlen($login)>20) $login="";
                 }
-
 
 		// Falls kein Nick übergeben, Nick finden
 		if (strlen($login)==0):

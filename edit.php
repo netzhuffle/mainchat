@@ -2,7 +2,7 @@
 
 // fidion GmbH mainChat
 
-// $Id: edit.php,v 1.28 2012/10/17 06:16:53 student Exp $
+// $Id: edit.php,v 1.29 2012/12/17 07:09:37 student Exp $
 
 require ("functions.php");
 require ("functions-msg.php");
