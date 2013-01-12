@@ -2,7 +2,7 @@ Open mainChat
 ========
 
 mainChat war der kostenlose Chat der fidion GmbH. Er wurde am 27.12.2012 eingestellt und daher unter der BSD-Lizenz veröffentlicht.
-Er wird in diesem Repository weiter gepflegt. Der Original-Code der fidion GmbH findet sich [im Branch „original“](https://github.com/netzhuffle/mainchat/branches/original).
+Er wird in diesem Repository weiter gepflegt. Der Original-Code der fidion GmbH findet sich [im Branch „original“](https://github.com/netzhuffle/mainchat/tree/original).
 
 > Hallo ### ###,
 > 
@@ -52,4 +52,4 @@ Eine Anleitung zur Installation findet sich unter /dok/LIESMICH.
 Mitarbeit
 ---------
 
-Mitarbeit ist gerne gesehen. Der aktuelle Code befindet sich unter [https://github.com/netzhuffle/mainchat]. Einfach einen Pull Request auf GitHub stellen!
+Mitarbeit ist gerne gesehen. Der aktuelle Code befindet sich unter https://github.com/netzhuffle/mainchat. Einfach einen Pull Request auf GitHub stellen!
