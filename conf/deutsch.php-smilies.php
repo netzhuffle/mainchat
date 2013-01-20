@@ -18,7 +18,7 @@ $smilie[":-)"] = "Fröhlich";
 $smilie[":-))"] = "Sehr Fröhlich";
 $smilie[":-)))"] = "Super Fröhlich";
 $smilie[":-j"] = "Etwas Fröhlich";
-$smilie[":-ﬁ"] = "Zunge herausstrecken";
+$smilie[":-Þ"] = "Zunge herausstrecken";
 $smilie[":-)8"] = "Mit Fliege";
 $smilie[":-)="] = "Mit Kinnbart";
 $smilie[":-*"] = "Sauer";
