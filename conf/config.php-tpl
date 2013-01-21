@@ -282,7 +282,7 @@ $ssl_login=0;				// 1=ja, 0=nein
 $SSLRedirect = "0";
   
 // Erlaubte Zeichen für Usernamen, leerer String -> keine Prüfung
-$check_name="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzöäü÷ÄÜ0123456789-#+";
+$check_name="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzöäüÖÄÜ0123456789-#+";
 
 
 // muss der erste Buchstabe des Namens großgeschrieben sein? 1=Ja, 0=Nein
