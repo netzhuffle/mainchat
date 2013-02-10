@@ -179,7 +179,7 @@ $hilfe_uebersichtstext = "<p><b>Erste Hilfe bei Problemen:</b><br>"
     . "<li>Für die Moderatoren steht eine eigene Benutzeroberfläche in HTML zur Verfügung, mit der die Fragen der User schnell"
     . " und komfortabel durchgeschaltet, beantwortet oder unterdrückt werden können. "
     . "<li>Die Fragen, die ein Moderator zur Beantwortung ausgewählt hat, sind für alle anderen Moderatoren gesperrt. "
-    . "<li>÷ffentliche Ein- und Austrittsnachrichten werden in moderierten Räumen unterdrückt. "
+    . "<li>Öffentliche Ein- und Austrittsnachrichten werden in moderierten Räumen unterdrückt. "
     . "<li>Die Moderationsfunktionen sind nur in den Räumen aktiv, die auf den Status \"moderiert\" gesetzt sind."
     . "</ul>" . "</p>";
 

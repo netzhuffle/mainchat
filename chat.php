@@ -85,7 +85,7 @@ if ($u_id) {
         $tmp = str_replace("ö", "", $tmp);
         $tmp = str_replace("ü", "", $tmp);
         $tmp = str_replace("Ä", "", $tmp);
-        $tmp = str_replace("÷", "", $tmp);
+        $tmp = str_replace("Ö", "", $tmp);
         $tmp = str_replace("Ü", "", $tmp);
         $tmp = str_replace("ß", "", $tmp);
         

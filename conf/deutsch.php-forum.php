@@ -11,7 +11,7 @@ $t['thema_edit'] = "Thema bearbeiten";
 
 //Texte für Maske Forum
 $t['forum_msg1'] = "Name des Forums:";
-$t['forum_msg2'] = "÷ffentlich zugänglich:";
+$t['forum_msg2'] = "Öffentlich zugänglich:";
 $t['forum_msg3'] = "Gäste dürfen:";
 $t['forum_msg4'] = "User dürfen:";
 $t['forum_msg5'] = "nur lesen";

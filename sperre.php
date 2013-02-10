@@ -134,7 +134,7 @@ function liste()
             } else {
                 echo "<TD>" . $f1
                     . "<B>[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=aendern&is_id=$row->is_id\">ÄNDERN</A>]\n"
-                    . "[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=loeschen&is_id=$row->is_id\">L÷SCHEN</A>]\n";
+                    . "[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=loeschen&is_id=$row->is_id\">LÖSCHEN</A>]\n";
                 if (isset($ip_name) && (strlen($ip_name) > 0)) {
                     echo "<br>[<A HREF=\"sperre.php?http_host=$http_host&id=$id&aktion=trace&is_id=$row->is_id\">TRACEROUTE</A>]\n";
                 }

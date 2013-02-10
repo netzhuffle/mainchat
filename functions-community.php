@@ -35,7 +35,7 @@ function mail_neu($u_id, $u_nick, $id, $nachricht = "OLM")
     $fenster = str_replace("ö", "", $fenster);
     $fenster = str_replace("ü", "", $fenster);
     $fenster = str_replace("Ä", "", $fenster);
-    $fenster = str_replace("÷", "", $fenster);
+    $fenster = str_replace("Ö", "", $fenster);
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
     
@@ -122,7 +122,7 @@ function profil_neu($u_id, $u_nick, $id)
     $fenster = str_replace("ö", "", $fenster);
     $fenster = str_replace("ü", "", $fenster);
     $fenster = str_replace("Ä", "", $fenster);
-    $fenster = str_replace("÷", "", $fenster);
+    $fenster = str_replace("Ö", "", $fenster);
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
     

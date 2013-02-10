@@ -49,7 +49,7 @@ function zeige_blacklist($aktion, $zeilen, $sort)
                 . "date_format(f_zeit,'%d.%m.%y %H:%i') as zeit "
                 . "from blacklist left join user on f_blacklistid=u_id "
                 . "order by $qsort";
-            $button = "L÷SCHEN";
+            $button = "LÖSCHEN";
             $titel = "Blacklist-Einträge";
             
             // blacklist-expire

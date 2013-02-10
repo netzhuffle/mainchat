@@ -11,7 +11,7 @@ $fenster = str_replace("ä", "", $fenster);
 $fenster = str_replace("ö", "", $fenster);
 $fenster = str_replace("ü", "", $fenster);
 $fenster = str_replace("Ä", "", $fenster);
-$fenster = str_replace("÷", "", $fenster);
+$fenster = str_replace("Ö", "", $fenster);
 $fenster = str_replace("Ü", "", $fenster);
 $fenster = str_replace("ß", "", $fenster);
 
@@ -184,7 +184,7 @@ if ($u_id && $communityfeatures) {
         
         case "bearbeite":
         // Freund löschen
-            if ($los == "L÷SCHEN") {
+            if ($los == "LÖSCHEN") {
                 if (isset($f_freundid) && is_array($f_freundid)) {
                     // Mehrere Freunde löschen
                     foreach ($f_freundid as $key => $loesche_id) {

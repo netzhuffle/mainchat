@@ -303,7 +303,7 @@ $t[menue11]=    "Admin: User löschen";
 $t[sonst45]=    "Userdaten importieren";             
 $t[sonst46]=    "Format: Nickname<TAB>Username<TAB>Admin E-Mail<TAB>Passwort";
 $t[sonst47]=    "<P><B>Fehler:</B> Sie müssen eine Datei hochladen!</P>"; 
-$t[sonst48]=    "<P><B>Fehler:</B> Fehler beim ÷ffnen der Datei.</P>";   
+$t[sonst48]=    "<P><B>Fehler:</B> Fehler beim Öffnen der Datei.</P>";   
 $t[sonst49]=    "<P><B>Alle User löschen:</B> Sollen wirklich alle User außer den Admins gelöscht werden?</P>";     
 $t[sonst50]=    "Ja";
 $t[sonst51]=    "User löschen"; 
@@ -419,7 +419,7 @@ $hilfe_uebersichtstext=	"<P><B>Erste Hilfe bei Problemen:</B><BR>".
 			"beantwortet oder unterdrückt werden können.".
 			"<LI>Die Fragen, die ein Moderator zur Beantwortung ausgewählt hat, sind für ".
 			"alle anderen Moderatoren gesperrt.".
-			"<LI>÷ffentliche Ein- und Austrittsnachrichten werden in moderierten Räumen unterdrückt.".
+			"<LI>Öffentliche Ein- und Austrittsnachrichten werden in moderierten Räumen unterdrückt.".
 			"<LI>Die Moderationsfunktionen sind nur in den Räum aktiv, die auf den Status ".
 			"\"moderiert\" gesetzt sind.</UL>".
 			"<HR SIZE=3 NOSHADE>";
@@ -680,7 +680,7 @@ $hilfe_uebersichtstext=	"<p><b>Erste Hilfe bei Problemen:</b><br>".
 			"<li>Für die Moderatoren steht eine eigene Benutzeroberfläche in HTML zur Verfügung, mit der die Fragen der User schnell".
 			" und komfortabel durchgeschaltet, beantwortet oder unterdrückt werden können. ".
 			"<li>Die Fragen, die ein Moderator zur Beantwortung ausgewählt hat, sind für alle anderen Moderatoren gesperrt. ".
-			"<li>÷ffentliche Ein- und Austrittsnachrichten werden in moderierten Räumen unterdrückt. ".
+			"<li>Öffentliche Ein- und Austrittsnachrichten werden in moderierten Räumen unterdrückt. ".
 			"<li>Die Moderationsfunktionen sind nur in den Räumen aktiv, die auf den Status \"moderiert\" gesetzt sind.".
 			"</ul>".
 			"</p>";

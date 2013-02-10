@@ -1188,7 +1188,7 @@ function user(
     $fenstername = str_replace("ö", "", $fenstername);
     $fenstername = str_replace("ü", "", $fenstername);
     $fenstername = str_replace("Ä", "", $fenstername);
-    $fenstername = str_replace("÷", "", $fenstername);
+    $fenstername = str_replace("Ö", "", $fenstername);
     $fenstername = str_replace("Ü", "", $fenstername);
     $fenstername = str_replace("ß", "", $fenstername);
     

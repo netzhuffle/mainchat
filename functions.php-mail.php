@@ -203,7 +203,7 @@ function zeige_mailbox($aktion, $zeilen)
             $query = "SELECT m_id,m_status,m_von_uid,date_format(m_zeit,'%d.%m.%y um %H:%i') as zeit,m_betreff,u_nick "
                 . "FROM mail LEFT JOIN user on m_von_uid=u_id "
                 . "WHERE m_an_uid=$u_id " . "order by m_zeit desc";
-            $button = "L÷SCHEN";
+            $button = "LÖSCHEN";
             $titel = "Mails in der Mailbox für";
             break;
         
@@ -222,7 +222,7 @@ function zeige_mailbox($aktion, $zeilen)
                 . "FROM mail LEFT JOIN user on m_von_uid=u_id "
                 . "WHERE m_an_uid=$u_id " . "AND m_status!='geloescht' "
                 . "order by m_zeit desc";
-            $button = "L÷SCHEN";
+            $button = "LÖSCHEN";
             $titel = "Mails in der Mailbox für";
     }
     
@@ -379,7 +379,7 @@ function zeige_email($m_id)
             . $row->m_id . "\">\n"
             . "<INPUT TYPE=\"HIDDEN\" NAME=\"aktion\" VALUE=\"loesche\">\n"
             . "<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n"
-            . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"L÷SCHEN\">" . $f2
+            . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"LÖSCHEN\">" . $f2
             . "</TD></FORM></TR>\n";
         
         echo "</TABLE>\n";

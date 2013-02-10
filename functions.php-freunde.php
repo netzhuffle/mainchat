@@ -15,7 +15,7 @@ function zeige_freunde($aktion, $zeilen)
                 . "UNION "
                 . "SELECT f_id,f_text,f_userid,f_freundid,f_zeit,date_format(f_zeit,'%d.%m.%y %H:%i') as zeit FROM freunde WHERE f_freundid=$u_id AND f_status = 'bestaetigt' "
                 . "ORDER BY f_zeit desc ";
-            $button = "L÷SCHEN";
+            $button = "LÖSCHEN";
             $titel1 = "hat";
             $titel2 = "bestätigte(n) Freunde";
             break;
@@ -26,7 +26,7 @@ function zeige_freunde($aktion, $zeilen)
                 . "from freunde " . "WHERE ( "
                 . " f_freundid=$u_id) AND (f_status='beworben') "
                 . "order by f_zeit desc";
-            $button = "L÷SCHEN";
+            $button = "LÖSCHEN";
             $button2 = "BESTÄTIGEN";
             $titel1 = "hat";
             $titel2 = "noch zu bestätigende Freunde";
@@ -299,7 +299,7 @@ function neuer_freund($f_userid, $freund)
             $fenster = str_replace("ö", "", $fenster);
             $fenster = str_replace("ü", "", $fenster);
             $fenster = str_replace("Ä", "", $fenster);
-            $fenster = str_replace("÷", "", $fenster);
+            $fenster = str_replace("Ö", "", $fenster);
             $fenster = str_replace("Ü", "", $fenster);
             $fenster = str_replace("ß", "", $fenster);
             

@@ -16,7 +16,7 @@ function kopf_forum($admin)
     $fenster = str_replace("ö", "", $fenster);
     $fenster = str_replace("ü", "", $fenster);
     $fenster = str_replace("Ä", "", $fenster);
-    $fenster = str_replace("÷", "", $fenster);
+    $fenster = str_replace("Ö", "", $fenster);
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
     
@@ -755,7 +755,7 @@ function maske_posting($mode)
     $fenster = str_replace("ö", "", $fenster);
     $fenster = str_replace("ü", "", $fenster);
     $fenster = str_replace("Ä", "", $fenster);
-    $fenster = str_replace("÷", "", $fenster);
+    $fenster = str_replace("Ö", "", $fenster);
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
     
@@ -916,7 +916,7 @@ function navigation_posting(
         $pfenster = str_replace("ö", "", $pfenster);
         $pfenster = str_replace("ü", "", $pfenster);
         $pfenster = str_replace("Ä", "", $pfenster);
-        $pfenster = str_replace("÷", "", $pfenster);
+        $pfenster = str_replace("Ö", "", $pfenster);
         $pfenster = str_replace("Ü", "", $pfenster);
         $pfenster = str_replace("ß", "", $pfenster);
         

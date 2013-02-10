@@ -25,7 +25,7 @@ if (strlen($u_id) > 0) {
     $fenster = str_replace("ö", "", $fenster);
     $fenster = str_replace("ü", "", $fenster);
     $fenster = str_replace("Ä", "", $fenster);
-    $fenster = str_replace("÷", "", $fenster);
+    $fenster = str_replace("Ö", "", $fenster);
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
 ?>

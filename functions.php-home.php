@@ -200,7 +200,7 @@ function home_info($u_id, $u_nick, $farben, $aktion)
     $fenster = str_replace("ö", "", $fenster);
     $fenster = str_replace("ü", "", $fenster);
     $fenster = str_replace("Ä", "", $fenster);
-    $fenster = str_replace("÷", "", $fenster);
+    $fenster = str_replace("Ö", "", $fenster);
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
     
@@ -397,13 +397,13 @@ function home_bild(
         
         if ($aktion == "aendern") {
             $text .= "<TD VALIGN=\"BOTTOM\" ALIGN=\"RIGHT\">" . $f3
-                . "<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=aendern&loesche=$feld\">L÷SCHEN</A>]</B>"
+                . "<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=aendern&loesche=$feld\">LÖSCHEN</A>]</B>"
                 . $f4 . "<BR>"
                 . home_farbe($u_id, $u_nick, $home, $feld, $farben[$feld])
                 . "</TD>\n";
         } elseif ($aktion == "aendern_ohne_farbe") {
             $text .= "<TD VALIGN=\"BOTTOM\" ALIGN=\"RIGHT\">" . $f3
-                . "<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=aendern&loesche=$feld\">L÷SCHEN</A>]</B>"
+                . "<B>[<A HREF=\"$PHP_SELF?http_host=$http_host&id=$id&aktion=aendern&loesche=$feld\">LÖSCHEN</A>]</B>"
                 . $f4 . "</TD>\n";
         }
         
@@ -456,7 +456,7 @@ function home_aktionen($u_id, $u_nick, $home, $farben, $aktion)
     $fenster = str_replace("ö", "", $fenster);
     $fenster = str_replace("ü", "", $fenster);
     $fenster = str_replace("Ä", "", $fenster);
-    $fenster = str_replace("÷", "", $fenster);
+    $fenster = str_replace("Ö", "", $fenster);
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
     
