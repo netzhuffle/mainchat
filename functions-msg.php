@@ -50,7 +50,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
     $text = auto_knebel($text);
     
     // Eingabe parsen
-    $chatzeile = preg_split("/ /", $text, 4);
+    $chatzeile = explode(" ", $text, 4);
     if (!isset($chatzeile[1]))
         $chatzeile[1] = "";
     if (!isset($chatzeile[2]))
@@ -1043,19 +1043,15 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                 $txt = str_replace("%zeit%", $zeit, $t['knebel6']);
                 system_msg("", 0, $u_id, $system_farbe, $txt);
             } else {
-                $away = html_parse($privat,
-                    htmlspecialchars(
-                        substr(
-                            trim(
-                                $chatzeile[1] . " " . $chatzeile[2] . " "
-                                    . $chatzeile[3]), 0, 80)));
+                $away = substr(trim($chatzeile[1] . " " . $chatzeile[2] . " " . $chatzeile[3]), 0, 80);
+                $away = html_parse($privat, htmlspecialchars($away));
                 if ($away == "") {
                     $text = "$u_nick $t[away2]";
                     $f['u_away'] = "";
                     schreibe_db("user", $f, $u_id, "u_id");
                 } else {
                     $text = "$u_nick $t[away1] $away";
-                    $f['u_away'] = addslashes($away);
+                    $f['u_away'] = $away;
                     schreibe_db("user", $f, $u_id, "u_id");
                 }
                 // Bei Moderation private Nachricht, sonst Nachricht an alle
@@ -1674,7 +1670,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                     
                     // Bei Moderation private Nachricht, sonst Nachricht an alle
                     if (!$ist_moderiert || $u_level == "M") {
-                        hidden_msg($u_name, $u_id, $u_farbe, $r_id,
+                        dice_msg($u_name, $u_id, $u_farbe, $r_id,
                             $t['chat_msg34']);
                     } else {
                         system_msg("", $u_id, $u_id, $system_farbe,
@@ -2983,7 +2979,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                         // da obriges seltener für den . passiert, und der . öfters aus versehen statt dem : erwischt wird
                         if ($temp == ":" || $temp == "@") {
                             $nick = nick_ergaenze($chatzeile[0], "raum", 0);
-                            if ($nick['u_nick'] <> "") {
+                            if ($nick['u_nick'] != "") {
                                 // Falls User gefunden wurde Nicknamen einfügen und filtern
                                 $f['c_text'] = "[" . $t['chat_spruch6']
                                     . "&nbsp;$nick[u_nick]] "
@@ -3003,7 +2999,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                         } elseif (isset($chatzeile[1])
                             && substr($chatzeile[1], 0, 1) == "@") {
                             $nick = nick_ergaenze($chatzeile[1], "raum", 0);
-                            if ($nick['u_nick'] <> "") {
+                            if ($nick['u_nick'] != "") {
                                 // Falls User gefunden wurde Nicknamen einfügen und filtern
                                 $f['c_text'] = "[" . $t['chat_spruch6']
                                     . "&nbsp;$nick[u_nick]] "

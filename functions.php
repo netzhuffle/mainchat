@@ -718,7 +718,7 @@ function schreibe_db($db, $f, $id, $id_name)
                     // Verschlüsseln
                     $q .= "='" . iCrypt($inhalt, $f['u_salt']) . "'";
                 } else {
-                    $q .= "='" . addslashes($inhalt) . "'";
+                    $q .= "='" . mysql_real_escape_string($inhalt) . "'";
                 }
             }
         }
@@ -750,7 +750,7 @@ function schreibe_db($db, $f, $id, $id_name)
                         $f['u_salt'] = substr($inhalt, 0, 2);
                     $q .= "='" . iCrypt($inhalt, $f['u_salt']) . "'";
                 } else {
-                    $q .= "='" . addslashes($inhalt) . "'";
+                    $q .= "='" . mysql_real_escape_string($inhalt) . "'";
                 }
             }
         }

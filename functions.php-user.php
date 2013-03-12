@@ -158,19 +158,13 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
     
     if ($result AND mysql_num_rows($result) == 1) {
         $row = mysql_fetch_object($result);
-        $uu_away = str_replace("\\", "",
-            htmlspecialchars(stripslashes($row->u_away)));
-        $uu_nick = str_replace("\\", "",
-            htmlspecialchars(stripslashes($row->u_nick)));
-        $uu_name = str_replace("\\", "",
-            htmlspecialchars(stripslashes($row->u_name)));
+        $uu_away = $row->u_away;
+        $uu_nick = htmlspecialchars($row->u_nick);
+        $uu_name = htmlspecialchars($row->u_name);
         $uu_id = $row->u_id;
-        $uu_email = str_replace("\\", "",
-            htmlspecialchars(stripslashes($row->u_email)));
-        $uu_adminemail = str_replace("\\", "",
-            htmlspecialchars(stripslashes($row->u_adminemail)));
-        $uu_url = str_replace("\\", "",
-            htmlspecialchars(stripslashes($row->u_url)));
+        $uu_email = htmlspecialchars($row->u_email);
+        $uu_adminemail = htmlspecialchars($row->u_adminemail);
+        $uu_url = htmlspecialchars($row->u_url);
         $uu_level = $row->u_level;
         $uu_farbe = $row->u_farbe;
         $letzter_login = $row->letzter_login;
@@ -273,15 +267,7 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
             . "</B></TD><TD><B>" . user($user, $row, TRUE, FALSE);
         
         if ($uu_away != "") {
-            $awaytext = str_replace('&lt;b&gt;', '<B>', $uu_away);
-            $awaytext = str_replace('&lt;/b&gt;', '</B>', $awaytext);
-            $awaytext = str_replace('&lt;i&gt;', '<I>', $awaytext);
-            $awaytext = str_replace('&lt;/i&gt;', '</I>', $awaytext);
-            $awaytext = str_replace('&amp;lt;', '<', $awaytext);
-            $awaytext = str_replace('&amp;gt;', '>', $awaytext);
-            $awaytext = str_replace('&amp;quot;', '"', $awaytext);
-            echo $f1 . "<BR></b>($awaytext)<b>" . $f2;
-            unset($awaytext);
+            echo $f1 . "<BR></b>($uu_away)<b>" . $f2;
         }
         
         echo "</B></TD></TR>\n";
