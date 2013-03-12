@@ -84,6 +84,10 @@ function user_liste($larr, $anzahl)
             $v['u_away'] = $v['u_away'] ? "y" : "";
             if (!isset($v['u_home_ok']))
                 $v['u_home_ok'] = "";
+            if (!isset($v['u_chathomepage']))
+                $v['u_chathomepage'] = "";
+            if (!isset($v['gruppe']))
+                $v['gruppe'] = "";
             if ($show_geschlecht == true) {
                 $geschlecht = $geschl[$v['u_id']];
                 $jsarr[] = "'$v[u_id]','$v[u_chathomepage]','$v[u_nick]','$v[hostname]','$v[o_ip]','$v[u_away]','$v[u_level]','$v[gruppe]','$v[u_home_ok]','$geschlecht' ";

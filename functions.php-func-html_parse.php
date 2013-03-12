@@ -73,7 +73,7 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                     } else {
                         // Falls smilie existiert, ersetzen
                         $smilie_code2 = str_replace("&amp;", "&", $smilie_code);
-                        if ($smilie[$smilie_code2]) {
+                        if (isset($smilie[$smilie_code2])) {
                             $text = str_replace($smilie_code,
                                 "<SMIL SRC=\"" . $smilies_pfad
                                     . $smilie[$smilie_code2] . "\" SMIL>",
