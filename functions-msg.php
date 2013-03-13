@@ -1670,7 +1670,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                     
                     // Bei Moderation private Nachricht, sonst Nachricht an alle
                     if (!$ist_moderiert || $u_level == "M") {
-                        dice_msg($u_name, $u_id, $u_farbe, $r_id,
+                        hidden_msg($u_name, $u_id, $u_farbe, $r_id,
                             $t['chat_msg34']);
                     } else {
                         system_msg("", $u_id, $u_id, $system_farbe,
