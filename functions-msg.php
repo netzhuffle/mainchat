@@ -1634,7 +1634,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                     break;
                 }
                 
-                if (preg_match("!\d+[wW]\d+!", $chatzeile[1])) {
+                if (preg_match("!^\d+[wW]\d+$!", $chatzeile[1])) {
                     
                     $w = preg_split("![wW]!", $chatzeile[1]);
                     if ($w[0] > 30)
