@@ -2893,7 +2893,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                             . $spruchart . "\t";
                         for (@reset($sp_list); (list(, $sp_text) = each(
                             $sp_list))
-                            AND (!preg_match("/" . $sp_such . "/", $sp_text));)
+                            AND (!preg_match("/" . $sp_such . "/i", $sp_text));)
                             ;
                         
                         // Spruch gefunden?
