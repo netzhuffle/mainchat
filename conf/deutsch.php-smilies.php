@@ -64,5 +64,3 @@ $smilie["~~8}"] = "Brillen-Schlange";
 $smilie[":=|"] = "Affe";
 $smilie["8)"] = "Frosch";
 $smilie[":<="] = "Walross";
-
-?>

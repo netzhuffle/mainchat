@@ -96,5 +96,3 @@ $t['verschieben3'] = "nach Thema: ";
 $t['verschieben4'] = "VERSCHIEBEN";
 
 $t['letzte_aenderung'] = "[zuletzt geändert am %datum% um %uhrzeit% von %user%]";
-
-?>

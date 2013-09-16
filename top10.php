@@ -1,6 +1,6 @@
 <?php
 
-require("functions.php");
+require 'functions.php';
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
 id_lese($id);
@@ -24,24 +24,28 @@ $fenster = str_replace("ß", "", $fenster);
 <HEAD><TITLE><?php echo $body_titel . "_Top10"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT>
         window.focus()
-        function win_reload(file,win_name) {
+        function win_reload(file,win_name)
+        {
                 win_name.location.href=file;
 }
-        function opener_reload(file,frame_number) {
+        function opener_reload(file,frame_number)
+        {
                 opener.parent.frames[frame_number].location.href=file;
 }
 </SCRIPT>
 <?php echo $stylesheet; ?>
 <SCRIPT>
-function neuesFenster(url) { 
-        hWnd=window.open(url,"<?php echo $fenster; ?>","resizable=yes,scrollbars=yes,width=300,height=580"); 
+function neuesFenster(url)
+{
+        hWnd=window.open(url,"<?php echo $fenster; ?>","resizable=yes,scrollbars=yes,width=300,height=580");
 }
-function neuesFenster2(url) { 
-        hWnd=window.open(url,"<?php echo "640_" . $fenster; ?>","resizable=yes,scrollbars=yes,width=780,height=580"); 
+function neuesFenster2(url)
+{
+        hWnd=window.open(url,"<?php echo "640_" . $fenster; ?>","resizable=yes,scrollbars=yes,width=780,height=580");
 }
 </SCRIPT>
 
-</HEAD> 
+</HEAD>
 <?php
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
 if (strlen($grafik_mini_background) > 0) {
@@ -74,7 +78,7 @@ if ($erweitertefeatures) {
         default:
             $anzahl = 10;
     }
-    
+
     $bgcolor = $farbe_tabelle_zeile1;
     echo "<TABLE WIDTH=100% BORDER=0 CELLPADDING=2 CELLSPACING=0>\n"
         . "<TR BGCOLOR=\"$farbe_tabelle_kopf2\" align=\"left\"><TD WIDTH=\"4%\">&nbsp;</TD>"
@@ -86,7 +90,7 @@ if ($erweitertefeatures) {
         . "</DIV></TD>"
         . "<TD WIDTH=\"32%\" colspan=2><DIV style=\"color:$farbe_text; font-weight:bold;\">"
         . "&nbsp;&nbsp;&nbsp;&nbsp;Gesamtpunkte</DIV></TD></TR></TABLE>\n";
-    
+
     // im Cache nachsehen, ob aktuelle Daten vorhanden sind (nicht älter als 6 Stunden)
     $query = "select * from top10cache where t_eintrag=1 "
         . "AND date_add(t_zeit, interval '6' hour)>=NOW()";
@@ -110,7 +114,7 @@ if ($erweitertefeatures) {
             }
         }
         @mysql_free_result($result);
-        
+
         // Top 100 Punkte im aktuellen Jahr als Array aufbauen
         $query = "select u_punkte_jahr as punkte,u_nick,u_id,u_level,u_punkte_gesamt,u_punkte_gruppe,u_chathomepage from user "
             . "where u_punkte_jahr!=0 " . "and u_punkte_datum_jahr="
@@ -124,7 +128,7 @@ if ($erweitertefeatures) {
             }
         }
         @mysql_free_result($result);
-        
+
         // Top 100 Gesamtpunkte als Array aufbauen
         $query = "select u_punkte_gesamt as punkte,u_nick,u_id,u_level,u_punkte_gesamt,u_punkte_gruppe,u_chathomepage from user "
             . "where u_punkte_gesamt!=0  and u_level != 'Z' "
@@ -137,7 +141,7 @@ if ($erweitertefeatures) {
             }
         }
         @mysql_free_result($result);
-        
+
         // Daten in Cache schreiben und alle anderen Einträge löschen
         unset($f);
         $f['t_eintrag'] = 1;
@@ -146,7 +150,7 @@ if ($erweitertefeatures) {
         $query = "DELETE FROM top10cache WHERE t_eintrag=1 AND t_id!='$t_id'";
         $result = mysql_query($query, $conn);
     }
-    
+
     // Array als Tabelle ausgeben
     if (is_array($array_user)) {
         for ($i = 0; $i < $anzahl; $i++) {
@@ -174,7 +178,7 @@ if ($erweitertefeatures) {
             } else {
                 $bgcolor = $farbe_tabelle_zeile2;
             }
-            
+
         }
     }
     echo "<BR>\n";

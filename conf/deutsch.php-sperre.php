@@ -28,4 +28,3 @@ $t['sonst19'] = "Grund der Sperre (opt):";
 $t['sonst20'] = "WARNUNG";
 $t['sonst21'] = "SPERRE";
 $t['sonst22'] = "Art (Warnung sperrt nicht):";
-?>

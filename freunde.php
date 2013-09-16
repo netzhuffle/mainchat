@@ -1,6 +1,6 @@
 <?php
 
-require("functions.php");
+require 'functions.php';
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
 id_lese($id);
@@ -20,20 +20,25 @@ $fenster = str_replace("ß", "", $fenster);
 <HEAD><TITLE><?php echo $body_titel . "_Freunde"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT>
         window.focus()
-        function win_reload(file,win_name) {
+        function win_reload(file,win_name)
+        {
             win_name.location.href=file;
         }
-        function opener_reload(file,frame_number) {
+        function opener_reload(file,frame_number)
+        {
             opener.parent.frames[frame_number].location.href=file;
         }
-        function neuesFenster(url,name) {
+        function neuesFenster(url,name)
+        {
             hWnd=window.open(url,name,"resizable=yes,scrollbars=yes,width=300,height=580");
         }
-        function neuesFenster2(url) {
+        function neuesFenster2(url)
+        {
             hWnd=window.open(url,"<?php echo "640_" . $fenster; ?>","resizable=yes,scrollbars=yes,width=780,height=580");
         }
-        function toggle(tostat ) {
-            for(i=0; i<document.forms["freund_loeschen"].elements.length; i++) {
+        function toggle(tostat )
+        {
+            for (i=0; i<document.forms["freund_loeschen"].elements.length; i++) {
                  e = document.forms["freund_loeschen"].elements[i];
                  if ( e.type=='checkbox' )
                      e.checked=tostat;
@@ -41,7 +46,7 @@ $fenster = str_replace("ß", "", $fenster);
         }
 </SCRIPT>
 <?php echo $stylesheet; ?>
-</HEAD> 
+</HEAD>
 <?php
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
 if (strlen($grafik_mini_background) > 0) {
@@ -63,7 +68,7 @@ if (ist_netscape()) {
 }
 
 if ($u_id && $communityfeatures) {
-    
+
     // Menü als erstes ausgeben
     $box = $ft0 . "Menü Freunde" . $ft1;
     $text = "<A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=\">Meine Freunde listen</A>\n"
@@ -72,12 +77,12 @@ if ($u_id && $communityfeatures) {
     if ($admin)
         $text .= "| <A HREF=\"freunde.php?http_host=$http_host&id=$id&aktion=admins\">Alle Admins als Freund hinzufügen</A>\n";
     $text .= "| <A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=community#freunde\">Hilfe</A>\n";
-    
+
     show_box2($box, $text, "100%");
     echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
-    
+
     switch ($aktion) {
-        
+
         case "editinfotext":
             if ((strlen($editeintrag) > 0)
                 && (preg_match("/^[0-9]+$/", trim($editeintrag)) == 1)) {
@@ -90,7 +95,7 @@ if ($u_id && $communityfeatures) {
                 @mysql_free_result($result);
             }
             break;
-        
+
         case "editinfotext2":
             if ((strlen($f_id) > 0)
                 && (preg_match("/^[0-9]+$/", trim($f_id)) == 1)) {
@@ -105,7 +110,7 @@ if ($u_id && $communityfeatures) {
                 @mysql_free_result($result);
             }
             break;
-        
+
         case "neu":
         // Formular für neuen Freund ausgeben
             if (!isset($neuer_freund)) {
@@ -114,7 +119,7 @@ if ($u_id && $communityfeatures) {
             }
             formular_neuer_freund($neuer_freund);
             break;
-        
+
         case "neu2":
         // Neuer Freund, 2. Schritt: Nick Prüfen
             $neuer_freund['u_nick'] = htmlspecialchars(
@@ -124,7 +129,7 @@ if ($u_id && $communityfeatures) {
             if ($result && mysql_num_rows($result) == 1) {
                 $neuer_freund['u_id'] = mysql_result($result, 0, 0);
                 $neuer_freund['u_level'] = mysql_result($result, 0, 1);
-                
+
                 $ignore = false;
                 $query2 = "SELECT * FROM iignore WHERE i_user_aktiv='$neuer_freund[u_id]' AND i_user_passiv = '$u_id'";
                 $result2 = mysql_query($query2);
@@ -134,16 +139,16 @@ if ($u_id && $communityfeatures) {
                 }
                 ;
                 @mysql_free_result($result2);
-                
+
                 if ($ignore) {
                     echo (str_replace("%u_name%", $neuer_freund['u_nick'],
                         $t['chat_msg116']));
                     formular_neuer_freund($neuer_freund);
-                } else if ($neuer_freund['u_level'] == 'Z') {
+                } elseif ($neuer_freund['u_level'] == 'Z') {
                     echo (str_replace("%u_name%", $neuer_freund['u_nick'],
                         $t['chat_msg117']));
                     formular_neuer_freund($neuer_freund);
-                } else if ($neuer_freund['u_level'] == 'G') {
+                } elseif ($neuer_freund['u_level'] == 'G') {
                     echo (str_replace("%u_name%", $neuer_freund['u_nick'],
                         $t['chat_msg118']));
                     formular_neuer_freund($neuer_freund);
@@ -153,7 +158,7 @@ if ($u_id && $communityfeatures) {
                     formular_neuer_freund($neuer_freund);
                     zeige_freunde("normal", "");
                 }
-                
+
             } elseif ($neuer_freund['u_nick'] == "") {
                 echo "<B>Fehler:</B> Bitte geben Sie einen Nicknamen an!<BR>\n";
                 formular_neuer_freund($neuer_freund);
@@ -163,7 +168,7 @@ if ($u_id && $communityfeatures) {
             }
             @mysql_free_result($result);
             break;
-        
+
         case "admins":
         // Alle Admins (Status C und S) als Freund hinzufügen
             $query = "SELECT u_id,u_nick,u_level FROM user WHERE u_level='S' OR u_level='C'";
@@ -181,7 +186,7 @@ if ($u_id && $communityfeatures) {
             zeige_freunde("normal", "");
             @mysql_free_result($result);
             break;
-        
+
         case "bearbeite":
         // Freund löschen
             if ($los == "LÖSCHEN") {
@@ -190,39 +195,39 @@ if ($u_id && $communityfeatures) {
                     foreach ($f_freundid as $key => $loesche_id) {
                         loesche_freund($loesche_id, $u_id);
                     }
-                    
+
                 } else {
                     // Einen Freund löschen
                     if (isset($f_freundid) && $f_freundid)
                         loesche_freund($f_freundid, $u_id);
                 }
             }
-            
+
             if ($los == "BESTÄTIGEN") {
                 if (isset($f_freundid) && is_array($f_freundid)) {
                     // Mehrere Freunde bestätigen
                     foreach ($f_freundid as $key => $bearbeite_id) {
                         bestaetige_freund($bearbeite_id, $u_id);
                     }
-                    
+
                 } else {
                     // Einen Freund bestätigen
                     if (isset($f_freundid) && $f_freundid)
                         bestaetige_freund($f_freundid, $u_id);
                 }
             }
-            
+
             zeige_freunde("normal", "");
             break;
-        
+
         case "bestaetigen":
             zeige_freunde("bestaetigen", "");
             break;
-        
+
         default:
             zeige_freunde("normal", "");
     }
-    
+
 }
 
 if ($o_js || !$u_id) {

@@ -1,6 +1,6 @@
 <?php
 
-require("functions.php");
+require 'functions.php';
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
 id_lese($id);
@@ -23,20 +23,25 @@ $fenster = str_replace("ß", "", $fenster);
 <HEAD><TITLE><?php echo $body_titel . "_Umfrage"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT>
         window.focus()
-        function win_reload(file,win_name) {
+        function win_reload(file,win_name)
+        {
                 win_name.location.href=file;
         }
-        function opener_reload(file,frame_number) {
+        function opener_reload(file,frame_number)
+        {
                 opener.parent.frames[frame_number].location.href=file;
         }
-        function neuesFenster(url,name) {
+        function neuesFenster(url,name)
+        {
                 hWnd=window.open(url,name,"resizable=yes,scrollbars=yes,width=300,height=580");
         }
-        function neuesFenster2(url) {
+        function neuesFenster2(url)
+        {
                 hWnd=window.open(url,"<?php echo "640_" . $fenster; ?>","resizable=yes,scrollbars=yes,width=780,height=580");
         }
-        function toggle(tostat ) {
-                for(i=0; i<document.forms["mailbox"].elements.length; i++) {
+        function toggle(tostat )
+        {
+                for (i=0; i<document.forms["mailbox"].elements.length; i++) {
                      e = document.forms["mailbox"].elements[i];
                      if ( e.type=='checkbox' )
                          e.checked=tostat;
@@ -44,7 +49,7 @@ $fenster = str_replace("ß", "", $fenster);
         }
 </SCRIPT>
 <?php echo $stylesheet; ?>
-</HEAD> 
+</HEAD>
 <?php
 
 // Body-Tag definieren
@@ -76,61 +81,61 @@ if (ist_netscape()) {
 if ($u_id && $communityfeatures && $u_level != "G") {
     // Menü als erstes ausgeben
     $box = $ft0 . "Menü Umfrage" . $ft1;
-    
+
     if (isset($adminuebersicht) && $adminuebersicht == "1" && $admin) {
         $urlzusatz = "&adminuebersicht=1";
     } else {
         $urlzusatz = "";
         $adminuebersicht = 0;
     }
-    
+
     $text = "<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=\">Übersicht</A>\n|\n"
         . "<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=umfragen_aktuell\">Aktuelle Umfragen</A>\n|\n"
         . "<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=umfragen_zukunft\">Zukünftige Umfragen</A>\n|\n"
         . "<A HREF=\"umfrage.php?http_host=$http_host&id=$id$urlzusatz&aktion=umfragen_abgeschlossen\">Abgeschlossene Umfragen</A>\n|\n"
         . "<A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=community\">Hilfe</A>\n";
-    
+
     show_box2($box, $text, "100%");
     echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
-    
+
     switch ($aktion) {
-        
+
         case "neu":
         case "aendern":
             if ($adminuebersicht == "1") {
                 umfrage_aendern($umfrage);
             }
             break;
-        
+
         case "umfrage":
         // berechtigungen prüfen
         // zeiten 1-4
         // punkte funktion, da link nicht angezeigt werden sollte
         // erster login funktion, da link nicht angezeigt werden sollte
         // $umfrage auf integer testen
-        
+
             umfrage($umfrage);
-            
+
             break;
-        
+
         case "umfragen_aktuell":
             anzeige_umfragen_aktuell($adminuebersicht);
             break;
-        
+
         case "umfragen_zukunft":
             anzeige_umfragen_zukuenftig($adminuebersicht);
             break;
-        
+
         case "umfragen_abgeschlossen":
             anzeige_umfragen_abgeschlossen($adminuebersicht);
             break;
-        
+
         default:
             anzeige_umfragen_aktuell($adminuebersicht);
             anzeige_umfragen_zukuenftig($adminuebersicht);
             anzeige_umfragen_abgeschlossen($adminuebersicht);
     }
-    
+
 } elseif ($u_level == "G") {
     echo "<P><B>Fehler:</B> Als Gast stehen Ihnen die Umfragen nicht zur Verfügung.</P>";
 } else {

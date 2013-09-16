@@ -1,7 +1,7 @@
 <?php
 
-require("functions.php");
-require("functions-msg.php");
+require 'functions.php';
+require 'functions-msg.php';
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, o_js, u_level, admin
 id_lese($id);
@@ -10,12 +10,14 @@ id_lese($id);
 <HTML>
 <HEAD><TITLE><?php echo $body_titel . "_Einstellungen"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT>
-        window.focus()     
-	function win_reload(file,win_name) {
-        	win_name.location.href=file;
+        window.focus()
+    function win_reload(file,win_name)
+    {
+            win_name.location.href=file;
 }
-	function opener_reload(file,frame_number) {
-        	opener.parent.frames[frame_number].location.href=file;
+    function opener_reload(file,frame_number)
+    {
+            opener.parent.frames[frame_number].location.href=file;
 }
 </SCRIPT>
 <?php
@@ -54,7 +56,7 @@ if (strlen($u_id) != 0) {
     $fenster = str_replace("Ö", "", $fenster);
     $fenster = str_replace("Ü", "", $fenster);
     $fenster = str_replace("ß", "", $fenster);
-    
+
     // Ggf Farbe aktualisieren
     if (isset($farbe) && strlen($farbe) > 0) {
         // In Userdatenbank schreiben
@@ -74,7 +76,7 @@ if (strlen($u_id) != 0) {
         unset($f['u_eintritt']);
         unset($f['u_austritt']);
         schreibe_db("user", $f, $u_id, "u_id");
-        
+
         if ($o_js && $o_who == 0) {
             echo "<SCRIPT>"
                 . "opener_reload('eingabe.php?http_host=$http_host&id=$id','3')"
@@ -82,12 +84,12 @@ if (strlen($u_id) != 0) {
         }
         unset($f['u_farbe']);
     }
-    
+
     // Benutzer darf Passwort nicht ändern (optional)
     if (!$einstellungen_aendern) {
         unset($f['u_passwort']);
     }
-    
+
     // Chat bei u_backup neu aufbauen, damit nach Umstellung der Chat refresht wird
     if ($o_js && $o_who == 0
         && ((isset($u_backup) && $u_backup)
@@ -99,7 +101,7 @@ if (strlen($u_id) != 0) {
             . "opener_reload('eingabe.php?http_host=$http_host&id=$id','3')"
             . "</SCRIPT>\n";
     }
-    
+
     $box = $ft0 . $t['menue4'] . $ft1;
     if ($communityfeatures && $u_level != "G") {
         $ur1 = "profil.php?http_host=$http_host&id=$id&aktion=aendern";
@@ -123,20 +125,20 @@ if (strlen($u_id) != 0) {
     if (isset($text) && $text)
         show_box2($box, $text, "100%");
     echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
-    
+
     if ($aktion == "edit2") {
-        
+
         if ((strlen($f['u_name']) < 4 || strlen($f['u_name']) > 50)) {
             echo "<P><B>$t[edit2]</B></P>\n";
             $aktion = "andereadminmail";
         }
-        
+
         if (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})",
             addslashes($f['u_adminemail']))) {
             echo "<P><B>$t[edit1]</B></P>\n";
             $aktion = "andereadminmail";
         }
-        
+
         // oder Domain ist lt. Config verboten
         if ($domaingesperrtdbase != $dbase) {
             $domaingesperrt = "";
@@ -149,12 +151,12 @@ if (strlen($u_id) != 0) {
                 $aktion = "andereadminmail";
             }
         }
-        
+
     }
-    
+
     // Auswahl
     switch ($aktion) {
-        
+
         case "andereadminmail":
             echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=$farbe_tabelle_kopf>\n";
             echo "<TR><TD COLSPAN=2>";
@@ -165,73 +167,73 @@ if (strlen($u_id) != 0) {
             echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
             echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BGCOLOR=\"$farbe_tabelle_koerper\">\n";
             echo "<TR><TD COLSPAN=2>";
-            
+
             echo "<FORM NAME=\"$u_nick\" ACTION=\"edit.php\" METHOD=POST>\n"
                 . "<INPUT TYPE=\"HIDDEN\" NAME=\"id\" VALUE=\"$id\">\n"
                 . "<INPUT TYPE=\"HIDDEN\" NAME=\"http_host\" VALUE=\"$http_host\">\n"
                 . "<INPUT TYPE=\"HIDDEN\" NAME=\"f[u_id]\" VALUE=\"$u_id\">\n"
                 . "<INPUT TYPE=\"HIDDEN\" NAME=\"aktion\" VALUE=\"edit2\">\n";
-            
+
             echo "<TABLE BORDER=0 CELLPADDING=0 WIDTH=100%>";
-            
+
             echo "<TR><TD COLSPAN=2>" . $f1
                 . "Sie können hier Ihren Username und die Interne E-Mailadresse abändern.<br><br>"
                 . "Nach dem Ändern werden Sie automatisch ausgeloggt, und ein neues Passwort an "
                 . "Ihre neue E-Mailadresse gesendet. Mit dem neuen Passwort können Sie sich sofort "
                 . "einloggen und ggf. Ihr Passwort wieder anpassen.<br><br>"
                 . "\n" . $f2 . "</TD></TR>\n";
-            
+
             echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige17']
                 . "</B><BR>\n" . $f2
                 . "<INPUT TYPE=\"TEXT\" VALUE=\"$u_name\" NAME=\"f[u_name]\" SIZE=$input_breite>"
                 . "</TD></TR>\n";
-            
+
             $query = "SELECT user.* " . "FROM user WHERE u_id=$u_id ";
             $result = mysql_query($query, $conn);
             $rows = mysql_num_rows($result);
-            
+
             if ($rows == 1) {
                 $row = mysql_fetch_object($result);
                 $u_adminemail = stripslashes($row->u_adminemail);
                 mysql_free_result($result);
-                
+
                 echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige3']
                     . "</B><BR>\n" . $f2
                     . "<INPUT TYPE=\"TEXT\" VALUE=\"$u_adminemail\" NAME=\"f[u_adminemail]\" SIZE=$input_breite>"
                     . "</TD></TR>\n";
             }
-            
+
             echo "</TABLE>\n";
             echo $f1
                 . "<BR><INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Ändern!\">"
                 . $f2;
             echo "</FORM>\n";
             echo "</TD></TR></TABLE></TD></TR></TABLE>\n";
-            
+
             break;
-        
+
         case "edit2":
             if (($eingabe == "Ändern!") && ($u_id == $f['u_id'])
                 && ($einstellungen_aendern)) {
-                
+
                 $query = "SELECT user.* FROM user WHERE u_id=$u_id ";
                 $result = mysql_query($query, $conn);
                 $rows = mysql_num_rows($result);
-                
+
                 if ($rows == 1) {
                     $row = mysql_fetch_object($result);
                     $u_adminemail = stripslashes($row->u_adminemail);
                     mysql_free_result($result);
-                    
+
                     unset($p);
-                    
+
                     // Länge des Feldes und Format Mailadresse werden weiter oben geprüft
                     $p['u_id'] = $u_id;
                     $p['u_name'] = addslashes($f['u_name']);
                     $p['u_adminemail'] = $f['u_adminemail'];
                     $pwdneu = genpassword(8);
                     $p['u_passwort'] = $pwdneu;
-                    
+
                     $ok = mail($p['u_adminemail'], $t['chat_msg112'],
                         str_replace("%passwort%", $p['u_passwort'],
                             $t['chat_msg113']), "From: $webmaster ($chat)");
@@ -244,10 +246,10 @@ if (strlen($u_id) != 0) {
                             . "<P><B>Fehler: Die Mail konnte nicht verschickt werden. Es wurden keine Einstellungen geändert!</B></P>"
                             . $f2;
                     }
-                    
+
                     $user = $row->u_nick;
                     $query = "SELECT o_id,o_raum,o_name FROM online WHERE o_user='$u_id' AND o_level!='C' AND o_level!='S'";
-                    
+
                     $result = mysql_query($query, $conn);
                     if ($result && mysql_num_rows($result) > 0) {
                         $row = mysql_fetch_object($result);
@@ -258,7 +260,7 @@ if (strlen($u_id) != 0) {
                 }
             }
             break;
-        
+
         case "loesche":
             if ($eingabe == "Löschen!" && $admin) {
                 if ($u_id == $f['u_id']) {
@@ -271,18 +273,18 @@ if (strlen($u_id) != 0) {
                     $del_level = mysql_result($result, 0, "u_level");
                     if ($del_level != "S" && $del_level != "C"
                         && $del_level != "M") {
-                        
+
                         // Userdaten löschen
                         echo "<P><B>"
                             . str_replace("%u_nick%", $f['u_nick'],
                                 $t['menue5']) . "</B></P>\n";
                         $query = "DELETE FROM user WHERE u_id=$f[u_id] ";
                         $result = mysql_query($query, $conn);
-                        
+
                         // Ignore-Einträge löschen
                         $query = "DELETE FROM iignore WHERE i_user_aktiv=$f[u_id] OR i_user_passiv=$f[u_id]";
                         $result = mysql_query($query, $conn);
-                        
+
                         // Gesperrte Räume löschen
                         $query = "DELETE FROM sperre WHERE s_user=$f[u_id]";
                         $result = mysql_query($query, $conn);
@@ -292,27 +294,27 @@ if (strlen($u_id) != 0) {
                                 $t['menue6']) . "</B></P>\n";
                     }
                 }
-                
+
             } else {
                 echo "<P><B>"
                     . str_replace("%u_nick%", $f['u_nick'], $t['menue6'])
                     . "</B></P>\n";
             }
             break;
-        
+
         case "edit":
             if (((isset($eingabe) && $eingabe == "Ändern!")
                 || (isset($farben['u_farbe']) && $farben['u_farbe']))
                 && ($u_id == $f['u_id'] || $admin)) {
                 // In Namen die unerlaubten Zeichen entfernen
                 $f['u_nick'] = coreCheckName($f['u_nick'], $check_name);
-                
+
                 // Bestimmte Felder dürfen nicht geändert werden
                 unset($f['u_neu']);
                 unset($f['u_login']);
                 unset($f['u_agb']);
                 unset($f['u_ip_historie']);
-                
+
                 // Nicht-Admin darf Einstellungen nicht ändern
                 if (!$admin) {
                     unset($f['u_name']);
@@ -320,30 +322,30 @@ if (strlen($u_id) != 0) {
                     unset($f['u_level']);
                     unset($f['u_kommentar']);
                 }
-                
+
                 // Gast darf Daten nicht ändern
                 if ($u_level == "G") {
                     unset($f['u_email']);
                     unset($f['u_auth']);
                     unset($passwort1);
                 }
-                
+
                 $ok = 1;
-                
+
                 // Farbe aus Farb-Popup in Hidden-Feld
                 if ($farben['u_farbe'])
                     $f['u_farbe'] = $farben['u_farbe'];
-                
+
                 // Farbe direkt über Input-Feld
                 if (substr($f['u_farbe'], 0, 1) == "#") {
                     $f['u_farbe'] = substr($f['u_farbe'], 1, 6);
                 }
                 if (strlen($f['u_farbe']) != 6) {
                     unset($f['u_farbe']);
-                } else if (!preg_match("/[a-f0-9]{6}/i", $f['u_farbe'])) {
+                } elseif (!preg_match("/[a-f0-9]{6}/i", $f['u_farbe'])) {
                     unset($f['u_farbe']);
                 }
-                
+
                 // E-Mail ok
                 if (isset($f['u_email']) && (strlen($f['u_email']) > 0)
                     && (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})",
@@ -352,7 +354,7 @@ if (strlen($u_id) != 0) {
                     unset($f['u_email']);
                     $ok = 0;
                 }
-                
+
                 // Name muss 4-50 Zeichen haben
                 if ($admin
                     && (strlen($f['u_name']) < 4 || strlen($f['u_name']) > 50)) {
@@ -360,20 +362,20 @@ if (strlen($u_id) != 0) {
                     unset($f['u_name']);
                     $ok = 0;
                 }
-                
+
                 // Nick muss 4-20 Zeichen haben
                 if (!isset($keineloginbox)) {
                     $keineloginbox = 0;
                 }
                 if (!$keineloginbox
                     && (strlen($f['u_nick']) < 4 || strlen($f['u_nick']) > 20)) {
-                    
+
                     // Wenn man den Nicknamen nicht ändern darf, und man User ist, dann den Parameter
                     // sicherheitshalber löschen
                     if (!$einstellungen_aendern && !$admin) {
                         unset($f['u_nick']);
                     }
-                    
+
                     // Falls er oben gelöscht wurde, den Alten aus der Datenbank holen
                     if ((!$einstellungen_aendern)
                         && (strlen($f['u_nick']) == 0)) {
@@ -384,10 +386,10 @@ if (strlen($u_id) != 0) {
                             $f['u_nick'] = mysql_result($result, 0);
                         }
                     }
-                    
+
                     // immernoch keine 4-20 Zeichen?
                     // Hier müsste aus den oberen beiden Fällen der Nickname nun da sein,
-                    // Jetzt wird geprüft, ob man normalerweise den Nick ändern darf, und dort 4-20 
+                    // Jetzt wird geprüft, ob man normalerweise den Nick ändern darf, und dort 4-20
                     // Zeichen eingegeben hat
                     if (!$keineloginbox
                         && (strlen($f['u_nick']) < 4
@@ -397,13 +399,13 @@ if (strlen($u_id) != 0) {
                         $ok = 0;
                     }
                 }
-                
+
                 // Homepage muss http:// enthalten
                 if (isset($f['u_url']) && strlen($f['u_url']) > 0
                     && !preg_match("/^http:\/\//i", $f['u_url'])) {
                     $f['u_url'] = "http://" . $f['u_url'];
                 }
-                
+
                 // nur Zahlen zulassen bei den Fenstergrößen
                 $size['eingabe'] = preg_replace("/[^0-9]/", "",
                     (isset($size['eingabe']) ? $size['eingabe'] : ""));
@@ -416,7 +418,7 @@ if (strlen($u_id) != 0) {
                         : ""));
                 $size['messagesforum'] = preg_replace("/[^0-9]/", "",
                     (isset($size['messagesforum']) ? $size['messagesforum'] : ""));
-                
+
                 // Gibts den User/Nicknamen schon?
                 if ($f['u_nick']) {
                     $query = "SELECT u_id FROM user "
@@ -434,8 +436,8 @@ if (strlen($u_id) != 0) {
                     // Nickname nicht schreiben (keine Änderung oder ungültiger Text)
                     unset($f['u_nick']);
                 }
-                
-                // Wenn noch keine 30 Sekunden Zeit seit der letzten Änderung vorbei sind, 
+
+                // Wenn noch keine 30 Sekunden Zeit seit der letzten Änderung vorbei sind,
                 // dann Nickname nicht speichern
                 if (isset($f['u_nick']) && $f['u_nick']) {
                     $query = "SELECT u_nick_historie, u_nick FROM user WHERE u_id = '$f[u_id]'";
@@ -443,7 +445,7 @@ if (strlen($u_id) != 0) {
                     $xyz = mysql_fetch_array($result);
                     $nick_historie = unserialize($xyz['u_nick_historie']);
                     $nick_alt = $xyz['u_nick'];
-                    
+
                     if (is_array($nick_historie)) {
                         reset($nick_historie);
                         list($key, $value) = each($nick_historie);
@@ -453,9 +455,9 @@ if (strlen($u_id) != 0) {
                         $differenz = 999;
                     if ($admin)
                         $differenz = 999;
-                    
+
                     if ($nick_alt <> $f['u_nick']) {
-                        
+
                         if ($differenz < $nickwechsel) {
                             echo "<P><B>Sie dürfen Ihren Nicknamen nur alle $nickwechsel Sekunden ändern!</B></P>\n";
                             unset($f['u_nick']);
@@ -476,39 +478,39 @@ if (strlen($u_id) != 0) {
                         }
                     }
                 }
-                
+
                 // Level "M" nur vergeben, wenn moderation in diesem Chat erlaubt ist.
                 if (isset($f['u_level']) && $f['u_level'] == "M"
                     && !$moderationsmodul) {
                     unset($f['u_level']);
                     echo $t['edit18'];
                 }
-                
+
                 // aufpassen, wenn Admin sich selbst ändert -> keine leveländerung zulassen.
                 if ($u_id == $f['u_id'] && $admin) {
                     if ($u_level != $f['u_level'])
                         print "$t[edit16]";
                     unset($f['u_level']);
                 }
-                
+
                 $query = "SELECT u_level FROM user WHERE u_id=$f[u_id]";
                 $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) > 0) {
                     $uu_level = mysql_result($result, 0, "u_level");
-                    
+
                     // Falls Userlevel G -> Änderung verboten
                     if (isset($f['u_level']) && strlen($f['u_level']) != 0
                         && $f['u_level'] != "G" && $uu_level == "G") {
                         echo $t['edit15'];
                         unset($f['u_level']);
                     }
-                    
+
                     // uu_level = Level des Users, der geändert wird
                     // u_level  = Level des Users, der ändert
                     // Admin (C) darf für anderen Admin (C oder S) nicht ändern: Level, Passwort, Admin-EMail
                     if ($u_id != $f['u_id'] && $u_level == "C"
                         && ($uu_level == "S" || $uu_level == "C")) {
-                        
+
                         // Array Löschen
                         echo $t['edit17'] . "<BR>";
                         $ok = 0;
@@ -516,16 +518,16 @@ if (strlen($u_id) != 0) {
                         unset($passwort1);
                     }
                     mysql_free_result($result);
-                    
+
                 } else {
-                    
+
                     // Per default nichts ändern -> Array Löschen
                     echo $t['edit17'] . "<BR>";
                     $ok = 0;
                     $f = array(u_id => $f['u_id']);
                     unset($passwort1);
                 }
-                
+
                 // Nur Superuser darf Level S oder C vergeben
                 if ($ok && isset($f['u_level'])
                     && ($f['u_level'] == "S" || $f['u_level'] == "C")
@@ -533,7 +535,7 @@ if (strlen($u_id) != 0) {
                     unset($f['u_level']);
                     echo $t['edit17'] . "<BR>";
                 }
-                
+
                 // Ist passwort gesetzt?
                 if (isset($passwort1) && strlen($passwort1) > 0) {
                     if ($passwort1 != $passwort2) {
@@ -548,17 +550,17 @@ if (strlen($u_id) != 0) {
                         $f['u_passwort'] = $passwort1;
                     }
                 }
-                
+
                 // Fenstergrößen setzen
                 if (is_array($size)) {
                     $f['u_frames'] = serialize($size);
                 }
-                
+
                 // Userdaten schreiben
                 if ($ok) {
                     if (isset($zeige_loesch) && $zeige_loesch != 1) {
                         // Änderungen anzeigen
-                        
+
                         $query = "SELECT o_userdata,o_userdata2,o_userdata3,o_userdata4,o_raum "
                             . "FROM online " . "WHERE o_user=$f[u_id] ";
                         $result = mysql_query($query, $conn);
@@ -588,19 +590,19 @@ if (strlen($u_id) != 0) {
                         }
                         @mysql_free_result($result);
                         echo "<P><B>$t[edit11]</B></P>\n";
-                        
+
                     }
-                    
+
                     $query = "SELECT u_profil_historie FROM user WHERE u_id = '$f[u_id]'";
                     $result = mysql_query($query);
                     $g = mysql_fetch_array($result);
-                    
+
                     $g['u_profil_historie'] = unserialize(
                         $g['u_profil_historie']);
-                    
+
                     $datum = time();
                     $u_profil_historie_neu[$datum] = $u_nick;
-                    
+
                     if (is_array($g['u_profil_historie'])) {
                         $i = 0;
                         while (($i < 3)
@@ -615,16 +617,16 @@ if (strlen($u_id) != 0) {
                         isset($f['u_eintritt']) ? $f['u_eintritt'] : "");
                     $f['u_austritt'] = addslashes(
                         isset($f['u_austritt']) ? $f['u_austritt'] : "");
-                    
+
                     schreibe_db("user", $f, $f['u_id'], "u_id");
-                    
+
                     // Hat der User den u_level = 'Z', dann lösche die Ignores, wo er der Aktive ist
                     if (isset($f['u_level']) && $f['u_level'] == "Z") {
                         $queryii = "SELECT u_nick,u_id from user,iignore "
                             . "WHERE i_user_aktiv=$f[u_id] AND u_id=i_user_passiv order by i_id";
                         $resultii = @mysql_query($queryii, $conn);
                         $anzahlii = @mysql_num_rows($resultii);
-                        
+
                         if ($resultii && $anzahlii > 0) {
                             for ($i = 0; $i < $anzahlii; $i++) {
                                 $rowii = @mysql_fetch_object($resultii);
@@ -641,7 +643,7 @@ if (strlen($u_id) != 0) {
                             . "WHERE i_user_passiv=$f[u_id] AND u_id=i_user_aktiv order by i_id";
                         $resultii = @mysql_query($queryii, $conn);
                         $anzahlii = @mysql_num_rows($resultii);
-                        
+
                         if ($resultii && $anzahlii > 0) {
                             for ($i = 0; $i < $anzahlii; $i++) {
                                 $rowii = @mysql_fetch_object($resultii);
@@ -651,12 +653,12 @@ if (strlen($u_id) != 0) {
                         }
                         @mysql_free_result($resultii);
                     }
-                    
+
                     // Warnung für sicheren Modus ausgeben
                     if (($u_backup == 0) && ($f['u_backup'] == 1)
                         && ($u_id == $f['u_id']))
                         warnung($u_id, $u_nick, "sicherer_modus");
-                    
+
                     // Eingabe-Frame mit Farben aktualisieren
                     if ($o_js && $o_who == 0 && isset($f['u_farbe'])
                         && $f['u_farbe']) {
@@ -665,7 +667,7 @@ if (strlen($u_id) != 0) {
                             . "</SCRIPT>\n";
                     }
                 }
-                
+
                 // Falls User auf Level "Z" gesetzt wurde -> logoff
                 if (ist_online($f['u_id']) && isset($f['u_level'])
                     && $f['u_level'] == "Z") {
@@ -674,7 +676,7 @@ if (strlen($u_id) != 0) {
                         . "WHERE o_user=$f[u_id] ";
                     $result = mysql_query($query, $conn);
                     $rows = mysql_num_rows($result);
-                    
+
                     if ($rows > 0) {
                         $row = mysql_fetch_object($result);
                         verlasse_chat($f['u_id'], $f['u_nick'], $row->o_raum);
@@ -685,11 +687,11 @@ if (strlen($u_id) != 0) {
                     }
                     mysql_free_result($result);
                 }
-                
+
                 // User mit ID $u_id anzeigen
                 $query = "SELECT user.* " . "FROM user WHERE u_id=$f[u_id] ";
                 $result = mysql_query($query, $conn);
-                
+
                 if ($result && mysql_num_rows($result) == 1) {
                     $row = mysql_fetch_object($result);
                     $f['u_id'] = $u_id;
@@ -716,7 +718,7 @@ if (strlen($u_id) != 0) {
                     user_edit($f, $admin, $u_level, $size);
                 }
                 mysql_free_result($result);
-                
+
                 // Bei Änderungen an u_smilie, u_systemmeldungen, u_punkte_anzeigen chat-Fenster neu laden
                 if (($u_smilie != $f['u_smilie']
                     || $u_systemmeldungen != $f['u_systemmeldungen']
@@ -726,13 +728,13 @@ if (strlen($u_id) != 0) {
                         . "opener_reload('chat.php?http_host=$http_host&id=$id&back=$chat_back','1')"
                         . "</SCRIPT>\n";
                 }
-                
+
             } elseif ((isset($eingabe) && $eingabe == "Löschen!") && $admin) {
                 // User löschen
-                
+
                 // Ist User noch Online?
                 if (!ist_online($f['u_id'])) {
-                    // Nachfrage ob sicher	
+                    // Nachfrage ob sicher
                     echo "<P><B>"
                         . str_replace("%u_nick%", $f['u_nick'], $t['edit13'])
                         . "</B></P>\n";
@@ -752,14 +754,14 @@ if (strlen($u_id) != 0) {
                     echo "<P><B>"
                         . str_replace("%u_nick%", $f['u_nick'], $t['edit14'])
                         . "</B></P>\n";
-                    
+
                     // User mit ID $u_id anzeigen
-                    
+
                     $query = "SELECT user.* "
                         . "FROM user WHERE u_id=$f[u_id] ";
                     $result = mysql_query($query, $conn);
                     $rows = mysql_num_rows($result);
-                    
+
                     if ($rows == 1) {
                         $row = mysql_fetch_object($result);
                         $f['u_id'] = $u_id;
@@ -794,10 +796,10 @@ if (strlen($u_id) != 0) {
                     echo "<font face=\"Arial\">Homepage wurde gelöscht!</font>";
                     $query = "DELETE FROM userinfo WHERE ui_userid = '$f[u_id]'";
                     mysql_query($query);
-                    
+
                     $query = "UPDATE user SET u_login = u_login, u_chathomepage = 'N' WHERE u_id = '$f[u_id]'";
                     mysql_query($query);
-                    
+
                     $query = "DELETE FROM bild WHERE b_user = '$f[u_id]'";
                     mysql_query($query);
                 } else {
@@ -811,22 +813,22 @@ if (strlen($u_id) != 0) {
                         . "<INPUT TYPE=\"HIDDEN\" NAME=\"aktion3\" VALUE=\"loeschen\">\n"
                         . "<INPUT TYPE=\"SUBMIT\" NAME=\"eingabe\" VALUE=\"Homepage löschen!\">"
                         . $f2 . "</FORM>\n";
-                    
+
                 }
             } elseif (isset($eingabe) && $eingabe == $t['chat_msg110']
                 && $admin) {
                 // Admin E-Mailadresse aus DB holen
                 $query = "SELECT u_adminemail,u_level FROM user WHERE u_nick = '$f[u_nick]'";
                 $result = mysql_query($query);
-                
+
                 $x = mysql_fetch_array($result);
                 $f['u_adminemail'] = $x['u_adminemail'];
                 $pwdneu = genpassword(8);
                 $f['u_passwort'] = $pwdneu;
                 $uu_level = $x['u_level'];
-                
+
                 // Prüfung ob der User das überhaupt darf...
-                
+
                 if ($f['u_adminemail'] == "") {
                     echo $f1
                         . "<P><B>Fehler: Keine E-Mail Adresse hinterlegt!</B></P>"
@@ -834,7 +836,7 @@ if (strlen($u_id) != 0) {
                 } elseif ((($u_level == "C" || $u_level == "A")
                     && ($uu_level == "U" || $uu_level == "M"
                         || $uu_level == "Z")) || ($u_level == "S")) {
-                    
+
                     $ok = mail($f['u_adminemail'], $t['chat_msg112'],
                         str_replace("%passwort%", $f['u_passwort'],
                             $t['chat_msg113']), "From: $webmaster ($chat)");
@@ -846,10 +848,10 @@ if (strlen($u_id) != 0) {
                             . "<P><B>Fehler: Die Mail konnte nicht verschickt werden. Das Passwort wurde beibehalten!</B></P>"
                             . $f2;
                     }
-                    
+
                     $user = $f['u_nick'];
                     $query = "SELECT o_id,o_raum,o_name FROM online WHERE o_user='$f[u_id]' AND o_level!='C' AND o_level!='S'";
-                    
+
                     $result = mysql_query($query, $conn);
                     if ($result && mysql_num_rows($result) > 0) {
                         $row = mysql_fetch_object($result);
@@ -861,24 +863,24 @@ if (strlen($u_id) != 0) {
                     echo $f1 . "<P><B>Fehler: Aktion nicht erlaubt!</B></P>"
                         . $f2;
                 }
-                
+
             } else {
                 // User mit ID $u_id anzeigen
-                
+
                 if ($admin && strlen($f['u_id']) > 0) {
                     // Jeden User anzeigen
                     $query = "SELECT user.* "
                         . "FROM user WHERE u_id=$f[u_id] ";
                     $result = mysql_query($query, $conn);
                     $rows = mysql_num_rows($result);
-                    
+
                 } else {
                     // Nur eigene Daten anzeigen
                     $query = "SELECT user.* " . "FROM user WHERE u_id=$u_id ";
                     $result = mysql_query($query, $conn);
                     $rows = mysql_num_rows($result);
                 }
-                
+
                 if ($rows == 1) {
                     $row = mysql_fetch_object($result);
                     $f['u_id'] = $u_id;
@@ -904,16 +906,16 @@ if (strlen($u_id) != 0) {
                     mysql_free_result($result);
                 }
             }
-            
+
             break;
-        
+
         default:
         // User mit ID $u_id anzeigen
-        
+
             $query = "SELECT user.* " . "FROM user WHERE u_id=$u_id ";
             $result = mysql_query($query, $conn);
             $rows = mysql_num_rows($result);
-            
+
             if ($rows == 1) {
                 $row = mysql_fetch_object($result);
                 $f['u_id'] = $u_id;
@@ -937,9 +939,9 @@ if (strlen($u_id) != 0) {
                 user_edit($f, $admin, $u_level, $size);
                 mysql_free_result($result);
             }
-        
+
     }
-    
+
 } else {
     echo "<P ALIGN=CENTER>$t[sonst1]</P>\n";
 }

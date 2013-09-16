@@ -5,7 +5,7 @@
 //			u_id -> User, zu dem das Bild gehört
 //			feld -> Feldname in der DB
 
-require_once("functions-registerglobals.php");
+require_once 'functions-registerglobals.php';
 
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -29,7 +29,7 @@ if (!is_numeric($u_id)) {
     exit;
 }
 
-require("functions-init.php");
+require 'functions-init.php';
 
 $http_host = str_replace("\\", "", $http_host);
 $http_host = str_replace("/", "", $http_host);
@@ -87,7 +87,7 @@ $anzeigeauscache = false;
 if (file_exists($cachepfad)) {
     // Datei ist da
     // Prüfe ob Größe mit der in DB übereinstimmt
-    
+
     // Hole Größe
     $image = getimagesize($cachepfad);
     if (is_array($image)) {
@@ -108,7 +108,7 @@ if (file_exists($cachepfad)) {
             default:
                 $image[2] = "";
         }
-        
+
         // Größen aus DB
         $query = "SELECT b_width, b_height, b_mime FROM bild WHERE b_user=$u_id AND b_name='$feld'";
         $result = mysql_query($query, $conn);
@@ -116,7 +116,7 @@ if (file_exists($cachepfad)) {
             $b_width = mysql_result($result, 0, "b_width");
             $b_heigth = mysql_result($result, 0, "b_height");
             $b_mime = mysql_result($result, 0, "b_mime");
-            
+
             // Wenn DB Werte = Cache Werte dann Cache laden
             if (($image[0] == $b_width) && ($image[1] == $b_heigth)
                 && ($image[2] == $b_mime)) {
@@ -138,17 +138,17 @@ if ($anzeigeauscache) {
         $b_mime = fread($datei, 1024);
         fclose($datei);
     }
-    
+
     // Alte Daten löschen (mit 0,1% Wahrscheinlichkeit)
     if (mt_rand(1, 1000) == 1) {
         $befehl = "find " . $cache . "/ -mtime +1 -exec rm {} \;";
         exec($befehl);
     }
-    
+
 } else {
-    
+
     // Bild aus der DB lesen
-    
+
     $query = "SELECT b_bild,b_mime FROM bild WHERE b_user=$u_id AND b_name='$feld'";
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) == 1) {
@@ -156,7 +156,7 @@ if ($anzeigeauscache) {
         $bild = mysql_result($result, 0, "b_bild");
     }
     @mysql_free_result($result);
-    
+
     // Bild in den Cache schreiben
     if (!@stat($cache))
         mkdir($cache, 0777);
@@ -169,7 +169,7 @@ if ($anzeigeauscache) {
         mkdir(
             $cache . "/" . $http_host . "/" . substr($u_id, 0, 2) . "/" . $u_id,
             0777);
-    
+
     $datei = fopen($cachepfad, "w");
     if ($datei) {
         fputs($datei, $bild, strlen($bild));
@@ -186,4 +186,3 @@ if ($b_mime) {
     header("Content-Type: $b_mime");
     echo $bild;
 }
-?>

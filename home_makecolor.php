@@ -145,4 +145,3 @@ Header("Content-Location: $n_name.gif");
 Header("Content-type: image/gif");
 ImageGif($img);
 ImageDestroy($img);
-?>

@@ -1,6 +1,6 @@
 <?php
 
-require("functions.php");
+require 'functions.php';
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
 id_lese($id);
@@ -9,7 +9,8 @@ id_lese($id);
 <HEAD><TITLE><?php echo $body_titel . "_Farben"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT>
 window.focus()
-function colorsave() {
+function colorsave()
+{
 <?php
 
 list($params, $query) = preg_split("/\?/", $QUERY_STRING . "?"); // ? am Ende um mindestens zwei Elemente zu haben
@@ -72,7 +73,7 @@ if ($bg == "Y") {
 }
 </SCRIPT>
 <?php echo $stylesheet; ?>
-</HEAD> 
+</HEAD>
 <?php
 $body_tag = "<BODY BGCOLOR=\"$farbe_mini_background\" ";
 if (strlen($grafik_mini_background) > 0) :
@@ -92,7 +93,7 @@ if ($u_id && $communityfeatures) {
         . urlencode($oldcolor) . "&nix\">"
         . "<img src=\"pics/colors2.png\" ismap border=0></a>\n";
     echo "<br clear=all><img src=\"home_makecolor.php?x=135&y=25&text=neue%20Farbe&";
-    
+
     if ($bg != "Y" && $bg != "N") {
         echo "bg=" . urlencode($bg) . "&fg=" . urlencode($newcolor) . "\";\n";
     } else {
@@ -100,7 +101,7 @@ if ($u_id && $communityfeatures) {
     }
     echo " height=25 width=135 border=0>";
     echo "<img src=\"home_makecolor.php?x=135&y=25&text=aktuelle%20Farbe&";
-    
+
     if ($bg != "Y" && $bg != "N") {
         echo "bg=" . urlencode($bg) . "&fg=" . urlencode($oldcolor)
             . "&nix\";\n";
@@ -108,10 +109,10 @@ if ($u_id && $communityfeatures) {
         echo "bg=" . urlencode($oldcolor) . "&nix\"\n";
     }
     echo " height=25 width=135 border=0><BR>";
-    
+
     // Optional Auswahl einer Grafik statt der Farbe
     if ($mit_grafik) {
-        
+
         $bildliste = ARRAY('ui_bild4' => "Hintergrundgrafik 1",
             'ui_bild5' => "Hintergrundgrafik 2",
             'ui_bild6' => "Hintergrundgrafik 3");
@@ -145,11 +146,11 @@ if ($u_id && $communityfeatures) {
             . "<TR><TD>" . $f1 . "oder transparent:" . $f2 . "</TD>"
             . "<TD>$f1<B>[<A href=\"home_farben.php?http_host=$http_host&id=$id&mit_grafik=$mit_grafik&feld=$feld&bg=$bg&oldcolor=0&nix\">"
             . "wählen</A>]</B>$f2</TD></TR></TABLE>\n";
-        
+
     } else {
         echo "<BR>";
     }
-    
+
     echo "<BR>" . $f1
         . "<B>[<a href=\"javascript:colorsave();\">Farbe übernehmen</a>]\n"
         . "[<a href=\"home_farben.php?http_host=$http_host&id=$id&mit_grafik=$mit_grafik&feld=$feld&bg=$bg&oldcolor=$oldcolor&$oldcolor&nix\">Reset</a>]\n"

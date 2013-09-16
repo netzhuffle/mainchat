@@ -199,12 +199,12 @@ $t['pwneu9'] = "Hallo %nickname%,
 
 Sie oder jemand unbefugtes möchte ein neues Passwort für Ihren Nicknamen.
 
-Anbei erhalten Sie den Sicherheitscode, mit dem Sie sich ein neues Passwort erzeugen können. Ohne diesen wird kein neues Passwort erzeugt.  
+Anbei erhalten Sie den Sicherheitscode, mit dem Sie sich ein neues Passwort erzeugen können. Ohne diesen wird kein neues Passwort erzeugt.
 Geben Sie den Sicherheitscode bitte in das vorgegebene Feld ein - oder kopieren Sie es mit \"Copy and Paste\" (markieren, STRG+C und STRG+V)
 
 Sicherheitscode: %hash%
-   
--- 
+
+--
 Ihr $chat-Team  ";
 $t['pwneu10'] = "Sicherheitscode";
 $t['pwneu11'] = "Der angegebene Sicherheitscode ist leider nicht richtig.";
@@ -323,5 +323,3 @@ $tzahl[96] = "sechsundneunzig";
 $tzahl[97] = "siebenundneunzig";
 $tzahl[98] = "achtundneunzig";
 $tzahl[99] = "neunundneunzig";
-
-?>

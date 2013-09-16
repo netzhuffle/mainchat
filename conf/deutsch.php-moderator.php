@@ -41,5 +41,3 @@ $t['moderation4'] = "<table cellpadding=1 cellspacing=0 border=0>"
 
 $t['moderation8'] = "<br><font size=-1>Dieses Modul ist nur in der kommerziellen Version erhältlich."
     . "<br>Weitere Informationen finden Sie <a href=http://www.mainchat.de/lizenz.html target=_blank>hier</a>.</font>";
-
-?>

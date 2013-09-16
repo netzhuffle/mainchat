@@ -9,15 +9,15 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
     // http://###### oder www.###### in <A HREF="http://###" TARGET=_new>http://###</A>
     // E-Mail Adressen in A-Tag mit Mailto
     // privat ist wahr bei privater Nachricht
-    
+
     global $admin, $smilies_pfad, $smilies_datei, $sprachconfig, $o_raum, $u_id, $u_level;
     global $t, $system_farbe, $erweitertefeatures, $conn, $smilies_anzahl, $smilies_config;
     global $ist_moderiert, $smilies_aus;
-    
+
     // Grafik-Smilies ergänzen, falls Funktion aktiv und Raum ist nicht moderiert
     // Für Gäste gesperrt
     // $ist_moderiert ist in raum_ist_moderiert() (Caching!) gesetzt worden!
-    
+
     if (!$ist_moderiert && $erweitertefeatures) {
         preg_match_all("/(&amp;[^ ]+)/", $text, $test, PREG_PATTERN_ORDER);
         $anzahl = count($test[0]);
@@ -28,7 +28,7 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
             } elseif ($u_level == "G") {
                 system_msg("", 0, $u_id, $system_farbe, $t[chat_msg55]);
             }
-            
+
             // Prüfen, ob im aktuellen Raum smilies erlaubt sind
             if (!$privat) {
                 $query = "SELECT r_smilie FROM raum WHERE r_id=$o_raum ";
@@ -42,17 +42,17 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
             } else {
                 $smilie_ok = TRUE;
             }
-            
+
             if ($smilies_aus == "1")
                 $smilie_ok = false;
-            
+
             // Konfiguration für smilies lesen
             if ($smilies_config) {
                 @require("conf/" . $smilies_config);
             } else {
                 @require("conf/" . $sprachconfig . "-" . $smilies_datei);
             }
-            
+
             if (!$smilie_ok && $smilies_datei != "") {
                 // Nur die Fehlermeldung ausgeben, falls es das angegeben Smile auch gibt
                 $anzahl = 0;
@@ -61,10 +61,10 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                     if ($smilie[$smilie_code])
                         $anzahl++;
                 }
-                
+
                 if ($anzahl > 0)
                     system_msg("", 0, $u_id, $system_farbe, $t[chat_msg76]);
-                
+
             } else {
                 while (list($i, $smilie_code) = each($test[0])) {
                     if ($anzahl > $smilies_anzahl || $u_level == "G") {
@@ -84,7 +84,7 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
             }
         }
     }
-    
+
     // doppelte Zeichen merken und wegspeichern...
     $text = str_replace("__", "###substr###", $text);
     $text = str_replace("**", "###stern###", $text);
@@ -93,25 +93,25 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
     $text = str_replace("]", "###zu###", $text);
     $text = str_replace("|", "###strich###", $text);
     $text = str_replace("+", "###plus###", $text);
-    
+
     // jetzt nach nach italic und bold parsen...  * in <I>, $_ in <B>
     if (substr_count($text, "http://") == 0 && substr_count($text, "www.") == 0
         && !preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})", $text)) {
         $text = preg_replace('|\*(.*?)\*|', '<i>\1</i>',
             preg_replace('|_(.*?)_|', '<b>\1</b>', $text));
     }
-    
+
     // erst mal testen ob www oder http oder email vorkommen
     if (preg_match("/(http:|www\.|@)/i", $text)) {
         // Zerlegen der Zeile in einzelne Bruchstücke. Trennzeichen siehe $split
-        // leider müssen zunächst erstmal in $text die gefundenen urls durch dummies 
-        // ersetzt werden, damit bei der Angabge von 2 gleichen urls nicht eine bereits 
+        // leider müssen zunächst erstmal in $text die gefundenen urls durch dummies
+        // ersetzt werden, damit bei der Angabge von 2 gleichen urls nicht eine bereits
         // ersetzte url nochmal ersetzt wird -> gibt sonst Müll bei der Ausgabe.
-        
+
         // wird evtl. später nochmal gebraucht...
         $split = '/[ ,\[\]\(\)]/';
         $txt = preg_split($split, $text);
-        
+
         // wieviele Worte hat die Zeile?
         for ($i = 500; $i >= 0; $i--) {
             if ((isset($txt[$i])) && $txt[$i] != "")
@@ -132,8 +132,7 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                     $nick = nick_ergaenze($txt[$j], "online", 1);
                 // fehlermeldungen unterdrücken.
                 if ($nick['u_nick'] != "") {
-                    if ($at_sonderbehandlung == 1) // in /me sprüchen kein [zu Nick] an den anfang stellen, sondern nur nick ergänzen
- {
+                    if ($at_sonderbehandlung == 1) { // in /me sprüchen kein [zu Nick] an den anfang stellen, sondern nur nick ergänzen
                         $rep = $nick[u_nick];
                         $text = preg_replace("!$txt[$j]!", $rep, $text);
                     } else {
@@ -142,12 +141,12 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                         $text = $rep . preg_replace("!$txt[$j]!", "", $text);
                     }
                 }
-                
+
                 if ($u_level == "G") {
                     break;
                 }
             }
-            
+
             if ($u_level != "G") {
                 // E-Mail Adressen in A-Tag mit Mailto
                 // E-Mail-Adresse -> Format = *@*.*
@@ -165,23 +164,23 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                     $txt[$j] = preg_replace("/" . $txt[$j] . "/", $rep,
                         $txt[$j]);
                 }
-                
+
                 // www.###### in <A HREF="http://###" TARGET=_new>http://###</A>
                 if (preg_match("/^www\..*\..*/", $txt[$j])) {
                     // sonderfall -> "?" in der URL -> dann "?" als Sonderzeichen behandeln...
                     $txt2 = preg_replace("!\?!", "\\?", $txt[$j]);
-                    
-                    // Doppelcheck, kann ja auch mit http:// in gleicher Zeile nochmal vorkommen. also erst die 
+
+                    // Doppelcheck, kann ja auch mit http:// in gleicher Zeile nochmal vorkommen. also erst die
                     // http:// mitrausnehmen, damit dann in der Ausgabe nicht http://http:// steht...
                     $text = preg_replace("!http://$txt2!", "-###$j####", $text);
-                    
+
                     // Wort=URL mit www am Anfang? -> im text durch dummie ersetzen, im wort durch href.
                     $text = preg_replace("!$txt2!", "####$j####", $text);
-                    
+
                     // und den ersten Fall wieder Rückwärts, der wird ja später in der schleife nochmal behandelt.
                     $text = preg_replace("!-###\d*####/!", "http://$txt2/",
                         $text);
-                    
+
                     // url aufbereiten
                     $txt[$j] = preg_replace("/" . $txt2 . "/",
                         "<a href=\"redirect.php?url="
@@ -192,14 +191,14 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                 if (preg_match("!^https?://!", $txt[$j])) {
                     // Wort=URL mit http:// am Anfang? -> im text durch dummie ersetzen, im wort durch href.
                     // Zusatzproblematik.... könnte ein http-get-URL sein, mit "?" am Ende oder zwischendrin... urgs.
-                    
+
                     // sonderfall -> "?" in der URL -> dann "?" als Sonderzeichen behandeln...
                     $txt2 = preg_replace("!\?!", "\\?", $txt[$j]);
                     $text = preg_replace("!$txt2!", "####$j####", $text);
-                    
+
                     // und wieder Rückwärts, falls zuviel ersetzt wurde...
                     $text = preg_replace("!####\d*####/!", "$txt[$j]/", $text);
-                    
+
                     // url aufbereiten
                     $txt[$j] = preg_replace("!$txt2!",
                         "<a href=\"redirect.php?url=" . urlencode($txt2)
@@ -207,7 +206,7 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                 }
             }
         }
-        
+
         // nun noch die Dummy-Strings durch die urls ersetzen...
         for ($j = 0; $j <= $i; $j++) {
             // erst mal "_" in den dummy-strings vormerken...
@@ -216,9 +215,9 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
             $text = preg_replace("![-#]###$j####!", $txt[$j], $text);
         }
     } // ende http, mailto, etc.
-    
+
     // endif;
-    
+
     // gemerkte @, _ und * zurückwandeln.
     $text = str_replace("###plus###", "+", $text);
     $text = str_replace("###strich###", "|", $text);
@@ -227,8 +226,6 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
     $text = str_replace("###substr###", "_", $text);
     $text = str_replace("###stern###", "*", $text);
     $text = str_replace("###klaffe###", "@", $text);
-    
+
     return $text;
 }
-
-?>

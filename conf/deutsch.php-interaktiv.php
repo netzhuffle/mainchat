@@ -9,5 +9,3 @@ $t['sonst4'] = "Anderen Raum betreten:";
 $t['sonst5'] = "Chatter";
 $t['sonst6'] = "Chattern";
 $t['sonst7'] = "einer";
-
-?>

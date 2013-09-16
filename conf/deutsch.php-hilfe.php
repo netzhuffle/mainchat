@@ -188,10 +188,10 @@ $chatiquette = "
 <p><b>CHATIQUETTE im mainChat</b></p>
 
 <p><b>Wie melde ich mich an? </b></p>
-<p>Wenn man den Chat als Gast betritt, sollte man sich sofort einen Namen zulegen (/nick name), da die meisten User sich nur 
+<p>Wenn man den Chat als Gast betritt, sollte man sich sofort einen Namen zulegen (/nick name), da die meisten User sich nur
 ungerne mit einer (austauschbaren) Zahl unterhalten. Im realen Leben wird man ja auch mit seinem Namen angesprochen. Über den
 Namen ist man leichter ansprechbar und unverwechselbar.
-Merkt man nach einiger Zeit, dass man öfter in den Chat kommen möchte, empfiehlt es sich, einen festen Account (Nicknamen) 
+Merkt man nach einiger Zeit, dass man öfter in den Chat kommen möchte, empfiehlt es sich, einen festen Account (Nicknamen)
 zuzulegen. Natürlich kann man das auch gleich machen, damit ist der Name dann besetzt und kein anderer kann sich mehr so
 nennen. Hierzu klickt man auf der Startseite auf >>neu anmelden<< und bestätigt die Anmeldung, die per Mail zugesandt wird.
 Dann wählt man sich seinen Chatnamen und sein Zugangspasswort aus.
@@ -199,41 +199,41 @@ Dann wählt man sich seinen Chatnamen und sein Zugangspasswort aus.
 
 <b><p>Wie verhalte ich mich im Chat richtig, wenn ich zum ersten Mal reingehe? </p></b>
 
-<p>Zuerst verschafft man sich am besten eine Übersicht über die Situation im Chat. 
-Wieviele User und Admins anwesend sind, welche Gespräche laufen, 
+<p>Zuerst verschafft man sich am besten eine Übersicht über die Situation im Chat.
+Wieviele User und Admins anwesend sind, welche Gespräche laufen,
 welche Stimmung allgemein herrscht und wie die User miteinander umgehen. </p>
 
-<p>Um ins Gespräch einzusteigen, spricht man am besten jemanden direkt an (name: text) 
+<p>Um ins Gespräch einzusteigen, spricht man am besten jemanden direkt an (name: text)
 oder man gibt ein allgemeines Statement zu einem Thema ab und wartet dann, bis jemand auf einen eingeht.
 Dann ist das Chatten nicht mehr schwer. </p>
 
 <b><p>Was ist ein Admin? </p></b>
 <p>Admin heißt Administrator (=\"Verwalter\")<br>
 Admins im mainChat haben die Aufgabe, dafür zu sorgen, dass sich alle wohl fühlen.
-Sie beantworten gerne Fragen zum Chat, helfen bei Problemen und werfen User aus dem Chat, 
+Sie beantworten gerne Fragen zum Chat, helfen bei Problemen und werfen User aus dem Chat,
 wenn diese andere belästigen.</p>
 
-<p>Administrative Tätigkeit ist Freizeit, die nicht bezahlt wird. 
-Deswegen kann nicht gewährleistet werden, dass immer ein Admin zur Stelle ist. 
-Allerdings kennen sich viele Stammuser genauso gut aus und beantworten oft auch gerne Fragen, 
-falls die Admins kurzfristig nicht anwesend oder ansprechbar sind. 
+<p>Administrative Tätigkeit ist Freizeit, die nicht bezahlt wird.
+Deswegen kann nicht gewährleistet werden, dass immer ein Admin zur Stelle ist.
+Allerdings kennen sich viele Stammuser genauso gut aus und beantworten oft auch gerne Fragen,
+falls die Admins kurzfristig nicht anwesend oder ansprechbar sind.
 </p>
 
 <b><p>Können Admins private Nachrichten mitlesen? </p></b>
 
 <p>Immer wieder tauchen im Chat Leute auf, die behaupten, Admins könnten alle privaten Mitteilungen lesen.
 Abgesehen davon, dass wir das moralisch nicht vertreten könnten, ist es technisch auch nicht vorgesehen.
-Private Nachrichten im Chat werden nach einigen Sekunden automatisch wieder gelöscht und *nicht* mitgeloggt, das heißt im 
+Private Nachrichten im Chat werden nach einigen Sekunden automatisch wieder gelöscht und *nicht* mitgeloggt, das heißt im
 Klartext:<br>
 <b>Nein, können sie nicht.</b> </p>
 
 <b><p>Bin ich im mainChat anonym? </p></b>
 <p>
 Ja und Nein.<br>
-Man ist anderen Usern gegenüber anonym; Admins jedoch können die IP-Adresse des Rechners, mit dem man online ist, sehen. 
+Man ist anderen Usern gegenüber anonym; Admins jedoch können die IP-Adresse des Rechners, mit dem man online ist, sehen.
 Das muss auch so sein, damit bei Vorfällen, wie zum Beispiel Beleidigungen, gehandelt werden kann.
-Benimmt sich jemand dauerhaft daneben und es ist nachvollziehbar, von welchem Provider er kommt, ist es auch kein Problem, 
-sich an den Provider zu wenden und zu beschweren. Die meisten Provider reagieren empfindlich auf solchen Missbrauch und 
+Benimmt sich jemand dauerhaft daneben und es ist nachvollziehbar, von welchem Provider er kommt, ist es auch kein Problem,
+sich an den Provider zu wenden und zu beschweren. Die meisten Provider reagieren empfindlich auf solchen Missbrauch und
 sperren den Zugang.</p>
 
 <b><p>Was sollte ich im Chat grundsätzlich nicht tun? </p></b>
@@ -244,23 +244,23 @@ Ich frage nicht sofort jeden aus, auch wenn ich über ihn viel wissen möchte, s
 indem ich ein bisschen von mir erzähle.
 Kurz gesagt: Ich benehme mich höflich, respektvoll und nicht zu aufdringlich. </p>
 
-<b><p>Wann werde ich von den Admins aus dem Chat geworfen?</p></b> 
+<b><p>Wann werde ich von den Admins aus dem Chat geworfen?</p></b>
 <p>
 Admins haben das Recht, User aus dem Chat zu werfen (\"kicken\"), wenn diese sich daneben benehmen.<br>
-Davon wird meist, außer in Extremfällen, erst nach einer Vorwarnung Gebrauch gemacht. Sieht ein User nicht ein, dass er sich 
-besser benehmen sollte, kann er auch gesperrt werden. In dem Fall wird die IP (Rechner-Adresse) blockiert, so dass sich der 
-Betreffende nicht mehr in den Chat einloggen kann. Bei wiederholten Verstößen wird der Provider / die Bildungseinrichtung 
-informiert und der User muss mit entsprechenden Konsequenzen rechnen. 
+Davon wird meist, außer in Extremfällen, erst nach einer Vorwarnung Gebrauch gemacht. Sieht ein User nicht ein, dass er sich
+besser benehmen sollte, kann er auch gesperrt werden. In dem Fall wird die IP (Rechner-Adresse) blockiert, so dass sich der
+Betreffende nicht mehr in den Chat einloggen kann. Bei wiederholten Verstößen wird der Provider / die Bildungseinrichtung
+informiert und der User muss mit entsprechenden Konsequenzen rechnen.
 </p>
 <b>Gründe zum Kicken sind: </b>
 <p>
 <BR>
-<b>Pöbeleien.</b> Jemanden zu beleidigen, den man gar nicht kennt, ist wenig stilvoll und wird nicht geduldet. Bei extremen 
+<b>Pöbeleien.</b> Jemanden zu beleidigen, den man gar nicht kennt, ist wenig stilvoll und wird nicht geduldet. Bei extremen
 Vorfällen (dies gilt auch für die Verbreitung nationalsozialistischen Gedankenguts oder von Sex-Urls) wird ohne Vorwarnung
 gekickt.
 <BR><BR>
-<b>Schreiben</b> nur mit Großbuchstaben. Das bedeutet, auf die Realität bezogen, lautes Schreien und ist wenig erwünscht. 
-Wenn etwas betont werden soll, kann man es auch kursiv (*) oder fett (_) darstellen. Ganze Sätze sollte man jedoch nicht betonen; das gilt als unfein. 
+<b>Schreiben</b> nur mit Großbuchstaben. Das bedeutet, auf die Realität bezogen, lautes Schreien und ist wenig erwünscht.
+Wenn etwas betont werden soll, kann man es auch kursiv (*) oder fett (_) darstellen. Ganze Sätze sollte man jedoch nicht betonen; das gilt als unfein.
 </p>
 ";
 
@@ -285,10 +285,10 @@ $hilfe_community = "<BR>
     . "
 </table>
 <P><b><A NAME=\"punkte\">Punkte</A></b><BR>
-Unter dem Chat-Menüpunkt \"<B>USER</B>\" führt der Link zur User Top10/100 Liste. 
+Unter dem Chat-Menüpunkt \"<B>USER</B>\" führt der Link zur User Top10/100 Liste.
 Alle angemeldeten User bekommen pro einzelnes im Chat geschriebenes Wort
 einen Punkt. Die Voraussetzung ist, dass jedes Wort mindestens vier Buchstaben hat
-und sich der User in einem öffentlichen, permanenten Raum mit mindestens 
+und sich der User in einem öffentlichen, permanenten Raum mit mindestens
 " . $punkte_ab_user
     . " Usern befindet. Für das
 erstmalige Ausfüllen des Profils bekommt jeder User 500 Punkte. Die Admins
@@ -378,8 +378,8 @@ Nachrichten erhalten.<BR><BR>
 <b><A NAME=\"home\">User-Homepages</A></b><br>
 Unter dem Punkt \"<B>EINSTELLUNGEN -> Homepage</B>\" kann ebenfalls jeder User mit
 wenigen Klicks seine eigene kleine Homepage erstellen, ohne jegliche
-HTML-Kenntnisse zu besitzen. Nach der \"<B>Freischaltung</B>\" der Homepage wird hinter dem 
-Nicknamen ein <B>Haus-Symbol</B> angezeigt, über das man sich die Homepage ansehen kann. In der 
+HTML-Kenntnisse zu besitzen. Nach der \"<B>Freischaltung</B>\" der Homepage wird hinter dem
+Nicknamen ein <B>Haus-Symbol</B> angezeigt, über das man sich die Homepage ansehen kann. In der
 \"Suche nach Usern\" (<B>USER -> Suche</B>) ist die gezielte Suche nach Usern mit freigeschalteter Homepage
 möglich.<BR><BR>
 Ihre Homepage kann natürlich auch mit folgender Adresse von außerhalb des Chats abgerufen werden:<BR>
@@ -392,7 +392,7 @@ Grundsätzlich immer dargestellt werden</P>
 <li><I>Userlevel</I>
 <li><I>Punkte</I>
 </ul><P>
-    
+
 Weiter kann der Chatuser entscheiden:</P>
 <UL>
 <li><I>welche Daten aus seinem Userprofil auf der Homepage dargestellt werden sollen.</I>
@@ -410,71 +410,71 @@ $hilfe_communitysms = "
 
 <p><b><A NAME=\"sms\">SMS-Benachrichtigungsfunktion</A></b></p>
 
-<p>Diese Funktion ist eine reine Benachrichtigungsfunktion, d.h. 
-User im Chat können nun auch <b></b>SMS direkt aus dem Chat auf das Handy 
-von anderen Chat-Usern</b> schicken und sich über die \"Aktionen\" 
-im Chat per SMS informieren lassen. 
-(Mit den Aktionen steuern Sie, bei welchen Ereignissen Sie mit welcher Nachricht 
-informiert werden wollen. Ein Ereignis ist z.B. der Logon oder Logout eines 
+<p>Diese Funktion ist eine reine Benachrichtigungsfunktion, d.h.
+User im Chat können nun auch <b></b>SMS direkt aus dem Chat auf das Handy
+von anderen Chat-Usern</b> schicken und sich über die \"Aktionen\"
+im Chat per SMS informieren lassen.
+(Mit den Aktionen steuern Sie, bei welchen Ereignissen Sie mit welcher Nachricht
+informiert werden wollen. Ein Ereignis ist z.B. der Logon oder Logout eines
 Freundes, oder auch der Eingang einer neuen Mail. Mehr hierzu unter EINSTELLUNGEN / AKTIONEN)
 
-</p> 
+</p>
 
-<p>Die SMS-Funktion ist mit den Community-Funktionen gekoppelt, 
-d.h. sie kann nur genutzt werden, wenn in Ihrem Chat auch die Community-Features 
+<p>Die SMS-Funktion ist mit den Community-Funktionen gekoppelt,
+d.h. sie kann nur genutzt werden, wenn in Ihrem Chat auch die Community-Features
 (Punkte, Userprofile etc.) aktiviert sind.</p>
 
 <P><b>Die SMS-Features funktionieren folgendermaßen:</b></p>
 
 <li><b>Schritt 1: SMS Guthaben aufladen: </b>
 
-<p>Gehen Sie im Chat-Menü auf den Punkt <b>\"EINSTELLUNGEN\"</b>. 
-Hier klicken Sie auf den Menüpunkt <b>\"SMS\"</b>. 
-Wenn Sie im Profil Ihre Handy-Nummer angegeben haben, 
-erhalten Sie nun die Möglichkeit, sich eine PIN-Nummer auf Ihr Handy schicken zu lassen. 
-Dieser Punkt ist notwendig um zu verhindern, dass User über fremde Handy-Nummern SMS bestellen. 
-Nun erhalten Sie eine SMS mit einer vierstelligen PIN-Nummer auf Ihr Handy. 
+<p>Gehen Sie im Chat-Menü auf den Punkt <b>\"EINSTELLUNGEN\"</b>.
+Hier klicken Sie auf den Menüpunkt <b>\"SMS\"</b>.
+Wenn Sie im Profil Ihre Handy-Nummer angegeben haben,
+erhalten Sie nun die Möglichkeit, sich eine PIN-Nummer auf Ihr Handy schicken zu lassen.
+Dieser Punkt ist notwendig um zu verhindern, dass User über fremde Handy-Nummern SMS bestellen.
+Nun erhalten Sie eine SMS mit einer vierstelligen PIN-Nummer auf Ihr Handy.
 Diese PIN-Nummer geben Sie wiederum im Chat im SMS-Menü in das Feld <b>\"PIN eingeben\"</b> ein.</p>
 
-<p>Der nächste Punkt ist nun das eigentliche Aufladen des SMS-Guthabens. 
-Sie w&auml;hlen einen Aufladebetrag und es wird Ihnen angezeigt, 
-wie viele SMS Sie mit diesem Betrag verschicken k&ouml;nnen. 
+<p>Der nächste Punkt ist nun das eigentliche Aufladen des SMS-Guthabens.
+Sie w&auml;hlen einen Aufladebetrag und es wird Ihnen angezeigt,
+wie viele SMS Sie mit diesem Betrag verschicken k&ouml;nnen.
 Mit dem Klick auf \"Jetzt SMS Guthaben aufladen\" bestätigen Sie Ihre Auswahl.</p>
 
-<p><b>Die Bezahlung der SMS erfolgt bequem per Lastschrift.</b> 
+<p><b>Die Bezahlung der SMS erfolgt bequem per Lastschrift.</b>
 
-Hierzu geben Sie Ihre Bankverbindung und Kontonummer an. 
-Ganz wichtig: Es ist unbedingt darauf zu achten, dass 
-im oberen Feld unter \"Kontoinhaber\" nicht der eventuell vorausgefüllte Chatname, 
+Hierzu geben Sie Ihre Bankverbindung und Kontonummer an.
+Ganz wichtig: Es ist unbedingt darauf zu achten, dass
+im oberen Feld unter \"Kontoinhaber\" nicht der eventuell vorausgefüllte Chatname,
 sondern der korrekte Name des Kontoinhabers steht!</p>
 
-<p>Wir versichern, dass sämtliche hier angegebenen 
-Daten absolut diskret und vertrauenswürdig behandelt 
-und ausschließlich zur Bezahlung der SMS und auf keinen 
+<p>Wir versichern, dass sämtliche hier angegebenen
+Daten absolut diskret und vertrauenswürdig behandelt
+und ausschließlich zur Bezahlung der SMS und auf keinen
 Fall zu irgendwelchen anderen Zwecken verwendet werden! </p>
 
-<p>Sind alle Felder korrekt ausgefüllt, werden die Eingaben von Ihnen bestätigt 
-und das SMS Konto wird aufgeladen.</p> 
+<p>Sind alle Felder korrekt ausgefüllt, werden die Eingaben von Ihnen bestätigt
+und das SMS Konto wird aufgeladen.</p>
 
 <p><b>Es gibt allerdings eine Voraussetzung zum Aufladen eine SMS Kontos:<br>
-Sie m&uuml;ssen mindestens 1000 Punkte im Userprofil im Chat haben.</b> 
-Dies bedeutet allerdings auch, dass Chats, die die Punktezählung deaktiviert haben, 
-Ihren Usern die SMS-Funktion leider nicht zur Verfügung stellen können.</p> 
+Sie m&uuml;ssen mindestens 1000 Punkte im Userprofil im Chat haben.</b>
+Dies bedeutet allerdings auch, dass Chats, die die Punktezählung deaktiviert haben,
+Ihren Usern die SMS-Funktion leider nicht zur Verfügung stellen können.</p>
 
 <p>Nun ist das SMS Konto aufgeladen, und es kann losgehen.</p>
 
 <li> <b>Schritt 2: SMS empfangen und versenden: </b>
 
-<p><b>Wichtig: Sie können SMS aus dem Chat auf das Handy eines Users versenden, 
-der im Chat die Option aktiviert hat, SMS zu empfangen. 
-Sie können jedoch keine SMS von Ihrem Handy in den Chat schicken. 
+<p><b>Wichtig: Sie können SMS aus dem Chat auf das Handy eines Users versenden,
+der im Chat die Option aktiviert hat, SMS zu empfangen.
+Sie können jedoch keine SMS von Ihrem Handy in den Chat schicken.
 SMS müssen deshalb stets aus dem Chat selbst geschrieben werden!
 </b></p>
-<p>Wenn Sie SMS aus dem Chat empfangen möchten, 
-müssen Sie zuerst unter dem Chat-Menüpunkt \"EINSTELLUNGEN / SMS\" das 
-Dropdown-Auswahlfeld neben \"Ich möchte SMS von anderen Usern aus dem Mainchat empfangen\" 
-auf \"JA\" gestellt haben. Dies verhindert, dass User unerwünschte SMS erhalten. 
-Dies bedeutet natürlich auch, dass Sie nur SMS an Chat-User verschicken können, 
+<p>Wenn Sie SMS aus dem Chat empfangen möchten,
+müssen Sie zuerst unter dem Chat-Menüpunkt \"EINSTELLUNGEN / SMS\" das
+Dropdown-Auswahlfeld neben \"Ich möchte SMS von anderen Usern aus dem Mainchat empfangen\"
+auf \"JA\" gestellt haben. Dies verhindert, dass User unerwünschte SMS erhalten.
+Dies bedeutet natürlich auch, dass Sie nur SMS an Chat-User verschicken können,
 die diese auch ausdrücklich empfangen möchten.</p>
 
 <p><b>Wichtig, wenn Sie eine SMS aus dem Chat erhalten:</b><br>
@@ -485,9 +485,9 @@ die diese auch ausdrücklich empfangen möchten.</p>
 
 <p>Der Befehl zum Verschicken einer SMS auf das Handy eines Chatusers lautet: /sms <nickname> <text><br>
 
-Wenn Sie also eine SMS mit dem Text \"Kommst Du in den Chat?\" auf das Handy des Users \"Pumuckl\" 
+Wenn Sie also eine SMS mit dem Text \"Kommst Du in den Chat?\" auf das Handy des Users \"Pumuckl\"
 (dieser User muss natürlich in Ihrem Chat registriert sein und muss in
-seinen Einstellungen angegeben haben, dass er SMS empfangen möchte) senden möchten, 
+seinen Einstellungen angegeben haben, dass er SMS empfangen möchte) senden möchten,
 tippen Sie im Chat ganz einfach: <br>
 /sms Pumuckl Kommst Du in den Chat?</p>";
 
@@ -509,12 +509,12 @@ Ihren EINSTELLUNGEN.
 </p><p>
 Wir speichern Ihre Daten auf eigenen Servern, auf die nur unsere
 Mitarbeiter Zugriff haben.  Bei Ihrem Login werden auf unseren Servern
-Daten, wie IP-Adresse, Datum und Uhrzeit, für Sicherungszwecke gespeichert. 
+Daten, wie IP-Adresse, Datum und Uhrzeit, für Sicherungszwecke gespeichert.
 Es findet keine personenbezogene Verwertung statt, wobei die statistische
 Auswertung anonymisierter Datensätze möglich ist.
 </p><p>
 Wir geben keine personenbezogenen Daten an Dritte weiter oder verkaufen
-diese. Soweit wir gesetzlich oder per Gerichtsbeschluss dazu verpflichtet 
+diese. Soweit wir gesetzlich oder per Gerichtsbeschluss dazu verpflichtet
 sind, werden wir Ihre Daten an auskunftsberechtigte Stellen übermitteln.
 Die personenbezogenen Daten, die Sie in Ihr Profil eingegeben haben, können
 Sie jederzeit wieder löschen.
@@ -530,15 +530,14 @@ konfigurierte \"Personal Firewalls\" eventuell als Angriff erkennen können.
 Auf Ihr Profil haben die Admins keinen Zugriff. Da Ihr Passwort
 verschlüsselt gespeichert wird, können daher weder wir noch die Admins Ihr
 Passwort lesen. Die Admin können allerdings die Passwörter der User auf
-besonderen Wunsch ändern und das neue Passwort an die hinterlegte 
+besonderen Wunsch ändern und das neue Passwort an die hinterlegte
 Admin-E-Mail Adresse schicken. Die Admin-E-Mail Adresse ist nur
 durch Admins änderbar. Die Admins sind verpflichtet, sich an diese
 Datenschutzbestimmungen und an die Chat-AGBs zu halten und keine
 personenbezogenen Daten an Dritte weiterzugeben.
 </P><P>
-Wir setzen im Chat prinzipiell keine Cookies. Falls Sie dennoch ein Cookie 
+Wir setzen im Chat prinzipiell keine Cookies. Falls Sie dennoch ein Cookie
 erhalten, stammt dieses Cookie aus der Anzeige einer Agentur, auf die wir keinen
 Einfluss haben. Bitte deaktivieren Sie Cookies in Ihrem Browser, wenn Sie keine
 Cookies empfangen möchten.
 </P>";
-?>

@@ -10,12 +10,12 @@ function werbung($werbung_flaeche, $werbung_gruppe)
     global $werbung_inhalt;
     global $werbung_default;
     global $werbefrei;
-    
+
     if ($werbung_gruppe != "mietchat") {
         if (file_exists("werbung/fallback.php"))
-            include("werbung/fallback.php");
+            include 'werbung/fallback.php';
         $gruppen = explode(",", $werbung_gruppe);
-        
+
         // zunächst jede Gruppe aus der config versuchen...
         $werbunggelesen = 0;
         $i = 0;
@@ -28,8 +28,8 @@ function werbung($werbung_flaeche, $werbung_gruppe)
             }
             $i++;
         }
-        
-        // wenn immer noch nicht geklappt, dann die Fallbacks der 
+
+        // wenn immer noch nicht geklappt, dann die Fallbacks der
         // config-gruppen und deren Fallbacks...
         if (!$werbunggelesen && isset($wfb) && is_array($wfb)) {
             // werbe-fall-back aus datei.
@@ -49,14 +49,14 @@ function werbung($werbung_flaeche, $werbung_gruppe)
                 $i++;
             }
         }
-        
+
         if (!$werbunggelesen && !empty($werbung_default)) {
             if (file_exists("werbung/$werbung_default")) {
                 include("werbung/$werbung_default");
                 $werbunggelesen = 1;
             }
         }
-        
+
         if ($werbunggelesen && isset($werbung)) {
             $werbung_inhalt = $werbung[$werbung_flaeche]['inhalt'];
             $werbung_art = $werbung[$werbung_flaeche]['art'];
@@ -67,7 +67,7 @@ function werbung($werbung_flaeche, $werbung_gruppe)
             unset($werbung_inhalt);
         }
     }
-    
+
     // jetzt werbung ausgeben...
     if (!empty($werbung_inhalt)) {
         if ($werbung_art) {
@@ -78,5 +78,3 @@ function werbung($werbung_flaeche, $werbung_gruppe)
         }
     }
 }
-
-?>

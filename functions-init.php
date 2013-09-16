@@ -1,9 +1,9 @@
 <?php
 
-require_once "functions-registerglobals.php";
+require_once 'functions-registerglobals.php';
 
 // Konfigurationsdatei einbinden
-require "conf/config.php";
+require 'conf/config.php';
 
 // Liegt lokale Konfigurationsdatei "config.php-http_host" in "conf/" vor? Falls ja einbinden
 if (!(isset($http_host)))
@@ -25,7 +25,7 @@ $chat_url = dirname($phpself);
 if (substr($chat_url, -1) != "/")
     $chat_url .= "/";
 
-// Wenn zwingend SSL, dann ... 
+// Wenn zwingend SSL, dann ...
 if (isset($SSLRedirect) && $SSLRedirect == "1") {
     // ... weiterleiten auf HTTPS wenn nicht schon sowieso aufgerufen
     if (!((isset($_SERVER["HTTPS"])
@@ -55,7 +55,7 @@ if (isset($SSLRedirect) && $SSLRedirect == "1") {
 require "conf/$sprachconfig";
 
 // Sprachdatei für functions.php einbinden
-require "conf/" . $sprachconfig . "-functions.php";
+require 'conf/'. $sprachconfig . "-functions.php";
 
 // Liegen lokale Functionen "functions.php-$chat_file" vor? Falls ja einbinden
 $functions = "functions.php-" . $chat_file;
@@ -98,5 +98,3 @@ if (ini_get('output_buffering') >= 1) {
 }
 
 $usleep = 50000;
-
-?>

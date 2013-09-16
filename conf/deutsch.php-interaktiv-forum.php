@@ -22,5 +22,3 @@ $t['menue13'] = "SUCHE";
 
 $t['button'] = "zum Chat";
 $t['forum_interaktiv_txt'] = "Insgesamt sind %anzahl_gesamt% Chatter online";
-
-?>

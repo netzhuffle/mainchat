@@ -19,5 +19,3 @@ $t['menue10'] = "MAIL";
 $t['menue11'] = "FORUM";
 $t['menue12'] = "BLACKLIST";
 $t['menue13'] = "UMFRAGE";
-
-?>

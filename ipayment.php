@@ -1,7 +1,7 @@
 <?php
 
 // Dieses Programm schreibt dem User seine Über IPayment gekauften SMS gut...
-include("functions.php");
+include 'functions.php';
 
 reset($HTTP_POST_VARS);
 while (list($key, $val) = each($HTTP_POST_VARS)) {
@@ -42,4 +42,3 @@ $id = mysql_insert_id();
 $v = addslashes($v);
 $query = "INSERT INTO payment_log (id, payment_text) VALUES ('$id','$v')";
 $result = mysql_query($query);
-?>

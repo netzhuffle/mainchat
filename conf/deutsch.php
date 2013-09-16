@@ -24,7 +24,7 @@ $hilfstext = array(
     "<B>USER direkt ansprechen -</B> USER: oder @USER ergibt [USER:]",
     "<B>Für die ausführliche Hilfe mit allen Befehlen klicken Sie bitte auf [HILFE] unter der Eingabezeile.</B>");
 
-// Texte Userlevel 
+// Texte Userlevel
 $level['C'] = "ChatAdmin";
 $level['S'] = "Superuser";
 $level['A'] = "Admin(temp)";
@@ -76,4 +76,3 @@ $hilfe_spruchtext = "<B>Format:</B> '=SPRUCH USER ZUSATZTEXT'<BR><BR>"
     . "Um bestimmte Sprüche auszuwählen ist es am einfachsten, im Chat "
     . "mit dem /such Befehl und einem Stichwort nach dem gewünschten Spruch "
     . "zu suchen.<BR>";
-?>

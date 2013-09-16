@@ -1,8 +1,8 @@
 <?php
 
-require("functions.php");
-require_once("functions.php-home.php");
-require("functions.php-hash.php");
+require 'functions.php';
+require_once 'functions.php-home.php';
+require 'functions.php-hash.php';
 
 $fenster = str_replace("+", "", $ui_userid);
 $fenster = str_replace("-", "", $fenster);
@@ -19,21 +19,25 @@ $fenster = str_replace("ß", "", $fenster);
 <HEAD><TITLE><?php echo $body_titel . "_Home"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT>
         window.focus()
-        function win_reload(file,win_name) {
+        function win_reload(file,win_name)
+        {
                 win_name.location.href=file;
         }
-        function opener_reload(file,frame_number) {
+        function opener_reload(file,frame_number)
+        {
                 opener.parent.frames[frame_number].location.href=file;
         }
-        function neuesFenster(url,name) {
+        function neuesFenster(url,name)
+        {
                 hWnd=window.open(url,name,"resizable=yes,scrollbars=yes,width=300,height=580");
         }
-        function neuesFenster2(url) {
+        function neuesFenster2(url)
+        {
                 hWnd=window.open(url,"<?php echo "640_" . $fenster; ?>","resizable=yes,scrollbars=yes,width=780,height=580");
         }
 </SCRIPT>
 <?php echo $stylesheet; ?>
-</HEAD> 
+</HEAD>
 <?php
 
 // Pfad auf Cache

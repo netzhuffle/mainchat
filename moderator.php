@@ -1,6 +1,6 @@
 <?php
 
-require("functions.php");
+require 'functions.php';
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, admin
 id_lese($id);
@@ -14,7 +14,7 @@ $body_tag .= "TEXT=\"$farbe_chat_text3\" " . "LINK=\"$farbe_chat_link3\" "
 
 if (strlen($u_id) > 0) {
     echo "<HTML><HEAD><TITLE>$body_titel</TITLE><META CHARSET=UTF-8>\n";
-    
+
     // Falls keine Texte zur Moderation gefunden wurden, nach 10 Sek reload
     if ($o_js) {
         $moderations_zeilen = anzahl_moderationstexte($o_raum);
@@ -22,17 +22,17 @@ if (strlen($u_id) > 0) {
             echo "<META HTTP-EQUIV=\"REFRESH\" CONTENT= \"10; URL=moderator.php?http_host=$http_host&id=$id\">\n";
         }
     }
-    
+
     echo "<SCRIPT>\n" . "  function chat_reload(file) {\n"
         . "  parent.chat.location.href=file;\n}\n" . "</SCRIPT>\n";
     echo $stylesheet;
     echo "</HEAD>\n";
-    
+
     echo $body_tag;
-    
+
     // Timestamp im Datensatz aktualisieren
     aktualisiere_online($u_id, $o_raum);
-    
+
     if ($moderationsmodul == 1) {
         if (!isset($mode))
             $mode = "";
@@ -74,13 +74,13 @@ if (strlen($u_id) > 0) {
             // moderationstexte bearbeiten...
             // hierbei auch expire der moderierten Nachrichten...
                 bearbeite_moderationstexte($o_raum);
-                
+
                 if (!isset($limit) || $limit == "") {
                     $rows = zeige_moderationstexte($o_raum);
                 } else {
                     $rows = zeige_moderationstexte($o_raum, $limit);
                 }
-                
+
                 if ($rows < 5) {
                     echo "<hr type=noshade width=90% height=1>\n";
                     echo $t['moderation1'] . "\n";
@@ -96,13 +96,12 @@ if (strlen($u_id) > 0) {
         echo $t[moderation1];
         echo $t[moderation8];
     }
-    
+
 } else {
-    
+
     // User wird nicht gefunden. Login ausgeben
     echo "<HTML><HEAD></HEAD><HTML>";
     echo "<BODY onLoad='javascript:parent.location.href=\"index.php?http_host=$http_host\"'>\n";
     echo "</BODY></HTML>\n";
     exit;
 }
-?>
