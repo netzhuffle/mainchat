@@ -1,7 +1,7 @@
 <?php
 
-include 'functions.php';
-include 'functions.php-forum.php';
+include("functions.php");
+include("functions.php-forum.php");
 // Userdaten setzen
 id_lese($id);
 
@@ -96,3 +96,5 @@ echo "<FRAME SRC=\"schreibe.php?http_host=$http_host&id=$id&o_who=2\" name=\"sch
 echo "</FRAMESET>\n";
 echo "<NOFRAMES>\n";
 echo $body_tag . (isset($t['login6']) ? $t['login6'] : "");
+
+?>

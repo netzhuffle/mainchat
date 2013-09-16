@@ -36,8 +36,8 @@ $userinfo_hilfe = "<B>Es wird eine transparente Grafik als JPG erzeugt, welche d
 // voreingestellter Zeichensatz
 $fontname = "arialbd.ttf";
 
-require 'functions-init.php';
-require 'functions.php';
+require("functions-init.php");
+require("functions.php");
 
 function get_maximum_height($fontname, $fontsize)
 {
@@ -52,15 +52,14 @@ function get_maximum_height($fontname, $fontsize)
             $oldheight = $height;
         }
     }
-
     return array("0" => $oldheight, "1" => abs($b[7]));
 }
 
 function JPGText($str, $fontname, $fontsize, $backcol, $txtcol)
 {
-
+    
     global $layout;
-
+    
     Header("Last-Modified: " . gmDate("D, d M Y H:i:s", Time()) . " GMT");
     Header("Expires: " . gmDate("D, d M Y H:i:s", Time() - 3601) . " GMT");
     Header("Pragma: no-cache");
@@ -76,7 +75,7 @@ function JPGText($str, $fontname, $fontsize, $backcol, $txtcol)
         $backcol['blue']);
     $fgcol = ImageColorAllocate($im, $txtcol['red'], $txtcol['green'],
         $txtcol['blue']);
-
+    
     if (!function_exists(imagegif)) {
         imageTTFText($im, $fontsize, 0, 2, $bl + ($fontsize / 6) + 2, $fgcol,
             $fontname, $str);
@@ -95,29 +94,29 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
     echo "<HTML><BODY BGCOLOR=\"#FFFFFF\"><PRE>userinfo.php - (C) by fidion GmbH 1999-2012\n\n"
         . $userinfo_hilfe . "\n</PRE></HTML></BODY>\n";
 } else {
-
+    
     if (!isset($art))
         $art = "";
-
+    
     // Art der Aktion
     switch ($art) {
-
+        
         case "raumliste":
             if ($raum_auswahl && !$beichtstuhl) {
-
+                
                 // Falls eintrittsraum nicht gesetzt ist, mit Lobby überschreiben
                 if (strlen($eintrittsraum) == 0) {
                     $eintrittsraum = $lobby;
                 }
-
+                
                 // Raumauswahlliste erstellen
                 $query = "SELECT r_name,r_id FROM raum "
                     . "WHERE (r_status1='O' OR r_status1 LIKE BINARY 'm') AND r_status2='P'"
                     . "ORDER BY r_name";
-
+                
                 $result = mysql_query($query, $conn);
                 $raeume = "<SELECT NAME=\"eintritt\">";
-
+                
                 $i = 0;
                 if ($communityfeatures && $forumfeatures)
                     $raeume = $raeume
@@ -153,15 +152,15 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                 @mysql_free_result($result);
                 $raeume = "<INPUT TYPE=HIDDEN NAME=\"eintritt\" VALUE=$lobby_id>\n";
             }
-
+            
             echo $raeume;
             break;
-
+        
         case "alles":
             if (!$beichtstuhl) {
-
+                
                 $ergebnis = array();
-
+                
                 // Wie viele User sind in der DB?
                 $query = "SELECT count(u_id) FROM user WHERE u_level in ('A','C','G','M','S','U')";
                 $result = mysql_query($query, $conn);
@@ -172,37 +171,37 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                 } else {
                     $ergebnis['registriert'] = 0;
                 }
-
+                
                 // User online und Räume bestimmen -> merken
                 $query = "SELECT o_who,o_name,o_level,r_name,r_status1,r_status2, "
                     . "r_name='$lobby' as lobby "
                     . "FROM online left join raum on o_raum=r_id  "
                     . "WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout "
                     . "ORDER BY lobby desc,r_name,o_who,o_name ";
-
+                
                 $result2 = mysql_query($query, $conn);
                 if ($result2) {
                     $ergebnis['online'] = mysql_num_rows($result2);
                 } else {
                     $ergebnis['online'] = 0;
                 }
-
+                
                 if ($abweisen == false and !$beichtstuhl
                     and $ergebnis['online'] > 0) {
-
+                    
                     $text = '';
                     $i = 0;
                     $r_name_alt = '';
                     $zeigen_alt = TRUE;
                     while ($row = mysql_fetch_object($result2)) {
-
+                        
                         if (($row->o_level == 'S') or ($row->o_level == 'C')) {
                             $nick = str_replace(';', '',
                                 '<b class="admin">' . $row->o_name . '</b>');
                         } else {
                             $nick = str_replace(';', '', $row->o_name);
                         }
-
+                        
                         // Unterscheidung Raum oder Community-Modul
                         if (!$row->r_name or $row->r_name == 'NULL') {
                             $r_name = $whotext[$row->o_who];
@@ -218,7 +217,7 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                             }
                             $r_name = $row->r_name;
                         }
-
+                        
                         // Textwechsel
                         if ($r_name_alt != $r_name) {
                             if (strlen($text) == 0) {
@@ -241,7 +240,7 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                         $ergebnis[$r_name_alt] = $text;
                     }
                     mysql_free_result($result2);
-
+                    
                 } else {
                     @mysql_free_result($result2);
                 }
@@ -249,9 +248,9 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                     echo $key . ";" . $val . "\n";
                 }
             }
-
+            
             break;
-
+        
         default:
         // Anzahl der User abfragen
             if (isset($registriert) && $registriert == "j") {
@@ -270,7 +269,7 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                     mysql_free_result($result);
                 }
             }
-
+            
             if (isset($anzahl)) {
                 if (!isset($text))
                     $text = "";
@@ -280,9 +279,9 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                     $registriert = "";
                 if (!isset($null))
                     $null = "";
-
+                
                 if ($text != "j" && $jscript != "j") {
-
+                    
                     // Voreinstellungen
                     if (!isset($hrot)) {
                         $hrot = 255;
@@ -327,14 +326,14 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                     } else {
                         $text = $anzahl . " " . $text;
                     }
-
+                    
                     // Aufgabe JPG
                     JPGText(urldecode($text), $fontname, $size,
                         array("red" => $hrot, "green" => $hgruen,
                             "blue" => $hblau),
                         array("red" => $vrot, "green" => $vgruen,
                             "blue" => $vblau));
-
+                    
                 } else {
                     if ($text == "j") {
                         // Textausgabe
@@ -347,3 +346,5 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
             }
     }
 }
+
+?>

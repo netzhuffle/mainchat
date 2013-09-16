@@ -2,7 +2,7 @@
 
 // Die öffentlichen Räume als Liste für ein Loginformular ausgeben
 
-require 'functions.php';
+require("functions.php");
 
 // Falls eintrittsraum nicht gesetzt ist, mit Lobby überschreiben
 if (strlen($eintrittsraum) == 0) {
@@ -38,3 +38,4 @@ if ($rows > 0) {
 mysql_free_result($result);
 
 echo "$raeume";
+?>

@@ -39,3 +39,4 @@ $STAT_MONTH_TXT["09"] = "September";
 $STAT_MONTH_TXT["10"] = "Oktober";
 $STAT_MONTH_TXT["11"] = "November";
 $STAT_MONTH_TXT["12"] = "Dezember";
+?>

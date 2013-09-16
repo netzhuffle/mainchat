@@ -35,3 +35,5 @@ $t['edit19'] = "Kommentar";
 
 $t['sonst1'] = "Sie sind ausgeloggt";
 $t['sonst2'] = "Fenster schließen";
+
+?>

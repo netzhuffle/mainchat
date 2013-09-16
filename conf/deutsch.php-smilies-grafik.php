@@ -100,3 +100,5 @@ $smilie["&zuzweit"] = "zuzweit.gif";
 $smilietxt["&zuzweit"] = "Zu&nbsp;zweit";
 $smilie["&zwinker"] = "zwinker.gif";
 $smilietxt["&zwinker"] = "Zwinkern";
+
+?>

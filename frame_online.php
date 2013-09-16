@@ -1,6 +1,6 @@
 <?php
 
-require 'functions-init.php';
+require "functions-init.php";
 
 $body_tag = "<BODY BGCOLOR=\"$farbe_background\" ";
 if (strlen($grafik_background) > 0) {

@@ -1,6 +1,6 @@
 <?php
 
-require 'functions.php';
+require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, o_js, u_level, admin
 id_lese($id);
@@ -12,7 +12,7 @@ aktualisiere_online($u_id, $o_raum);
 if (isset($smilies_config) && file_exists("conf/" . $smilies_config)) {
     unset($smilie);
     unset($smilietxt);
-    require 'conf/'. $smilies_config);
+    require("conf/" . $smilies_config);
 }
 
 echo "<HTML>\n<HEAD><TITLE>" . $body_titel
@@ -39,7 +39,7 @@ if (strlen($u_id) != 0) {
         $farbe_tabelle_zeile1 = $smilies_hintergrund;
         $farbe_tabelle_zeile2 = $smilies_hintergrund;
     }
-
+    
     if (!isset($r_name))
         $r_name = "";
     // Menue ausgeben, Tabelle aufbauen
@@ -51,29 +51,29 @@ if (strlen($u_id) != 0) {
         . "[<a onMouseOver=\"return(true)\" $linkuser>" . $t['sonst2']
         . "</A>]</B>$f4<BR>"
         . "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"3\" >\n";
-
+    
     // Unterscheidung JavaScript an/aus
     if ($o_js) {
-
+        
         // Array mit Smilies einlesen, Tabelle in Javascript ausgeben
         reset($smilie);
         while (list($smilie_code, $smilie_grafik) = each($smilie)) {
             $jsarr[] = "'$smilie_code','$smilie_grafik','"
                 . str_replace(" ", "&nbsp;", $smilietxt[$smilie_code]) . "'";
         }
-
+        
         echo "\n\n<SCRIPT LANGUAGE=\"JavaScript\">\n"
             . "   var color         = new Array('$farbe_tabelle_zeile1','$farbe_tabelle_zeile2');\n"
             . "   var fett          = new Array('$f1<B>','</B>$f2','$f3','$f4','$f1','$f2');\n"
             . "   var smilies_pfad  = '$smilies_pfad';\n"
             . "   var liste         = new Array(\n   "
             . @implode(",\n   ", $jsarr) . "   );\n"
-            . "   showsmiliegrafiken(liste);\n" .
+            . "   showsmiliegrafiken(liste);\n" . 
             //			     "   stdparm=''; stdparm2=''; id=''; http_host=''; u_nick=''; raum=''; nlink=''; nick=''; url='';\n".
             "</SCRIPT>\n";
-
+        
     } else { // kein javascript verfügbar
-
+    
     // Array mit Smilies einlesen, HTML-Tabelle ausgeben
         reset($smilie);
         $schalt = TRUE;
@@ -92,13 +92,13 @@ if (strlen($u_id) != 0) {
                 . "\"></TD>" . "</TR>\n";
         }
     }
-
+    
     echo "</TABLE>"
         . "<B>$r_name</B><BR>$f3<B>[<a onMouseOver=\"return(true)\" $linksmilies>"
         . $t['sonst1'] . "</A>]&nbsp;"
         . "[<a onMouseOver=\"return(true)\" $linkuser>" . $t['sonst2']
         . "</A>]</B>$f4</CENTER>";
-
+    
 } else {
     echo "<P ALIGN=CENTER>$t[sonst15]</P>\n";
 }

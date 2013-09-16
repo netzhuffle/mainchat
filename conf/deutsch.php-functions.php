@@ -381,3 +381,5 @@ $t['hack3'] = "<P>Sehr geehrter Hacker,</P>"
     . "bei Ihrem Provider Ihren Namen und Anschrift erhalten hat, wird er Sie kontaktieren.</P>"
     . "<P>Wir wünschen Ihnen noch einen angenehmen Tag,<BR>"
     . "<A HREF=\"MAILTO:$webmaster\">Ihr $chat Team</A></P><HR NOSHADE\n>";
+
+?>

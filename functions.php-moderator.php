@@ -13,7 +13,7 @@ function zeige_moderations_antworten($o_raum, $answer = "")
     global $farbe_moderationr_zeile2;
     global $farbe_moderationg_zeile1;
     global $farbe_moderationg_zeile2;
-
+    
     $query = "SELECT c_id,c_text FROM moderation WHERE c_raum=$o_raum AND c_typ='P' ORDER BY c_text";
     $result = mysql_query($query, $conn);
     echo "<table width=100% border=0 cellpadding=0 cellspacing=0>";
@@ -75,7 +75,7 @@ function bearbeite_moderationstexte($o_raum)
     global $action;
     global $u_id;
     global $system_farbe;
-
+    
     if (is_array($action)) {
         echo "<font><small>";
         $a = 0;
@@ -104,7 +104,7 @@ function bearbeite_moderationstexte($o_raum)
                         case "ok":
                         case "clear":
                         case "thru":
-                        // vorbereiten für umspeichern... geht leider nicht 1:1,
+                        // vorbereiten für umspeichern... geht leider nicht 1:1, 
                         // weil fetch_array mehr zurückliefert als in $f[] sein darf...
                             $c['c_von_user'] = $f['c_von_user'];
                             $c['c_an_user'] = $f['c_an_user'];
@@ -191,7 +191,7 @@ function zeige_moderationstexte($o_raum, $limit = 20)
     global $moderationsexpire;
     global $u_id;
     global $o_js;
-
+    
     // gegen DAU-Eingaben sichern...
     $limit = max(intval($limit), 20);
     // erst mal alle alten Msgs expiren...
@@ -200,7 +200,7 @@ function zeige_moderationstexte($o_raum, $limit = 20)
     $expiretime = $moderationsexpire * 60;
     $query = "DELETE from moderation WHERE unix_timestamp(c_zeit)+$expiretime<unix_timestamp(NOW()) AND c_moderator=0 AND c_typ='N'";
     $result = mysql_query($query, $conn);
-
+    
     if ($moderation_rueckwaerts == 1)
         $rev = " DESC";
     $query = "SELECT c_id,c_text,c_von_user,c_moderator FROM moderation WHERE c_raum=$o_raum AND c_typ='N' ORDER BY c_id $rev LIMIT 0,$limit";
@@ -218,7 +218,7 @@ function zeige_moderationstexte($o_raum, $limit = 20)
         }
         echo "<form name=modtext action=\"moderator.php?http_host=$http_host&id=$id\" method=\"post\">\n";
         if ($rows > 0) {
-
+            
             echo "<table width=100% cellpadding=0 cellspacing=0 border=0>\n";
             echo "<tr bgcolor=$farbe_tabelle_kopf>";
             echo "<td align=center valign=bottom><img src=\"pics/ok.gif\" height=20 width=20 alt=\""
@@ -244,7 +244,7 @@ function zeige_moderationstexte($o_raum, $limit = 20)
             echo "<td align=center valign=bottom><img src=\"pics/nope.gif\" height=20 width=20 alt=\""
                 . $t['mod15'] . "\"></td>";
             echo "</tr>\n";
-
+            
             while ($row = mysql_fetch_object($result)) {
                 $i++;
                 if ($i % 2 == 0) {
@@ -301,7 +301,6 @@ function zeige_moderationstexte($o_raum, $limit = 20)
         echo "<input type=submit name=ok value=" . $t['mod_ok'] . ">\n";
         echo "</form>\n";
     }
-
     return $rows;
 }
 
@@ -310,13 +309,14 @@ function anzahl_moderationstexte($o_raum)
     global $http_host;
     global $id;
     global $dbase, $conn;
-
+    
     $query = "SELECT c_id FROM moderation WHERE c_raum=$o_raum AND c_typ='N' ORDER BY c_id";
     $result = mysql_query($query, $conn);
     if ($result > 0) {
         $rows = mysql_num_rows($result);
     }
     ;
-
     return $rows;
 }
+
+?>

@@ -2,16 +2,16 @@
 <head>
 <title>Mainchat Installation</TITLE><META CHARSET=UTF-8>
 <script>
-function newWindow(url,name)
+function newWindow(url,name) 
 {
-    hWnd=window.open(url,name,'resizable=yes,scrollbars=yes,width=800,height=400');
+	hWnd=window.open(url,name,'resizable=yes,scrollbars=yes,width=800,height=400');
 }
 </script>
 </head>
 <body>
 <?php
 
-require 'functions.php-install.php';
+require("functions.php-install.php");
 $configdatei = "../conf/config.php";
 
 echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"8\" border=\"2\" bordercolor=\"#007ABE\" bgcolor=\"#E5E5E5\" style=\"font-family: Arial;\">\n";
@@ -21,7 +21,7 @@ switch ($aktion) {
     case "step_2":
         if (!file_exists($configdatei)) {
             $regexemail = "|^[_a-z0-9-]+(\.[_a-z0-9]+)*@([a-z0-9-]+\.)[a-z]{2,3}$|mi";
-
+            
             if ($chat['lobby'] == "" || $chat['dbase'] == ""
                 || $chat['host'] == "" || $chat['user'] == ""
                 || $chat['pass'] != $chat['pass2']
@@ -89,7 +89,7 @@ switch ($aktion) {
                                     $connect);
                                 step_2($connect, $select, $chat, $fp);
                             }
-
+                            
                         } else step_2($connect, $select, $chat, $fp);
                     }
                 }
@@ -102,7 +102,7 @@ switch ($aktion) {
             step_1();
         }
         break;
-
+    
     default:
         if (file_exists($configdatei)) {
             echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" border=\"0\" align=\"center\">\n"

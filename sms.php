@@ -1,7 +1,7 @@
 <?php
 
-require 'functions.php';
-require_once 'functions.php-func-sms.php';
+require("functions.php");
+require_once("functions.php-func-sms.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, u_level, o_js
 id_lese($id);
@@ -12,64 +12,62 @@ id_lese($id);
 <HEAD><TITLE><?php echo $body_titel . "_SMS"; ?></TITLE><META CHARSET=UTF-8>
 <SCRIPT>
         window.focus()
-        function win_reload(file,win_name)
-        {
+        function win_reload(file,win_name) {
                 win_name.location.href=file;
 }
-        function opener_reload(file,frame_number)
-        {
+        function opener_reload(file,frame_number) {
                 opener.parent.frames[frame_number].location.href=file;
 }
 </SCRIPT>
 <?php echo $stylesheet; ?>
-</HEAD>
+</HEAD> 
 <?php
 
 function erzwingeNeuePin()
 {
-
+    
     global $conn, $u_id;
-
+    
     if (!$u_id)
         return;
-
+    
     $sql = "select u_sms_extra from user where u_id=$u_id";
     $result = mysql_query($sql, $conn);
     if (mysql_num_rows($result) > 0)
         $sms_extra = unserialize(mysql_result($result, 0, "u_sms_extra"));
-
+    
     //falls pin vor mehr als 24 stunden vergeben wurde, muss neue erzwungen werden
     if ($sms_extra['pintime'] && ($sms_extra['pintime'] + 86400) < date("U")) {
-
+        
         $g['u_sms_extra'] = "";
-
+        
         schreibe_db("user", $g, $u_id, "u_id");
-
+        
     }
-
+    
 }
 
 function CheckHandynummerVorhanden()
 {
-
+    
     global $conn, $u_id;
-
+    
     $sql = "select ui_handy from userinfo where ui_userid = $u_id";
     $result = mysql_query($sql, $conn);
     if (mysql_num_rows($result) > 0)
         $handynr = mysql_result($result, 0, "ui_handy");
-
+    
     if ($handynr)
         return true;
     else return false;
-
+    
 }
 
 function PinvergabeFormular()
 {
     global $f, $http_host, $id, $chat;
     $box = "PIN vergeben";
-
+    
     $text .= "Damit Sie SMS aus dem $chat versenden können, muss zunächste einmal Ihre Handynummer geprüft werden.";
     $text .= "Hierzu bekommen Sie eine PIN aufs Handy geschickt. Sobald Sie die PIN korrekt eingegeben haben, dürfen Sie aufladen.";
     $text .= "<BR>Hier nochmal Ihre Handynummer: <b>$f[ui_handy]</b><BR>";
@@ -102,12 +100,12 @@ function ZeigSMSHistory($u_id)
         $farbe = $farbe_tabelle_zeile1;
         while ($a = mysql_fetch_array($result)) {
             $user_id = $a['s_an_user_id'];
-
+            
             $query = "SELECT user.* FROM user WHERE u_id=$user_id ";
             $result2 = mysql_query($query, $conn);
             $b = mysql_fetch_array($result2);
             @mysql_free_result($result2);
-
+            
             $a['s_an_user_id'] = $b['u_nick'];
             $atext .= "<tr BGCOLOR=\"$farbe\">";
             $atext .= "<td><small>$a[zeit]</small></td>";
@@ -206,19 +204,18 @@ function pruefe()
 {
 alertmsg="";
 pos=document.forms["sms"].trx_amount.selectedIndex;
-if (pos == "0") { alertmsg = "Bitte eine Betrag > 0 wählen";}
-
+if (pos == "0"){ alertmsg = "Bitte eine Betrag > 0 wählen";}
+        
     if (alertmsg == "") {
         return true;
     } else {
         window. alert (alertmsg);
-
         return false;
     }
-
+        
 }
 </script>
-
+        
 <table align=RIGHT border=0 cellpadding=5 cellspacing=0 BGCOLOR="'
         . $farbe_tabelle_zeile1 . '">
 <form action="' . $sms[ipayment]
@@ -296,17 +293,17 @@ if (ist_netscape()) {
 }
 
 if ($u_id && $communityfeatures) {
-
+    
     if (isset($u_sms_ok) && isset($aktion)) {
         $f['u_sms_ok'] = $u_sms_ok;
         $f['ui_id'] = schreibe_db("user", $f, $u_id, "u_id");
-
+        
         unset($f);
     }
-
+    
     //nach 24 Stunden muss Pin geloescht werden
     erzwingeNeuePin();
-
+    
     // Menü als erstes ausgeben
     $box = $ft0 . "Menü SMS" . $ft1;
     $text = "<A HREF=\"hilfe.php?http_host=$http_host&id=$id&aktion=community#sms\">Hilfe</A>\n";
@@ -316,17 +313,17 @@ if ($u_id && $communityfeatures) {
     echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
     //Nur irgendwas machen wenn User ueberhaupt eine Handynummer eingegeben hat
     if (!CheckHandynummerVorhanden()) {
-
+        
         $box = "Fehler!";
         $text = "<br>Sie habe in Ihrem <a href=\"profil.php?id=$id&http_host=$httphost&aktion=aendern\">Profil</a> keine Handynummer hinterlegt. Um die SMS-Funktionen nutzen zu können, müssen Sie <a href=\"profil.php?id=$id&http_host=$httphost&aktion=aendern\">hier</a> Ihre Handynummer eingeben!";
         show_box2($box, $text, "100%");
-
+        
     } else {
         // Wir holen u_sms_ok und u_sms_guthaben aus der DB
         $q = "SELECT u_sms_ok, u_sms_guthaben FROM user WHERE u_id = '$u_id'";
         $result = mysql_query($q);
         $a = @mysql_fetch_array($result);
-
+        
         // Wir lesen die Userdaten in $userdata
         $query = "SELECT * FROM user WHERE u_id=$u_id";
         $result = mysql_query($query, $conn);
@@ -334,7 +331,7 @@ if ($u_id && $communityfeatures) {
             $userdata = mysql_fetch_array($result);
             mysql_free_result($result);
         }
-
+        
         // Wir lesen Userinfo in $f
         $query = "SELECT * FROM userinfo WHERE ui_userid=$u_id";
         $result = mysql_query($query, $conn);
@@ -349,11 +346,11 @@ if ($u_id && $communityfeatures) {
             $profil_gefunden = false;
         }
         @mysql_free_result($result);
-
+        
         SMSEmpfangFormular();
-
+        
         $u = unserialize($userdata['u_sms_extra']);
-
+        
         if ($aktion == "pinsenden"
             && ($u['pintime'] + 86400 < date("U") || $u['pintime'] == "")) {
             unset($u);
@@ -364,12 +361,12 @@ if ($u_id && $communityfeatures) {
             $u['pinversuche'] = 1;
             $u['handynrok'] = false;
             $g['u_sms_extra'] = serialize($u);
-
+            
             $g['ui_id'] = schreibe_db("user", $g, $u_id, "u_id");
             sms_sende2($f['ui_handy'],
                 "Hallo! Die Auflade-PIN fuer den $chat lautet: $u[pin]");
             unset($g);
-
+            
             // Wir lesen die Userdaten in Userdata
             $query = "SELECT * FROM user WHERE u_id=$u_id";
             $result = mysql_query($query, $conn);
@@ -377,9 +374,9 @@ if ($u_id && $communityfeatures) {
                 $userdata = mysql_fetch_array($result);
                 mysql_free_result($result);
             }
-
+            
         }
-
+        
         $errmsg = "";
         if (isset($pin)) {
             $u = unserialize($userdata['u_sms_extra']);
@@ -388,9 +385,9 @@ if ($u_id && $communityfeatures) {
                 $u[handynrok] = true;
                 $u[ip] = $REMOTE_ADDR;
                 $g[u_sms_extra] = serialize($u);
-
+                
                 $http_stuff = $_SERVER;
-
+                
                 // ausblenden vom uninteressanten Sachen...
                 unset($http_stuff['DOCUMENT_ROOT']);
                 unset($http_stuff['HTTP_ACCEPT']);
@@ -423,13 +420,13 @@ if ($u_id && $communityfeatures) {
                 unset($http_stuff['HTTP_KEEP_ALIVE']);
                 unset($http_stuff['QUERY_STRING']);
                 unset($http_stuff['REMOTE_PORT']);
-
+                
                 unset($stuff);
                 while (list($http_stuff_name, $http_stuff_inhalt) = each(
                     $http_stuff))
                     if ($http_stuff_inhalt)
                         $stuff .= "$http_stuff_name:\t$http_stuff_inhalt\n";
-
+                
                 $msg = "PIN-Eingabe OK!\n\nNickname: $userdata[u_nick]\nUsername: $userdata[u_name]\nUserID: $u_id\nHandynummer: $u[handynr]\nIP: $REMOTE_ADDR\n\n$stuff";
                 mail($hackmail, "PIN-Eingabe erfolgreich", $msg);
             } else {
@@ -438,10 +435,10 @@ if ($u_id && $communityfeatures) {
                 $u[handynrok] = false;
                 $g[u_sms_extra] = serialize($u);
             }
-
+            
             $g[ui_id] = schreibe_db("user", $g, $u_id, "u_id");
             unset($g);
-
+            
             // Wir lesen die Userdaten in Userdata
             $query = "SELECT * FROM user WHERE u_id=$u_id";
             $result = mysql_query($query, $conn);
@@ -449,59 +446,59 @@ if ($u_id && $communityfeatures) {
                 $userdata = mysql_fetch_array($result);
                 mysql_free_result($result);
             }
-
+            
         }
-
+        
         echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
-
+        
         // SMS Payment-Gateway eingetragen?
         if ((!isset($sms['ipayment'])) || (!$sms['ipayment'])) {
-
+            
             $box = "Keine Aufladung möglich!";
             $atext = '<BR>Es ist keine Aufladung Ihres Guthabens möglich.';
             show_box2($box, $atext, "100%");
-
+            
         } elseif ($u_punkte_gesamt < $sms[punkte]) {
-
+            
             $box = "Fehler!";
             $atext = '<BR>Um Ihr Guthaben per Lastschrift aufladen zu können, brauchen Sie mindestens '
                 . $sms[punkte] . ' Chat-Punkte. Sie haben aber nur '
                 . $u_punkte_gesamt . ' Punkte';
             show_box2($box, $atext, "100%");
-
+            
         } else {
-
+            
             $u = unserialize($userdata['u_sms_extra']);
-
+            
             // User bekommt eine PIN wenn, a) noch eine PIN vergeben oder b) PIN älter 24h und handynrok==false
             if (($userdata['u_sms_extra'] == "")
                 || ($u['pintime'] + 86400 < date("U")
                     && $u['handynrok'] == false)) {
                 PinVergabeFormular($message);
             }
-
+            
             // Wenn PIN gesetzt UND PIN-Vergabe in den letzten 24h UND PINVERSUCHE <= 4 UND HANDYNUMMER == FALSCH dann PinEingabeFormular
             if (($u['pin'] != "") && ($u['pintime'] + 86400 > date("U"))
                 && ($u['pinversuche'] <= 4) && ($u['handynrok'] == false)) {
                 PinEingabeFormular($errmsg);
             }
-
+            
             // Wenn Fehleingaben > 4 dann Fehlermeldung
             if (($u['pin'] != "") && ($u['pintime'] + 86400 > date("U"))
                 && ($u['pinversuche'] > 4) && ($u['handynrok'] == false)) {
                 PinErrorFormular();
             }
-
+            
             // Wenn Handynummer richtig dann Aufladen OK
             if ($u['handynrok'] == true) {
                 AufladeFormular();
             }
-
+            
         }
-
+        
         echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
         ZeigSMSHistory($u_id);
-
+        
     }
 }
 ?>

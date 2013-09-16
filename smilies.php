@@ -1,6 +1,6 @@
 <?php
 
-require 'functions.php';
+require("functions.php");
 
 // Vergleicht Hash-Wert mit IP und liefert u_id, u_name, o_id, o_raum, o_js, u_level, admin
 id_lese($id);
@@ -40,25 +40,25 @@ if (strlen($u_id) != 0) {
         . "[<a onMouseOver=\"return(true)\" $linkuser>" . $t['sonst2']
         . "</A>]</B>$f4<BR>"
         . "<TABLE BORDER=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\" >\n";
-
+    
     // Unterscheidung JavaScript an/aus
     if ($o_js) {
-
+        
         // Array mit Smilies einlesen, Tabelle in Javascript ausgeben
         reset($smilie);
         while (list($smilie_code, $smilie_text) = each($smilie)) {
             $jsarr[] = "'$smilie_code','"
                 . str_replace(" ", "&nbsp;", $smilie_text) . "'";
         }
-
+        
         echo "\n\n<SCRIPT LANGUAGE=\"JavaScript\">\n"
             . "   var color = new Array('$farbe_tabelle_zeile1','$farbe_tabelle_zeile2');\n"
             . "   var fett  = new Array('$f1<B>','</B>$f2','$f3','$f4','$f1','$f2');\n"
             . "   var liste = new Array(\n   " . @implode(",\n   ", $jsarr)
             . "   );\n" . "   showsmilies(liste);\n" . "</SCRIPT>\n";
-
+        
     } else { // kein javascript verfügbar
-
+    
     // Array mit Smilies einlesen, HTML-Tabelle ausgeben
         reset($smilie);
         $schalt = TRUE;
@@ -75,13 +75,13 @@ if (strlen($u_id) != 0) {
                 . "</TD></TR>\n";
         }
     }
-
+    
     echo "</TABLE>"
         . "<B>$r_name</B><BR>$f3<B>[<a onMouseOver=\"return(true)\" $linksmilies>"
         . $t['sonst1'] . "</A>]&nbsp;"
         . "[<a onMouseOver=\"return(true)\" $linkuser>" . $t['sonst2']
         . "</A>]</B>$f4</CENTER>";
-
+    
 } else {
     echo "<P ALIGN=CENTER>$t[sonst15]</P>\n";
 }

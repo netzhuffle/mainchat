@@ -1,6 +1,6 @@
 <?php
 
-require 'functions.php';
+require("functions.php");
 
 // User die gerade Online sind als Liste ausgeben
 // Diese Liste kann webchat.de einlesen und damit die Liste unserer User ausgeben
@@ -33,7 +33,7 @@ if ($rows > 0) {
             if ($klammer == "j")
                 echo ") ";
         }
-
+        
         $row = @mysql_fetch_array($result);
         if ($klammer == "j")
             echo "(";
@@ -66,3 +66,5 @@ if ($rows > 0) {
     }
     mysql_free_result($result);
 }
+
+?>

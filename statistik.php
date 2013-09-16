@@ -8,16 +8,16 @@ if (!$u_id) {
     die();
 }
 
-include 'statistik-functions.php';
-include 'conf/'. $sprachconfig . "-statistik.php");
+include("statistik-functions.php");
+include("conf/" . $sprachconfig . "-statistik.php");
 
 // config-bereich
 
-$STAT_TITLE_BACK0 = $farbe_tabelle_kopf;// "#0078BE"; // Farben die für den Rahmen und den Hintergrund der Überschrift und
-$STAT_TITLE_BACK1 = $farbe_tabelle_koerper; // des Menü verwendet werden sollen.
-$STAT_BAR_HEIGHT = 300; // Höhe einer Statistiktabelle in Pixel.
+$STAT_TITLE_BACK0 = $farbe_tabelle_kopf;// "#0078BE"; // Farben die für den Rahmen und den Hintergrund der Überschrift und    
+$STAT_TITLE_BACK1 = $farbe_tabelle_koerper; // des Menü verwendet werden sollen. 
+$STAT_BAR_HEIGHT = 300; // Höhe einer Statistiktabelle in Pixel. 
 
-// Hintergründe die für die Statistiktabelle verwendet werden
+// Hintergründe die für die Statistiktabelle verwendet werden  
 $STAT_BAR_BACK0 = "#E5E5E5";
 $STAT_BAR_BACK1 = "#BDC6D5";
 $STAT_BAR_BACK2 = $farbe_tabelle_kopf;
@@ -27,7 +27,7 @@ $STAT_BAR_IMAGE_T = "14,2,pics/bar-t.gif";
 $STAT_BAR_IMAGE_M = "14,2,pics/bar-m.gif";
 $STAT_BAR_IMAGE_B = "14,2,pics/bar-b.gif";
 
-// Fontstart und Fontende die zum Anzeigen der unteren Beschriftung verwendet werden sollen.
+// Fontstart und Fontende die zum Anzeigen der unteren Beschriftung verwendet werden sollen.                                                                
 $STAT_BAR_FONTBEG1 = "<SMALL>";
 $STAT_BAR_FONTEND1 = "</SMALL>";
 
@@ -35,7 +35,7 @@ $STAT_BAR_FONTEND1 = "</SMALL>";
 $STAT_BAR_FONTBEG2 = "<SMALL><B>";
 $STAT_BAR_FONTEND2 = "</B></SMALL>";
 
-// Fontstart und Fontende die zum Anzeigen der Überschrift einer Statistik verwendet werden sollen.
+// Fontstart und Fontende die zum Anzeigen der Überschrift einer Statistik verwendet werden sollen.                                                          
 $STAT_BAR_FONTBEG3 = "<FONT COLOR=\"#FFFFFF\"><B>";
 $STAT_BAR_FONTEND3 = "</B></FONT>";
 
@@ -82,7 +82,6 @@ if (!$c) {
 
 if ($fehler) {
     show_box2($t['statistik1'], $msg, "100%");
-
     return;
 }
 
@@ -100,20 +99,20 @@ switch ($type) {
         $y = urldecode($y);
         $m = urldecode($m);
         $v = urldecode($v);
-
+        
         $grapharray = array();
-
+        
         if (strlen($v) < 1)
             $v = "%";
         if (strlen($y) < 1)
             $y = date("Y", time());
-
+        
         if ((intval($m) < 1) || (intval($m) > 12))
             $m = intval(date("m", time()));
-
+        
         $m = SPrintF("%02d", $m);
         $y = SPrintF("%04d", $y);
-
+        
         $msg = "";
         $msg .= "<center>\n";
         $msg .= "<TABLE BORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\">\n";
@@ -131,30 +130,30 @@ switch ($type) {
         $msg .= "<TD" . coreMakeBackground($STAT_TITLE_BACK1) . ">"
             . $STAT_TITLE_FONTBEG0 . "\n";
         $msg .= "<SELECT NAME=\"m\" onchange='form.submit();'>\n";
-
+        
         while (list($i, $n) = each($STAT_MONTH_TXT)) {
             if ($i == $m)
                 $msg .= "<OPTION VALUE=\"$i\" SELECTED>$n\n";
             else $msg .= "<OPTION VALUE=\"$i\">$n\n";
-
+            
         }
-
+        
         $msg .= "</SELECT>\n";
-        // Auswahlbox Jahr
+        // Auswahlbox Jahr  
         $msg .= "<SELECT NAME=\"y\">\n";
-
+        
         $i = 0;
-
+        
         while ($i < 2) {
             $n = (date("Y", time()) - $i);
-
+            
             if ($n == $y)
                 $msg .= "<OPTION VALUE=\"$n\" SELECTED>$n\n";
             else $msg .= "<OPTION VALUE=\"$n\">$n\n";
-
+            
             $i++;
         }
-
+        
         $msg .= "</SELECT>\n";
         $msg .= $STAT_TITLE_FONTEND0;
         $msg .= "<INPUT TYPE=\"SUBMIT\" VALUE=\"" . $STAT_TXT["0053"] . "\">\n";
@@ -163,59 +162,59 @@ switch ($type) {
         $msg .= "</FORM>\n";
         $msg .= "</TABLE>\n";
         $msg .= "</CENTER>\n";
-
+        
         // Statistiken einzeln nach Monaten
-
+        
         $r1 = @mysql_query(
             "SELECT DISTINCT c_host FROM chat WHERE date(c_timestamp) LIKE '$y-$m%' AND c_host LIKE '$v' ORDER BY c_host");
         if ($r1 > 0) {
             $j = 0;
             $o = @mysql_num_rows($r1);
-
+            
             while ($j < $o) {
                 $c_host = @mysql_result($r1, $j, "c_host");
-
+                
                 statsResetMonth($y, $m);
-
+                
                 $r0 = @mysql_query(
                     "SELECT *, DATE_FORMAT(c_timestamp,'%d') as tag FROM chat WHERE date(c_timestamp) LIKE '$y-$m%' AND c_host='"
                         . AddSlashes($c_host) . "' ORDER BY c_timestamp");
                 if ($r0 > 0) {
                     $i = 0;
                     $n = @mysql_num_rows($r0);
-
+                    
                     while ($i < $n) {
                         $x = @mysql_result($r0, $i, "tag");
                         $c_users = @mysql_result($r0, $i, "c_users");
-
+                        
                         if ($c_users > $grapharray["$x"])
                             $grapharray["$x"] = $c_users;
-
+                        
                         $i++;
                     }
-
+                    
                     $msg .= statsPrintGraph($c_host, $STAT_TXT["0102"],
                         $STAT_TXT["0105"]);
                 }
-
+                
                 $j++;
             }
         }
-
+        
         show_box2($t['statistik3'], $msg, "100%");
         break;
-
+    
     case "stunde":
         $h = 24;
         $msg = "";
-
+        
         $showtime = (time() - (($h - 1) * 60 * 60));
-
+        
         statsResetHours($showtime, $h);
-
+        
         $r0 = @mysql_query(
             "SELECT *, DATE_FORMAT(c_timestamp,'%k') as stunde FROM chat WHERE UNIX_TIMESTAMP(c_timestamp)>$showtime AND c_host LIKE '$v' ORDER BY c_timestamp");
-
+        
         if ($r0 > 0) {
             $i = 0;
             $n = @mysql_num_rows($r0);
@@ -225,13 +224,15 @@ switch ($type) {
                 $grapharray["$x"] += $c_users;
                 $i++;
             }
-
+            
             $title = $v;
-
+            
             $msg .= statsPrintGraph($title, $STAT_TXT["0102"],
                 $STAT_TXT["0103"]);
         }
-
+        
         show_box2($t['statistik2'], $msg, "100%");
         break;
 } // switch
+
+?>

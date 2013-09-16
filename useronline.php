@@ -1,6 +1,6 @@
 <?php
 
-require 'functions.php';
+require("functions.php");
 
 // Anzahl der User, die gerade Online sind, als kurzliste ausgeben
 
@@ -34,10 +34,10 @@ $result = @mysql_query($query, $conn);
 
 if ($result && mysql_Num_Rows($result) > 0) {
     while ($row = @mysql_fetch_object($result)) {
-
+        
         if (!$raum_alt)
             $raum_alt = $row->r_name;
-
+        
         if ($raum_alt != $row->r_name) {
             if ($user_im_raum) {
                 $txt = str_replace("%raum_alt%", $raum_alt, $t[userliste1]);
@@ -48,7 +48,7 @@ if ($result && mysql_Num_Rows($result) > 0) {
                 $raum_alt = $row->r_name;
             }
         }
-
+        
         if ($nicks) {
             $nicks .= ", " . $row->o_name;
         } else {
@@ -69,3 +69,5 @@ if ($anzahl_online && $anzahl_user)
     $txt = str_replace("%anzahl_online%", $anzahl_online, $t[userliste2]);
 $txt = str_replace("%anzahl_user%", $anzahl_user, $txt);
 echo str_replace("%userliste%", $userliste, $txt);
+
+?>

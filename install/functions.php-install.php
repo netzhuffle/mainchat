@@ -9,7 +9,7 @@ function step_1()
         . "Weitere Informationen zur Installation finden Sie hier [<a href=\"liesmich.php\" onClick=\"newWindow('liesmich.php','LIESMICH');return false;\">LIESMICH</a>]</p></td>\n"
         . "<td><img src=\"images/fidionlogo.gif\" width=\"138\" height=\"51\" alt=\"\" border=\"0\"</td></tr>\n"
         . "<tr><td colspan=\"2\"><br></td></tr></table>\n";
-
+    
     echo "<form action=\"$PHP_SELF\" method=\"post\">\n"
         . "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" border=\"0\" align=\"center\">\n"
         . "<tr bgcolor=\"#007ABE\"><td colspan=\"2\" style=\"font-size:15px; text-align:center;color:White;\"><B>Datenbank Einstellungen</b></td></tr>\n"
@@ -90,7 +90,7 @@ function step_1()
         . "<tr><td colspan=\"2\"><br></td></tr>\n"
         . "<input type=\"hidden\" name=\"aktion\" value=\"step_2\">\n"
         . "<tr><td colspan=\"2\"><input type=\"submit\" name=\"los\" value=\"Installation starten\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type=\"reset\" value=\"Standardwerte wiederherstellen\"</td></tr>\n"
+		<input type=\"reset\" value=\"Standardwerte wiederherstellen\"</td></tr>\n"
         . "</form>\n" . "</table>\n";
 }
 
@@ -102,7 +102,7 @@ function step_2($connect, $select, $chat, $fpconfig)
     foreach ($chat as $key => $value)
         $inhalt = str_replace("%$key%", $value, $inhalt);
     fwrite($fpconfig, $inhalt, strlen($inhalt));
-
+    
     echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" border=\"0\" align=\"center\">\n"
         . "<tr bgcolor=\"#007ABE\"><td style=\"font-size:15px; text-align:center;color:White;\"><b>Konfigurationsdatei</b></td></tr>\n"
         . "<tr><td > Im Verzeichnis conf wurde folgende Konfigurationsdatei angelegt: <br>\n";
@@ -110,28 +110,30 @@ function step_2($connect, $select, $chat, $fpconfig)
     if (!file_exists($config))
         echo "<span style=\"color:red\">Anlegen der <b>config.php</b> misslungen</span></td></tr>\n";
     else echo "<b>config.php</b></td></tr>\n";
-
+    
     $mysqldatei = "../dok/mysql.def";
     $mysqlfp = fopen($mysqldatei, "r");
     $mysqlinhalt = fread($mysqlfp, filesize($mysqldatei));
     $mysqlarray = explode(';', $mysqlinhalt);
-
+    
     foreach ($mysqlarray as $key => $value)
         mysql_query($value);
-
+    
     echo "<tr><td colspan=\"2\"><br><br></td></tr>\n"
         . "<tr bgcolor=\"#007ABE\"><td style=\"font-size:15px; text-align:center;color:White;\"><b>Datenbank</b></td></tr>\n"
         . "<tr><td>In der Datenbank " . $chat['dbase'] . " (Datenbankuser: "
         . $chat['user'] . ") wurden folgende Tabellen " . "angelegt: <br>\n";
-
+    
     $tables = mysql_listtables($chat['dbase']);
     for ($i = 0; $i < mysql_num_rows($tables); $i++) {
         $table = mysql_tablename($tables, $i);
         echo "<b>" . $table . "</b>, \n";
     }
     echo "</td></tr>" . "<tr><td colspan=\"2\"><br><br></td></tr>\n";
-
+    
     echo "<tr><td> Mit <b>Nickname admin und Passwort admin</b> können Sie sich beim ersten Mal anmelden!<br>\n"
         . "<a href=\"../index.php\">zum Chat</a></tr></td></table>\n";
-
+    
 }
+
+?>

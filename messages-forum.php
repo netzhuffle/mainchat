@@ -1,7 +1,7 @@
 <?php
 
-require 'functions.php';
-require 'functions.php-func-chat_lese.php';
+require("functions.php");
+require("functions.php-func-chat_lese.php");
 
 // Userdaten setzen
 id_lese($id);
@@ -17,7 +17,7 @@ $body_tag = $body_tag . "TEXT=\"$farbe_chat_text3\" "
 // Userdaten gesetzt?
 if (strlen($u_id) > 0) {
     aktualisiere_online($u_id, $o_raum);
-
+    
     // Fenstername
     $fenster = str_replace("+", "", $u_nick);
     $fenster = str_replace("-", "", $fenster);
@@ -39,16 +39,16 @@ if (strlen($u_id) > 0) {
         . "}\n" . "function neuesFenster2(url) {\n"
         . "hWnd=window.open(url,\"640_$fenster\",\"resizable=yes,scrollbars=yes,width=780,height=580\");\n"
         . "}\n" . "</SCRIPT>\n" . "</HEAD>\n";
-
+    
     echo $body_tag;
-
+    
     // Timestamp im Datensatz aktualisieren
     aktualisiere_online($u_id, $o_raum, 2);
-
+    
     // eigene Farbe für BG gesetzt? dann die nehmen.
     if ($u_farbe_bg != "" && $u_farbe_bg != "-")
         $farbe_chat_background1 = $u_farbe_bg;
-
+    
     if (strlen($grafik_background1) > 0) {
         $table_option = "BACKGROUND=\"$grafik_background1\"";
     } else {
@@ -56,19 +56,21 @@ if (strlen($u_id) > 0) {
     }
     echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"5\" border=\"0\">\n";
     echo "<tr><td><table $table_option width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" border=\"0\"><tr><td>\n";
-
+    
     // Aktuelle Privat- und Systemnachrichten oder Statusmeldung ausgeben
     if (!chat_lese($o_id, $o_raum, $u_id, TRUE, $ignore, 10, TRUE)) {
         echo $f1 . $t['messages_forum1'] . $f2 . "\n";
     }
-
+    
     echo "</td></tr></table></td></tr></table></BODY></HTML>\n";
-
+    
 } else {
-
+    
     // User wird nicht gefunden. Login ausgeben
     echo "<HTML><HEAD></HEAD><HTML>";
     echo "<BODY onLoad='javascript:parent.location.href=\"index.php?http_host=$http_host\"'>\n";
     echo "</BODY></HTML>\n";
     exit;
 }
+
+?>
