@@ -465,7 +465,7 @@ function id_lese($id, $auth_id = "", $ipaddr = "", $agent = "", $referrer = "")
     global $u_farbe_alle, $u_farbe_sys, $u_farbe_priv, $u_farbe_noise, $u_farbe_bg, $u_clearedit;
     global $u_away, $o_knebel, $u_punkte_gesamt, $u_punkte_gruppe, $moderationsmodul, $conn;
     global $HTTP_SERVER_VARS, $HTTP_COOKIE_VARS, $o_who, $o_timeout_zeit, $o_timeout_warnung;
-    global $o_spam_zeilen, $o_spam_byte, $o_spam_zeit;
+    global $o_spam_zeilen, $o_spam_byte, $o_spam_zeit, $o_dicecheck;
     global $hackmail, $webmaster, $chat, $http_host, $t, $erweitertefeatures;
     
     // IP und Browser ermittlen

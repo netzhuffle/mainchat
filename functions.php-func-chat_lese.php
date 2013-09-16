@@ -1,14 +1,6 @@
 <?php
 
-function chat_lese(
-    $o_id,
-    $raum,
-    $u_id,
-    $sysmsg,
-    $ignore,
-    $back,
-    $nur_privat = FALSE,
-    $nur_privat_user = "")
+function chat_lese($o_id, $raum, $u_id, $sysmsg, $ignore, $back, $nur_privat = FALSE, $nur_privat_user = "")
 {
     // Gibt Text gefiltert aus
     // $raum = ID des aktuellen Raums
@@ -16,7 +8,7 @@ function chat_lese(
     
     global $dbase, $user_farbe, $letzte_id, $chat, $system_farbe, $t, $chat_status_klein, $admin;
     global $u_farbe_alle, $u_farbe_noise, $u_farbe_priv, $u_farbe_sys, $u_farbe_bg, $u_nick, $u_level, $u_smilie, $u_systemmeldungen;
-    global $show_spruch_owner, $farbe_user_fest, $id, $http_host;
+    global $show_spruch_owner, $farbe_user_fest, $id, $http_host, $o_dicecheck;
     global $user_nick, $conn;
     
     // Systemfarbe setzen
@@ -64,8 +56,7 @@ function chat_lese(
         
         // Nachrichten ab o_chat_id (Merker) in Tabelle online ausgeben
         // Nur Nachrichten im aktuellen Raum anzeigen, außer Typ P oder S und an User adressiert
-        $query = "SELECT c_id FROM chat WHERE c_raum='$raum' AND c_id >= $o_chat_id"
-            . $qquery;
+        $query = "SELECT c_id FROM chat WHERE c_raum='$raum' AND c_id >= $o_chat_id" . $qquery;
         
         unset($rows);
         $result = mysql_query($query, $conn);
@@ -76,8 +67,7 @@ function chat_lese(
         }
         mysql_free_result($result);
         
-        $query = "SELECT c_id FROM chat WHERE c_typ IN ('P','S') AND c_an_user=$u_id AND c_id >= $o_chat_id"
-            . $qquery;
+        $query = "SELECT c_id FROM chat WHERE c_typ IN ('P','S') AND c_an_user=$u_id AND c_id >= $o_chat_id" . $qquery;
         $result = mysql_query($query, $conn);
         if ($result) {
             while ($row = mysql_fetch_row($result)) {
@@ -108,8 +98,7 @@ function chat_lese(
         
         // $back-Zeilen in Tabelle online ausgeben, höchstens  aber ab o_chat_id
         // Nur Nachrichten im aktuellen Raum anzeigen, außer Typ P oder S und an User adressiert
-        $query = "SELECT c_id FROM chat WHERE c_raum='$raum' AND c_id >= $o_chat_id"
-            . $qquery;
+        $query = "SELECT c_id FROM chat WHERE c_raum='$raum' AND c_id >= $o_chat_id" . $qquery;
         
         unset($rows);
         $result = mysql_query($query, $conn);
@@ -120,8 +109,7 @@ function chat_lese(
         }
         mysql_free_result($result);
         
-        $query = "SELECT c_id FROM chat WHERE c_typ IN ('P','S') AND c_an_user=$u_id AND c_id >= $o_chat_id"
-            . $qquery;
+        $query = "SELECT c_id FROM chat WHERE c_typ IN ('P','S') AND c_an_user=$u_id AND c_id >= $o_chat_id" . $qquery;
         
         $result = mysql_query($query, $conn);
         if ($result) {
@@ -153,8 +141,7 @@ function chat_lese(
         
         // Die letzten Nachrichten seit $letzte_id ausgeben
         // Nur Nachrichten im aktuellen Raum anzeigen, außer Typ P oder S und an User adressiert
-        $query = "SELECT c_id FROM chat WHERE c_raum=$raum AND c_id > $letzte_id"
-            . $qquery;
+        $query = "SELECT c_id FROM chat WHERE c_raum=$raum AND c_id > $letzte_id" . $qquery;
         
         unset($rows);
         $result = mysql_query($query, $conn);
@@ -165,8 +152,7 @@ function chat_lese(
         }
         @mysql_free_result($result);
         
-        $query = "SELECT c_id FROM chat WHERE c_typ IN ('P','S') AND c_an_user=$u_id AND c_id > $letzte_id"
-            . $qquery;
+        $query = "SELECT c_id FROM chat WHERE c_typ IN ('P','S') AND c_an_user=$u_id AND c_id > $letzte_id" . $qquery;
         
         $result = mysql_query($query, $conn);
         if ($result) {
@@ -185,8 +171,7 @@ function chat_lese(
     
     // Query aus Array erzeugen und die Chatzeilen lesen
     if (isset($rows) && is_array($rows)) {
-        $query = "SELECT * FROM chat WHERE c_id IN (" . implode(",", $rows)
-            . ") ORDER BY c_id";
+        $query = "SELECT * FROM chat WHERE c_id IN (" . implode(",", $rows) . ") ORDER BY c_id";
         $result = mysql_query($query, $conn);
     } else {
         unset($result);
@@ -205,22 +190,17 @@ function chat_lese(
             // Systemnachrichten, die <<< oder >>> an Stelle 4-16 enthalten herausfiltern
             $ausgeben = true;
             if ($u_systemmeldungen == "N") {
-                if (($row->c_typ == "S")
-                    && (substr($row->c_text, 3, 12) == "&gt;&gt;&gt;"
-                        || substr($row->c_text, 3, 12) == "&lt;&lt;&lt;")) {
+                if (($row->c_typ == "S") && (substr($row->c_text, 3, 12) == "&gt;&gt;&gt;" || substr($row->c_text, 3, 12) == "&lt;&lt;&lt;")) {
                     $ausgeben = false;
                 }
             }
             
             // Die Ignorierten User rausfiltern                                                                       
-            if (isset($ignore[$row->c_von_user_id])
-                && $ignore[$row->c_von_user_id]) {
+            if (isset($ignore[$row->c_von_user_id]) && $ignore[$row->c_von_user_id]) {
                 $ausgeben = false;
             }
             
-            if ($ausgeben
-                && ($text_ausgegeben || $row->c_br == "normal"
-                    || $row->c_br == "erste")) {
+            if ($ausgeben && ($text_ausgegeben || $row->c_br == "normal" || $row->c_br == "erste")) {
                 
                 // Alter Code 
                 // if (!$ignore[$row->c_von_user_id] && ($text_ausgegeben || $row->c_br=="normal" || $row->c_br=="erste")){
@@ -242,8 +222,7 @@ function chat_lese(
                 // hier wird es reingehängt, wenn es in sequenz am
                 // anfang oder in der mitte, und der text nur 254
                 // zeichen breit ist
-                if ((strlen($row->c_text) == 254)
-                    && (($row->c_br == "erste") || ($row->c_br == "mitte"))) {
+                if ((strlen($row->c_text) == 254) && (($row->c_br == "erste") || ($row->c_br == "mitte"))) {
                     $row->c_text .= ' ';
                 }
                 
@@ -257,8 +236,7 @@ function chat_lese(
                 
                 // Smilies ausgeben oder unterdrücken
                 if ($u_smilie == "N") {
-                    $c_text = str_replace("<SMIL",
-                        "<small>&lt;SMILIE&gt;</small><!--", $c_text);
+                    $c_text = str_replace("<SMIL", "<small>&lt;SMILIE&gt;</small><!--", $c_text);
                     $c_text = str_replace("SMIL>", "-->", $c_text);
                 } else {
                     $c_text = str_replace("<SMIL", "<IMG", $c_text);
@@ -289,8 +267,7 @@ function chat_lese(
                     $c_text = str_replace("<ID>", $id, $c_text);
                 
                 // alternativ, falls am ende der Zeile, und das "<ID>" auf 2 Zeilen verteilt wird
-                if (($id)
-                    && (($row->c_br == "erste") || ($row->c_br == "mitte"))) {
+                if (($id) && (($row->c_br == "erste") || ($row->c_br == "mitte"))) {
                     if (substr($c_text, -3) == '<ID') {
                         $text_weitergabe = substr($c_text, -3);
                         $c_text = substr($c_text, 0, -3);
@@ -324,8 +301,7 @@ function chat_lese(
                             if (!$erste_zeile) {
                                 $zanfang = "";
                             } else {
-                                $zanfang = $sm1
-                                    . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\">";
+                                $zanfang = $sm1 . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\">";
                             }
                             if ($br == "") {
                                 $zende = "";
@@ -337,8 +313,7 @@ function chat_lese(
                             if (!$erste_zeile) {
                                 $zanfang = "";
                             } else {
-                                $zanfang = $sm1
-                                    . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><B>$chat:</B>&nbsp;";
+                                $zanfang = $sm1 . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><B>$chat:</B>&nbsp;";
                             }
                             if ($br == "") {
                                 $zende = "";
@@ -359,14 +334,9 @@ function chat_lese(
                             if (!$erste_zeile) {
                                 $zanfang = "";
                             } else {
-                                $temp_von_user = str_replace("<ID>", $id,
-                                    $row->c_von_user);
-                                $temp_von_user = str_replace("<HTTP_HOST>",
-                                    $http_host, $temp_von_user);
-                                $zanfang = "<FONT COLOR=\"" . $row->c_farbe
-                                    . "\" TITLE=\"$row->c_zeit\"><B>"
-                                    . $temp_von_user
-                                    . "&nbsp;($t[chat_lese1]):</B> ";
+                                $temp_von_user = str_replace("<ID>", $id, $row->c_von_user);
+                                $temp_von_user = str_replace("<HTTP_HOST>", $http_host, $temp_von_user);
+                                $zanfang = "<FONT COLOR=\"" . $row->c_farbe . "\" TITLE=\"$row->c_zeit\"><B>" . $temp_von_user . "&nbsp;($t[chat_lese1]):</B> ";
                             }
                             if ($br == "") {
                                 $zende = "";
@@ -377,14 +347,9 @@ function chat_lese(
                             if (!$erste_zeile) {
                                 $zanfang = "";
                             } else {
-                                $temp_von_user = str_replace("<ID>", $id,
-                                    $row->c_von_user);
-                                $temp_von_user = str_replace("<HTTP_HOST>",
-                                    $http_host, $temp_von_user);
-                                $zanfang = $sm1
-                                    . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><B>"
-                                    . $temp_von_user
-                                    . "&nbsp;($t[chat_lese1]):</B> ";
+                                $temp_von_user = str_replace("<ID>", $id, $row->c_von_user);
+                                $temp_von_user = str_replace("<HTTP_HOST>", $http_host, $temp_von_user);
+                                $zanfang = $sm1 . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><B>" . $temp_von_user . "&nbsp;($t[chat_lese1]):</B> ";
                             }
                             if ($br == "") {
                                 $zende = "";
@@ -400,26 +365,56 @@ function chat_lese(
                             $c_text = str_replace("<!--", "<b>", $c_text);
                             $c_text = str_replace("-->", "</b>", $c_text);
                         }
+                        
                         if ($row->c_von_user_id != 0) {
                             // eigene Farbe für noise, falls gesetzt.
-                            if ($u_farbe_noise != "-")
+                            if ($u_farbe_noise != "-") {
                                 $row->c_farbe = "#$u_farbe_noise";
+                            }
+                            // prüfe auf Würfelwurf, falls dicecheck aktiviert
+                            $diceRoll = false;
+                            $validDiceRoll = false;
+                            if ($o_dicecheck) {
+                                $diceRoll = preg_match("/(\d+|einem) +(k.einen|gro..?en) +\d+.seitigen +W..?rfe./", $c_text);
+                                // ..? für Umlaute wegen Codierung, . für l und - wegen Betrug (I/–/—)
+                                if ($diceRoll) {
+                                    $dice = preg_split("/[wW]/", $o_dicecheck);
+                                    if ($dice[0] == "1") {
+                                        $dice[0] = "einem";
+                                    }
+                                    $regex = "/^<[bB]>.+";
+                                    $regex .= $dice[0];
+                                    $regex .= " +(k.einen|gro..?en) +";
+                                    $regex .= $dice[1];
+                                    $regex .= "/";
+                                    $validDiceRoll = preg_match($regex, $c_text);
+                                }
+                            }
                             if (!$erste_zeile) {
                                 $zanfang = "";
                             } else {
-                                $zanfang = "<FONT COLOR=\"$row->c_farbe\" TITLE=\"$row->c_zeit\"><I>&lt;";
+                                $zanfang = "<SPAN TITLE=\"$row->c_zeit\"";
+                                if ($diceRoll) {
+                                    $zanfang .= " style=\"border-left: .7em solid ";
+                                    if ($validDiceRoll) {
+                                        $zanfang .= "lime";
+                                    } else {
+                                        $zanfang .= "red";
+                                    }
+                                    $zanfang .= ";\"";
+                                }
+                                $zanfang .= "><I><FONT COLOR=\"$row->c_farbe\">&lt;";
                             }
                             if ($br == "") {
                                 $zende = "";
                             } else {
-                                $zende = "&gt;</I></FONT>" . $br;
+                                $zende = "&gt;</FONT></I></SPAN>" . $br;
                             }
                         } else {
                             if (!$erste_zeile) {
                                 $zanfang = "";
                             } else {
-                                $zanfang = $sm1
-                                    . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><I>&lt;";
+                                $zanfang = $sm1 . "<FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"><I>&lt;";
                             }
                             if ($br == "") {
                                 $zende = "";
@@ -432,13 +427,11 @@ function chat_lese(
                     default:
                     // N: Normal an alle mit Absender
                     // eigene Farbe, falls gesetzt
-                        if ($row->c_von_user_id != $u_id
-                            && $u_farbe_alle != "-")
+                        if ($row->c_von_user_id != $u_id && $u_farbe_alle != "-")
                             $row->c_farbe = $u_farbe_alle;
                         
                         // eigene Farbe für nachricht an Privat, falls gesetzt.
-                        if (preg_match("/\[.*&nbsp;$nick\]/i", $c_text)
-                            && $u_farbe_priv != "-")
+                        if (preg_match("/\[.*&nbsp;$nick\]/i", $c_text) && $u_farbe_priv != "-")
                             $row->c_farbe = $u_farbe_priv;
                         
                         // Nur Nick in Userfarbe oder ganze Zeile
@@ -446,14 +439,9 @@ function chat_lese(
                             if (!$erste_zeile) {
                                 $zanfang = "";
                             } else {
-                                $temp_von_user = str_replace("<ID>", $id,
-                                    $row->c_von_user);
-                                $temp_von_user = str_replace("<HTTP_HOST>",
-                                    $http_host, $temp_von_user);
-                                $zanfang = "<FONT COLOR=\"" . $row->c_farbe
-                                    . "\" TITLE=\"$row->c_zeit\"><B>"
-                                    . $temp_von_user
-                                    . ":</B> </FONT><FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"> ";
+                                $temp_von_user = str_replace("<ID>", $id, $row->c_von_user);
+                                $temp_von_user = str_replace("<HTTP_HOST>", $http_host, $temp_von_user);
+                                $zanfang = "<FONT COLOR=\"" . $row->c_farbe . "\" TITLE=\"$row->c_zeit\"><B>" . $temp_von_user . ":</B> </FONT><FONT COLOR=\"$system_farbe\" TITLE=\"$row->c_zeit\"> ";
                             }
                             if ($br == "") {
                                 $zende = "";
@@ -464,13 +452,9 @@ function chat_lese(
                             if (!$erste_zeile) {
                                 $zanfang = "";
                             } else {
-                                $temp_von_user = str_replace("<ID>", $id,
-                                    $row->c_von_user);
-                                $temp_von_user = str_replace("<HTTP_HOST>",
-                                    $http_host, $temp_von_user);
-                                $zanfang = "<FONT COLOR=\"" . $row->c_farbe
-                                    . "\" TITLE=\"$row->c_zeit\">" . "<B>"
-                                    . $temp_von_user . ":</B> ";
+                                $temp_von_user = str_replace("<ID>", $id, $row->c_von_user);
+                                $temp_von_user = str_replace("<HTTP_HOST>", $http_host, $temp_von_user);
+                                $zanfang = "<FONT COLOR=\"" . $row->c_farbe . "\" TITLE=\"$row->c_zeit\">" . "<B>" . $temp_von_user . ":</B> ";
                             }
                             if ($br == "") {
                                 $zende = "";

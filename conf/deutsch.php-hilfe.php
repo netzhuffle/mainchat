@@ -64,6 +64,7 @@ $hilfe_befehlstext = array(
     "/loescheraum RAUM\tLöscht den angegebenen Raum\t \tNur für Admins oder Raumbesitzer",
     "/zeige NAME\tGibt die Benutzerinformationen für den Benutzer NAME aus <BR>(% ist Joker).\t/whois",
     "/wuerfel\tWürfel werfen\t/dice\t/wuerfel 2W6 <BR>wirft 2 sechseitige Würfel",
+    "/dicecheck\tPrüft Würfelwürfe auf Korrektheit\t/quiddice\t/dicecheck 2W6 <BR>prüft auf 2 sechseitige Würfel",
     "/suche NAME\tSucht alle Sprüche, die das Wort NAME enthalten\t/such\tGut geeignet, um einen Spruch passend zum Thema zu finden",
     "=spruch NAME ZUSATZ\tGibt einen vordefinierten Spruch aus (Siehe \"Liste aller Sprüche\")\t \tNAME und ZUSATZ ist optional und vom Spruch abhängig. Weitere Info vorhanden",
     "*TEXT*\tTEXT wird kursiv dargestellt\t \tWirkt in allen Texten, die öffentlich oder privat im Chat ausgegeben werden",

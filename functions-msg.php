@@ -28,7 +28,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
     global $u_farbe_alle, $u_farbe_sys, $u_farbe_priv, $u_farbe_noise, $u_farbe_bg, $u_clearedit, $raum_max;
     global $u_nick, $id, $http_host, $lobby, $o_raum, $o_js, $o_knebel, $r_status1, $u_level, $leveltext, $max_user_liste;
     global $communityfeatures, $o_punkte, $beichtstuhl, $raum_einstellungen, $ist_moderiert, $userdata, $lustigefeatures;
-    global $punkte_ab_user, $punktefeatures, $whotext, $knebelzeit, $nickwechsel, $raumanlegenpunkte;
+    global $punkte_ab_user, $punktefeatures, $whotext, $knebelzeit, $nickwechsel, $raumanlegenpunkte, $o_dicecheck;
     global $einstellungen_aendern, $single_room_verhalten, $eingabe_light_farbe, $eingabe_light_hilfe;
     
     // Text $text parsen, Befehle ausführen, Texte im Chat ausgeben
@@ -2813,6 +2813,36 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                 system_msg("", 0, $u_id, $system_farbe, $t['chat_msg55']);
             }
             break;
+            
+            case "/quiddice":
+            case "/dicecheck":
+                if (!isset($o_dicecheck)) {
+                    mysql_query("ALTER TABLE online ADD o_dicecheck VARCHAR(255) NOT NULL DEFAULT ''", $conn);
+                    $o_dicecheck = "";
+                }
+                if (!$o_dicecheck) {
+                    if (preg_match("!^\d+[wW]\d+$!", $chatzeile[1])) {
+                        $o_dicecheck = mysql_real_escape_string($chatzeile[1]);
+                        mysql_query("UPDATE online SET o_dicecheck = '$o_dicecheck' WHERE o_user = $u_id", $conn);
+                        if (!isset($t['chat_dicecheck_msg0'])) {
+                            $t['chat_dicecheck_msg0'] = "<B>$chat:</B> <b>%dicecheck%</b> wurde aktiviert. Bitte klicke auf RESET.";
+                        }
+                        system_msg("", 0, $u_id, $system_farbe, str_replace("%dicecheck%", $chatzeile[0] . " " . $chatzeile[1], $t['chat_dicecheck_msg0']));
+                    } else {
+                        if (!isset($t['chat_dicecheck_msg1'])) {
+                            $t['chat_dicecheck_msg1'] = "<B>$chat:</B> Beispiel: <b>%dicecheck% 3W6</b> prüft alle Würfelwürfe, ob sie mit /dice 3W6 geworfen wurden.";
+                        }
+                        system_msg("", 0, $u_id, $system_farbe, str_replace("%dicecheck%", $chatzeile[0], $t['chat_dicecheck_msg1']));
+                    }
+                } else {
+                    $o_dicecheck = "";
+                    mysql_query("UPDATE online SET o_dicecheck = '' WHERE o_user = $u_id", $conn);
+                    if (!isset($t['chat_dicecheck_msg2'])) {
+                        $t['chat_dicecheck_msg2'] = "<B>$chat:</B> <b>%dicecheck%</b> wurde deaktiviert. Bitte klicke auf RESET.";
+                    }
+                    system_msg("", 0, $u_id, $system_farbe, str_replace("%dicecheck%", $chatzeile[0], $t['chat_dicecheck_msg2']));
+                }
+                break;
         default:
             if (!($o_knebel > 0)) {
                 
