@@ -84,6 +84,7 @@ ALTER TABLE online CHANGE o_ignore o_ignore CHAR(255) NOT NULL;
 ALTER TABLE online CHANGE o_userdata o_userdata varchar(255) NOT NULL;
 ALTER TABLE online CHANGE o_http_stuff o_http_stuff varchar(255) NOT NULL;
 ALTER TABLE online CHANGE o_id o_id int(11) unsigned DEFAULT '0' NOT NULL;
+ALTER TABLE online ADD o_dicecheck VARCHAR(255) NOT NULL DEFAULT '';
 
 # ‰nderungen ab 12.09.01
 ALTER TABLE chat CHANGE c_typ c_typ CHAR(1) DEFAULT 'N' NOT NULL;
