@@ -87,7 +87,7 @@ if ($admin && $u_id && $communityfeatures) {
         
         case "neu2":
         // Neuer Eintrag, 2. Schritt: Nick Prüfen
-            $neuer_blacklist['u_nick'] = AddSlashes($neuer_blacklist['u_nick']); // sec
+            $neuer_blacklist['u_nick'] = mysql_real_escape_string($neuer_blacklist['u_nick']); // sec
             $query = "SELECT u_id FROM user WHERE u_nick = '$neuer_blacklist[u_nick]'";
             $result = mysql_query($query, $conn);
             if ($result && mysql_num_rows($result) == 1) {

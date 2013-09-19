@@ -19,7 +19,7 @@ function verlasse_chat($u_id, $u_name, $raum)
             $result = mysql_query($query);
             $row = mysql_fetch_object($result);
             if (strlen($row->u_austritt) > 0) {
-                $text = stripslashes($row->u_austritt);
+                $text = $row->u_austritt;
                 if ($eintritt_useranzeige == "1")
                     $text = "<b>&lt;&lt;&lt;</b> " . htmlspecialchars($text)
                         . " (<b>$u_name</b> - verlässt Chat) ";
@@ -28,7 +28,7 @@ function verlasse_chat($u_id, $u_name, $raum)
             }
             mysql_free_result($result);
             
-            $query = "SELECT r_name FROM raum where r_id = $raum";
+            $query = "SELECT r_name FROM raum where r_id = " . intval($raum);
             $result = mysql_query($query);
             $row = mysql_fetch_object($result);
             if (isset($row->r_name)) {

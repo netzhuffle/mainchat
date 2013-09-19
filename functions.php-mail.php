@@ -13,7 +13,7 @@ function formular_neue_email($neue_email, $m_id = "")
     
     // Nickname aus u_nick lesen und setzen
     if (isset($neue_email['m_an_uid']) && $neue_email['m_an_uid']) {
-        $query = "SELECT u_nick FROM user WHERE u_id = $neue_email[m_an_uid]";
+        $query = "SELECT u_nick FROM user WHERE u_id = " . intval($neue_email[m_an_uid]);
         $result = mysql_query($query, $conn);
         if ($result && mysql_num_rows($result) == 1) {
             $an_nick = mysql_result($result, 0, 0);
@@ -40,7 +40,7 @@ function formular_neue_email($neue_email, $m_id = "")
     echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=2><DIV style=\"color:$farbe_text;\"><B>$titel</B></DIV></TD></TR>\n"
         . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD align=\"right\"><B>Nickname:</B></TD><TD>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"neue_email[an_nick]\" VALUE=\""
-        . stripslashes($neue_email['an_nick']) . "\" SIZE=20>" . "&nbsp;"
+        . $neue_email['an_nick'] . "\" SIZE=20>" . "&nbsp;"
         . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"WEITER\">" . $f2
         . "</TD></TR>\n" . "</TABLE></FORM>\n";
     
@@ -79,7 +79,7 @@ function formular_neue_email2($neue_email, $m_id = "")
         // Alte Mail lesen und als Kopie in Formular schreiben
         $titel = "Mail weiterleiten an";
         $query = "SELECT m_betreff,m_text from mail "
-            . "where m_id=$m_id AND m_an_uid=$u_id";
+            . "where m_id=" . intval($m_id) . " AND m_an_uid=$u_id";
         $result = mysql_query($query, $conn);
         if ($result && mysql_num_rows($result) == 1) {
             $row = mysql_fetch_object($result);
@@ -166,7 +166,7 @@ function formular_neue_email2($neue_email, $m_id = "")
                 . "<TR BGCOLOR=\"$farbe_tabelle_zeile2\"><TD VALIGN=\"TOP\" align=\"right\"><B>Betreff:</B></TD><TD  COLSPAN=2>"
                 . $f1
                 . "<INPUT TYPE=\"TEXT\" NAME=\"neue_email[m_betreff]\" VALUE=\""
-                . stripslashes($neue_email['m_betreff']) . "\" SIZE="
+                . $neue_email['m_betreff'] . "\" SIZE="
                 . ($eingabe_breite1)
                 . "
 				 ONCHANGE=zaehle() ONFOCUS=zaehle() ONKEYDOWN=zaehle() ONKEYUP=zaehle()>"
@@ -174,7 +174,7 @@ function formular_neue_email2($neue_email, $m_id = "")
                 . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD VALIGN=\"TOP\" align=\"right\"><B>Ihr Text:</B></TD><TD COLSPAN=2>"
                 . $f1 . "<TEXTAREA COLS=" . ($eingabe_breite2)
                 . " ROWS=20 NAME=\"neue_email[m_text]\" ONCHANGE=zaehle() ONFOCUS=zaehle() ONKEYDOWN=zaehle() ONKEYUP=zaehle()>"
-                . stripslashes($neue_email['m_text']) . "</TEXTAREA>\n" . $f2
+                . $neue_email['m_text'] . "</TEXTAREA>\n" . $f2
                 . "</TD></TR>"
                 . "<TR BGCOLOR=\"$farbe_tabelle_zeile2\"><TD>&nbsp;</TD><TD>$email_select</TD>"
                 . "<TD ALIGN=\"right\" >" . $f1
@@ -202,7 +202,7 @@ function zeige_mailbox($aktion, $zeilen)
         case "alle";
             $query = "SELECT m_id,m_status,m_von_uid,date_format(m_zeit,'%d.%m.%y um %H:%i') as zeit,m_betreff,u_nick "
                 . "FROM mail LEFT JOIN user on m_von_uid=u_id "
-                . "WHERE m_an_uid=$u_id " . "order by m_zeit desc";
+                . "WHERE m_an_uid=$u_id order by m_zeit desc";
             $button = "LÖSCHEN";
             $titel = "Mails in der Mailbox für";
             break;
@@ -210,7 +210,7 @@ function zeige_mailbox($aktion, $zeilen)
         case "geloescht":
             $query = "SELECT m_id,m_status,m_von_uid,date_format(m_zeit,'%d.%m.%y um %H:%i') as zeit,m_betreff,u_nick "
                 . "FROM mail LEFT JOIN user on m_von_uid=u_id "
-                . "WHERE m_an_uid=$u_id " . "AND m_status='geloescht' "
+                . "WHERE m_an_uid=$u_id AND m_status='geloescht' "
                 . "order by m_zeit desc";
             $button = "WIEDERHERSTELLEN";
             $titel = "Mails im Papierkorb von";
@@ -220,7 +220,7 @@ function zeige_mailbox($aktion, $zeilen)
         default;
             $query = "SELECT m_id,m_status,m_von_uid,date_format(m_zeit,'%d.%m.%y um %H:%i') as zeit,m_betreff,u_nick "
                 . "FROM mail LEFT JOIN user on m_von_uid=u_id "
-                . "WHERE m_an_uid=$u_id " . "AND m_status!='geloescht' "
+                . "WHERE m_an_uid=$u_id AND m_status!='geloescht' "
                 . "order by m_zeit desc";
             $button = "LÖSCHEN";
             $titel = "Mails in der Mailbox für";
@@ -278,7 +278,7 @@ function zeige_mailbox($aktion, $zeilen)
                     . $row->m_id . "\"></TD>" . "<TD>" . $auf . $url
                     . $von_nick . "</A>" . $zu . "</TD>" . "<TD WIDTH=\"50%\">"
                     . $auf . $url
-                    . htmlspecialchars(stripslashes($row->m_betreff)) . "</A>"
+                    . htmlspecialchars($row->m_betreff) . "</A>"
                     . $zu . "</TD>" . "<TD>" . $auf . $row->zeit . $zu
                     . "</TD>" . "<TD>" . $auf . $row->m_status . $zu . "</TD>"
                     . "</TR>\n";
@@ -317,7 +317,7 @@ function zeige_email($m_id)
     
     $query = "SELECT mail.*,date_format(m_zeit,'%d.%m.%y um %H:%i') as zeit,u_nick,u_id,u_level,u_punkte_gesamt,u_punkte_gruppe "
         . "FROM mail LEFT JOIN user on m_von_uid=u_id "
-        . "WHERE m_an_uid=$u_id " . "AND m_id=$m_id " . "order by m_zeit desc";
+        . "WHERE m_an_uid=$u_id AND m_id=" . intval($m_id) . " order by m_zeit desc";
     $result = mysql_query($query, $conn);
     
     if ($result && mysql_num_rows($result) == 1) {
@@ -343,13 +343,13 @@ function zeige_email($m_id)
             . $f2 . "</TD></TR>\n"
             . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD ALIGN=\"RIGHT\"><B>"
             . $f1 . "Betreff:" . $f2 . "</B></TD><TD COLSPAN=3>" . $f1
-            . htmlspecialchars(stripslashes($row->m_betreff)) . $f2
+            . htmlspecialchars($row->m_betreff) . $f2
             . "</TD></TR>\n"
             . "<TR BGCOLOR=\"$farbe_tabelle_zeile2\"><TD ALIGN=\"RIGHT\"><B>"
             . $f1 . "Status:" . $f2 . "</B></TD><TD COLSPAN=3>" . $f1
             . $row->m_status . $f2 . "</TD></TR>\n"
             . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD>&nbsp;</TD><TD COLSPAN=3>"
-            . $f1 . (stripslashes(str_replace("\n", "<BR>\n", $row->m_text)))
+            . $f1 . str_replace("\n", "<BR>\n", $row->m_text)
             . $f2 . "</TD></TR>\n";
         
         // Formular zur Löschen, Beantworten
@@ -402,7 +402,7 @@ function loesche_mail($m_id, $u_id)
     global $id, $http_host, $eingabe_breite, $PHP_SELF, $f1, $f2, $f3, $f4, $dbase, $conn, $u_nick, $u_id;
     
     $query = "SELECT m_zeit,m_id,m_status FROM mail "
-        . "WHERE m_id=$m_id AND m_an_uid=$u_id";
+        . "WHERE m_id=" . intval($m_id) . " AND m_an_uid=$u_id";
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) == 1) {
         

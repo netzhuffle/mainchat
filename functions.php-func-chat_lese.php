@@ -11,6 +11,8 @@ function chat_lese($o_id, $raum, $u_id, $sysmsg, $ignore, $back, $nur_privat = F
     global $show_spruch_owner, $farbe_user_fest, $id, $http_host, $o_dicecheck;
     global $user_nick, $conn;
     
+    $o_id = intval($o_id);
+    
     // Systemfarbe setzen
     if ($u_farbe_sys != "-")
         $system_farbe = $u_farbe_sys;
@@ -35,7 +37,7 @@ function chat_lese($o_id, $raum, $u_id, $sysmsg, $ignore, $back, $nur_privat = F
     
     if ($nur_privat_user) {
         #echo "nur_privat_user ist gesetzt! $nur_privat_user | $u_id";
-        $txt = "<b>$u_nick flüstert an " . $user_nick . ":</b>";
+        $txt = mysql_real_escape_string("<b>$u_nick flüstert an " . $user_nick . ":</b>");
         $len = strlen($txt);
         #print $txt;
         $qquery .= " AND (c_an_user = '$u_id' and c_von_user_id != '0' and ( (c_von_user_id = '$u_id' and left(c_text,$len) = '$txt') or c_von_user_id = '$nur_privat_user') )";
@@ -227,7 +229,7 @@ function chat_lese($o_id, $raum, $u_id, $sysmsg, $ignore, $back, $nur_privat = F
                 }
                 
                 // Text filtern
-                $c_text = stripslashes($row->c_text);
+                $c_text = $row->c_text;
                 $c_text = $text_weitergabe . $c_text;
                 $text_weitergabe = "";
                 

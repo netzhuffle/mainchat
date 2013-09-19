@@ -9,7 +9,7 @@ id_lese($id);
 
 // Info zu altem Raum lesen
 $query = "SELECT r_name,r_status1,r_austritt from raum "
-    . "WHERE r_id=$o_raum ";
+    . "WHERE r_id=" . intval($o_raum);
 
 $result = mysql_query($query, $conn);
 

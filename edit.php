@@ -131,8 +131,7 @@ if (strlen($u_id) != 0) {
             $aktion = "andereadminmail";
         }
         
-        if (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})",
-            addslashes($f['u_adminemail']))) {
+        if (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})", $f['u_adminemail'])) {
             echo "<P><B>$t[edit1]</B></P>\n";
             $aktion = "andereadminmail";
         }
@@ -192,7 +191,7 @@ if (strlen($u_id) != 0) {
             
             if ($rows == 1) {
                 $row = mysql_fetch_object($result);
-                $u_adminemail = stripslashes($row->u_adminemail);
+                $u_adminemail = $row->u_adminemail;
                 mysql_free_result($result);
                 
                 echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige3']
@@ -220,14 +219,14 @@ if (strlen($u_id) != 0) {
                 
                 if ($rows == 1) {
                     $row = mysql_fetch_object($result);
-                    $u_adminemail = stripslashes($row->u_adminemail);
+                    $u_adminemail = $row->u_adminemail;
                     mysql_free_result($result);
                     
                     unset($p);
                     
                     // Länge des Feldes und Format Mailadresse werden weiter oben geprüft
                     $p['u_id'] = $u_id;
-                    $p['u_name'] = addslashes($f['u_name']);
+                    $p['u_name'] = $f['u_name'];
                     $p['u_adminemail'] = $f['u_adminemail'];
                     $pwdneu = genpassword(8);
                     $p['u_passwort'] = $pwdneu;
@@ -346,8 +345,7 @@ if (strlen($u_id) != 0) {
                 
                 // E-Mail ok
                 if (isset($f['u_email']) && (strlen($f['u_email']) > 0)
-                    && (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})",
-                        addslashes($f['u_email'])))) {
+                    && (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})", $f['u_email']))) {
                     echo "<P><B>$t[edit1]</B></P>\n";
                     unset($f['u_email']);
                     $ok = 0;
@@ -491,7 +489,7 @@ if (strlen($u_id) != 0) {
                     unset($f['u_level']);
                 }
                 
-                $query = "SELECT u_level FROM user WHERE u_id=$f[u_id]";
+                $query = "SELECT u_level FROM user WHERE u_id=" . intval($f[u_id]);
                 $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) > 0) {
                     $uu_level = mysql_result($result, 0, "u_level");
@@ -560,7 +558,7 @@ if (strlen($u_id) != 0) {
                         // Änderungen anzeigen
                         
                         $query = "SELECT o_userdata,o_userdata2,o_userdata3,o_userdata4,o_raum "
-                            . "FROM online " . "WHERE o_user=$f[u_id] ";
+                            . "FROM online " . "WHERE o_user=" . intval($f[u_id]);
                         $result = mysql_query($query, $conn);
                         if ($result && mysql_num_rows($result) == 1) {
                             $row = mysql_fetch_object($result);
@@ -571,8 +569,7 @@ if (strlen($u_id) != 0) {
                                 AND $f['u_name'] AND $admin) {
                                 echo "<P><B>"
                                     . str_replace("%u_name%",
-                                        htmlspecialchars(
-                                            stripslashes($f['u_name'])),
+                                        htmlspecialchars($f['u_name']),
                                         $t['edit8']) . "</B></P>\n";
                             }
                             if ($f['u_nick']
@@ -591,7 +588,7 @@ if (strlen($u_id) != 0) {
                         
                     }
                     
-                    $query = "SELECT u_profil_historie FROM user WHERE u_id = '$f[u_id]'";
+                    $query = "SELECT u_profil_historie FROM user WHERE u_id = " . intval($f[u_id]);
                     $result = mysql_query($query);
                     $g = mysql_fetch_array($result);
                     
@@ -611,17 +608,15 @@ if (strlen($u_id) != 0) {
                         }
                     }
                     $f['u_profil_historie'] = serialize($u_profil_historie_neu);
-                    $f['u_eintritt'] = addslashes(
-                        isset($f['u_eintritt']) ? $f['u_eintritt'] : "");
-                    $f['u_austritt'] = addslashes(
-                        isset($f['u_austritt']) ? $f['u_austritt'] : "");
+                    $f['u_eintritt'] = isset($f['u_eintritt']) ? $f['u_eintritt'] : "";
+                    $f['u_austritt'] = isset($f['u_austritt']) ? $f['u_austritt'] : "";
                     
                     schreibe_db("user", $f, $f['u_id'], "u_id");
                     
                     // Hat der User den u_level = 'Z', dann lösche die Ignores, wo er der Aktive ist
                     if (isset($f['u_level']) && $f['u_level'] == "Z") {
                         $queryii = "SELECT u_nick,u_id from user,iignore "
-                            . "WHERE i_user_aktiv=$f[u_id] AND u_id=i_user_passiv order by i_id";
+                            . "WHERE i_user_aktiv=" . intval($f[u_id]) . " AND u_id=i_user_passiv order by i_id";
                         $resultii = @mysql_query($queryii, $conn);
                         $anzahlii = @mysql_num_rows($resultii);
                         
@@ -638,7 +633,7 @@ if (strlen($u_id) != 0) {
  else if ((isset($f['u_level']) && $f['u_level'] == "C")
                         || (isset($f['u_level']) && $f['u_level'] == "S")) {
                         $queryii = "SELECT u_nick,u_id from user,iignore "
-                            . "WHERE i_user_passiv=$f[u_id] AND u_id=i_user_aktiv order by i_id";
+                            . "WHERE i_user_passiv=" . intval($f[u_id]) . " AND u_id=i_user_aktiv order by i_id";
                         $resultii = @mysql_query($queryii, $conn);
                         $anzahlii = @mysql_num_rows($resultii);
                         
@@ -671,7 +666,7 @@ if (strlen($u_id) != 0) {
                     && $f['u_level'] == "Z") {
                     // o_id und o_raum bestimmen
                     $query = "SELECT o_id,o_raum FROM online "
-                        . "WHERE o_user=$f[u_id] ";
+                        . "WHERE o_user=" . intval($f[u_id]);
                     $result = mysql_query($query, $conn);
                     $rows = mysql_num_rows($result);
                     
@@ -680,35 +675,33 @@ if (strlen($u_id) != 0) {
                         verlasse_chat($f['u_id'], $f['u_nick'], $row->o_raum);
                         logout($row->o_id, $f['u_id'], "edit->levelZ");
                         echo "<P><B>"
-                            . str_replace("%u_name%", $f['u_nick'],
+                            . str_replace("%u_name%", htmlspecialchars($f['u_nick']),
                                 $t['edit12']) . "</B></P>\n";
                     }
                     mysql_free_result($result);
                 }
                 
                 // User mit ID $u_id anzeigen
-                $query = "SELECT user.* " . "FROM user WHERE u_id=$f[u_id] ";
+                $query = "SELECT user.* " . "FROM user WHERE u_id=" . intval($f[u_id]);
                 $result = mysql_query($query, $conn);
                 
                 if ($result && mysql_num_rows($result) == 1) {
                     $row = mysql_fetch_object($result);
                     $f['u_id'] = $u_id;
-                    $f['u_name'] = htmlspecialchars(stripslashes($row->u_name));
+                    $f['u_name'] = htmlspecialchars($row->u_name);
                     $f['u_nick'] = $row->u_nick;
                     $f['u_id'] = $row->u_id;
-                    $f['u_email'] = htmlspecialchars(
-                        stripslashes($row->u_email));
-                    $f['u_adminemail'] = htmlspecialchars(
-                        stripslashes($row->u_adminemail));
-                    $f['u_url'] = htmlspecialchars(stripslashes($row->u_url));
+                    $f['u_email'] = htmlspecialchars($row->u_email);
+                    $f['u_adminemail'] = htmlspecialchars($row->u_adminemail);
+                    $f['u_url'] = htmlspecialchars($row->u_url);
                     $f['u_level'] = $row->u_level;
                     $f['u_farbe'] = $row->u_farbe;
                     $f['u_zeilen'] = $row->u_zeilen;
                     $f['u_backup'] = $row->u_backup;
                     $f['u_smilie'] = $row->u_smilie;
                     $f['u_systemmeldungen'] = $row->u_systemmeldungen;
-                    $f['u_eintritt'] = stripslashes($row->u_eintritt);
-                    $f['u_austritt'] = stripslashes($row->u_austritt);
+                    $f['u_eintritt'] = $row->u_eintritt;
+                    $f['u_austritt'] = $row->u_austritt;
                     $f['u_punkte_anzeigen'] = $row->u_punkte_anzeigen;
                     $f['u_signatur'] = $row->u_signatur;
                     $f['u_kommentar'] = $row->u_kommentar;
@@ -756,31 +749,27 @@ if (strlen($u_id) != 0) {
                     // User mit ID $u_id anzeigen
                     
                     $query = "SELECT user.* "
-                        . "FROM user WHERE u_id=$f[u_id] ";
+                        . "FROM user WHERE u_id=" . intval($f[u_id]);
                     $result = mysql_query($query, $conn);
                     $rows = mysql_num_rows($result);
                     
                     if ($rows == 1) {
                         $row = mysql_fetch_object($result);
                         $f['u_id'] = $u_id;
-                        $f['u_name'] = htmlspecialchars(
-                            stripslashes($row->u_name));
+                        $f['u_name'] = htmlspecialchars($row->u_name);
                         $f['u_nick'] = $row->u_nick;
                         $f['u_id'] = $row->u_id;
-                        $f['u_email'] = htmlspecialchars(
-                            stripslashes($row->u_email));
-                        $f['u_adminemail'] = htmlspecialchars(
-                            stripslashes($row->u_adminemail));
-                        $f['u_url'] = htmlspecialchars(
-                            stripslashes($row->u_url));
+                        $f['u_email'] = htmlspecialchars($row->u_email);
+                        $f['u_adminemail'] = htmlspecialchars($row->u_adminemail);
+                        $f['u_url'] = htmlspecialchars($row->u_url);
                         $f['u_level'] = $row->u_level;
                         $f['u_farbe'] = $row->u_farbe;
                         $f['u_zeilen'] = $row->u_zeilen;
                         $f['u_backup'] = $row->u_backup;
                         $f['u_smilie'] = $row->u_smilie;
                         $f['u_systemmeldungen'] = $row->u_systemmeldungen;
-                        $f['u_eintritt'] = stripslashes($row->u_eintritt);
-                        $f['u_austritt'] = stripslashes($row->u_austritt);
+                        $f['u_eintritt'] = $row->u_eintritt;
+                        $f['u_austritt'] = $row->u_austritt;
                         $f['u_punkte_anzeigen'] = $row->u_punkte_anzeigen;
                         $f['u_signatur'] = $row->u_signatur;
                         $size = unserialize($row->u_frames);
@@ -792,13 +781,13 @@ if (strlen($u_id) != 0) {
                 && $admin) {
                 if ($aktion3 == "loeschen") {
                     echo "<font face=\"Arial\">Homepage wurde gelöscht!</font>";
-                    $query = "DELETE FROM userinfo WHERE ui_userid = '$f[u_id]'";
+                    $query = "DELETE FROM userinfo WHERE ui_userid = " . intval($f[u_id]);
                     mysql_query($query);
                     
-                    $query = "UPDATE user SET u_login = u_login, u_chathomepage = 'N' WHERE u_id = '$f[u_id]'";
+                    $query = "UPDATE user SET u_login = u_login, u_chathomepage = 'N' WHERE u_id = " . intval($f[u_id]);
                     mysql_query($query);
                     
-                    $query = "DELETE FROM bild WHERE b_user = '$f[u_id]'";
+                    $query = "DELETE FROM bild WHERE b_user = " . intval($f[u_id]);
                     mysql_query($query);
                 } else {
                     echo "<FORM NAME=\"edit\" ACTION=\"edit.php\" METHOD=POST>\n"
@@ -816,7 +805,7 @@ if (strlen($u_id) != 0) {
             } elseif (isset($eingabe) && $eingabe == $t['chat_msg110']
                 && $admin) {
                 // Admin E-Mailadresse aus DB holen
-                $query = "SELECT u_adminemail,u_level FROM user WHERE u_nick = '$f[u_nick]'";
+                $query = "SELECT u_adminemail,u_level FROM user WHERE u_nick = '" . mysql_real_escape_string($f[u_nick]) . "'";
                 $result = mysql_query($query);
                 
                 $x = mysql_fetch_array($result);
@@ -848,7 +837,7 @@ if (strlen($u_id) != 0) {
                     }
                     
                     $user = $f['u_nick'];
-                    $query = "SELECT o_id,o_raum,o_name FROM online WHERE o_user='$f[u_id]' AND o_level!='C' AND o_level!='S'";
+                    $query = "SELECT o_id,o_raum,o_name FROM online WHERE o_user=" . intval($f[u_id]) . " AND o_level!='C' AND o_level!='S'";
                     
                     $result = mysql_query($query, $conn);
                     if ($result && mysql_num_rows($result) > 0) {
@@ -867,14 +856,13 @@ if (strlen($u_id) != 0) {
                 
                 if ($admin && strlen($f['u_id']) > 0) {
                     // Jeden User anzeigen
-                    $query = "SELECT user.* "
-                        . "FROM user WHERE u_id=$f[u_id] ";
+                    $query = "SELECT user.* FROM user WHERE u_id=" . intval($f[u_id]);
                     $result = mysql_query($query, $conn);
                     $rows = mysql_num_rows($result);
                     
                 } else {
                     // Nur eigene Daten anzeigen
-                    $query = "SELECT user.* " . "FROM user WHERE u_id=$u_id ";
+                    $query = "SELECT user.* FROM user WHERE u_id=" . intval($u_id);
                     $result = mysql_query($query, $conn);
                     $rows = mysql_num_rows($result);
                 }
@@ -882,19 +870,19 @@ if (strlen($u_id) != 0) {
                 if ($rows == 1) {
                     $row = mysql_fetch_object($result);
                     $f['u_id'] = $u_id;
-                    $f['u_name'] = stripslashes($row->u_name);
+                    $f['u_name'] = $row->u_name;
                     $f['u_nick'] = $row->u_nick;
                     $f['u_id'] = $row->u_id;
-                    $f['u_email'] = stripslashes($row->u_email);
-                    $f['u_adminemail'] = stripslashes($row->u_adminemail);
-                    $f['u_url'] = stripslashes($row->u_url);
+                    $f['u_email'] = $row->u_email;
+                    $f['u_adminemail'] = $row->u_adminemail;
+                    $f['u_url'] = $row->u_url;
                     $f['u_level'] = $row->u_level;
                     $f['u_farbe'] = $row->u_farbe;
                     $f['u_zeilen'] = $row->u_zeilen;
                     $f['u_backup'] = $row->u_backup;
                     $f['u_smilie'] = $row->u_smilie;
-                    $f['u_eintritt'] = stripslashes($row->u_eintritt);
-                    $f['u_austritt'] = stripslashes($row->u_austritt);
+                    $f['u_eintritt'] = $row->u_eintritt;
+                    $f['u_austritt'] = $row->u_austritt;
                     $f['u_systemmeldungen'] = $row->u_systemmeldungen;
                     $f['u_punkte_anzeigen'] = $row->u_punkte_anzeigen;
                     $f['u_signatur'] = $row->u_signatur;
@@ -910,27 +898,27 @@ if (strlen($u_id) != 0) {
         default:
         // User mit ID $u_id anzeigen
         
-            $query = "SELECT user.* " . "FROM user WHERE u_id=$u_id ";
+            $query = "SELECT user.* FROM user WHERE u_id=" . intval($u_id);
             $result = mysql_query($query, $conn);
             $rows = mysql_num_rows($result);
             
             if ($rows == 1) {
                 $row = mysql_fetch_object($result);
                 $f['u_id'] = $u_id;
-                $f['u_name'] = stripslashes($row->u_name);
+                $f['u_name'] = $row->u_name;
                 $f['u_nick'] = $row->u_nick;
                 $f['u_id'] = $row->u_id;
-                $f['u_email'] = stripslashes($row->u_email);
-                $f['u_adminemail'] = stripslashes($row->u_adminemail);
-                $f['u_url'] = stripslashes($row->u_url);
+                $f['u_email'] = $row->u_email;
+                $f['u_adminemail'] = $row->u_adminemail;
+                $f['u_url'] = $row->u_url;
                 $f['u_level'] = $row->u_level;
                 $f['u_farbe'] = $row->u_farbe;
                 $f['u_zeilen'] = $row->u_zeilen;
                 $f['u_backup'] = $row->u_backup;
                 $f['u_smilie'] = $row->u_smilie;
                 $f['u_systemmeldungen'] = $row->u_systemmeldungen;
-                $f['u_eintritt'] = stripslashes($row->u_eintritt);
-                $f['u_austritt'] = stripslashes($row->u_austritt);
+                $f['u_eintritt'] = $row->u_eintritt;
+                $f['u_austritt'] = $row->u_austritt;
                 $f['u_punkte_anzeigen'] = $row->u_punkte_anzeigen;
                 $f['u_signatur'] = $row->u_signatur;
                 $size = unserialize($row->u_frames);

@@ -162,7 +162,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
             
             if (isset($loesche) && $loesche && $ui_userid) {
                 $query = "DELETE FROM bild WHERE "
-                    . "b_name='$loesche' AND b_user=$ui_userid";
+                    . "b_name='" . mysql_real_escape_string($loesche) . "' AND b_user=" . intval($ui_userid);
                 $result = mysql_query($query, $conn);
                 
                 $cache = "home_bild";
@@ -240,7 +240,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
             
             // Daten laden und Editor anzeigen
             unset($home);
-            $query = "SELECT * FROM userinfo WHERE ui_userid=$ui_userid";
+            $query = "SELECT * FROM userinfo WHERE ui_userid=" . intval($ui_userid);
             $result = mysql_query($query, $conn);
             if ($result && mysql_num_rows($result) == 1) {
                 
@@ -257,7 +257,7 @@ if (isset($u_id) && $u_id && $communityfeatures) {
                 
                 // Bildinfos lesen und in Array speichern
                 $query = "SELECT b_name,b_height,b_width,b_mime FROM bild "
-                    . "WHERE b_user=$ui_userid";
+                    . "WHERE b_user=" . intval($ui_userid);
                 $result2 = mysql_query($query, $conn);
                 if ($result2 && mysql_num_rows($result2) > 0) {
                     unset($bilder);

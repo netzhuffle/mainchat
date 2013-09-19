@@ -188,7 +188,7 @@ function window_reload(file,win_name) {
     if ($forumfeatures && $communityfeatures) {
         // Raumstatus lesen, für Temporär, damit FORUM nicht angezeigt wird
         
-        $query = "SELECT r_status1 from raum WHERE r_id=$o_raum ";
+        $query = "SELECT r_status1 from raum WHERE r_id=" . intval($o_raum);
         $result = mysql_query($query, $conn);
         if ($result && mysql_num_rows($result) == 1) {
             $aktraum = mysql_fetch_object($result);

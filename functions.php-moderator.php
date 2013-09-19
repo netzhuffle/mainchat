@@ -14,7 +14,7 @@ function zeige_moderations_antworten($o_raum, $answer = "")
     global $farbe_moderationg_zeile1;
     global $farbe_moderationg_zeile2;
     
-    $query = "SELECT c_id,c_text FROM moderation WHERE c_raum=$o_raum AND c_typ='P' ORDER BY c_text";
+    $query = "SELECT c_id,c_text FROM moderation WHERE c_raum=" . intval($o_raum) . " AND c_typ='P' ORDER BY c_text";
     $result = mysql_query($query, $conn);
     echo "<table width=100% border=0 cellpadding=0 cellspacing=0>";
     if ($result > 0) {
@@ -53,7 +53,7 @@ function zeige_moderations_antworten($o_raum, $answer = "")
         echo "<input type=hidden name=answer value=$answer>";
     echo "<textarea name=answertxt rows=5 cols=60>";
     if ($answer != "") {
-        $answer = addslashes($answer);
+        $answer = intval($answer);
         $query = "SELECT c_id,c_text FROM moderation WHERE c_id=$answer AND c_typ='P'";
         $result = mysql_query($query, $conn);
         if ($result > 0) {
@@ -84,7 +84,7 @@ function bearbeite_moderationstexte($o_raum)
         while ($a < count($action)) {
             $key = key($action);
             // nur markieren, was noch frei ist.
-            $query = "UPDATE moderation SET c_moderator=$u_id WHERE c_id=$key AND c_typ='N' AND c_moderator=0";
+            $query = "UPDATE moderation SET c_moderator=$u_id WHERE c_id=" . intval($key) . " AND c_typ='N' AND c_moderator=0";
             $result = mysql_query($query, $conn);
             next($action);
             $a++;
@@ -95,7 +95,7 @@ function bearbeite_moderationstexte($o_raum)
         while ($a < count($action)) {
             $key = key($action);
             // nur auswählen, was bereits von diesem Moderator reserviert ist
-            $query = "SELECT * FROM moderation WHERE c_id=$key AND c_typ='N' AND c_moderator=$u_id";
+            $query = "SELECT * FROM moderation WHERE c_id=" . intval($key) . " AND c_typ='N' AND c_moderator=$u_id";
             $result = mysql_query($query, $conn);
             if ($result > 0) {
                 if (mysql_num_rows($result) > 0) {
@@ -158,7 +158,7 @@ function bearbeite_moderationstexte($o_raum)
                     }
                     // jetzt noch aus moderierter Tabelle löschen.
                     mysql_free_result($result);
-                    $query = "DELETE FROM moderation WHERE c_id=$key AND c_moderator=$u_id";
+                    $query = "DELETE FROM moderation WHERE c_id=" . intval($key) . " AND c_moderator=$u_id";
                     $result2 = mysql_query($query, $conn);
                 } else {
                     echo "$t[mod9]<br>";
@@ -203,7 +203,7 @@ function zeige_moderationstexte($o_raum, $limit = 20)
     
     if ($moderation_rueckwaerts == 1)
         $rev = " DESC";
-    $query = "SELECT c_id,c_text,c_von_user,c_moderator FROM moderation WHERE c_raum=$o_raum AND c_typ='N' ORDER BY c_id $rev LIMIT 0,$limit";
+    $query = "SELECT c_id,c_text,c_von_user,c_moderator FROM moderation WHERE c_raum=" . intval($o_raum) . " AND c_typ='N' ORDER BY c_id $rev LIMIT 0, " . intval($limit);
     $result = mysql_query($query, $conn);
     $i = 0;
     $rows = 0;
@@ -310,7 +310,7 @@ function anzahl_moderationstexte($o_raum)
     global $id;
     global $dbase, $conn;
     
-    $query = "SELECT c_id FROM moderation WHERE c_raum=$o_raum AND c_typ='N' ORDER BY c_id";
+    $query = "SELECT c_id FROM moderation WHERE c_raum=" . intval($o_raum) . " AND c_typ='N' ORDER BY c_id";
     $result = mysql_query($query, $conn);
     if ($result > 0) {
         $rows = mysql_num_rows($result);

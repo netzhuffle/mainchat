@@ -166,7 +166,7 @@ if (strlen($u_id) != 0) {
     if ($admin && isset($kick_user_chat) && $user) {
         // Nur Admins: User sofort aus dem Chat kicken
         $query = "SELECT o_id,o_raum,o_name FROM online "
-            . "WHERE o_user='$user' "
+            . "WHERE o_user='" . mysql_real_escape_string($user) . "' "
             . "AND o_level!='C' AND o_level!='S' AND o_level!='A' ";
         $result = mysql_query($query, $conn);
         
@@ -226,7 +226,7 @@ if (strlen($u_id) != 0) {
                                 $f['u_name'] = $userd[1];
                                 $f['u_adminemail'] = $userd[2];
                                 $f['u_passwort'] = $userd[3];
-                                $query = "SELECT u_id FROM user where u_nick like '$f[u_nick]'"; // User importieren
+                                $query = "SELECT u_id FROM user where u_nick like '" . mysql_real_escape_string($f[u_nick]) . "'"; // User importieren
                                 $result = mysql_query($query, $conn);
                                 if ($result && mysql_num_rows($result)) {
                                     $ui_userid = mysql_result($result, 0, 0);
@@ -486,6 +486,7 @@ if (strlen($u_id) != 0) {
                     // Kein Suchtext, aber evtl subquery
                     $where[0] = "WHERE ";
                 } elseif (strpos($suchtext, "%") >= 0) {
+                    $suchtext = mysql_real_escape_string($suchtext);
                     if ($admin) {
                         $where[0] = "WHERE (u_name LIKE '$suchtext' OR u_nick LIKE '$suchtext' OR u_email LIKE '$suchtext' "
                             . " OR u_adminemail LIKE '$suchtext') ";
@@ -493,6 +494,7 @@ if (strlen($u_id) != 0) {
                         $where[0] = "WHERE (u_nick LIKE '$suchtext' OR u_email LIKE '$suchtext') ";
                     }
                 } else {
+                    $suchtext = mysql_real_escape_string($suchtext);
                     if ($admin) {
                         $where[0] = "WHERE u_name = '$suchtext' ";
                         $where[1] = "WHERE u_nick = '$suchtext' ";
@@ -509,14 +511,14 @@ if (strlen($u_id) != 0) {
                 if ($admin) {
                     // Optional level ergänzen
                     if ($f['level'] && $subquery)
-                        $subquery .= "AND u_level = '$f[level]' ";
+                        $subquery .= "AND u_level = '" . mysql_real_escape_string($f[level]) . "' ";
                     elseif ($f['level'])
-                        $subquery = " u_level = '$f[level]' ";
+                        $subquery = " u_level = '" . mysql_real_escape_string($f[level]) . "' ";
                     
                     if ($f['ip'] && $subquery)
-                        $subquery .= "AND u_ip_historie LIKE '%$f[ip]%' ";
+                        $subquery .= "AND u_ip_historie LIKE '%" . mysql_real_escape_string($f[ip]) . "%' ";
                     elseif ($f['ip'])
-                        $subquery = " u_ip_historie LIKE '%$f[ip]%' ";
+                        $subquery = " u_ip_historie LIKE '%" . mysql_real_escape_string($f[ip]) . "%' ";
                 }
                 
                 if ($f['u_chathomepage'] == "J" && $subquery)
@@ -525,14 +527,14 @@ if (strlen($u_id) != 0) {
                     $subquery = " u_chathomepage='J' ";
                 
                 if ($f['user_neu'] && $subquery)
-                    $subquery .= "AND u_neu IS NOT NULL AND date_add(u_neu, interval '$f[user_neu]' day)>=NOW() ";
+                    $subquery .= "AND u_neu IS NOT NULL AND date_add(u_neu, interval '" . mysql_real_escape_string($f[user_neu]) . "' day)>=NOW() ";
                 elseif ($f['user_neu'])
-                    $subquery = " u_neu IS NOT NULL AND date_add(u_neu, interval '$f[user_neu]' day)>=NOW() ";
+                    $subquery = " u_neu IS NOT NULL AND date_add(u_neu, interval '" . mysql_real_escape_string($f[user_neu]) . "' day)>=NOW() ";
                 
                 if ($f['user_login'] && $subquery)
-                    $subquery .= "AND date_add(u_login, interval '$f[user_login]' hour)>=NOW() ";
+                    $subquery .= "AND date_add(u_login, interval '" . mysql_real_escape_string($f[user_login]) . "' hour)>=NOW() ";
                 elseif ($f['user_login'])
-                    $subquery = " date_add(u_login, interval '$f[user_login]' hour)>=NOW() ";
+                    $subquery = " date_add(u_login, interval '" . mysql_real_escape_string($f[user_login]) . "' hour)>=NOW() ";
                 
                 if ($u_level == "U" && $subquery)
                     $subquery .= "AND u_level IN ('A','C','G','M','S','U') ";
@@ -732,9 +734,7 @@ if (strlen($u_id) != 0) {
         case "adminliste":
             if ($adminlisteabrufbar && $u_level != "G") {
                 
-                $result = mysql_query(
-                    'select * from user where u_level = "S" or u_level = "C" order by u_nick ',
-                    $conn);
+                $result = mysql_query('select * from user where u_level = "S" or u_level = "C" order by u_nick ', $conn);
                 $anzahl = mysql_num_rows($result);
                 
                 for ($i = 0; $row = mysql_fetch_array($result, MYSQL_ASSOC); $i++) {
@@ -791,7 +791,7 @@ if (strlen($u_id) != 0) {
             if (isset($beichtstuhl) && $beichtstuhl && !$admin) {
                 
                 // Id der Lobby als Voreinstellung ermitteln
-                $query = "SELECT r_id FROM raum WHERE r_name LIKE '$lobby' ";
+                $query = "SELECT r_id FROM raum WHERE r_name LIKE '" . mysql_real_escape_string($lobby) . "' ";
                 $result = mysql_query($query, $conn);
                 $rows = mysql_num_rows($result);
                 
@@ -888,7 +888,7 @@ if (strlen($u_id) != 0) {
             // Fehlerbehandlung, falls Arry leer ist -> nichts gefunden
             if (!$rows && $schau_raum > 0) {
                 
-                $query = "SELECT r_name FROM raum WHERE r_id=$schau_raum ";
+                $query = "SELECT r_name FROM raum WHERE r_id=" . intval($schau_raum);
                 $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) != 0)
                     $r_name = mysql_result($result, 0, 0);

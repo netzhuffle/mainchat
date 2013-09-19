@@ -14,9 +14,9 @@ header("Pragma: no-cache");
 header("Cache-Control: post-check=0, pre-check=0", FALSE);
 
 $cache = "home_bild";
-$feld = addslashes($feld);
-$http_host = addslashes($http_host);
-$u_id = addslashes($u_id);
+$feld = mysql_real_escape_string($feld);
+$http_host = mysql_real_escape_string($http_host);
+$u_id = intval($u_id);
 
 if ($feld != "ui_bild1" && $feld != "ui_bild2" && $feld != "ui_bild3"
     && $feld != "ui_bild4" && $feld != "ui_bild5" && $feld != "ui_bild6") {

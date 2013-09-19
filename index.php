@@ -305,8 +305,8 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
     
     $query = "SELECT * FROM ip_sperre "
         . "WHERE (SUBSTRING_INDEX(is_ip,'.',is_ip_byte) "
-        . " LIKE SUBSTRING_INDEX('$ip_adr','.',is_ip_byte) AND is_ip IS NOT NULL) "
-        . "OR (is_domain LIKE RIGHT('$ip_name',LENGTH(is_domain)) AND LENGTH(is_domain)>0)";
+        . " LIKE SUBSTRING_INDEX('" . mysql_real_escape_string($ip_adr) . "','.',is_ip_byte) AND is_ip IS NOT NULL) "
+        . "OR (is_domain LIKE RIGHT('" . mysql_real_escape_string($ip_name) . "',LENGTH(is_domain)) AND LENGTH(is_domain)>0)";
     $result = mysql_query($query, $conn);
     $rows = mysql_num_rows($result);
     
@@ -335,8 +335,8 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
         $ip_name = @gethostbyaddr($ip_adr);
         $query = "SELECT * FROM ip_sperre "
             . "WHERE (SUBSTRING_INDEX(is_ip,'.',is_ip_byte) "
-            . " LIKE SUBSTRING_INDEX('$ip_adr','.',is_ip_byte) AND is_ip IS NOT NULL) "
-            . "OR (is_domain LIKE RIGHT('$ip_name',LENGTH(is_domain)) AND LENGTH(is_domain)>0)";
+            . " LIKE SUBSTRING_INDEX('" . mysql_real_escape_string($ip_adr) . "','.',is_ip_byte) AND is_ip IS NOT NULL) "
+            . "OR (is_domain LIKE RIGHT('" . mysql_real_escape_string($ip_name) . "',LENGTH(is_domain)) AND LENGTH(is_domain)>0)";
         $result = mysql_query($query, $conn);
         $rows = mysql_num_rows($result);
         
@@ -386,7 +386,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
     if ($abweisen && $aktion != "relogin" && strlen($login) > 0) {
         // test: ist user=admin -> dann nicht abweisen...
         $query = "select u_nick,u_level from user where u_nick='"
-            . coreCheckName($login, $check_name)
+            . mysql_real_escape_string(coreCheckName($login, $check_name))
             . "' AND (u_level in ('S','C'))";
         $r = mysql_query($query, $conn);
         $rw = mysql_num_rows($r);
@@ -403,10 +403,10 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
         if ($communityfeatures && $loginwhileipsperre <> 0) {
             // Test auf Punkte 
             $query = "select u_id, u_nick,u_level,u_punkte_gesamt from user "
-                . "where (u_nick='" . coreCheckName($login, $check_name)
-                . "' OR u_name='" . coreCheckName($login, $check_name) . "') "
+                . "where (u_nick='" . mysql_real_escape_string(coreCheckName($login, $check_name))
+                . "' OR u_name='" . mysql_real_escape_string("$login, $check_name") . "') "
                 . "AND (u_level in ('A','C','G','M','S','U')) ";
-            "AND u_passwort = encrypt('$passwort',u_passwort)";
+            "AND u_passwort = encrypt('" . mysql_real_escape_string($passwort) . "',u_passwort)";
             // Nutzt die MYSQL -> Unix crypt um DES, SHA256, etc. automatisch zu erkennen
             // Durchleitung wg. Punkten im Fall der MD5() verschlüsselung wird nicht gehen
             $r = mysql_query($query, $conn);
@@ -433,7 +433,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
             if ($eintritt == 'forum') {
                 $raumname = " (" . $whotext[2] . ")";
             } else {
-                $query2 = "SELECT r_name from raum where r_id=$eintritt";
+                $query2 = "SELECT r_name from raum where r_id=" . intval($eintritt);
                 $result2 = mysql_query($query2, $conn);
                 if ($result2 AND mysql_num_rows($result2) > 0) {
                     $raumname = " (" . mysql_result($result2, 0, 0) . ") ";
@@ -562,7 +562,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
     }
     
     if ($aktion == "mailcheck" && isset($email) && isset($hash)) {
-        $email = addslashes($email);
+        $email = mysql_real_escape_string($email);
         $query = "SELECT * FROM mail_check WHERE email = '$email'";
         $result = mysql_query($query);
         if ($result && mysql_numrows($result) == 1) {
@@ -581,8 +581,8 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                         . "\n</HEAD>\n";
                 zeige_kopf();
                 echo "<P><B>Fehler:</B> Die URL ist nicht korrekt! Bitte melden Sie sich "
-                    . "<A HREF=\"" . $chatserver
-                    . "index.php?http_host=$http_host\">hier</A> neu an.</P>";
+                    . "<A HREF=\"" . mysql_real_escape_string($chatserver)
+                    . "index.php?http_host=" . mysql_real_escape_string($http_host) . "\">hier</A> neu an.</P>";
                 $query = "DELETE FROM mail_check WHERE email = '$email'";
                 mysql_query($query);
                 zeige_fuss();
@@ -619,8 +619,8 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
             $fehlermeldung = "";
             
             if (isset($email) && isset($nickname) && isset($hash)) {
-                $nickname = coreCheckName($nickname, $check_name);
-                $email = addslashes(urldecode($email));
+                $nickname = mysql_real_escape_string(coreCheckName($nickname, $check_name));
+                $email = mysql_real_escape_string(urldecode($email));
                 $query = "SELECT u_id, u_login, u_nick, u_name, u_passwort, u_adminemail, u_punkte_jahr FROM user "
                     . "WHERE u_nick = '$nickname' AND u_level = 'U' AND u_adminemail = '$email' LIMIT 1";
                 $result = mysql_query($query);
@@ -641,10 +641,10 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                 }
                 mysql_free_result($result);
             } else if (isset($email) && isset($nickname)) {
-                $nickname = coreCheckName($nickname, $check_name);
-                $email = addslashes(urldecode($email));
+                $nickname = mysql_real_escape_string(coreCheckName($nickname, $check_name));
+                $email = mysql_real_escape_string(urldecode($email));
                 if (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})",
-                    addslashes($email))) {
+                    mysql_real_escape_string($email))) {
                     $fehlermeldung .= $t['pwneu5'] . '<br>';
                 }
                 
@@ -771,9 +771,9 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
             
             unset($fehlermeldung);
             if ($email) {
-                $email = addslashes($email);
+                $email = mysql_real_escape_string($email);
                 if (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})",
-                    addslashes($email))) {
+                    mysql_real_escape_string($email))) {
                     $fehlermeldung = $t['neu51'];
                 } else {
                     $query = "SELECT * FROM mail_check WHERE email = '$email'";
@@ -861,7 +861,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
             // der Form name@do.main entspricht, wobei
             if (isset($email)) {
                 if (!preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})",
-                    addslashes($email))) {
+                    mysql_real_escape_string($email))) {
                     echo str_replace("%email%", $email, $t['neu41']);
                     $email = "";
                 }
@@ -986,7 +986,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                         "From: $webmaster ($chat)" . "\n" . "X-MC-IP: "
                             . $_SERVER["REMOTE_ADDR"] . "\n" . "X-MC-TS: "
                             . time());
-                    $email = addslashes($email);
+                    $email = mysql_real_escape_string($email);
                     $query = "REPLACE INTO mail_check (email,datum) VALUES ('$email',NOW())";
                     $result = mysql_query($query);
                     
@@ -1132,10 +1132,8 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                         $rows = 1;
                         $i = 0;
                         while ($rows != 0 && $i < 100) {
-                            $login = $t['login13']
-                                . strval((mt_rand(1, 10000)) + 1);
-                            $query4711 = "SELECT u_id FROM user "
-                                . "WHERE u_nick='$login' ";
+                            $login = $t['login13'] . strval((mt_rand(1, 10000)) + 1);
+                            $query4711 = "SELECT u_id FROM user WHERE u_nick='" . mysql_real_escape_string($login) . "'";
                             $result = mysql_query($query4711, $conn);
                             $rows = mysql_num_rows($result);
                             $i++;
@@ -1145,7 +1143,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                 }
                 
                 // Im Nick alle Sonderzeichen entfernen, vorsichtshalber nochmals prüfen
-                $login = coreCheckName($login, $check_name);
+                $login = mysql_real_escape_string(coreCheckName($login, $check_name));
                 
                 // Userdaten für Gast setzen
                 $f['u_level'] = "G";
@@ -1155,8 +1153,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                 $passwort = $f['u_passwort'];
                 
                 // Prüfung, ob dieser User bereits existiert
-                $query4711 = "SELECT u_id FROM user "
-                    . "WHERE u_nick='$f[u_nick]' ";
+                $query4711 = "SELECT u_id FROM user WHERE u_nick='$f[u_nick]'";
                 $result = mysql_query($query4711, $conn);
                 
                 if (mysql_num_rows($result) == 0) {
@@ -1550,7 +1547,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                         if ($eintritt == 'forum') {
                             $raumname = " (" . $whotext[2] . ")";
                         } else {
-                            $query2 = "SELECT r_name from raum where r_id=$eintritt";
+                            $query2 = "SELECT r_name from raum where r_id=" . intval($eintritt);
                             $result2 = mysql_query($query2, $conn);
                             if ($result2 AND mysql_num_rows($result2) > 0) {
                                 $raumname = " (" . mysql_result($result2, 0, 0)
@@ -1609,7 +1606,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                         // Prüfen, ob ein User in der Lobby ist
                         $query2 = "SELECT o_id "
                             . "FROM raum,online WHERE o_raum=r_id "
-                            . "AND r_name='$lobby' "
+                            . "AND r_name='" . mysql_real_escape_string($lobby) . "' "
                             . "AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout ";
                         $result2 = mysql_query($query2, $conn);
                         
@@ -1626,7 +1623,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                             $query2 = "SELECT r_id,count(o_id) as anzahl, "
                                 . "count(o_level='C') as CADMIN, count(o_level='S') as SADMIN "
                                 . "FROM raum,online WHERE o_raum=r_id "
-                                . "AND r_name!='$lobby' "
+                                . "AND r_name!='" . mysql_real_escape_string($lobby) . "' "
                                 . "AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout "
                                 . "GROUP BY r_id HAVING anzahl=1 AND (CADMIN=1 OR SADMIN=1)";
                             $result2 = mysql_query($query2, $conn);
@@ -1645,7 +1642,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                         
                         // ID der Lobby neu ermitteln -> Login in Lobby
                         if ($login_in_lobby) {
-                            $query2 = "SELECT r_id FROM raum WHERE r_name = '$eintrittsraum' ";
+                            $query2 = "SELECT r_id FROM raum WHERE r_name = '" . mysql_real_escape_string($eintrittsraum) . "' ";
                             $result2 = mysql_query($query2, $conn);
                             if ($result2 && mysql_num_rows($result2) == 1) {
                                 $eintritt = mysql_result($result2, 0, "r_id");
@@ -1654,7 +1651,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                         }
                         
                         // Bei Login dieses Users alle Admins (online, nicht Temp) informieren
-                        $query2 = "SELECT r_name from raum where r_id=$eintritt";
+                        $query2 = "SELECT r_name from raum where r_id= '" . mysql_real_escape_string($eintritt) . "'";
                         $result2 = mysql_query($query2, $conn);
                         if ($result2 AND mysql_num_rows($result2) > 0) {
                             $raumname = mysql_result($result2, 0, 0);
@@ -1987,8 +1984,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                 }
                 
                 // Gibts den Usernamen schon?
-                $query = "SELECT u_id FROM user " . "WHERE u_nick = '"
-                    . $f['u_nick'] . "' ";
+                $query = "SELECT u_id FROM user WHERE u_nick = '" . mysql_real_escape_string($f['u_nick']) . "'";
                 
                 $result = mysql_query($query, $conn);
                 $rows = mysql_num_rows($result);
@@ -2065,7 +2061,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
             // Prüfe ob Mailadresse schon zu oft registriert, durch ZURÜCK Button bei der 1. registrierung
             if ($ok) {
                 if ($begrenzung_anmeld_pro_mailadr > 0) {
-                    $query = "select u_id from user WHERE u_adminemail = '$f[u_adminemail]'";
+                    $query = "select u_id from user WHERE u_adminemail = '" . mysql_real_escape_string($f[u_adminemail]) . "'";
                     $result = mysql_query($query);
                     $num = mysql_numrows($result);
                     if ($num >= $begrenzung_anmeld_pro_mailadr) {
@@ -2144,12 +2140,10 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                 
                 $f['u_level'] = "U";
                 $u_id = schreibe_db("user", $f, "", "u_id");
-                $result = mysql_query(
-                    "UPDATE user SET u_neu=DATE_FORMAT(now(),\"%Y%m%d%H%i%s\") WHERE u_id=$u_id",
-                    $conn);
+                $result = mysql_query("UPDATE user SET u_neu=DATE_FORMAT(now(),\"%Y%m%d%H%i%s\") WHERE u_id=$u_id", $conn);
                 
                 if ($pruefe_email == "1") {
-                    $query = "DELETE FROM mail_check WHERE email = '$f[u_adminemail]'";
+                    $query = "DELETE FROM mail_check WHERE email = '" . mysql_real_escape_string($f[u_adminemail]) . "'";
                     $result = mysql_query($query);
                 }
                 
@@ -2307,7 +2301,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
                 
                 // User online und Räume bestimmen -> merken
                 $query = "SELECT o_who,o_name,o_level,r_name,r_status1,r_status2, "
-                    . "r_name='$lobby' as lobby "
+                    . "r_name='" . mysql_real_escape_string($lobby) . "' as lobby "
                     . "FROM online left join raum on o_raum=r_id  "
                     . "WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout "
                     . "ORDER BY lobby desc,r_name,o_who,o_name ";

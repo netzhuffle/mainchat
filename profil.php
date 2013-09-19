@@ -231,44 +231,43 @@ if ($u_id && $communityfeatures) {
                 if ($result && mysql_num_rows($result) > 0) {
                     while ($row = mysql_fetch_object($result)) {
                         echo "<TR><TD><B>"
-                            . htmlspecialchars(stripslashes($row->u_nick))
+                            . htmlspecialchars($row->u_nick)
                             . "</B></TD><TD>"
-                            . htmlspecialchars(stripslashes($row->u_name))
+                            . htmlspecialchars($row->u_name)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_strasse))
+                            . htmlspecialchars($row->ui_strasse)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_plz))
+                            . htmlspecialchars($row->ui_plz)
                             . " "
-                            . htmlspecialchars(stripslashes($row->ui_ort))
+                            . htmlspecialchars($row->ui_ort)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_land))
+                            . htmlspecialchars($row->ui_land)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->u_adminemail))
+                            . htmlspecialchars($row->u_adminemail)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->u_email))
+                            . htmlspecialchars($row->u_email)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->u_url))
+                            . htmlspecialchars($row->u_url)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_geburt))
+                            . htmlspecialchars($row->ui_geburt)
                             . "</TD><TD>"
-                            . htmlspecialchars(
-                                stripslashes($row->ui_geschlecht))
+                            . htmlspecialchars($row->ui_geschlecht)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_beziehung))
+                            . htmlspecialchars($row->ui_beziehung)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_typ))
+                            . htmlspecialchars($row->ui_typ)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_beruf))
+                            . htmlspecialchars($row->ui_beruf)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_hobby))
+                            . htmlspecialchars($row->ui_hobby)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_tel))
+                            . htmlspecialchars($row->ui_tel)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_fax))
+                            . htmlspecialchars($row->ui_fax)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_handy))
+                            . htmlspecialchars($row->ui_handy)
                             . "</TD><TD>"
-                            . htmlspecialchars(stripslashes($row->ui_icq))
+                            . htmlspecialchars($row->ui_icq)
                             . "</TD></TR>\n";
                     }
                 }

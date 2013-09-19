@@ -56,7 +56,7 @@ function raum_user($r_id, $u_id, $id)
     
     if ($unterdruecke_user_im_raum_anzeige != "1") {
         $query = "SELECT r_name,r_besitzer,o_user,o_name,o_userdata,o_userdata2,o_userdata3,o_userdata4 "
-            . "FROM raum,online " . "WHERE r_id=$r_id " . "AND o_raum=r_id "
+            . "FROM raum,online WHERE r_id=$r_id AND o_raum=r_id "
             . "AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout "
             . "ORDER BY o_name";
         
@@ -124,7 +124,7 @@ function ist_online($user)
     
     $ist_online_raum = "";
     
-    $user = addslashes($user); // sec
+    $user = mysql_real_escape_string($user); // sec
     
     $query = "SELECT o_id,r_name FROM online left join raum on r_id=o_raum "
         . "WHERE o_user=$user "
@@ -244,7 +244,7 @@ function logout($o_id, $u_id, $info = "")
     $query = "LOCK TABLES online WRITE, user WRITE";
     $result = mysql_query($query, $conn);
     
-    $o_id = AddSlashes($o_id); // sec
+    $o_id = mysql_real_escape_string($o_id); // sec
     
     // Aktuelle Punkte auf Punkte in Usertabelle addieren
     $result = @mysql_query(
@@ -415,7 +415,7 @@ function priv_msg(
     
     // In Session merken, dass Text im Chat geschrieben wurde
     if ($von_user_id) {
-        $von_user_id = addslashes($von_user_id); // sec
+        $von_user_id = mysql_real_escape_string($von_user_id); // sec
         $query = "UPDATE online SET o_timeout_zeit=DATE_FORMAT(NOW(),\"%Y%m%d%H%i%s\"), o_timeout_warnung='N' "
             . "WHERE o_user=$von_user_id";
         $result = mysql_query($query, $conn);
@@ -679,6 +679,8 @@ function schreibe_db($db, $f, $id, $id_name)
     // Akualiert ggf Kopie des Datensatzes in online-Tabelle
     global $dbase, $conn, $u_id;
     
+    $id == intval($id);
+    
     if (strlen($id) == 0 || $id == 0) {
         
         // ID generieren
@@ -713,12 +715,12 @@ function schreibe_db($db, $f, $id, $id_name)
         $q = "";
         for (reset($f); list($name, $inhalt) = each($f);) {
             if (($name != $id_name) && ($name != "u_salt")) {
-                $q .= "," . $name;
+                $q .= "," . mysql_real_escape_string($name);
                 if ($name == "u_passwort") {
                     if (!isset($f['u_salt']))
                         $f['u_salt'] = substr($inhalt, 0, 2);
                     // Verschlüsseln
-                    $q .= "='" . iCrypt($inhalt, $f['u_salt']) . "'";
+                    $q .= "='" . mysql_real_escape_string(iCrypt($inhalt, $f['u_salt'])) . "'";
                 } else {
                     $q .= "='" . mysql_real_escape_string($inhalt) . "'";
                 }
@@ -742,15 +744,15 @@ function schreibe_db($db, $f, $id, $id_name)
         for (reset($f); list($name, $inhalt) = each($f);) {
             if ($name != "u_salt") {
                 if ($q == "") {
-                    $q = $name;
+                    $q = mysql_real_escape_string($name);
                 } else {
-                    $q .= ",$name";
+                    $q .= "," . mysql_real_escape_string($name);
                 }
                 if ($name == "u_passwort") {
                     // Verschlüsseln
                     if (!isset($f['u_salt']))
                         $f['u_salt'] = substr($inhalt, 0, 2);
-                    $q .= "='" . iCrypt($inhalt, $f['u_salt']) . "'";
+                    $q .= "='" . mysql_real_escape_string(iCrypt($inhalt, $f['u_salt'])) . "'";
                 } else {
                     $q .= "='" . mysql_real_escape_string($inhalt) . "'";
                 }
@@ -775,7 +777,7 @@ function schreibe_db($db, $f, $id, $id_name)
             // Slashes in jedem Eintrag des Array ergänzen
             reset($userdata);
             while (list($ukey, $udata) = each($userdata)) {
-                $udata = addslashes($udata);
+                $udata = mysql_real_escape_string($udata);
             }
             
             // Userdaten in 255-Byte Häppchen zerlegen
@@ -791,12 +793,12 @@ function schreibe_db($db, $f, $id, $id_name)
                 $userdata_array[3] = "";
             
             $query = "UPDATE online SET " . "o_userdata='"
-                . addslashes($userdata_array[0]) . "', " . "o_userdata2='"
-                . addslashes($userdata_array[1]) . "', " . "o_userdata3='"
-                . addslashes($userdata_array[2]) . "', " . "o_userdata4='"
-                . addslashes($userdata_array[3]) . "', " . "o_level='"
-                . addslashes($userdata['u_level']) . "', " . "o_name='"
-                . addslashes($userdata['u_nick']) . "' " . "WHERE o_user=$id";
+                . mysql_real_escape_string($userdata_array[0]) . "', " . "o_userdata2='"
+                . mysql_real_escape_string($userdata_array[1]) . "', " . "o_userdata3='"
+                . mysql_real_escape_string($userdata_array[2]) . "', " . "o_userdata4='"
+                . mysql_real_escape_string($userdata_array[3]) . "', " . "o_level='"
+                . mysql_real_escape_string($userdata['u_level']) . "', " . "o_name='"
+                . mysql_real_escape_string($userdata['u_nick']) . "' " . "WHERE o_user=$id";
             mysql_query($query, $conn);
             mysql_free_result($result);
             
@@ -893,8 +895,8 @@ function show_box2($box, $text, $width = "", $button = TRUE)
 function coreCheckName($name, $check_name)
 {
     global $upper_name;
-    // Nicht-druckbare Zeichen, Leerzeichen, \, " und ' entfernen
-    $name = preg_replace("/[\\\\ '" . chr(34) . chr(1) . "-" . chr(31) . "]/",
+    // Nicht-druckbare Zeichen, Leerzeichen, " und ' entfernen
+    $name = preg_replace("/[ '" . chr(34) . chr(1) . "-" . chr(31) . "]/",
         "", $name);
     $name = str_replace("#", "", $name);
     $name = str_replace("+", "", $name);
@@ -925,7 +927,7 @@ function coreCheckName($name, $check_name)
         $name = UCFirst($name);
     }
     
-    return (addslashes($name));
+    return $name;
 }
 
 // Werbung vom ReadMedia Adserver holen und ausliefern
@@ -966,6 +968,7 @@ function raum_ist_moderiert($raum)
     global $dbase, $conn, $u_id, $system_farbe, $moderationsmodul, $raum_einstellungen, $ist_moderiert;
     
     $moderiert = 0;
+    $raum = intval($raum);
     
     $query = "SELECT * FROM raum WHERE r_id=$raum";
     $result = mysql_query($query, $conn);
@@ -1089,12 +1092,11 @@ function user(
             $userdaten['u_punkte_anzeigen'] = 'N';
         
         $user_id = $userdaten['u_id'];
-        $user_nick = stripslashes($userdaten['u_nick']);
+        $user_nick = $userdaten['u_nick'];
         $user_level = $userdaten['u_level'];
         $user_punkte_gesamt = $userdaten['u_punkte_gesamt'];
         $user_punkte_gruppe = hexdec($userdaten['u_punkte_gruppe']);
-        $user_chathomepage = htmlspecialchars(
-            stripslashes($userdaten['u_chathomepage']));
+        $user_chathomepage = htmlspecialchars($userdaten['u_chathomepage']);
         
         if ($show_geschlecht == true)
             $user_geschlecht = hole_geschlecht($zeige_user_id);
@@ -1104,13 +1106,12 @@ function user(
     } elseif (is_object($userdaten)) {
         // Object wurde übergeben
         $user_id = $userdaten->u_id;
-        $user_nick = stripslashes($userdaten->u_nick);
+        $user_nick = $userdaten->u_nick;
         $user_level = $userdaten->u_level;
         $user_punkte_gesamt = $userdaten->u_punkte_gesamt;
         $user_punkte_gruppe = hexdec($userdaten->u_punkte_gruppe);
         if (isset($userdaten->u_chathomepage)) {
-            $user_chathomepage = htmlspecialchars(
-                stripslashes($userdaten->u_chathomepage));
+            $user_chathomepage = htmlspecialchars($userdaten->u_chathomepage);
         } else {
             $user_chathomepage = "";
         }
@@ -1131,17 +1132,16 @@ function user(
             . "UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_login) AS online, "
             . "date_format(u_login,'%d.%m.%y %H:%i') as login "
             . "FROM user left join online on o_user=u_id "
-            . "where u_id=$zeige_user_id";
+            . "where u_id=" . intval($zeige_user_id);
         $result = mysql_query($query, $conn);
         if ($result && mysql_Num_Rows($result) == 1) {
             $userdaten = mysql_fetch_object($result);
             $user_id = $userdaten->u_id;
-            $user_nick = stripslashes($userdaten->u_nick);
+            $user_nick = $userdaten->u_nick;
             $user_level = $userdaten->u_level;
             $user_punkte_gesamt = $userdaten->u_punkte_gesamt;
             $user_punkte_gruppe = hexdec($userdaten->u_punkte_gruppe);
-            $user_chathomepage = htmlspecialchars(
-                stripslashes($userdaten->u_chathomepage));
+            $user_chathomepage = htmlspecialchars($userdaten->u_chathomepage);
             $user_punkte_anzeigen = $userdaten->u_punkte_anzeigen;
             
             $online_zeit = $userdaten->online;
@@ -1169,7 +1169,7 @@ function user(
     // Wenn die $user_punkte_anzeigen nicht im Array war, dann seperat abfragen
     if (!isset($user_punkte_anzeigen)
         || ($user_punkte_anzeigen != "Y" and $user_punkte_anzeigen != "N")) {
-        $query = "SELECT u_punkte_anzeigen FROM user where u_id=$user_id";
+        $query = "SELECT u_punkte_anzeigen FROM user where u_id=" . intval($user_id);
         $result = mysql_query($query, $conn);
         if ($result && mysql_Num_Rows($result) == 1) {
             $userdaten = mysql_fetch_object($result);
@@ -1504,7 +1504,7 @@ function logout_debug($o_id, $info)
     if ($info == "login")
         $logout[lo_aktion] = "login";
     
-    $o_id = AddSlashes($o_id);
+    $o_id = intval($o_id);
     $result = mysql_query("select * FROM online WHERE o_id=$o_id", $conn);
     if ($result && mysql_num_rows($result) == 1) {
         $row = mysql_fetch_array($result);
@@ -1526,7 +1526,7 @@ function logout_debug($o_id, $info)
     
     $query = "INSERT INTO logouts SET ";
     foreach ($logout as $key => $val)
-        $query .= "$key='" . str_replace("'", "\\'", $val) . "', ";
+        $query .= mysql_real_escape_string($key) . "='" . mysql_real_escape_string($val) . "', ";
     $query = substr($query, 0, -2);
     $conn2 = mysql_connect($STAT_DB_HOST, $STAT_DB_USER, $STAT_DB_PASS);
     mysql_set_charset("utf8");
@@ -1543,7 +1543,7 @@ function hole_geschlecht($userid)
 {
     global $dbase, $conn;
     
-    $query = "SELECT ui_geschlecht FROM userinfo WHERE ui_userid=$userid";
+    $query = "SELECT ui_geschlecht FROM userinfo WHERE ui_userid=" . intval($userid);
     $result = mysql_query($query, $conn);
     if ($result AND mysql_Num_Rows($result) == 1) {
         $userinfo = mysql_fetch_object($result);

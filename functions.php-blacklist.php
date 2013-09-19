@@ -132,7 +132,7 @@ function zeige_blacklist($aktion, $zeilen, $sort)
                 if ($row->f_text == "") {
                     $infotext = "&nbsp;";
                 } else {
-                    $infotext = stripslashes($row->f_text);
+                    $infotext = $row->f_text;
                 }
                 
                 // Nick des Admins (Eintrager) setzen
@@ -185,9 +185,9 @@ function loesche_blacklist($f_blacklistid)
         return (0);
     }
     
-    $f_blacklistid = AddSlashes($f_blacklistid);
+    $f_blacklistid = intval($f_blacklistid);
     
-    $query = "DELETE from blacklist WHERE " . "f_blacklistid=$f_blacklistid ";
+    $query = "DELETE from blacklist WHERE f_blacklistid=$f_blacklistid";
     $result = mysql_query($query, $conn);
     
     $query = "SELECT u_nick FROM user where u_id=$f_blacklistid";
@@ -227,12 +227,12 @@ function formular_neuer_blacklist($neuer_blacklist)
         . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD align=\"right\"><B>Nickname:</B></TD><TD>"
         . $f1
         . "<INPUT TYPE=\"TEXT\" NAME=\"neuer_blacklist[u_nick]\" VALUE=\""
-        . htmlspecialchars(stripslashes($neuer_blacklist['u_nick']))
+        . htmlspecialchars($neuer_blacklist['u_nick'])
         . "\" SIZE=20>" . $f2 . "</TD></TR>\n"
         . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD align=\"right\"><B>Infotext:</B></TD><TD>"
         . $f1
         . "<INPUT TYPE=\"TEXT\" NAME=\"neuer_blacklist[f_text]\" VALUE=\""
-        . htmlspecialchars(stripslashes($neuer_blacklist['f_text']))
+        . htmlspecialchars($neuer_blacklist['f_text'])
         . "\" SIZE=$eingabe_breite>" . "&nbsp;"
         . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"EINTRAGEN\">" . $f2
         . "</TD></TR>\n" . "</TABLE></FORM>\n";
@@ -250,8 +250,8 @@ function neuer_blacklist($f_userid, $blacklist)
         echo "Fehler beim Anlegen des Blacklist-Eintrags: $f_userid,$blacklist[u_id]!<BR>";
     } else {
         
-        $blacklist['u_id'] = addslashes($blacklist['u_id']); // sec
-        $f_userid = addslashes($f_userid); // sec
+        $blacklist['u_id'] = mysql_real_escape_string($blacklist['u_id']); // sec
+        $f_userid = mysql_real_escape_string($f_userid); // sec
         
         // Prüfen ob Blacklist-Eintrag bereits in Tabelle steht
         $query = "SELECT f_id from blacklist WHERE "

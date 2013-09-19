@@ -14,8 +14,6 @@ $url = str_replace("</i>", "", $url);
 $url = str_replace("<br>", "", $url);
 $url = str_replace("<br/", "", $url);
 
-$url = stripslashes($url);
-
 $url = str_replace('&amp;', '&', $url);
 $url = str_replace('&#039;', '\'', $url);
 $url = str_replace('&quot;', '\"', $url);

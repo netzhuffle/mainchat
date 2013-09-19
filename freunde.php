@@ -81,7 +81,7 @@ if ($u_id && $communityfeatures) {
         case "editinfotext":
             if ((strlen($editeintrag) > 0)
                 && (preg_match("/^[0-9]+$/", trim($editeintrag)) == 1)) {
-                $query = "SELECT f_text FROM freunde WHERE (f_userid = $u_id or f_freundid = $u_id) AND (f_id = $editeintrag)";
+                $query = "SELECT f_text FROM freunde WHERE (f_userid = $u_id or f_freundid = $u_id) AND (f_id = " . mysql_real_escape_string($editeintrag) . ")";
                 $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) == 1) {
                     $infotext = mysql_result($result, 0, 0);
@@ -94,7 +94,7 @@ if ($u_id && $communityfeatures) {
         case "editinfotext2":
             if ((strlen($f_id) > 0)
                 && (preg_match("/^[0-9]+$/", trim($f_id)) == 1)) {
-                $query = "SELECT f_text FROM freunde WHERE (f_userid = $u_id or f_freundid = $u_id) AND (f_id = $f_id)";
+                $query = "SELECT f_text FROM freunde WHERE (f_userid = $u_id or f_freundid = $u_id) AND (f_id = " . intval($f_id) . ")";
                 $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) == 1) {
                     // f_id ist zahl und gehört zu dem User, also ist update möglich
@@ -117,9 +117,8 @@ if ($u_id && $communityfeatures) {
         
         case "neu2":
         // Neuer Freund, 2. Schritt: Nick Prüfen
-            $neuer_freund['u_nick'] = htmlspecialchars(
-                AddSlashes($neuer_freund['u_nick']));
-            $query = "SELECT u_id, u_level FROM user WHERE u_nick = '$neuer_freund[u_nick]'";
+            $neuer_freund['u_nick'] = htmlspecialchars($neuer_freund['u_nick']);
+            $query = "SELECT u_id, u_level FROM user WHERE u_nick = '" . mysql_real_escape_string($neuer_freund[u_nick]) . "'";
             $result = mysql_query($query, $conn);
             if ($result && mysql_num_rows($result) == 1) {
                 $neuer_freund['u_id'] = mysql_result($result, 0, 0);

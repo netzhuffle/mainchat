@@ -80,7 +80,7 @@ if ($expire_privat) {
     // Chat expire und Kopie in Log für alle privaten Zeilen, die älter als 15 Minuten sind
     $query = "SELECT SQL_BUFFER_RESULT * FROM chat "
         . "WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(c_zeit)) > 900 "
-        . "AND c_typ='P' " . "ORDER BY c_raum,c_id";
+        . "AND c_typ='P' ORDER BY c_raum,c_id";
     
     $result = mysql_query($query, $conn);
     $rows = mysql_NumRows($result);
@@ -125,7 +125,7 @@ if ($expire_privat) {
     // Chat expire für alle privaten Zeilen, die älter als 15 Minuten sind
     $query = "DELETE FROM chat "
         . "WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(c_zeit)) > 900 "
-        . "AND c_typ='P' " . "OR c_zeit='' OR c_zeit=0";
+        . "AND c_typ='P' OR c_zeit='' OR c_zeit=0";
     $result = mysql_query($query, $conn);
 }
 
@@ -449,7 +449,7 @@ if ((strlen($STAT_DB_HOST) > 0)) {
                     $o_vhost = @mysql_result($r0, $i, "o_vhost");
                     $r1 = @mysql_query(
                         "SELECT COUNT(o_id) AS anzahl FROM online WHERE o_vhost='"
-                            . AddSlashes($o_vhost) . "' ", $conn);
+                            . mysql_real_escape_string($o_vhost) . "' ", $conn);
                 }
                 
                 if ($r1 > 0) {
@@ -484,7 +484,7 @@ if ((strlen($STAT_DB_HOST) > 0)) {
             while (list($name, $nr) = each($onlinevhosts)) {
                 $r0 = mysql_query(
                     "SELECT SQL_BUFFER_RESULT c_users FROM chat WHERE DATE_FORMAT(c_timestamp,'%Y-%m-%d %H') = '$currentdate' AND c_host='"
-                        . AddSlashes($name) . "' ORDER BY c_users DESC",
+                        . mysql_real_escape_string($name) . "' ORDER BY c_users DESC",
                     $conn2);
                 
                 if ($r0) {
@@ -493,7 +493,7 @@ if ((strlen($STAT_DB_HOST) > 0)) {
                         /* Es war noch kein Eintrag vorhanden. Neuer Eintrag wird angelegt. */
                         @mysql_query(
                             "INSERT INTO chat (c_timestamp, c_users, c_host) VALUES (NOW(),$nr,'"
-                                . AddSlashes($name) . "')", $conn2);
+                                . mysql_real_escape_string($name) . "')", $conn2);
                     } else {
                         /* Es war bereits ein Eintrag vorhanden. Die Anzahl der	*/
                         /* User wird erneuert wenn sie größer als der alte Wert	*/
@@ -504,7 +504,7 @@ if ((strlen($STAT_DB_HOST) > 0)) {
                         if ($nr > $currentnr) {
                             @mysql_query(
                                 "UPDATE chat SET c_users=$nr WHERE DATE_FORMAT(c_timestamp,'%Y-%m-%d %H') = '$currentdate' AND c_host='"
-                                    . AddSlashes($name) . "'", $conn2);
+                                    . mysql_real_escape_string($name) . "'", $conn2);
                         }
                     }
                 }

@@ -43,7 +43,7 @@ aktualisiere_online($u_id, $o_raum);
 // Optional via JavaScript den oberen Werbeframe mit dem Werbeframe des Raums neu laden
 if ($erweitertefeatures) {
     
-    $query = "SELECT r_werbung FROM raum WHERE r_id=$o_raum ";
+    $query = "SELECT r_werbung FROM raum WHERE r_id=" . intval($o_raum);
     $result = mysql_query($query, $conn);
     
     if ($result && mysql_Num_Rows($result) != 0) {

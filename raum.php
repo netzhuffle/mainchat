@@ -69,10 +69,10 @@ if (strlen($u_id) != 0) {
         
         // html unterdrücken
         $f['r_name'] = htmlspecialchars($f['r_name']);
-        $f['r_topic'] = htmlspecialchars(stripslashes($f['r_topic']));
-        $f['r_eintritt'] = htmlspecialchars(stripslashes($f['r_eintritt']));
-        $f['r_austritt'] = htmlspecialchars(stripslashes($f['r_austritt']));
-        $f['r_werbung'] = htmlspecialchars(stripslashes($f['r_werbung']));
+        $f['r_topic'] = htmlspecialchars($f['r_topic']);
+        $f['r_eintritt'] = htmlspecialchars($f['r_eintritt']);
+        $f['r_austritt'] = htmlspecialchars($f['r_austritt']);
+        $f['r_werbung'] = htmlspecialchars($f['r_werbung']);
         
         // Nur Admin darf Werbung eintragen
         if (!$admin || !$erweitertefeatures) {
@@ -133,6 +133,8 @@ if (strlen($u_id) != 0) {
         $f['r_name'] = "";
     if (!isset($neu))
         $neu = false;
+    $f['r_id'] = mysql_real_escape_string($f['r_id']);
+    $f['r_name'] = mysql_real_escape_string($f['r_name']);
     
     $query = "SELECT r_id, r_besitzer, r_name FROM raum WHERE r_id = '$f[r_id]'";
     $result = mysql_query($query);
@@ -239,8 +241,7 @@ if (strlen($u_id) != 0) {
         
         case "loesch2":
         // Raum löschen
-            $query = "SELECT raum.*,u_id FROM raum left join user "
-                . "on r_besitzer=u_id " . "WHERE r_id=$f[r_id] ";
+            $query = "SELECT raum.*,u_id FROM raum left join user on r_besitzer=u_id WHERE r_id=$f[r_id] ";
             
             $result = mysql_query($query, $conn);
             
@@ -250,7 +251,7 @@ if (strlen($u_id) != 0) {
                 // Berechtigung prüfen, alle User in Lobby werfen und löschen
                 if ($admin || ($row->r_besitzer == $u_id)) {
                     // Lobby suchen
-                    $query = "SELECT r_id FROM raum WHERE r_name='$lobby' ";
+                    $query = "SELECT r_id FROM raum WHERE r_name='" . mysql_real_escape_string($lobby) . "'";
                     $result2 = mysql_query($query, $conn);
                     if ($result2 AND mysql_num_rows($result2) > 0) {
                         $lobby_id = mysql_result($result2, 0, "r_id");
@@ -269,8 +270,7 @@ if (strlen($u_id) != 0) {
                         schreibe_db("raum", $f, $f['r_id'], "r_id");
                         
                         // Raum leeren
-                        $query = "SELECT o_user,o_name FROM online "
-                            . "WHERE o_raum=$f[r_id] ";
+                        $query = "SELECT o_user,o_name FROM online WHERE o_raum=$f[r_id] ";
                         
                         $result2 = mysql_query($query, $conn);
                         while ($row2 = mysql_fetch_object($result2)) {
@@ -337,10 +337,10 @@ if (strlen($u_id) != 0) {
                 echo "<TABLE WIDTH=100% BORDER=0 CELLSPACING=0><TR>\n";
                 echo "<TD><B>$t[sonst2] $row->r_name</B></TD></TR>\n";
                 echo "<TR><TD COLSPAN=2>" . $f1 . "<B>$t[sonst3]</B> "
-                    . htmlspecialchars(stripslashes($row->r_topic)) . $f2
+                    . htmlspecialchars($row->r_topic) . $f2
                     . "</TD></TR>\n";
                 echo "<TR><TD COLSPAN=2>" . $f1 . "<B>$t[sonst7]</B> "
-                    . htmlspecialchars(stripslashes($row->r_eintritt)) . $f2
+                    . htmlspecialchars($row->r_eintritt) . $f2
                     . "</TD></TR>\n";
                 echo "</TR></TABLE>\n";
                 
@@ -374,8 +374,7 @@ if (strlen($u_id) != 0) {
             
             if ($communityfeatures && !$admin) {
                 
-                $result = mysql_query(
-                    "select u_punkte_gesamt FROM user WHERE u_id=$u_id");
+                $result = mysql_query("select u_punkte_gesamt FROM user WHERE u_id=$u_id");
                 if ($result && mysql_num_rows($result) == 1) {
                     $u_punkte_gesamt = mysql_result($result, 0, 0);
                 }
@@ -490,16 +489,16 @@ if (strlen($u_id) != 0) {
             echo "<TR><TD>" . $f1 . "<B>" . $t['sonst3'] . "</B>" . $f2
                 . "</TD>" . "<TD>" . $f1 . "<TEXTAREA rows=5 cols="
                 . ($eingabe_breite) . " NAME=\"f[r_topic]\">"
-                . stripslashes($r_topic) . "</TEXTAREA>" . $f2 . "</TD></TR>\n";
+                . $r_topic . "</TEXTAREA>" . $f2 . "</TD></TR>\n";
             echo "<TR VALIGN=\"TOP\"><TD>" . $f1 . "<B>" . $t['sonst7']
                 . "</B>" . $f2 . "</TD>" . "<TD>" . $f1
                 . "<TEXTAREA rows=5 cols=" . ($eingabe_breite)
-                . " NAME=\"f[r_eintritt]\">" . stripslashes($r_eintritt)
+                . " NAME=\"f[r_eintritt]\">" . $r_eintritt
                 . "</TEXTAREA>" . $f2 . "</TD></TR>\n";
             echo "<TR VALIGN=\"TOP\"><TD>" . $f1 . "<B>" . $t['sonst8']
                 . "</B>" . $f2 . "</TD>" . "<TD>" . $f1
                 . "<TEXTAREA rows=5 cols=" . ($eingabe_breite)
-                . " NAME=\"f[r_austritt]\">" . stripslashes($r_austritt)
+                . " NAME=\"f[r_austritt]\">" . $r_austritt
                 . "</TEXTAREA>" . $f2 . "</TD></TR>\n";
             
             if (!isset($r_werbung)) {
@@ -509,7 +508,7 @@ if (strlen($u_id) != 0) {
                 echo "<TR><TD>" . $f1 . "<B>" . $t['sonst12'] . "</B>" . $f2
                     . "</TD>" . "<TD>" . $f1
                     . "<INPUT TYPE=\"TEXT\" NAME=\"f[r_werbung]\" VALUE=\""
-                    . stripslashes($r_werbung) . "\" SIZE=$eingabe_breite>"
+                    . $r_werbung . "\" SIZE=$eingabe_breite>"
                     . $f2 . "</TD></TR>\n";
             }
             
@@ -534,7 +533,7 @@ if (strlen($u_id) != 0) {
             if ($aktion == "edit") {
                 $query = "SELECT raum.*,u_id,u_nick "
                     . "FROM raum left join user on r_besitzer=u_id "
-                    . "WHERE r_id=$raum ORDER BY $order";
+                    . "WHERE r_id=" . intval($raum) . " ORDER BY $order";
                 $result = mysql_query($query, $conn);
                 
                 // Kopf Tabelle
@@ -645,19 +644,19 @@ if (strlen($u_id) != 0) {
                             . $t['sonst3'] . "</B>" . $f2 . "</TD>" . "<TD>"
                             . $f1 . "<TEXTAREA rows=5 cols="
                             . ($eingabe_breite) . " NAME=\"f[r_topic]\">"
-                            . stripslashes($rows->r_topic) . "</TEXTAREA>"
+                            . $rows->r_topic . "</TEXTAREA>"
                             . $f2 . "</TD></TR>\n";
                         echo "<TR VALIGN=\"TOP\"><TD>" . $f1 . "<B>"
                             . $t['sonst7'] . "</B>" . $f2 . "</TD>" . "<TD>"
                             . $f1 . "<TEXTAREA rows=5 cols="
                             . ($eingabe_breite) . " NAME=\"f[r_eintritt]\">"
-                            . stripslashes($rows->r_eintritt) . "</TEXTAREA>"
+                            . $rows->r_eintritt . "</TEXTAREA>"
                             . $f2 . "</TD></TR>\n";
                         echo "<TR VALIGN=\"TOP\"><TD>" . $f1 . "<B>"
                             . $t['sonst8'] . "</B>" . $f2 . "</TD>" . "<TD>"
                             . $f1 . "<TEXTAREA rows=5 cols="
                             . ($eingabe_breite) . " NAME=\"f[r_austritt]\">"
-                            . stripslashes($rows->r_austritt) . "</TEXTAREA>"
+                            . $rows->r_austritt . "</TEXTAREA>"
                             . $f2 . "</TD></TR>\n";
                         
                         // Werbung für Frame
@@ -665,7 +664,7 @@ if (strlen($u_id) != 0) {
                             echo "<TR><TD>" . $f1 . "<B>" . $t['sonst12']
                                 . "</B>" . $f2 . "</TD>" . "<TD>" . $f1
                                 . "<INPUT TYPE=\"TEXT\" NAME=\"f[r_werbung]\" VALUE=\""
-                                . stripslashes($rows->r_werbung)
+                                . $rows->r_werbung
                                 . "\" SIZE=$eingabe_breite>" . $f2
                                 . "</TD></TR>\n";
                         }
@@ -690,13 +689,12 @@ if (strlen($u_id) != 0) {
                         if ($rows->r_topic)
                             echo "<TR><TD COLSPAN=2>" . $f1
                                 . "<B>$t[sonst3]</B> "
-                                . htmlspecialchars(stripslashes($rows->r_topic))
+                                . htmlspecialchars($rows->r_topic)
                                 . $f2 . "</TD></TR>\n";
                         if ($rows->r_eintritt)
                             echo "<TR><TD COLSPAN=2>" . $f1
                                 . "<B>$t[sonst7]</B> "
-                                . htmlspecialchars(
-                                    stripslashes($rows->r_eintritt)) . $f2
+                                . htmlspecialchars($rows->r_eintritt) . $f2
                                 . "</TD></TR>\n";
                         echo "</TR></TABLE>\n";
                         
@@ -855,24 +853,21 @@ if (strlen($u_id) != 0) {
                                             . "&nbsp;$b2</td>";
                                     }
                                     
-                                    $temp = htmlspecialchars(
-                                        stripslashes($row['r_topic']));
+                                    $temp = htmlspecialchars($row['r_topic']);
                                     $temp = str_replace('&amp;lt;', '<', $temp);
                                     $temp = str_replace('&amp;gt;', '>', $temp);
                                     $temp = str_replace('&amp;quot;', '"',
                                         $temp);
                                     echo "<td>$b1" . $temp . "&nbsp;$b2</td>";
                                     
-                                    $temp = htmlspecialchars(
-                                        stripslashes($row['r_eintritt']));
+                                    $temp = htmlspecialchars($row['r_eintritt']);
                                     $temp = str_replace('&amp;lt;', '<', $temp);
                                     $temp = str_replace('&amp;gt;', '>', $temp);
                                     $temp = str_replace('&amp;quot;', '"',
                                         $temp);
                                     echo "<td>$b1" . $temp . "&nbsp;$b2</td>";
                                     
-                                    $temp = htmlspecialchars(
-                                        stripslashes($row['r_austritt']));
+                                    $temp = htmlspecialchars($row['r_austritt']);
                                     $temp = str_replace('&amp;lt;', '<', $temp);
                                     $temp = str_replace('&amp;gt;', '>', $temp);
                                     $temp = str_replace('&amp;quot;', '"',

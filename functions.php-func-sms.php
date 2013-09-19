@@ -45,7 +45,7 @@ function sms_msg(
     }
     
     // Prüfen ob User SMS möchte
-    $query = "SELECT u_sms_ok FROM user WHERE u_id = '$an_user'";
+    $query = "SELECT u_sms_ok FROM user WHERE u_id = " . intval($an_user);
     $result = mysql_query($query);
     $a = mysql_fetch_array($result);
     mysql_free_result($result);
@@ -69,7 +69,7 @@ function sms_msg(
         system_msg("", 0, $von_user_id, $u_farbe,
             "<b>Fehler:</b> Die SMS konnte nicht verschickt werden. $fehler");
     } else {
-        $query = "SELECT u_nick FROM user WHERE u_id = '$an_user'";
+        $query = "SELECT u_nick FROM user WHERE u_id = " . intval($an_user);
         $result = mysql_query($query);
         $emp2 = mysql_fetch_array($result);
         
@@ -86,7 +86,7 @@ function sms_msg(
     // In Session Timeout-Zeit auf jetzt setzen
     if ($von_user_id) {
         $query = "UPDATE online SET o_timeout_zeit=DATE_FORMAT(NOW(),\"%Y%m%d%H%i%s\"), o_timeout_warnung='N' "
-            . "WHERE o_user=$von_user_id";
+            . "WHERE o_user=" . intval($von_user_id);
         $result = mysql_query($query, $conn);
     }
     
@@ -105,14 +105,13 @@ function sms_sende($von_user_id, $an_user, $nachricht)
     if (pruefe_handynummer($handynummer) && $guthaben > 0) {
         $handynummer = urlencode($handynummer);
         $nachricht = htmlspecialchars(strip_tags($nachricht));
-        $nachricht = stripslashes($nachricht);
         $nachricht = str_replace("\n", " ", $nachricht);
         $nachricht = str_replace("'", "", $nachricht);
         $nachricht = str_replace("\"", "", $nachricht);
         $nachricht = urlencode($nachricht);
         $gw = $sms[gateway];
         
-        $query = "SELECT COUNT(*) as zahl FROM sms WHERE s_an_user_id = '$an_user'";
+        $query = "SELECT COUNT(*) as zahl FROM sms WHERE s_an_user_id = " . intval($an_user);
         $result = mysql_query($query);
         $num = mysql_fetch_array($result);
         if ($num[zahl] == 0) {
@@ -162,7 +161,6 @@ function sms_sende2($nummer, $nachricht)
     global $sms, $dbase, $chat;
     $handynummer = urlencode($nummer);
     $nachricht = htmlspecialchars(strip_tags($nachricht));
-    $nachricht = stripslashes($nachricht);
     $nachricht = str_replace("\n", " ", $nachricht);
     $nachricht = str_replace("'", "", $nachricht);
     $nachricht = str_replace("\"", "", $nachricht);
@@ -183,7 +181,7 @@ function sms_sende2($nummer, $nachricht)
 
 function hole_smsguthaben($von_user_id)
 {
-    $query = "SELECT u_sms_guthaben FROM user WHERE u_id = '$von_user_id'";
+    $query = "SELECT u_sms_guthaben FROM user WHERE u_id = " . intval($von_user_id);
     $result = mysql_query($query);
     $a = mysql_fetch_array($result);
     return ($a['u_sms_guthaben']);
@@ -191,7 +189,7 @@ function hole_smsguthaben($von_user_id)
 
 function hole_handynummer($user_id)
 {
-    $query = "SELECT ui_handy FROM userinfo WHERE ui_userid = '$user_id'";
+    $query = "SELECT ui_handy FROM userinfo WHERE ui_userid = " . intval($user_id);
     $result = mysql_query($query);
     $a = mysql_fetch_array($result);
     $handynr = $a['ui_handy'];

@@ -64,7 +64,7 @@ if (strlen($u_id) > 0) {
             case "answerdel":
             // antwort löschem
                 if ($answer != "") {
-                    $answer = AddSlashes($answer);
+                    $answer = intval($answer);
                     $query = "DELETE FROM moderation WHERE c_id=$answer";
                     mysql_query($query, $conn);
                 }

@@ -74,7 +74,7 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
     } else if (($einstellungen_aendern) && ($u_level == 'U')) {
         echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige17']
             . "</B> (<a href=\"edit.php?http_host=$http_host&id=$id&aktion=andereadminmail\">ändern</a>)<BR>\n"
-            . $f2 . htmlspecialchars(stripslashes($f['u_name']))
+            . $f2 . htmlspecialchars($f['u_name'])
             . "</TD></TR>\n";
     }
     
@@ -105,7 +105,7 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
     } else if (($einstellungen_aendern) && ($u_level == 'U')) {
         echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige3']
             . "</B> (<a href=\"edit.php?http_host=$http_host&id=$id&aktion=andereadminmail\">ändern</a>)<BR>\n"
-            . $f2 . htmlspecialchars(stripslashes($f['u_adminemail']))
+            . $f2 . htmlspecialchars($f['u_adminemail'])
             . "</TD></TR>\n";
     }
     
@@ -114,7 +114,7 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
             $f['u_kommentar'] = "";
         echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige49']
             . "</B><BR>\n" . $f2 . "<INPUT TYPE=\"TEXT\" VALUE=\""
-            . htmlspecialchars(stripslashes($f['u_kommentar']))
+            . htmlspecialchars($f['u_kommentar'])
             . "\" NAME=\"f[u_kommentar]\" SIZE=$input_breite>" . "</TD></TR>\n";
     }
     
@@ -135,13 +135,13 @@ function user_edit($f, $admin, $u_level, $size = ARRAY())
             // Eintrittsnachricht
             echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige53']
                 . "</B><BR>\n" . $f2 . "<INPUT TYPE=\"TEXT\" VALUE=\""
-                . htmlspecialchars(stripslashes($f['u_eintritt']))
+                . htmlspecialchars($f['u_eintritt'])
                 . "\" NAME=\"f[u_eintritt]\" SIZE=$input_breite MAXLENGTH=\"100\">"
                 . "</TD></TR>\n";
             // Austrittsnachricht
             echo "<TR><TD COLSPAN=2>" . $f1 . "<B>" . $t['user_zeige54']
                 . "</B><BR>\n" . $f2 . "<INPUT TYPE=\"TEXT\" VALUE=\""
-                . htmlspecialchars(stripslashes($f['u_austritt']))
+                . htmlspecialchars($f['u_austritt'])
                 . "\" NAME=\"f[u_austritt]\" SIZE=$input_breite MAXLENGTH=\"100\">"
                 . "</TD></TR>\n";
         }

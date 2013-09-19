@@ -63,7 +63,7 @@ function raeume_auswahl($raum, $offen, $alle, $nur_chat = TRUE)
         }
         
         $query = "SELECT r_id FROM raum "
-            . "WHERE r_status1='O' OR r_status1 like binary 'm' OR r_besitzer=$u_id OR r_id=$o_raum";
+            . "WHERE r_status1='O' OR r_status1 like binary 'm' OR r_besitzer=$u_id OR r_id=" . intval($o_raum);
         
         $result = mysql_query($query, $conn);
         if ($result) {

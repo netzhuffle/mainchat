@@ -46,7 +46,7 @@ function user_liste($larr, $anzahl)
         if ($show_geschlecht == true) {
             $geschl = array();
             foreach ($larr as $k => $v)
-                $ids[] = $v['u_id'];
+                $ids[] = intval($v['u_id']);
             $query = "SELECT ui_userid,ui_geschlecht FROM userinfo WHERE ui_userid in ('"
                 . implode("','", $ids) . "')";
             $result = mysql_query($query, $conn);
@@ -379,7 +379,7 @@ function user_zeige($user, $admin, $schau_raum, $u_level, $zeigeip)
         if ($uu_kommentar && $admin) {
             echo "<TR><TD VALIGN=TOP>" . $f1 . $t['user_zeige49'] . $f2
                 . "</TD><TD>" . $f3;
-            echo htmlspecialchars(stripslashes($uu_kommentar)) . "<BR>\n";
+            echo htmlspecialchars($uu_kommentar) . "<BR>\n";
             echo $f4 . "</TD></TR>\n";
         }
         

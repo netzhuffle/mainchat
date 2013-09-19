@@ -26,7 +26,7 @@ function liste()
     for ($i = 0; $i < count($sperre_dialup); $i++) {
         if ($sperr != "")
             $sperr .= " OR ";
-        $sperr .= "is_domain like '%$sperre_dialup[$i]%' ";
+        $sperr .= "is_domain like '%" . mysql_real_escape_string($sperre_dialup[$i]) . "%' ";
     }
     
     if (count($sperre_dialup) >= 1) {
@@ -42,7 +42,7 @@ function liste()
     // Alle Sperren ausgeben
     $query = "SELECT u_nick,is_infotext,is_id,is_domain,UNIX_TIMESTAMP(is_zeit) as zeit,is_ip_byte,is_warn,"
         . "SUBSTRING_INDEX(is_ip,'.',is_ip_byte) as isip "
-        . "FROM ip_sperre,user " . "WHERE is_owner=u_id "
+        . "FROM ip_sperre,user WHERE is_owner=u_id "
         . "ORDER BY is_zeit DESC,is_domain,is_ip";
     $result = mysql_query($query, $conn);
     $rows = mysql_Num_Rows($result);
@@ -94,16 +94,16 @@ function liste()
                 if ($ip_name == $row->is_domain) {
                     unset($ip_name);
                     echo "<TR VALIGN=TOP BGCOLOR=\"$bgcolor\"><TD><B>" . $f1
-                        . stripslashes($row->is_domain) . $f2 . "</B></TD>\n";
+                        . $row->is_domain . $f2 . "</B></TD>\n";
                 } else {
                     echo "<TR VALIGN=TOP BGCOLOR=\"$bgcolor\"><TD><B>" . $f1
-                        . stripslashes($row->is_domain) . "<br>(" . $ip_name
+                        . $row->is_domain . "<br>(" . $ip_name
                         . $f2 . ")</B></TD>\n";
                 }
             }
             
             // Infotext
-            echo "<TD>" . $f1 . stripslashes($row->is_infotext) . "&nbsp;"
+            echo "<TD>" . $f1 . $row->is_infotext . "&nbsp;"
                 . $f2 . "</TD>\n";
             
             // Nur Warnung ja/nein
@@ -330,7 +330,7 @@ if (strlen($u_id) > 0 && $admin) {
         // ID gesetzt?
             if (strlen($is_id) > 0) {
                 $query = "SELECT is_infotext,is_domain,is_ip FROM ip_sperre "
-                    . "WHERE is_id=$is_id";
+                    . "WHERE is_id=" . intval($is_id);
                 
                 $result = mysql_query($query);
                 $rows = mysql_Num_Rows($result);
@@ -376,7 +376,7 @@ if (strlen($u_id) > 0 && $admin) {
         // ID gesetzt?
             if (strlen($is_id) > 0) {
                 $query = "SELECT is_infotext,is_domain,is_ip_byte,SUBSTRING_INDEX(is_ip,'.',is_ip_byte) as isip FROM ip_sperre "
-                    . "WHERE is_id=$is_id";
+                    . "WHERE is_id=" . intval($is_id);
                 
                 $result = mysql_query($query);
                 $rows = mysql_Num_Rows($result);
@@ -385,7 +385,7 @@ if (strlen($u_id) > 0 && $admin) {
                     // Zeile lesen, IP zerlegen
                     $row = mysql_fetch_object($result);
                     
-                    $query2 = "DELETE FROM ip_sperre " . "WHERE is_id=$is_id";
+                    $query2 = "DELETE FROM ip_sperre WHERE is_id=" . intval($is_id);
                     
                     $result2 = mysql_query($query2);
                     
@@ -419,7 +419,7 @@ if (strlen($u_id) > 0 && $admin) {
         // ID gesetzt?
             if (strlen($is_id) > 0) {
                 $query = "SELECT is_infotext,is_domain,is_ip,is_ip_byte,is_warn FROM ip_sperre "
-                    . "WHERE is_id=$is_id";
+                    . "WHERE is_id=" . intval($is_id);
                 
                 $result = mysql_query($query);
                 $rows = mysql_Num_Rows($result);

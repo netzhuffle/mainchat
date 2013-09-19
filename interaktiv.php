@@ -94,8 +94,8 @@ if (isset($u_id) && $u_id) {
     }
     
     // Daten für Raum lesen
-    $query = "SELECT raum.* " . "FROM raum,online " . "WHERE r_id=o_raum "
-        . "AND o_id=$o_id " . "ORDER BY o_aktiv DESC";
+    $query = "SELECT raum.* FROM raum,online WHERE r_id=o_raum "
+        . "AND o_id=$o_id ORDER BY o_aktiv DESC";
     
     $result = mysql_query($query, $conn);
     

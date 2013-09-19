@@ -15,10 +15,7 @@ function erzeuge_sequence($db, $id)
     $result = mysql_query($query, $conn);
     if (!($result && mysql_num_rows($result) == 1)) {
         // Tabelle neu anlegen
-        $query = "CREATE TABLE sequence ("
-            . "se_name varchar(127) NOT NULL default '',"
-            . "se_nextid int(10) unsigned NOT NULL default '0',"
-            . "PRIMARY KEY (se_name));";
+        $query = "CREATE TABLE sequence (" . "se_name varchar(127) NOT NULL default ''," . "se_nextid int(10) unsigned NOT NULL default '0'," . "PRIMARY KEY (se_name));";
         $result = mysql_query($query, $conn);
         
         // Sperren
@@ -71,8 +68,7 @@ function show_who_is_online($result)
                 $zeigen = TRUE;
             } else {
                 // Nur offene, permanente Räume zeigen
-                if (($row->r_status1 == 'O' || $row->r_status1 == 'm')
-                    && $row->r_status2 == 'P') {
+                if (($row->r_status1 == 'O' || $row->r_status1 == 'm') && $row->r_status2 == 'P') {
                     $zeigen = TRUE;
                 } else {
                     $zeigen = FALSE;
@@ -87,10 +83,7 @@ function show_who_is_online($result)
                 } else {
                     // Nur offene, permanente Räume zeigen
                     if ($zeigen_alt) {
-                        show_box2(
-                            str_replace("%raum%", $r_name_alt,
-                                $ft0 . $t['default4'] . $ft1), $text, "100%",
-                            false);
+                        show_box2(str_replace("%raum%", $r_name_alt, $ft0 . $t['default4'] . $ft1), $text, "100%", false);
                         echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
                     }
                     $text = "$nick ";
@@ -103,28 +96,14 @@ function show_who_is_online($result)
             }
         }
         if ($zeigen_alt) {
-            show_box2(
-                str_replace("%raum%", $r_name_alt, $ft0 . $t['default4'] . $ft1),
-                $text, "100%", false);
+            show_box2(str_replace("%raum%", $r_name_alt, $ft0 . $t['default4'] . $ft1), $text, "100%", false);
             echo "<IMG SRC=\"pics/fuell.gif\" ALT=\"\" WIDTH=4 HEIGHT=4><BR>\n";
         }
         mysql_free_result($result);
     }
 }
 
-function login(
-    $u_id,
-    $u_name,
-    $u_level,
-    $hash_id,
-    $javascript,
-    $ip_historie,
-    $u_agb,
-    $u_punkte_monat,
-    $u_punkte_jahr,
-    $u_punkte_datum_monat,
-    $u_punkte_datum_jahr,
-    $u_punkte_gesamt)
+function login($u_id, $u_name, $u_level, $hash_id, $javascript, $ip_historie, $u_agb, $u_punkte_monat, $u_punkte_jahr, $u_punkte_datum_monat, $u_punkte_datum_jahr, $u_punkte_gesamt)
 {
     // In das System einloggen
     // $o_id wird zurückgeliefert
@@ -180,23 +159,12 @@ function login(
     if ($u_level != "G" && $communityfeatures) {
         $query = "select a_id FROM aktion WHERE a_user=$u_id ";
         $result = mysql_query($query, $conn);
-        if ($result
-            && (mysql_num_rows($result) == 0 || mysql_num_rows($result) > 20)) {
-            mysql_query(
-                "INSERT INTO aktion set a_user=$u_id, a_text='$u_name', a_wann='Sofort/Online',	a_was='Freunde',	a_wie='OLM'",
-                $conn);
-            mysql_query(
-                "INSERT INTO aktion set a_user=$u_id, a_text='$u_name', a_wann='Login',		a_was='Freunde',	a_wie='OLM'",
-                $conn);
-            mysql_query(
-                "INSERT INTO aktion set a_user=$u_id, a_text='$u_name', a_wann='Sofort/Online',	a_was='Neue Mail',	a_wie='OLM'",
-                $conn);
-            mysql_query(
-                "INSERT INTO aktion set a_user=$u_id, a_text='$u_name', a_wann='Login',		a_was='Neue Mail',	a_wie='OLM'",
-                $conn);
-            mysql_query(
-                "INSERT INTO aktion set a_user=$u_id, a_text='$u_name', a_wann='Alle 5 Minuten',	a_was='Neue Mail',	a_wie='OLM'",
-                $conn);
+        if ($result && (mysql_num_rows($result) == 0 || mysql_num_rows($result) > 20)) {
+            mysql_query("INSERT INTO aktion set a_user=$u_id, a_text='" . mysql_real_escape_string($u_name) . "', a_wann='Sofort/Online', a_was='Freunde', a_wie='OLM'", $conn);
+            mysql_query("INSERT INTO aktion set a_user=$u_id, a_text='" . mysql_real_escape_string($u_name) . "', a_wann='Login', a_was='Freunde', a_wie='OLM'", $conn);
+            mysql_query("INSERT INTO aktion set a_user=$u_id, a_text='" . mysql_real_escape_string($u_name) . "', a_wann='Sofort/Online', a_was='Neue Mail', a_wie='OLM'", $conn);
+            mysql_query("INSERT INTO aktion set a_user=$u_id, a_text='" . mysql_real_escape_string($u_name) . "', a_wann='Login',	a_was='Neue Mail', a_wie='OLM'", $conn);
+            mysql_query("INSERT INTO aktion set a_user=$u_id, a_text='" . mysql_real_escape_string($u_name) . "', a_wann='Alle 5 Minuten', a_was='Neue Mail', a_wie='OLM'", $conn);
         }
         mysql_free_result($result);
     }
@@ -303,23 +271,13 @@ function login(
     $knebelzeit = NULL;
     // Aktuelle Userdaten aus Tabelle user lesen
     // Query muss mit Code in schreibe_db übereinstimmen
-    $query = "SELECT u_id,u_name,u_nick,u_level,u_farbe,u_zeilen,u_backup,u_farbe_bg,"
-        . "u_farbe_alle,u_farbe_priv,u_farbe_noise,u_farbe_sys,u_clearedit, "
-        . "u_away,u_email,u_adminemail,u_smilie,u_punkte_gesamt,u_punkte_gruppe,"
-        . "u_chathomepage,u_systemmeldungen,u_punkte_anzeigen "
-        . "FROM user WHERE u_id=$u_id";
+    $query = "SELECT u_id,u_name,u_nick,u_level,u_farbe,u_zeilen,u_backup,u_farbe_bg,u_farbe_alle,u_farbe_priv,u_farbe_noise,u_farbe_sys,u_clearedit,u_away,u_email,u_adminemail,u_smilie,u_punkte_gesamt,u_punkte_gruppe,u_chathomepage,u_systemmeldungen,u_punkte_anzeigen FROM user WHERE u_id=$u_id";
     $result = mysql_query($query, $conn);
     if (!$result) {
         echo "Fehler beim Login: $query<BR>";
         exit;
     } else {
         $userdata = mysql_fetch_array($result, MYSQL_ASSOC);
-        
-        // Slashes in jedem Eintrag des Array ergänzen
-        reset($userdata);
-        while (list($ukey, $udata) = each($userdata)) {
-            $udata = addslashes($udata);
-        }
         
         $userdata_array = zerlege(serialize($userdata));
         $http_stuff_array = zerlege(serialize($http_stuff));
@@ -400,8 +358,7 @@ function login(
     
     // Bei Admins Cookie setzen zur Überprüfung der Session
     if ($userdata['u_level'] == "C" || $userdata['u_level'] == "S") {
-        setcookie("MAINCHAT" . $userdata['u_nick'],
-            md5($o_id . $hash_id . "42"), 0, "/");
+        setcookie("MAINCHAT" . $userdata['u_nick'], md5($o_id . $hash_id . "42"), 0, "/");
     }
     
     if ($logout_logging)
@@ -410,14 +367,7 @@ function login(
     return ($o_id);
 }
 
-function betrete_chat(
-    $o_id,
-    $u_id,
-    $u_name,
-    $u_level,
-    $raum,
-    $javascript,
-    $u_backup)
+function betrete_chat($o_id, $u_id, $u_name, $u_level, $raum, $javascript, $u_backup)
 {
     // User $u_id betritt Raum $raum (r_id)
     // Nachricht in Raum $raum wird erzeugt
@@ -469,9 +419,7 @@ function betrete_chat(
                         
                         // abweisen wenn $raumeintritt = false
                         if (!$raumeintritt) {
-                            system_msg("", 0, $u_id, $system_farbe,
-                                str_replace("%r_name_neu%", $rows->r_name,
-                                    $t['raum_gehe4']));
+                            system_msg("", 0, $u_id, $system_farbe, str_replace("%r_name_neu%", $rows->r_name, $t['raum_gehe4']));
                             unset($raum);
                         }
                         break;
@@ -486,7 +434,7 @@ function betrete_chat(
     if (strlen($raum) > 0) {
         // Prüfung ob User aus Raum ausgesperrt ist
         
-        $query4711 = "SELECT s_id FROM sperre WHERE s_raum=$raum AND s_user=$u_id";
+        $query4711 = "SELECT s_id FROM sperre WHERE s_raum=" . intval($raum) . " AND s_user=$u_id";
         $result = mysql_query($query4711, $conn);
         if ($result > 0) {
             
@@ -500,12 +448,9 @@ function betrete_chat(
                 unset($raum);
                 
                 if (!$beichtstuhl) {
-                    $query1222b = "SELECT r_id FROM raum left join sperre on r_id = s_raum and s_user = '$u_id' "
-                        . "WHERE r_status1 = 'O' and r_status2 = 'P' and r_min_punkte <= $u_punkte_gesamt "
-                        . "and s_id is NULL " . "ORDER BY r_id ";
+                    $query1222b = "SELECT r_id FROM raum left join sperre on r_id = s_raum and s_user = '$u_id' " . "WHERE r_status1 = 'O' and r_status2 = 'P' and r_min_punkte <= $u_punkte_gesamt " . "and s_id is NULL " . "ORDER BY r_id ";
                     $result1222b = mysql_query($query1222b, $conn);
-                    if (($result1222b > 0)
-                        && (mysql_num_rows($result1222b) > 0)) {
+                    if (($result1222b > 0) && (mysql_num_rows($result1222b) > 0)) {
                         // Es gibt Räume, für die man noch nicht gesperrt ist.
                         // hiervon den ersten nehmen
                         $raum = mysql_result($result1222b, 0, 0);
@@ -523,16 +468,14 @@ function betrete_chat(
     if (strlen($raum) == 0) {
         
         // Id des Eintrittsraums als Voreinstellung ermitteln
-        $query4711 = "SELECT r_id,r_name,r_eintritt,r_topic "
-            . "FROM raum WHERE r_name='$eintrittsraum' ";
+        $query4711 = "SELECT r_id,r_name,r_eintritt,r_topic " . "FROM raum WHERE r_name='$eintrittsraum' ";
         $result = mysql_query($query4711, $conn);
         if ($result)
             $rows = mysql_Num_Rows($result);
         
         // eintrittsraum nicht gefunden? -> lobby probieren.
         if ($rows == 0) {
-            $query4711 = "SELECT r_id,r_name,r_eintritt,r_topic "
-                . "FROM raum WHERE r_name='$lobby' ";
+            $query4711 = "SELECT r_id,r_name,r_eintritt,r_topic " . "FROM raum WHERE r_name='$lobby' ";
             $result = mysql_query($query4711, $conn);
             if ($result)
                 $rows = mysql_Num_Rows($result);
@@ -540,13 +483,10 @@ function betrete_chat(
         // lobby  nicht gefunden? --> lobby anlegen.
         if ($rows == 0) {
             // lobby neu anlegen.
-            $query4711 = "INSERT INTO raum "
-                . "(r_id,r_name,r_eintritt,r_austritt,r_status1,r_besitzer,r_topic,r_status2,r_smilie) "
-                . "VALUES (0,'$lobby','Willkommen','','O',1,'Eingangshalle','P','')";
+            $query4711 = "INSERT INTO raum " . "(r_id,r_name,r_eintritt,r_austritt,r_status1,r_besitzer,r_topic,r_status2,r_smilie) " . "VALUES (0,'$lobby','Willkommen','','O',1,'Eingangshalle','P','')";
             $result = mysql_query($query4711, $conn);
             // neu lesen.
-            $query4711 = "SELECT r_id,r_name,r_eintritt,r_topic "
-                . "FROM raum WHERE r_name='$lobby' ";
+            $query4711 = "SELECT r_id,r_name,r_eintritt,r_topic " . "FROM raum WHERE r_name='$lobby' ";
             $result = mysql_query($query4711, $conn);
             if ($result)
                 $rows = mysql_Num_Rows($result);
@@ -555,8 +495,7 @@ function betrete_chat(
     } else {
         
         // Gewählten Raum ermitteln
-        $query4711 = "SELECT r_id,r_name,r_eintritt,r_topic "
-            . "FROM raum WHERE r_id=$raum ";
+        $query4711 = "SELECT r_id,r_name,r_eintritt,r_topic " . "FROM raum WHERE r_id=$raum ";
         $result = mysql_query($query4711, $conn);
         if ($result)
             $rows = mysql_Num_Rows($result);
@@ -587,8 +526,7 @@ function betrete_chat(
     
     // Topic vorhanden? ausgeben
     if (strlen($r_topic) > 0) {
-        system_msg("", 0, $u_id, "",
-            "<BR><B>$t[betrete_chat3] $r_name:</B> $r_topic");
+        system_msg("", 0, $u_id, "", "<BR><B>$t[betrete_chat3] $r_name:</B> $r_topic");
     }
     
     // Eintrittsnachricht
@@ -603,11 +541,9 @@ function betrete_chat(
     
     if ($raum_eintrittsnachricht_anzeige_deaktivieren == "1") {
     } else if (strlen($r_eintritt) > 0) {
-        system_msg("", 0, $u_id, "",
-            "<BR><B>$txt $r_eintritt, $u_name!</B><BR>");
+        system_msg("", 0, $u_id, "", "<BR><B>$txt $r_eintritt, $u_name!</B><BR>");
     } else {
-        system_msg("", 0, $u_id, "",
-            "<BR><B>$txt</B> $t[betrete_chat2], $u_name!</B><BR>");
+        system_msg("", 0, $u_id, "", "<BR><B>$txt</B> $t[betrete_chat2], $u_name!</B><BR>");
     }
     
     // Wer ist alles im Raum?
@@ -625,17 +561,7 @@ function betrete_chat(
     $browser = $_SERVER["HTTP_USER_AGENT"];
     if (!$javascript) {
         warnung($u_id, $u_nick, "ohne_js");
-    } elseif ($u_backup
-        || preg_match("/(.*)mozilla\/[234](.*)mac(.*)/i", $browser)
-        || preg_match("/(.*)msie(.*)mac(.*)/i", $browser)
-        || preg_match("/(.*)Opera 3(.*)/i", $browser)
-        || preg_match("/(.*)Opera\/9(.*)/i", $browser)
-        || preg_match("/(.*)AppleWebKit\/53(.*)/i", $browser)
-        || preg_match("/(.*)Konqueror(.*)/i", $browser)
-        || preg_match("/(.*)mozilla\/5(.*)Netscape6(.*)/i", $browser)
-        || preg_match("/(.*)mozilla\/[23](.*)/i", $browser)
-        || preg_match("/(.*)AOL [123](.*)/i", $browser)
-        || $http_te == 'chunked') {
+    } elseif ($u_backup || preg_match("/(.*)mozilla\/[234](.*)mac(.*)/i", $browser) || preg_match("/(.*)msie(.*)mac(.*)/i", $browser) || preg_match("/(.*)Opera 3(.*)/i", $browser) || preg_match("/(.*)Opera\/9(.*)/i", $browser) || preg_match("/(.*)AppleWebKit\/53(.*)/i", $browser) || preg_match("/(.*)Konqueror(.*)/i", $browser) || preg_match("/(.*)mozilla\/5(.*)Netscape6(.*)/i", $browser) || preg_match("/(.*)mozilla\/[23](.*)/i", $browser) || preg_match("/(.*)AOL [123](.*)/i", $browser) || $http_te == 'chunked') {
         $u_nick = "";
         warnung($u_id, $u_nick, "sicherer_modus");
     }
@@ -647,10 +573,7 @@ function betrete_chat(
     
     // Nachrichten an Freude verschicken
     if ($communityfeatures) {
-        $query = "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_userid=$u_id AND f_status = 'bestaetigt' "
-            . "UNION "
-            . "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_freundid=$u_id AND f_status = 'bestaetigt' "
-            . "ORDER BY f_zeit desc ";
+        $query = "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_userid=$u_id AND f_status = 'bestaetigt' " . "UNION " . "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_freundid=$u_id AND f_status = 'bestaetigt' ORDER BY f_zeit desc ";
         
         $result = mysql_query($query, $conn);
         
@@ -708,8 +631,7 @@ function betrete_forum($o_id, $u_id, $u_name, $u_level)
     $f['o_who'] = "2";
     
     //user betritt nicht chat, sondern direkt forum --> $back ist die aktuellste Zeile in chat
-    $f['o_chat_id'] = system_msg("", 0, $u_id, "",
-        str_replace("%u_nick%", $u_name, $t['betrete_forum1']));
+    $f['o_chat_id'] = system_msg("", 0, $u_id, "", str_replace("%u_nick%", $u_name, $t['betrete_forum1']));
     schreibe_db("online", $f, $o_id, "o_id");
     
     // Hat der User Aktionen für den Login eingestellt, wie Nachricht bei neuer Mail oder Freunden an sich selbst?
@@ -718,10 +640,7 @@ function betrete_forum($o_id, $u_id, $u_name, $u_level)
     
     // Nachrichten an Freude verschicken
     if ($communityfeatures) {
-        $query = "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_userid=$u_id AND f_status = 'bestaetigt' "
-            . "UNION "
-            . "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_freundid=$u_id AND f_status = 'bestaetigt' "
-            . "ORDER BY f_zeit desc ";
+        $query = "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_userid=$u_id AND f_status = 'bestaetigt' UNION SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_freundid=$u_id AND f_status = 'bestaetigt' ORDER BY f_zeit desc ";
         $result = mysql_query($query, $conn);
         
         if ($result && mysql_num_rows($result) > 0) {
@@ -783,8 +702,7 @@ function zeige_kopf()
         $out = preg_replace("/src=\"\//i", "src=\"" . $layout_parse, $out);
         $out = preg_replace("/href=\"\//i", "href=\"" . $layout_parse, $out);
         $out = preg_replace("/action=\"\//i", "action=\"" . $layout_parse, $out);
-        $out = preg_replace("/background=\"\//i",
-            "background=\"" . $layout_parse, $out);
+        $out = preg_replace("/background=\"\//i", "background=\"" . $layout_parse, $out);
         $out = preg_replace("/" . $layout_parse . "\//i", $layout_parse, $out);
         echo $out;
     }
@@ -796,9 +714,7 @@ function zeige_fuss()
     global $body_tag, $layout_fuss, $layout_include, $layout_parse, $ivw, $layout_bodytag;
     global $f3, $f4, $mainchat_version;
     
-    echo "<DIV align=center>" . $f3 . $mainchat_version
-        . "<BR><A HREF=\"https://github.com/netzhuffle/mainchat\">mainChat Open Source</A>"
-        . $f4 . "</DIV>\n<BR CLEAR=ALL>\n" . "<BR CLEAR=ALL>\n";
+    echo "<DIV align=center>" . $f3 . $mainchat_version . "<BR><A HREF=\"https://github.com/netzhuffle/mainchat\">mainChat Open Source</A>" . $f4 . "</DIV>\n<BR CLEAR=ALL>\n" . "<BR CLEAR=ALL>\n";
     
     if (isset($banner) && strlen($banner) > 0) {
         readfile($banner);
@@ -841,7 +757,7 @@ function RaumNameToRaumID($eintrittsraum)
     // Holt anhand der Globalen Lobby Raumbezeichnung die Passende Raum ID
     
     $lobby_id = False;
-    $eintrittsraum = addslashes($eintrittsraum);
+    $eintrittsraum = mysql_real_escape_string($eintrittsraum);
     $query = "SELECT r_id FROM raum WHERE r_name = '$eintrittsraum' ";
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) == 1) {
@@ -860,15 +776,14 @@ function getsalt($feldname, $login)
     global $upgrade_password;
     
     $salt = "-9";
-    $query = "SELECT u_passwort FROM user WHERE $feldname = '$login' ";
+    $query = "SELECT u_passwort FROM user WHERE $feldname = '" . mysql_real_escape_string($login) . "' ";
     $result = mysql_query($query, $conn);
     
     if ($result && mysql_num_rows($result) == 1) {
         // User vorhanden, u_passwort untersuchen
         $pass = mysql_result($result, 0, "u_passwort");
         
-        if (preg_match('#(^\$6\$rounds\=([0-9]{4,9})\$(.{1,16})\$)#i', $pass,
-            $treffer)) {
+        if (preg_match('#(^\$6\$rounds\=([0-9]{4,9})\$(.{1,16})\$)#i', $pass, $treffer)) {
             // SHA 512 erkannt
             $salt = $treffer[1];
             
@@ -879,9 +794,7 @@ function getsalt($feldname, $login)
                 $salt = "-8";
             }
             
-        } else if ((preg_match('#(^\$5\$rounds\=([0-9]{4,9})\$(.{1,16})\$)#i',
-            $pass, $treffer))
-            || (preg_match('#(^\$5\$(.{1,16})\$)#i', $pass, $treffer))) {
+        } else if ((preg_match('#(^\$5\$rounds\=([0-9]{4,9})\$(.{1,16})\$)#i', $pass, $treffer)) || (preg_match('#(^\$5\$(.{1,16})\$)#i', $pass, $treffer))) {
             // SHA 256 erkannt
             $salt = $treffer[1];
             
@@ -892,8 +805,7 @@ function getsalt($feldname, $login)
                 $salt = "-7";
             }
             
-        } else if (preg_match('#(^\$2(a|x|y)\$([0-9]{1,2})\$(.{21}))#i', $pass,
-            $treffer)) {
+        } else if (preg_match('#(^\$2(a|x|y)\$([0-9]{1,2})\$(.{21}))#i', $pass, $treffer)) {
             // Blowfish erkannt
             $salt = $treffer[1] . '$';
             
@@ -929,8 +841,7 @@ function getsalt($feldname, $login)
                     $upgrade_password = 1;
                 }
             }
-        } else if ((strlen($pass) == 32)
-            && preg_match('#(^[a-f0-9]{32}$)#i', $pass, $treffer)) {
+        } else if ((strlen($pass) == 32) && preg_match('#(^[a-f0-9]{32}$)#i', $pass, $treffer)) {
             // HASH MD5 erkannt
             $salt = 'MD5';
             
@@ -1005,8 +916,7 @@ function auth_user($feldname, $login, $passwort)
             $v_passwort = crypt($passwort, $v_salt);
         }
         
-        $query = "SELECT * " . "FROM user WHERE $feldname = '$login' "
-            . "AND u_passwort='" . addslashes($v_passwort) . "'";
+        $query = "SELECT * " . "FROM user WHERE $feldname = '" . mysql_real_escape_string($login) . "' AND u_passwort='" . mysql_real_escape_string($v_passwort) . "'";
         $result = mysql_query($query, $conn);
         if ($result && mysql_num_rows($result) == 1) {
             $usergefunden = mysql_result($result, 0, "u_id");

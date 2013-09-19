@@ -144,7 +144,7 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                 if (strlen($eintrittsraum) == 0) {
                     $eintrittsraum = $lobby;
                 }
-                $query = "SELECT r_id FROM raum WHERE r_name = '$eintrittsraum' ";
+                $query = "SELECT r_id FROM raum WHERE r_name = '" . mysql_real_escape_string($eintrittsraum) . "'";
                 $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) == 1) {
                     $lobby_id = mysql_result($result, 0, "r_id");
@@ -174,7 +174,7 @@ if ($_SERVER['QUERY_STRING'] == "hilfe") {
                 
                 // User online und Räume bestimmen -> merken
                 $query = "SELECT o_who,o_name,o_level,r_name,r_status1,r_status2, "
-                    . "r_name='$lobby' as lobby "
+                    . "r_name='" . mysql_real_escape_string($lobby) . "' as lobby "
                     . "FROM online left join raum on o_raum=r_id  "
                     . "WHERE (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout "
                     . "ORDER BY lobby desc,r_name,o_who,o_name ";

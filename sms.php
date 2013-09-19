@@ -227,8 +227,7 @@ if (pos == "0"){ alertmsg = "Bitte eine Betrag > 0 wählen";}
 <input type=hidden name="redirect_url" value="' . $sms[ipayment_redirect_url]
         . '">
 <!--
-<input type=hidden name="addr_name" value="'
-        . stripslashes($userdata['u_name'])
+<input type=hidden name="addr_name" value="' . $userdata['u_name']
         . '">
 <input type=hidden name="addr_street" value="' . $f['ui_strasse']
         . '">

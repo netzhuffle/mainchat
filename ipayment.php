@@ -36,10 +36,10 @@ $f['ui_id'] = schreibe_db("user", $f, $u_id, "u_id");
 $conn2 = mysql_connect("localhost", "www", "");
 mysql_set_charset("utf8");
 mysql_selectdb("ipayment", $conn2);
-$query = "INSERT INTO transaction_log (u_nick, u_id, datum, handynr, ip, http_host, trx_amount) VALUES ('$u_nick','$u_id',NOW(),'$handynr','$ret_ip','$http_host','$trx_amount')";
+$query = "INSERT INTO transaction_log (u_nick, u_id, datum, handynr, ip, http_host, trx_amount) VALUES ('" . mysql_real_escape_string($u_nick) . "','" . mysql_real_escape_string($u_id) . "',NOW(),'" . mysql_real_escape_string($handynr) . "','" . mysql_real_escape_string($ret_ip) . "','" . mysql_real_escape_string($http_host) . "','" . mysql_real_escape_string($trx_amount) . "')";
 $result = mysql_query($query);
 $id = mysql_insert_id();
-$v = addslashes($v);
+$v = mysql_real_escape_string($v);
 $query = "INSERT INTO payment_log (id, payment_text) VALUES ('$id','$v')";
 $result = mysql_query($query);
 ?>

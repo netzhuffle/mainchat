@@ -13,14 +13,12 @@ function show_pfad_posting2($th_id)
     //Infos über Forum und Thema holen
     $sql = "select fo_id, fo_name, th_name
                 from forum, thema
-                where th_id = $th_id
+                where th_id = " . intval($th_id) . "
                 and fo_id = th_fo_id";
     $query = mysql_query($sql, $conn);
-    $fo_id = htmlspecialchars(stripslashes(mysql_result($query, 0, "fo_id")));
-    $fo_name = htmlspecialchars(
-        stripslashes(mysql_result($query, 0, "fo_name")));
-    $th_name = htmlspecialchars(
-        stripslashes(mysql_result($query, 0, "th_name")));
+    $fo_id = mysql_result($query, 0, "fo_id");
+    $fo_name = htmlspecialchars($query, 0, "fo_name");
+    $th_name = htmlspecialchars($query, 0, "th_name");
     @mysql_free_result($query);
     
     return "$f3<a href=\"#\" onClick=\"opener_reload('forum.php?id=$id&http_host=$http_host#$fo_id',1); return(false);\">$fo_name</a> > <a href=\"#\" onclick=\"opener_reload('forum.php?id=$id&http_host=$http_host&th_id=$th_id&show_tree=$thread&aktion=show_thema&seite=1',1); return(false);\">$th_name</a>$f4";
@@ -29,7 +27,7 @@ function show_pfad_posting2($th_id)
 
 function vater_rekursiv($vater)
 {
-    $query = "SELECT po_id, po_vater_id FROM posting WHERE po_id = $vater";
+    $query = "SELECT po_id, po_vater_id FROM posting WHERE po_id = " . intval($vater);
     $result = mysql_query($query);
     $a = mysql_fetch_array($result);
     if (mysql_num_rows($result) <> 1) {
@@ -65,7 +63,7 @@ function such_bereich()
         // Suchtext
         "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD align=\"right\"><B>$t[suche1]</B></TD><TD>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"suche[text]\" VALUE=\""
-        . htmlspecialchars(stripslashes($suche['text']))
+        . htmlspecialchars($suche['text'])
         . "\" SIZE=$eingabe_breite>" . $f2 . "</TD></TR>\n";
     
     // Suche in Board/Thema
@@ -74,7 +72,7 @@ function such_bereich()
         . $select_breite . "px;\">";
     
     $sql = "SELECT fo_id, fo_admin, fo_name, th_id, th_name FROM forum left join thema on fo_id = th_fo_id "
-        . "WHERE th_anzthreads <> 0 " . "ORDER BY fo_order, th_order ";
+        . "WHERE th_anzthreads <> 0 ORDER BY fo_order, th_order ";
     $query = mysql_query($sql, $conn);
     $themaalt = "";
     echo "<OPTION ";
@@ -206,7 +204,7 @@ function such_bereich()
     // nur von User
     echo "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD align=\"right\">$t[suche4]</TD><TD>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"suche[username]\" VALUE=\""
-        . htmlspecialchars(stripslashes($suche['username']))
+        . htmlspecialchars($suche['username'])
         . "\" SIZE=\"20\">" . $f2 . "</TD></TR>\n"
         . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD COLSPAN=\"2\" align=\"center\">"
         . $f1 . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"$t[suche5]\">"
@@ -227,7 +225,7 @@ function such_ergebnis()
     $maxpostingsprosuche = 1000;
     $titel = $t['ergebnis1'];
     
-    $sql = "select u_gelesene_postings from user where u_id=$u_id";
+    $sql = "select u_gelesene_postings from user where u_id=" . intval($u_id);
     $query = mysql_query($sql, $conn);
     if (mysql_num_rows($query) > 0)
         $gelesene = mysql_result($query, 0, "u_gelesene_postings");
@@ -239,8 +237,7 @@ function such_ergebnis()
     $suche['username'] = coreCheckName($suche['username'], $check_name);
     unset($suche['u_id']);
     if (strlen($fehler) == 0 && $suche['username'] <> "") {
-        $sql = "SELECT u_id FROM user where u_nick = \"" . $suche['username']
-            . "\"";
+        $sql = "SELECT u_id FROM user where u_nick = '" . mysql_real_escape_string($suche['username']) . "'";
         $query = mysql_query($sql, $conn);
         if (mysql_num_rows($query) == 1) {
             $suche['u_id'] = mysql_result($query, 0, "u_id");
@@ -273,27 +270,27 @@ function such_ergebnis()
             
             for ($i = 0; $i < count($suchetext); $i++) {
                 if (strlen($querytext) == 0) {
-                    $querytext = "po_text LIKE \"%" . $suchetext[$i] . "%\"";
+                    $querytext = "po_text LIKE \"%" . mysql_real_escape_string($suchetext[$i]) . "%\"";
                 } else {
                     if ($suche['modus'] == "O") {
-                        $querytext .= " OR po_text LIKE \"%" . $suchetext[$i]
+                        $querytext .= " OR po_text LIKE \"%" . mysql_real_escape_string($suchetext[$i])
                             . "%\"";
                     } else {
-                        $querytext .= " AND po_text LIKE \"%" . $suchetext[$i]
+                        $querytext .= " AND po_text LIKE \"%" . mysql_real_escape_string($suchetext[$i])
                             . "%\"";
                     }
                 }
                 
                 if (strlen($querybetreff) == 0) {
-                    $querybetreff = "po_titel LIKE \"%" . $suchetext[$i]
+                    $querybetreff = "po_titel LIKE \"%" . mysql_real_escape_string($suchetext[$i])
                         . "%\"";
                 } else {
                     if ($suche['modus'] == "O") {
                         $querybetreff .= " OR po_titel LIKE \"%"
-                            . $suchetext[$i] . "%\"";
+                            . mysql_real_escape_string($suchetext[$i]) . "%\"";
                     } else {
                         $querybetreff .= " AND po_titel LIKE \"%"
-                            . $suchetext[$i] . "%\"";
+                            . mysql_real_escape_string($suchetext[$i]) . "%\"";
                     }
                 }
                 
@@ -329,9 +326,9 @@ function such_ergebnis()
             if (pruefe_leserechte($thema['th_id'])) {
                 if ($suche['thema'] == "ALL") {
                     if (strlen($boards) == 0) {
-                        $boards = "po_th_id = $thema[th_id]";
+                        $boards = "po_th_id = " . intval($thema[th_id]);
                     } else {
-                        $boards .= " OR po_th_id = $thema[th_id]";
+                        $boards .= " OR po_th_id = " . intval($thema[th_id]);
                     }
                 } else if (preg_match("/^B([0-9])+T([0-9])+$/i",
                     $suche['thema'])) {
@@ -344,9 +341,9 @@ function such_ergebnis()
                     $tempboard = substr($suche['thema'], 1, 4);
                     if ($thema['fo_id'] == $tempboard) {
                         if (strlen($boards) == 0) {
-                            $boards = "po_th_id = $thema[th_id]";
+                            $boards = "po_th_id = " . intval($thema[th_id]);
                         } else {
-                            $boards .= " OR po_th_id = $thema[th_id]";
+                            $boards .= " OR po_th_id = " . intval($thema[th_id]);
                         }
                     }
                 }
@@ -450,7 +447,7 @@ function such_ergebnis()
                     . $fund['po_th_id'] . "&po_id=" . $fund['po_id']
                     . "&thread=" . $thread
                     . "&aktion=show_posting&seite=1',1); return(false);\"><font size=-1 color=\"$col\">"
-                    . stripslashes($fund['po_titel']) . "</font></a>";
+                    . $fund['po_titel'] . "</font></a>";
                 if ($fund['po_gesperrt'] == 'Y')
                     echo " <font color=\"red\">(gesperrt)</font>";
                 echo $f2 . "</b></TD>";

@@ -75,7 +75,7 @@ if ($u_id && $communityfeatures && $u_level != "G") {
         $mailloescheauspapierkorb = 14;
     $query2 = "DELETE FROM mail WHERE m_an_uid = $u_id AND m_status = 'geloescht' AND m_geloescht_ts < '"
         . date("YmdHis",
-            mktime(0, 0, 0, date("m"), date("d") - $mailloescheauspapierkorb,
+            mktime(0, 0, 0, date("m"), date("d") - intval($mailloescheauspapierkorb),
                 date("Y"))) . "'";
     $result2 = mysql_query($query2, $conn);
     
@@ -102,10 +102,8 @@ if ($u_id && $communityfeatures && $u_level != "G") {
         
         case "neu2":
         // Mail versenden, 2. Schritt: Nick Prüfen
-            $neue_email['an_nick'] = str_replace(" ", "+",
-                $neue_email['an_nick']);
-            $neue_email['an_nick'] = coreCheckName($neue_email['an_nick'],
-                $check_name);
+            $neue_email['an_nick'] = str_replace(" ", "+", $neue_email['an_nick']);
+            $neue_email['an_nick'] = mysql_real_escape_string(coreCheckName($neue_email['an_nick'], $check_name));
             
             if (!isset($m_id))
                 $m_id = "";
@@ -116,7 +114,7 @@ if ($u_id && $communityfeatures && $u_level != "G") {
                 $neue_email['m_an_uid'] = mysql_result($result, 0, "u_id");
                 
                 $ignore = false;
-                $query2 = "SELECT * FROM iignore WHERE i_user_aktiv='$neue_email[m_an_uid]' AND i_user_passiv = '$u_id'";
+                $query2 = "SELECT * FROM iignore WHERE i_user_aktiv='" . intval($neue_email[m_an_uid]) . "' AND i_user_passiv = '$u_id'";
                 $result2 = mysql_query($query2);
                 $num = mysql_numrows($result2);
                 if ($num >= 1) {
@@ -124,7 +122,7 @@ if ($u_id && $communityfeatures && $u_level != "G") {
                 }
                 
                 $boxzu = false;
-                $query = "SELECT m_id FROM mail WHERE m_von_uid='$neue_email[m_an_uid]' AND m_an_uid='$neue_email[m_an_uid]' and m_betreff = 'MAILBOX IST ZU' and m_status != 'geloescht'";
+                $query = "SELECT m_id FROM mail WHERE m_von_uid='" . intval($neue_email[m_an_uid]) . "' AND m_an_uid='" . intval($neue_email[m_an_uid]) . "' and m_betreff = 'MAILBOX IST ZU' and m_status != 'geloescht'";
                 $result2 = mysql_query($query);
                 $num = mysql_numrows($result2);
                 if ($num >= 1) {
@@ -185,7 +183,7 @@ if ($u_id && $communityfeatures && $u_level != "G") {
             }
             
             // User-ID Prüfen
-            $neue_email['m_an_uid'] = AddSlashes($neue_email['m_an_uid']);
+            $neue_email['m_an_uid'] = intval($neue_email['m_an_uid']);
             $query = "SELECT u_nick FROM user WHERE u_id = $neue_email[m_an_uid]";
             $result = mysql_query($query, $conn);
             if ($result && mysql_num_rows($result) == 1) {
@@ -243,8 +241,7 @@ if ($u_id && $communityfeatures && $u_level != "G") {
                     }
                     
                     // Prüfen ob Empfänger SMS möchte
-                    $neue_email['m_an_uid'] = AddSlashes(
-                        $neue_email['m_an_uid']);
+                    $neue_email['m_an_uid'] = intval($neue_email['m_an_uid']);
                     $query = "SELECT u_sms_ok FROM user WHERE u_id = '$neue_email[m_an_uid]'";
                     $result = mysql_query($query);
                     $a = mysql_fetch_array($result);
@@ -328,9 +325,9 @@ if ($u_id && $communityfeatures && $u_level != "G") {
         
         case "antworten":
         // Mail beantworten, Mail quoten und Absender lesen
-            $m_id = AddSlashes($m_id);
+            $m_id = intval($m_id);
             $query = "SELECT *,date_format(m_zeit,'%d.%m.%y um %H:%i') as zeit "
-                . "FROM mail " . "WHERE m_an_uid=$u_id " . "AND m_id=$m_id ";
+                . "FROM mail WHERE m_an_uid=$u_id AND m_id=$m_id ";
             
             $result = mysql_query($query, $conn);
             if ($result && mysql_num_rows($result) == 1) {
@@ -339,8 +336,7 @@ if ($u_id && $communityfeatures && $u_level != "G") {
             @mysql_free_result($result);
             
             // Nick prüfen
-            $query = "SELECT u_id,u_nick FROM user WHERE u_id="
-                . $row->m_von_uid;
+            $query = "SELECT u_id,u_nick FROM user WHERE u_id=" . $row->m_von_uid;
             $result = mysql_query($query, $conn);
             if ($result && mysql_num_rows($result) == 1) {
                 
@@ -384,7 +380,7 @@ if ($u_id && $communityfeatures && $u_level != "G") {
 			po_titel, po_text, u_nick, u_id
 			from posting
 			left join user on po_u_id = u_id
-			where po_id = $po_vater_id";
+			where po_id = " . intval($po_vater_id);
             $result = mysql_query($query, $conn);
             if ($result && mysql_num_rows($result) == 1) {
                 $row = mysql_fetch_object($result);

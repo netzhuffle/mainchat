@@ -167,7 +167,7 @@ function window_reload(file,win_name) {
         $eintrittsraum = $lobby;
     }
     
-    $sql = "select r_id from raum where r_name like '$eintrittsraum'";
+    $sql = "select r_id from raum where r_name like '" . mysql_real_escape_string($eintrittsraum) . "'";
     $query = mysql_query($sql, $conn);
     if (mysql_num_rows($query) > 0)
         $lobby_id = mysql_result($query, 0, "r_id");

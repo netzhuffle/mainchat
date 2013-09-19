@@ -31,7 +31,7 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
             
             // Prüfen, ob im aktuellen Raum smilies erlaubt sind
             if (!$privat) {
-                $query = "SELECT r_smilie FROM raum WHERE r_id=$o_raum ";
+                $query = "SELECT r_smilie FROM raum WHERE r_id=" . intval($o_raum);
                 $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) > 0
                     && mysql_result($result, 0, 0) != "Y") {

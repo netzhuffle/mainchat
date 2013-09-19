@@ -77,7 +77,7 @@ function home_profil($u_id, $u_nick, $home, $farben, $aktion)
         if ($ui_einstellungen["Straße"] && $home['ui_strasse'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\" WIDTH=20%>" . $f1
                 . "Straße:" . $f2 . "</TD><TD colspan=3 WIDTH=80%>"
-                . htmlspecialchars(stripslashes($home['ui_strasse']))
+                . htmlspecialchars($home['ui_strasse'])
                 . "</TD></TR>\n";
         
         if (($ui_einstellungen["Ort"] || $ui_einstellungen["PLZ"])
@@ -85,77 +85,77 @@ function home_profil($u_id, $u_nick, $home, $farben, $aktion)
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1 . "Ort:"
                 . $f2 . "</TD><TD colspan=3>";
             if ($ui_einstellungen["PLZ"])
-                $text .= htmlspecialchars(stripslashes($home['ui_plz']))
+                $text .= htmlspecialchars($home['ui_plz'])
                     . "&nbsp;&nbsp;";
             if ($ui_einstellungen["Ort"])
-                $text .= htmlspecialchars(stripslashes($home['ui_ort']));
+                $text .= htmlspecialchars($home['ui_ort']);
             $text .= "</TD></TR>\n";
         }
         
         if ($ui_einstellungen["Land"] && $home['ui_land'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1 . "Land:"
                 . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_land']))
+                . htmlspecialchars($home['ui_land'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["Tel"] && $home['ui_tel'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1
                 . "Telefon:" . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_tel']))
+                . htmlspecialchars($home['ui_tel'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["Handy"] && $home['ui_handy'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1 . "Handy:"
                 . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_handy']))
+                . htmlspecialchars($home['ui_handy'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["Fax"] && $home['ui_fax'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1
                 . "Telefax" . $f2 . ":</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_fax']))
+                . htmlspecialchars($home['ui_fax'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["ICQ"] && $home['ui_icq'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1 . "ICQ:"
                 . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_icq']))
+                . htmlspecialchars($home['ui_icq'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["Geburtsdatum"] && $home['ui_geburt'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1
                 . "Geburtsdatum:" . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_geburt']))
+                . htmlspecialchars($home['ui_geburt'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["Geschlecht"] && $home['ui_geschlecht'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1
                 . "Geschlecht:" . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_geschlecht']))
+                . htmlspecialchars($home['ui_geschlecht'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["Beziehung"] && $home['ui_beziehung'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1
                 . "Beziehung:" . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_beziehung']))
+                . htmlspecialchars($home['ui_beziehung'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["Typ"] && $home['ui_typ'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1 . "Typ:"
                 . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_typ']))
+                . htmlspecialchars($home['ui_typ'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["Beruf"] && $home['ui_beruf'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1 . "Beruf:"
                 . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_beruf']))
+                . htmlspecialchars($home['ui_beruf'])
                 . "</TD></TR>\n";
         
         if ($ui_einstellungen["Hobbies"] && $home['ui_hobby'])
             $text .= "<TR><TD valign=\"TOP\" align=\"right\">" . $f1
                 . "Hobbies:" . $f2 . "</TD><TD colspan=3>"
-                . htmlspecialchars(stripslashes($home['ui_hobby']))
+                . htmlspecialchars($home['ui_hobby'])
                 . "</TD></TR>\n";
         
     } else {
@@ -329,7 +329,7 @@ function home_text($u_id, $u_nick, $home, $feld, $farben, $aktion)
     //	$stopwordarray=array("background","java","script","activex","embed","target","javascript");
     $stopwordarray = array("|background|i", "|java|i", "|script|i",
         "|activex|i", "|target|i", "|javascript|i");
-    $text = stripslashes(str_replace("\n", "<BR>\n", $text));
+    $text = str_replace("\n", "<BR>\n", $text);
     
     foreach ($stopwordarray as $stopword) {
         // str_replace ist case sensitive, gefährlichen, wenn JavaScript geschrieben wird, oder Target, oder ActiveX
@@ -347,7 +347,7 @@ function home_text($u_id, $u_nick, $home, $feld, $farben, $aktion)
     if ($aktion == "aendern") {
         $text = "<TR><TD COLSPAN=4 VALIGN=\"TOP\">$f1<B>Ihr Text über sich selbst:</B>$f2<BR><TEXTAREA COLS="
             . ($eingabe_breite2) . " ROWS=20 NAME=\"home[$feld]\">"
-            . stripslashes($home[$feld]) . "</TEXTAREA></TD></TR>"
+            . $home[$feld] . "</TEXTAREA></TD></TR>"
             . "<TR><TD VALIGN=\"TOP\" ALIGN=\"RIGHT\">"
             . home_farbe($u_id, $u_nick, $home, $feld, $farben[$feld])
             . "</TD></TR>";
@@ -472,8 +472,8 @@ function home_aktionen($u_id, $u_nick, $home, $farben, $aktion)
     
     if ($userdata['u_url']) {
         $text .= "Mehr&nbsp;über&nbsp;mich: <B><A HREF=\"redirect.php?url="
-            . urlencode(stripslashes($userdata['u_url']))
-            . "\" TARGET=\"_new\">" . stripslashes($userdata['u_url'])
+            . urlencode($userdata['u_url'])
+            . "\" TARGET=\"_new\">" . $userdata['u_url']
             . "</B></A><BR>\n";
     }
     
@@ -612,7 +612,7 @@ function bild_holen($u_id, $name, $ui_bild, $groesse)
     // HEIGHT                 -> home[ui_bild_height]
     // MIME-TYPE              -> home[ui_bild_mime]
     
-    global $max_groesse, $dbase, $http_host;
+    global $max_groesse, $dbase, $http_host, $conn;
     
     if ($ui_bild && $groesse > 0 && $groesse < ($max_groesse * 1024)) {
         
@@ -649,8 +649,8 @@ function bild_holen($u_id, $name, $ui_bild, $groesse)
             $f['b_name'] = $name;
             
             if ($f['b_mime']) {
-                $query = "SELECT b_id FROM bild WHERE b_user=$u_id AND b_name='$name'";
-                $result = mysql_query($query, $conn); // TODO: $conn ist doch immer undefiniert!?
+                $query = "SELECT b_id FROM bild WHERE b_user=$u_id AND b_name='" . mysql_real_escape_string($name) . "'";
+                $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) != 0) {
                     $b_id = mysql_result($result, 0, 0);
                 }
@@ -701,7 +701,7 @@ function zeige_home($u_id, $force = FALSE, $defaultfarben = "")
         
     } elseif ($u_id == -1 && isset($_SERVER['QUERY_STRING'])) {
         // Aufruf als home.php?USERNAME
-        $tempnick = addslashes(strtolower(urldecode($_SERVER['QUERY_STRING'])));
+        $tempnick = mysql_real_escape_string(strtolower(urldecode($_SERVER['QUERY_STRING'])));
         $tempnick = coreCheckName($tempnick, $check_name);
         
         $query = "SELECT u_id,u_nick,u_chathomepage FROM user WHERE u_nick = '"

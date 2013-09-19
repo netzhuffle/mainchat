@@ -185,8 +185,8 @@ function eintrag_aktionen($aktion_datensatz)
             
             if (!$temp[0] || $temp[0] == "0" || $temp[0] == "") {
                 $query = "DELETE FROM aktion "
-                    . "WHERE a_was='$def_was_eintrag' "
-                    . "AND a_wann='$a_wann_eintrag' " . "AND a_user='$u_id'";
+                    . "WHERE a_was='" . mysql_real_escape_string($def_was_eintrag) . "' "
+                    . "AND a_wann='" . mysql_real_escape_string($a_wann_eintrag) . "' " . "AND a_user='$u_id'";
                 $result = mysql_query($query, $conn);
             }
             

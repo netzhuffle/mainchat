@@ -171,8 +171,8 @@ function loesche_freund($f_freundid, $f_userid)
         echo "Fehler beim Löschen des Freundes '$f_nick': $f_userid,$f_freundid!<BR>";
         return (0);
     }
-    $f_freundid = addslashes($f_freundid);
-    $f_userid = addslashes($f_userid);
+    $f_freundid = mysql_real_escape_string($f_freundid);
+    $f_userid = mysql_real_escape_string($f_userid);
     
     $query = "DELETE from freunde WHERE "
         . "(f_userid=$f_userid AND f_freundid=$f_freundid) " . "OR "
@@ -211,11 +211,11 @@ function formular_neuer_freund($neuer_freund)
     echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=2><DIV style=\"color:$farbe_text;\"><B>$titel</B></DIV></TD></TR>\n"
         . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD align=\"right\"><B>Nickname:</B></TD><TD>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"neuer_freund[u_nick]\" VALUE=\""
-        . stripslashes($neuer_freund['u_nick']) . "\" SIZE=20>" . $f2
+        . $neuer_freund['u_nick'] . "\" SIZE=20>" . $f2
         . "</TD></TR>\n"
         . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD align=\"right\"><B>Infotext:</B></TD><TD>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"neuer_freund[f_text]\" VALUE=\""
-        . htmlentities(stripslashes($neuer_freund['f_text']))
+        . htmlentities($neuer_freund['f_text'])
         . "\" SIZE=$eingabe_breite>" . "&nbsp;"
         . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"EINTRAGEN\">" . $f2
         . "</TD></TR>\n" . "</TABLE></FORM>\n";
@@ -245,7 +245,7 @@ function formular_editieren($f_id, $f_text)
     echo "<TR BGCOLOR=\"$farbe_tabelle_kopf2\"><TD COLSPAN=2><DIV style=\"color:$farbe_text;\"><B>$titel</B></DIV></TD></TR>\n"
         . "<TR BGCOLOR=\"$farbe_tabelle_zeile1\"><TD align=\"right\"><B>Infotext:</B></TD><TD>"
         . $f1 . "<INPUT TYPE=\"TEXT\" NAME=\"f_text\" VALUE=\""
-        . htmlentities(stripslashes($f_text)) . "\" SIZE=$eingabe_breite>"
+        . htmlentities($f_text) . "\" SIZE=$eingabe_breite>"
         . "&nbsp;" . "<INPUT TYPE=\"SUBMIT\" NAME=\"los\" VALUE=\"ÄNDERN\">"
         . $f2 . "</TD></TR>\n" . "</TABLE></FORM>\n";
     
@@ -262,8 +262,8 @@ function neuer_freund($f_userid, $freund)
     } else {
         
         // Prüfen ob Freund bereits in Tabelle steht
-        $freund['u_id'] = AddSlashes($freund['u_id']);
-        $f_userid = AddSlashes($f_userid);
+        $freund['u_id'] = mysql_real_escape_string($freund['u_id']);
+        $f_userid = mysql_real_escape_string($f_userid);
         
         $query = "SELECT f_id from freunde WHERE "
             . "(f_userid=$freund[u_id] AND f_freundid=$f_userid) " . "OR "
@@ -325,11 +325,7 @@ function edit_freund($f_id, $f_text)
 {
     // Ändert den Infotext beim Freund
     
-    global $id, $http_host, $eingabe_breite, $PHP_SELF, $f1, $f2, $f3, $f4, $conn, $dbase, $chat, $system_farbe;
-    
-    if (isset($freund['u_id']))
-        $freund['u_id'] = AddSlashes($freund['u_id']);
-    $f_id = addSlashes($f_id);
+    $f_id = intval($f_id);
     
     unset($f);
     $f['f_text'] = $f_text;
@@ -343,6 +339,8 @@ function edit_freund($f_id, $f_text)
 function bestaetige_freund($f_userid, $freund)
 {
     global $dbase, $conn;
+    $f_userid = mysql_real_escape_string($f_userid);
+    $freund = mysql_real_escape_string($freund);
     $query = "UPDATE freunde SET f_status = 'bestaetigt', f_zeit = NOW() WHERE f_userid = '$f_userid' AND f_freundid = '$freund'";
     mysql_query($query);
     $query = "SELECT u_nick FROM user where u_id='$f_userid'";

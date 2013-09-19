@@ -89,11 +89,10 @@ function maske_forum($fo_id = 0)
     global $t, $farbe_text;
     
     if ($fo_id > 0) {
-        $fo_id = addslashes($fo_id);
+        $fo_id = intval($fo_id);
         $sql = "select fo_name, fo_admin from forum where fo_id=$fo_id";
         $query = mysql_query($sql, $conn);
-        $fo_name = htmlspecialchars(
-            stripslashes(mysql_result($query, 0, "fo_name")));
+        $fo_name = htmlspecialchars(mysql_result($query, 0, "fo_name"));
         $fo_admin = mysql_result($query, 0, "fo_admin");
         @mysql_free_result($query);
         
@@ -202,7 +201,7 @@ function forum_liste()
                 echo "<td width=\"1\"><img src=\"pics/fuell.gif\" width=\"1\" height=\"25\" border=\"0\"></td>\n";
                 echo "<td width=\"559\" colspan=\"2\"><table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">\n";
                 echo "<tr><td>&nbsp;<DIV style=\"color:$farbe_text; font-weight:bold;\">&nbsp;&nbsp;"
-                    . htmlspecialchars(stripslashes($thema['fo_name']))
+                    . htmlspecialchars($thema['fo_name'])
                     . "<a name=\"" . $thema['fo_id'] . "\"></a></DIV></td>";
                 if ($forum_admin) {
                     echo "<td style=\"color:$farbe_text;\" width=\"85\" align=\"right\" valign=\"middle\"><a href=\"forum.php?id=$id&http_host=$http_host&aktion=forum_delete&fo_id=$thema[fo_id]\" onClick=\"return ask('$t[conf_delete_forum]')\">$chat_grafik[forum_loeschen]</a>&nbsp;</td>";
@@ -247,9 +246,9 @@ function forum_liste()
                     echo "<td width=\"550\">";
                     echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">";
                     echo "<tr><td width=\"385\">$f1<B><A href=\"forum.php?id=$id&http_host=$http_host&th_id=$thema[th_id]&aktion=show_thema\">"
-                        . htmlspecialchars(stripslashes($thema['th_name']))
+                        . htmlspecialchars($thema['th_name'])
                         . "</a></B>$f2<br>" . $f3 . " "
-                        . htmlspecialchars(stripslashes($thema['th_desc']))
+                        . htmlspecialchars($thema['th_desc'])
                         . "$f4</td>";
                     echo "<td width=\"85\" align=\"center\" valign=\"middle\"><a href=\"forum.php?id=$id&http_host=$http_host&aktion=thema_delete&th_id=$thema[th_id]\" onClick=\"return ask('$t[conf_delete_thema]')\">$chat_grafik[forum_loeschen]</a>&nbsp;</td>";
                     echo "<td width=\"85\" align=\"center\" valign=\"middle\"><a href=\"forum.php?id=$id&http_host=$http_host&th_id=$thema[th_id]&aktion=thema_edit\">$chat_grafik[forum_themabearbeiten]</a>&nbsp;</td>";
@@ -262,9 +261,9 @@ function forum_liste()
                 } else {
                     
                     echo "<td width=\"550\">$f1<B><a href=\"forum.php?id=$id&http_host=$http_host&th_id=$thema[th_id]&aktion=show_thema\">"
-                        . htmlspecialchars(stripslashes($thema['th_name']))
+                        . htmlspecialchars($thema['th_name'])
                         . "$f2</a></B><br>" . $f3 . " "
-                        . htmlspecialchars(stripslashes($thema['th_desc']))
+                        . htmlspecialchars($thema['th_desc'])
                         . "$f4</td>\n";
                     
                 }
@@ -315,12 +314,10 @@ function maske_thema($th_id = 0)
     
     if ($th_id > 0) {
         
-        $sql = "select th_name, th_desc from thema where th_id=$th_id";
+        $sql = "select th_name, th_desc from thema where th_id=" . intval($th_id);
         $query = mysql_query($sql, $conn);
-        $th_name = htmlspecialchars(
-            stripslashes(mysql_result($query, 0, "th_name")));
-        $th_desc = htmlspecialchars(
-            stripslashes(mysql_result($query, 0, "th_desc")));
+        $th_name = htmlspecialchars(mysql_result($query, 0, "th_name"));
+        $th_desc = htmlspecialchars(mysql_result($query, 0, "th_desc"));
         @mysql_free_result($query);
         
         $kopfzeile = $chat_grafik['forum_themabearbeiten'];
@@ -392,14 +389,12 @@ function show_pfad($th_id)
     //Infos über Forum und Thema holen
     $sql = "select fo_id, fo_name, th_name, th_anzthreads
                 from forum, thema
-                where th_id = $th_id
+                where th_id = " . intval($th_id) . "
                 and fo_id = th_fo_id";
     $query = mysql_query($sql, $conn);
-    $fo_id = htmlspecialchars(stripslashes(mysql_result($query, 0, "fo_id")));
-    $fo_name = htmlspecialchars(
-        stripslashes(mysql_result($query, 0, "fo_name")));
-    $th_name = htmlspecialchars(
-        stripslashes(mysql_result($query, 0, "th_name")));
+    $fo_id = htmlspecialchars(mysql_result($query, 0, "fo_id"));
+    $fo_name = htmlspecialchars(mysql_result($query, 0, "fo_name"));
+    $th_name = htmlspecialchars(mysql_result($query, 0, "th_name"));
     $th_anzthreads = mysql_result($query, 0, "th_anzthreads");
     @mysql_free_result($query);
     
@@ -474,7 +469,7 @@ function show_thema()
                 from posting
                 left join user on po_u_id = u_id
                 where po_vater_id = 0
-                and po_th_id = $th_id
+                and po_th_id = " . intval($th_id) . "
                 order by po_topposting desc, po_threadts desc, po_ts desc
                 limit $offset, $anzahl_po_seite";
     
@@ -564,15 +559,15 @@ function show_thema()
         
         if ($posting['po_gesperrt'] == 'Y' and !$forum_admin) {
             echo "<td>&nbsp;<b><font size=\"-1\" color=\"$farbe_link\">"
-                . substr((stripslashes($posting['po_titel'])), 0, 40)
+                . substr($posting['po_titel'], 0, 40)
                 . "</font> <font size=\"-1\" color=\"red\">(gesperrt)</font></b></td>\n";
         } elseif ($posting['po_gesperrt'] == 'Y' and $forum_admin) {
             echo "<td>&nbsp;$f1<b><a href=\"forum.php?id=$id&http_host=$http_host&th_id=$th_id&po_id=$posting[po_id]&thread=$posting[po_id]&aktion=show_posting&seite=$seite\">"
-                . substr((stripslashes($posting['po_titel'])), 0, 40)
+                . substr($posting['po_titel'], 0, 40)
                 . "</a></b>$f2  <font size=\"-1\" color=\"red\"><b>(gesperrt)</b></font></td>\n";
         } else {
             echo "<td>&nbsp;$f1<b><a href=\"forum.php?id=$id&http_host=$http_host&th_id=$th_id&po_id=$posting[po_id]&thread=$posting[po_id]&aktion=show_posting&seite=$seite\">"
-                . substr((stripslashes($posting['po_titel'])), 0, 40)
+                . substr($posting['po_titel'], 0, 40)
                 . "</a></b>$f2</td>\n";
         }
         
@@ -666,16 +661,16 @@ function maske_posting($mode)
                                 po_titel, po_text, ifnull(u_nick, 'unknown') as u_nick
                                 from posting
                                 left join user on po_u_id = u_id
-                                where po_id = $po_vater_id";
+                                where po_id = " . intval($po_vater_id);
             $query = mysql_query($sql, $conn);
             
             $autor = mysql_result($query, 0, "u_nick");
             $po_date = mysql_result($query, 0, "po_date");
-            $po_titel = (stripslashes(mysql_result($query, 0, "po_titel")));
+            $po_titel = (mysql_result($query, 0, "po_titel"));
             if (substr($po_titel, 0, 3) != $t['reply'])
                 $po_titel = $t['reply'] . " " . $po_titel;
             $titel = $po_titel;
-            $po_text = stripslashes(mysql_result($query, 0, "po_text"));
+            $po_text = mysql_result($query, 0, "po_text");
             $po_text = erzeuge_quoting($po_text, $autor, $po_date);
             $po_text = erzeuge_fuss($po_text);
             
@@ -688,10 +683,10 @@ function maske_posting($mode)
         //Daten des Vaters holen
             $sql = "select po_tiefe, po_titel
                                 from posting
-                                where po_id = $po_vater_id";
+                                where po_id = " . intval($po_vater_id);
             $query = mysql_query($sql, $conn);
             
-            $po_titel = (stripslashes(mysql_result($query, 0, "po_titel")));
+            $po_titel = mysql_result($query, 0, "po_titel");
             if (substr($po_titel, 0, 3) != $t['reply'])
                 $po_titel = $t['reply'] . " " . $po_titel;
             $titel = $po_titel;
@@ -709,7 +704,7 @@ function maske_posting($mode)
                                 po_titel, po_text, ifnull(u_nick, 'unknown') as u_nick, u_id, po_threadgesperrt, po_topposting
                                 from posting
                                 left join user on po_u_id = u_id
-                                where po_id = $po_id";
+                                where po_id = " . intval($po_id);
             $query = mysql_query($sql, $conn);
             
             $autor = mysql_result($query, 0, "u_nick");
@@ -717,9 +712,9 @@ function maske_posting($mode)
             $po_date = mysql_result($query, 0, "po_date");
             $po_topposting = mysql_result($query, 0, "po_topposting");
             $po_threadgesperrt = mysql_result($query, 0, "po_threadgesperrt");
-            $po_titel = stripslashes(mysql_result($query, 0, "po_titel"));
+            $po_titel = mysql_result($query, 0, "po_titel");
             $titel = $po_titel;
-            $po_text = stripslashes(mysql_result($query, 0, "po_text"));
+            $po_text = mysql_result($query, 0, "po_text");
             $po_tiefe = mysql_result($query, 0, "po_tiefe");
             
             //Testen ob User mogelt, indem er den Edit-Link mit anderer po_id benutzt
@@ -842,14 +837,12 @@ function show_pfad_posting($th_id, $po_titel)
     //Infos über Forum und Thema holen
     $sql = "select fo_id, fo_name, th_name
                 from forum, thema
-                where th_id = $th_id
+                where th_id = " . intval($th_id) . "
                 and fo_id = th_fo_id";
     $query = mysql_query($sql, $conn);
-    $fo_id = htmlspecialchars(stripslashes(mysql_result($query, 0, "fo_id")));
-    $fo_name = htmlspecialchars(
-        stripslashes(mysql_result($query, 0, "fo_name")));
-    $th_name = htmlspecialchars(
-        stripslashes(mysql_result($query, 0, "th_name")));
+    $fo_id = htmlspecialchars(mysql_result($query, 0, "fo_id"));
+    $fo_name = htmlspecialchars(mysql_result($query, 0, "fo_name"));
+    $th_name = htmlspecialchars(mysql_result($query, 0, "th_name"));
     @mysql_free_result($query);
     
     echo "<table width=\"760\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">\n";
@@ -976,14 +969,14 @@ function verschiebe_posting()
 		u_email, u_id, u_level,u_punkte_gesamt,u_punkte_gruppe,u_chathomepage
                 from posting
                 left join user on po_u_id = u_id
-                where po_id = $thread";
+                where po_id = " . intval($thread);
     
     $query = mysql_query($sql, $conn);
     if ($query)
         $row = mysql_fetch_object($query);
     mysql_free_result($query);
     
-    $sql = "SELECT fo_name, th_name FROM forum left join thema on fo_id = th_fo_id WHERE th_id = $th_id ";
+    $sql = "SELECT fo_name, th_name FROM forum left join thema on fo_id = th_fo_id WHERE th_id = " . intval($th_id);
     $query = mysql_query($sql, $conn);
     if ($query)
         $row2 = mysql_fetch_object($query);
@@ -1041,7 +1034,7 @@ function show_posting()
 		u_email, u_id, u_level,u_punkte_gesamt,u_punkte_gruppe,u_chathomepage
                 from posting
                 left join user on po_u_id = u_id
-                where po_id = $po_id";
+                where po_id = " . intval($po_id);
     
     $query = mysql_query($sql, $conn);
     if ($query)
@@ -1050,7 +1043,7 @@ function show_posting()
     $po_u_id = $row->po_u_id;
     $po_date = $row->po_date;
     $po_tiefe = $row->po_tiefe;
-    $po_titel = (stripslashes($row->po_titel));
+    $po_titel = $row->po_titel;
     $po_gesperrt = $row->po_gesperrt;
     
     if ($po_gesperrt == 'Y' and !$forum_admin) {
@@ -1058,7 +1051,7 @@ function show_posting()
         return;
     }
     
-    $po_text = ersetzte_smilies(chat_parse(stripslashes(nl2br($row->po_text))));
+    $po_text = ersetzte_smilies(chat_parse(nl2br($row->po_text)));
     if (($row->u_nick != "Nobody") && ($row->u_level <> "Z")) {
         $autor = user($po_u_id, $row, $o_js, FALSE, "&nbsp;", "", "", TRUE,
             TRUE);
@@ -1068,7 +1061,7 @@ function show_posting()
     
     @mysql_free_result($query);
     
-    $sql = "select po_threadorder from posting where po_id=$thread";
+    $sql = "select po_threadorder from posting where po_id=" . intval($thread);
     $query = mysql_query($sql, $conn);
     $po_threadorder = mysql_result($query, 0, "po_threadorder");
     
@@ -1152,7 +1145,7 @@ function zeige_baum(
         return;
     
     if ($zeige_top) {
-        $postings = "$thread,$postings";
+        $postings = mysql_real_escape_string("$thread,$postings");
     }
     
     //vom user gelesene postings holen
@@ -1188,19 +1181,19 @@ function zeige_baum(
         
         if ($po_wahlfrei[$thread]->po_gesperrt == 'Y' and !$forum_admin) {
             echo "<td colspan=\"16\">&nbsp;<b><font size=-1 color=\"$col\">"
-                . substr((stripslashes($po_wahlfrei[$thread]->po_titel)), 0, 60)
+                . substr($po_wahlfrei[$thread]->po_titel, 0, 60)
                 . "</font> <font size=\"-1\" color=\"red\">(gesperrt)</font></b></td>\n";
         } else if ($po_wahlfrei[$thread]->po_gesperrt == 'Y' and $forum_admin) {
             echo "<td colspan=\"16\">&nbsp;<b><a href=\"forum.php?id=$id&http_host=$http_host&th_id=$th_id&po_id="
                 . $po_wahlfrei[$thread]->po_id
                 . "&thread=$thread&aktion=show_posting&seite=$seite\"><font size=-1 color=\"$col\">"
-                . substr((stripslashes($po_wahlfrei[$thread]->po_titel)), 0, 60)
+                . substr($po_wahlfrei[$thread]->po_titel, 0, 60)
                 . "$f2</a> <font size=\"-1\" color=\"red\">(gesperrt)</font></td>\n";
         } else {
             echo "<td colspan=\"16\">&nbsp;<b><a href=\"forum.php?id=$id&http_host=$http_host&th_id=$th_id&po_id="
                 . $po_wahlfrei[$thread]->po_id
                 . "&thread=$thread&aktion=show_posting&seite=$seite\"><font size=-1 color=\"$col\">"
-                . substr((stripslashes($po_wahlfrei[$thread]->po_titel)), 0, 60)
+                . substr($po_wahlfrei[$thread]->po_titel, 0, 60)
                 . "$f2</a></td>\n";
         }
         
@@ -1276,7 +1269,7 @@ function zeige_baum(
         if ($po_wahlfrei[$v]->po_gesperrt == 'Y' and !$forum_admin) {
             echo "<td colspan=\"" . (16 - $span)
                 . "\">&nbsp;<b><font size=-1 color=\"$col\">"
-                . substr((stripslashes($po_wahlfrei[$v]->po_titel)), 0,
+                . substr($po_wahlfrei[$v]->po_titel, 0,
                     (60 - round($span * 2.5)))
                 . "</font> <font size=\"-1\" color=\"red\">(gesperrt)</font></b></td>\n";
         } else if ($po_wahlfrei[$v]->po_gesperrt == 'Y' and $forum_admin) {
@@ -1284,7 +1277,7 @@ function zeige_baum(
                 . "\">&nbsp;<b><a href=\"forum.php?id=$id&http_host=$http_host&th_id=$th_id&po_id="
                 . $po_wahlfrei[$v]->po_id
                 . "&thread=$thread&aktion=show_posting&seite=$seite\"><font size=-1 color=\"$col\">"
-                . substr((stripslashes($po_wahlfrei[$v]->po_titel)), 0,
+                . substr($po_wahlfrei[$v]->po_titel, 0,
                     (60 - round($span * 2.5)))
                 . " $f2</a> <font size=\"-1\" color=\"red\">(gesperrt)</font></td>\n";
         } else {
@@ -1292,7 +1285,7 @@ function zeige_baum(
                 . "\">&nbsp;<b><a href=\"forum.php?id=$id&http_host=$http_host&th_id=$th_id&po_id="
                 . $po_wahlfrei[$v]->po_id
                 . "&thread=$thread&aktion=show_posting&seite=$seite\"><font size=-1 color=\"$col\">"
-                . substr((stripslashes($po_wahlfrei[$v]->po_titel)), 0,
+                . substr($po_wahlfrei[$v]->po_titel, 0,
                     (60 - round($span * 2.5))) . " $f2</a></td>\n";
         }
         

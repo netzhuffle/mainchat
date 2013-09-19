@@ -5,7 +5,7 @@ require_once("functions.php-func-sms.php");
 function suche_vaterposting($poid)
 {
     // Diese Funktion sucht das Vaterposting des übergebenen Postings
-    $query = "SELECT po_vater_id FROM posting WHERE po_id = '$poid'";
+    $query = "SELECT po_vater_id FROM posting WHERE po_id = '" . intval($poid) . "'";
     $result = mysql_query($query);
     list($vp) = mysql_fetch_array($result);
     return ($vp);
@@ -14,7 +14,7 @@ function suche_vaterposting($poid)
 function suche_threadord($poid)
 {
     // Diese Funktion sucht die Threadorder des Vaterpostings
-    $query = "SELECT po_threadorder FROM posting WHERE po_id = '$poid'";
+    $query = "SELECT po_threadorder FROM posting WHERE po_id = '" . intval($poid) . "'";
     $result = mysql_query($query);
     list($to) = mysql_fetch_array($result);
     return ($to);
@@ -41,7 +41,7 @@ function mail_neu($u_id, $u_nick, $id, $nachricht = "OLM")
     
     $query = "SELECT mail.*,date_format(m_zeit,'%d.%m.%y um %H:%i') as zeit,u_nick "
         . "FROM mail LEFT JOIN user on m_von_uid=u_id "
-        . "WHERE m_an_uid=$u_id " . "AND m_status='neu' "
+        . "WHERE m_an_uid=$u_id  AND m_status='neu' "
         . "order by m_zeit desc";
     $result = mysql_query($query, $conn);
     
@@ -148,7 +148,7 @@ function autoselect($name, $voreinstellung, $tabelle, $feld)
     
     global $system_farbe, $conn, $dbase, $communityfeatures, $t, $http_host;
     
-    $query = "SHOW COLUMNS FROM $tabelle like '$feld'";
+    $query = "SHOW COLUMNS FROM $tabelle like '" . mysql_real_escape_string($feld) . "'";
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) != 0) {
         $txt = substr(mysql_result($result, 0, "Type"), 4, -1);
@@ -182,7 +182,7 @@ function punkte($anzahl, $o_id, $u_id = 0, $text = "", $sofort = FALSE)
         } else {
             $where = "WHERE o_id=$o_id";
         }
-        $query = "UPDATE online set o_punkte=o_punkte+$anzahl " . $where;
+        $query = "UPDATE online set o_punkte=o_punkte+" . intval($anzahl) . " " . $where;
         mysql_query($query, $conn);
     }
     
@@ -211,7 +211,7 @@ function punkte($anzahl, $o_id, $u_id = 0, $text = "", $sofort = FALSE)
         
         // Aktuelle Punkte auf Punkte in Usertabelle addieren
         $result = mysql_query(
-            "select o_punkte,o_user FROM online WHERE o_id=$o_id", $conn);
+            "select o_punkte,o_user FROM online WHERE o_id=" . intval($o_id), $conn);
         if ($result && mysql_num_rows($result) == 1) {
             $row = mysql_fetch_object($result);
             $u_id = $row->o_user;
@@ -239,7 +239,7 @@ function punkte($anzahl, $o_id, $u_id = 0, $text = "", $sofort = FALSE)
                 . "where u_id=$u_id";
             $result2 = mysql_query($query, $conn);
             $result = mysql_query(
-                "UPDATE online set o_punkte=0 WHERE o_id=$o_id", $conn);
+                "UPDATE online set o_punkte=0 WHERE o_id=" . intval($o_id), $conn);
         }
         @mysql_free_result($result);
         
@@ -701,7 +701,7 @@ function mail_sende($von, $an, $text, $betreff = "")
     $fehlermeldung = "";
     
     // User die die Mailbox zu haben, bekommen keine Aktionen per Mainchat
-    $query = "SELECT m_id FROM mail WHERE m_von_uid='$an' AND m_an_uid='$an' and m_betreff = 'MAILBOX IST ZU' and m_status != 'geloescht'";
+    $query = "SELECT m_id FROM mail WHERE m_von_uid=" . intval($an) . " AND m_an_uid=" . intval($an) . " and m_betreff = 'MAILBOX IST ZU' and m_status != 'geloescht'";
     $result = mysql_query($query);
     $num = mysql_numrows($result);
     if ($num >= 1) {
@@ -710,7 +710,7 @@ function mail_sende($von, $an, $text, $betreff = "")
     }
     
     // Gesperrte User bekommen keine Chatmail Aktionen mehr
-    $query = "SELECT u_id FROM user WHERE u_id='$an' AND u_level='Z'";
+    $query = "SELECT u_id FROM user WHERE u_id=" . intval($an) . " AND u_level='Z'";
     $result = mysql_query($query);
     $num = mysql_numrows($result);
     if ($num >= 1) {
@@ -719,7 +719,7 @@ function mail_sende($von, $an, $text, $betreff = "")
     }
     
     // mailbombing schutz!
-    $query = "SELECT m_id,now()-m_zeit as zeit FROM mail WHERE m_von_uid = '$von' AND m_an_uid = '$an' order by m_id desc limit 0,1";
+    $query = "SELECT m_id,now()-m_zeit as zeit FROM mail WHERE m_von_uid = " . intval($von) . " AND m_an_uid = '" . intval($an) . " order by m_id desc limit 0,1";
     // system_msg("",0,$von,$system_farbe,"DEBUG: $query");
     $result = mysql_query($query);
     
@@ -791,11 +791,11 @@ function email_versende(
     $trans = array_flip($trans);
     $text = str_replace("<ID>", "", $text);
     $text = str_replace("<HTTP_HOST>", $http_host, $text);
-    $text = strip_tags(stripslashes(strtr($text, $trans)));
-    $betreff = strip_tags(stripslashes(strtr($betreff, $trans)));
+    $text = strip_tags(strtr($text, $trans));
+    $betreff = strip_tags(strtr($betreff, $trans));
     
     // Absender ermitteln
-    $query = "SELECT u_email,u_nick from user WHERE u_id=$von_user_id ";
+    $query = "SELECT u_email,u_nick from user WHERE u_id=" . intval($von_user_id);
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) == 1) {
         $abrow = mysql_fetch_object($result);
@@ -803,7 +803,7 @@ function email_versende(
     @mysql_free_result($result);
     
     // Empfänger ermitteln und E-Mail versenden, Footer steht in $t[mail4]
-    $query = "SELECT u_adminemail,u_email,u_name,u_nick from user WHERE u_id=$an_user_id ";
+    $query = "SELECT u_adminemail,u_email,u_name,u_nick from user WHERE u_id=" . intval($an_user_id);
     $result = mysql_query($query, $conn);
     if ($result && mysql_num_rows($result) == 1) {
         $row = mysql_fetch_object($result);
@@ -821,8 +821,7 @@ function email_versende(
         } else {
             $absender = $abrow->u_nick . " <" . $abrow->u_email . ">";
         }
-        mail($adresse, $betreff,
-            stripslashes(str_replace("%user%", $row->u_nick, $text))
+        mail($adresse, $betreff, str_replace("%user%", $row->u_nick, $text)
                 . $t['mail4'], "From: $absender\nReply-To: $absender\n");
         @mysql_free_result($result);
         return (TRUE);
@@ -840,9 +839,9 @@ function freunde_online($u_id, $u_nick, $id, $nachricht = "OLM")
     
     global $conn, $system_farbe, $dbase, $communityfeatures, $t, $http_host, $webmaster, $o_js, $whotext;
     
-    $query = "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_userid=$u_id AND f_status = 'bestaetigt' "
+    $query = "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_userid=" . intval($u_id) . " AND f_status = 'bestaetigt' "
         . "UNION "
-        . "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_freundid=$u_id AND f_status = 'bestaetigt' "
+        . "SELECT f_id,f_text,f_userid,f_freundid,f_zeit FROM freunde WHERE f_freundid=" . intval($u_id) . " AND f_status = 'bestaetigt' "
         . "ORDER BY f_zeit desc ";
     $result = mysql_query($query, $conn);
     
@@ -991,7 +990,7 @@ function postings_neu($an_u_id, $u_nick, $id, $nachricht)
     global $conn, $t, $system_farbe;
     
     //schon gelesene Postings des Users holen
-    $sql = "select u_gelesene_postings from user where u_id = $an_u_id";
+    $sql = "select u_gelesene_postings from user where u_id = " . intval($an_u_id);
     $query = mysql_query($sql, $conn);
     if (mysql_num_rows($query) > 0)
         $gelesene = mysql_result($query, 0, "u_gelesene_postings");
@@ -1033,7 +1032,7 @@ function postings_neu($an_u_id, $u_nick, $id, $nachricht)
 		date_format(from_unixtime(b.po_ts), '%d.%m.%Y %H:%i') as po_date_reply,
 		u_nick, a.po_threadorder as threadord, a.po_id as po_id_thread
 		from posting a, posting b, thema, forum, user 
-		where a.po_u_id = $an_u_id 
+		where a.po_u_id = " . intval($an_u_id) . "
 		and a.po_id = b.po_vater_id 
 		and a.po_th_id = th_id 
 		and fo_id=th_fo_id 

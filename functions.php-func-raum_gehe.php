@@ -14,7 +14,7 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
     
     // Info zu altem Raum lesen
     $query = "SELECT r_name,r_status1,r_austritt,r_min_punkte from raum "
-        . "WHERE r_id=$raum_alt ";
+        . "WHERE r_id=" . intval($raum_alt);
     
     $result = mysql_query($query, $conn);
     
@@ -24,7 +24,7 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
     }
     
     // Ist User aus dem Raum ausgesperrt?
-    $query = "SELECT s_id FROM sperre WHERE s_raum=$raum_neu AND s_user=$u_id";
+    $query = "SELECT s_id FROM sperre WHERE s_raum=" . intval($raum_neu) . " AND s_user=$u_id";
     $result = @mysql_query($query, $conn);
     $rows = @mysql_Num_Rows($result);
     if ($rows == 0) {
@@ -35,7 +35,7 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
     @mysql_free_result($result);
     
     // Info zu neuem Raum lesen
-    $query = "SELECT * from raum " . "WHERE r_id=$raum_neu ";
+    $query = "SELECT * from raum WHERE r_id=" . intval($raum_neu);
     
     $result = mysql_query($query, $conn);
     
@@ -46,7 +46,7 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
         // Online Punkte Holen, damit der User zum Raumwechsel nicht ein/ausloggen muss
         $o_punkte = 0;
         if ($erweitertefeatures == 1) {
-            $query2 = "SELECT o_punkte FROM online WHERE o_id=$o_id ";
+            $query2 = "SELECT o_punkte FROM online WHERE o_id=" . intval($o_id);
             $result2 = mysql_query($query2, $conn);
             
             if ($result2 && mysql_num_rows($result2) == 1) {
@@ -119,7 +119,7 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
                 . "FROM raum LEFT JOIN online ON o_raum=r_id "
                 . "WHERE ((UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(o_aktiv)) <= $timeout "
                 . "OR r_name='Lobby' OR r_status2='T') "
-                . "AND r_id=$raum_neu "
+                . "AND r_id=" . intval($raum_neu) . " "
                 . "GROUP BY r_id HAVING anzahl=1 AND (CADMIN=1 OR SADMIN=1) OR LOBBY OR STATUS";
             // system_msg("",0,$u_id,"","DEBUG $query");
             $result = mysql_query($query, $conn);
@@ -144,8 +144,8 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
             schreibe_db("online", $f, $o_id, "o_id");
             
             // Neuen Raum eintragen
-            $query = "UPDATE online SET o_raum=$raum_neu "
-                . "WHERE o_user=$u_id " . "AND   o_raum=$raum_alt";
+            $query = "UPDATE online SET o_raum=" . intval($raum_neu)
+                . " WHERE o_user=$u_id AND o_raum=" . intval($raum_alt);
             $result = mysql_query($query, $conn);
             
             // Austrittstext
@@ -187,7 +187,7 @@ function raum_gehe($o_id, $u_id, $u_name, $raum_alt, $raum_neu, $geschlossen)
             if (($forumfeatures) && ($communityfeatures) && (!$beichtstuhl)
                 && (($neu->r_status1 == "L") || ($alt->r_status1 == "L"))
                 && ($u_level != "A") && (!$admin)) {
-                $query2 = "SELECT o_hash, o_vhost FROM online WHERE o_id=$o_id ";
+                $query2 = "SELECT o_hash, o_vhost FROM online WHERE o_id=" . intval($o_id);
                 $result2 = mysql_query($query2, $conn);
                 
                 if ($result2 && mysql_num_rows($result2) == 1) {

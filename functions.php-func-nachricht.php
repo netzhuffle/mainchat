@@ -24,7 +24,7 @@ function nachricht_betrete($u_id, $r_id, $u_name, $r_name)
         $result = mysql_query($query, $conn);
         $row = mysql_fetch_object($result);
         if (strlen($row->u_eintritt) > 0) {
-            $text = stripslashes($row->u_eintritt);
+            $text = $row->u_eintritt;
             if ($eintritt_useranzeige == "1")
                 $text = htmlspecialchars($text) . "  <b>($u_name)</b> ";
             else $text = htmlspecialchars($text) . " <!-- <b>($u_name)</b> -->";
@@ -50,7 +50,7 @@ function nachricht_betrete($u_id, $r_id, $u_name, $r_name)
         
         // Spamschutz, verhindert die Eintrittsmeldung, wenn innerhalb von 60 Sek mehr als 15 Systemmiteilungen eingehen...
         
-        $sql = "SELECT count(c_id) as nummer FROM chat WHERE c_von_user = '' and c_typ='S' and c_raum ='$r_id' and c_zeit > '"
+        $sql = "SELECT count(c_id) as nummer FROM chat WHERE c_von_user = '' and c_typ='S' and c_raum = " . intval($r_id) . " and c_zeit > '"
             . date("YmdHis", date("U") - 60) . "'";
         $result = mysql_query($sql);
         $num = mysql_fetch_array($result);
@@ -82,11 +82,11 @@ function nachricht_verlasse($r_id, $u_name, $r_name)
     
     // Nachricht auswählen
     if ($eintritt_individuell == "1") {
-        $query = "SELECT u_austritt FROM user where u_nick = '$u_name'";
+        $query = "SELECT u_austritt FROM user where u_nick = '" . mysql_real_escape_string($u_name) . "'";
         $result = mysql_query($query);
         $row = mysql_fetch_object($result);
         if (strlen($row->u_austritt) > 0) {
-            $text = stripslashes($row->u_austritt);
+            $text = $row->u_austritt;
             if ($eintritt_useranzeige == "1")
                 $text = htmlspecialchars($text) . "  <b>($u_name)</b> ";
             else $text = htmlspecialchars($text) . " <!-- <b>($u_name)</b> -->";
