@@ -654,7 +654,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
         // Gibt Spruchliste aus
             if (!isset($chatzeile[1]))
                 $chatzeile[1] = "";
-            $suchtext = preg_replace("/[*%$!?.,;\\:\/]/i", "", $chatzeile[1]);
+            $suchtext = preg_replace("/[*%$!?.,;:\\/]/i", "", $chatzeile[1]);
             if (strlen($suchtext) > 2) :
                 // Sprüche in Array lesen
                 $spruchliste = file("conf/$datei_spruchliste");

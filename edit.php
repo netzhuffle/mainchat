@@ -489,7 +489,7 @@ if (strlen($u_id) != 0) {
                     unset($f['u_level']);
                 }
                 
-                $query = "SELECT u_level FROM user WHERE u_id=" . intval($f[u_id]);
+                $query = "SELECT u_level FROM user WHERE u_id=" . intval($f['u_id']);
                 $result = mysql_query($query, $conn);
                 if ($result && mysql_num_rows($result) > 0) {
                     $uu_level = mysql_result($result, 0, "u_level");
@@ -588,7 +588,7 @@ if (strlen($u_id) != 0) {
                         
                     }
                     
-                    $query = "SELECT u_profil_historie FROM user WHERE u_id = " . intval($f[u_id]);
+                    $query = "SELECT u_profil_historie FROM user WHERE u_id = " . intval($f['u_id']);
                     $result = mysql_query($query);
                     $g = mysql_fetch_array($result);
                     
@@ -682,7 +682,7 @@ if (strlen($u_id) != 0) {
                 }
                 
                 // User mit ID $u_id anzeigen
-                $query = "SELECT user.* " . "FROM user WHERE u_id=" . intval($f[u_id]);
+                $query = "SELECT user.* " . "FROM user WHERE u_id=" . intval($f['u_id']);
                 $result = mysql_query($query, $conn);
                 
                 if ($result && mysql_num_rows($result) == 1) {
