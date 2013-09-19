@@ -714,7 +714,7 @@ function zeige_fuss()
     global $body_tag, $layout_fuss, $layout_include, $layout_parse, $ivw, $layout_bodytag;
     global $f3, $f4, $mainchat_version;
     
-    echo "<DIV align=center>" . $f3 . $mainchat_version . "<BR><A HREF=\"https://github.com/netzhuffle/mainchat\">mainChat Open Source</A>" . $f4 . "</DIV>\n<BR CLEAR=ALL>\n" . "<BR CLEAR=ALL>\n";
+    echo "<DIV align=center>" . $f3 . $mainchat_version . "<BR><A HREF=\"https://github.com/netzhuffle/mainchat\" TARGET=\"_top\">mainChat Open Source</A>" . $f4 . "</DIV>\n<BR CLEAR=ALL>\n" . "<BR CLEAR=ALL>\n";
     
     if (isset($banner) && strlen($banner) > 0) {
         readfile($banner);
