@@ -1,10 +1,10 @@
 <?php
 // fidion mainChat
 // (C) fidion GmbH
-// $Id: functions.php,v 1.94 2012/12/17 07:11:17 student Exp $
+// $Id: functions.php,v 1.95 2013/12/04 06:44:23 student Exp $
 
 // Version / Copyright - nicht entfernen!
-$mainchat_version="mainChat 5.0.2 (c) by fidion GmbH 1999-2012";
+$mainchat_version="mainChat 5.0.3 (c) by fidion GmbH 1999-2013";
 $mainchat_email="info@fidion.de";
 
 // HTTPS ja oder nein?
@@ -34,6 +34,43 @@ if ( !(isset($conn))) {
  echo "Beim Zugriff auf die Datenbank ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal!<BR>";
  exit;
 }
+
+// Deklaration der gültigen Tabellenfelder die in die Datenbank geschrieben werden dürfen 
+    $valid_fields = array(
+        'aktion' => array('a_id', 'a_user', 'a_wann', 'a_was', 'a_wie', 'a_text', 'a_zeit'),
+        'bild' => array('b_id', 'b_user', 'b_name', 'b_bild', 'b_mime', 'b_width', 'b_height'),
+        'blacklist' => array('f_id', 'f_userid', 'f_blacklistid', 'f_zeit', 'f_text'),
+        'chat' => array('c_id', 'c_von_user', 'c_an_user', 'c_typ', 'c_raum', 'c_text', 'c_zeit', 'c_farbe', 'c_von_user_id', 'c_br'),
+        'forum' => array('fo_id', 'fo_name', 'fo_order', 'fo_admin'),
+        'freunde' => array('f_id', 'f_userid', 'f_freundid', 'f_zeit', 'f_text', 'f_status'),
+        'iignore' => array('i_id', 'i_user_aktiv', 'i_user_passiv'),
+        'invite' => array('inv_id', 'inv_raum', 'inv_user'),
+        'ip_sperre' => array('is_id', 'is_ip', 'is_domain', 'is_zeit', 'is_ip_byte', 'is_owner', 'is_infotext', 'is_warn'),
+        'mail' => array('m_id', 'm_status', 'm_von_uid', 'm_an_uid', 'm_zeit', 'm_geloescht_ts', 'm_betreff', 'm_text'),
+        'mail_check' => array('email', 'datum', 'u_id'),
+        'moderation' => array('c_id', 'c_von_user', 'c_an_user', 'c_typ', 'c_raum', 'c_text', 'c_zeit', 'c_farbe', 'c_von_user_id', 'c_moderator'),
+        'online' => array('o_id', 'o_user', 'o_raum', 'o_hash', 'o_timestamp', 'o_ip', 'o_who', 'o_aktiv', 'o_chat_id', 'o_browser', 'o_name', 'o_vhost', 'o_js', 'o_knebel', 
+                          'o_http_stuff', 'o_http_stuff2', 'o_userdata', 'o_userdata2', 'o_userdata3', 'o_userdata4', 'o_level', 'o_ignore', 'o_login', 'o_punkte', 'o_aktion', 
+                          'o_timeout_zeit', 'o_timeout_warnung', 'o_chat_historie', 'o_spam_zeilen', 'o_spam_byte', 'o_spam_zeit', 'u_sms_extra'),
+        'posting' => array('po_id', 'po_th_id', 'po_u_id', 'po_vater_id', 'po_ts', 'po_tiefe', 'po_threadorder', 'po_threadts', 'po_gesperrt', 'po_threadgesperrt', 
+                           'po_topposting', 'po_titel', 'po_text'),
+        'raum' => array('r_id', 'r_name', 'r_eintritt', 'r_austritt', 'r_status1', 'r_besitzer', 'r_topic', 'r_status2', 'r_smilie', 'r_werbung', 'r_min_punkte'), 
+        'sequence' => array('se_name', 'se_nextid'),
+        'sms' => array('s_id', 's_zeit', 's_von_user_id', 's_an_user_id', 's_status', 's_text'),
+        'smsin' => array('s_id', 's_handynummer', 's_shortnumber', 's_keyword', 's_timestamp', 's_text'),
+        'sperre' => array('s_id', 's_user', 's_raum', 's_zeit'),
+        'thema' => array('th_id', 'th_fo_id', 'th_name', 'th_desc', 'th_anzthreads', 'th_anzreplys', 'th_postings', 'th_order'),
+        'top10cache' => array('t_id', 't_zeit', 't_eintrag', 't_daten'),
+        'umfrage' => array('um_id', 'um_bereich', 'um_frage', 'um_opt', 'um_opt_typ', 'um_opt_anzahl_min', 'um_opt_anzahl_max', 'um_start', 'um_start_umfrage', 
+                           'um_ende_umfrage', 'um_ende', 'um_minpunkte', 'um_minlogin', 'um_useranzahl', 'um_user', 'um_stimmen'),
+        'user' => array('u_id', 'u_neu', 'u_login', 'u_auth', 'u_nick', 'u_name', 'u_passwort', 'u_adminemail', 'u_email', 'u_url', 'u_level', 'u_farbe', 'u_backup', 
+                        'u_farbe_alle', 'u_farbe_noise', 'u_farbe_priv', 'u_farbe_bg', 'u_farbe_sys', 'u_clearedit', 'u_away', 'u_ip_historie', 'u_smilie', 'u_agb', 
+                        'u_zeilen', 'u_punkte_gesamt', 'u_punkte_monat', 'u_punkte_jahr', 'u_punkte_datum_monat', 'u_punkte_datum_jahr', 'u_punkte_gruppe', 'u_gelesene_postings',
+                        'u_frames', 'u_chathomepage', 'u_eintritt', 'u_austritt', 'u_signatur', 'u_lastclean', 'u_loginfehler', 'u_sms_ok', 'u_sms_guthaben', 'u_sms_extra', 
+                        'u_nick_historie', 'u_profil_historie', 'u_kommentar', 'u_forum_postingproseite', 'u_systemmeldungen', 'u_punkte_anzeigen', 'u_knebel'),
+        'userinfo' => array('ui_id', 'ui_userid', 'ui_strasse', 'ui_plz', 'ui_ort', 'ui_land', 'ui_geburt', 'ui_geschlecht', 'ui_beziehung', 'ui_typ', 'ui_beruf', 'ui_hobby', 
+                            'ui_tel', 'ui_fax', 'ui_handy', 'ui_icq', 'ui_text', 'ui_farbe', 'ui_einstellungen')
+        );
 
 
 // Funktionen
@@ -497,6 +534,8 @@ $browser = $agent  ? $agent  : $_SERVER["HTTP_USER_AGENT"];
 
 $browser = str_replace("MSIE 8.0", "MSIE 7.0", $browser);
 
+$id = mysql_real_escape_string($id);
+ 
 // u_id und o_id aus Objekt ermitteln, o_hash, o_browser müssen übereinstimmen
 
 $query = "SELECT HIGH_PRIORITY *,UNIX_TIMESTAMP(o_timeout_zeit) as o_timeout_zeit,".
@@ -709,9 +748,22 @@ function schreibe_db($db,$f,$id,$id_name) {
 // Liefert als Ergebnis die ID des geschriebenen Datensatzes zurück
 // Sonderbehandlung für Passwörter
 // Akualiert ggf Kopie des Datensatzes in online-Tabelle
-global $dbase,$conn,$u_id;
+global $dbase,$conn,$u_id, $valid_fields;
+
 
 // echo "Debug:<PRE>";print_r($f);echo "</PRE>";
+
+    unset($neu);
+
+    foreach ($valid_fields[$db] as $field) {
+        if (isset($f[$field])) {
+            $neu[$field] = $f[$field];
+        }
+    }
+
+    unset($f);
+    $f = $neu;
+
 
 if (strlen($id)==0 || $id==0) {
 

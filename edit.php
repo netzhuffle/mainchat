@@ -2,7 +2,7 @@
 
 // fidion GmbH mainChat
 
-// $Id: edit.php,v 1.29 2012/12/17 07:09:37 student Exp $
+// $Id: edit.php,v 1.30 2013/12/04 06:44:23 student Exp $
 
 require ("functions.php");
 require ("functions-msg.php");
@@ -329,7 +329,22 @@ case "edit":
 		unset($f['u_login']);
 		unset($f['u_agb']);
 		unset($f['u_ip_historie']);
-
+		unset($f['u_punkte_gesamt']);
+		unset($f['u_punkte_monat']);
+		unset($f['u_punkte_jahr']);
+		unset($f['u_punkte_datum_monat']);
+		unset($f['u_punkte_datum_jahr']);
+		unset($f['u_punkte_gruppe']);
+		unset($f['u_gelesene_postings']);
+		unset($f['u_lastclean']);
+		unset($f['u_loginfehler']);
+		unset($f['u_sms_ok']);
+		unset($f['u_sms_guthaben']);
+		unset($f['u_sms_extra']);
+		unset($f['u_nick_historie']);
+		unset($f['u_profil_historie']);		
+		unset($f['u_knebel']);
+		
 		// Nicht-Admin darf Einstellungen nicht ändern
 		if (!$admin):
 			unset($f['u_name']);

@@ -1,7 +1,7 @@
 <?php
 // fidion GmbH mainChat
 
-// $Id: user.php,v 1.20 2012/10/17 06:16:53 student Exp $
+// $Id: user.php,v 1.21 2013/12/04 06:44:23 student Exp $
 
 require_once("functions.php");
 require_once("functions.php-func-verlasse_chat.php");
@@ -599,7 +599,7 @@ case "suche":
 			}
 		} else {
 
-			// Bei mehr als 1000 Ergebnissen Fehlermeldung ausgeben
+			// Bei mehr als 2000 Ergebnissen Fehlermeldung ausgeben
 			if ($anzahl>2000) {
 				echo "<B>$t[sonst24]</B><BR>";
 			} else {

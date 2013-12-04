@@ -1,6 +1,6 @@
 <?php
 
-// $Id: functions.php-user.php,v 1.17 2012/10/17 06:16:53 student Exp $
+// $Id: functions.php-user.php,v 1.18 2013/12/04 06:44:23 student Exp $
 // functions nur für user.php
 
 require_once("functions.php-func-html_parse.php");
@@ -259,7 +259,7 @@ global $chat_grafik,$whotext,$beichtstuhl,$erweitertefeatures,$msgpopup,$serverp
 				$awaytext = str_replace('&amp;lt;', '<', $awaytext);
 				$awaytext = str_replace('&amp;gt;', '>', $awaytext);
 				$awaytext = str_replace('&amp;quot;', '"', $awaytext);
-				echo $f1."<BR></b>($awaytext)<b>".$f2;
+				echo $f1."<BR></b>(".htmlspecialchars($awaytext).")<b>".$f2;
 				unset($awaytext);
 			}
 
