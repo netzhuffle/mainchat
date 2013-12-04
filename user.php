@@ -1010,5 +1010,3 @@ if ($aktion != "zeigalle" || $u_level != "S") {
     }
     echo "</BODY></HTML>\n";
 }
-        ?>
-
