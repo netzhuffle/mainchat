@@ -3,5 +3,7 @@
 .settings
 .buildpath
 /conf/config.php*
+/conf/header.html
+/conf/footer.html
 /seitenkoepfe/*
 /logs/*
