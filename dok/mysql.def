@@ -168,11 +168,11 @@ CREATE TABLE aktion (
   a_was varchar(255) NOT NULL default '',
   a_wie set('keine','Chat-Mail','E-Mail','OLM','SMS') NOT NULL default 'keine',
   a_text varchar(255) NOT NULL default '',
-  a_zeit timestamp(14) NOT NULL,
+  a_zeit timestamp NOT NULL,
   PRIMARY KEY  (a_id),
   KEY a_user (a_user),
   KEY a_wann (a_wann)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `bild`
@@ -188,7 +188,7 @@ CREATE TABLE bild (
   b_height int(11) unsigned NOT NULL default '0',
   PRIMARY KEY  (b_id),
   KEY b_user (b_user)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `blacklist`
@@ -198,11 +198,11 @@ CREATE TABLE blacklist (
   f_id int(11) unsigned NOT NULL auto_increment,
   f_userid int(11) unsigned NOT NULL default '0',
   f_blacklistid int(11) unsigned NOT NULL default '0',
-  f_zeit timestamp(14) NOT NULL,
+  f_zeit timestamp NOT NULL,
   f_text varchar(255) NOT NULL default '',
   PRIMARY KEY  (f_id),
   KEY f_blacklistid (f_blacklistid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `chat`
@@ -215,14 +215,14 @@ CREATE TABLE chat (
   c_typ char(1) NOT NULL default 'N',
   c_raum int(11) unsigned NOT NULL default '0',
   c_text varchar(255) NOT NULL default '',
-  c_zeit timestamp(14) NOT NULL,
+  c_zeit timestamp NOT NULL,
   c_farbe varchar(6) default NULL,
   c_von_user_id int(11) unsigned NOT NULL default '0',
   c_br enum('normal','letzte','erste','mitte') NOT NULL default 'normal',
   PRIMARY KEY  (c_id),
   KEY c_an_user (c_an_user),
   KEY c_raum (c_raum)
-) TYPE=HEAP PACK_KEYS=1;
+) ENGINE=HEAP PACK_KEYS=1;
 
 --
 -- Table structure for table `forum`
@@ -234,7 +234,7 @@ CREATE TABLE forum (
   fo_order smallint(5) NOT NULL default '0',
   fo_admin tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (fo_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `freunde`
@@ -244,13 +244,13 @@ CREATE TABLE freunde (
   f_id int(11) unsigned NOT NULL auto_increment,
   f_userid int(11) unsigned NOT NULL default '0',
   f_freundid int(11) unsigned NOT NULL default '0',
-  f_zeit timestamp(14) NOT NULL,
+  f_zeit timestamp NOT NULL,
   f_text varchar(255) NOT NULL default '',
   f_status enum('beworben','bestaetigt') NOT NULL default 'bestaetigt',
   PRIMARY KEY  (f_id),
   KEY f_userid (f_userid),
   KEY f_freundid (f_freundid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `iignore`
@@ -263,7 +263,7 @@ CREATE TABLE iignore (
   PRIMARY KEY  (i_id),
   KEY i_user_aktiv (i_user_aktiv),
   KEY i_user_passiv (i_user_passiv)
-) TYPE=MyISAM PACK_KEYS=1;
+) ENGINE=MyISAM PACK_KEYS=1;
 
 --
 -- Table structure for table `invite`
@@ -275,7 +275,7 @@ CREATE TABLE invite (
   inv_user int(11) default NULL,
   PRIMARY KEY  (inv_id),
   KEY inv_user (inv_user)  
-) TYPE=MyISAM PACK_KEYS=1;
+) ENGINE=MyISAM PACK_KEYS=1;
 
 --
 -- Table structure for table `ip_sperre`
@@ -285,7 +285,7 @@ CREATE TABLE ip_sperre (
   is_id int(11) unsigned NOT NULL auto_increment,
   is_ip varchar(16) default NULL,
   is_domain varchar(255) default NULL,
-  is_zeit timestamp(14) NOT NULL,
+  is_zeit timestamp NOT NULL,
   is_ip_byte char(1) default NULL,
   is_owner int(11) unsigned NOT NULL default '0',
   is_infotext text,
@@ -293,7 +293,7 @@ CREATE TABLE ip_sperre (
   PRIMARY KEY  (is_id),
   KEY is_owner (is_owner),
   KEY is_warn (is_warn)
-) TYPE=MyISAM PACK_KEYS=1;
+) ENGINE=MyISAM PACK_KEYS=1;
 
 --
 -- Table structure for table `mail`
@@ -304,8 +304,8 @@ CREATE TABLE mail (
   m_status enum('neu','gelesen','geloescht','neu/verschickt') NOT NULL default 'neu',
   m_von_uid int(11) unsigned NOT NULL default '0',
   m_an_uid int(11) unsigned NOT NULL default '0',
-  m_zeit timestamp(14) NOT NULL,
-  m_geloescht_ts timestamp(14) NOT NULL default '00000000000000',
+  m_zeit timestamp NOT NULL,
+  m_geloescht_ts timestamp NOT NULL default '00000000000000',
   m_betreff varchar(255) NOT NULL default '',
   m_text text NOT NULL,
   PRIMARY KEY  (m_id),
@@ -313,7 +313,7 @@ CREATE TABLE mail (
   KEY m_von_uid (m_von_uid),
   KEY m_an_uid (m_an_uid),
   KEY m_geloescht_ts (m_an_uid,m_status,m_geloescht_ts)
-) TYPE=MyISAM PACK_KEYS=1;
+) ENGINE=MyISAM PACK_KEYS=1;
 
 --
 -- Table structure for table `mail_check`
@@ -324,7 +324,7 @@ CREATE TABLE mail_check (
   datum date NOT NULL default '0000-00-00',
   u_id int(11) NOT NULL default '0',
   PRIMARY KEY  (email)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `moderation`
@@ -337,7 +337,7 @@ CREATE TABLE moderation (
   c_typ char(1) default NULL,
   c_raum int(11) unsigned NOT NULL default '0',
   c_text text,
-  c_zeit timestamp(14) NOT NULL,
+  c_zeit timestamp NOT NULL,
   c_farbe varchar(6) default NULL,
   c_von_user_id int(11) unsigned NOT NULL default '0',
   c_moderator int(11) NOT NULL default '0',
@@ -346,7 +346,7 @@ CREATE TABLE moderation (
   KEY c_raum (c_raum),
   KEY c_von_user_id (c_von_user_id),
   KEY c_moderator (c_moderator)
-) TYPE=MyISAM PACK_KEYS=1;
+) ENGINE=MyISAM PACK_KEYS=1;
 
 --
 -- Table structure for table `online`
@@ -357,16 +357,16 @@ CREATE TABLE online (
   o_user int(11) unsigned NOT NULL default '0',
   o_raum int(11) NOT NULL default '0',
   o_hash varchar(255) NOT NULL default '',
-  o_timestamp timestamp(14) NOT NULL,
+  o_timestamp timestamp NOT NULL,
   o_ip varchar(16) NOT NULL default '',
   o_who smallint(3) unsigned default NULL,
-  o_aktiv timestamp(14) NOT NULL default '00000000000000',
+  o_aktiv timestamp NOT NULL default '00000000000000',
   o_chat_id int(11) unsigned NOT NULL default '0',
   o_browser varchar(255) NOT NULL default '',
   o_name varchar(64) NOT NULL default '',
   o_vhost varchar(255) default '',
   o_js tinyint(1) NOT NULL default '0',
-  o_knebel timestamp(14) NOT NULL default '00000000000000',
+  o_knebel timestamp NOT NULL default '00000000000000',
   o_http_stuff varchar(255) NOT NULL default '',
   o_http_stuff2 varchar(255) NOT NULL default '',
   o_userdata varchar(255) NOT NULL default '',
@@ -375,7 +375,7 @@ CREATE TABLE online (
   o_userdata4 varchar(255) NOT NULL default '',
   o_level char(1) NOT NULL default '',
   o_ignore varchar(255) NOT NULL default '',
-  o_login timestamp(14) NOT NULL default '00000000000000',
+  o_login timestamp NOT NULL default '00000000000000',
   o_punkte int(11) NOT NULL default '0',
   o_aktion int(11) unsigned NOT NULL default '0',
   o_timeout_zeit varchar(14) NOT NULL default '0',
@@ -398,7 +398,7 @@ CREATE TABLE online (
   KEY o_browser (o_browser),
   KEY o_js (o_js),
   KEY o_level (o_level)
-) TYPE=HEAP PACK_KEYS=1;
+) ENGINE=HEAP PACK_KEYS=1;
 
 --
 -- Table structure for table `posting`
@@ -423,7 +423,7 @@ CREATE TABLE posting (
   KEY po_u_id (po_u_id),
   KEY po_vater_id (po_vater_id),
   KEY po_themasort (po_th_id,po_vater_id,po_topposting,po_threadts,po_ts)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `raum`
@@ -446,7 +446,7 @@ CREATE TABLE raum (
   KEY r_status1 (r_status1),
   KEY r_status2 (r_status2),
   KEY r_smilie (r_smilie)
-) TYPE=MyISAM PACK_KEYS=1;
+) ENGINE=MyISAM PACK_KEYS=1;
 
 --
 -- Table structure for table `sequence`
@@ -456,7 +456,7 @@ CREATE TABLE sequence (
   se_name varchar(127) NOT NULL default '',
   se_nextid int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (se_name)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `sms`
@@ -464,13 +464,13 @@ CREATE TABLE sequence (
 
 CREATE TABLE sms (
   s_id int(11) unsigned NOT NULL auto_increment,
-  s_zeit timestamp(14) NOT NULL,
+  s_zeit timestamp NOT NULL,
   s_von_user_id int(11) unsigned NOT NULL default '0',
   s_an_user_id int(11) unsigned NOT NULL default '0',
   s_status char(1) NOT NULL default 'W',
   s_text varchar(255) NOT NULL default '',
   PRIMARY KEY  (s_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `smsin`
@@ -484,7 +484,7 @@ CREATE TABLE smsin (
   s_timestamp datetime default NULL,
   s_text varchar(160) NOT NULL default '',
   PRIMARY KEY  (s_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `sperre`
@@ -494,11 +494,11 @@ CREATE TABLE sperre (
   s_id int(11) unsigned NOT NULL auto_increment,
   s_user int(11) unsigned NOT NULL default '0',
   s_raum int(11) unsigned NOT NULL default '0',
-  s_zeit timestamp(14) NOT NULL,
+  s_zeit timestamp NOT NULL,
   PRIMARY KEY  (s_id),
   KEY s_user (s_user),
   KEY s_raum (s_raum)
-) TYPE=MyISAM PACK_KEYS=1;
+) ENGINE=MyISAM PACK_KEYS=1;
 
 --
 -- Table structure for table `thema`
@@ -516,7 +516,7 @@ CREATE TABLE thema (
   PRIMARY KEY  (th_id),
   KEY th_fo_id (th_fo_id),
   KEY th_name (th_name)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `top10cache`
@@ -524,11 +524,11 @@ CREATE TABLE thema (
 
 CREATE TABLE top10cache (
   t_id int(11) unsigned NOT NULL auto_increment,
-  t_zeit timestamp(14) NOT NULL,
+  t_zeit timestamp NOT NULL,
   t_eintrag int(11) unsigned NOT NULL default '1',
   t_daten mediumblob,
   PRIMARY KEY  (t_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `user`
@@ -537,7 +537,7 @@ CREATE TABLE top10cache (
 CREATE TABLE user (
   u_id int(11) unsigned NOT NULL auto_increment,
   u_neu varchar(14) default NULL,
-  u_login timestamp(14) NOT NULL,
+  u_login timestamp NOT NULL,
   u_auth char(1) default NULL,
   u_nick varchar(64) NOT NULL default '',
   u_name varchar(64) NOT NULL default '',
@@ -590,7 +590,7 @@ CREATE TABLE user (
   KEY u_email (u_email),
   KEY u_name (u_name),
   FULLTEXT KEY u_ip_historie (u_ip_historie)
-) TYPE=MyISAM PACK_KEYS=1;
+) ENGINE=MyISAM PACK_KEYS=1;
 
 --
 -- Table structure for table `userinfo`
@@ -618,7 +618,7 @@ CREATE TABLE userinfo (
   ui_einstellungen varchar(255) NOT NULL default '',
   PRIMARY KEY  (ui_id),
   KEY ui_userid (ui_userid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 INSERT INTO raum set r_name='Lobby',r_eintritt='Hallˆle',r_topic='Eingangshalle',r_status1='O',r_status2='P';
 INSERT INTO user set u_id=1,u_nick='admin',u_name='admin',u_passwort='adpexzg3FUZAk',u_level='S';
