@@ -87,7 +87,7 @@ switch ($_POST['aktion']) {
                             } else {
                                 $select = mysql_select_db($_POST['chat']['dbase'],
                                     $connect);
-                            step_2($connect, $select, $_POST['chat'], $fp);
+                                step_2($connect, $select, $_POST['chat'], $fp);
                             }
                             
                         } else step_2($connect, $select, $_POST['chat'], $fp);
