@@ -1,4 +1,4 @@
-Installationsanleitung mainChat, Stand 13.09.05
+Installationsanleitung mainChat, Stand 02.06.14
 
 
 Alle Rechte an mainChat vorbehalten, (C) fidion GmbH
@@ -17,7 +17,7 @@ mainChat benötigt folgende Komponenten:
 - apache (http://www.apache.org/)
 
 Empfehlenswerte Versionen:
-mysql ab 4.0.20
+mysql ab 5.5.3
 php ab 4.4.x
 apache 1.3.x oder apache 2.0.x (diese Anleitung bezieht sich auf 1.3.x)
 gdlib mit GIF-Support (nur in der Community-Version)
@@ -203,10 +203,10 @@ config.php-chat.beispieldomain.de mit minimalinhalt <?php ?>)
 
 Die Datei config.php enthält folgende wichtige Variablen:
 
-$dbase		Die verwendete Datenbank. Immer "mainchat"
+$dbase		Die verwendete Datenbank. Beispiel: "mainchat"
 $mysqlhost	Name des Datenbankservers. Hier den Rechnernamen eintragen.
                 Bei lokaler Datenbank genügt "localhost".
-$mysqluser	Name des Datenbankusers. Immer "www".
+$mysqluser	Name des Datenbankusers.
 $webmaster	E-Mail Adresse der zuständigen Person. Bitte eintragen.
 
 $ivw		URL zum Zählmodul. Sollte angepaßt oder leer gelassen werden.
@@ -241,8 +241,9 @@ Level Z: Gesperrt - Der Login wird abgewiesen
 ChatAdmins und Superuser können User verändern und Rechner vom Chat
 aussperren. Ein Superuser kann andere User zu ChatAdmins oder Superuser
 ändern, ein ChatAdmin kann dies nicht. Gast und User sind auch gleichwertig,
-außer das ein Gast nach dem Logoff gelöscht wird. Ein User, der auf
-"Gesperrt" gesetzt wird, kann sich nicht mehr im mainChat anmelden. 
+außer das ein Gast nach dem Logoff gelöscht wird und gewisse Befehle nicht
+nutzen kann. Ein User, der auf "Gesperrt" gesetzt wird, kann sich nicht mehr
+im mainChat anmelden. 
 
 Im Verzeichnis conf/ finden Sie Konfigurationsdateien mit den Texten, die im
 mainChat Verwendung finden. Die Texte sind bis auf die Platzhalter (%TEXT%)
