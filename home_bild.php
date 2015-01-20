@@ -60,7 +60,7 @@ $conn = 0;
 for ($c = 0; $c++ < 50 AND !$conn;) {
     if ($conn = @mysql_connect($mysqlhost, $mysqluser, $mysqlpass)) {
         @mysql_select_db($dbase, $conn);
-        mysql_set_charset("utf8");
+        mysql_set_charset("utf8mb4");
     }
     usleep(200000);
 }

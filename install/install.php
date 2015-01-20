@@ -74,7 +74,7 @@ switch ($aktion) {
                         unlink($configdatei);
                         step_1();
                     } else {
-                        mysql_set_charset("utf8");
+                        mysql_set_charset("utf8mb4");
                         if (!$select = mysql_select_db($chat['dbase'], $connect)) {
                             if (!$create_db = mysql_query(
                                 "CREATE DATABASE $chat[dbase]", $connect)) {

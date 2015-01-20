@@ -2806,7 +2806,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
             case "/quiddice":
             case "/dicecheck":
                 if (!isset($o_dicecheck)) {
-                    mysql_query("ALTER TABLE online ADD o_dicecheck VARCHAR(255) NOT NULL DEFAULT ''", $conn);
+                    mysql_query("ALTER TABLE online ADD o_dicecheck VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''", $conn);
                     $o_dicecheck = "";
                 }
                 if (!$o_dicecheck) {

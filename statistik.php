@@ -47,7 +47,7 @@ if (!$admin || !$erweitertefeatures)
 
 $c = @mysql_connect($STAT_DB_HOST, $STAT_DB_USER, $STAT_DB_PASS);
 if ($c) {
-    mysql_set_charset("utf8");
+    mysql_set_charset("utf8mb4");
     mysql_select_db($STAT_DB_NAME, $c);
 }
 $v = mysql_real_escape_string($http_host);
