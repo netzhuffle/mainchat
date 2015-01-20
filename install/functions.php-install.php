@@ -100,7 +100,7 @@ function step_2($connect, $select, $chat, $fpconfig)
     $fpconfigtpl = fopen($configtpl, "r");
     $inhalt = fread($fpconfigtpl, filesize($configtpl));
     foreach ($chat as $key => $value)
-        $inhalt = str_replace("%$key%", $value, $inhalt);
+        $inhalt = str_replace("%$key%", addslashes($value), $inhalt);
     fwrite($fpconfig, $inhalt, strlen($inhalt));
     
     echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" border=\"0\" align=\"center\">\n"
