@@ -195,7 +195,7 @@ if ((!isset($http_host) && !isset($login)) || ($frame == 1)) {
         
         // Raumauswahlliste erstellen
         $query = "SELECT r_name,r_id FROM raum "
-            . "WHERE (r_status1='O' OR r_status1 LIKE BINARY 'm') AND r_status2='P' "
+            . "WHERE (r_status1='O' OR r_status1='E' OR r_status1 LIKE BINARY 'm') AND r_status2='P' "
             . "ORDER BY r_name";
         
         $result = @mysql_query($query, $conn);

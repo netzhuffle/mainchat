@@ -27,7 +27,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
     global $chat, $timeout, $chat_url, $datei_spruchliste, $t, $id, $ak, $check_name, $f1, $f2, $raumstatus1;
     global $u_farbe_alle, $u_farbe_sys, $u_farbe_priv, $u_farbe_noise, $u_farbe_bg, $u_clearedit, $raum_max;
     global $u_nick, $id, $http_host, $lobby, $o_raum, $o_js, $o_knebel, $r_status1, $u_level, $leveltext, $max_user_liste;
-    global $communityfeatures, $o_punkte, $beichtstuhl, $raum_einstellungen, $ist_moderiert, $userdata, $lustigefeatures;
+    global $communityfeatures, $o_punkte, $beichtstuhl, $raum_einstellungen, $ist_moderiert, $ist_eingang, $userdata, $lustigefeatures;
     global $punkte_ab_user, $punktefeatures, $whotext, $knebelzeit, $nickwechsel, $raumanlegenpunkte, $o_dicecheck;
     global $einstellungen_aendern, $single_room_verhalten, $eingabe_light_farbe, $eingabe_light_hilfe;
     
@@ -1838,7 +1838,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
         case "/msgpriv": // Extra behandlung für Private Nachrichten im Userfenster, für den Fall, dass der User sich ausloggt, keine Nickergänzung
         
         // Private Nachricht 
-            if (!($o_knebel > 0) && $u_level != "G"
+            if (!($o_knebel > 0) && $u_level != "G" && !$ist_eingang
                 && (!$beichtstuhl || $admin)) {
                 
                 // Smilies und Text parsen
@@ -1924,6 +1924,9 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                 $zeit = gmdate("H:i:s", $o_knebel);
                 $txt = str_replace("%zeit%", $zeit, $t['knebel6']);
                 system_msg("", $u_id, $u_id, $system_farbe, $txt);
+            } elseif ($ist_eingang) {
+				system_msg("", 0, $u_id, $system_farbe,
+					$raum_einstellungen['r_topic']);
             } elseif (!$admin) {
                 system_msg("", 0, $u_id, $system_farbe,
                     str_replace("%chatzeile%", $chatzeile[0], $t['chat_msg1']));
@@ -3048,8 +3051,8 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                         $f['c_farbe'] = $u_farbe;
                         
                         // Ist Raum moderiert? $ist_moderiert und $raum_einstellungen wurde in raum_ist_moderiert() gesetzt
-                        if (!$ist_moderiert) {
                             
+                        if (!$ist_eingang && !$ist_moderiert) {
                             // raum ist nicht moderiert -> schreiben.
                             $back = schreibe_chat($f);
                             
@@ -3100,7 +3103,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                                 
                             }
                             
-                        } else {
+                        } elseif ($ist_moderiert) {
                             if ($u_level == "M") {
                                 
                                 // sonderfall: moderator -> hier doch schreiben	
@@ -3130,6 +3133,9 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                                         "&gt;&gt;&gt; " . $f['c_text']);
                                 }
                             }
+                        } elseif ($ist_eingang && strlen(trim($f['c_text'])) > 0)  {
+                        	system_msg("", 0, $u_id, $system_farbe,
+                                        $raum_einstellungen['r_topic']);
                         }
                         return ($back);
                     }

@@ -50,6 +50,7 @@ $raumstatus1['G'] = "geschlossen";
 $raumstatus1['L'] = "Teergrube";
 $raumstatus1['m'] = "moderiert";
 $raumstatus1['M'] = "Moderiert+geschl.";
+$raumstatus1['E'] = "Stiller Eingangsraum";
 $raumstatus2['T'] = "temporär";
 $raumstatus2['P'] = "permanent";
 

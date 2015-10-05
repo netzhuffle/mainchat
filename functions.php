@@ -1009,8 +1009,9 @@ function raum_ist_moderiert($raum)
     // Liefert Status des Raums zurück: Moderiert ja/nein
     // Liefert zusätzlich in $raum_einstellungen alle Einstellungen des Raums zurück
     // Liefert in ist_moderiert zurück: Moderiert ja/nein
-    global $dbase, $conn, $u_id, $system_farbe, $moderationsmodul, $raum_einstellungen, $ist_moderiert;
     
+    // Liefert in ist_eingang zurück: Stiller Eingangsraum ja/nein
+    global $dbase, $conn, $u_id, $system_farbe, $moderationsmodul, $raum_einstellungen, $ist_moderiert, $ist_eingang;
     $moderiert = 0;
     $raum = intval($raum);
     
@@ -1030,6 +1031,7 @@ function raum_ist_moderiert($raum)
         mysql_free_result($result);
     }
     $ist_moderiert = $moderiert;
+    $ist_eingang = $r_status1 == "E";
     return $moderiert;
 }
 

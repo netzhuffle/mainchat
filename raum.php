@@ -15,6 +15,10 @@ $fenster = str_replace("Ö", "", $fenster);
 $fenster = str_replace("Ü", "", $fenster);
 $fenster = str_replace("ß", "", $fenster);
 
+if (!isset($raumstatus['E'])) {
+	$raumstatus1['E'] = "Stiller Eingangsraum";
+}
+
 // Kopf ausgeben
 ?>
 <HTML>
