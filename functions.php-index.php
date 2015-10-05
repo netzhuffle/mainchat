@@ -605,7 +605,6 @@ if (!$javascript){
         preg_match("/(.*)msie(.*)mac(.*)/i",$browser) ||
         preg_match("/(.*)Opera 3(.*)/i",$browser) ||    
         preg_match("/(.*)Opera\/9(.*)/i",$browser) ||    
-        preg_match("/(.*)AppleWebKit\/53(.*)/i",$browser) ||    
         preg_match("/(.*)Konqueror(.*)/i",$browser) ||  
         preg_match("/(.*)mozilla\/5(.*)Netscape6(.*)/i",$browser) ||
         preg_match("/(.*)mozilla\/[23](.*)/i",$browser) ||

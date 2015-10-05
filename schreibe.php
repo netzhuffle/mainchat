@@ -30,6 +30,7 @@ if (strlen($u_id)>0){
 	if (isset($user_chat_back) && (strlen($user_chat_back)>0))
 	{
 		// chat_back in DB schreiben
+		unset ($f);
 		$f['u_zeilen']=$user_chat_back;
 		schreibe_db("user",$f,$u_id,"u_id");
 		$chat_back=$user_chat_back;

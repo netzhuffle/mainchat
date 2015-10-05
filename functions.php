@@ -4,7 +4,7 @@
 // $Id: functions.php,v 1.95 2013/12/04 06:44:23 student Exp $
 
 // Version / Copyright - nicht entfernen!
-$mainchat_version="mainChat 5.0.3 (c) by fidion GmbH 1999-2013";
+$mainchat_version="mainChat 5.0.4 (c) by fidion GmbH 1999-2013";
 $mainchat_email="info@fidion.de";
 
 // HTTPS ja oder nein?
@@ -619,7 +619,6 @@ if (    preg_match("/(.*)mozilla\/[234](.*)mac(.*)/i",$browser) ||
 	preg_match("/(.*)msie(.*)mac(.*)/i",$browser) || 
 	preg_match("/(.*)Opera 3(.*)/i",$browser) || 
 	preg_match("/(.*)Opera\/9(.*)/i",$browser) || 
-	preg_match("/(.*)AppleWebKit\/5(.*)/i",$browser) || 
 	preg_match("/(.*)Konqueror(.*)/i",$browser) || 
 	preg_match("/(.*)mozilla\/5(.*)Netscape6(.*)/i",$browser) || 
 	preg_match("/(.*)mozilla\/[23](.*)/i",$browser) ||
