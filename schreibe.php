@@ -22,6 +22,7 @@ if (strlen($u_id) > 0) {
     // $chat_back gesetzt?
     if (isset($user_chat_back) && (strlen($user_chat_back) > 0)) {
         // chat_back in DB schreiben
+        unset($f);
         $f['u_zeilen'] = $user_chat_back;
         schreibe_db("user", $f, $u_id, "u_id");
         $chat_back = $user_chat_back;
@@ -104,7 +105,6 @@ if (strlen($u_id) > 0) {
                 || (array_sum($neu_spam_byte) > $chat_max_byte)) {
                 $fehler = TRUE;
             }
-            
         }
         
         @mysql_free_result($result);

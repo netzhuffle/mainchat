@@ -561,7 +561,16 @@ function betrete_chat($o_id, $u_id, $u_name, $u_level, $raum, $javascript, $u_ba
     $browser = $_SERVER["HTTP_USER_AGENT"];
     if (!$javascript) {
         warnung($u_id, $u_nick, "ohne_js");
-    } elseif ($u_backup || preg_match("/(.*)mozilla\/[234](.*)mac(.*)/i", $browser) || preg_match("/(.*)msie(.*)mac(.*)/i", $browser) || preg_match("/(.*)Opera 3(.*)/i", $browser) || preg_match("/(.*)Opera\/9(.*)/i", $browser) || preg_match("/(.*)AppleWebKit\/53(.*)/i", $browser) || preg_match("/(.*)Konqueror(.*)/i", $browser) || preg_match("/(.*)mozilla\/5(.*)Netscape6(.*)/i", $browser) || preg_match("/(.*)mozilla\/[23](.*)/i", $browser) || preg_match("/(.*)AOL [123](.*)/i", $browser) || $http_te == 'chunked') {
+    } elseif ($u_backup
+    	    || preg_match("/(.*)mozilla\/[234](.*)mac(.*)/i", $browser)
+    		|| preg_match("/(.*)msie(.*)mac(.*)/i", $browser)
+    		|| preg_match("/(.*)Opera 3(.*)/i", $browser)
+    		|| preg_match("/(.*)Opera\/9(.*)/i", $browser)
+    		|| preg_match("/(.*)Konqueror(.*)/i", $browser)
+    		|| preg_match("/(.*)mozilla\/5(.*)Netscape6(.*)/i", $browser)
+    		|| preg_match("/(.*)mozilla\/[23](.*)/i", $browser)
+    		|| preg_match("/(.*)AOL [123](.*)/i", $browser)
+    		|| $http_te == 'chunked') {
         $u_nick = "";
         warnung($u_id, $u_nick, "sicherer_modus");
     }
