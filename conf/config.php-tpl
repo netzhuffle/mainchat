@@ -680,5 +680,8 @@ $userleiste_inaktiv_userfunktionen = "0";
 
 // Deaktiviert die Anzeige "User im Raum" beim Betreten des Raumes
 $unterdruecke_user_im_raum_anzeige = "0";
+
+// Deaktiviert autocomplete in der Chateingabe
+$eingabe_inaktiv_autocomplete = "0";
                   
 ?>

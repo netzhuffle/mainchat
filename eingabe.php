@@ -96,7 +96,9 @@ function window_reload(file,win_name) {
     } else {
         $text2_typ = "<INPUT TYPE=\"TEXT\" NAME=\"text2\" maxlength=\""
             . ($chat_max_eingabe - 1) . "\" VALUE=\"\" SIZE=\""
-            . $chat_eingabe_breite . "\">";
+            . $chat_eingabe_breite . "\""
+    		. (isset($eingabe_inaktiv_autocomplete) && $eingabe_inaktiv_autocomplete == "1" ? "autocomplete=\"off\"" : "")
+            . ">";
     }
     
     // Unterscheidung Normal oder sicherer Modus
