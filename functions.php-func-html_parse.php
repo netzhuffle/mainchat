@@ -6,7 +6,7 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
     // Filtert Text, ersetzt Smilies und ersetzt folgende Zeichen:
     // _ in <B>
     // * in <I>
-    // http://###### oder www.###### in <A HREF="http://###" TARGET=_new>http://###</A>
+    // http(s)://###### oder www.###### in <A HREF="http(s)://###" TARGET=_new>http(s)://###</A>
     // E-Mail Adressen in A-Tag mit Mailto
     // privat ist wahr bei privater Nachricht
     
@@ -95,14 +95,14 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
     $text = str_replace("+", "###plus###", $text);
     
     // jetzt nach nach italic und bold parsen...  * in <I>, $_ in <B>
-    if (substr_count($text, "http://") == 0 && substr_count($text, "www.") == 0
+    if (substr_count($text, "http://") == 0 && substr_count($text, "https://") == 0 && substr_count($text, "www.") == 0
         && !preg_match("(\w[-._\w]*@\w[-._\w]*\w\.\w{2,3})", $text)) {
         $text = preg_replace('|\*(.*?)\*|', '<i>\1</i>',
             preg_replace('|_(.*?)_|', '<b>\1</b>', $text));
     }
     
     // erst mal testen ob www oder http oder email vorkommen
-    if (preg_match("/(http:|www\.|@)/i", $text)) {
+    if (preg_match("/(https?:|www\.|@)/i", $text)) {
         // Zerlegen der Zeile in einzelne Bruchstücke. Trennzeichen siehe $split
         // leider müssen zunächst erstmal in $text die gefundenen urls durch dummies 
         // ersetzt werden, damit bei der Angabge von 2 gleichen urls nicht eine bereits 
@@ -173,13 +173,13 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                     
                     // Doppelcheck, kann ja auch mit http:// in gleicher Zeile nochmal vorkommen. also erst die 
                     // http:// mitrausnehmen, damit dann in der Ausgabe nicht http://http:// steht...
-                    $text = preg_replace("!http://$txt2!", "-###$j####", $text);
+                    $text = preg_replace("!http(s?)://$txt2!", "-###$1$j####", $text);
                     
                     // Wort=URL mit www am Anfang? -> im text durch dummie ersetzen, im wort durch href.
                     $text = preg_replace("!$txt2!", "####$j####", $text);
                     
                     // und den ersten Fall wieder Rückwärts, der wird ja später in der schleife nochmal behandelt.
-                    $text = preg_replace("!-###\d*####/!", "http://$txt2/",
+                    $text = preg_replace("!-###(s?)\d*####/!", "http$1://$txt2/",
                         $text);
                     
                     // url aufbereiten
@@ -188,9 +188,9 @@ function html_parse($privat, $text, $at_sonderbehandlung = 0)
                             . urlencode("http://$txt2")
                             . "\" target=_blank>http://$txt2</a>", $txt[$j]);
                 }
-                // http://###### in <A HREF="http://###" TARGET=_new>http://###</A>
+                // http(s)://###### in <A HREF="http(s)://###" TARGET=_new>http(s)://###</A>
                 if (preg_match("!^https?://!", $txt[$j])) {
-                    // Wort=URL mit http:// am Anfang? -> im text durch dummie ersetzen, im wort durch href.
+                    // Wort=URL mit http(s):// am Anfang? -> im text durch dummie ersetzen, im wort durch href.
                     // Zusatzproblematik.... könnte ein http-get-URL sein, mit "?" am Ende oder zwischendrin... urgs.
                     
                     // sonderfall -> "?" in der URL -> dann "?" als Sonderzeichen behandeln...
