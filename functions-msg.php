@@ -539,8 +539,25 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
         case "/einlad":
         case "/invite":
         // Einladen in Räume... darf nur Admin oder Raumbesitzer
-        // Besitzer des aktuellen Raums ermitteln
-            $query = "SELECT r_besitzer,r_name from raum WHERE r_id=$r_id ";
+        // Raum ermitteln
+        $raum_id = $r_id;
+        if ($chatzeile[2] != "") {
+          $query = "SELECT r_id from raum WHERE r_name LIKE '" . mysql_real_escape_string($chatzeile[2]) . "%'";
+          $result = mysql_query($query, $conn);
+          if ($result AND mysql_num_rows($result) > 0) {
+            $row = mysql_fetch_object($result);
+            $raum_id = $row->r_id;
+            mysql_free_result($result);
+          } else {
+            // Raum nicht gefunden -> Fehlermeldung
+            $txt = str_replace("%raumname%", $chatzeile[1],
+              $t['chat_msg53']);
+            system_msg("", $u_id, $u_id, $system_farbe, $txt);
+            break;
+          }
+        }
+        // Besitzer des Raums ermitteln
+            $query = "SELECT r_besitzer,r_name from raum WHERE r_id=$raum_id ";
             $result = mysql_query($query, $conn);
             if ($result > 0) {
                 $rows = mysql_num_rows($result);
@@ -569,17 +586,17 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                         $nick = nick_ergaenze($chatzeile[1], "chat", 0);
                     if ($nick['u_nick'] != "") {
                         // nick gefunden. jetzt eintragen oder löschen...
-                        $query = "SELECT inv_user FROM invite WHERE inv_raum=$r_id AND inv_user=$nick[u_id]";
+                        $query = "SELECT inv_user FROM invite WHERE inv_raum=$raum_id AND inv_user=$nick[u_id]";
                         $result = mysql_query($query, $conn);
                         if ($result > 0) {
                             if (mysql_num_rows($result) > 0) {
-                                $query = "DELETE FROM invite WHERE inv_raum=$r_id AND inv_user=$nick[u_id]";
+                                $query = "DELETE FROM invite WHERE inv_raum=$raum_id AND inv_user=$nick[u_id]";
                                 $result2 = mysql_query($query, $conn);
                                 $msg = $t['invite4'];
                             } else {
                                 $f['inv_id'] = 0;
                                 $f['inv_user'] = $nick['u_id'];
-                                $f['inv_raum'] = $r_id;
+                                $f['inv_raum'] = $raum_id;
                                 schreibe_db("invite", $f, $f['inv_id'],
                                     "inv_id");
                                 if (!$beichtstuhl) {
@@ -606,12 +623,12 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                     } else {
                         // Nick nicht gefunden, d.h. nicht Online, aber vielleicht doch eingeladen zum runterwerfen?
                         $query = "SELECT u_nick,u_id from user,invite "
-                            . "WHERE inv_raum=$r_id AND inv_user=u_id AND u_nick='" . mysql_real_escape_string($chatzeile[1]) . "'"
+                            . "WHERE inv_raum=$raum_id AND inv_user=u_id AND u_nick='" . mysql_real_escape_string($chatzeile[1]) . "'"
                             . "ORDER BY u_nick";
                         $result = mysql_query($query, $conn);
                         if ($result && mysql_num_rows($result) == 1) {
                             $row = mysql_fetch_object($result);
-                            $query2 = "DELETE FROM invite WHERE inv_raum=$r_id AND inv_user=$row->u_id";
+                            $query2 = "DELETE FROM invite WHERE inv_raum=$raum_id AND inv_user=$row->u_id";
                             $result2 = mysql_query($query2, $conn);
                             $msg = $t['invite4'];
                             $msg = str_replace("%admin%", $u_nick, $msg);
@@ -626,7 +643,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                 // Invite-Liste ausgeben...
                 $query = "SELECT u_id,u_nick,u_level,u_punkte_gesamt,u_punkte_gruppe,inv_id "
                     . "FROM invite LEFT JOIN user ON u_id=inv_user "
-                    . "WHERE inv_raum=$r_id";
+                    . "WHERE inv_raum=$raum_id";
                 $result = mysql_query($query, $conn);
                 $txt = "";
                 if ($result && mysql_num_rows($result) > 0) {
