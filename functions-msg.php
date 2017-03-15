@@ -960,7 +960,7 @@ function chat_msg($o_id, $u_id, $u_name, $u_farbe, $admin, $r_id, $text, $typ)
                 
             } elseif ($chatzeile[1] != "") {
                 
-                $query = "SELECT r_id from raum WHERE r_name LIKE '" . mysql_real_escape_string($chatzeile[1]) . "'%' ";
+                $query = "SELECT r_id from raum WHERE r_name LIKE '" . mysql_real_escape_string($chatzeile[1]) . "%' ";
                 if (!$admin)
                     $query .= " AND (r_status1='O' OR r_status1='m' OR r_id=$o_raum) ";
                 $result = mysql_query($query, $conn);

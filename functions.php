@@ -1,7 +1,7 @@
 <?php
 
 // Version / Copyright - nicht entfernen!
-$mainchat_version = "Open mainChat 5.0.8 (c) by fidion GmbH 1999-2012";
+$mainchat_version = "Open mainChat 5.0.9-dev (c) by fidion GmbH 1999-2012";
 $mainchat_email = "info@fidion.de";
 
 // HTTPS ja oder nein?
@@ -139,7 +139,7 @@ function raum_user($r_id, $u_id, $id)
             }
             
         } else {
-            $text = "";
+            $text = "Da ist niemand.";
         }
         $back = system_msg("", 0, $u_id, "", $text);
         
