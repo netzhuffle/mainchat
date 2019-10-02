@@ -2,7 +2,9 @@
 .project
 .settings
 .buildpath
-/conf/config.php*
+/conf/config.php
+/conf/config.php-*
+/conf/deutsch-*
 /conf/header.html
 /conf/footer.html
 /seitenkoepfe/*
