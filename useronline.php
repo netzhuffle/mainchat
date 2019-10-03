@@ -68,6 +68,8 @@ if ($result && mysql_Num_Rows($result) > 0) {
 if ($anzahl_online && $anzahl_user)
     $txt = str_replace("%anzahl_online%", $anzahl_online, $t[userliste2]);
 $txt = str_replace("%anzahl_user%", $anzahl_user, $txt);
+
+header('Access-Control-Allow-Origin: *');
 echo str_replace("%userliste%", $userliste, $txt);
 
 ?>

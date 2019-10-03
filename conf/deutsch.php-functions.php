@@ -362,7 +362,7 @@ $t['msg_new_posting_olm'] = "Es liegt eine <b>neue Antwort</b> auf Ihr Posting <
 $t['msg_new_posting_sms'] = "Es liegt eine neue Antwort auf Ihr Posting <b>%po_titel%</b> vom %po_ts% (Forum: %forum%, Thema: %thema%) vor.";
 
 // Sonstiges
-$t['userliste1'] = "<span class=\"textbold\">%raum_alt% (%user_im_raum% Chatter Im Raum)</span><BR>\n<span class=\"text\">%nicks%</span><br>\n";
+$t['userliste1'] = "<span class=\"textbold\">%raum_alt% (%user_im_raum% Chatter im Raum)</span><BR>\n<span class=\"text\">%nicks%</span><br>\n";
 $t['userliste2'] = "<span class=\"header3\">Gerade sind %anzahl_online% User online, insgesamt sind %anzahl_user% User angemeldet </span><br><br>\n%userliste%";
 
 // Hacking
